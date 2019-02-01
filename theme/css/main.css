@@ -41,6 +41,20 @@
 html {
   font-family: "PT Sans", Helvetica, -apple-system, BlinkMacSystemFont,'Microsoft YaHei', Arial, sans-serif;
 }
+
+/* iphone se 640 40em */
+/* iphone 6 750 46.875em */
+/* iphone 8 1080 67.5em */
+/* iphone x xs 1125 70.31em */
+/* iphone xr 828 51.75em */
+/* iphone plus 1242 77.625em */
+
+@media (min-width: 38em) {
+  html {
+    font-size: 20px;
+  }
+}
+/* 768 48em */
 @media (min-width: 48em) {
   html {
     font-size: 14px;
@@ -52,11 +66,6 @@ html {
   }
 }
 
-/* @media (min-width: 80em) { */
-/*   html { */
-/*     font-size: 16px; */
-/*   } */
-/* } */
 
 /*
  * Sidebar
@@ -74,6 +83,19 @@ html {
   border-right: dashed black 1px;
   border-bottom: dashed black 1px;
 }
+
+@media (min-width: 38em) {
+  .sidebar {
+    position: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    /* sidebar width */
+    width: auto;
+    text-align: left;
+  }
+}
+
 @media (min-width: 48em) {
   .sidebar {
     position: fixed;
@@ -89,13 +111,11 @@ html {
 .sidebar-toc {
   text-align: left;
   padding: 1rem 0rem;
-  /*color: rgba(255,255,255,.5);*/
   color: black;
   background-color: #202020;
-  /* border-left: dashed black 1px; */
-  /* border-bottom: dashed black 1px; */
 }
-@media (min-width: 48em) {
+
+@media (min-width: 38em) {
   .sidebar-toc {
     position: fixed;
     top: 0;
@@ -167,6 +187,13 @@ a.sidebar-nav-item:focus {
   padding-bottom: 4rem;
 }
 
+@media (min-width: 38em) {
+  .content {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+}
+
 @media (min-width: 48em) {
   .content {
     margin-left: 17rem;
@@ -188,6 +215,17 @@ a.sidebar-nav-item:focus {
  * Flip the orientation of the page by placing the `.sidebar` on the right.
  */
 
+@media (min-width: 38em) {
+  .layout-reverse .sidebar {
+    left: auto;
+    right: 0;
+  }
+  .layout-reverse .content {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+}
+
 @media (min-width: 48em) {
   .layout-reverse .sidebar {
     left: auto;
@@ -196,10 +234,6 @@ a.sidebar-nav-item:focus {
   .layout-reverse .content {
     margin-left: 2rem;
     margin-right: 20rem;
-  }
-  .layout-reverse .sidebar-toc {
-    left: auto;
-    right: 0;
   }
 }
 
