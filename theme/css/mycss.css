@@ -1,0 +1,135 @@
+/*
+ * My own CSS.
+ * @author Wittawat Jitkrittum
+ * Created on 15 Feb 2017
+ * */
+
+div.paper {
+    margin-bottom: 20px;
+}
+
+p.links {
+    /* https://css-tricks.com/all-about-floats/ */
+    clear: both;
+    margin: 10px;
+
+}
+
+.paper_title {
+    color: #3e619b;
+    display: block;
+}
+
+.paper_author {
+    display: block;
+}
+
+.paper_author_me {
+    /* highlight my name */
+    /*text-decoration: underline;*/
+    /*font-style: italic;*/
+    /*font-weight: bold;*/
+
+}
+
+
+.paper_venue {
+    font-weight: bold;
+    /*font-style: italic;*/
+
+}
+
+.paper_year {
+    font-weight: bold;
+    /*font-style: italic;*/
+
+}
+
+
+.paper  a {
+    border-radius: 8px 8px;
+    background: #eff8ff; 
+    /*border-color: black;*/
+    margin-right: 8px;
+    padding: 1px 6px 1px 6px;
+    /*margin-left: 5px;*/
+    display: inline-block;
+    margin: 0px 10px 5px 0;
+}
+
+
+/* Highlight box for a paper */
+.paper div.wj_highlight {
+    color: #9b1c00;
+    /*background-color: #eff8ff;*/
+    /*display: inline-block;*/
+    font-style: italic;
+    /*font-weight: 600;*/
+    font-family: serif;
+}
+
+.wj_summary_container div.wj_summary {
+    color: #597a24;
+    /*font-weight: 100;*/
+    text-align: justify;
+    text-justify: inter-word;
+    font-family: serif;
+
+    vertical-align: top;
+    /*font-variant: small-caps;*/
+}
+
+
+.wj_summary_container{
+    vertical-align: bottom;
+}
+
+/* This is for icons */
+.paper  a i {
+    color: #555555;
+
+}
+
+.paper div.paper_img {
+    /*display: inline;*/
+    margin-bottom: 5px;
+    padding: 0 12px 0 0 ;
+}
+
+.paper div.paper_img img{
+    margin-right: 15px;
+}
+
+/* paper summary images */
+.paper .paper_img img{
+    /*width: 15%;*/
+    height: auto;
+    width: auto;
+    /*margin: auto;*/
+    float: left;
+
+    max-width: 110px;
+    max-height: 110px;
+}
+
+.publications .paper{
+    /*border-bottom: 1px solid black;*/
+    margin-bottom: 10px;
+
+}
+
+.paper .links a.wj_http {
+    /*background: #ffefd8;*/
+
+}
+
+pre.bibsrc {
+    background: #fbfbfb;
+    color: #444444;
+
+}
+
+.math {
+    color: #001574 !important;
+}
+

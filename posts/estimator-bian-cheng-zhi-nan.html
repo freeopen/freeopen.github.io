@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>Freeopen - Estimator 编程指南</title>
+        <meta charset="utf-8" />
+
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/css/main.css" />
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/academicons/css/academicons.min.css" />
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/font-awesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface" />
+
+
+        <link href="https://freeopen.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Freeopen Atom Feed" />
+        
+
+
+
+
+
+
+</head>
+
+<!-- <body class="theme-myblue"id="index" class="home"> -->
+<body id="index" class="theme-myblue">
+
+  <div class="sidebar">
+    <div class="container sidebar-sticky">
+      <div class="sidebar-about">
+        <h1><a href="https://freeopen.github.io/">Freeopen <strong></strong></a></h1>
+        <p class="lead"></p>
+      </div>
+      <nav id="menu" class="sidebar-nav">
+            <div >
+              <a class="sidebar-nav-item" href="https://freeopen.github.io/pages/about.html">About</a>
+            </div>
+            <div >
+              <a class="sidebar-nav-item" href="https://freeopen.github.io/pages/da-shang.html">打赏</a>
+            </div>
+            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/bian-cheng.html">编程</a>
+            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
+            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/shou-ce.html">手册</a>
+            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/shu-xue.html">数学</a>
+
+        <hr>
+          <a href="" title="Atom feed" target="_blank" 
+              style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;">
+            <i class="fa fa-rss-square"></i>
+          </a>
+          <a href="https://github.com/freeopen" title="Software I released on Github" 
+                target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="fa fa-github-square"></i> </a>
+          <a href="" title="Google Scholar" 
+              target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="ai ai-google-scholar-square"></i> </a>
+          <a href="" title="LinkedIn" 
+              target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="fa fa-linkedin-square"></i> </a>
+          <a href="" title="ResearchGate" 
+              target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="ai ai-researchgate-square"></i> </a>
+          <a href="Mailto:freeopen@163.com" title="My email" 
+              target="_blank" style="display: inline; padding: 0px 0px 0px 0;
+              margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i
+            class="fa fa-envelope-square"></i> </a>
+      </nav>
+
+    </div>
+  </div>
+
+  <div id="content" class="container content">
+    <div class="post">
+<section id="content" class="body">
+  <header>
+    <h1 class="entry-title">Estimator 编程指南</h2>
+ 
+  </header>
+  <footer class="post-info">
+    <time class="published" datetime="2018-03-04T00:00:00+08:00">
+      2018-03-04
+    </time>
+    <address class="vcard author">
+      By           <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
+    </address>
+    <div class="category">
+        Category: <a href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
+    </div>
+  </footer><!-- /.post-info -->
+  <div class="entry-content">
+    <blockquote>
+<p>2018-04-12 第一次修订, 新增"多GPU下的写法"</p>
+</blockquote>
+<p>注：代码适用于 TF1.4 ~ TF1.7 。</p>
+<p>为什么要使用Estimator, 仅<a href="https://www.tensorflow.org/programmers_guide/estimators">官方文档</a>里提到的第一条优点就让我不得不重视它。
+大意是不管你在本地环境还是分布式环境，不管你用一个或多个CPU、GPU还是TPU训练模型，你的模型代码不需要做任何改变。</p>
+<p>但看了一些Estimator教程，不怎么满意。因为大部分介绍的方法过于简单，仅适用于实验环境。当你面对大数据、复杂模型和机能限制时，发现那些方法就不灵了。
+所以就自己写了一本，方便自查自检。这篇文章，会随着本人的打怪升级等级进行增补。</p>
+<h2 id="estimator">Estimator</h2>
+<p align="center">
+<img src="/images/image2.jpg" width="75%"/>
+<br/>
+</p>
+<p>Estimator 作为高层API，可以让我们写出结构清晰的代码。你有两种方法通过 estimator 来构建模型：</p>
+<ul>
+<li>Pre-mode Estimator: 创建指定类型的模型，如上图，它们分别是线性分类和回归模型、深度神经网络分类和回归模型，还有线性和深度混合的分类、回归模型。</li>
+<li>自定义 Estimator: 按传统的方法写模型，然后用 model_fn 函数封装</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="c1"># 指定类型模型的估计器举例</span>
+<span class="n">classifier</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">DNNClassifier</span><span class="p">(</span>
+   <span class="n">feature_columns</span><span class="o">=</span><span class="n">feature_columns</span><span class="p">,</span> <span class="c1"># 定义好的特征列 </span>
+   <span class="n">hidden_units</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>           <span class="c1"># 两个隐藏层, 每层10个神经元</span>
+   <span class="n">n_classes</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>                     <span class="c1"># 输出3个类别</span>
+   <span class="n">model_dir</span><span class="o">=</span><span class="n">PATH</span><span class="p">)</span>                  <span class="c1"># 存 checkpoints 的路径</span>
+
+<span class="n">classifier</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
+   <span class="n">input_fn</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">input_fn</span><span class="p">(</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="n">FILE_TRAIN</span><span class="p">,</span>     <span class="c1"># 训练数据文件路径</span>
+        <span class="n">perform_shuffle</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span>     <span class="c1"># 打乱数据</span>
+        <span class="n">repeat_count</span> <span class="o">=</span> <span class="mi">8</span><span class="p">))</span>          <span class="c1"># 重复8次</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="c1"># 自定义模型的估计器举例</span>
+<span class="k">def</span> <span class="nf">model_fn</span><span class="p">(</span>
+   <span class="n">features</span><span class="p">,</span>                       <span class="c1"># batch数量的特征，是input_fn 函数的输出</span>
+   <span class="n">labels</span><span class="p">,</span>                         <span class="c1"># batch数量的标签，是input_fn 函数的输出</span>
+   <span class="n">mode</span><span class="p">):</span>                          <span class="c1"># tf.estimator.ModeKeys.TRAIN / EVAL / PREDICT</span>
+
+  <span class="c1"># 用特征列（feature_columns)定义输入层 </span>
+  <span class="n">input_layer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">input_layer</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">feature_columns</span><span class="p">)</span>
+
+  <span class="c1"># 模型定义部分</span>
+  <span class="o">...</span>
+
+  <span class="c1"># 返回值被EstimatorSpec封装，返回训练时关心的loss和train_op</span>
+  <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">EstimatorSpec</span><span class="p">(</span>
+     <span class="n">mode</span><span class="p">,</span>
+     <span class="n">loss</span><span class="o">=</span><span class="n">loss</span><span class="p">,</span>
+     <span class="n">train_op</span><span class="o">=</span><span class="n">train_op</span><span class="p">)</span> 
+
+<span class="n">classifier</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">Estimator</span><span class="p">(</span>
+   <span class="n">model_fn</span><span class="o">=</span><span class="n">model_fn</span><span class="p">,</span>               <span class="c1"># 自定义模型的封装函数</span>
+   <span class="n">model_dir</span><span class="o">=</span><span class="n">PATH</span><span class="p">)</span>                  <span class="c1"># 存 checkpoints 的路径</span>
+
+<span class="n">classifier</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
+  <span class="n">input_fn</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">input_fn</span><span class="p">(</span><span class="n">FILE_TRAIN</span><span class="p">,</span> <span class="n">repeat_count</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">shuffle_count</span><span class="o">=</span><span class="mi">256</span><span class="p">))</span>
+</pre></div>
+<p>仔细研究上面两段最简代码，Estimator的编程结构就呼之欲出了，看下图：</p>
+<p align="center">
+<img src="/images/Unknown.jpg" width="60%"/>
+<br/>
+</p>
+<p>input_fn读入数据，预处理后输出到estimator，再由estimator执行训练、评估或预测等任务.
+这里的estimator(估计器）就是模型的抽象，它可以直接定义模型或使用外部模型。 特殊的地方在于，
+数据送进estimator时，常常被feature_columns（由特征列组成的列表, 与input_fn输出的数据一一对应）
+做二次封装. 注意，特征列是使用estimator的主要方法之一，并不是必须.</p>
+<p>任务分解如下：</p>
+<ul>
+<li>input_fn: 从原始数据文件读取数据，然后清洗数据、打乱顺序等，用迭代器分批输出特征和对应的标签。  </li>
+<li>feature_columns: 特征工程，使数据便于模型训练。</li>
+<li>模型定义: 简单的模型可考虑用estimator直接定义；自定义模型的话，须封装进model_fn函数，输入层传入feature_columns, 输出用tf.estimator.EstimatorSpec封装。</li>
+<li>最后，用estimator把上面三项组织在一起，做训练、评估、预测等任务。</li>
+</ul>
+<h2 id="input_fn">input_fn</h2>
+<p>原始数据一般工整的很少，所以要把input_fn写好，还是蛮难的。</p>
+<h3 id="xiao shu ju de qing kuang">小数据的情况</h3>
+<p>通常实验性的项目采用小规模的数据，这时只需要简单把数据载入内存作训练即可, 我们可以用numpy、pandas等通用工具来处理数据。
+假如原始数据是csv文件，选用pandas读入并作预处理：</p>
+<div class="highlight"><pre><span></span><span class="c1"># 定义列名</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">'symboling'</span><span class="p">,</span> 
+    <span class="s1">'normalized-losses'</span><span class="p">,</span> 
+    <span class="s1">'make'</span><span class="p">,</span> 
+     <span class="o">...</span>
+    <span class="s1">'price'</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="c1"># 为每列指定类型.</span>
+<span class="n">dtypes</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'symboling'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> 
+    <span class="s1">'normalized-losses'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> 
+    <span class="s1">'make'</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+     <span class="o">...</span>
+    <span class="s1">'price'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span>    
+<span class="p">}</span>
+
+<span class="c1"># 读入文件，空数据用 ？号填充.</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'filename.csv'</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">names</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtypes</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="s1">'?'</span><span class="p">)</span>
+
+<span class="c1"># 清理数据: 如果发现价格为空就删除该行.</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">'rows'</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">'any'</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">'price'</span><span class="p">])</span>
+
+<span class="c1"># 补足数据: 把其他列的空值填充为缺省值</span>
+<span class="c1"># 把float32类型的列放入列表 float_columns</span>
+<span class="n">float_columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">dtypes</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">]</span>
+<span class="c1"># 对数值列来说，如果发现空值就填充 0 </span>
+<span class="n">df</span><span class="p">[</span><span class="n">float_columns</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">float_columns</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">'columns'</span><span class="p">)</span>
+
+<span class="c1"># 构建字符串列，如果方向空值(NaN)就填充''(空串).</span>
+<span class="n">string_columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">dtypes</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="o">==</span> <span class="nb">str</span><span class="p">]</span>
+<span class="n">df</span><span class="p">[</span><span class="n">string_columns</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">string_columns</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">'columns'</span><span class="p">)</span>
+</pre></div>
+<p>这样，数据变得比较工整了。假设最后一项price是label，前面的都是特征，按照习惯，数据被分割成训练和评估数据, 
+它们分别被叫做 training_data、training_label 和 eval_data、eval_label, 它们的类型都是dataframe.</p>
+<p>定义训练和评估的input_fn</p>
+<div class="highlight"><pre><span></span><span class="c1"># num_epochs=None -&gt; 数据无限循环</span>
+<span class="c1"># shuffle   =True -&gt; 打乱数据</span>
+<span class="n">training_input_fn</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">pandas_input_fn</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">training_data</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">training_label</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">num_epochs</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+
+<span class="c1"># 评估时，数据不需要被打乱，所以shuffle=False </span>
+<span class="n">eval_input_fn</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">pandas_input_fn</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">eval_data</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">eval_label</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+<p>这样，input_fn就快速的写好了。</p>
+<h3 id="da shu ju de qing kuang">大数据的情况</h3>
+<p>pandas一次性把数据载入内存中，不适合大数据量的情形。
+面对大规模数据时，需要给数据和模型之间接上管道，然后打开水龙头，按照你想要的流量把数据传入模型。
+这时，TF提供的 dataset api 就派上用场了。</p>
+<h4>Dataset API 的结构</h4>
+<p><p align="center">
+<img src="/images/image7.jpg" width="70%"/>
+<br/>
+</p></p>
+<ul>
+<li>TextLineDataset: 从文本文件每次读一行.</li>
+<li>TFRecordDataset: 从 TFRecord 文件读取记录.</li>
+<li>FixedLengthRecordDataset: 从二进制文件读取固定大小的记录.</li>
+<li>Iterator: 从dataset中每次读取一笔(一般为batch条)数据.</li>
+</ul>
+<h4>Dataset版的input_fn</h4>
+<p>假设我们手上有一堆人口普查数据，其中年收入是字符串类型，形如&ldquo;&gt;50k&rdquo;, 我们的目标是预测人们的年收入是大于5万还是小于等于5万。
+input_fn函数的写法如下：</p>
+<p>首先定义CSV文件中每行数据的列名和缺省值，字典格式.</p>
+<div class="highlight"><pre><span></span><span class="n">csv_defaults</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">([</span>
+  <span class="p">(</span><span class="s1">'age'</span><span class="p">,[</span><span class="mi">0</span><span class="p">]),</span>
+  <span class="p">(</span><span class="s1">'workclass'</span><span class="p">,[</span><span class="s1">''</span><span class="p">]),</span>
+  <span class="p">(</span><span class="s1">'fnlwgt'</span><span class="p">,[</span><span class="mi">0</span><span class="p">]),</span>
+  <span class="p">(</span><span class="s1">'education'</span><span class="p">,[</span><span class="s1">''</span><span class="p">]),</span>
+  <span class="p">(</span><span class="s1">'education-num'</span><span class="p">,[</span><span class="mi">0</span><span class="p">]),</span>
+  <span class="p">(</span><span class="s1">'marital-status'</span><span class="p">,[</span><span class="s1">''</span><span class="p">]),</span>
+  <span class="p">(</span><span class="s1">'occupation'</span><span class="p">,[</span><span class="s1">''</span><span class="p">]),</span>
+  <span class="p">(</span><span class="s1">'relationship'</span><span class="p">,[</span><span class="s1">''</span><span class="p">]),</span>
+  <span class="p">(</span><span class="s1">'race'</span><span class="p">,[</span><span class="s1">''</span><span class="p">]),</span>
+  <span class="p">(</span><span class="s1">'sex'</span><span class="p">,[</span><span class="s1">''</span><span class="p">]),</span>
+  <span class="p">(</span><span class="s1">'capital-gain'</span><span class="p">,[</span><span class="mi">0</span><span class="p">]),</span>
+  <span class="p">(</span><span class="s1">'capital-loss'</span><span class="p">,[</span><span class="mi">0</span><span class="p">]),</span>
+  <span class="p">(</span><span class="s1">'hours-per-week'</span><span class="p">,[</span><span class="mi">0</span><span class="p">]),</span>
+  <span class="p">(</span><span class="s1">'native-country'</span><span class="p">,[</span><span class="s1">''</span><span class="p">]),</span>
+  <span class="p">(</span><span class="s1">'income'</span><span class="p">,[</span><span class="s1">''</span><span class="p">]),</span>
+<span class="p">])</span>
+</pre></div>
+<p>接下来是一段通用代码, 具体见代码注释.</p>
+<div class="highlight"><pre><span></span><span class="c1"># 按行解码 CSV 文件.</span>
+<span class="c1"># 读入一行数据，对于每列如果有数据就用原值，如果没数据就用缺省值;</span>
+<span class="c1"># 返回字典格式的键值对</span>
+<span class="k">def</span> <span class="nf">csv_decoder</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+    <span class="n">parsed</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">decode_csv</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">csv_defaults</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">csv_defaults</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">parsed</span><span class="p">))</span>
+
+<span class="c1"># 过滤器，滤掉空行，该函数后面要用</span>
+<span class="k">def</span> <span class="nf">filter_empty_lines</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">not_equal</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">string_split</span><span class="p">([</span><span class="n">line</span><span class="p">],</span> <span class="s1">','</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># 创建训练的input_fn</span>
+<span class="k">def</span> <span class="nf">create_train_input_fn</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">input_fn</span><span class="p">():</span>    
+        <span class="n">dataset</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">TextLineDataset</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>  <span class="c1"># 从文件创建数据集</span>
+                <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">filter_empty_lines</span><span class="p">)</span>        <span class="c1"># 滤掉空行</span>
+                <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">csv_decoder</span><span class="p">)</span>                  <span class="c1"># 解析每行</span>
+                <span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">buffer_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>         <span class="c1"># 每1000行打乱顺序</span>
+                <span class="o">.</span><span class="n">repeat</span><span class="p">()</span>                          <span class="c1"># 无限重复</span>
+                <span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="mi">32</span><span class="p">))</span> 
+
+        <span class="c1"># 迭代器，每次取batch个数据, 这里为32</span>
+        <span class="n">features</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">make_one_shot_iterator</span><span class="p">()</span><span class="o">.</span><span class="n">get_next</span><span class="p">()</span>
+
+        <span class="c1"># 分离出label值，并转成 true/false 形式</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">'income'</span><span class="p">),</span><span class="s2">" &gt;50K"</span><span class="p">)</span> 
+        <span class="k">return</span> <span class="n">features</span><span class="p">,</span> <span class="n">labels</span>
+
+    <span class="k">return</span> <span class="n">input_fn</span>
+
+<span class="c1"># 创建测试的input_fn, 注意与前面的区别</span>
+<span class="k">def</span> <span class="nf">create_test_input_fn</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">input_fn</span><span class="p">():</span>    
+        <span class="n">dataset</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">TextLineDataset</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+                <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">filter_empty_lines</span><span class="p">)</span>
+                <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">csv_decoder</span><span class="p">)</span>
+                <span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="mi">32</span><span class="p">))</span>
+
+        <span class="n">features</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">make_one_shot_iterator</span><span class="p">()</span><span class="o">.</span><span class="n">get_next</span><span class="p">()</span>
+
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">columns</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">'income'</span><span class="p">),</span><span class="s2">" &gt;50K"</span><span class="p">)</span> 
+        <span class="k">return</span> <span class="n">features</span><span class="p">,</span> <span class="n">labels</span> 
+
+    <span class="k">return</span> <span class="n">input_fn</span>
+
+<span class="c1"># 从input_fn中取出数据，每sess.run一次next_batch，就取出一批</span>
+<span class="n">train_input_fn</span> <span class="o">=</span> <span class="n">create_train_input_fn</span><span class="p">(</span><span class="n">train_path</span><span class="p">)</span>
+<span class="n">next_batch</span> <span class="o">=</span> <span class="n">train_input_fn</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
+    <span class="n">features</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">next_batch</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">features</span><span class="p">[</span><span class="s1">'education'</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+</pre></div>
+<p>上面的代码为什么 create_train_input_fn() 套 input_fn() 呢？
+回忆这句：</p>
+<div class="highlight"><pre><span></span><span class="n">classifier</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
+  <span class="n">input_fn</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">input_fn</span><span class="p">(</span><span class="n">FILE_TRAIN</span><span class="p">,</span> <span class="n">repeat_count</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">shuffle_count</span><span class="o">=</span><span class="mi">256</span><span class="p">))</span>
+</pre></div>
+<p>因为calssifier.train()中，input_fn要求接的是一个函数，而input_fn() 返回的是特征和标签，所以前面要接上<code>lambda:</code>.
+如果采用现在函数套函数的结构, 那么这句前面的lambda就可以去掉, 走个例子：</p>
+<div class="highlight"><pre><span></span><span class="n">train_input_fn</span> <span class="o">=</span> <span class="n">create_train_input_fn</span><span class="p">(</span><span class="n">FILE_TRAIN</span><span class="p">)</span>
+
+<span class="n">classifier</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
+  <span class="n">input_fn</span><span class="o">=</span><span class="n">train_input_fn</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+<h2 id="te zheng lie_1">特征列</h2>
+<p>特征列实质上是对input_fn()输出的数据做的二次封装，它是做特征工程的强力工具之一。
+特征列好比一种约定，它规定了estimator使用input_fn传入的数据具备什么样的形式, 
+主要目的是令特征数据变得更方便机器运算。</p>
+<p>关于特征列，一共涉及10个函数（图中底层的3个矩形框, 缺weighted_categorical_column）。
+按大类分为类别特征列和密集特征列（以下也简称为&ldquo;类别列&rdquo;和&ldquo;密集列&rdquo;）。</p>
+<p align="center">
+<img src="/images/3_.jpg" width="70%"/>
+<br/>
+</p>
+<p>其中，<code>buchetized_column</code>位于中间，表示它作为中介把密集列(通常是<code>numeric_column</code>)转为类别列。对于类别列而言，除了<code>categorical_column_with_hash_buchet</code>和<code>crossed_column</code>外，其余三种均把输入的特征数据处理为one-hot结构。</p>
+<p>10个函数可对应9种特征列，我们约定中文称谓如下：</p>
+<ul>
+<li>numeric_column : 数值列</li>
+<li>bucketized_column : 分区列 </li>
+<li>indicator_column : 指示列</li>
+<li>embedding_column : 嵌入列</li>
+<li>categorical_column_with_identity : 类别ID列</li>
+<li>categorical_column_with_vocabulary(file or list) : 类别词表列</li>
+<li>categorical_column_with_hash_bucket : 类别哈希列</li>
+<li>crossed_column : 合成列</li>
+<li>weighted_categorical_column : 权重类别列</li>
+</ul>
+<h3 id="shu zhi lie">数值列</h3>
+<p>以鸢尾花分类问题举例，其输入特征 SepalLength, SepalWidth, PetalLength, PetalWidth （萼片的长宽、花瓣的长宽）就是数值类型。用法：</p>
+<div class="highlight"><pre><span></span><span class="c1"># 缺省为tf.float32的标量.</span>
+<span class="n">numeric_feature_column</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">numeric_column</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">"SepalLength"</span><span class="p">)</span>
+</pre></div>
+<p>数值列的缺省类型为 tf.float32, 如果想指定类型，则：</p>
+<div class="highlight"><pre><span></span><span class="c1"># 用tf.float64的标量表示.</span>
+<span class="n">numeric_feature_column</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">numeric_column</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">"SepalLength"</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+</pre></div>
+<p>缺省情况下，numeric_column 返回一个单值数据，如果要返回向量数据，则需指定shape值：</p>
+<div class="highlight"><pre><span></span><span class="c1"># 用10维向量来表示，其中每个元素的类型为 tf.float32.</span>
+<span class="n">vector_feature_column</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">numeric_column</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">"Bowling"</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># 用10x5的矩阵来表示.</span>
+<span class="n">matrix_feature_column</span>
+   <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">numeric_column</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">"MyMatrix"</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span> 
+</pre></div>
+<h3 id="fen qu lie">分区列</h3>
+<p>如果要把一个数值分成不同区间，比如按年份划分：
+<p align="center">
+<img src="/images/4_.jpg" width="60%"/>
+<br/>
+</p></p>
+<p>划分后的结果为one-hot向量形式。</p>
+<table>
+<thead>
+<tr>
+<th>区间</th>
+<th align="center">表示为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt; 1960</td>
+<td align="center">[1, 0, 0, 0]</td>
+</tr>
+<tr>
+<td>&gt;= 1960 且 &lt; 1980</td>
+<td align="center">[0, 1, 0, 0]</td>
+</tr>
+<tr>
+<td>&gt;= 1980 且 &lt; 2000</td>
+<td align="center">[0, 0, 1, 0]</td>
+</tr>
+<tr>
+<td>&gt; 2000</td>
+<td align="center">[0, 0, 0, 1]</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><span class="c1"># 原始输入是一个名为Year的数值列.</span>
+<span class="n">numeric_feature_column</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">numeric_column</span><span class="p">(</span><span class="s2">"Year"</span><span class="p">)</span>
+
+<span class="c1"># 以1960、1980、2000年来划分区间</span>
+<span class="n">bucketized_feature_column</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">bucketized_column</span><span class="p">(</span>
+    <span class="n">source_column</span> <span class="o">=</span> <span class="n">numeric_feature_column</span><span class="p">,</span>
+    <span class="n">boundaries</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1960</span><span class="p">,</span> <span class="mi">1980</span><span class="p">,</span> <span class="mi">2000</span><span class="p">])</span>
+</pre></div>
+<h3 id="lei bie idlie">类别Id列</h3>
+<p>如图，所谓类别Id列是指把左边的单值数据转换为右边的one-hot矢量形式。
+<p align="center">
+<img src="/images/5_.jpg" width="40%"/>
+<br/>
+</p></p>
+<p>比如我们用0、1、2、3分别表示童装、数码、运动和食品四类商品：</p>
+<ul>
+<li>0=&ldquo;kitchenware&rdquo;</li>
+<li>1="electronics"</li>
+<li>2="sport"</li>
+<li>3="food"</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="c1"># key后跟的列名与input_fn()中的列名一致，</span>
+<span class="c1"># 其值域为[0, num_buckets)间的整数。</span>
+<span class="n">identity_feature_column</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">categorical_column_with_identity</span><span class="p">(</span>
+    <span class="n">key</span><span class="o">=</span><span class="s1">'procduct_class'</span><span class="p">,</span> 
+    <span class="n">num_buckets</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span> 
+
+<span class="c1"># 本例中, 'Integer_1' 或 'Integer_2' 皆可替换到上句的 key 之后</span>
+<span class="k">def</span> <span class="nf">input_fn</span><span class="p">():</span>
+    <span class="o">...&lt;</span><span class="n">code</span><span class="o">&gt;...</span>
+    <span class="k">return</span> <span class="p">({</span> <span class="s1">'Integer_1'</span><span class="p">:[</span><span class="n">values</span><span class="p">],</span> <span class="o">..&lt;</span><span class="n">etc</span><span class="o">&gt;..</span><span class="p">,</span> <span class="s1">'Integer_2'</span><span class="p">:[</span><span class="n">values</span><span class="p">]</span> <span class="p">},</span>
+            <span class="p">[</span><span class="n">Label_values</span><span class="p">])</span>
+</pre></div>
+<h3 id="lei bie ci biao lie">类别词表列</h3>
+<p>在NLP任务中，我们不会把词条直接输入模型，而是首先把它转换成数值或向量。类别词表列可以把词条转换为one-hot向量形式，如下图：
+<p align="center">
+<img src="/images/6_.jpg" width="50%"/>
+<br/>
+</p></p>
+<p>从列表创建一个词表列：</p>
+<div class="highlight"><pre><span></span><span class="n">vocabulary_feature_column</span> <span class="o">=</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">categorical_column_with_vocabulary_list</span><span class="p">(</span>
+        <span class="n">key</span><span class="o">=</span><span class="s2">"feature_name_from_input_fn"</span><span class="p">,</span>
+        <span class="n">vocabulary_list</span><span class="o">=</span><span class="p">[</span><span class="s2">"kitchenware"</span><span class="p">,</span> <span class="s2">"electronics"</span><span class="p">,</span> <span class="s2">"sports"</span><span class="p">])</span> 
+</pre></div>
+<p>从文件创建一个词表列：</p>
+<div class="highlight"><pre><span></span><span class="n">vocabulary_feature_column</span> <span class="o">=</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">categorical_column_with_vocabulary_file</span><span class="p">(</span>
+        <span class="n">key</span><span class="o">=</span><span class="s2">"feature_name_from_input_fn"</span><span class="p">,</span>
+        <span class="n">vocabulary_file</span><span class="o">=</span><span class="s2">"product_class.txt"</span><span class="p">,</span>
+        <span class="n">vocabulary_size</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># product_class.txt 的文件内容如下：</span>
+<span class="n">kitchenware</span>
+<span class="n">electronics</span>
+<span class="n">sports</span>
+</pre></div>
+<h3 id="lei bie ha xi lie">类别哈希列</h3>
+<p>如果待分类的数据量很大，势必会消耗很大内存。tensorflow提供一种用哈希表分类的方法。</p>
+<div class="highlight"><pre><span></span><span class="n">hashed_feature_column</span> <span class="o">=</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">categorical_column_with_hash_bucket</span><span class="p">(</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="s2">"feature_name_from_input_fn"</span><span class="p">,</span>
+        <span class="n">hash_buckets_size</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span> <span class="c1"># 把特征值哈希分布到100个位置</span>
+</pre></div>
+<p align="center">
+<img src="/images/7_.jpg" width="75%"/>
+<br/>
+</p>
+<p>当分类数量大于哈希分布尺寸的时候，必然会有几个特征指向同一个哈希位置。如图所示，<code>kitchenware</code>和<code>sports</code>的哈希值同为12，这没有关系，模型可以通过你提供的其他特征进一步区分到底是<code>kitchenware</code>还是<code>sports</code>。</p>
+<h3 id="he cheng lie">合成列</h3>
+<p>有时我们需要组合多个特征为一个特征，这种特征叫合成特征。组合方式通常采用相乘或求笛卡尔积，特征组合有助于表示非线性关系。举个例子，假设我们的模型要计算北京的房产价格，而房产价格与它所处的位置密切相关，而对于位置而言，我们需要用经纬度两个数据同时标定，因此这个经纬度就构成了合成特征。假设我们把北京均匀的纵横切100x100刀，这样就会产生10000个可区分的矩形区域。</p>
+<div class="highlight"><pre><span></span><span class="c1"># 将经纬度转换为[0, 100)范围内的整型值</span>
+<span class="k">def</span> <span class="nf">input_fn</span><span class="p">():</span>
+    <span class="c1"># 从数据集读入经纬度</span>
+    <span class="n">latitude</span> <span class="o">=</span> <span class="o">...</span>   <span class="c1"># A tf.float32 value</span>
+    <span class="n">longitude</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># A tf.float32 value</span>
+
+    <span class="c1"># 返回的字典包含经纬度及其它特征，经纬度的值为0到99的整型值</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="s2">"latitude"</span><span class="p">:</span> <span class="n">latitude</span><span class="p">,</span> <span class="s2">"longitude"</span><span class="p">:</span> <span class="n">longitude</span><span class="p">,</span> <span class="o">...</span><span class="p">},</span> <span class="n">labels</span>
+
+<span class="c1"># 用np.linspace把纬度区间分成100等份</span>
+<span class="c1"># 然后把100等份的列表定义为区间列.</span>
+<span class="n">latitude_buckets</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">33.641336</span><span class="p">,</span> <span class="mf">33.887157</span><span class="p">,</span> <span class="mi">99</span><span class="p">))</span>
+<span class="n">latitude_fc</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">bucketized_column</span><span class="p">(</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">numeric_column</span><span class="p">(</span><span class="s1">'latitude'</span><span class="p">),</span>
+    <span class="n">latitude_buckets</span><span class="p">)</span>
+
+<span class="n">longitude_buckets</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">84.558798</span><span class="p">,</span> <span class="o">-</span><span class="mf">84.287259</span><span class="p">,</span> <span class="mi">99</span><span class="p">))</span>
+<span class="n">longitude_fc</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">bucketized_column</span><span class="p">(</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">numeric_column</span><span class="p">(</span><span class="s1">'longitude'</span><span class="p">),</span> <span class="n">longitude_buckets</span><span class="p">)</span>
+
+<span class="c1"># 用fc_longitude x fc_latitude创建交叉特征.</span>
+<span class="n">fc_beijing_boxed</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">crossed_column</span><span class="p">(</span>
+    <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="n">latitude_fc</span><span class="p">,</span> <span class="n">longitude_fc</span><span class="p">],</span>
+    <span class="n">hash_bucket_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span> <span class="c1"># 把10000个分区哈希分布到1000个位置</span>
+</pre></div>
+<p>创建合成特征的方法为：</p>
+<ul>
+<li>从input_fn的返回值中取得待组合的特征名，本例中为<code>latitude</code>和<code>longitude</code></li>
+<li>做组合的这些特征必须先转换成one-hot形式</li>
+</ul>
+<p>由<code>latitude_fc</code>和<code>longitude_fc</code>组成的合成列的形式如下：</p>
+<div class="highlight"><pre><span></span>(0,0),(0,1)...  (0,99)
+(1,0),(1,1)...  (1,99)
+&hellip;, &hellip;,          ...
+(99,0),(99,1)...(99, 99)
+</pre></div>
+<p>注意，使用合成列后，仍需在模型中包含你用来合成特征列的原始特征列，它们负责在哈希冲突时，作为附加特征来进一步做类别区分。</p>
+<h3 id="zhi shi lie">指示列</h3>
+<p>指示列和后面要说的嵌入列均不能直接作为特征给模型使用，它的数据来源于类别特征列，即类别特征列是它的输入。
+为什么要作这样的设计？因为estimator执行深度神经网络的任务时，只能使用密集特征列，而类别特征列为稀疏列，需要用指示列或嵌入列作下变换才能被使用。
+至于指示列封装后，数据变成什么样子，我在官方文档中没找到，以后知道了再补充。</p>
+<div class="highlight"><pre><span></span><span class="n">categorical_column</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># 创建某种类型的类别特征列</span>
+
+<span class="c1"># 定义一个指示列，该列中的每个元素为one-hot向量. </span>
+<span class="n">indicator_column</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">indicator_column</span><span class="p">(</span><span class="n">categorical_column</span><span class="p">)</span>
+</pre></div>
+<h3 id="qian ru lie">嵌入列</h3>
+<p>如果类别数据量很大，比如上百万、上亿等，这时采用one-hot来表示就不经济了。记得词嵌入模型中的词向量吗，用一组浮点数来代替one-hot形式来表示一个词条，这种形式在这里被叫做嵌入列，这种方法明显的好处就是令向量维度变得很小。</p>
+<p>如下图，假设我们有81个不同的单词，采用one-hot形式需要81维的向量，而采用嵌入列则仅需要3维向量就能表达。
+<p align="center">
+<img src="/images/image9.jpg" width="75%"/>
+<br/>
+</p></p>
+<p>那么，在嵌入列产生的向量中的浮点数是如何确定的呢？通常，由训练数据学得。嵌入列可以提升模型的表达能力，一定程度描述类别间的关系。</p>
+<p>如何确定表示81个类别只需要3维呢？有个简单的公式来算出：
+</p>
+<div class="math">$$\frac{1}{2}\log_2(n)$$</div>
+<p>
+<mj></mj></p>
+<div class="math">$$n^{0.25}  \tag {等价公式}$$</div>
+<p></p>
+<div class="highlight"><pre><span></span><span class="c1"># 类别数的0.25次方</span>
+<span class="n">embedding_dimensions</span> <span class="o">=</span>  <span class="n">number_of_categories</span><span class="o">**</span><span class="mf">0.25</span>
+
+<span class="n">categorical_column</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># 创建一个类别列.</span>
+
+<span class="c1"># 再把这个类别列转为一个嵌入列.</span>
+<span class="c1"># 这意味着把one-hot向量转为指定维度的向量.</span>
+<span class="n">embedding_column</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">embedding_column</span><span class="p">(</span>
+    <span class="n">categorical_column</span><span class="o">=</span><span class="n">categorical_column</span><span class="p">,</span>
+    <span class="n">dimension</span><span class="o">=</span><span class="n">embedding_dimensions</span><span class="p">)</span>
+</pre></div>
+<p>注意，这仅仅是个一般规则，你也可以自行设定你希望的维度数。</p>
+<h3 id="quan zhong lei bie lie">权重类别列</h3>
+<p>有时会遇到一种配对特征，特征一是本体，特征二是本体对应的权重（或出现频率）。
+这就是权重类别列的使用场景。
+下面是从Tensorflow源码里抠出例子，话说有个<code>tf.Example</code>对象，它的proto形式如下：</p>
+<div class="highlight"><pre><span></span># proto 
+[
+  features {
+    feature {
+      key: "terms"
+      value {bytes_list {value: "very" value: "model"}}
+    }
+    feature {
+      key: "frequencies"
+      value {float_list {value: 0.3 value: 0.1}}
+    }
+  },
+  features {
+    feature {
+      key: "terms"
+      value {bytes_list {value: "when" value: "course" value: "human"}}
+    }
+    feature {
+      key: "frequencies"
+      value {float_list {value: 0.4 value: 0.1 value: 0.2}}
+    }
+  }
+]
+</pre></div>
+<p>考虑到proto格式熟悉的人不多，我们把上面的内容简化一下：</p>
+<div class="highlight"><pre><span></span>terms      : ["very", "model"]
+frequencies: [  0.3 ,    0.1 ]
+</pre></div>
+<p>容易看出，这两组数据有伴生关系，下面的代码通过权重类别列函数把该特征组合在一起.</p>
+<div class="highlight"><pre><span></span><span class="n">categorical_column</span> <span class="o">=</span> <span class="n">categorical_column_with_hash_bucket</span><span class="p">(</span>
+  <span class="n">column_name</span><span class="o">=</span><span class="s1">'terms'</span><span class="p">,</span> <span class="n">hash_bucket_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="n">weighted_column</span> <span class="o">=</span> <span class="n">weighted_categorical_column</span><span class="p">(</span>
+  <span class="n">categorical_column</span><span class="o">=</span><span class="n">categorical_column</span><span class="p">,</span> <span class="n">weight_feature_key</span><span class="o">=</span><span class="s1">'frequencies'</span><span class="p">)</span>
+
+<span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">weighted_column</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">parse_example</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="n">make_parse_example_spec</span><span class="p">(</span><span class="n">columns</span><span class="p">))</span>
+<span class="n">linear_prediction</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">linear_model</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">columns</span><span class="p">)</span>
+</pre></div>
+<h3 id="shi yong te zheng lie">使用特征列</h3>
+<p>我们须把多个特征列封装成一个列表，才能作为参数拿给估计器(estimator)用。
+在使用特征列时，要注意区分特征列类型和模型类型。特征列只有两种类型，类别列和密集列；
+模型也分两种，线性模型和深度模型。具体如下：</p>
+<ul>
+<li><code>LinearClassifier</code> 和 <code>LinearRegressor</code>:<ul>
+<li>适用所有类型的特征列</li>
+</ul>
+</li>
+<li><code>DNNClassifier</code> 和 <code>DNNRegressor</code>:<ul>
+<li>仅适用于密集列，如要使用类别列，须经过 <code>indicator_column</code> or或<code>embedding_column</code>做二次封装</li>
+</ul>
+</li>
+<li><code>DNNLinearCombinedClassifier</code> 和<code>DNNLinearCombinedRegressor</code>:<ul>
+<li><code>linear_feature_columns</code> 参数适用所有类型特征列.</li>
+<li><code>dnn_feature_columns</code> 参数仅适用密集列, 用法和 <code>DNNClassifier</code> 及 <code>DNNRegressor</code>的用法一致.</li>
+</ul>
+</li>
+</ul>
+<p><code>DNNLinearCombinedClassifier</code>的代码举例：</p>
+<div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">DNNLinearCombinedClassifier</span><span class="p">(</span>
+    <span class="n">model_dir</span><span class="o">=</span><span class="s1">'/tmp/census_model'</span><span class="p">,</span>
+    <span class="n">linear_feature_columns</span><span class="o">=</span><span class="n">base_columns</span> <span class="o">+</span> <span class="n">crossed_columns</span><span class="p">,</span>
+    <span class="n">dnn_feature_columns</span><span class="o">=</span><span class="n">deep_columns</span><span class="p">,</span>
+    <span class="n">dnn_hidden_units</span><span class="o">=</span><span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">])</span>
+</pre></div>
+<h2 id="mo xing ding yi_1">模型定义</h2>
+<h3 id="yu ding yi">预定义</h3>
+<p align="center">
+<img src="/images/image2.jpg" width="75%"/>
+<br/>
+</p>
+<p>预定义模型没什么好讲，看看文档就能秒懂，如下面的例子：</p>
+<div class="highlight"><pre><span></span><span class="c1"># 含2个隐藏层的深度神经网络</span>
+<span class="n">classifier</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">DNNClassifier</span><span class="p">(</span>
+   <span class="n">feature_columns</span><span class="o">=</span><span class="n">feature_columns</span><span class="p">,</span> <span class="c1"># 定义好的特征列 </span>
+   <span class="n">hidden_units</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>           <span class="c1"># 两个隐藏层, 每层10个神经元</span>
+   <span class="n">n_classes</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>                     <span class="c1"># 输出3个类别</span>
+   <span class="n">model_dir</span><span class="o">=</span><span class="n">PATH</span><span class="p">)</span>                  <span class="c1"># 存 checkpoints 的路径</span>
+</pre></div>
+<h3 id="zi ding yi">自定义</h3>
+<p>写自定义模型时，其实和传统的写法差不多，只是有些小地方要注意一下。</p>
+<p>基本思路是，定义模型函数，它接收从input_fn()传来的特征和标签，输出由tf.estimator.EstimatorSpec封装后的结果, 
+函数体主要做两件事情，一件是定义模型，一件是通过分支语句分别实现训练、评估和预测。</p>
+<p>我喜欢的结构是把模型单独定义成一个类，然后再用mode_fn()来调用它, 
+mode_fn()的返回用tf.estimator.EstimatorSpec封装，详见下面的例子：</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Sample_model</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="o">...</span><span class="p">):</span>
+    <span class="o">...</span> <span class="o">&lt;</span> <span class="n">code</span> <span class="o">&gt;</span> <span class="o">...</span>
+  <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">training</span><span class="p">):</span>
+    <span class="o">...</span> <span class="o">&lt;</span> <span class="n">code</span> <span class="o">&gt;</span> <span class="o">...</span>
+
+<span class="k">def</span> <span class="nf">model_fn</span><span class="p">(</span>
+   <span class="n">features</span><span class="p">,</span>                       <span class="c1"># batch数量的特征，是input_fn 函数的输出</span>
+   <span class="n">labels</span><span class="p">,</span>                         <span class="c1"># batch数量的标签，是input_fn 函数的输出</span>
+   <span class="n">mode</span><span class="p">):</span>                          <span class="c1"># tf.estimator.ModeKeys.TRAIN / EVAL / PREDICT</span>
+
+    <span class="c1"># 用特征列（feature_columns)定义输入层 </span>
+    <span class="n">input_layer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">input_layer</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">feature_columns</span><span class="p">)</span>
+
+    <span class="c1"># 定义模型实例 </span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Sample_model</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">:</span>
+        <span class="n">logits</span>  <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">training</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="o">...</span>
+        <span class="n">train_op</span> <span class="o">=</span> <span class="o">...</span>
+        <span class="n">accuracy</span> <span class="o">=</span> <span class="o">...</span>
+
+        <span class="c1"># 给训练准确度命名，并使它被tf日志记录</span>
+        <span class="n">tf</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">accuracy</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">'train_accuracy'</span><span class="p">)</span>
+        <span class="n">tf</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">scalar</span><span class="p">(</span><span class="s1">'train_accuracy'</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">EstimatorSpec</span><span class="p">(</span>
+            <span class="n">mode</span><span class="p">,</span>
+            <span class="n">loss</span><span class="o">=</span><span class="n">loss</span><span class="p">,</span>
+            <span class="n">train_op</span><span class="o">=</span><span class="n">train_op</span><span class="p">)</span> 
+
+    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">PREDICT</span><span class="p">:</span>
+        <span class="n">logits</span>  <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">training</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="n">predictions</span> <span class="o">=</span> <span class="o">...</span>
+        <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">EstimatorSpec</span><span class="p">(</span>
+            <span class="n">mode</span><span class="p">,</span> 
+            <span class="n">predictions</span> <span class="o">=</span> <span class="n">predictions</span>
+            <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">EVAL</span><span class="p">:</span>
+        <span class="n">logits</span>  <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">training</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="o">...</span>
+
+        <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">EstimatorSpec</span><span class="p">(</span>
+            <span class="n">mode</span><span class="p">,</span>
+            <span class="n">loss</span><span class="o">=</span><span class="n">loss</span><span class="p">)</span>
+</pre></div>
+<p>你可能发现，我好像没用到特征列。
+如果在自定义的模型中想用特征列这个工具（再次强调，不是必须），只需在模型的输入层调用下面这个函数即可：</p>
+<ul>
+<li><code>tf.feature_column.linear_model(features, feature_columns, ...)</code>：如果定义线性模型的话用这个，输出是预测结果.</li>
+<li><code>tf.feature_column.input_layer(features, feature_columns, ...)</code>：深度模型用这个.</li>
+</ul>
+<p>其中features 来自input_fn 的输出， feature_columns 是由多个特征列组成的列表。</p>
+<div class="highlight"><pre><span></span><span class="c1"># 自定义一个超简单的模型</span>
+<span class="c1"># 输入层</span>
+<span class="n">input_layer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">input_layer</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">feature_columns</span><span class="p">)</span>
+<span class="c1"># 隐藏层: h1，h2</span>
+<span class="c1"># 10个神经元，relu激活函数，input_layer作为输入参数</span>
+<span class="n">h1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">relu</span><span class="p">)(</span><span class="n">input_layer</span><span class="p">)</span>
+<span class="n">h2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">relu</span><span class="p">)(</span><span class="n">h1</span><span class="p">)</span>
+<span class="c1"># 输出层，3个输出</span>
+<span class="n">logits</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">3</span><span class="p">)(</span><span class="n">h2</span><span class="p">)</span>
+</pre></div>
+<h4>合并写法</h4>
+<p>这是tensorflow 官网给出的一种写法, 只用了一个return, 返回内容的判断放在了前面的 if 分支，你可以根据自己的喜好选择不同写法。</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">model_fn</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">mode</span> <span class="o">==</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span> <span class="ow">or</span>
+      <span class="n">mode</span> <span class="o">==</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">EVAL</span><span class="p">):</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="o">...</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="bp">None</span>
+  <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">:</span>
+    <span class="n">train_op</span> <span class="o">=</span> <span class="o">...</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">train_op</span> <span class="o">=</span> <span class="bp">None</span>
+  <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">PREDICT</span><span class="p">:</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="o">...</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="bp">None</span>
+
+  <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">EstimatorSpec</span><span class="p">(</span>
+      <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span>
+      <span class="n">predictions</span><span class="o">=</span><span class="n">predictions</span><span class="p">,</span>
+      <span class="n">loss</span><span class="o">=</span><span class="n">loss</span><span class="p">,</span>
+      <span class="n">train_op</span><span class="o">=</span><span class="n">train_op</span><span class="p">)</span>
+</pre></div>
+<h2 id="zu zhuang_1">组装</h2>
+<p>准备好上面的内容后，就可以把model_fn()和input_fn组装在一起了。方法是用estimator实例化
+估计器对象，然后用这个对象分别进行训练、评估、预测即可。</p>
+<p>在组装时，我们还要加入一些常规的东西。比如设置checkpoint的保存规则，定义一些观测变量，
+方便在训练时用TensorBoard观察，还有超参数等等。具体请看示例注释：</p>
+<div class="highlight"><pre><span></span><span class="c1"># 设置tf输出哪种类别的日志，不同类别详细程度不同</span>
+<span class="c1"># tf.logging.后的可选值为DEBUG, INFO, WARN, ERROR, or FATAL.</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">set_verbosity</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+
+<span class="c1"># TensorFlow 版本检查，estimator 要求1.4以上 </span>
+<span class="n">tf_version</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">__version__</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"TensorFlow version: {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tf_version</span><span class="p">))</span>
+<span class="k">assert</span> <span class="s2">"1.4"</span> <span class="o">&lt;=</span> <span class="n">tf_version</span><span class="p">,</span> <span class="s2">"TensorFlow r1.4 or later is needed"</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">flags</span><span class="p">,</span> <span class="n">model_function</span><span class="p">,</span> <span class="n">input_function</span><span class="p">):</span>
+  <span class="c1"># flags 携带准备传入模型函数和输入函数的参数。 </span>
+
+  <span class="c1"># 设置训练时每隔多少秒保存一下checkpoint.</span>
+  <span class="n">run_config</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">RunConfig</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">save_checkpoints_secs</span><span class="o">=</span><span class="mf">1e9</span><span class="p">)</span>
+  <span class="c1"># 生成classifier实例</span>
+  <span class="n">classifier</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">Estimator</span><span class="p">(</span>
+      <span class="n">model_fn</span><span class="o">=</span><span class="n">model_function</span><span class="p">,</span> <span class="n">model_dir</span><span class="o">=</span><span class="n">flags</span><span class="o">.</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">run_config</span><span class="p">,</span>
+      <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+          <span class="s1">'resnet_size'</span><span class="p">:</span> <span class="n">flags</span><span class="o">.</span><span class="n">resnet_size</span><span class="p">,</span>
+          <span class="s1">'data_format'</span><span class="p">:</span> <span class="n">flags</span><span class="o">.</span><span class="n">data_format</span><span class="p">,</span>
+          <span class="s1">'batch_size'</span><span class="p">:</span> <span class="n">flags</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span>
+      <span class="p">})</span>
+
+  <span class="c1"># 每训练 flags.epochs_per_eval 轮更新一下日志内容.</span>
+  <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">flags</span><span class="o">.</span><span class="n">train_epochs</span> <span class="o">//</span> <span class="n">flags</span><span class="o">.</span><span class="n">epochs_per_eval</span><span class="p">):</span>
+    <span class="n">tensors_to_log</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">'learning_rate'</span><span class="p">:</span> <span class="s1">'learning_rate'</span><span class="p">,</span>
+        <span class="s1">'cross_entropy'</span><span class="p">:</span> <span class="s1">'cross_entropy'</span><span class="p">,</span>
+        <span class="s1">'train_accuracy'</span><span class="p">:</span> <span class="s1">'train_accuracy'</span>
+    <span class="p">}</span>
+
+    <span class="c1"># 设置每跑100个迭代器，打印一下日志。</span>
+    <span class="n">logging_hook</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">LoggingTensorHook</span><span class="p">(</span>
+        <span class="n">tensors</span><span class="o">=</span><span class="n">tensors_to_log</span><span class="p">,</span> <span class="n">every_n_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s1">'Starting a training cycle.'</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">input_fn_train</span><span class="p">():</span>
+      <span class="k">return</span> <span class="n">input_function</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">flags</span><span class="o">.</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">flags</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span>
+                            <span class="n">flags</span><span class="o">.</span><span class="n">epochs_per_eval</span><span class="p">,</span> <span class="n">flags</span><span class="o">.</span><span class="n">num_parallel_calls</span><span class="p">)</span>
+
+    <span class="n">classifier</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">input_fn</span><span class="o">=</span><span class="n">input_fn_train</span><span class="p">,</span> <span class="n">hooks</span><span class="o">=</span><span class="p">[</span><span class="n">logging_hook</span><span class="p">])</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s1">'Starting to evaluate.'</span><span class="p">)</span>
+
+    <span class="c1"># 评估模型并打印结果</span>
+    <span class="k">def</span> <span class="nf">input_fn_eval</span><span class="p">():</span>
+      <span class="k">return</span> <span class="n">input_function</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">flags</span><span class="o">.</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">flags</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span>
+                            <span class="mi">1</span><span class="p">,</span> <span class="n">flags</span><span class="o">.</span><span class="n">num_parallel_calls</span><span class="p">)</span>
+
+    <span class="n">eval_results</span> <span class="o">=</span> <span class="n">classifier</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">input_fn</span><span class="o">=</span><span class="n">input_fn_eval</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">eval_results</span><span class="p">)</span>
+</pre></div>
+<h2 id="duo gpuxia de xie fa">多GPU下的写法</h2>
+<p>在多GPU的情况下，代码需要做几点小变化。</p>
+<p>首先, 检查batch_size的数量，它必须能被GPU的数量整除。其目的是让每批的输入数量被平均分配到各个GPU上。</p>
+<p>其次，在model_fn函数中的训练部分封装优化器。</p>
+<div class="highlight"><pre><span></span>    <span class="n">optimizer</span> <span class="o">=</span> <span class="o">...</span>          <span class="c1"># 原优化器的定义不变</span>
+    <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'multi_gpu'</span><span class="p">):</span>
+      <span class="n">optimizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">TowerOptimizer</span><span class="p">(</span><span class="n">optimizer</span><span class="p">)</span>
+</pre></div>
+<p>最后，在main函数部分封装模型函数(model_fn).</p>
+<div class="highlight"><pre><span></span>  <span class="k">if</span> <span class="n">flags</span><span class="o">.</span><span class="n">multi_gpu</span><span class="p">:</span>
+    <span class="n">model_function</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">replicate_model_fn</span><span class="p">(</span>
+        <span class="n">model_fn</span><span class="p">,</span> <span class="n">loss_reduction</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">Reduction</span><span class="o">.</span><span class="n">MEAN</span><span class="p">)</span>
+</pre></div>
+<h2 id="qi ta">其他</h2>
+<h3 id="san ge import">三个import</h3>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+</pre></div>
+<p>常看到这三个置于顶上的import 语句，一直没有深究它们有什么用，今天查了下资料，发现这三句都是针对python 2.X版本的情况，分别作用如下：</p>
+<ul>
+<li>print_function: print语句必须使用函数形式，而 print &lsquo;test&rsquo;这句在这种条件下就会报错。</li>
+<li>division: 精确除法，即python2.x版本中，3/4=0（截断除法），有了这句, 3/4=0.75， 而3//4=0</li>
+<li>absolute_import: 绝对路径，解决自定义包与缺省包名字冲突的问题，如你不小心自定义了string，有了这句， import string时引用系统的，没有这句就引用你本地的。</li>
+</ul>
+<h3 id="guan yu chao can shu">关于超参数</h3>
+<p>既然训练始终要调参，不如把参数提前定义好，比如下面这个参数类。</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">argparse</span>
+<span class="k">class</span> <span class="nc">MymodelArgParser</span><span class="p">(</span><span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">):</span>
+
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">(</span><span class="n">MymodelArgParser</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">'--multi_gpu'</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">'store_true'</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">'If set, run across all available GPUs.'</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">'--batch_size'</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">'Number of images to process in a batch'</span><span class="p">)</span>
+
+    <span class="o">...</span> <span class="o">&lt;</span><span class="n">code</span><span class="o">&gt;</span> <span class="o">...</span>
+</pre></div>
+<p>还有一种方法也比较优雅，它把参数存成json文件，运行时载入参数即可，见下面的几个功能函数：</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">codecs</span>
+
+<span class="c1"># 从指定目录载入参数</span>
+<span class="k">def</span> <span class="nf">load_hparams</span><span class="p">(</span><span class="n">model_dir</span><span class="p">):</span>
+  <span class="sd">"""Load hparams from an existing model directory."""</span>
+  <span class="n">hparams_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_dir</span><span class="p">,</span> <span class="s2">"hparams"</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">tf</span><span class="o">.</span><span class="n">gfile</span><span class="o">.</span><span class="n">Exists</span><span class="p">(</span><span class="n">hparams_file</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">"# Loading hparams from </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">hparams_file</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">codecs</span><span class="o">.</span><span class="n">getreader</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">)(</span><span class="n">tf</span><span class="o">.</span><span class="n">gfile</span><span class="o">.</span><span class="n">GFile</span><span class="p">(</span><span class="n">hparams_file</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">))</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+      <span class="k">try</span><span class="p">:</span>
+        <span class="n">hparams_values</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">hparams</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">training</span><span class="o">.</span><span class="n">HParams</span><span class="p">(</span><span class="o">**</span><span class="n">hparams_values</span><span class="p">)</span>
+      <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">"  can't load hparams file"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">return</span> <span class="n">hparams</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="k">return</span> <span class="bp">None</span>
+
+<span class="c1"># 保存参数到json文件</span>
+<span class="k">def</span> <span class="nf">save_hparams</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">hparams</span><span class="p">):</span>
+  <span class="sd">"""Save hparams."""</span>
+  <span class="n">hparams_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">"hparams"</span><span class="p">)</span>
+  <span class="k">print</span><span class="p">(</span><span class="s2">"  saving hparams to </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">hparams_file</span><span class="p">)</span>
+  <span class="k">with</span> <span class="n">codecs</span><span class="o">.</span><span class="n">getwriter</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">)(</span><span class="n">tf</span><span class="o">.</span><span class="n">gfile</span><span class="o">.</span><span class="n">GFile</span><span class="p">(</span><span class="n">hparams_file</span><span class="p">,</span> <span class="s2">"wb"</span><span class="p">))</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">hparams</span><span class="o">.</span><span class="n">to_json</span><span class="p">())</span>
+
+<span class="c1"># 用hparams_path里的新值覆盖hparams的老值</span>
+<span class="k">def</span> <span class="nf">maybe_parse_standard_hparams</span><span class="p">(</span><span class="n">hparams</span><span class="p">,</span> <span class="n">hparams_path</span><span class="p">):</span>
+  <span class="k">if</span> <span class="ow">not</span> <span class="n">hparams_path</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">hparams</span>
+
+  <span class="k">if</span> <span class="n">tf</span><span class="o">.</span><span class="n">gfile</span><span class="o">.</span><span class="n">Exists</span><span class="p">(</span><span class="n">hparams_path</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">"# Loading standard hparams from </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">hparams_path</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">gfile</span><span class="o">.</span><span class="n">GFile</span><span class="p">(</span><span class="n">hparams_path</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+      <span class="n">hparams</span><span class="o">.</span><span class="n">parse_json</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+  <span class="k">return</span> <span class="n">hparams</span>
+</pre></div>
+<h3 id="zhu cheng xu ru kou">主程序入口</h3>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">FLAGS</span><span class="p">,</span> <span class="n">model_function</span><span class="p">,</span> <span class="n">input_function</span><span class="p">):</span>
+  <span class="o">...</span> <span class="o">&lt;</span><span class="n">code</span><span class="o">&gt;</span> <span class="o">...</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+  <span class="n">parser</span> <span class="o">=</span> <span class="n">MymodelArgParser</span><span class="p">()</span>
+  <span class="n">tf</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">set_verbosity</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+  <span class="n">FLAGS</span><span class="p">,</span> <span class="n">unparsed</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_known_args</span><span class="p">()</span>
+  <span class="n">tf</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="o">=</span><span class="n">main</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+</span> <span class="n">unparsed</span><span class="p">)</span>
+</pre></div>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+  </div><!-- /.entry-content -->
+</section>
+    </div>
+    <footer id="contentinfo" class="pagination" style="font-size:85%">
+            <address id="about" class="vcard body">
+            无节操小广告<a href="https://freeopen.github.io/pages/da-shang.html"> 欢迎打赏 </a>
+            </address><!-- /#about -->
+    </footer><!-- /#contentinfo -->
+  </div>
+
+  <!--Right-->
+  <div id="main_toc" class="sidebar-toc" style="overflow:auto;height:100%;">
+<section id="main_toc">
+    <!-- <div class="col-lg-2 hidden-xs hidden-sm"> -->
+    <nav toc-data class="col-lg-2 hidden-xs hidden-sm">
+      <div id="toc"><ul><li><a class="toc-href" href="#estimator" title="Estimator">Estimator</a></li><li><a class="toc-href" href="#input_fn" title="input_fn">input_fn</a><ul><li><a class="toc-href" href="#xiao shu ju de qing kuang" title="小数据的情况">小数据的情况</a></li><li><a class="toc-href" href="#da shu ju de qing kuang" title="大数据的情况">大数据的情况</a></li></ul></li><li><a class="toc-href" href="#te zheng lie_1" title="特征列">特征列</a><ul><li><a class="toc-href" href="#shu zhi lie" title="数值列">数值列</a></li><li><a class="toc-href" href="#fen qu lie" title="分区列">分区列</a></li><li><a class="toc-href" href="#lei bie idlie" title="类别Id列">类别Id列</a></li><li><a class="toc-href" href="#lei bie ci biao lie" title="类别词表列">类别词表列</a></li><li><a class="toc-href" href="#lei bie ha xi lie" title="类别哈希列">类别哈希列</a></li><li><a class="toc-href" href="#he cheng lie" title="合成列">合成列</a></li><li><a class="toc-href" href="#zhi shi lie" title="指示列">指示列</a></li><li><a class="toc-href" href="#qian ru lie" title="嵌入列">嵌入列</a></li><li><a class="toc-href" href="#quan zhong lei bie lie" title="权重类别列">权重类别列</a></li><li><a class="toc-href" href="#shi yong te zheng lie" title="使用特征列">使用特征列</a></li></ul></li><li><a class="toc-href" href="#mo xing ding yi_1" title="模型定义">模型定义</a><ul><li><a class="toc-href" href="#yu ding yi" title="预定义">预定义</a></li><li><a class="toc-href" href="#zi ding yi" title="自定义">自定义</a></li></ul></li><li><a class="toc-href" href="#zu zhuang_1" title="组装">组装</a></li><li><a class="toc-href" href="#duo gpuxia de xie fa" title="多GPU下的写法">多GPU下的写法</a></li><li><a class="toc-href" href="#qi ta" title="其他">其他</a><ul><li><a class="toc-href" href="#san ge import" title="三个import">三个import</a></li><li><a class="toc-href" href="#guan yu chao can shu" title="关于超参数">关于超参数</a></li><li><a class="toc-href" href="#zhu cheng xu ru kou" title="主程序入口">主程序入口</a></li></ul></li></ul></div>
+    </nav>
+    <!-- </div> -->
+</section>
+  </div>
+
+</body>
+</html>

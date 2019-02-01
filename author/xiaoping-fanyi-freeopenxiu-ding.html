@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>Freeopen - Articles by Xiaoping Fan(译), freeopen(修订)</title>
+        <meta charset="utf-8" />
+
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/css/main.css" />
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/academicons/css/academicons.min.css" />
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/font-awesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface" />
+
+
+        <link href="https://freeopen.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Freeopen Atom Feed" />
+        
+
+</head>
+
+<!-- <body class="theme-myblue"id="index" class="home"> -->
+<body id="index" class="theme-myblue">
+
+  <div class="sidebar">
+    <div class="container sidebar-sticky">
+      <div class="sidebar-about">
+        <h1><a href="https://freeopen.github.io/">Freeopen <strong></strong></a></h1>
+        <p class="lead"></p>
+      </div>
+      <nav id="menu" class="sidebar-nav">
+            <div >
+              <a class="sidebar-nav-item" href="https://freeopen.github.io/pages/about.html">About</a>
+            </div>
+            <div >
+              <a class="sidebar-nav-item" href="https://freeopen.github.io/pages/da-shang.html">打赏</a>
+            </div>
+            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/bian-cheng.html">编程</a>
+            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
+            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/shou-ce.html">手册</a>
+            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/shu-xue.html">数学</a>
+
+        <hr>
+          <a href="" title="Atom feed" target="_blank" 
+              style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;">
+            <i class="fa fa-rss-square"></i>
+          </a>
+          <a href="https://github.com/freeopen" title="Software I released on Github" 
+                target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="fa fa-github-square"></i> </a>
+          <a href="" title="Google Scholar" 
+              target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="ai ai-google-scholar-square"></i> </a>
+          <a href="" title="LinkedIn" 
+              target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="fa fa-linkedin-square"></i> </a>
+          <a href="" title="ResearchGate" 
+              target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="ai ai-researchgate-square"></i> </a>
+          <a href="Mailto:freeopen@163.com" title="My email" 
+              target="_blank" style="display: inline; padding: 0px 0px 0px 0;
+              margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i
+            class="fa fa-envelope-square"></i> </a>
+      </nav>
+
+    </div>
+  </div>
+
+  <div id="content" class="container content">
+    <div class="post">
+<section id="content">
+<h2>Articles by Xiaoping Fan(译), freeopen(修订)</h2>
+
+<ol id="post-list">
+        <li><article class="hentry">
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/tensorlayer-jiao-cheng" rel="bookmark" title="Permalink to TensorLayer 教程">TensorLayer 教程</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2017-09-09T00:00:00+08:00"> 2017-09-09 </time>
+                    <address class="vcard author">By
+                        <a class="url fn" href="https://freeopen.github.io/author/xiaoping-fanyi-freeopenxiu-ding.html">Xiaoping Fan(译), freeopen(修订)</a>
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> <p><a href="https://github.com/zsdonghao/tensorlayer/blob/master/docs/user/tutorial.rst">原文</a> | <a href="https://github.com/shorxp/tensorlayer-chinese/blob/master/docs/user/tutorial.rst">原译文</a></p>
+<blockquote>
+<p>freeopen: 为什么研究 TensorLayer ? <br/>
+在TF的编码中，常看到model被封装成class，进一步研究，发现为了简化模型的创建，有各种封装库，包括Keras, Tflearn, TFSlim, tf.contrib.learn(或称skflow) 等。
+其中TFSlim和skflow属TensorFlow自带，考虑到TFSlim中有现成的模型，就修改了一个试试，发现坑不小。我需要首先把数据源转成TFRecord格式，然后用模型训练后报错（out of range), 然后我就首先检查数据源的格式是否有问题，我采用TFSlim的Data
+provider来输出数据，可能我的数据维度太大，程序不报错，但一直死在那里不出结果，而同样我在使用numpy输出数据源数据时，没有任何问题，也没什么延时，瞬间我感觉到TFSlim的封装模式不仅把问题复杂化了，甚至还降低了程序的性能。Keras据说跑TF性能较慢，Tflearn感觉活跃度较低，考虑到TensorLayer是skflow上的再次封装，且不丧失灵活性，加上这篇最主要的教程写得真心不错，所以我发愿要好好研究一番。 <br/></p>
+<p>为什么我总喜欢修订一些长文翻译？<br/>
+技术翻译文章经常在阅读时有不知所云的现象，我总结的原因主要有三：一是译者没有理解作者意图，甚至连文章都没读懂，就开始直译 …</p></blockquote> </div><!-- /.entry-content -->
+        </article></li>
+</ol><!-- /#posts-list -->
+</section><!-- /#content -->
+    </div>
+    <footer id="contentinfo" class="pagination" style="font-size:85%">
+            <address id="about" class="vcard body">
+            无节操小广告<a href="https://freeopen.github.io/pages/da-shang.html"> 欢迎打赏 </a>
+            </address><!-- /#about -->
+    </footer><!-- /#contentinfo -->
+  </div>
+
+  <!--Right-->
+  <div id="main_toc" class="sidebar-toc" style="overflow:auto;height:100%;">
+  </div>
+
+</body>
+</html>

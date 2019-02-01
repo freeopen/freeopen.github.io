@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>Freeopen - 机器学习 category</title>
+        <meta charset="utf-8" />
+
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/css/main.css" />
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/academicons/css/academicons.min.css" />
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/font-awesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface" />
+
+
+        <link href="https://freeopen.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Freeopen Atom Feed" />
+        
+
+</head>
+
+<!-- <body class="theme-myblue"id="index" class="home"> -->
+<body id="index" class="theme-myblue">
+
+  <div class="sidebar">
+    <div class="container sidebar-sticky">
+      <div class="sidebar-about">
+        <h1><a href="https://freeopen.github.io/">Freeopen <strong></strong></a></h1>
+        <p class="lead"></p>
+      </div>
+      <nav id="menu" class="sidebar-nav">
+            <div >
+              <a class="sidebar-nav-item" href="https://freeopen.github.io/pages/about.html">About</a>
+            </div>
+            <div >
+              <a class="sidebar-nav-item" href="https://freeopen.github.io/pages/da-shang.html">打赏</a>
+            </div>
+            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/bian-cheng.html">编程</a>
+            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
+            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/shou-ce.html">手册</a>
+            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/shu-xue.html">数学</a>
+
+        <hr>
+          <a href="" title="Atom feed" target="_blank" 
+              style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;">
+            <i class="fa fa-rss-square"></i>
+          </a>
+          <a href="https://github.com/freeopen" title="Software I released on Github" 
+                target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="fa fa-github-square"></i> </a>
+          <a href="" title="Google Scholar" 
+              target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="ai ai-google-scholar-square"></i> </a>
+          <a href="" title="LinkedIn" 
+              target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="fa fa-linkedin-square"></i> </a>
+          <a href="" title="ResearchGate" 
+              target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="ai ai-researchgate-square"></i> </a>
+          <a href="Mailto:freeopen@163.com" title="My email" 
+              target="_blank" style="display: inline; padding: 0px 0px 0px 0;
+              margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i
+            class="fa fa-envelope-square"></i> </a>
+      </nav>
+
+    </div>
+  </div>
+
+  <div id="content" class="container content">
+    <div class="post">
+<section id="content">
+<h2>Articles in the 机器学习 category</h2>
+
+<ol id="post-list">
+        <li><article class="hentry">
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/hmm-memm-crf" rel="bookmark" title="Permalink to 概率图模型 HMM、MEMM、CRF">概率图模型 HMM、MEMM、CRF</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2018-05-08T00:00:00+08:00"> 2018-05-08 </time>
+                    <address class="vcard author">By
+                        <a class="url fn" href="https://freeopen.github.io/author/scofield.html">Scofield</a>
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> <p><a href="https://www.zhihu.com/question/35866596/answer/236886066">转自知乎</a></p>
+<blockquote>
+<p>freeopen: 此文不错，有些小错，顺手改了</p>
+</blockquote>
+<h2 id="yi , preface"><strong>一、Preface</strong></h2>
+<p>之前刚接触NLP时做相关的任务，也必然地涉及到了序列处理任务，然后自然要接触到概率图模型。当时在全网搜中文资料，陆续失望地发现竟然真的没有讲得清楚的博文，发现基本是把李航老师书里或CRF tutorial等资料的文字论述和公式抄来抄去的。当然，没有说别人讲的是错的，只是觉得，要是没有把东西说的让读者看得懂，那也是没意义啊。或者有些吧，就是讲了一大堆的东西，貌似也明白了啥，但还是不能让我很好的理解CRF这些模型究竟是个啥，完了还是有一头雾水散不开的感觉。试想，一堆公式扔过来，没有个感性理解的过渡，怎么可能理解的了。我甚至觉得，如果博客让人看不懂，那说明要么自己没理解透要么就是思维不清晰讲不清楚。所以默想，深水区攻坚还是要靠自己，然后去做调研做research，所以就写了个这个学习记录。</p>
+<p>所以概率图的研究学习思考列入了我的任务清单。不过平时的时间又非常的紧，只能陆陆续续的思考着，所以时间拖得也真是长啊。</p>
+<p>这是个学习笔记。相比其他的学习模型，概率图貌似确实是比较难以理解的。这里我基本全部用自己的理解加上自己的语言习惯表达出来，off the official form，表达尽量接地气。我会尽量将我所有理解过程中的每个关键小细节都详细描述出来，以使对零基础的初学者友好 …</p> </div><!-- /.entry-content -->
+        </article></li>
+        <li><article class="hentry">
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/estimator-bian-cheng-zhi-nan" rel="bookmark" title="Permalink to Estimator 编程指南">Estimator 编程指南</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2018-03-04T00:00:00+08:00"> 2018-03-04 </time>
+                    <address class="vcard author">By
+                        <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> <blockquote>
+<p>2018-04-12 第一次修订, 新增"多GPU下的写法"</p>
+</blockquote>
+<p>注：代码适用于 TF1.4 ~ TF1.7 。</p>
+<p>为什么要使用Estimator, 仅<a href="https://www.tensorflow.org/programmers_guide/estimators">官方文档</a>里提到的第一条优点就让我不得不重视它。
+大意是不管你在本地环境还是分布式环境，不管你用一个或多个CPU、GPU还是TPU训练模型，你的模型代码不需要做任何改变。</p>
+<p>但看了一些Estimator教程，不怎么满意。因为大部分介绍的方法过于简单，仅适用于实验环境。当你面对大数据、复杂模型和机能限制时，发现那些方法就不灵了。
+所以就自己写了一本，方便自查自检。这篇文章，会随着本人的打怪升级等级进行增补。</p>
+<h2 id="estimator">Estimator</h2>
+<p align="center">
+<img src="/images/image2.jpg" width="75%"/>
+<br/>
+</p>
+<p>Estimator 作为高层API，可以让我们写出结构清晰的代码。你有两种方法通过 estimator 来构建模型：</p>
+<ul>
+<li>Pre-mode Estimator: 创建指定类型的模型，如上图，它们分别是线性分类和回归模型、深度神经网络分类和回归模型，还有线性和深度混合的分类、回归模型。</li>
+<li>自定义 Estimator: 按传统的方法写模型，然后用 model_fn 函数封装 …</li></ul> </div><!-- /.entry-content -->
+        </article></li>
+        <li><article class="hentry">
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/tensorlayer-jiao-cheng" rel="bookmark" title="Permalink to TensorLayer 教程">TensorLayer 教程</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2017-09-09T00:00:00+08:00"> 2017-09-09 </time>
+                    <address class="vcard author">By
+                        <a class="url fn" href="https://freeopen.github.io/author/xiaoping-fanyi-freeopenxiu-ding.html">Xiaoping Fan(译), freeopen(修订)</a>
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> <p><a href="https://github.com/zsdonghao/tensorlayer/blob/master/docs/user/tutorial.rst">原文</a> | <a href="https://github.com/shorxp/tensorlayer-chinese/blob/master/docs/user/tutorial.rst">原译文</a></p>
+<blockquote>
+<p>freeopen: 为什么研究 TensorLayer ? <br/>
+在TF的编码中，常看到model被封装成class，进一步研究，发现为了简化模型的创建，有各种封装库，包括Keras, Tflearn, TFSlim, tf.contrib.learn(或称skflow) 等。
+其中TFSlim和skflow属TensorFlow自带，考虑到TFSlim中有现成的模型，就修改了一个试试，发现坑不小。我需要首先把数据源转成TFRecord格式，然后用模型训练后报错（out of range), 然后我就首先检查数据源的格式是否有问题，我采用TFSlim的Data
+provider来输出数据，可能我的数据维度太大，程序不报错，但一直死在那里不出结果，而同样我在使用numpy输出数据源数据时，没有任何问题，也没什么延时，瞬间我感觉到TFSlim的封装模式不仅把问题复杂化了，甚至还降低了程序的性能。Keras据说跑TF性能较慢，Tflearn感觉活跃度较低，考虑到TensorLayer是skflow上的再次封装，且不丧失灵活性，加上这篇最主要的教程写得真心不错，所以我发愿要好好研究一番。 <br/></p>
+<p>为什么我总喜欢修订一些长文翻译？<br/>
+技术翻译文章经常在阅读时有不知所云的现象，我总结的原因主要有三：一是译者没有理解作者意图，甚至连文章都没读懂，就开始直译 …</p></blockquote> </div><!-- /.entry-content -->
+        </article></li>
+        <li><article class="hentry">
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/tensorflow-de-mnist-jiao-cheng" rel="bookmark" title="Permalink to TensorFlow 的 MNIST 教程">TensorFlow 的 MNIST 教程</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2017-08-02T00:00:00+08:00"> 2017-08-02 </time>
+                    <address class="vcard author">By
+                        <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> <p><a href="https://www.tensorflow.org/get_started/mnist/pros">原文</a></p>
+<blockquote>
+<p>译者注：这篇文章对初学tensorflow的朋友来说，有很好的参考作用。曾经在网上看过本教程的翻译稿，但版本偏老。本文翻译时，tensorflow的版本为1.3.0-rc1. 新版相较于老版，示例代码有变化，文字说明也有增补。</p>
+</blockquote>
+<p>TensorFlow是一个非常强大的用来做大规模数值计算的库。其所擅长的任务之一就是实现以及训练深度神经网络。
+在本教程中，我们将学到构建一个TensorFlow模型的基本步骤，并将通过这些步骤为MNIST构建一个深度卷积神经网络。</p>
+<p>这个教程假设你已经熟悉神经网络和MNIST数据集。如果你尚未了解，请查看新手指南.</p>
+<h2 id="guan yu ben jiao cheng">关于本教程</h2>
+<p>本教程第一部分讲解 <a href="https://www.github.com/tensorflow/tensorflow/blob/r1.2/tensorflow/examples/tutorials/mnist/mnist_softmax.py">mnist_softmax.py</a> 代码, 一个简单的tensorflow模型实现。第二部分介绍一些提高精度的方法。</p>
+<p>你可以从本教程拷贝和粘贴代码块到你的python环境，或者下载完整代码 <a href="https://www.github.com/tensorflow/tensorflow/blob/r1.2/tensorflow/examples/tutorials/mnist/mnist_deep.py">mnist_deep.py</a>.</p>
+<p>我们将完成如下目标：</p>
+<ul>
+<li>基于图片像素，创建一个softmax回归函数的模型来识别MNIST数字。</li>
+<li>用tensorflow训练模型识别数字。</li>
+<li>用测试数据检查模型精度</li>
+<li>构建、训练和测试一个多层卷积神经网络来提升模型精度。</li>
+</ul>
+<h2 id="an zhuang">安装</h2>
+<p>在创建模型之前，我们会先加载MNIST数据集，然后启动一个TensorFlow的session。</p>
+<h3 id="jia zai mnistshu ju">加载MNIST数据</h3>
+<p>为了方便起见，我们已经准备了一个脚本来自动下载和导入MNIST数据集。它会自动创建一个'MNIST_data'的目录来存储数据。</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorflow.examples …</span></pre></div> </div><!-- /.entry-content -->
+        </article></li>
+        <li><article class="hentry">
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/neural-machine-translation-seq2seq-jiao-cheng" rel="bookmark" title="Permalink to Neural Machine Translation (seq2seq) 教程">Neural Machine Translation (seq2seq) 教程</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2017-07-18T00:00:00+08:00"> 2017-07-18 </time>
+                    <address class="vcard author">By
+                        <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> <p>2018-01-31 第一次修订</p>
+<p><a href="https://github.com/tensorflow/nmt">原文</a></p>
+<h2 id="jie shao">介绍</h2>
+<p>序列到序列(seq2seq)模型 (<a href="https://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf">Sutskever et al., 2014</a>, <a href="http://emnlp2014.org/papers/pdf/EMNLP2014179.pdf">Cho et al., 2014</a>) 在诸如机器翻译、语音识别和文本概括等任务中取得了巨大成功. 本教程为读者提供对 seq2seq 模型的全面理解，并展示如何从头构建一个有竞争力的 seq2seq 模型. 我们专注于神经机器翻译（NMT）任务，这是一个很好的、已获得广泛<a href="https://research.googleblog.com/2016/09/a-neural-network-for-machine.html">成功</a>的 seq2seq 模型的试验台. 所含的代码轻量、高质、实用，并整合了最新的研究思路。我们通过以下方式达成此目标 :</p>
+<ol>
+<li>使用最新的 解码器 / attention wrapper <a href="https://github.com/tensorflow/tensorflow/tree/master/tensorflow/contrib/seq2seq/python/ops">API</a>, TensorFlow 1.2 数据迭代器</li>
+<li>结合我们在建立循环神经网络和序列到序列模型方面的强大专长</li>
+<li>提供一些巧思来构建最好的 NMT 模型 …</li></ol> </div><!-- /.entry-content -->
+        </article></li>
+</ol><!-- /#posts-list -->
+</section><!-- /#content -->
+    </div>
+    <footer id="contentinfo" class="pagination" style="font-size:85%">
+            <address id="about" class="vcard body">
+            无节操小广告<a href="https://freeopen.github.io/pages/da-shang.html"> 欢迎打赏 </a>
+            </address><!-- /#about -->
+    </footer><!-- /#contentinfo -->
+  </div>
+
+  <!--Right-->
+  <div id="main_toc" class="sidebar-toc" style="overflow:auto;height:100%;">
+  </div>
+
+</body>
+</html>

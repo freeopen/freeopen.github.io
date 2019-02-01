@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>Freeopen - Articles by Justin Johnson, 杜客(译), freeopen(编)</title>
+        <meta charset="utf-8" />
+
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/css/main.css" />
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/academicons/css/academicons.min.css" />
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/font-awesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface" />
+
+
+        <link href="https://freeopen.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Freeopen Atom Feed" />
+        
+
+</head>
+
+<!-- <body class="theme-myblue"id="index" class="home"> -->
+<body id="index" class="theme-myblue">
+
+  <div class="sidebar">
+    <div class="container sidebar-sticky">
+      <div class="sidebar-about">
+        <h1><a href="https://freeopen.github.io/">Freeopen <strong></strong></a></h1>
+        <p class="lead"></p>
+      </div>
+      <nav id="menu" class="sidebar-nav">
+            <div >
+              <a class="sidebar-nav-item" href="https://freeopen.github.io/pages/about.html">About</a>
+            </div>
+            <div >
+              <a class="sidebar-nav-item" href="https://freeopen.github.io/pages/da-shang.html">打赏</a>
+            </div>
+            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/bian-cheng.html">编程</a>
+            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
+            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/shou-ce.html">手册</a>
+            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/shu-xue.html">数学</a>
+
+        <hr>
+          <a href="" title="Atom feed" target="_blank" 
+              style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;">
+            <i class="fa fa-rss-square"></i>
+          </a>
+          <a href="https://github.com/freeopen" title="Software I released on Github" 
+                target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="fa fa-github-square"></i> </a>
+          <a href="" title="Google Scholar" 
+              target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="ai ai-google-scholar-square"></i> </a>
+          <a href="" title="LinkedIn" 
+              target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="fa fa-linkedin-square"></i> </a>
+          <a href="" title="ResearchGate" 
+              target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="ai ai-researchgate-square"></i> </a>
+          <a href="Mailto:freeopen@163.com" title="My email" 
+              target="_blank" style="display: inline; padding: 0px 0px 0px 0;
+              margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i
+            class="fa fa-envelope-square"></i> </a>
+      </nav>
+
+    </div>
+  </div>
+
+  <div id="content" class="container content">
+    <div class="post">
+<section id="content">
+<h2>Articles by Justin Johnson, 杜客(译), freeopen(编)</h2>
+
+<ol id="post-list">
+        <li><article class="hentry">
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/python-numpy-jiao-cheng" rel="bookmark" title="Permalink to Python Numpy 教程">Python Numpy 教程</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2017-12-11T00:00:00+08:00"> 2017-12-11 </time>
+                    <address class="vcard author">By
+                        <a class="url fn" href="https://freeopen.github.io/author/justin-johnson-du-ke-yi-freeopenbian.html">Justin Johnson, 杜客(译), freeopen(编)</a>
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> <p><a href="http://cs231n.github.io/python-numpy-tutorial/">原文</a> | <a href="https://zhuanlan.zhihu.com/p/20878530?refer=intelligentunit">原译文</a></p>
+<blockquote>
+<p>freeopen: 原译文没有目录导航，阅读起来不方便。补全少量漏翻的地方。虽然内容很基础，但需要时快速查阅一下还是很不错的。</p>
+</blockquote>
+<h2 id="introduction">Introduction</h2>
+<p>Python是一门伟大的通用编程语言，在一些常用库（numpy, scipy, matplotlib）的帮助下，它又会变成一个强大的科学计算环境。</p>
+<p>我们期望你们中大多数人对于Python语言和Numpy库比较熟悉，而对于没有Python经验的同学，这篇教程可以帮助你们快速了解Python编程环境和如何使用Python作为科学计算工具。</p>
+<p>一部分同学对于Matlab有一定经验。对于这部分同学，我们推荐阅读 <a href="https://docs.scipy.org/doc/numpy-dev/user/numpy-for-matlab-users.html">numpy for Matlab users 页面</a>。</p>
+<p>本教程内容涵盖:</p>
+<ul>
+<li>Basic Python: Basic data types (Containers, Lists, Dictionaries, Sets, Tuples), Functions, Classes</li>
+<li>Numpy: Arrays, Array indexing, Datatypes, Array math, Broadcasting</li>
+<li>SciPy: Image …</li></ul> </div><!-- /.entry-content -->
+        </article></li>
+</ol><!-- /#posts-list -->
+</section><!-- /#content -->
+    </div>
+    <footer id="contentinfo" class="pagination" style="font-size:85%">
+            <address id="about" class="vcard body">
+            无节操小广告<a href="https://freeopen.github.io/pages/da-shang.html"> 欢迎打赏 </a>
+            </address><!-- /#about -->
+    </footer><!-- /#contentinfo -->
+  </div>
+
+  <!--Right-->
+  <div id="main_toc" class="sidebar-toc" style="overflow:auto;height:100%;">
+  </div>
+
+</body>
+</html>

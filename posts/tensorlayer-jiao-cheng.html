@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>Freeopen - TensorLayer 教程</title>
+        <meta charset="utf-8" />
+
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/css/main.css" />
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/academicons/css/academicons.min.css" />
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/font-awesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface" />
+
+
+        <link href="https://freeopen.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Freeopen Atom Feed" />
+        
+
+
+
+
+
+
+</head>
+
+<!-- <body class="theme-myblue"id="index" class="home"> -->
+<body id="index" class="theme-myblue">
+
+  <div class="sidebar">
+    <div class="container sidebar-sticky">
+      <div class="sidebar-about">
+        <h1><a href="https://freeopen.github.io/">Freeopen <strong></strong></a></h1>
+        <p class="lead"></p>
+      </div>
+      <nav id="menu" class="sidebar-nav">
+            <div >
+              <a class="sidebar-nav-item" href="https://freeopen.github.io/pages/about.html">About</a>
+            </div>
+            <div >
+              <a class="sidebar-nav-item" href="https://freeopen.github.io/pages/da-shang.html">打赏</a>
+            </div>
+            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/bian-cheng.html">编程</a>
+            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
+            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/shou-ce.html">手册</a>
+            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/shu-xue.html">数学</a>
+
+        <hr>
+          <a href="" title="Atom feed" target="_blank" 
+              style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;">
+            <i class="fa fa-rss-square"></i>
+          </a>
+          <a href="https://github.com/freeopen" title="Software I released on Github" 
+                target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="fa fa-github-square"></i> </a>
+          <a href="" title="Google Scholar" 
+              target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="ai ai-google-scholar-square"></i> </a>
+          <a href="" title="LinkedIn" 
+              target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="fa fa-linkedin-square"></i> </a>
+          <a href="" title="ResearchGate" 
+              target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="ai ai-researchgate-square"></i> </a>
+          <a href="Mailto:freeopen@163.com" title="My email" 
+              target="_blank" style="display: inline; padding: 0px 0px 0px 0;
+              margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i
+            class="fa fa-envelope-square"></i> </a>
+      </nav>
+
+    </div>
+  </div>
+
+  <div id="content" class="container content">
+    <div class="post">
+<section id="content" class="body">
+  <header>
+    <h1 class="entry-title">TensorLayer 教程</h2>
+ 
+  </header>
+  <footer class="post-info">
+    <time class="published" datetime="2017-09-09T00:00:00+08:00">
+      2017-09-09
+    </time>
+    <address class="vcard author">
+      By           <a class="url fn" href="https://freeopen.github.io/author/xiaoping-fanyi-freeopenxiu-ding.html">Xiaoping Fan(译), freeopen(修订)</a>
+    </address>
+    <div class="category">
+        Category: <a href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
+    </div>
+  </footer><!-- /.post-info -->
+  <div class="entry-content">
+    <p><a href="https://github.com/zsdonghao/tensorlayer/blob/master/docs/user/tutorial.rst">原文</a> | <a href="https://github.com/shorxp/tensorlayer-chinese/blob/master/docs/user/tutorial.rst">原译文</a></p>
+<blockquote>
+<p>freeopen: 为什么研究 TensorLayer ? <br/>
+在TF的编码中，常看到model被封装成class，进一步研究，发现为了简化模型的创建，有各种封装库，包括Keras, Tflearn, TFSlim, tf.contrib.learn(或称skflow) 等。
+其中TFSlim和skflow属TensorFlow自带，考虑到TFSlim中有现成的模型，就修改了一个试试，发现坑不小。我需要首先把数据源转成TFRecord格式，然后用模型训练后报错（out of range), 然后我就首先检查数据源的格式是否有问题，我采用TFSlim的Data
+provider来输出数据，可能我的数据维度太大，程序不报错，但一直死在那里不出结果，而同样我在使用numpy输出数据源数据时，没有任何问题，也没什么延时，瞬间我感觉到TFSlim的封装模式不仅把问题复杂化了，甚至还降低了程序的性能。Keras据说跑TF性能较慢，Tflearn感觉活跃度较低，考虑到TensorLayer是skflow上的再次封装，且不丧失灵活性，加上这篇最主要的教程写得真心不错，所以我发愿要好好研究一番。 <br/></p>
+<p>为什么我总喜欢修订一些长文翻译？<br/>
+技术翻译文章经常在阅读时有不知所云的现象，我总结的原因主要有三：一是译者没有理解作者意图，甚至连文章都没读懂，就开始直译，导致文理不通；
+二是对技术术语不统一的称谓，本来英文是一个词，翻成中文后变成几个词，导致读者以为是不同的东西；三是过度翻译，把没必要或该省略的词也翻出来，反而影响理解。
+比如vanilla RNN 中的vanilla, 并不代表&ldquo;香草&rdquo;，而是表示一个&ldquo;普通的&rdquo;或&ldquo;原始的&rdquo;意思，有时把这个词加进译文反而觉得多余，删掉最好。还有本文中&ldquo;理解机器翻译－实现细节&rdquo;部分的第6个段落，encoder_input_size 这个词，其实就是个代码变量，原译文居然也把它翻译出来，没有必要。我一般也是看到一点改一点，不保证能穷尽译文的所有地方，欢迎读者批评指正。</p>
+</blockquote>
+<p>对于深度学习，该教程会引导您使用MNIST数据集构建不同的手写数字的分类器，
+这可以说是神经网络的 "Hello World" 。
+对于强化学习，我们将让计算机根据屏幕输入来学习打乒乓球。
+对于自然语言处理。我们从词嵌套（word embedding）开始，然后再实现语言建模和机器翻译。
+此外，TensorLayer的Tutorial包含了所有TensorFlow官方深度学习教程的模块化实现，因此你可以对照TensorFlow深度学习教程<a href="https://www.tensorflow.org/versions/master/tutorials/index.html">(英文</a><a href="http://wiki.jikexueyuan.com/project/tensorflow-zh/">|中文)</a>来学习 。</p>
+<blockquote>
+<p>若你已经对TensorFlow非常熟悉，阅读 <code>InputLayer</code> 和 <code>DenseLayer</code> 的源代码可让您很好地理解 TensorLayer 是如何工作的。</p>
+</blockquote>
+<h2 id="zai wo men kai shi zhi qian">在我们开始之前</h2>
+<p>本教程假定您在神经网络和 TensorFlow (TensorLayer在它的基础上构建的)方面具有一定的基础。
+您可以尝试从<a href="http://deeplearning.stanford.edu/tutorial/">Deeplearning Tutorial</a> 同时进行学习。</p>
+<p>对于人工神经网络更系统的介绍，我们推荐 Andrej Karpathy 等人所著的 <a href="http://cs231n.github.io/">Convolutional Neural Networks for Visual Recognition</a>
+和 Michael Nielsen 的 <a href="http://neuralnetworksanddeeplearning.com/">Neural Networks and Deep Learning</a>。</p>
+<p>要了解TensorFlow的更多内容，请阅读 <a href="https://www.tensorflow.org/versions/r0.9/tutorials/index.html">TensorFlow tutorial</a> 。
+您不需要会它的全部，只要知道TensorFlow是如何工作的，就能够使用TensorLayer。
+如果您是TensorFlow的新手，建议你阅读整个教程。</p>
+<h2 id="tensorlayerhen jian dan">TensorLayer很简单</h2>
+<p>下面的代码是TensorLayer的一个简单例子，来自 <code>tutorial_mnist_simple.py</code> 。
+我们提供了很多方便的函数（如： <code>fit()</code> ，<code>test()</code> ），但如果你想了解更多实现细节，或想成为机器学习领域的专家，我们鼓励
+您尽可能地直接使用TensorFlow原本的方法如 <code>sess.run()</code> 来训练模型，请参考  <code>tutorial_mnist.py</code> 。</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="kn">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">tensorlayer</span> <span class="kn">as</span> <span class="nn">tl</span>
+
+<span class="n">sess</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">InteractiveSession</span><span class="p">()</span>
+
+<span class="c1"># 准备数据</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> \
+                                <span class="n">tl</span><span class="o">.</span><span class="n">files</span><span class="o">.</span><span class="n">load_mnist_dataset</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">784</span><span class="p">))</span>
+
+<span class="c1"># 定义 placeholder</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="mi">784</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">'x'</span><span class="p">)</span>
+<span class="n">y_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">int64</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">'y_'</span><span class="p">)</span>
+
+<span class="c1"># 定义模型</span>
+<span class="n">network</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">InputLayer</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'input_layer'</span><span class="p">)</span>
+<span class="n">network</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">DropoutLayer</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'drop1'</span><span class="p">)</span>
+<span class="n">network</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">DenseLayer</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="n">n_units</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>
+                                <span class="n">act</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">relu</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'relu1'</span><span class="p">)</span>
+<span class="n">network</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">DropoutLayer</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'drop2'</span><span class="p">)</span>
+<span class="n">network</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">DenseLayer</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="n">n_units</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>
+                                <span class="n">act</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">relu</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'relu2'</span><span class="p">)</span>
+<span class="n">network</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">DropoutLayer</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'drop3'</span><span class="p">)</span>
+<span class="n">network</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">DenseLayer</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="n">n_units</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                                <span class="n">act</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">identity</span><span class="p">,</span>
+                                <span class="n">name</span><span class="o">=</span><span class="s1">'output_layer'</span><span class="p">)</span>
+<span class="c1"># 定义损失函数和衡量指标</span>
+<span class="c1"># tl.cost.cross_entropy 在内部使用 tf.nn.sparse_softmax_cross_entropy_with_logits() 实现 softmax</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">outputs</span>
+<span class="n">cost</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">cost</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">'cost'</span><span class="p">)</span>
+<span class="n">correct_prediction</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">y_</span><span class="p">)</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">correct_prediction</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span>
+<span class="n">y_op</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># 定义 optimizer</span>
+<span class="n">train_params</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">all_params</span>
+<span class="n">train_op</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">AdamOptimizer</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> <span class="n">beta1</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">beta2</span><span class="o">=</span><span class="mf">0.999</span><span class="p">,</span>
+          <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-08</span><span class="p">,</span> <span class="n">use_locking</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="n">var_list</span><span class="o">=</span><span class="n">train_params</span><span class="p">)</span>
+
+<span class="c1"># 初始化 session 中的所有参数</span>
+<span class="n">tl</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">initialize_global_variables</span><span class="p">(</span><span class="n">sess</span><span class="p">)</span>
+
+<span class="c1"># 列出模型信息</span>
+<span class="n">network</span><span class="o">.</span><span class="n">print_params</span><span class="p">()</span>
+<span class="n">network</span><span class="o">.</span><span class="n">print_layers</span><span class="p">()</span>
+
+<span class="c1"># 训练模型</span>
+<span class="n">tl</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">sess</span><span class="p">,</span> <span class="n">network</span><span class="p">,</span> <span class="n">train_op</span><span class="p">,</span> <span class="n">cost</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y_</span><span class="p">,</span>
+            <span class="n">acc</span><span class="o">=</span><span class="n">acc</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">n_epoch</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">print_freq</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">X_val</span><span class="o">=</span><span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span><span class="o">=</span><span class="n">y_val</span><span class="p">,</span> <span class="n">eval_train</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="c1"># 评估模型</span>
+<span class="n">tl</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">sess</span><span class="p">,</span> <span class="n">network</span><span class="p">,</span> <span class="n">acc</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y_</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">cost</span><span class="o">=</span><span class="n">cost</span><span class="p">)</span>
+
+<span class="c1"># 把模型保存成 .npz 文件</span>
+<span class="n">tl</span><span class="o">.</span><span class="n">files</span><span class="o">.</span><span class="n">save_npz</span><span class="p">(</span><span class="n">network</span><span class="o">.</span><span class="n">all_params</span> <span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'model.npz'</span><span class="p">)</span>
+<span class="n">sess</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+<h2 id="yun xing mnistli zi">运行MNIST例子</h2>
+<p align="center">
+<img src="/images/mnist.jpeg" width="80%"/>
+<br/>
+</p>
+<p>在本教程的第一部分，我们仅仅运行TensorLayer内置的MNIST例子。
+MNIST数据集包含了60000个28x28像素的手写数字图片，它通常用于训练各种图片识别系统。</p>
+<p>我们假设您已经按照 <code>installation</code> 安装好了TensorLayer。如果您还没有，请复制一个TensorLayer的source目录到终端中，并进入该文件夹，
+然后运行 <code>tutorial_mnist.py</code> 这个例子脚本：</p>
+<div class="highlight"><pre><span></span>  python tutorial_mnist.py
+</pre></div>
+<p>如果所有设置都正确，您将得到下面的结果：</p>
+<div class="highlight"><pre><span></span>  <span class="n">tensorlayer</span><span class="p">:</span> <span class="n">GPU</span> <span class="n">MEM</span> <span class="n">Fraction</span> <span class="mf">0.300000</span>
+  <span class="n">Downloading</span> <span class="n">train</span><span class="o">-</span><span class="n">images</span><span class="o">-</span><span class="n">idx3</span><span class="o">-</span><span class="n">ubyte</span><span class="o">.</span><span class="n">gz</span>
+  <span class="n">Downloading</span> <span class="n">train</span><span class="o">-</span><span class="n">labels</span><span class="o">-</span><span class="n">idx1</span><span class="o">-</span><span class="n">ubyte</span><span class="o">.</span><span class="n">gz</span>
+  <span class="n">Downloading</span> <span class="n">t10k</span><span class="o">-</span><span class="n">images</span><span class="o">-</span><span class="n">idx3</span><span class="o">-</span><span class="n">ubyte</span><span class="o">.</span><span class="n">gz</span>
+  <span class="n">Downloading</span> <span class="n">t10k</span><span class="o">-</span><span class="n">labels</span><span class="o">-</span><span class="n">idx1</span><span class="o">-</span><span class="n">ubyte</span><span class="o">.</span><span class="n">gz</span>
+
+  <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span> <span class="p">(</span><span class="mi">50000</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span>
+  <span class="n">y_train</span><span class="o">.</span><span class="n">shape</span> <span class="p">(</span><span class="mi">50000</span><span class="p">,)</span>
+  <span class="n">X_val</span><span class="o">.</span><span class="n">shape</span> <span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span>
+  <span class="n">y_val</span><span class="o">.</span><span class="n">shape</span> <span class="p">(</span><span class="mi">10000</span><span class="p">,)</span>
+  <span class="n">X_test</span><span class="o">.</span><span class="n">shape</span> <span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span>
+  <span class="n">y_test</span><span class="o">.</span><span class="n">shape</span> <span class="p">(</span><span class="mi">10000</span><span class="p">,)</span>
+  <span class="n">X</span> <span class="n">float32</span>   <span class="n">y</span> <span class="n">int64</span>
+
+  <span class="n">tensorlayer</span><span class="p">:</span><span class="n">Instantiate</span> <span class="n">InputLayer</span> <span class="n">input_layer</span> <span class="p">(</span><span class="err">?</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span>
+  <span class="n">tensorlayer</span><span class="p">:</span><span class="n">Instantiate</span> <span class="n">DropoutLayer</span> <span class="n">drop1</span><span class="p">:</span> <span class="n">keep</span><span class="p">:</span> <span class="mf">0.800000</span>
+  <span class="n">tensorlayer</span><span class="p">:</span><span class="n">Instantiate</span> <span class="n">DenseLayer</span> <span class="n">relu1</span><span class="p">:</span> <span class="mi">800</span><span class="p">,</span> <span class="n">relu</span>
+  <span class="n">tensorlayer</span><span class="p">:</span><span class="n">Instantiate</span> <span class="n">DropoutLayer</span> <span class="n">drop2</span><span class="p">:</span> <span class="n">keep</span><span class="p">:</span> <span class="mf">0.500000</span>
+  <span class="n">tensorlayer</span><span class="p">:</span><span class="n">Instantiate</span> <span class="n">DenseLayer</span> <span class="n">relu2</span><span class="p">:</span> <span class="mi">800</span><span class="p">,</span> <span class="n">relu</span>
+  <span class="n">tensorlayer</span><span class="p">:</span><span class="n">Instantiate</span> <span class="n">DropoutLayer</span> <span class="n">drop3</span><span class="p">:</span> <span class="n">keep</span><span class="p">:</span> <span class="mf">0.500000</span>
+  <span class="n">tensorlayer</span><span class="p">:</span><span class="n">Instantiate</span> <span class="n">DenseLayer</span> <span class="n">output_layer</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="n">identity</span>
+
+  <span class="n">param</span> <span class="mi">0</span><span class="p">:</span> <span class="p">(</span><span class="mi">784</span><span class="p">,</span> <span class="mi">800</span><span class="p">)</span> <span class="p">(</span><span class="n">mean</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.000053</span><span class="p">,</span> <span class="n">median</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.000043</span> <span class="n">std</span><span class="p">:</span> <span class="mf">0.035558</span><span class="p">)</span>
+  <span class="n">param</span> <span class="mi">1</span><span class="p">:</span> <span class="p">(</span><span class="mi">800</span><span class="p">,)</span> <span class="p">(</span><span class="n">mean</span><span class="p">:</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="n">median</span><span class="p">:</span> <span class="mf">0.000000</span> <span class="n">std</span><span class="p">:</span> <span class="mf">0.000000</span><span class="p">)</span>
+  <span class="n">param</span> <span class="mi">2</span><span class="p">:</span> <span class="p">(</span><span class="mi">800</span><span class="p">,</span> <span class="mi">800</span><span class="p">)</span> <span class="p">(</span><span class="n">mean</span><span class="p">:</span> <span class="mf">0.000008</span><span class="p">,</span> <span class="n">median</span><span class="p">:</span> <span class="mf">0.000041</span> <span class="n">std</span><span class="p">:</span> <span class="mf">0.035371</span><span class="p">)</span>
+  <span class="n">param</span> <span class="mi">3</span><span class="p">:</span> <span class="p">(</span><span class="mi">800</span><span class="p">,)</span> <span class="p">(</span><span class="n">mean</span><span class="p">:</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="n">median</span><span class="p">:</span> <span class="mf">0.000000</span> <span class="n">std</span><span class="p">:</span> <span class="mf">0.000000</span><span class="p">)</span>
+  <span class="n">param</span> <span class="mi">4</span><span class="p">:</span> <span class="p">(</span><span class="mi">800</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="p">(</span><span class="n">mean</span><span class="p">:</span> <span class="mf">0.000469</span><span class="p">,</span> <span class="n">median</span><span class="p">:</span> <span class="mf">0.000432</span> <span class="n">std</span><span class="p">:</span> <span class="mf">0.049895</span><span class="p">)</span>
+  <span class="n">param</span> <span class="mi">5</span><span class="p">:</span> <span class="p">(</span><span class="mi">10</span><span class="p">,)</span> <span class="p">(</span><span class="n">mean</span><span class="p">:</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="n">median</span><span class="p">:</span> <span class="mf">0.000000</span> <span class="n">std</span><span class="p">:</span> <span class="mf">0.000000</span><span class="p">)</span>
+  <span class="n">num</span> <span class="n">of</span> <span class="n">params</span><span class="p">:</span> <span class="mi">1276810</span>
+
+  <span class="n">layer</span> <span class="mi">0</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">(</span><span class="s2">"dropout/mul_1:0"</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="err">?</span><span class="p">,</span> <span class="mi">784</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">float32</span><span class="p">)</span>
+  <span class="n">layer</span> <span class="mi">1</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">(</span><span class="s2">"Relu:0"</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="err">?</span><span class="p">,</span> <span class="mi">800</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">float32</span><span class="p">)</span>
+  <span class="n">layer</span> <span class="mi">2</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">(</span><span class="s2">"dropout_1/mul_1:0"</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="err">?</span><span class="p">,</span> <span class="mi">800</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">float32</span><span class="p">)</span>
+  <span class="n">layer</span> <span class="mi">3</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">(</span><span class="s2">"Relu_1:0"</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="err">?</span><span class="p">,</span> <span class="mi">800</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">float32</span><span class="p">)</span>
+  <span class="n">layer</span> <span class="mi">4</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">(</span><span class="s2">"dropout_2/mul_1:0"</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="err">?</span><span class="p">,</span> <span class="mi">800</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">float32</span><span class="p">)</span>
+  <span class="n">layer</span> <span class="mi">5</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">(</span><span class="s2">"add_2:0"</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="err">?</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">float32</span><span class="p">)</span>
+
+  <span class="n">learning_rate</span><span class="p">:</span> <span class="mf">0.000100</span>
+  <span class="n">batch_size</span><span class="p">:</span> <span class="mi">128</span>
+
+  <span class="n">Epoch</span> <span class="mi">1</span> <span class="n">of</span> <span class="mi">500</span> <span class="n">took</span> <span class="mf">0.342539</span><span class="n">s</span>
+    <span class="n">train</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.330111</span>
+    <span class="n">val</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.298098</span>
+    <span class="n">val</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.910700</span>
+  <span class="n">Epoch</span> <span class="mi">10</span> <span class="n">of</span> <span class="mi">500</span> <span class="n">took</span> <span class="mf">0.356471</span><span class="n">s</span>
+    <span class="n">train</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.085225</span>
+    <span class="n">val</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.097082</span>
+    <span class="n">val</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.971700</span>
+  <span class="n">Epoch</span> <span class="mi">20</span> <span class="n">of</span> <span class="mi">500</span> <span class="n">took</span> <span class="mf">0.352137</span><span class="n">s</span>
+    <span class="n">train</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.040741</span>
+    <span class="n">val</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.070149</span>
+    <span class="n">val</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.978600</span>
+  <span class="n">Epoch</span> <span class="mi">30</span> <span class="n">of</span> <span class="mi">500</span> <span class="n">took</span> <span class="mf">0.350814</span><span class="n">s</span>
+    <span class="n">train</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.022995</span>
+    <span class="n">val</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.060471</span>
+    <span class="n">val</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.982800</span>
+  <span class="n">Epoch</span> <span class="mi">40</span> <span class="n">of</span> <span class="mi">500</span> <span class="n">took</span> <span class="mf">0.350996</span><span class="n">s</span>
+    <span class="n">train</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.013713</span>
+    <span class="n">val</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.055777</span>
+    <span class="n">val</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.983700</span>
+  <span class="o">...</span>
+</pre></div>
+<p>这个例子脚本允许您从 <code>if__name__=='__main__':</code> 中选择不同的模型进行尝试，包括多层神经网络（Multi-Layer Perceptron），
+退出（Dropout），退出连接（DropConnect），堆栈式降噪自编码器（Stacked Denoising Autoencoder）和卷积神经网络（CNN）。</p>
+<div class="highlight"><pre><span></span>  main_test_layers(model='relu')
+  main_test_denoise_AE(model='relu')
+  main_test_stacked_denoise_AE(model='relu')
+  main_test_cnn_layer()
+</pre></div>
+<h2 id="li jie mnistli zi">理解MNIST例子</h2>
+<p>现在就让我们看看它是如何做到的！跟着下面的步骤，打开源代码。</p>
+<h3 id="xu yan">序言</h3>
+<p>您可能会首先注意到，除TensorLayer之外，我们还导入了Numpy和TensorFlow：</p>
+<div class="highlight"><pre><span></span>  <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="kn">as</span> <span class="nn">tf</span>
+  <span class="kn">import</span> <span class="nn">tensorlayer</span> <span class="kn">as</span> <span class="nn">tl</span>
+  <span class="kn">from</span> <span class="nn">tensorlayer.layers</span> <span class="kn">import</span> <span class="n">set_keep</span>
+  <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+  <span class="kn">import</span> <span class="nn">time</span>
+</pre></div>
+<p>这是因为TensorLayer是建立在TensorFlow上的，TensorLayer设计的初衷是为了简化工作并提供帮助而不是取代TensorFlow。
+所以您会需要一起使用TensorLayer和一些常见的TensorFlow代码。</p>
+<p>请注意，当使用降噪自编码器(Denoising Autoencoder)时，代码中的 <code>set_keep</code> 被当作用来访问保持概率(Keeping Probabilities)的占位符。</p>
+<h3 id="zai ru shu ju">载入数据</h3>
+<p>下面第一部分的代码首先定义了 <code>load_mnist_dataset()</code> 函数。
+其目的是为了下载MNIST数据集（如果还未下载），并且返回标准numpy数列通过numpy array的格式。
+到这里还没有涉及TensorLayer，所以我们可以把它简单看作：</p>
+<div class="highlight"><pre><span></span>  X_train, y_train, X_val, y_val, X_test, y_test = \
+                    tl.files.load_mnist_dataset(shape=(-1,784))
+</pre></div>
+<p><code>X_train.shape</code> 为 <code>(50000,784)</code>，可以理解成共有50000张图片并且每张图片有784个像素点。
+<code>Y_train.shape</code> 为 <code>(50000,)</code> ，它是一个和 <code>X_train</code> 长度相同的向量，用于给出每幅图的数字标签，即这些图片所包含的位于0-9之间的数字（如果画这些数字的人没有想乱画别的东西）。</p>
+<p>另外对于卷积神经网络的例子，MNIST还可以按下面的4D版本来载入：</p>
+<div class="highlight"><pre><span></span>  X_train, y_train, X_val, y_val, X_test, y_test = \
+              tl.files.load_mnist_dataset(shape=(-1, 28, 28, 1))
+</pre></div>
+<p><code>X_train.shape</code> 为 <code>(50000,28,28,1)</code> ，这代表了50000张图片，每张图片使用一个通道（Channel），28行，28列。
+通道为1是因为它是灰度图像，每个像素只能有一个值。</p>
+<h3 id="jian li mo xing">建立模型</h3>
+<p>来到这里，就轮到TensorLayer来一显身手了！TensorLayer允许您通过创建，堆叠或者合并图层(Layers)来定义任意结构的神经网络。
+每一层都知道它在网络中的直接输入层, 而每层的输出同时作为该层和整个网络的一个句柄，
+通常是我们要传递给其余代码的唯一东西。</p>
+<blockquote>
+<p>freeopen: 上段的最后一句翻译，我认为原文中的output layer说法有问题，因为output layer通常指网络的最后一层, 或者表示当前层的下一层，这里应该表示为&ldquo;每层的输出&rdquo;才符合上下文，也符合代码逻辑。</p>
+</blockquote>
+<p>正如上文提到的， <code>tutorial_mnist.py</code> 支持四类模型，我们通过同样的接口实现，只需简单的替换一下函数即可。
+首先，我们将定义一个结构固定的多层次感知器（Multi-Layer Perceptron），所有的步骤都会详细的讲解。
+然后，我们会实现一个去噪自编码器(Denosing Autoencoding)。
+接着，我们要将所有去噪自编码器堆叠起来并对他们进行监督微调(Supervised Fine-tune)。
+最后，我们将展示如何去创建一个卷积神经网络(Convolutional Neural Network)。</p>
+<p>此外，如果您有兴趣，我们还提供了一个简化版的MNIST例子在 <code>tutorial_mnist_simple.py</code> 中，和一个
+CIFAR-10数据集的卷积神经网络(CNN)的例子在 <code>tutorial_cifar10_tfrecord.py</code> 中, 供你参考。</p>
+<h3 id="duo ceng shen jing wang luo">多层神经网络</h3>
+<p>第一个脚本 <code>main_test_layers()</code> ，创建了一个具有两个隐藏层，每层800个单元的多层次感知器，并且具有10个单元的SOFTMAX输出层紧随其后。
+它对输入数据采用20%的退出率(dropout)并且对隐藏层应用50%的退出率(dropout)。</p>
+<p>为了提供数据给这个网络，TensorFlow占位符(placeholder)需要按如下定义。
+在这里 <code>None</code> 是指在编译之后，网络将接受任意批规模(batchsize)的数据
+<code>x</code> 是用来存放 <code>X_train</code> 数据的并且 <code>y_</code> 是用来存放 <code>y_train</code> 数据的。
+如果你已经知道批规模，那就不需要这种灵活性了。您可以在这里给出批规模，特别是对于卷积层，这样可以运用TensorFlow一些优化功能。</p>
+<div class="highlight"><pre><span></span>    x = tf.placeholder(tf.float32, shape=[None, 784], name='x')
+    y_ = tf.placeholder(tf.int64, shape=[None, ], name='y_')
+</pre></div>
+<p>在TensorLayer中每个神经网络的基础是一个 <code>InputLayer</code> 实例。它代表了将要提供(feed)给网络的输入数据。
+值得注意的是 <code>InputLayer</code> 并不依赖任何特定的数据。</p>
+<div class="highlight"><pre><span></span>    network = tl.layers.InputLayer(x, name='input_layer')
+</pre></div>
+<p>在添加第一层隐藏层之前，我们要对输入数据应用20%的退出率(dropout)。
+这里我们是通过一个 <code>DropoutLayer</code> 的实例来实现的。</p>
+<div class="highlight"><pre><span></span>    network = tl.layers.DropoutLayer(network, keep=0.8, name='drop1')
+</pre></div>
+<p>请注意构造函数的第一个参数是输入层，第二个参数是激活值的保持概率(keeping probability for the activation value)
+现在我们要继续构造第一个800个单位的全连接的隐藏层。
+尤其是当要堆叠一个 <code>DenseLayer</code> 时，要特别注意。</p>
+<div class="highlight"><pre><span></span>    network = tl.layers.DenseLayer(network, n_units=800, act = tf.nn.relu, name='relu1')
+</pre></div>
+<p>同样，构造函数的第一个参数意味着这我们正在 <code>network</code> 之上堆叠 <code>network</code> 。
+<code>n_units</code> 简明得给出了全连接层的单位数。
+<code>act</code> 指定了一个激活函数，这里的激活函数有一部分已经被定义在了<code>tensorflow.nn</code> 和  <code>tensorlayer.activation</code> 中。
+我们在这里选择了整流器(rectifier)，我们将得到ReLUs。
+我们现在来添加50%的退出率，以及另外800个单位的稠密层(dense layer)，和50%的退出率：</p>
+<div class="highlight"><pre><span></span>    network = tl.layers.DropoutLayer(network, keep=0.5, name='drop2')
+    network = tl.layers.DenseLayer(network, n_units=800, act = tf.nn.relu, name='relu2')
+    network = tl.layers.DropoutLayer(network, keep=0.5, name='drop3')
+</pre></div>
+<p>最后，我们加入<code>n_units</code>等于分类个数的全连接的输出层。注意，<code>cost = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(y, y_))</code> 在内部实现 Softmax，以提高计算效率，因此最后一层的输出为 identity ，更多细节请参考 <code>tl.cost.cross_entropy()</code> 。</p>
+<div class="highlight"><pre><span></span>    network = tl.layers.DenseLayer(network,
+                                  n_units=10,
+                                  act = tl.activation.identity,
+                                  name='output_layer')
+</pre></div>
+<p>如上所述，因为每一层都被链接到了它的输入层，所以我们只需要在TensorLayer中将输出层接入一个网络：</p>
+<div class="highlight"><pre><span></span>    y = network.outputs
+    y_op = tf.argmax(tf.nn.softmax(y), 1)
+    cost = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(y, y_))
+</pre></div>
+<p>在这里，<code>network.outputs</code> 是网络的10个特征的输出(按照一个热门的格式)。
+<code>y_op</code> 是代表类索引的整数输出， <code>cost</code> 是目标和预测标签的交叉熵。</p>
+<h3 id="jiang zao zi bian ma qi">降噪自编码器</h3>
+<p>自编码器是一种无监督学习（Unsupervisered Learning）模型，可从数据中学习出更好的表达，
+目前已经用于逐层贪婪的预训练（Greedy layer-wise pre-train）。
+有关自编码器内容，请参考教程 <a href="http://deeplearning.stanford.edu/tutorial/">Deeplearning Tutorial</a>。</p>
+<p>脚本 <code>main_test_denoise_AE()</code> 实现了有50%的腐蚀率(corrosion rate)的降噪自编码器。
+这个自编码器可以按如下方式定义，这里的 <code>DenseLayer</code> 代表了一个自编码器：</p>
+<div class="highlight"><pre><span></span>    network = tl.layers.InputLayer(x, name='input_layer')
+    network = tl.layers.DropoutLayer(network, keep=0.5, name='denoising1')
+    network = tl.layers.DenseLayer(network, n_units=200, act=tf.nn.sigmoid, name='sigmoid1')
+    recon_layer1 = tl.layers.ReconLayer(network,
+                                        x_recon=x,
+                                        n_units=784,
+                                        act=tf.nn.sigmoid,
+                                        name='recon_layer1')
+</pre></div>
+<p>训练 <code>DenseLayer</code> ，只需要运行 <code>ReconLayer.Pretrain()</code> 即可。
+如果要使用降噪自编码器，腐蚀层(corrosion layer)(<code>DropoutLayer</code>)的名字需要按后面说的指定。
+如果要保存特征图像，设置 <code>save</code> 为 True 。
+根据不同的架构和应用这里可以设置许多预训练的度量(metric)</p>
+<p>对于 sigmoid型激活函数来说，自编码器可以用KL散度来实现。
+而对于整流器(Rectifier)来说，对激活函数输出的L1正则化能使得输出变得稀疏。
+所以 <code>ReconLayer</code> 默认只对整流激活函数(ReLU)提供KLD和交叉熵这两种损失度量，而对sigmoid型激活函数提供均方误差以及激活输出的L1范数这两种损失度量。
+我们建议您修改 <code>ReconLayer</code> 来实现自己的预训练度量。</p>
+<div class="highlight"><pre><span></span>    recon_layer1.pretrain(sess,
+                          x=x,
+                          X_train=X_train,
+                          X_val=X_val,
+                          denoise_name='denoising1',
+                          n_epoch=200,
+                          batch_size=128,
+                          print_freq=10,
+                          save=True,
+                          save_name='w1pre_')
+</pre></div>
+<p>此外，脚本 <code>main_test_stacked_denoise_AE()</code> 展示了如何将多个自编码器堆叠到一个网络，然后进行微调。</p>
+<h3 id="juan ji shen jing wang luo">卷积神经网络</h3>
+<p>最后，<code>main_test_cnn_layer()</code> 脚本创建了两个CNN层和最大汇流阶段(max pooling stages)，一个全连接的隐藏层和一个全连接的输出层。</p>
+<p>首先，我们用 <code>Conv2dLayer</code>添加一个卷积层，它带有32个5x5的过滤器，紧接是2x2维度的最大池化。接着是64个5x5的过滤器的卷积层和同样的最大池化。之后，用｀FlattenLayer｀把4维输出转为1维向量，和50%的dropout在最后的隐层中。这里的<code>?</code>表示每批数量(batch_size)。</p>
+<p>注，<code>tutorial_mnist.py</code> 中介绍了针对初学者的简化版的 CNN API。</p>
+<div class="highlight"><pre><span></span>network = tl.layers.InputLayer(x, name='input_layer')
+network = tl.layers.Conv2dLayer(network,
+                        act = tf.nn.relu,
+                        shape = [5, 5, 1, 32],  # 32 features for each 5x5 patch
+                        strides=[1, 1, 1, 1],
+                        padding='SAME',
+                        name ='cnn_layer1')     # output: (?, 28, 28, 32)
+network = tl.layers.PoolLayer(network,
+                        ksize=[1, 2, 2, 1],
+                        strides=[1, 2, 2, 1],
+                        padding='SAME',
+                        pool = tf.nn.max_pool,
+                        name ='pool_layer1',)   # output: (?, 14, 14, 32)
+network = tl.layers.Conv2dLayer(network,
+                        act = tf.nn.relu,
+                        shape = [5, 5, 32, 64], # 64 features for each 5x5 patch
+                        strides=[1, 1, 1, 1],
+                        padding='SAME',
+                        name ='cnn_layer2')     # output: (?, 14, 14, 64)
+network = tl.layers.PoolLayer(network,
+                        ksize=[1, 2, 2, 1],
+                        strides=[1, 2, 2, 1],
+                        padding='SAME',
+                        pool = tf.nn.max_pool,
+                        name ='pool_layer2',)   # output: (?, 7, 7, 64)
+network = tl.layers.FlattenLayer(network, name='flatten_layer')
+                                                # output: (?, 3136)
+network = tl.layers.DropoutLayer(network, keep=0.5, name='drop1')
+                                                # output: (?, 3136)
+network = tl.layers.DenseLayer(network, n_units=256, act = tf.nn.relu, name='relu1')
+                                                # output: (?, 256)
+network = tl.layers.DropoutLayer(network, keep=0.5, name='drop2')
+                                                # output: (?, 256)
+network = tl.layers.DenseLayer(network, n_units=10, act = tl.identity, name='output_layer')
+                                                # output: (?, 10)
+</pre></div>
+<blockquote>
+<p>对于专家们来说， <code>Conv2dLayer</code> 将使用 <code>tensorflow.nn.conv2d</code> ,TensorFlow默认的卷积方式来创建一个卷积层。</p>
+</blockquote>
+<h3 id="xun lian mo xing">训练模型</h3>
+<p>在 <code>tutorial_mnist.py</code> 脚本的其余部分，仅使用交叉熵代价函数来对MNIST数据集进行训练循环。</p>
+<h4>数据集迭代</h4>
+<p>迭代函数分别对inputs 和 targets 两个numpy数组，按照小批量的数量尺度进行迭代。
+更多有关迭代函数的说明，可以在 <code>tensorlayer.iterate</code> 中找到。</p>
+<div class="highlight"><pre><span></span>    tl.iterate.minibatches(inputs, targets, batchsize, shuffle=False)
+</pre></div>
+<h4>损失和更新公式</h4>
+<p>我们继续创建一个在训练中被最小化的损失表达式：</p>
+<div class="highlight"><pre><span></span>    y = network.outputs
+    y_op = tf.argmax(tf.nn.softmax(y), 1)
+    cost = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(y, y_))
+</pre></div>
+<p>举 <code>main_test_layers()</code> 这个例子来说，更多的成本或者正则化方法可以被应用在这里。
+如果要在权重矩阵中应用最大模(max-norm)方法，你可以添加下列代码：</p>
+<div class="highlight"><pre><span></span>    cost = cost + tl.cost.maxnorm_regularizer(1.0)(network.all_params[0]) +
+                  tl.cost.maxnorm_regularizer(1.0)(network.all_params[2])
+</pre></div>
+<p>根据要解决的问题，您会需要使用不同的损失函数，更多有关损失函数的说明请见： <code>tensorlayer.cost</code></p>
+<p>有了模型和定义的损失函数之后，我们就可以创建用于训练网络的更新公式。
+接下去，我们将使用TensorFlow的优化器如下：</p>
+<div class="highlight"><pre><span></span>    train_params = network.all_params
+    train_op = tf.train.AdamOptimizer(learning_rate, beta1=0.9, beta2=0.999,
+        epsilon=1e-08, use_locking=False).minimize(cost, var_list=train_params)
+</pre></div>
+<p>为了训练网络，我们需要提供数据和保持概率给 <code>feed_dict</code>。</p>
+<div class="highlight"><pre><span></span>    feed_dict = {x: X_train_a, y_: y_train_a}
+    feed_dict.update( network.all_drop )
+    sess.run(train_op, feed_dict=feed_dict)
+</pre></div>
+<p>同时为了进行验证和测试，我们这里用了略有不同的方法。
+所有的Dropout，退连(DropConnect)，腐蚀层(Corrosion Layers)都将被禁用。
+<code>tl.utils.dict_to_one</code> 将会设置所有 <code>network.all_drop</code> 值为1。</p>
+<div class="highlight"><pre><span></span>    dp_dict = tl.utils.dict_to_one( network.all_drop )
+    feed_dict = {x: X_test_a, y_: y_test_a}
+    feed_dict.update(dp_dict)
+    err, ac = sess.run([cost, acc], feed_dict=feed_dict)
+</pre></div>
+<p>最后，作为一个额外的监测量，我们需要创建一个分类准确度的公式：</p>
+<div class="highlight"><pre><span></span>    correct_prediction = tf.equal(tf.argmax(y, 1), y_)
+    acc = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
+</pre></div>
+<h4>下一步？</h4>
+<p>在 <code>tutorial_cifar10_tfrecord.py</code> 中我们还有更高级的图像分类的例子。
+请阅读代码及注释，用以明白如何来生成更多的训练数据以及什么是局部响应正则化。
+在这之后，您可以尝试着去实现 <a href="http://doi.org/10.3389/fpsyg.2013.00124">残差网络(Residual Network)</a>。
+<em>小提示：您可能会用到Layer.outputs。</em></p>
+<h2 id="yun xing ping pang qiu li zi_1">运行乒乓球例子</h2>
+<p>在本教程的第二部分，我们将运行一个深度强化学习的例子，它在Karpathy的两篇博客 <a href="http://karpathy.github.io/2016/05/31/rl/">Deep Reinforcement Learning:Pong from Pixels</a> 有介绍。</p>
+<div class="highlight"><pre><span></span>  python tutorial_atari_pong.py
+</pre></div>
+<p>在运行教程代码之前 你需要安装 <a href="https://gym.openai.com/docs">OpenAI gym environment</a> ,它是强化学习的一个标杆。
+如果一切设置正确，您将得到一个类似以下的输出：</p>
+<div class="highlight"><pre><span></span>  [2016-07-12 09:31:59,760] Making new env: Pong-v0
+    tensorlayer:Instantiate InputLayer input_layer (?, 6400)
+    tensorlayer:Instantiate DenseLayer relu1: 200, relu
+    tensorlayer:Instantiate DenseLayer output_layer: 3, identity
+    param 0: (6400, 200) (mean: -0.000009, median: -0.000018 std: 0.017393)
+    param 1: (200,) (mean: 0.000000, median: 0.000000 std: 0.000000)
+    param 2: (200, 3) (mean: 0.002239, median: 0.003122 std: 0.096611)
+    param 3: (3,) (mean: 0.000000, median: 0.000000 std: 0.000000)
+    num of params: 1280803
+    layer 0: Tensor("Relu:0", shape=(?, 200), dtype=float32)
+    layer 1: Tensor("add_1:0", shape=(?, 3), dtype=float32)
+  episode 0: game 0 took 0.17381s, reward: -1.000000
+  episode 0: game 1 took 0.12629s, reward: 1.000000  !!!!!!!!
+  episode 0: game 2 took 0.17082s, reward: -1.000000
+  episode 0: game 3 took 0.08944s, reward: -1.000000
+  episode 0: game 4 took 0.09446s, reward: -1.000000
+  episode 0: game 5 took 0.09440s, reward: -1.000000
+  episode 0: game 6 took 0.32798s, reward: -1.000000
+  episode 0: game 7 took 0.74437s, reward: -1.000000
+  episode 0: game 8 took 0.43013s, reward: -1.000000
+  episode 0: game 9 took 0.42496s, reward: -1.000000
+  episode 0: game 10 took 0.37128s, reward: -1.000000
+  episode 0: game 11 took 0.08979s, reward: -1.000000
+  episode 0: game 12 took 0.09138s, reward: -1.000000
+  episode 0: game 13 took 0.09142s, reward: -1.000000
+  episode 0: game 14 took 0.09639s, reward: -1.000000
+  episode 0: game 15 took 0.09852s, reward: -1.000000
+  episode 0: game 16 took 0.09984s, reward: -1.000000
+  episode 0: game 17 took 0.09575s, reward: -1.000000
+  episode 0: game 18 took 0.09416s, reward: -1.000000
+  episode 0: game 19 took 0.08674s, reward: -1.000000
+  episode 0: game 20 took 0.09628s, reward: -1.000000
+  resetting env. episode reward total was -20.000000. running mean: -20.000000
+  episode 1: game 0 took 0.09910s, reward: -1.000000
+  episode 1: game 1 took 0.17056s, reward: -1.000000
+  episode 1: game 2 took 0.09306s, reward: -1.000000
+  episode 1: game 3 took 0.09556s, reward: -1.000000
+  episode 1: game 4 took 0.12520s, reward: 1.000000  !!!!!!!!
+  episode 1: game 5 took 0.17348s, reward: -1.000000
+  episode 1: game 6 took 0.09415s, reward: -1.000000
+</pre></div>
+<p>这个例子让电脑从屏幕输入来学习如何像人类一样打乒乓球。
+在经过15000个序列的训练之后，计算机就可以赢得20%的比赛。
+在20000个序列的训练之后，计算机可以赢得35%的比赛，
+我们可以看到计算机学的越来越快，这是因为它有更多的胜利的数据来进行训练。
+如果您用30000个序列来训练它，那么它会一直赢。</p>
+<div class="highlight"><pre><span></span>  render = False
+  resume = False
+</pre></div>
+<p>如果您想显示游戏过程，那就设置 <code>render</code> 为 <code>True</code> 。
+当您再次运行该代码，您可以设置 <code>resume</code> 为 <code>True</code>,那么代码将加载现有的模型并且会基于它进行训练。</p>
+<p align="center">
+<img src="/images/pong_game.jpeg" width="30%"/>
+<br/>
+</p>
+<h2 id="li jie qiang hua xue xi">理解强化学习</h2>
+<h3 id="ping pang qiu">乒乓球</h3>
+<p>要理解强化学习，我们要让电脑学习如何从原始的屏幕输入(像素输入)打乒乓球。
+在我们开始之前，我们强烈建议您去浏览一个著名的博客叫做 <a href="http://karpathy.github.io/2016/05/31/rl/">Deep Reinforcement Learning:pong from Pixels</a> ,
+这是使用python numpy库和OpenAI gym environment=来实现的一个深度强化学习的最简实现。</p>
+<div class="highlight"><pre><span></span>  python tutorial_atari_pong.py
+</pre></div>
+<h3 id="ce lue wang luo (policy network)">策略网络(Policy Network)</h3>
+<p>在深度强化学习中，Policy Network 等同于 深度神经网络。
+它是我们的选手(或者说&ldquo;代理人(agent)&rdquo;），它的输出告诉我们应该做什么(向上移动或向下移动)：
+在Karpathy的代码中，他只定义了2个动作，向上移动和向下移动，并且仅使用单个simgoid输出：
+为了使我们的教程更具有普遍性，我们使用3个 softmax 输出来定义向上移动，向下移动和停止(什么都不做)3个动作。</p>
+<div class="highlight"><pre><span></span>    # observation for training
+    states_batch_pl = tf.placeholder(tf.float32, shape=[None, D])
+
+    network = tl.layers.InputLayer(states_batch_pl, name='input_layer')
+    network = tl.layers.DenseLayer(network, n_units=H,
+                                    act = tf.nn.relu, name='relu1')
+    network = tl.layers.DenseLayer(network, n_units=3,
+                            act = tl.activation.identity, name='output_layer')
+    probs = network.outputs
+    sampling_prob = tf.nn.softmax(probs)
+</pre></div>
+<p>然后我们的代理人就一直打乒乓球。它计算不同动作的概率，
+并且之后会从这个均匀的分布中选取样本(动作)。
+因为动作被1,2和3代表，但是softmax输出应该从0开始，所以我们从-1计算这个标签的价值。</p>
+<div class="highlight"><pre><span></span>    prob = sess.run(
+        sampling_prob,
+        feed_dict={states_batch_pl: x}
+    )
+    # action. 1: STOP  2: UP  3: DOWN
+    action = np.random.choice([1,2,3], p=prob.flatten())
+    ...
+    ys.append(action - 1)
+</pre></div>
+<h3 id="ce lue bi jin (policy gradient)">策略逼近(Policy Gradient)</h3>
+<p>策略梯度下降法是一个end-to-end的算法，它直接学习从状态映射到动作的策略函数。
+一个近似最优的策略可以通过最大化预期的奖励来直接学习。
+策略函数的参数(例如，在乒乓球例子终使用的策略网络的参数)在预期奖励的近似值的引导下能够被训练和学习。
+换句话说，我们可以通过更新它的参数来逐步调整策略函数，这样它能从给定的状态做出一系列行为来获得更高的奖励。</p>
+<p>策略迭代的一个替代算法就是深度Q-learning(DQN)。
+他是基于Q-learning,学习一个映射状态和动作到一些值的价值函数的算法(叫Q函数)。
+DQN采用了一个深度神经网络来作为Q函数的逼近来代表Q函数。
+训练是通过最小化时序差分(temporal-difference)误差来实现。
+一个名为&ldquo;再体验(experience replay)&rdquo;的神经生物学的启发式机制通常和DQN一起被使用来帮助提高非线性函数的逼近的稳定性</p>
+<p>您可以阅读以下文档，来得到对强化学习更好的理解：</p>
+<ul>
+<li><a href="https://webdocs.cs.ualberta.ca/~sutton/book/the-book.html">Reinforcement Learning: An Introduction. Richard S. Sutton and Andrew G. Barto</a></li>
+<li><a href="http://www.iclr.cc/lib/exe/fetch.php?media=iclr2015:silver-iclr2015.pdf">Deep Reinforcement Learning. David Silver, Google DeepMind</a></li>
+<li><a href="http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching.html">UCL Course on RL</a></li>
+</ul>
+<p>强化深度学习近些年来最成功的应用就是让模型去学习玩Atari的游戏。 AlphaGO同时也是使用类似的策略逼近方法来训练他们的策略网络而战胜了世界级的专业围棋选手。</p>
+<ul>
+<li><a href="https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf">Atari - Playing Atari with Deep Reinforcement Learning</a></li>
+<li><a href="http://www.nature.com/nature/journal/v518/n7540/full/nature14236.html">Atari - Human-level control through deep reinforcement learning</a></li>
+<li><a href="http://www.nature.com/nature/journal/v529/n7587/full/nature16961.html">AlphaGO - Mastering the game of Go with deep neural networks and tree search</a></li>
+</ul>
+<h4>数据集迭代</h4>
+<p>在强化学习中，我们把每场比赛所产生的所有决策来作为一个序列 (up,up,stop,...,down)。在乒乓球游戏中，比赛是在某一方达到21分后结束的，所以一个序列可能包含几十个决策。
+然后我们可以设置一个批规模的大小，每一批包含一定数量的序列，基于这个批规模来更新我们的模型。
+在本教程中，我们把每批规模设置成10个序列。使用RMSProp训练一个具有200个单元的隐藏层的2层策略网络</p>
+<h4>损失和更新公式</h4>
+<p>接着我们创建一个在训练中被最小化的损失公式：</p>
+<div class="highlight"><pre><span></span>    actions_batch_pl = tf.placeholder(tf.int32, shape=[None])
+    discount_rewards_batch_pl = tf.placeholder(tf.float32, shape=[None])
+    loss = tl.rein.cross_entropy_reward_loss(probs, actions_batch_pl,
+                                                  discount_rewards_batch_pl)
+    ...
+    ...
+    sess.run(
+        train_op,
+        feed_dict={
+            states_batch_pl: epx,
+            actions_batch_pl: epy,
+            discount_rewards_batch_pl: disR
+        }
+    )
+</pre></div>
+<p>一batch的损失和一个batch内的策略网络的所有输出，所有的我们做出的动作和相应的被打折的奖励有关
+我们首先通过累加被打折的奖励和实际输出和真实动作的交叉熵计算每一个动作的损失。
+最后的损失是所有动作的损失的和。</p>
+<h3 id="xia yi bu ?">下一步?</h3>
+<p>上述教程展示了您如何去建立自己的代理人，end-to-end。
+虽然它有很合理的品质，但它的默认参数不会给你最好的代理人模型。
+这有一些您可以优化的内容。</p>
+<p>首先，与传统的MLP模型不同，比起 <a href="https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf">Playing Atari with Deep Reinforcement Learning</a> 更好的是我们可以使用CNNs来采集屏幕信息</p>
+<p>另外这个模型默认参数没有调整，您可以更改学习率，衰退率，或者用不同的方式来初始化您的模型的权重。</p>
+<p>最后，您可以尝试不同任务(游戏)的模型。</p>
+<h2 id="yun xing word2vecli zi_1">运行Word2Vec例子</h2>
+<p>在教程的这一部分，我们训练一个词嵌套矩阵，每个词可以通过矩阵中唯一的行向量来表示。
+在训练结束时，意思类似的单词会有相识的词向量。
+在代码的最后，我们通过把单词放到一个平面上来可视化，我们可以看到相似的单词会被聚集在一起。</p>
+<div class="highlight"><pre><span></span>  python tutorial_word2vec_basic.py
+</pre></div>
+<p>如果一切设置正确，您最后会得到如下的可视化图。</p>
+<p align="center">
+<img src="/images/tsne.png" width="100%"/>
+<br/>
+</p>
+<h2 id="li jie ci qian tao">理解词嵌套</h2>
+<h3 id="ci qian tao (qian ru )">词嵌套（嵌入）</h3>
+<p>我们强烈建议您先阅读Colah的博客 <a href="http://colah.github.io/posts/2014-07-NLP-RNNs-Representations/">Word Representations</a> <a href="http://dataunion.org/9331.html">(中文翻译)</a> ，
+以理解为什么我们要使用一个向量来表示一个单词。更多Word2vec的细节可以在 <a href="http://arxiv.org/abs/1411.2738">Word2vec Parameter Learning Explained</a> 中找到。</p>
+<p>基本来说，训练一个嵌套矩阵是一个非监督学习的过程。一个单词使用唯一的ID来表示，而这个ID号就是嵌套矩阵的行号（row index），对应的行向量就是用来表示该单词的，使用向量来表示单词可以更好地表达单词的意思。比如，有4个单词的向量， <code>woman &minus; man = queen - king</code> ，这个例子中可以看到，嵌套矩阵中有一个纬度是用来表示性别的。</p>
+<p>定义一个Word2vec词嵌套矩阵如下。</p>
+<div class="highlight"><pre><span></span>  # train_inputs is a row vector, a input is an integer id of single word.
+  # train_labels is a column vector, a label is an integer id of single word.
+  # valid_dataset is a column vector, a valid set is an integer id of single word.
+  train_inputs = tf.placeholder(tf.int32, shape=[batch_size])
+  train_labels = tf.placeholder(tf.int32, shape=[batch_size, 1])
+  valid_dataset = tf.constant(valid_examples, dtype=tf.int32)
+
+  # Look up embeddings for inputs.
+  emb_net = tl.layers.Word2vecEmbeddingInputlayer(
+          inputs = train_inputs,
+          train_labels = train_labels,
+          vocabulary_size = vocabulary_size,
+          embedding_size = embedding_size,
+          num_sampled = num_sampled,
+          nce_loss_args = {},
+          E_init = tf.random_uniform_initializer(minval=-1.0, maxval=1.0),
+          E_init_args = {},
+          nce_W_init = tf.truncated_normal_initializer(
+                            stddev=float(1.0/np.sqrt(embedding_size))),
+          nce_W_init_args = {},
+          nce_b_init = tf.constant_initializer(value=0.0),
+          nce_b_init_args = {},
+          name ='word2vec_layer',
+      )
+</pre></div>
+<h4>数据迭代和损失函数</h4>
+<p>Word2vec使用负采样（Negative sampling）和Skip-gram模型进行训练。
+噪音对比估计损失（NCE）会帮助减少损失函数的计算量，加快训练速度。
+Skip-Gram 将文本（context）和目标（target）反转，尝试从目标单词预测目标文本单词。
+我们使用 <code>tl.nlp.generate_skip_gram_batch</code> 函数来生成训练数据，如下：</p>
+<div class="highlight"><pre><span></span>  # NCE损失函数由 Word2vecEmbeddingInputlayer 提供
+  cost = emb_net.nce_cost
+  train_params = emb_net.all_params
+
+  train_op = tf.train.AdagradOptimizer(learning_rate, initial_accumulator_value=0.1,
+            use_locking=False).minimize(cost, var_list=train_params)
+
+  data_index = 0
+  while (step &lt; num_steps):
+    batch_inputs, batch_labels, data_index = tl.nlp.generate_skip_gram_batch(
+                  data=data, batch_size=batch_size, num_skips=num_skips,
+                  skip_window=skip_window, data_index=data_index)
+    feed_dict = {train_inputs : batch_inputs, train_labels : batch_labels}
+    _, loss_val = sess.run([train_op, cost], feed_dict=feed_dict)
+</pre></div>
+<h4>加载已训练好的的词嵌套矩阵</h4>
+<p>在训练嵌套矩阵的最后，我们保存矩阵及其词汇表、单词转ID字典、ID转单词字典。
+然后，当下次做实际应用时，可以想下面的代码中那样加载这个已经训练好的矩阵和字典，
+参考 <code>tutorial_generate_text.py</code> 。</p>
+<div class="highlight"><pre><span></span>  vocabulary_size = 50000
+  embedding_size = 128
+  model_file_name = "model_word2vec_50k_128"
+  batch_size = None
+
+  print("Load existing embedding matrix and dictionaries")
+  all_var = tl.files.load_npy_to_any(name=model_file_name+'.npy')
+  data = all_var['data']; count = all_var['count']
+  dictionary = all_var['dictionary']
+  reverse_dictionary = all_var['reverse_dictionary']
+
+  tl.nlp.save_vocab(count, name='vocab_'+model_file_name+'.txt')
+
+  del all_var, data, count
+
+  load_params = tl.files.load_npz(name=model_file_name+'.npz')
+
+  x = tf.placeholder(tf.int32, shape=[batch_size])
+  y_ = tf.placeholder(tf.int32, shape=[batch_size, 1])
+
+  emb_net = tl.layers.EmbeddingInputlayer(
+                  inputs = x,
+                  vocabulary_size = vocabulary_size,
+                  embedding_size = embedding_size,
+                  name ='embedding_layer')
+
+  tl.layers.initialize_global_variables(sess)
+
+  tl.files.assign_params(sess, [load_params[0]], emb_net)
+</pre></div>
+<h2 id="yun xing ptbli zi_1">运行PTB例子</h2>
+<p>Penn TreeBank（PTB）数据集被用在很多语言建模（Language Modeling）的论文中，包括"Empirical Evaluation and Combination of Advanced Language Modeling Techniques"和
+&ldquo;Recurrent Neural Network Regularization&rdquo;。该数据集的训练集有929k个单词，验证集有73K个单词，测试集有82k个单词。
+在它的词汇表刚好有10k个单词。</p>
+<p>PTB例子是为了展示如何用递归神经网络（Recurrent Neural Network）来进行语言建模的。</p>
+<p>给一句话 "I am from Imperial College London", 这个模型可以从中学习出如何从&ldquo;from Imperial College&rdquo;来预测出&ldquo;Imperial College London&rdquo;。也就是说，它根据之前输入的单词序列来预测出下一步输出的单词序列，在刚才的例子中 <code>num_steps (序列长度，sequence length)</code> 为 3。</p>
+<div class="highlight"><pre><span></span>  python tutorial_ptb_lstm.py
+</pre></div>
+<p>该脚本提供三种设置(小，中，大)，越大的模型有越好的建模性能，您可以修改下面的代码片段来选择不同的模型设置。</p>
+<div class="highlight"><pre><span></span>  flags.DEFINE_string(
+      "model", "small",
+      "A type of model. Possible options are: small, medium, large.")
+</pre></div>
+<p>如果您选择小设置，您将会看到：</p>
+<div class="highlight"><pre><span></span>  Epoch: 1 Learning rate: 1.000
+  0.004 perplexity: 5220.213 speed: 7635 wps
+  0.104 perplexity: 828.871 speed: 8469 wps
+  0.204 perplexity: 614.071 speed: 8839 wps
+  0.304 perplexity: 495.485 speed: 8889 wps
+  0.404 perplexity: 427.381 speed: 8940 wps
+  0.504 perplexity: 383.063 speed: 8920 wps
+  0.604 perplexity: 345.135 speed: 8920 wps
+  0.703 perplexity: 319.263 speed: 8949 wps
+  0.803 perplexity: 298.774 speed: 8975 wps
+  0.903 perplexity: 279.817 speed: 8986 wps
+  Epoch: 1 Train Perplexity: 265.558
+  Epoch: 1 Valid Perplexity: 178.436
+  ...
+  Epoch: 13 Learning rate: 0.004
+  0.004 perplexity: 56.122 speed: 8594 wps
+  0.104 perplexity: 40.793 speed: 9186 wps
+  0.204 perplexity: 44.527 speed: 9117 wps
+  0.304 perplexity: 42.668 speed: 9214 wps
+  0.404 perplexity: 41.943 speed: 9269 wps
+  0.504 perplexity: 41.286 speed: 9271 wps
+  0.604 perplexity: 39.989 speed: 9244 wps
+  0.703 perplexity: 39.403 speed: 9236 wps
+  0.803 perplexity: 38.742 speed: 9229 wps
+  0.903 perplexity: 37.430 speed: 9240 wps
+  Epoch: 13 Train Perplexity: 36.643
+  Epoch: 13 Valid Perplexity: 121.475
+  Test Perplexity: 116.716
+</pre></div>
+<p>PTB例子证明了递归神经网络能够实现语言建模，但是这个例子并没有做什么实际的事情。
+在做具体应用之前，您应该浏览这个例子的代码和下一章 &ldquo;理解 LSTM&rdquo; 来学好递归神经网络的基础。
+之后，您将学习如何用递归神经网络来生成文本，如何实现语言翻译和问题应答系统。</p>
+<h2 id="li jie lstm">理解LSTM</h2>
+<h3 id="di gui shen jing wang luo  (recurrent neural network)">递归神经网络 (Recurrent Neural Network)</h3>
+<p>我们认为Andrey Karpathy的博客 <a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/">Understand Recurrent Neural Network</a> 是了解递归神经网络最好的材料。
+读完这个博客后，Colah的博客 <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/">Understand LSTM Network</a> 能帮助你了解LSTM。
+我们在这里不介绍更多关于递归神经网络的内容，所以在你继续下面的内容之前，请先阅读我们建议阅读的博客。</p>
+<p align="center">
+<img src="/images/karpathy_rnn.jpeg" width="100%"/>
+<br/>
+</p>
+<p>图片由Andrey Karpathy提供</p>
+<h3 id="tong bu shu ru yu shu chu xu lie  (synced sequence input and output)">同步输入与输出序列 (Synced sequence input and output)</h3>
+<p>PTB例子中的模型是一个典型的同步输入与输出，Karpathy 把它描述为
+&ldquo;(5) 同步序列输入与输出(例如视频分类中我们希望对每一帧进行标记)。&ldquo;</p>
+<p>模型的构建如下，第一层是词嵌套层（嵌入），把每一个单词转换成对应的词向量，在该例子中没有使用预先训练好的
+嵌套矩阵。第二，堆叠两层LSTM，使用Dropout来实现规则化，防止overfitting。
+最后，使用全连接层输出一序列的softmax输出。</p>
+<p>第一层LSTM的输出形状是 [batch_size, num_steps, hidden_size]，这是为了让下一层LSTM可以堆叠在其上面。
+第二层LSTM的输出形状是 [batch_size<em>num_steps, hidden_size]，这是为了让输出层（全连接层 Dense）可以堆叠在其上面。
+然后计算每个样本的softmax输出，样本总数为 n_examples = batch_size</em>num_steps。</p>
+<p>若想要更进一步理解该PTB教程，您也可以阅读 <a href="https://www.tensorflow.org/versions/r0.9/tutorials/recurrent/index.html#recurrent-neural-networks">TensorFlow 官方的PTB教程</a> ，中文翻译请见极客学院。</p>
+<div class="highlight"><pre><span></span>  network = tl.layers.EmbeddingInputlayer(
+              inputs = x,
+              vocabulary_size = vocab_size,
+              embedding_size = hidden_size,
+              E_init = tf.random_uniform_initializer(-init_scale, init_scale),
+              name ='embedding_layer')
+  if is_training:
+      network = tl.layers.DropoutLayer(network, keep=keep_prob, name='drop1')
+  network = tl.layers.RNNLayer(network,
+              cell_fn=tf.nn.rnn_cell.BasicLSTMCell,
+              cell_init_args={'forget_bias': 0.0},
+              n_hidden=hidden_size,
+              initializer=tf.random_uniform_initializer(-init_scale, init_scale),
+              n_steps=num_steps,
+              return_last=False,
+              name='basic_lstm_layer1')
+  lstm1 = network
+  if is_training:
+      network = tl.layers.DropoutLayer(network, keep=keep_prob, name='drop2')
+  network = tl.layers.RNNLayer(network,
+              cell_fn=tf.nn.rnn_cell.BasicLSTMCell,
+              cell_init_args={'forget_bias': 0.0},
+              n_hidden=hidden_size,
+              initializer=tf.random_uniform_initializer(-init_scale, init_scale),
+              n_steps=num_steps,
+              return_last=False,
+              return_seq_2d=True,
+              name='basic_lstm_layer2')
+  lstm2 = network
+  if is_training:
+      network = tl.layers.DropoutLayer(network, keep=keep_prob, name='drop3')
+  network = tl.layers.DenseLayer(network,
+              n_units=vocab_size,
+              W_init=tf.random_uniform_initializer(-init_scale, init_scale),
+              b_init=tf.random_uniform_initializer(-init_scale, init_scale),
+              act = tl.activation.identity, name='output_layer')
+</pre></div>
+<h4>数据迭代</h4>
+<p>batch_size 数值可以被视为并行计算的数量。
+如下面的例子所示，第一个 batch 使用 0 到 9 来学习序列信息。
+第二个 batch 使用 10 到 19 来学习序列。
+所以它忽略了 9 到 10 之间的信息。
+只当我们 bath_size 设为 1，它才使用 0 到 20 之间所有的序列信息来学习。</p>
+<p>这里的 batch_size 的意思与 MNIST 例子略有不同。
+在 MNIST 例子，batch_size 是每次迭代中我们使用的样本数量，
+而在 PTB 的例子中，batch_size 是为加快训练速度的并行进程数。</p>
+<p>虽然当 batch_size &gt; 1 时有些信息将会被忽略，
+但是如果你的数据是足够长的（一个语料库通常有几十亿个字），被忽略的信息不会影响最终的结果。</p>
+<p>在PTB教程中，我们设置了 batch_size = 20，所以，我们将整个数据集拆分成 20 段（segment）。
+在每一轮（epoch）的开始时，我们有 20 个初始化的 LSTM 状态（State），然后分别对 20 段数据进行迭代学习。</p>
+<p>训练数据迭代的例子如下：</p>
+<div class="highlight"><pre><span></span>  train_data = [i for i in range(20)]
+  for batch in tl.iterate.ptb_iterator(train_data, batch_size=2, num_steps=3):
+      x, y = batch
+      print(x, '\n',y)
+</pre></div>
+<div class="highlight"><pre><span></span>  ... [[ 0  1  2] &lt;---x                       1st subset/ iteration
+  ...  [10 11 12]]
+  ... [[ 1  2  3] &lt;---y
+  ...  [11 12 13]]
+  ...
+  ... [[ 3  4  5]  &lt;--- 1st batch input       2nd subset/ iteration
+  ...  [13 14 15]] &lt;--- 2nd batch input
+  ... [[ 4  5  6]  &lt;--- 1st batch target
+  ...  [14 15 16]] &lt;--- 2nd batch target
+  ...
+  ... [[ 6  7  8]                             3rd subset/ iteration
+  ...  [16 17 18]]
+  ... [[ 7  8  9]
+  ...  [17 18 19]]
+</pre></div>
+<div class="highlight"><pre><span></span>&amp;gt; 这个例子可以当作词嵌套矩阵的预训练。
+</pre></div>
+<h4>损失和更新公式</h4>
+<p>损失函数是一系列输出cross entropy的均值。</p>
+<div class="highlight"><pre><span></span>  # 更多细节请见 tensorlayer.cost.cross_entropy_seq()
+  def loss_fn(outputs, targets, batch_size, num_steps):
+      # Returns the cost function of Cross-entropy of two sequences, implement
+      # softmax internally.
+      # outputs : 2D tensor [batch_size*num_steps, n_units of output layer]
+      # targets : 2D tensor [batch_size, num_steps], need to be reshaped.
+      # n_examples = batch_size * num_steps
+      # so
+      # cost is the averaged cost of each mini-batch (concurrent process).
+      loss = tf.nn.seq2seq.sequence_loss_by_example(
+          [outputs],
+          [tf.reshape(targets, [-1])],
+          [tf.ones([batch_size * num_steps])])
+      cost = tf.reduce_sum(loss) / batch_size
+      return cost
+
+  # Cost for Training
+  cost = loss_fn(network.outputs, targets, batch_size, num_steps)
+</pre></div>
+<p>在训练时，该例子在若干个epoch之后（由 <code>max_epoch</code> 定义），才开始按比例下降学习率（learning rate），新学习率是前一个epoch的学习率乘以一个下降率（由 <code>lr_decay</code> 定义）。
+此外，截断反向传播（truncated backpropagation）截断了</p>
+<p>为使学习过程易于处理，通常的做法是将反向传播的梯度在（按时间）展开的步骤上照一个固定长度( <code>num_steps</code> )截断。 通过在一次迭代中的每个时刻上提供长度为 <code>num_steps</code> 的输入和每次迭代完成之后反向传导，这会很容易实现。</p>
+<div class="highlight"><pre><span></span>  # 截断反响传播 Truncated Backpropagation for training
+  with tf.variable_scope('learning_rate'):
+      lr = tf.Variable(0.0, trainable=False)
+  tvars = tf.trainable_variables()
+  grads, _ = tf.clip_by_global_norm(tf.gradients(cost, tvars),
+                                    max_grad_norm)
+  optimizer = tf.train.GradientDescentOptimizer(lr)
+  train_op = optimizer.apply_gradients(zip(grads, tvars))
+</pre></div>
+<p>如果当前epoch值大于 <code>max_epoch</code> ，则把当前学习率乘以 <code>lr_decay</code> 来降低学习率。</p>
+<div class="highlight"><pre><span></span>  new_lr_decay = lr_decay ** max(i - max_epoch, 0.0)
+  sess.run(tf.assign(lr, learning_rate * new_lr_decay))
+</pre></div>
+<p>在每一个epoch的开始之前，LSTM的状态要被重置为零状态；在每一个迭代之后，LSTM状态都会被改变，所以要把最新的LSTM状态
+作为下一个迭代的初始化状态。</p>
+<div class="highlight"><pre><span></span>  # 在每一个epoch之前，把所有LSTM状态设为零状态
+  state1 = tl.layers.initialize_rnn_state(lstm1.initial_state)
+  state2 = tl.layers.initialize_rnn_state(lstm2.initial_state)
+  for step, (x, y) in enumerate(tl.iterate.ptb_iterator(train_data,
+                                              batch_size, num_steps)):
+      feed_dict = {input_data: x, targets: y,
+                  lstm1.initial_state: state1,
+                  lstm2.initial_state: state2,
+                  }
+      # 启用dropout
+      feed_dict.update( network.all_drop )
+      # 把新的状态作为下一个迭代的初始状态
+      _cost, state1, state2, _ = sess.run([cost,
+                                      lstm1.final_state,
+                                      lstm2.final_state,
+                                      train_op],
+                                      feed_dict=feed_dict
+                                      )
+      costs += _cost; iters += num_steps
+</pre></div>
+<h4>预测</h4>
+<p>在训练完模型之后，当我们预测下一个输出时，我们不需要考虑序列长度了，因此 <code>batch_size</code> 和 <code>num_steps</code> 都设为 1 。
+然后，我们可以一步一步地输出下一个单词，而不是通过一序列的单词来输出一序列的单词。</p>
+<div class="highlight"><pre><span></span>  input_data_test = tf.placeholder(tf.int32, [1, 1])
+  targets_test = tf.placeholder(tf.int32, [1, 1])
+  ...
+  network_test, lstm1_test, lstm2_test = inference(input_data_test,
+                        is_training=False, num_steps=1, reuse=True)
+  ...
+  cost_test = loss_fn(network_test.outputs, targets_test, 1, 1)
+  ...
+  print("Evaluation")
+  # 测试
+  # go through the test set step by step, it will take a while.
+  start_time = time.time()
+  costs = 0.0; iters = 0
+  # 与训练时一样，设置所有LSTM状态为零状态
+  state1 = tl.layers.initialize_rnn_state(lstm1_test.initial_state)
+  state2 = tl.layers.initialize_rnn_state(lstm2_test.initial_state)
+  for step, (x, y) in enumerate(tl.iterate.ptb_iterator(test_data,
+                                          batch_size=1, num_steps=1)):
+      feed_dict = {input_data_test: x, targets_test: y,
+                  lstm1_test.initial_state: state1,
+                  lstm2_test.initial_state: state2,
+                  }
+      _cost, state1, state2 = sess.run([cost_test,
+                                      lstm1_test.final_state,
+                                      lstm2_test.final_state],
+                                      feed_dict=feed_dict
+                                      )
+      costs += _cost; iters += 1
+  test_perplexity = np.exp(costs / iters)
+  print("Test Perplexity: %.3f took %.2fs" % (test_perplexity, time.time() - start_time))
+</pre></div>
+<h3 id="xia yi bu ?_1">下一步？</h3>
+<p>您已经明白了同步序列输入和序列输出（Synced sequence input and output）。
+现在让我们思考下序列输入单一输出的情况（Sequence input and one output），
+LSTM 也可以学会通过给定一序列输入如 &ldquo;我来自北京，我会说.." 来输出
+一个单词 "中文"。</p>
+<p>请仔细阅读并理解 <code>tutorial_generate_text.py</code> 的代码，它讲了如何加载一个已经训练好的词嵌套矩阵，
+以及如何给定机器一个文档，让它来学习文字自动生成。</p>
+<p>Karpathy的博客：
+"(3) Sequence input (e.g. sentiment analysis where a given sentence is
+classified as expressing positive or negative sentiment). "</p>
+<h2 id="yun xing ji qi fan yi li zi_1">运行机器翻译例子</h2>
+<div class="highlight"><pre><span></span>  python tutorial_translate.py
+</pre></div>
+<p>该脚本将训练一个神经网络来把英文翻译成法文。
+如果一切正常，您将看到：
+- 下载WMT英文-法文翻译数据库，包括训练集和测试集。
+- 通过训练集创建英文和法文的词汇表。
+- 把训练集和测试集的单词转换成数字ID表示。</p>
+<div class="highlight"><pre><span></span>  Prepare raw data
+  Load or Download WMT English-to-French translation &gt; wmt
+  Training data : wmt/giga-fren.release2
+  Testing data : wmt/newstest2013
+
+  Create vocabularies
+  Vocabulary of French : wmt/vocab40000.fr
+  Vocabulary of English : wmt/vocab40000.en
+  Creating vocabulary wmt/vocab40000.fr from data wmt/giga-fren.release2.fr
+    processing line 100000
+    processing line 200000
+    processing line 300000
+    processing line 400000
+    processing line 500000
+    processing line 600000
+    processing line 700000
+    processing line 800000
+    processing line 900000
+    processing line 1000000
+    processing line 1100000
+    processing line 1200000
+    ...
+    processing line 22500000
+  Creating vocabulary wmt/vocab40000.en from data wmt/giga-fren.release2.en
+    processing line 100000
+    ...
+    processing line 22500000
+
+  ...
+</pre></div>
+<p>首先，我们从WMT'15网站上下载英语-法语翻译数据。训练数据和测试数据如下。
+训练数据用于训练模型，测试数据用于评估该模型。</p>
+<div class="highlight"><pre><span></span>  wmt/training-giga-fren.tar  &lt;-- 英文－法文训练集 (2.6GB)
+                                  giga-fren.release2.* 从该文件解压出来
+  wmt/dev-v2.tgz              &lt;-- 多种语言的测试集 (21.4MB)
+                                  newstest2013.* 从该文件解压出来
+
+  wmt/giga-fren.release2.fr   &lt;-- 法文训练集 (4.57GB)
+  wmt/giga-fren.release2.en   &lt;-- 英文训练集 (3.79GB)
+
+  wmt/newstest2013.fr         &lt;-- 法文测试集 (393KB)
+  wmt/newstest2013.en         &lt;-- 英文测试集 (333KB)
+</pre></div>
+<p>所有 <code>giga-fren.release2.*</code> 是训练数据， <code>giga-fren.release2.fr</code> 内容如下：</p>
+<div class="highlight"><pre><span></span>  Il a transform&eacute; notre vie | Il a transform&eacute; la soci&eacute;t&eacute; | Son fonctionnement | La technologie, moteur du changement Accueil | Concepts | Enseignants | Recherche | Aper&ccedil;u | Collaborateurs | Web HHCC | Ressources | Commentaires Mus&eacute;e virtuel du Canada
+  Plan du site
+  R&eacute;troaction
+  Cr&eacute;dits
+  English
+  Qu&rsquo;est-ce que la lumi&egrave;re?
+  La d&eacute;couverte du spectre de la lumi&egrave;re blanche Des codes dans la lumi&egrave;re Le spectre &eacute;lectromagn&eacute;tique Les spectres d&rsquo;&eacute;mission Les spectres d&rsquo;absorption Les ann&eacute;es-lumi&egrave;re La pollution lumineuse
+  Le ciel des premiers habitants La vision contemporaine de l'Univers L&rsquo;astronomie pour tous
+  Bande dessin&eacute;e
+  Liens
+  Glossaire
+  Observatoires
+  ...
+</pre></div>
+<p><code>giga-fren.release2.en</code> 内容如下，我们可以看到单词或者句子用 <code>|</code> 或 <code>\n</code> 来分隔。</p>
+<div class="highlight"><pre><span></span>  Changing Lives | Changing Society | How It Works | Technology Drives Change Home | Concepts | Teachers | Search | Overview | Credits | HHCC Web | Reference | Feedback Virtual Museum of Canada Home Page
+  Site map
+  Feedback
+  Credits
+  Fran&ccedil;ais
+  What is light ?
+  The white light spectrum Codes in the light The electromagnetic spectrum Emission spectra Absorption spectra Light-years Light pollution
+  The sky of the first inhabitants A contemporary vison of the Universe Astronomy for everyone
+  Cartoon
+  Links
+  Glossary
+  Observatories
+</pre></div>
+<p>测试数据 <code>newstest2013.en</code> 和 <code>newstest2013.fr</code> 如下所示：</p>
+<div class="highlight"><pre><span></span>  newstest2013.en :
+  A Republican strategy to counter the re-election of Obama
+  Republican leaders justified their policy by the need to combat electoral fraud.
+  However, the Brennan Centre considers this a myth, stating that electoral fraud is rarer in the United States than the number of people killed by lightning.
+
+  newstest2013.fr :
+  Une strat&eacute;gie r&eacute;publicaine pour contrer la r&eacute;&eacute;lection d'Obama
+  Les dirigeants r&eacute;publicains justifi&egrave;rent leur politique par la n&eacute;cessit&eacute; de lutter contre la fraude &eacute;lectorale.
+  Or, le Centre Brennan consid&egrave;re cette derni&egrave;re comme un mythe, affirmant que la fraude &eacute;lectorale est plus rare aux &Eacute;tats-Unis que le nombre de personnes tu&eacute;es par la foudre.
+</pre></div>
+<p>下载完数据之后，开始创建词汇表文件。
+从训练数据 <code>giga-fren.release2.fr</code> 和 <code>giga-fren.release2.en</code>创建 <code>vocab40000.fr</code> 和 <code>vocab40000.en</code> 这个过程需要较长一段时间，数字 <code>40000</code> 代表了词汇库的大小。</p>
+<p><code>vocab40000.fr</code> (381KB) 按下列所示地按每行一个单词的方式存储（one-item-per-line）。</p>
+<div class="highlight"><pre><span></span>  _PAD
+  _GO
+  _EOS
+  _UNK
+  de
+  ,
+  .
+  '
+  la
+  et
+  des
+  les
+  &agrave;
+  le
+  du
+  l
+  en
+  )
+  d
+  0
+  (
+  00
+  pour
+  dans
+  un
+  que
+  une
+  sur
+  au
+  0000
+  a
+  par
+</pre></div>
+<p><code>vocab40000.en</code> (344KB) 也是如此。</p>
+<div class="highlight"><pre><span></span>  _PAD
+  _GO
+  _EOS
+  _UNK
+  the
+  .
+  ,
+  of
+  and
+  to
+  in
+  a
+  )
+  (
+  0
+  for
+  00
+  that
+  is
+  on
+  The
+  0000
+  be
+  by
+  with
+  or
+  :
+  as
+  "
+  000
+  are
+  ;
+</pre></div>
+<p>接着我们开始创建英文和法文的数字化（ID）训练集和测试集。这也要较长一段时间。</p>
+<div class="highlight"><pre><span></span>  Tokenize data
+  Tokenizing data in wmt/giga-fren.release2.fr  &lt;-- Training data of French
+    tokenizing line 100000
+    tokenizing line 200000
+    tokenizing line 300000
+    tokenizing line 400000
+    ...
+    tokenizing line 22500000
+  Tokenizing data in wmt/giga-fren.release2.en  &lt;-- Training data of English
+    tokenizing line 100000
+    tokenizing line 200000
+    tokenizing line 300000
+    tokenizing line 400000
+    ...
+    tokenizing line 22500000
+  Tokenizing data in wmt/newstest2013.fr        &lt;-- Testing data of French
+  Tokenizing data in wmt/newstest2013.en        &lt;-- Testing data of English
+</pre></div>
+<p>最后，我们所有的文件如下所示：</p>
+<div class="highlight"><pre><span></span>  wmt/training-giga-fren.tar  &lt;-- 英文－法文训练集 (2.6GB)
+                                  giga-fren.release2.* 从该文件解压出来
+  wmt/dev-v2.tgz              &lt;-- 多种语言的测试集 (21.4MB)
+                                  newstest2013.* 从该文件解压出来
+
+  wmt/giga-fren.release2.fr   &lt;-- 法文训练集 (4.57GB)
+  wmt/giga-fren.release2.en   &lt;-- 英文训练集 (3.79GB)
+
+  wmt/newstest2013.fr         &lt;-- 法文测试集 (393KB)
+  wmt/newstest2013.en         &lt;-- 英文测试集 (333KB)
+
+  wmt/vocab40000.fr           &lt;-- 法文词汇表 (381KB)
+  wmt/vocab40000.en           &lt;-- 英文词汇表 (344KB)
+
+  wmt/giga-fren.release2.ids40000.fr   &lt;-- 数字化法文训练集 (2.81GB)
+  wmt/giga-fren.release2.ids40000.en   &lt;-- 数字化英文训练集 (2.38GB)
+
+  wmt/newstest2013.ids40000.fr         &lt;-- 数字化法文训练集 (268KB)
+  wmt/newstest2013.ids40000.en         &lt;-- 数字化英文测试集 (232KB)
+</pre></div>
+<p>现在，把数字化的数据读入buckets中，并计算不同buckets中数据样本的个数。</p>
+<div class="highlight"><pre><span></span>  Read development (test) data into buckets
+  dev data: (5, 10) [[13388, 4, 949], [23113, 8, 910, 2]]
+  en word_ids: [13388, 4, 949]
+  en context: [b'Preventing', b'the', b'disease']
+  fr word_ids: [23113, 8, 910, 2]
+  fr context: [b'Pr\xc3\xa9venir', b'la', b'maladie', b'_EOS']
+
+  Read training data into buckets (limit: 0)
+    reading data line 100000
+    reading data line 200000
+    reading data line 300000
+    reading data line 400000
+    reading data line 500000
+    reading data line 600000
+    reading data line 700000
+    reading data line 800000
+    ...
+    reading data line 22400000
+    reading data line 22500000
+  train_bucket_sizes: [239121, 1344322, 5239557, 10445326]
+  train_total_size: 17268326.0
+  train_buckets_scale: [0.013847375825543252, 0.09169638099257565, 0.3951164693091849, 1.0]
+  train data: (5, 10) [[1368, 3344], [1089, 14, 261, 2]]
+  en word_ids: [1368, 3344]
+  en context: [b'Site', b'map']
+  fr word_ids: [1089, 14, 261, 2]
+  fr context: [b'Plan', b'du', b'site', b'_EOS']
+
+  the num of training data in each buckets: [239121, 1344322, 5239557, 10445326]
+  the num of training data: 17268326
+  train_buckets_scale: [0.013847375825543252, 0.09169638099257565, 0.3951164693091849, 1.0]
+</pre></div>
+<p>最后开始训练模型，当 <code>steps_per_checkpoint = 10</code> 时，您将看到：</p>
+<p><code>steps_per_checkpoint = 10</code></p>
+<div class="highlight"><pre><span></span>  Create Embedding Attention Seq2seq Model
+
+  global step 10 learning rate 0.5000 step-time 22.26 perplexity 12761.50
+    eval: bucket 0 perplexity 5887.75
+    eval: bucket 1 perplexity 3891.96
+    eval: bucket 2 perplexity 3748.77
+    eval: bucket 3 perplexity 4940.10
+  global step 20 learning rate 0.5000 step-time 20.38 perplexity 28761.36
+    eval: bucket 0 perplexity 10137.01
+    eval: bucket 1 perplexity 12809.90
+    eval: bucket 2 perplexity 15758.65
+    eval: bucket 3 perplexity 26760.93
+  global step 30 learning rate 0.5000 step-time 20.64 perplexity 6372.95
+    eval: bucket 0 perplexity 1789.80
+    eval: bucket 1 perplexity 1690.00
+    eval: bucket 2 perplexity 2190.18
+    eval: bucket 3 perplexity 3808.12
+  global step 40 learning rate 0.5000 step-time 16.10 perplexity 3418.93
+    eval: bucket 0 perplexity 4778.76
+    eval: bucket 1 perplexity 3698.90
+    eval: bucket 2 perplexity 3902.37
+    eval: bucket 3 perplexity 22612.44
+  global step 50 learning rate 0.5000 step-time 14.84 perplexity 1811.02
+    eval: bucket 0 perplexity 644.72
+    eval: bucket 1 perplexity 759.16
+    eval: bucket 2 perplexity 984.18
+    eval: bucket 3 perplexity 1585.68
+  global step 60 learning rate 0.5000 step-time 19.76 perplexity 1580.55
+    eval: bucket 0 perplexity 1724.84
+    eval: bucket 1 perplexity 2292.24
+    eval: bucket 2 perplexity 2698.52
+    eval: bucket 3 perplexity 3189.30
+  global step 70 learning rate 0.5000 step-time 17.16 perplexity 1250.57
+    eval: bucket 0 perplexity 298.55
+    eval: bucket 1 perplexity 502.04
+    eval: bucket 2 perplexity 645.44
+    eval: bucket 3 perplexity 604.29
+  global step 80 learning rate 0.5000 step-time 18.50 perplexity 793.90
+    eval: bucket 0 perplexity 2056.23
+    eval: bucket 1 perplexity 1344.26
+    eval: bucket 2 perplexity 767.82
+    eval: bucket 3 perplexity 649.38
+  global step 90 learning rate 0.5000 step-time 12.61 perplexity 541.57
+    eval: bucket 0 perplexity 180.86
+    eval: bucket 1 perplexity 350.99
+    eval: bucket 2 perplexity 326.85
+    eval: bucket 3 perplexity 383.22
+  global step 100 learning rate 0.5000 step-time 18.42 perplexity 471.12
+    eval: bucket 0 perplexity 216.63
+    eval: bucket 1 perplexity 348.96
+    eval: bucket 2 perplexity 318.20
+    eval: bucket 3 perplexity 389.92
+  global step 110 learning rate 0.5000 step-time 18.39 perplexity 474.89
+    eval: bucket 0 perplexity 8049.85
+    eval: bucket 1 perplexity 1677.24
+    eval: bucket 2 perplexity 936.98
+    eval: bucket 3 perplexity 657.46
+  global step 120 learning rate 0.5000 step-time 18.81 perplexity 832.11
+    eval: bucket 0 perplexity 189.22
+    eval: bucket 1 perplexity 360.69
+    eval: bucket 2 perplexity 410.57
+    eval: bucket 3 perplexity 456.40
+  global step 130 learning rate 0.5000 step-time 20.34 perplexity 452.27
+    eval: bucket 0 perplexity 196.93
+    eval: bucket 1 perplexity 655.18
+    eval: bucket 2 perplexity 860.44
+    eval: bucket 3 perplexity 1062.36
+  global step 140 learning rate 0.5000 step-time 21.05 perplexity 847.11
+    eval: bucket 0 perplexity 391.88
+    eval: bucket 1 perplexity 339.09
+    eval: bucket 2 perplexity 320.08
+    eval: bucket 3 perplexity 376.44
+  global step 150 learning rate 0.4950 step-time 15.53 perplexity 590.03
+    eval: bucket 0 perplexity 269.16
+    eval: bucket 1 perplexity 286.51
+    eval: bucket 2 perplexity 391.78
+    eval: bucket 3 perplexity 485.23
+  global step 160 learning rate 0.4950 step-time 19.36 perplexity 400.80
+    eval: bucket 0 perplexity 137.00
+    eval: bucket 1 perplexity 198.85
+    eval: bucket 2 perplexity 276.58
+    eval: bucket 3 perplexity 357.78
+  global step 170 learning rate 0.4950 step-time 17.50 perplexity 541.79
+    eval: bucket 0 perplexity 1051.29
+    eval: bucket 1 perplexity 626.64
+    eval: bucket 2 perplexity 496.32
+    eval: bucket 3 perplexity 458.85
+  global step 180 learning rate 0.4950 step-time 16.69 perplexity 400.65
+    eval: bucket 0 perplexity 178.12
+    eval: bucket 1 perplexity 299.86
+    eval: bucket 2 perplexity 294.84
+    eval: bucket 3 perplexity 296.46
+  global step 190 learning rate 0.4950 step-time 19.93 perplexity 886.73
+    eval: bucket 0 perplexity 860.60
+    eval: bucket 1 perplexity 910.16
+    eval: bucket 2 perplexity 909.24
+    eval: bucket 3 perplexity 786.04
+  global step 200 learning rate 0.4901 step-time 18.75 perplexity 449.64
+    eval: bucket 0 perplexity 152.13
+    eval: bucket 1 perplexity 234.41
+    eval: bucket 2 perplexity 249.66
+    eval: bucket 3 perplexity 285.95
+  ...
+  global step 980 learning rate 0.4215 step-time 18.31 perplexity 208.74
+    eval: bucket 0 perplexity 78.45
+    eval: bucket 1 perplexity 108.40
+    eval: bucket 2 perplexity 137.83
+    eval: bucket 3 perplexity 173.53
+  global step 990 learning rate 0.4173 step-time 17.31 perplexity 175.05
+    eval: bucket 0 perplexity 78.37
+    eval: bucket 1 perplexity 119.72
+    eval: bucket 2 perplexity 169.11
+    eval: bucket 3 perplexity 202.89
+  global step 1000 learning rate 0.4173 step-time 15.85 perplexity 174.33
+    eval: bucket 0 perplexity 76.52
+    eval: bucket 1 perplexity 125.97
+    eval: bucket 2 perplexity 150.13
+    eval: bucket 3 perplexity 181.07
+  ...
+</pre></div>
+<p>经过350000轮训练模型之后，您可以将代码中的 <code>main_train()</code> 换为 <code>main_decode()</code> 来使用训练好的翻译器，
+您输入一个英文句子，程序将输出一个对应的法文句子。</p>
+<div class="highlight"><pre><span></span>  Reading model parameters from wmt/translate.ckpt-350000
+  &gt;  Who is the president of the United States?
+  Qui est le pr&eacute;sident des &Eacute;tats-Unis ?
+</pre></div>
+<h2 id="li jie ji qi fan yi">理解机器翻译</h2>
+<h3 id="seq2seq">Seq2seq</h3>
+<p>序列到序列模型（Seq2seq）通常被用来转换一种语言到另一种语言。
+但实际上它能用来做很多您可能无法想象的事情，比如我们可以将一个长的句子翻译成意思一样但短且简单的句子，
+再比如，从莎士比亚的语言翻译成现代英语。若用上卷积神经网络(CNN)的话，我们能将视频翻译成句子，则自动看一段视频给出该视频的文字描述（Video captioning）。</p>
+<p>如果你只是想用 Seq2seq，你只需要考虑训练集的格式，比如如何切分单词、如何数字化单词等等。
+所以，在本教程中，我们将讨论很多如何整理训练集。</p>
+<h4>基础</h4>
+<p>序列到序列模型是一种多对多（Many to many）的模型，但与PTB教程中的同步序列输入与输出(Synced sequence input and output）不一样，Seq2seq是在输入了整个序列之后，才开始输出新的序列（非同步）。
+该教程用了下列两种最新的方法来提高准确度：</p>
+<ul>
+<li>把输入序列倒转输入（Reversing the inputs）</li>
+<li>注意机制（Attention mechanism）</li>
+</ul>
+<p>为了要加快训练速度，我们使用了：</p>
+<ul>
+<li>softmax 抽样（Sampled softmax）</li>
+</ul>
+<p>Karpathy的博客是这样描述Seq2seq的："(4) Sequence input and sequence output (e.g. Machine Translation: an RNN reads a sentence in English and then outputs a sentence in French)."</p>
+<p align="center">
+<img src="/images/basic_seq2seq.png" width="80%"/>
+<br/>
+</p>
+<p>如上图所示，编码器输入（encoder input），解码器输入（decoder input）以及输出目标（targets）如下：</p>
+<div class="highlight"><pre><span></span>   encoder_input =  A    B    C
+   decoder_input =  &lt;go&gt; W    X    Y    Z
+   targets       =  W    X    Y    Z    &lt;eos&gt;
+</pre></div>
+<blockquote>
+<p>Note：在代码实现中，targets的长度比decoder_input的长度小一，更多实现细节将在下文说明。</p>
+</blockquote>
+<h4>文献</h4>
+<p>该英语-法语的机器翻译例子使用了多层递归神经网络以及注意机制。
+该模型和如下论文中一样：</p>
+<ul>
+<li><a href="http://arxiv.org/abs/1412.7449">Grammar as a Foreign Language</a></li>
+</ul>
+<p>该例子采用了 softmax 抽样（sampled softmax）来解决当词汇表很大时计算量大的问题。
+在该例子中，<code>target_vocab_size=4000</code> ，若词汇量小于 <code>512</code> 时用普通的softmax cross entropy即可。
+Softmax 抽样在这篇论文的第三小节中描述:</p>
+<ul>
+<li><a href="http://arxiv.org/abs/1412.2007">On Using Very Large Target Vocabulary for Neural Machine Translation</a></li>
+</ul>
+<p>如下文章讲述了把输入序列倒转（Reversing the inputs）和多层神递归神经网络用在Seq2seq的翻译应用非常成功：</p>
+<ul>
+<li><a href="http://arxiv.org/abs/1409.3215">Sequence to Sequence Learning with Neural Networks</a></li>
+</ul>
+<p>如下文章讲述了注意机制（Attention Mechanism）让解码器可以更直接地得到每一个输入的信息：</p>
+<ul>
+<li><a href="http://arxiv.org/abs/1409.0473">Neural Machine Translation by Jointly Learning to Align and Translate</a></li>
+</ul>
+<p>如下文章讲述了另一种Seq2seq模型，则使用双向编码器（Bi-directional encoder）：</p>
+<ul>
+<li><a href="http://arxiv.org/abs/1409.0473">Neural Machine Translation by Jointly Learning to Align and Translate</a></li>
+</ul>
+<h3 id="shi xian xi jie">实现细节</h3>
+<h4>Bucketing and Padding</h4>
+<p>Bucketing 是一种能有效处理不同句子长度的方法，为什么使用Bucketing，在 <a href="https://www.zhihu.com/question/42057513">知乎</a>上已经有很好的回答了。</p>
+<p>当将英文翻译成法文的时，我们有不同长度的英文句子输入（长度为 <code>L1</code> ），以及不同长度的法文句子输出，（长度为 <code>L2</code> ）。
+我们原则上要建立每一种长度的可能性，则有很多个 <code>(L1, L2+1)</code> ，其中 <code>L2</code> 加一是因为有 GO 标志符。</p>
+<p>为了减少 bucket 的数量以及为句子找到最合适的 bucket，若 bucket 大于句子的长度，我们则使用 PAD 标志符填充之。</p>
+<p>为了提高效率，我们只使用几个 bucket，然后使用 padding 来让句子匹配到最相近的 bucket 中。
+在该例子中，我们使用如下 4 个 buckets。</p>
+<div class="highlight"><pre><span></span>  buckets = [(5, 10), (10, 15), (20, 25), (40, 50)]
+</pre></div>
+<p>如果输入的是一个有 <code>3</code> 个单词的英文句子，对应的法文输出有 <code>6</code> 个单词，
+那么改数据将被放在第一个 bucket 中并且把 encoder inputs 和 decoder inputs 通过 padding 来让其长度变成 <code>5</code> 和 <code>10</code> 。
+如果我们有 <code>8</code> 个单词的英文句子，及 <code>18</code> 个单词的法文句子，它们会被放到 <code>(20, 25)</code> 的 bucket 中。</p>
+<p>换句话说，bucket <code>(I,O)</code> 是 (encoder_input_size，decoder_inputs_size) 。</p>
+<p>给出一对数字化训练样本 <code>[["I", "go", "."], ["Je", "vais", "."]]</code> ，我们把它转换为 <code>(5,10)</code> 。
+编码器输入（encoder inputs）的训练数据为  <code>[PAD PAD "." "go" "I"]</code> ，而解码器的输入（decoder inputs）为 <code>[GO "Je" "vais" "." EOS PAD PAD PAD PAD PAD]</code> 。
+而输出目标（targets）是解码器输入（decoder inputs）平移一位。 <code>target_weights</code> 是输出目标（targets）的掩码。</p>
+<div class="highlight"><pre><span></span>  bucket = (I, O) = (5, 10)
+  encoder_inputs = [PAD PAD "." "go" "I"]                       &lt;-- 5  x batch_size
+  decoder_inputs = [GO "Je" "vais" "." EOS PAD PAD PAD PAD PAD] &lt;-- 10 x batch_size
+  target_weights = [1   1     1     1   0 0 0 0 0 0 0]          &lt;-- 10 x batch_size
+  targets        = ["Je" "vais" "." EOS PAD PAD PAD PAD PAD]    &lt;-- 9  x batch_size
+</pre></div>
+<p>在该代码中，一个句子是由一个列向量表示，假设 <code>batch_size = 3</code> ， <code>bucket = (5, 10)</code> ，训练集如下所示。</p>
+<div class="highlight"><pre><span></span>  encoder_inputs    decoder_inputs    target_weights    targets
+  0    0    0       1    1    1       1    1    1       87   71   16748
+  0    0    0       87   71   16748   1    1    1       2    3    14195
+  0    0    0       2    3    14195   0    1    1       0    2    2
+  0    0    3233    0    2    2       0    0    0       0    0    0
+  3    698  4061    0    0    0       0    0    0       0    0    0
+                    0    0    0       0    0    0       0    0    0
+                    0    0    0       0    0    0       0    0    0
+                    0    0    0       0    0    0       0    0    0
+                    0    0    0       0    0    0       0    0    0
+                    0    0    0       0    0    0
+</pre></div>
+<p>其中 0 : _PAD    1 : _GO     2 : _EOS      3 : _UNK</p>
+<p>在训练过程中，解码器输入是目标，而在预测过程中，下一个解码器的输入是最后一个解码器的输出。</p>
+<p>在训练过程中，编码器输入（decoder inputs）就是目标输出（targets）；
+当使用模型时，下一个编码器输入（decoder inputs）是上一个解码器输出（ decoder output）。</p>
+<h4>特殊标志符、标点符号与阿拉伯数字</h4>
+<p>该例子中的特殊标志符是：</p>
+<div class="highlight"><pre><span></span>  <span class="n">_PAD</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">"_PAD"</span>
+  <span class="n">_GO</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">"_GO"</span>
+  <span class="n">_EOS</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">"_EOS"</span>
+  <span class="n">_UNK</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">"_UNK"</span>
+  <span class="n">PAD_ID</span> <span class="o">=</span> <span class="mi">0</span>      <span class="o">&lt;--</span> <span class="n">index</span> <span class="p">(</span><span class="n">row</span> <span class="n">number</span><span class="p">)</span> <span class="ow">in</span> <span class="n">vocabulary</span>
+  <span class="n">GO_ID</span> <span class="o">=</span> <span class="mi">1</span>
+  <span class="n">EOS_ID</span> <span class="o">=</span> <span class="mi">2</span>
+  <span class="n">UNK_ID</span> <span class="o">=</span> <span class="mi">3</span>
+  <span class="n">_START_VOCAB</span> <span class="o">=</span> <span class="p">[</span><span class="n">_PAD</span><span class="p">,</span> <span class="n">_GO</span><span class="p">,</span> <span class="n">_EOS</span><span class="p">,</span> <span class="n">_UNK</span><span class="p">]</span>
+</pre></div>
+<div class="highlight"><pre><span></span>          ID号    意义
+  _PAD    0       Padding, empty word
+  _GO     1       decoder_inputs 的第一个元素
+  _EOS    2       targets 的结束符
+  _UNK    3       不明单词（Unknown word），没有在词汇表出现的单词被标记为3
+</pre></div>
+<p>对于阿拉伯数字，建立词汇表时与数字化数据集时的 <code>normalize_digits</code> 必须是一致的，若
+<code>normalize_digits=True</code> 所有阿拉伯数字都将被 <code>0</code> 代替。比如 <code>123</code> 被 <code>000</code> 代替，<code>9</code> 被 <code>0</code>代替
+，<code>1990-05</code> 被 <code>0000-00` 代替，最后</code>000<code>，</code>0<code>，</code>0000-00<code>等将在词汇库中(看</code>vocab40000.en`` )。</p>
+<p>反之，如果 <code>normalize_digits=False</code> ，不同的阿拉伯数字将会放入词汇表中，那么词汇表就变得十分大了。
+本例子中寻找阿拉伯数字使用的正则表达式是 <code>_DIGIT_RE = re.compile(br"\d")</code> 。(详见 <code>tl.nlp.create_vocabulary()</code> 和 <code>`tl.nlp.data_to_token_ids()</code> )</p>
+<p>对于分离句子成独立单词，本例子使用正则表达式 <code>_WORD_SPLIT = re.compile(b"([.,!?\"':;)(])")</code> ，
+这意味着使用这几个标点符号 <code>[ . , ! ? " ' : ; ) ( ]</code> 以及空格来分割句子，详情请看 <code>tl.nlp.basic_tokenizer()</code> 。这个分割方法是 <code>tl.nlp.create_vocabulary()</code> 和  <code>tl.nlp.data_to_token_ids()</code> 的默认方法。</p>
+<p>所有的标点符号，比如 <code>. , ) (</code> 在英文和法文数据库中都会被全部保留下来。</p>
+<h4>Softmax 抽样 (Sampled softmax)</h4>
+<p>softmax抽样是一种词汇表很大（Softmax 输出很多）的时候用来降低损失（cost）计算量的方法。
+与从所有输出中计算 cross-entropy 相比，这个方法只从 <code>num_samples</code> 个输出中计算 cross-entropy。</p>
+<h4>损失和更新函数</h4>
+<p><code>EmbeddingAttentionSeq2seqWrapper</code> 内部实现了 SGD optimizer。</p>
+<h3 id="xia yi bu ?_2">下一步？</h3>
+<p>您可以尝试其他应用。</p>
+<h2 id="fan yi dui zhao_1">翻译对照</h2>
+<p>Stacked Denosing Autoencoder 堆栈式降噪自编码器</p>
+<p>Word Embedding               词嵌套、词嵌入</p>
+<p>Iteration                    迭代</p>
+<p>Natural Language Processing  自然语言处理</p>
+<p>Sparse                       稀疏的</p>
+<p>Cost function                损失函数</p>
+<p>Regularization               规则化、正则化</p>
+<p>Tokenization                 数字化</p>
+<p>Truncated backpropagation    截断反向传播</p>
+<h2 id="geng duo xin xi">更多信息</h2>
+<p>TensorLayer 还能做什么？请继续阅读本文档。</p>
+<p>最后，API 参考列表和说明如下：</p>
+<p>layers (<code>tensorlayer.layers</code>),</p>
+<p>activation (<code>tensorlayer.activation</code>),</p>
+<p>natural language processing (<code>tensorlayer.nlp</code>),</p>
+<p>reinforcement learning (<code>tensorlayer.rein</code>),</p>
+<p>cost expressions and regularizers (<code>tensorlayer.cost</code>),</p>
+<p>load and save files (<code>tensorlayer.files</code>),</p>
+<p>operating system (<code>tensorlayer.ops</code>),</p>
+<p>helper functions (<code>tensorlayer.utils</code>),</p>
+<p>visualization (<code>tensorlayer.visualize</code>),</p>
+<p>iteration functions (<code>tensorlayer.iterate</code>),</p>
+<p>preprocessing functions (<code>tensorlayer.prepro</code>),</p>
+  </div><!-- /.entry-content -->
+</section>
+    </div>
+    <footer id="contentinfo" class="pagination" style="font-size:85%">
+            <address id="about" class="vcard body">
+            无节操小广告<a href="https://freeopen.github.io/pages/da-shang.html"> 欢迎打赏 </a>
+            </address><!-- /#about -->
+    </footer><!-- /#contentinfo -->
+  </div>
+
+  <!--Right-->
+  <div id="main_toc" class="sidebar-toc" style="overflow:auto;height:100%;">
+<section id="main_toc">
+    <!-- <div class="col-lg-2 hidden-xs hidden-sm"> -->
+    <nav toc-data class="col-lg-2 hidden-xs hidden-sm">
+      <div id="toc"><ul><li><a class="toc-href" href="#zai wo men kai shi zhi qian" title="在我们开始之前">在我们开始之前</a></li><li><a class="toc-href" href="#tensorlayerhen jian dan" title="TensorLayer很简单">TensorLayer很简单</a></li><li><a class="toc-href" href="#yun xing mnistli zi" title="运行MNIST例子">运行MNIST例子</a></li><li><a class="toc-href" href="#li jie mnistli zi" title="理解MNIST例子">理解MNIST例子</a><ul><li><a class="toc-href" href="#xu yan" title="序言">序言</a></li><li><a class="toc-href" href="#zai ru shu ju" title="载入数据">载入数据</a></li><li><a class="toc-href" href="#jian li mo xing" title="建立模型">建立模型</a></li><li><a class="toc-href" href="#duo ceng shen jing wang luo" title="多层神经网络">多层神经网络</a></li><li><a class="toc-href" href="#jiang zao zi bian ma qi" title="降噪自编码器">降噪自编码器</a></li><li><a class="toc-href" href="#juan ji shen jing wang luo" title="卷积神经网络">卷积神经网络</a></li><li><a class="toc-href" href="#xun lian mo xing" title="训练模型">训练模型</a></li></ul></li><li><a class="toc-href" href="#yun xing ping pang qiu li zi_1" title="运行乒乓球例子">运行乒乓球例子</a></li><li><a class="toc-href" href="#li jie qiang hua xue xi" title="理解强化学习">理解强化学习</a><ul><li><a class="toc-href" href="#ping pang qiu" title="乒乓球">乒乓球</a></li><li><a class="toc-href" href="#ce lue wang luo (policy network)" title="策略网络(Policy Network)">策略网络(Policy Network)</a></li><li><a class="toc-href" href="#ce lue bi jin (policy gradient)" title="策略逼近(Policy Gradient)">策略逼近(Policy Gradient)</a></li><li><a class="toc-href" href="#xia yi bu ?" title="下一步?">下一步?</a></li></ul></li><li><a class="toc-href" href="#yun xing word2vecli zi_1" title="运行Word2Vec例子">运行Word2Vec例子</a></li><li><a class="toc-href" href="#li jie ci qian tao" title="理解词嵌套">理解词嵌套</a><ul><li><a class="toc-href" href="#ci qian tao (qian ru )" title="词嵌套（嵌入）">词嵌套（嵌入）</a></li></ul></li><li><a class="toc-href" href="#yun xing ptbli zi_1" title="运行PTB例子">运行PTB例子</a></li><li><a class="toc-href" href="#li jie lstm" title="理解LSTM">理解LSTM</a><ul><li><a class="toc-href" href="#di gui shen jing wang luo  (recurrent neural network)" title="递归神经网络 (Recurrent Neural Network)">递归神经网络 (Recurrent Neural Network)</a></li><li><a class="toc-href" href="#tong bu shu ru yu shu chu xu lie  (synced sequence input and output)" title="同步输入与输出序列 (Synced sequence input and output)">同步输入与输出序列 (Synced sequence input and output)</a></li><li><a class="toc-href" href="#xia yi bu ?_1" title="下一步？">下一步？</a></li></ul></li><li><a class="toc-href" href="#yun xing ji qi fan yi li zi_1" title="运行机器翻译例子">运行机器翻译例子</a></li><li><a class="toc-href" href="#li jie ji qi fan yi" title="理解机器翻译">理解机器翻译</a><ul><li><a class="toc-href" href="#seq2seq" title="Seq2seq">Seq2seq</a></li><li><a class="toc-href" href="#shi xian xi jie" title="实现细节">实现细节</a></li><li><a class="toc-href" href="#xia yi bu ?_2" title="下一步？">下一步？</a></li></ul></li><li><a class="toc-href" href="#fan yi dui zhao_1" title="翻译对照">翻译对照</a></li><li><a class="toc-href" href="#geng duo xin xi" title="更多信息">更多信息</a></li></ul></div>
+    </nav>
+    <!-- </div> -->
+</section>
+  </div>
+
+</body>
+</html>

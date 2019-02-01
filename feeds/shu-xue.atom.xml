@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Freeopen - 数学</title><link href="https://freeopen.github.io/" rel="alternate"></link><link href="https://freeopen.github.io/feeds/shu-xue.atom.xml" rel="self"></link><id>https://freeopen.github.io/</id><updated>2017-06-11T00:00:00+08:00</updated><entry><title>艾波寧捎信</title><link href="https://freeopen.github.io/posts/ai-bo-zhu-shao-xin" rel="alternate"></link><published>2017-06-11T00:00:00+08:00</published><updated>2017-06-11T00:00:00+08:00</updated><author><name>freeopen</name></author><id>tag:freeopen.github.io,2017-06-11:/posts/ai-bo-zhu-shao-xin</id><summary type="html">&lt;blockquote&gt;
+&lt;p&gt;由台大葉丙成老師的学生创作的概率问题，文章本身比问题更有趣。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;巴黎, 1832 年 6 月, 一個飄著毛雨的濕熱夜晚。&lt;/p&gt;
+&lt;p&gt;一間破舊的旅社, 歪一邊的招牌寫著「德納第客棧」(Thénardier&amp;rsquo;s)。
+一樓的大廳裡, &amp;mdash;&amp;mdash; 說大廳, 其實只是兩張沙發跟一個小圓桌組成的狹窄空間 &amp;mdash;&amp;mdash; 只有坐著的兩位老友,
+他們多年不見, 正在暢談。&lt;/p&gt;
+&lt;p&gt;留著滿臉花白大鬍子跟八字鬚,滔滔不絕的是作家維克托.雨果(Victor Hugo)。
+旁邊靜靜聽著的那人是雨果的朋友, 一位正直的英國詩人。
+他年輕許多,留著捲髮,有深 邃的眼神跟鷹鉤鼻。&lt;/p&gt;
+&lt;p&gt;「最近交稿期限又要到了,」雨果說,
+「我的靈感卻像這個酒杯一樣枯竭呀。老闆娘! 來一瓶上好的波本威士忌,再來一盤肉乾下酒。」&lt;/p&gt;
+&lt;p&gt;一直低頭擦盤子的老闆娘放下工作, 來招呼她的顧客。&lt;/p&gt;
+&lt;p&gt;「我也何嘗不是入不敷出。」英國詩人說。「畢竟作詩這種東西又不能當飯吃。」&lt;/p&gt;
+&lt;p&gt;這時有人推開嘎吱作響的木門, 匆忙走進旅社, 靠近沙發上的兩人。
+他的臉有點圓而結實, 額上的皺紋大概是常年經過思考的結果。
+「維克托! 」他喊道。&lt;/p&gt;
+&lt;p&gt;「大數學家西米翁 …&lt;/p&gt;</summary><content type="html">&lt;blockquote&gt;
+&lt;p&gt;由台大葉丙成老師的学生创作的概率问题，文章本身比问题更有趣。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;巴黎, 1832 年 6 月, 一個飄著毛雨的濕熱夜晚。&lt;/p&gt;
+&lt;p&gt;一間破舊的旅社, 歪一邊的招牌寫著「德納第客棧」(Thénardier&amp;rsquo;s)。
+一樓的大廳裡, &amp;mdash;&amp;mdash; 說大廳, 其實只是兩張沙發跟一個小圓桌組成的狹窄空間 &amp;mdash;&amp;mdash; 只有坐著的兩位老友,
+他們多年不見, 正在暢談。&lt;/p&gt;
+&lt;p&gt;留著滿臉花白大鬍子跟八字鬚,滔滔不絕的是作家維克托.雨果(Victor Hugo)。
+旁邊靜靜聽著的那人是雨果的朋友, 一位正直的英國詩人。
+他年輕許多,留著捲髮,有深 邃的眼神跟鷹鉤鼻。&lt;/p&gt;
+&lt;p&gt;「最近交稿期限又要到了,」雨果說,
+「我的靈感卻像這個酒杯一樣枯竭呀。老闆娘! 來一瓶上好的波本威士忌,再來一盤肉乾下酒。」&lt;/p&gt;
+&lt;p&gt;一直低頭擦盤子的老闆娘放下工作, 來招呼她的顧客。&lt;/p&gt;
+&lt;p&gt;「我也何嘗不是入不敷出。」英國詩人說。「畢竟作詩這種東西又不能當飯吃。」&lt;/p&gt;
+&lt;p&gt;這時有人推開嘎吱作響的木門, 匆忙走進旅社, 靠近沙發上的兩人。
+他的臉有點圓而結實, 額上的皺紋大概是常年經過思考的結果。
+「維克托! 」他喊道。&lt;/p&gt;
+&lt;p&gt;「大數學家西米翁.泊松(Siméon Poisson)駕到啦! 」雨果調侃道。
+「幾年沒見了? 怎麼氣喘吁吁的? 」&lt;/p&gt;
+&lt;p&gt;「呼...呼...都半百年紀了,一把老骨頭了。」泊松說道, 揉了揉背。&lt;/p&gt;
+&lt;p&gt;「下禮拜就是你 51 歲生日了吧? 順便慶祝一下? 」雨果真是那壺不開提那壺。&lt;/p&gt;
+&lt;p&gt;「別提了....」泊松說。「咦? 我剛才要說什麼? 對了, 警察把學生叛軍逼到絕路,
+剩下一個據點了。附近的街道都封起來, 說經過的格殺勿論! 大家要小心。」 &lt;/p&gt;
+&lt;p&gt;「學生就是這樣, 因為一點小事動不動抗議。」雨果說。「哎,這個社會最近真的
+很亂。聽說有個逃犯叫尚萬強(Jean-Valjean), 非常危險, 本以為被抓了, 原來是弄錯人。」&lt;/p&gt;
+&lt;p&gt;「這種人最好關到死。」泊松道。「大革命之後已經亂了三十幾年了, 不用嚴刑峻法怎麼治國? 」他舉杯。「乾啦! 」&lt;/p&gt;
+&lt;p&gt;門外的街道上,一個棕髮女子戴著毛氈帽,穿土黃色大衣,正快步經過。
+「如果我 們之間從來都不可能,」她喃喃自語道,「告白只會讓他困擾吧? 
+我想著他,跟他想著 她,有什麼不同? 也許我只是個好人,」她踢了踢年久失修的鋪路的石版。
+「那就讓我 再作一次好人吧。假如我是他&amp;mdash;&amp;mdash;寬宏大量的革命領袖,馬里歐斯(Marius) &amp;mdash;&amp;mdash;」
+她呼了一口氣,不知是因為喘還是憤怒。
+「又何嘗不想把這封訣別的情書交到柯賽特 (Cosette)手裡?」她的手一直埋在大衣口袋裡, 這時終於伸出。
+月色下,隱約見到她原來是捏著一封信,汗都快把封蠟融化了。
+她繼續沒入巷弄陰影中。&lt;/p&gt;
+&lt;p&gt;砰! 老闆娘手裡的盤子摔到地上, 引起三人的注意。「艾波寧(Éponine)! 艾波寧!」 老闆娘頭探出窗外叫道,「你要去哪?」&lt;/p&gt;
+&lt;p&gt;幾陣槍響讓室內一片寂靜, 只剩下老掛鐘的滴答聲渾然不覺於此。英國詩人坐得離
+窗戶最遠,也把頭湊近。可是那女孩早已隱沒在黑夜中。&lt;/p&gt;
+&lt;p&gt;「我看她凶多吉少。」雨果道, 又啜了一口威士忌。&lt;/p&gt;
+&lt;p&gt;「不會吧? 」詩人說, 也喝了口咖啡。「政府財務拮据,那槍也不知道放幾年了, 又在黑夜當中,我懷疑 20 秒能不能打中一發! 」
+他想開個玩笑,兩位朋友卻沒有反應。&lt;/p&gt;
+&lt;p&gt;「你估的差不多。」泊松說,「其實我剛才一直在注意士兵的命中率,」他敲了敲懷錶的錶面, 眼睛亮了起來。
+「讓我們來作個假設: 士兵是否擊中她,是隨時間的均 勻泊松事件(Poisson process),參數也不隨距離變化。」&lt;/p&gt;
+&lt;p&gt;「又在炫耀以他為名的分布,」詩人咕噥著。&lt;/p&gt;
+&lt;p&gt;「她被擊中之後,」雨果也被引起興趣了,「應該還可以走一段路。那就假設她每中一槍, 速度就減半,
+直到中 4 槍時當場斃命。那她成功穿過巷子的機率是多少,你算得出來嗎? 」&lt;/p&gt;
+&lt;p&gt;「小意思! 」 泊松答道,「為了方便計算,令 &amp;mu; = 100 / ln( 50 ) = 25.5622,再令這條巷子長 400 m。
+她以 4 m/s 的初速出發, 而且一出巷子就不會被擊中, 好嗎? 」 雨果點頭。&lt;/p&gt;
+&lt;p&gt;「你有沒有在聽啊? 」泊松問詩人, 後者一直低頭查字典。&lt;/p&gt;
+&lt;p&gt;「感謝那個狙擊手! 我又有靈感了。」詩人抬起頭說,「你們要聽聽嗎? 」他等不及兩人回應, 便拿出羽毛筆, 順手沾了咖啡, 拿起泛黃的報紙,邊寫邊念。他秀麗的字 跡活像中世紀手稿。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Neath lamplights as &amp;lsquo;Ponine roved, on her own        當艾波宁形單影隻地漫步,沿著街燈
+
+Professing to thin air (her absent crush)            向空氣(她不 在場的心上人)吐露
+
+What each heart-broken maid, e&amp;rsquo;en lad, had known,    所有心碎女孩(甚至男孩)都懂的心聲,
+
+The rain her tears wiped; Seine, weeping a gush,     雨水拭去她眼泪;塞納河洪流如注, 
+
+Too called the freedom fighter who did fix           一起哭著呼喚自由鬥士: 他鎖定目光,
+
+His eyes on noosing curly locks &amp;mdash; not wars           向柯賽特能絞死人的捲髮,
+
+He led &amp;mdash; of blonde Cosette with rosy cheeks          而非戰爭。弟兄的血塊與刀傷,
+
+Bloodier than brethren&amp;rsquo;s gore ignored and sores.     血紅色比不上金髮女粉紅雙頰。
+
+O singing swan! Whose speed, once shot, would halve; 歌唱的天鵝! (一被擊中速度就減半) 
+
+Must you this letter send to Hades black?            為何定要送這信到黑暗的冥府?
+
+With Poisson bein&amp;rsquo; the butcher&amp;rsquo;s PMF,                助紂為虐的子彈不會收回刀尖,
+
+Abetting bullets take no blade aback!                因為泊松分布是屠夫的機率質量函数 !
+
+Cruel witnesses! Ask Probability,                    無情的目擊者! 去請求&amp;ldquo;機率&amp;rdquo; 
+
+Still speechless, to relate the tragedy.             (他仍啞口無言)訴说這場悲劇。
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;「講法文啦,我聽不懂。」泊松還在低頭計算。&lt;/p&gt;
+&lt;p&gt;「寫的真好! 」雨果言不由衷地附和著。「我知道! 這是...」他說, 想要裝懂。 
+「義大利八行體(octave)? 法國十九行體(villanelle)? 」&lt;/p&gt;
+&lt;p&gt;「你連幾行都數不出來嗎? 你根本沒在聽吧? 」詩人激動地站起來,把咖啡弄倒 了。&lt;/p&gt;
+&lt;p&gt;「你如果真的關心社會,」雨果說, 生氣了。「為什麼不像拜倫(Byron)一樣參與希臘革命, 卻在這裡大放厥詞? 」&lt;/p&gt;
+&lt;p&gt;「那你呢? 」詩人回嘴,「自以為在揭露陰暗面,還不是坐在這裡喝咖啡! 」&lt;/p&gt;
+&lt;p&gt;「誰跟你社會寫實了? 」雨果說,「只要把情節弄聳動一點,能賣錢就好啦! 」他趁老闆娘不注意, 別過頭,啐了一口煙草到地上。&lt;/p&gt;
+&lt;p&gt;「我算出來了! 」泊松趕緊轉移話題。「我跟你講,先算恰中 n 槍的機率,再遞迴 地算中第 n + 1 槍的機率。我真是天才! 哈哈哈!」&lt;/p&gt;
+&lt;p&gt;「可是這個積分好難算喔。」雨果湊過去看。&lt;/p&gt;
+&lt;p&gt;「你笨耶! 先作個變數變換,然後這樣...這樣...」他指著紙上潦草的鬼畫符說。 
+「嗯...嗯...」詩人應道,但是根本沒在看。
+「這個肉乾到底是貓肉還是馬肉呀? 我突然覺得肚子不太舒服,先去休息了。」
+看到兩位朋友對他的詩興趣索然,詩人有點不悅,找了藉口。&lt;/p&gt;
+&lt;p&gt;「老鼠肉。」老闆娘低聲道, 小聲到三人沒有聽見。她早已恢復平靜,繼續撿地上的碎片。&lt;/p&gt;
+&lt;p&gt;「其實我也覺得胃有點痛。」泊松道,看起來不像是裝的。瞪著天花板沈思許久的雨果起身。
+「都多虧你的詩,」他說,「又讓我有一個長篇 小說的題材了! 我得趁忘記以前熬夜把大綱寫下來。」
+他起身。「明天見囉! 到時再帶 你去參觀奧賽美術館(Musée d'Orsay)。」
+他跟詩人說。「只是要繞過抗議的學生就是。」&lt;/p&gt;
+&lt;p&gt;「他們真的很煩。」泊松附和道。&lt;/p&gt;
+&lt;p&gt;「對呀。」雨果說。「我們的詩人朋友難得來拜訪, 當然要帶他好好參觀這個古都呀! 偏偏碰到這種事。」&lt;/p&gt;
+&lt;p&gt;互道晚安後,一行人各自上樓回房了。當旅社最後一盞燈暗下,花都巴黎又恢復了
+平日的寂靜。除了遠處群眾隱約的喧鬧聲,還有槍枝的星火與夜空中的星光相映。&lt;/p&gt;
+&lt;hr/&gt;
+&lt;p&gt;如上, 巷子呈直線, 長 L0 = 400 m, 艾波宁以 v0 = 4 m/s 初速等速穿越。
+士兵時時刻刻瞄準她; 第 t 秒時是否擊中她,是隨時間 t 的均勻的泊松事件(Poisson process), 且與距离無關。
+其中, 平均每 &amp;mu; 秒能擊中一次, &amp;mu; = 100 / ln( 50 ) 約為 25.5622。
+士兵無法 擊中巷子以外的區域; 另外,只要她處於巷中, &amp;mu; 就是常数 。&lt;/p&gt;
+&lt;p&gt;當她每被擊中一槍, 速度就會減半; 直到她恰中 4 槍時, 會當場死亡。
+亦即, 中 n 槍時速依序為 4、2、1、0.5 m/s,其中 n 依序為 0、 1、 2、 3。&lt;/p&gt;
+&lt;p&gt;請問艾波宁成功捎信的機率為何? 亦即, 在她處於巷子之中時, 被射中低於四槍的機率為何?&lt;/p&gt;</content></entry></feed>
