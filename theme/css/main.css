@@ -36,6 +36,7 @@
 @import url("mycss.css");
 @import url("syntax.css");
 @import url("bootstrap-toc.css");
+@import url("googleapi-fonts.css");
 
 html {
   font-family: "PT Sans", Helvetica, -apple-system, BlinkMacSystemFont,'Microsoft YaHei', Arial, sans-serif;
