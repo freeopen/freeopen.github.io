@@ -42,29 +42,32 @@ html {
 }
 
 /* iphone se 640 40em */
-/* iphone 6 750 46.875em */
-/* iphone 8 1080 67.5em */
-/* iphone x xs 1125 70.31em */
+/* iphone 6  750 46.875em */
 /* iphone xr 828 51.75em */
+/* iphone 8  1080 67.5em */
+/* iphone x xs 1125 70.31em */
 /* iphone plus 1242 77.625em */
 
-@media (min-width: 38em) {
-  html {
+/* 480px */
+@media (min-width: 30rem) {
+  body {
     font-size: 20px;
   }
 }
-/* 768 48em */
-@media (min-width: 48em) {
-  html {
-    font-size: 14px;
-  }
-}
-@media (min-width: 64em) {
-  html {
-    font-size: 16px;
+
+/* screen width >= 768 */
+@media (min-width: 48rem) {
+  body {
+    font-size: 18px;
   }
 }
 
+/* screen width >= 1024px */
+@media (min-width: 64rem) {
+  body {
+    font-size: 16px;
+  }
+}
 
 /*
  * Sidebar
@@ -73,6 +76,7 @@ html {
  * out above content in mobile and later moves to the side with wider viewports.
  */
 
+/* left */
 .sidebar {
   text-align: center;
   padding: 1rem 1rem;
@@ -83,19 +87,18 @@ html {
   border-bottom: dashed black 1px;
 }
 
-@media (min-width: 38em) {
-  .sidebar {
-    position: auto;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    /* sidebar width */
-    width: auto;
-    text-align: left;
-  }
+.sidebar-toc {
+  text-align: left;
+  padding: 1rem 1rem;
+  color: black;
+  background-color: #202020;
+  display: none;
 }
 
-@media (min-width: 48em) {
+
+/* desktop screen 1024 x 768 */
+/* show left nav */
+@media (min-width: 64rem) {
   .sidebar {
     position: fixed;
     top: 0;
@@ -107,14 +110,11 @@ html {
   }
 }
 
-.sidebar-toc {
-  text-align: left;
-  padding: 1rem 0rem;
-  color: black;
-  background-color: #202020;
-}
-
-@media (min-width: 38em) {
+/* desktop screen */
+/* 67.5rem 1080px */
+/* show right TOC */
+@media (min-width: 67.5rem) {
+  /* right */
   .sidebar-toc {
     position: fixed;
     top: 0;
@@ -122,10 +122,12 @@ html {
     bottom: 0;
     /* sidebar width */
     width: 14rem;
-    text-align: left;
+    overflow:auto;
+    height:100%;
+    display: block;
   }
-}
 
+}
 /* Sidebar links */
 .sidebar a {
   /*color: #fff;*/
@@ -146,10 +148,23 @@ html {
 .sidebar-nav {
   margin-bottom: 1rem;
 }
-.sidebar-nav-item {
-  display: block;
-  line-height: 1.75;
+
+/* mobile screen */
+@media (min-width: 30rem) {
+  .sidebar-nav-item {
+    display: inline;
+    line-height: 1.5;
+  }
 }
+
+/* middle-size screen */
+@media (min-width: 64em) {
+  .sidebar-nav-item {
+    display: block;
+    line-height: 1.75;
+  }
+}
+
 a.sidebar-nav-item:hover,
 a.sidebar-nav-item:focus {
   /*text-decoration: underline;*/
@@ -165,15 +180,14 @@ a.sidebar-nav-item:focus {
  * contents to the bottom of the sidebar in tablets and up.
  */
 
-@media (min-width: 48em) {
+@media (min-width: 64rem) {
   .sidebar-sticky {
     position: absolute;
-    right:  1rem;
     top: 2rem;
     left:   1rem;
+    right:  1rem;
   }
 }
-
 
 /* Container
  *
@@ -183,49 +197,40 @@ a.sidebar-nav-item:focus {
 
 .content {
   padding-top:    2rem;
-  padding-bottom: 4rem;
+  padding-bottom: 2rem;
 }
 
-@media (min-width: 38em) {
+@media (min-width: 30rem) {
   .content {
-    margin-left: 2rem;
-    margin-right: 2rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
   }
 }
 
-@media (min-width: 48em) {
+@media (min-width: 64rem) {
   .content {
-    margin-left: 17rem;
-    margin-right: 2rem;
+    /* max-width: 40rem; */
+    margin-left: 14rem;
+    margin-right: 1rem;
   }
 }
 
-@media (min-width: 64em) {
+@media (min-width: 80rem) {
   .content {
+    /* max-width: 50rem; */
     margin-left: 15rem;
-    margin-right: 4rem;
+    margin-right: 1rem;
   }
 }
-
 
 /*
  * Reverse layout
  *
  * Flip the orientation of the page by placing the `.sidebar` on the right.
+ * 侧边栏放在右边的情况
  */
 
-@media (min-width: 38em) {
-  .layout-reverse .sidebar {
-    left: auto;
-    right: 0;
-  }
-  .layout-reverse .content {
-    margin-left: 2rem;
-    margin-right: 2rem;
-  }
-}
-
-@media (min-width: 48em) {
+@media (min-width: 48rem) {
   .layout-reverse .sidebar {
     left: auto;
     right: 0;
@@ -236,7 +241,7 @@ a.sidebar-nav-item:focus {
   }
 }
 
-@media (min-width: 64em) {
+@media (min-width: 64rem) {
   .layout-reverse .content {
     margin-left: 4rem;
     margin-right: 22rem;
@@ -345,5 +350,3 @@ a.sidebar-nav-item:focus {
 .theme-myblue .related-posts li a:hover {
   color: #268bda;
 }
-
-
