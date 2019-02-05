@@ -152,15 +152,12 @@ $$</div>
 <div class="math">$$\sqrt{2} \quad and \quad \sqrt[n]{3}$$</div>
 <h3 id="6.ru he shu ru sheng lue hao">6．如何输入省略号</h3>
 <p>数学公式中常见的省略号有两种，<code>\ldots</code> 表示与文本底线对齐的省略号，<code>\cdots</code> 表示与文本中线对齐的省略号。</p>
-<p>```f(x_1,x_2,\underbrace{\ldots}<em _rm="\rm" cdots="">{\rm ldots} ,x_n) = x_1^2 + x_2^2 + \underbrace{\cdots}</em> + x_n^2</p>
-<div class="highlight"><pre><span></span>$$f(x_1,x_2,\underbrace{\ldots}_{\rm ldots} ,x_n) = x_1^2 + x_2^2 + \underbrace{\cdots}_{\rm cdots} + x_n^2$$
-
-### 7．如何输入矢量
-
-使用 `\vec{矢量}` 来自动产生一个矢量。也可以使用 `\overrightarrow` 等命令自定义字母上方的符号。
-
-
-```\vec{a} \cdot \vec{b}=0
+<div class="highlight"><pre><span></span>f(x_1,x_2,\underbrace{\ldots}_{\rm ldots} ,x_n) = x_1^2 + x_2^2 + \underbrace{\cdots}_{\rm cdots} + x_n^2
+</pre></div>
+<div class="math">$$f(x_1,x_2,\underbrace{\ldots}_{\rm ldots} ,x_n) = x_1^2 + x_2^2 + \underbrace{\cdots}_{\rm cdots} + x_n^2$$</div>
+<h3 id="7.ru he shu ru shi liang">7．如何输入矢量</h3>
+<p>使用 <code>\vec{矢量}</code> 来自动产生一个矢量。也可以使用 <code>\overrightarrow</code> 等命令自定义字母上方的符号。</p>
+<div class="highlight"><pre><span></span>\vec{a} \cdot \vec{b}=0
 </pre></div>
 <div class="math">$$\vec{a} \cdot \vec{b}=0$$</div>
 <div class="highlight"><pre><span></span>\overleftarrow{xy} \quad and \quad \overleftrightarrow{xy} \quad and \quad \overrightarrow{xy}
@@ -673,12 +670,8 @@ $$</div>
 <p>若想在一行内显示矩阵，使用<code>\bigl(\begin{smallmatrix} ... \end{smallmatrix}\bigr)</code>。</p>
 <div class="highlight"><pre><span></span>这是一个行中矩阵的示例 $\bigl( \begin{smallmatrix} a &amp; b \\ c &amp; d \end{smallmatrix} \bigr)$ 。
 </pre></div>
-<p>这是一个行中矩阵的示例</p>
+<p>这是一个行中矩阵的示例 </p>
 <div class="math">$$\bigl(\begin{smallmatrix} a &amp; b \\ c &amp; d \end{smallmatrix}\bigr)$$</div>
-<p> 。</p>
-<blockquote>
-<p>freeopen: 这里的页面生成有bug, 左右两边均为两个$。</p>
-</blockquote>
 <h2 id="san , fang cheng shi xu lie shi yong can kao_1">三、方程式序列使用参考</h2>
 <h3 id="1.ru he shu ru yi ge fang cheng shi xu lie">1．如何输入一个方程式序列</h3>
 <p>人们经常想要一列整齐且居中的方程式序列。使用 <code>\begin{align}&hellip;\end{align}</code> 来创造一列方程式，其中在每行结尾处使用 <code>\\</code> 。 
@@ -959,9 +952,9 @@ $$</div>
 <p>连分数通常都太大以至于不易排版，所以建议在连分数前后声明 <code>$$</code> 符号，或使用像 <code>[a0;a1,a2,a3,&hellip;]</code> 一样的紧缩记法。</p>
 <h2 id="qi , jiao huan tu biao shi yong can kao_1">七、交换图表使用参考</h2>
 <h3 id="1.ru he shu ru yi ge jiao huan tu biao">1．如何输入一个交换图表</h3>
-<p>使用一行 <code>$ \require{AMScd} $</code> 语句来允许交换图表的显示。 
+<p>使用一行 <code>\require{AMScd}</code> 语句来允许交换图表的显示。 
 声明交换图表后，语法与矩阵相似，在开头使用 <code>begin{CD}</code>，在结尾使用 <code>end{CD}</code>，在中间插入图表元素，每个元素之间插入 <code>&amp;</code> ，并在每行结尾处使用<code>\\</code> 。</p>
-<div class="highlight"><pre><span></span>$\require{AMScd}$
+<div class="highlight"><pre><span></span>\require{AMScd}
 \begin{CD}
     A @&gt;a&gt;&gt; B\\
     @V b V V\# @VV c V\\
@@ -969,7 +962,7 @@ $$</div>
 \end{CD}
 </pre></div>
 <div class="math">$$
-$\require{AMScd}$
+\require{AMScd}
 \begin{CD}
     A @&gt;a&gt;&gt; B\\
     @V b V V\# @VV c V\\
@@ -1146,7 +1139,7 @@ $$</div>
 <section id="main_toc">
     <!-- <div class="col-lg-2 hidden-xs hidden-sm"> -->
     <nav toc-data class="col-lg-2 hidden-xs hidden-sm">
-      <div id="toc"><ul><li><a class="toc-href" href="#yi , gong shi shi yong can kao" title="一、公式使用参考">一、公式使用参考</a><ul><li><a class="toc-href" href="#1.ru he cha ru gong shi" title="1．如何插入公式">1．如何插入公式</a></li><li><a class="toc-href" href="#2.ru he shu ru shang xia biao" title="2．如何输入上下标">2．如何输入上下标</a></li><li><a class="toc-href" href="#3.ru he shu ru gua hao he fen ge fu" title="3．如何输入括号和分隔符">3．如何输入括号和分隔符</a></li><li><a class="toc-href" href="#4.ru he shu ru fen shu" title="4．如何输入分数">4．如何输入分数</a></li><li><a class="toc-href" href="#5.ru he shu ru kai fang" title="5．如何输入开方">5．如何输入开方</a></li><li><a class="toc-href" href="#6.ru he shu ru sheng lue hao" title="6．如何输入省略号">6．如何输入省略号</a></li><li><a class="toc-href" href="#8.ru he shu ru ji fen" title="8．如何输入积分">8．如何输入积分</a></li><li><a class="toc-href" href="#9.ru he shu ru ji xian yun suan" title="9．如何输入极限运算">9．如何输入极限运算</a></li><li><a class="toc-href" href="#10.ru he shu ru lei jia , lei cheng yun suan" title="10．如何输入累加、累乘运算">10．如何输入累加、累乘运算</a></li><li><a class="toc-href" href="#11.ru he shu ru xi la zi mu" title="11．如何输入希腊字母">11．如何输入希腊字母</a></li><li><a class="toc-href" href="#12.ru he shu ru qi ta te shu zi fu" title="12．如何输入其它特殊字符">12．如何输入其它特殊字符</a></li><li><a class="toc-href" href="#13.ru he jin xing zi ti zhuan huan" title="13．如何进行字体转换">13．如何进行字体转换</a></li><li><a class="toc-href" href="#14.da gua hao he xing biao de shi yong" title="14．大括号和行标的使用">14．大括号和行标的使用</a></li><li><a class="toc-href" href="#15.qi ta ming ling" title="15．其它命令">15．其它命令</a></li></ul></li><li><a class="toc-href" href="#er , ju zhen shi yong can kao_1" title="二、矩阵使用参考">二、矩阵使用参考</a><ul><li><a class="toc-href" href="#1.ru he shu ru wu kuang ju zhen" title="1．如何输入无框矩阵">1．如何输入无框矩阵</a></li><li><a class="toc-href" href="#2.ru he shu ru dai bian kuang de ju zhen" title="2．如何输入带边框的矩阵">2．如何输入带边框的矩阵</a></li><li><a class="toc-href" href="#3.ru he shu ru dai sheng lue fu hao de ju zhen" title="3．如何输入带省略符号的矩阵">3．如何输入带省略符号的矩阵</a></li><li><a class="toc-href" href="#4.ru he shu ru dai fen ge fu hao de ju zhen" title="4．如何输入带分割符号的矩阵">4．如何输入带分割符号的矩阵</a></li><li><a class="toc-href" href="#5.ru he shu ru xing zhong ju zhen" title="5．如何输入行中矩阵">5．如何输入行中矩阵</a></li></ul></li><li><a class="toc-href" href="#san , fang cheng shi xu lie shi yong can kao_1" title="三、方程式序列使用参考">三、方程式序列使用参考</a><ul><li><a class="toc-href" href="#1.ru he shu ru yi ge fang cheng shi xu lie" title="1．如何输入一个方程式序列">1．如何输入一个方程式序列</a></li><li><a class="toc-href" href="#2.zai yi ge fang cheng shi xu lie de mei yi xing zhong zhu ming yuan yin" title="2．在一个方程式序列的每一行中注明原因">2．在一个方程式序列的每一行中注明原因</a></li></ul></li><li><a class="toc-href" href="#si , tiao jian biao da shi shi yong can kao_1" title="四、条件表达式使用参考">四、条件表达式使用参考</a><ul><li><a class="toc-href" href="#1.ru he shu ru yi ge tiao jian biao da shi" title="1．如何输入一个条件表达式">1．如何输入一个条件表达式</a></li><li><a class="toc-href" href="#2.ru he shu ru yi ge zuo ce dui qi de tiao jian biao da shi" title="2．如何输入一个左侧对齐的条件表达式">2．如何输入一个左侧对齐的条件表达式</a></li><li><a class="toc-href" href="#3.ru he shi tiao jian biao da shi gua pei xing gao" title="3．如何使条件表达式适配行高">3．如何使条件表达式适配行高</a></li></ul></li><li><a class="toc-href" href="#wu , shu zu yu biao ge shi yong can kao_1" title="五、数组与表格使用参考">五、数组与表格使用参考</a><ul><li><a class="toc-href" href="#1.ru he shu ru yi ge shu zu huo biao ge" title="1．如何输入一个数组或表格">1．如何输入一个数组或表格</a></li><li><a class="toc-href" href="#2.ru he shu ru yi ge qian tao de shu zu huo biao ge" title="2．如何输入一个嵌套的数组或表格">2．如何输入一个嵌套的数组或表格</a></li><li><a class="toc-href" href="#3.ru he shu ru yi ge fang cheng zu" title="3．如何输入一个方程组">3．如何输入一个方程组</a></li></ul></li><li><a class="toc-href" href="#liu , lian fen shu shi yong can kao_1" title="六、连分数使用参考">六、连分数使用参考</a><ul><li><a class="toc-href" href="#1.ru he shu ru yi ge lian fen shi" title="1．如何输入一个连分式">1．如何输入一个连分式</a></li></ul></li><li><a class="toc-href" href="#qi , jiao huan tu biao shi yong can kao_1" title="七、交换图表使用参考">七、交换图表使用参考</a><ul><li><a class="toc-href" href="#1.ru he shu ru yi ge jiao huan tu biao" title="1．如何输入一个交换图表">1．如何输入一个交换图表</a></li></ul></li><li><a class="toc-href" href="#ba , yi xie te shu de zhu yi shi xiang_1" title="八、一些特殊的注意事项">八、一些特殊的注意事项</a><ul><li><a class="toc-href" href="#1. mou xie fen shu de xian shi wen ti" title="1. 某些分数的显示问题">1. 某些分数的显示问题</a></li><li><a class="toc-href" href="#2. liu chu he li de jian ge" title="2. 留出合理的间隔">2. 留出合理的间隔</a></li><li><a class="toc-href" href="#3. duo zhong ji fen fu hao de xian shi" title="3. 多重积分符号的显示">3. 多重积分符号的显示</a></li><li><a class="toc-href" href="#4. duo ge wei fen fu hao de xian shi" title="4. 多个微分符号的显示">4. 多个微分符号的显示</a></li></ul></li></ul></div>
+      <div id="toc"><ul><li><a class="toc-href" href="#yi , gong shi shi yong can kao" title="一、公式使用参考">一、公式使用参考</a><ul><li><a class="toc-href" href="#1.ru he cha ru gong shi" title="1．如何插入公式">1．如何插入公式</a></li><li><a class="toc-href" href="#2.ru he shu ru shang xia biao" title="2．如何输入上下标">2．如何输入上下标</a></li><li><a class="toc-href" href="#3.ru he shu ru gua hao he fen ge fu" title="3．如何输入括号和分隔符">3．如何输入括号和分隔符</a></li><li><a class="toc-href" href="#4.ru he shu ru fen shu" title="4．如何输入分数">4．如何输入分数</a></li><li><a class="toc-href" href="#5.ru he shu ru kai fang" title="5．如何输入开方">5．如何输入开方</a></li><li><a class="toc-href" href="#6.ru he shu ru sheng lue hao" title="6．如何输入省略号">6．如何输入省略号</a></li><li><a class="toc-href" href="#7.ru he shu ru shi liang" title="7．如何输入矢量">7．如何输入矢量</a></li><li><a class="toc-href" href="#8.ru he shu ru ji fen" title="8．如何输入积分">8．如何输入积分</a></li><li><a class="toc-href" href="#9.ru he shu ru ji xian yun suan" title="9．如何输入极限运算">9．如何输入极限运算</a></li><li><a class="toc-href" href="#10.ru he shu ru lei jia , lei cheng yun suan" title="10．如何输入累加、累乘运算">10．如何输入累加、累乘运算</a></li><li><a class="toc-href" href="#11.ru he shu ru xi la zi mu" title="11．如何输入希腊字母">11．如何输入希腊字母</a></li><li><a class="toc-href" href="#12.ru he shu ru qi ta te shu zi fu" title="12．如何输入其它特殊字符">12．如何输入其它特殊字符</a></li><li><a class="toc-href" href="#13.ru he jin xing zi ti zhuan huan" title="13．如何进行字体转换">13．如何进行字体转换</a></li><li><a class="toc-href" href="#14.da gua hao he xing biao de shi yong" title="14．大括号和行标的使用">14．大括号和行标的使用</a></li><li><a class="toc-href" href="#15.qi ta ming ling" title="15．其它命令">15．其它命令</a></li></ul></li><li><a class="toc-href" href="#er , ju zhen shi yong can kao_1" title="二、矩阵使用参考">二、矩阵使用参考</a><ul><li><a class="toc-href" href="#1.ru he shu ru wu kuang ju zhen" title="1．如何输入无框矩阵">1．如何输入无框矩阵</a></li><li><a class="toc-href" href="#2.ru he shu ru dai bian kuang de ju zhen" title="2．如何输入带边框的矩阵">2．如何输入带边框的矩阵</a></li><li><a class="toc-href" href="#3.ru he shu ru dai sheng lue fu hao de ju zhen" title="3．如何输入带省略符号的矩阵">3．如何输入带省略符号的矩阵</a></li><li><a class="toc-href" href="#4.ru he shu ru dai fen ge fu hao de ju zhen" title="4．如何输入带分割符号的矩阵">4．如何输入带分割符号的矩阵</a></li><li><a class="toc-href" href="#5.ru he shu ru xing zhong ju zhen" title="5．如何输入行中矩阵">5．如何输入行中矩阵</a></li></ul></li><li><a class="toc-href" href="#san , fang cheng shi xu lie shi yong can kao_1" title="三、方程式序列使用参考">三、方程式序列使用参考</a><ul><li><a class="toc-href" href="#1.ru he shu ru yi ge fang cheng shi xu lie" title="1．如何输入一个方程式序列">1．如何输入一个方程式序列</a></li><li><a class="toc-href" href="#2.zai yi ge fang cheng shi xu lie de mei yi xing zhong zhu ming yuan yin" title="2．在一个方程式序列的每一行中注明原因">2．在一个方程式序列的每一行中注明原因</a></li></ul></li><li><a class="toc-href" href="#si , tiao jian biao da shi shi yong can kao_1" title="四、条件表达式使用参考">四、条件表达式使用参考</a><ul><li><a class="toc-href" href="#1.ru he shu ru yi ge tiao jian biao da shi" title="1．如何输入一个条件表达式">1．如何输入一个条件表达式</a></li><li><a class="toc-href" href="#2.ru he shu ru yi ge zuo ce dui qi de tiao jian biao da shi" title="2．如何输入一个左侧对齐的条件表达式">2．如何输入一个左侧对齐的条件表达式</a></li><li><a class="toc-href" href="#3.ru he shi tiao jian biao da shi gua pei xing gao" title="3．如何使条件表达式适配行高">3．如何使条件表达式适配行高</a></li></ul></li><li><a class="toc-href" href="#wu , shu zu yu biao ge shi yong can kao_1" title="五、数组与表格使用参考">五、数组与表格使用参考</a><ul><li><a class="toc-href" href="#1.ru he shu ru yi ge shu zu huo biao ge" title="1．如何输入一个数组或表格">1．如何输入一个数组或表格</a></li><li><a class="toc-href" href="#2.ru he shu ru yi ge qian tao de shu zu huo biao ge" title="2．如何输入一个嵌套的数组或表格">2．如何输入一个嵌套的数组或表格</a></li><li><a class="toc-href" href="#3.ru he shu ru yi ge fang cheng zu" title="3．如何输入一个方程组">3．如何输入一个方程组</a></li></ul></li><li><a class="toc-href" href="#liu , lian fen shu shi yong can kao_1" title="六、连分数使用参考">六、连分数使用参考</a><ul><li><a class="toc-href" href="#1.ru he shu ru yi ge lian fen shi" title="1．如何输入一个连分式">1．如何输入一个连分式</a></li></ul></li><li><a class="toc-href" href="#qi , jiao huan tu biao shi yong can kao_1" title="七、交换图表使用参考">七、交换图表使用参考</a><ul><li><a class="toc-href" href="#1.ru he shu ru yi ge jiao huan tu biao" title="1．如何输入一个交换图表">1．如何输入一个交换图表</a></li></ul></li><li><a class="toc-href" href="#ba , yi xie te shu de zhu yi shi xiang_1" title="八、一些特殊的注意事项">八、一些特殊的注意事项</a><ul><li><a class="toc-href" href="#1. mou xie fen shu de xian shi wen ti" title="1. 某些分数的显示问题">1. 某些分数的显示问题</a></li><li><a class="toc-href" href="#2. liu chu he li de jian ge" title="2. 留出合理的间隔">2. 留出合理的间隔</a></li><li><a class="toc-href" href="#3. duo zhong ji fen fu hao de xian shi" title="3. 多重积分符号的显示">3. 多重积分符号的显示</a></li><li><a class="toc-href" href="#4. duo ge wei fen fu hao de xian shi" title="4. 多个微分符号的显示">4. 多个微分符号的显示</a></li></ul></li></ul></div>
     </nav>
     <!-- </div> -->
 </section>
