@@ -936,18 +936,56 @@ note.]
 <h2 id="yin yong">引用</h2>
 <p><strong>Extension: <code>citations</code></strong></p>
 <p>Pandoc 能夠以數種形式自動產生引用與參考書目（使用 Andrea Rossato 的 <code>hs-citeproc</code>）。為了使用這項功能，你需要一個下列其中一種格式的參考書目資料庫：</p>
-<p>Format            File extension
-  ------------      --------------
-  MODS              .mods
-  BibLaTeX          .bib
-  BibTeX            .bibtex
-  RIS               .ris
-  EndNote           .enl
-  EndNote XML       .xml
-  ISI               .wos
-  MEDLINE           .medline
-  Copac             .copac
-  JSON citeproc     .json</p>
+<table>
+<thead>
+<tr>
+<th>Format</th>
+<th>File extension</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MODS</td>
+<td>.mods</td>
+</tr>
+<tr>
+<td>BibLaTeX</td>
+<td>.bib</td>
+</tr>
+<tr>
+<td>BibTeX</td>
+<td>.bibtex</td>
+</tr>
+<tr>
+<td>RIS</td>
+<td>.ris</td>
+</tr>
+<tr>
+<td>EndNote</td>
+<td>.enl</td>
+</tr>
+<tr>
+<td>EndNote XML</td>
+<td>.xml</td>
+</tr>
+<tr>
+<td>ISI</td>
+<td>.wos</td>
+</tr>
+<tr>
+<td>MEDLINE</td>
+<td>.medline</td>
+</tr>
+<tr>
+<td>Copac</td>
+<td>.copac</td>
+</tr>
+<tr>
+<td>JSON citeproc</td>
+<td>.json</td>
+</tr>
+</tbody>
+</table>
 <p>需注意的是副檔名 <code>.bib</code> 一般而言同時適用於 BibTeX 與 BibLaTeX 的檔案，不過你可以使用 <code>.bibtex</code> 來強制指定 BibTeX。</p>
 <p>你需要使用命令列選項 <code>--bibliography</code> 來指定參考書目檔案（如果有多個書目檔就得反覆指定）。</p>
 <p>預設情況下，pandoc 會在引用文獻與參考書目中使用芝加哥「作者－日期」格式。要使用其他的格式，你需要用 <code>--csl</code> 選項來指定一個 <a href="http://CitationStyles.org">CSL</a> 1.0 格式的檔案。關於建立與修改 CSL 格式的入門可以在 <a href="http://citationstyles.org/downloads/primer.html">http://citationstyles.org/downloads/primer.html</a> 這邊找到。<a href="https://github.com/citation-style-language/styles">https://github.com/citation-style-language/styles</a> 是 CSL 格式的檔案庫。也可以在 <a href="http://zotero.org/styles">http://zotero.org/styles</a> 以簡單的方式瀏覽。</p>

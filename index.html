@@ -67,6 +67,27 @@
 
 <ol id="post-list">
         <li><article class="hentry">
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/juan-ji-bei-wang-lu" rel="bookmark" title="Permalink to 卷积备忘录">卷积备忘录</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2019-01-05T00:00:00+08:00"> 2019-01-05 </time>
+                    <address class="vcard author">By
+                        <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> <blockquote>
+<p>学习了一段时间卷积，到了该整理的时候了。这是一篇不会写完的文章，它将跟进卷积技术的发展和演变，进行增补。</p>
+</blockquote>
+<h2 id="juan ji de shu xue yuan li">卷积的数学原理</h2>
+<p>在图像处理中，卷积计算属于二维卷积的离散形式，公式如下：
+</p>
+<div class="math">$$(f*g)[n_1, n_2] = \sum_{m_1 = -\infty}^{+\infty}\sum_{m_2 = -\infty}^{+\infty}f[m_1, m_2]\cdot g[n_1 - m_1, n_2 - m_2]$$</div>
+<p>其中，</p>
+<ul>
+<li><span class="math">\((f*g)[n_1, n_2]\)</span> 表示 <span class="math">\(g\)</span> 图像位于<span class="math">\((n_1,n_2)\)</span> 坐标对应的值在过滤器 <span class="math">\(f\)</span> 上的卷积</li>
+<li><span class="math">\(f[m_1,m_2]\)</span> 为卷积核，方括号表示序列，
+  例如<span class="math">\(f …</span></li></ul> </div><!-- /.entry-content -->
+        </article></li>
+        <li><article class="hentry">
                 <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/hmm-memm-crf" rel="bookmark" title="Permalink to 概率图模型 HMM、MEMM、CRF">概率图模型 HMM、MEMM、CRF</a></h2> </header>
                 <footer class="post-info">
                     <time class="published" datetime="2018-05-08T00:00:00+08:00"> 2018-05-08 </time>
@@ -263,24 +284,6 @@ provider来输出数据，可能我的数据维度太大，程序不报错，但
 <p>在IU的时候，由于Dan Friedman的严格教导，我们以写出冗长复杂的代码为耻。如果你代码
 多写了几行，这老顽童就会大笑，说：&ldquo;当年我解决这个问题，只写了5行代码，你回去再想
 想吧&hellip;&hellip;&rdquo; 当然，有时候他只是夸张一下，故意刺激你的，其实没有人能只用5行代码完成 …</p> </div><!-- /.entry-content -->
-        </article></li>
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/markdown-shu-xue-gong-shi-zhi-dao-shou-ce" rel="bookmark" title="Permalink to Markdown 数学公式指导手册">Markdown 数学公式指导手册</a></h2> </header>
-                <footer class="post-info">
-                    <time class="published" datetime="2017-05-11T00:00:00+08:00"> 2017-05-11 </time>
-                    <address class="vcard author">By
-                        <a class="url fn" href="https://freeopen.github.io/author/pan-jia-hao-bian-yi-freeopenxiu-ding.html">潘嘉豪(编译), freeopen(修订)</a>
-                    </address>
-                </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>本手册的主要内容来自 <a href="https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference">mathjax-basic-tutorial-and-quick-reference</a>.</p>
-<blockquote>
-<p><em>Note: 鼠标右键单击公式表达式, 选择 "Show Math As &gt; TeX Commands", 即可查看公式的LaTex代码。</em></p>
-</blockquote>
-<h2 id="yi , gong shi shi yong can kao">一、公式使用参考</h2>
-<h3 id="1.ru he cha ru gong shi">1．如何插入公式</h3>
-<p>LaTex 的数学公式有两种：行中公式和独立公式。行中公式放在文中与其它文字混编，独立公式单独成行。</p>
-<p>行中公式示例: <code>$\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}$</code> <span class="math">\(\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}\)</span></p>
-<p>独立公式示例：<code>$$\sum_{i …</code></p> </div><!-- /.entry-content -->
         </article></li>
 </ol><!-- /#posts-list -->
 <p class="paginator">
