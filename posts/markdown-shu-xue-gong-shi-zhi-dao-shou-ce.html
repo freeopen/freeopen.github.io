@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
         <title>Freeopen - Markdown 数学公式指导手册</title>
-
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://freeopen.github.io/theme/css/main.css" />
         <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/academicons/css/academicons.min.css" />
         <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/font-awesome/css/font-awesome.min.css" />
@@ -22,74 +22,72 @@
 
 </head>
 
-<!-- <body class="theme-myblue"id="index" class="home"> -->
-<body id="index" class="theme-myblue">
+<body id="index" class="theme-myblue" data-spy="scroll" data-target="#post_toc">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-lg">
+        <nav class="navbar navbar-expand-lg navbar-light sidebar" role="navigation">
+          <a class="sidebar-about" href="https://freeopen.github.io/">Freeopen</a>
+          <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <nav class="collapse navbar-collapse sidebar-nav flex-column" id="navbarNav">
 
-  <div class="sidebar">
-    <div class="container sidebar-sticky">
-      <div class="sidebar-about">
-        <h1><a href="https://freeopen.github.io/">Freeopen <strong></strong></a></h1>
-        <p class="lead"></p>
+              <a class="nav-link" href="https://freeopen.github.io/pages/about.html">About</a>
+              <a class="nav-link" href="https://freeopen.github.io/pages/da-shang.html">打赏</a>
+
+              <a class="nav-link" href="https://freeopen.github.io/category/bian-cheng.html">编程</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/shou-ce.html">手册</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/shu-xue.html">数学</a>
+            <div class="sidebar-icons">
+              <hr>
+                <a href="" title="Atom feed" target="_blank" 
+                    style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;">
+                  <i class="fa fa-rss-square"></i>
+                </a>
+                <a href="https://github.com/freeopen" title="Software I released on Github" 
+                      target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="fa fa-github-square"></i> </a>
+                <a href="Mailto:freeopen@163.com" title="My email" 
+                    target="_blank" style="display: inline; padding: 0px 0px 0px 0;
+                    margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i
+                  class="fa fa-envelope-square"></i> </a>
+
+            </div>
+          </nav>
+
+        </nav>
+
       </div>
-      <nav id="menu" class="sidebar-nav">
 
-
-            <a class="sidebar-nav-item" href="https://freeopen.github.io/pages/about.html">About</a>
-            <a class="sidebar-nav-item" href="https://freeopen.github.io/pages/da-shang.html">打赏</a>
-
-            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/bian-cheng.html">编程</a>
-            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
-            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/shou-ce.html">手册</a>
-            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/shu-xue.html">数学</a>
-
-        <hr>
-
-          <a href="" title="Atom feed" target="_blank" 
-              style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;">
-            <i class="fa fa-rss-square"></i>
-          </a>
-          <a href="https://github.com/freeopen" title="Software I released on Github" 
-                target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="fa fa-github-square"></i> </a>
-          <!-- <a href="" title="Google Scholar" --> 
-          <!--     target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="ai ai-google-scholar-square"></i> </a> -->
-          <!-- <a href="" title="LinkedIn" --> 
-          <!--     target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="fa fa-linkedin-square"></i> </a> -->
-          <!-- <a href="" title="ResearchGate" --> 
-          <!--     target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="ai ai-researchgate-square"></i> </a> -->
-          <a href="Mailto:freeopen@163.com" title="My email" 
-              target="_blank" style="display: inline; padding: 0px 0px 0px 0;
-              margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i
-            class="fa fa-envelope-square"></i> </a>
-      </nav>
-
-    </div>
-  </div>
-
-  <div id="content" class="container content">
-    <div class="post">
+      <div class="col-12 col-lg-7" role="main">
+        <div id="content" class="content">
+          <div class="post">
 <section id="content" class="body">
   <header>
     <h1 class="entry-title">Markdown 数学公式指导手册</h2>
  
   </header>
-  <footer class="post-info">
-    <time class="published" datetime="2017-05-11T00:00:00+08:00">
-      2017-05-11
-    </time>
-    <address class="vcard author">
-      By           <a class="url fn" href="https://freeopen.github.io/author/pan-jia-hao-bian-yi-freeopenxiu-ding.html">潘嘉豪(编译), freeopen(修订)</a>
-    </address>
-    <div class="category">
-        Category: <a href="https://freeopen.github.io/category/shou-ce.html">手册</a>
-    </div>
-  </footer><!-- /.post-info -->
-  <div class="entry-content">
+  <div class="post-info">
+
+    <span>2017-05-11</span>
+
+
+    <span>| By             <a class="url fn" href="https://freeopen.github.io/author/pan-jia-hao-bian-yi-freeopenxiu-ding.html">潘嘉豪(编译), freeopen(修订)</a>
+    </span>
+
+    <span>
+      | 分类于 <a href="https://freeopen.github.io/category/shou-ce.html">手册</a>
+    </span>
+
+  </div><!-- /.post-info -->
+  <div class="related-posts">
     <p>本手册的主要内容来自 <a href="https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference">mathjax-basic-tutorial-and-quick-reference</a>.</p>
 <blockquote>
 <p><em>Note: 鼠标右键单击公式表达式, 选择 "Show Math As &gt; TeX Commands", 即可查看公式的LaTex代码。</em></p>
 </blockquote>
-<h2 id="yi , gong shi shi yong can kao">一、公式使用参考</h2>
-<h3 id="1.ru he cha ru gong shi">1．如何插入公式</h3>
+<h2 id="yi--gong-shi-shi-yong-can-kao">一、公式使用参考</h2>
+<h3 id="ru-he-cha-ru-gong-shi">1．如何插入公式</h3>
 <p>LaTex 的数学公式有两种：行中公式和独立公式。行中公式放在文中与其它文字混编，独立公式单独成行。</p>
 <p>行中公式示例: <code>$\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}$</code> <span class="math">\(\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}\)</span></p>
 <p>独立公式示例：<code>$$\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}$$</code> </p>
@@ -107,7 +105,7 @@
 \end{equation}
 </pre></div>
 <p>自动编号后的公式可在全文任意处使用<code>\eqref{eq:公式名}</code> 语句引用。</p>
-<h3 id="2.ru he shu ru shang xia biao">2．如何输入上下标</h3>
+<h3 id="ru-he-shu-ru-shang-xia-biao">2．如何输入上下标</h3>
 <p><code>^</code> 表示上标,<code>_</code> 表示下标。如果上下标的内容多于一个字符，需要用 <code>{}</code> 将这些内容括成一个整体。上下标可以嵌套，也可以同时使用。</p>
 <div class="highlight"><pre><span></span>x^{y^z}=(1+{\rm e}^x)^{-2xy^w} 
 </pre></div>
@@ -116,7 +114,7 @@
 <div class="highlight"><pre><span></span>\sideset{^1_2}{^3_4}\bigotimes 
 </pre></div>
 <div class="math">$$ \sideset{^1_2}{^3_4}\bigotimes $$</div>
-<h3 id="3.ru he shu ru gua hao he fen ge fu">3．如何输入括号和分隔符</h3>
+<h3 id="ru-he-shu-ru-gua-hao-he-fen-ge-fu">3．如何输入括号和分隔符</h3>
 <p><code>()</code>、<code>[]</code> 和 <code>|</code> 表示符号本身，使用 <code>\{\}</code> 来表示 <code>{}</code> 。当要显示大号的括号或分隔符时，要用 <code>\left</code> 和 <code>\right</code> 命令。</p>
 <p>一些特殊的括号：</p>
 <div class="math">$$
@@ -138,24 +136,24 @@ $$</div>
 <div class="highlight"><pre><span></span>\left. \frac{{\rm d}u}{{\rm d}x} \right| _{x=0} 
 </pre></div>
 <div class="math">$$ \left. \frac{{\rm d}u}{{\rm d}x} \right| _{x=0} $$</div>
-<h3 id="4.ru he shu ru fen shu">4．如何输入分数</h3>
+<h3 id="ru-he-shu-ru-fen-shu">4．如何输入分数</h3>
 <p>通常使用 <code>\frac {分子} {分母}</code> 命令产生一个分数，分数可嵌套。 
 便捷情况可直接输入 \frac ab 来快速生成一个  。 
 如果分式很复杂，亦可使用 <code>分子 \over 分母</code> 命令，此时分数仅有一层。</p>
 <div class="highlight"><pre><span></span>\frac{a-1}{b-1} \quad and \quad {a+1\over b+1}
 </pre></div>
 <div class="math">$$\frac{a-1}{b-1} \quad and \quad {a+1\over b+1}$$</div>
-<h3 id="5.ru he shu ru kai fang">5．如何输入开方</h3>
+<h3 id="ru-he-shu-ru-kai-fang">5．如何输入开方</h3>
 <p>使用 <code>\sqrt [根指数，省略时为2] {被开方数}</code> 命令输入开方。</p>
 <div class="highlight"><pre><span></span>\sqrt{2} \quad and \quad \sqrt[n]{3}
 </pre></div>
 <div class="math">$$\sqrt{2} \quad and \quad \sqrt[n]{3}$$</div>
-<h3 id="6.ru he shu ru sheng lue hao">6．如何输入省略号</h3>
+<h3 id="ru-he-shu-ru-sheng-lue-hao">6．如何输入省略号</h3>
 <p>数学公式中常见的省略号有两种，<code>\ldots</code> 表示与文本底线对齐的省略号，<code>\cdots</code> 表示与文本中线对齐的省略号。</p>
 <div class="highlight"><pre><span></span>f(x_1,x_2,\underbrace{\ldots}_{\rm ldots} ,x_n) = x_1^2 + x_2^2 + \underbrace{\cdots}_{\rm cdots} + x_n^2
 </pre></div>
 <div class="math">$$f(x_1,x_2,\underbrace{\ldots}_{\rm ldots} ,x_n) = x_1^2 + x_2^2 + \underbrace{\cdots}_{\rm cdots} + x_n^2$$</div>
-<h3 id="7.ru he shu ru shi liang">7．如何输入矢量</h3>
+<h3 id="ru-he-shu-ru-shi-liang">7．如何输入矢量</h3>
 <p>使用 <code>\vec{矢量}</code> 来自动产生一个矢量。也可以使用 <code>\overrightarrow</code> 等命令自定义字母上方的符号。</p>
 <div class="highlight"><pre><span></span>\vec{a} \cdot \vec{b}=0
 </pre></div>
@@ -163,25 +161,25 @@ $$</div>
 <div class="highlight"><pre><span></span>\overleftarrow{xy} \quad and \quad \overleftrightarrow{xy} \quad and \quad \overrightarrow{xy}
 </pre></div>
 <div class="math">$$\overleftarrow{xy} \quad and \quad \overleftrightarrow{xy} \quad and \quad \overrightarrow{xy}$$</div>
-<h3 id="8.ru he shu ru ji fen">8．如何输入积分</h3>
+<h3 id="ru-he-shu-ru-ji-fen">8．如何输入积分</h3>
 <p>使用 <code>\int_积分下限^积分上限 {被积表达式}</code> 来输入一个积分。</p>
 <div class="highlight"><pre><span></span>\int_0^1 {x^2} \,{\rm d}x
 </pre></div>
 <div class="math">$$\int_0^1 {x^2} \,{\rm d}x$$</div>
 <p>本例中 <code>\,</code> 和 <code>{\rm d}</code> 部分可省略，但建议加入，能使式子更美观。</p>
-<h3 id="9.ru he shu ru ji xian yun suan">9．如何输入极限运算</h3>
+<h3 id="ru-he-shu-ru-ji-xian-yun-suan">9．如何输入极限运算</h3>
 <p>使用 <code>\lim_{变量 \to 表达式}</code> 表达式 来输入一个极限。如有需求，可以更改 <code>\to</code> 符号至任意符号。</p>
 <div class="highlight"><pre><span></span>\lim_{n \to +\infty} \frac{1}{n(n+1)} \quad and \quad \lim_{x\leftarrow{示例}} \frac{1}{n(n+1)} 
 </pre></div>
 <div class="math">$$ \lim_{n \to +\infty} \frac{1}{n(n+1)} \quad and \quad \lim_{x\leftarrow{示例}} \frac{1}{n(n+1)} $$</div>
-<h3 id="10.ru he shu ru lei jia , lei cheng yun suan">10．如何输入累加、累乘运算</h3>
+<h3 id="ru-he-shu-ru-lei-jia--lei-cheng-yun-suan">10．如何输入累加、累乘运算</h3>
 <p>使用 <code>\sum_{下标表达式}^{上标表达式} {累加表达式}</code> 来输入一个累加。 
 与之类似，使用 <code>\prod \bigcup \bigcap</code> 来分别输入累乘、并集和交集。 
 此类符号在行内显示时上下标表达式将会移至右上角和右下角。</p>
 <div class="highlight"><pre><span></span>sum_{i=1}^n \frac{1}{i^2} \quad and \quad \prod_{i=1}^n \frac{1}{i^2} \quad and \quad \bigcup_{i=1}^{2} R
 </pre></div>
 <div class="math">$$\sum_{i=1}^n \frac{1}{i^2} \quad and \quad \prod_{i=1}^n \frac{1}{i^2} \quad and \quad \bigcup_{i=1}^{2} R$$</div>
-<h3 id="11.ru he shu ru xi la zi mu">11．如何输入希腊字母</h3>
+<h3 id="ru-he-shu-ru-xi-la-zi-mu">11．如何输入希腊字母</h3>
 <p>输入 <code>\小写希腊字母英文全称</code> 和 <code>\首字母大写希腊字母英文全称</code> 来分别输入小写和大写希腊字母。 
 对于大写希腊字母与现有字母相同的，直接输入大写字母即可。</p>
 <div class="math">\begin{array}{cccc|cccc|cccc}
@@ -233,7 +231,7 @@ M  &amp; \mu &amp; mu &amp; \text{/mju:/} &amp; \Omega &amp; \omega &amp; omega 
 \phi &amp;  \Phi &amp;  \varphi &amp;  \text{\varphi} \\
 \hline
 \end{array}</div>
-<h3 id="12.ru he shu ru qi ta te shu zi fu">12．如何输入其它特殊字符</h3>
+<h3 id="ru-he-shu-ru-qi-ta-te-shu-zi-fu">12．如何输入其它特殊字符</h3>
 <p>若需要显示更大或更小的字符，在符号前插入 <code>\large</code> 或 <code>\small</code> 命令。</p>
 <p>若找不到需要的符号，使用 <a href="http://detexify.kirelabs.org/classify.html">Detexify</a> 来画出想要的符号。</p>
 <ul>
@@ -377,7 +375,7 @@ $$</div>
 \text{\mapsto} &amp; \mapsto  &amp; \text{ } &amp; \text{ } \\  
 \hline
 \end{array}</div>
-<h3 id="13.ru he jin xing zi ti zhuan huan">13．如何进行字体转换</h3>
+<h3 id="ru-he-jin-xing-zi-ti-zhuan-huan">13．如何进行字体转换</h3>
 <p>若要对公式的某一部分字符进行字体转换，可以用 <code>{\字体 {需转换的部分字符}}</code> 命令，其中 <code>\字体</code> 部分可以参照下表选择合适的字体。一般情况下，公式默认为意大利体  。</p>
 <p>示例中 <strong>全部大写</strong> 的字体仅大写可用。</p>
 <div class="math">\begin{array}{l|c|l|c}
@@ -408,7 +406,7 @@ $$</div>
 $$</div>
 <p>注意比较两个式子间 <code>dx</code> 的不同。 
 使用 <code>\operatorname</code> 命令也可以达到相同的效果，详见 [定义新的符号 <code>\operatorname</code>] 。</p>
-<h3 id="14.da gua hao he xing biao de shi yong">14．大括号和行标的使用</h3>
+<h3 id="da-gua-hao-he-xing-biao-de-shi-yong">14．大括号和行标的使用</h3>
 <p>使用 <code>\left</code> 和 <code>\right</code> 来创建自动匹配高度的 (圆括号)，[方括号] 和 {花括号} 。 
 在每个公式末尾前使用 <code>\tag{行标}</code> 来实现行标。</p>
 <div class="highlight"><pre><span></span>f\left(
@@ -470,7 +468,7 @@ $$</div>
    p 
 \right\rangle
 $$</div>
-<h3 id="15.qi ta ming ling">15．其它命令</h3>
+<h3 id="qi-ta-ming-ling">15．其它命令</h3>
 <ul>
 <li>(1)．定义新的符号 <code>\operatorname</code></li>
 </ul>
@@ -586,8 +584,8 @@ $$</div>
 \end{array}
 $$</div>
 <p>此外，<code>\enclose</code> 命令还可以产生包围的边框和圆等，参见 <a href="https://developer.mozilla.org/en-US/docs/Web/MathML/Element/menclose">MathML Menclose Documentation</a> 以查看更多效果。</p>
-<h2 id="er , ju zhen shi yong can kao_1">二、矩阵使用参考</h2>
-<h3 id="1.ru he shu ru wu kuang ju zhen">1．如何输入无框矩阵</h3>
+<h2 id="er--ju-zhen-shi-yong-can-kao_1">二、矩阵使用参考</h2>
+<h3 id="ru-he-shu-ru-wu-kuang-ju-zhen">1．如何输入无框矩阵</h3>
 <p>在开头使用 <code>begin{matrix}</code>，在结尾使用 <code>end{matrix}</code>，在中间插入矩阵元素，每个元素之间插入 <code>&amp;</code> ，并在每行结尾处使用 \ 。 
 使用矩阵时必须声明 <code>$</code> 或 <code>$$</code> 符号。</p>
 <div class="highlight"><pre><span></span>        \begin{matrix}
@@ -603,7 +601,7 @@ $$</div>
         1 &amp; z &amp; z^2 \\
         \end{matrix}
 $$</div>
-<h3 id="2.ru he shu ru dai bian kuang de ju zhen">2．如何输入带边框的矩阵</h3>
+<h3 id="ru-he-shu-ru-dai-bian-kuang-de-ju-zhen">2．如何输入带边框的矩阵</h3>
 <p>在开头将 <code>matrix</code> 替换为 <code>pmatrix bmatrix Bmatrix vmatrix Vmatrix</code> 。</p>
 <ul>
 <li>
@@ -632,7 +630,7 @@ $$</div>
 </p>
 </li>
 </ul>
-<h3 id="3.ru he shu ru dai sheng lue fu hao de ju zhen">3．如何输入带省略符号的矩阵</h3>
+<h3 id="ru-he-shu-ru-dai-sheng-lue-fu-hao-de-ju-zhen">3．如何输入带省略符号的矩阵</h3>
 <p>使用 <code>\cdots</code>  , <code>\ddots</code>  , <code>\vdots</code>  来输入省略符号。</p>
 <div class="highlight"><pre><span></span>        \begin{pmatrix}
         1 &amp; a_1 &amp; a_1^2 &amp; \cdots &amp; a_1^n \\
@@ -649,7 +647,7 @@ $$</div>
         1 &amp; a_m &amp; a_m^2 &amp; \cdots &amp; a_m^n \\
         \end{pmatrix}
 $$</div>
-<h3 id="4.ru he shu ru dai fen ge fu hao de ju zhen">4．如何输入带分割符号的矩阵</h3>
+<h3 id="ru-he-shu-ru-dai-fen-ge-fu-hao-de-ju-zhen">4．如何输入带分割符号的矩阵</h3>
 <div class="highlight"><pre><span></span>        \left[
             \begin{array}{cc|c}
               1&amp;2&amp;3\\
@@ -666,14 +664,14 @@ $$</div>
     \end{array}
 \right]
 $$</div>
-<h3 id="5.ru he shu ru xing zhong ju zhen">5．如何输入行中矩阵</h3>
+<h3 id="ru-he-shu-ru-xing-zhong-ju-zhen">5．如何输入行中矩阵</h3>
 <p>若想在一行内显示矩阵，使用<code>\bigl(\begin{smallmatrix} ... \end{smallmatrix}\bigr)</code>。</p>
 <div class="highlight"><pre><span></span>这是一个行中矩阵的示例 $\bigl( \begin{smallmatrix} a &amp; b \\ c &amp; d \end{smallmatrix} \bigr)$ 。
 </pre></div>
 <p>这是一个行中矩阵的示例 </p>
 <div class="math">$$\bigl(\begin{smallmatrix} a &amp; b \\ c &amp; d \end{smallmatrix}\bigr)$$</div>
-<h2 id="san , fang cheng shi xu lie shi yong can kao_1">三、方程式序列使用参考</h2>
-<h3 id="1.ru he shu ru yi ge fang cheng shi xu lie">1．如何输入一个方程式序列</h3>
+<h2 id="san--fang-cheng-shi-xu-lie-shi-yong-can-kao_1">三、方程式序列使用参考</h2>
+<h3 id="ru-he-shu-ru-yi-ge-fang-cheng-shi-xu-lie">1．如何输入一个方程式序列</h3>
 <p>人们经常想要一列整齐且居中的方程式序列。使用 <code>\begin{align}&hellip;\end{align}</code> 来创造一列方程式，其中在每行结尾处使用 <code>\\</code> 。 
 使用方程式序列无需声明公式符号 <code>$</code> 或 <code>$$</code> 。</p>
 <p>请注意 <code>{align}</code> 语句是 <strong>自动编号</strong> 的。</p>
@@ -695,7 +693,7 @@ $$</div>
 <blockquote>
 <p><em>Note: 本blog不能自动编号, 示例效果采用手动编号</em></p>
 </blockquote>
-<h3 id="2.zai yi ge fang cheng shi xu lie de mei yi xing zhong zhu ming yuan yin">2．在一个方程式序列的每一行中注明原因</h3>
+<h3 id="zai-yi-ge-fang-cheng-shi-xu-lie-de-mei-yi-xing-zhong-zhu-ming-yuan-yin">2．在一个方程式序列的每一行中注明原因</h3>
 <p>在 <code>{align}</code> 中灵活组合 <code>\text</code> 和 <code>\tag</code> 语句。<code>\tag</code> 语句编号优先级高于自动编号。</p>
 <div class="highlight"><pre><span></span>\begin{align}
    v + w &amp; = 0  &amp;\text{Given} \tag 1\\
@@ -711,8 +709,8 @@ $$</div>
 \end{align}
 $$</div>
 <p>本例中第一、第二行的自动编号被 <code>\tag</code> 语句覆盖，第三行的编号为自动编号。</p>
-<h2 id="si , tiao jian biao da shi shi yong can kao_1">四、条件表达式使用参考</h2>
-<h3 id="1.ru he shu ru yi ge tiao jian biao da shi">1．如何输入一个条件表达式</h3>
+<h2 id="si--tiao-jian-biao-da-shi-shi-yong-can-kao_1">四、条件表达式使用参考</h2>
+<h3 id="ru-he-shu-ru-yi-ge-tiao-jian-biao-da-shi">1．如何输入一个条件表达式</h3>
 <p>使用 <code>begin{cases}</code> 来创造一组条件表达式，在每一行条件中插入 <code>&amp;</code> 来指定需要对齐的内容，并在每一行结尾处使用 <code>\\</code>，以 <code>end{cases}</code> 结束。 
 条件表达式无需声明 <code>$</code> 或 <code>$$</code> 符号。</p>
 <div class="highlight"><pre><span></span>        f(n) =
@@ -728,7 +726,7 @@ $$</div>
         3n+1, &amp; \text{if $n$ is odd}
         \end{cases}
 $$</div>
-<h3 id="2.ru he shu ru yi ge zuo ce dui qi de tiao jian biao da shi">2．如何输入一个左侧对齐的条件表达式</h3>
+<h3 id="ru-he-shu-ru-yi-ge-zuo-ce-dui-qi-de-tiao-jian-biao-da-shi">2．如何输入一个左侧对齐的条件表达式</h3>
 <p>若想让文字在 左侧对齐显示 ，则有如下方式：</p>
 <div class="highlight"><pre><span></span>        \left.
         \begin{array}{l}
@@ -747,7 +745,7 @@ $$</div>
         \right\}
         =f(n)
 $$</div>
-<h3 id="3.ru he shi tiao jian biao da shi gua pei xing gao">3．如何使条件表达式适配行高</h3>
+<h3 id="ru-he-shi-tiao-jian-biao-da-shi-gua-pei-xing-gao">3．如何使条件表达式适配行高</h3>
 <p>在一些情况下，条件表达式中某些行的行高为非标准高度，此时使用 <code>\\[2ex]</code> 语句代替该行末尾的 <code>\\</code> 来让编辑器适配。</p>
 <ul>
 <li>不适配[2ex]</li>
@@ -783,8 +781,8 @@ f(n) =
 $$</div>
 <p>一个 <code>[ex]</code> 指一个 "X-Height"，即<code>x</code>字母高度。可以根据情况指定多个 <code>[ex]</code>，如 <code>[3ex]</code>、<code>[4ex]</code> 等。 
 其实可以在任何地方使用 <code>\\[2ex]</code> 语句，只要你觉得合适。</p>
-<h2 id="wu , shu zu yu biao ge shi yong can kao_1">五、数组与表格使用参考</h2>
-<h3 id="1.ru he shu ru yi ge shu zu huo biao ge">1．如何输入一个数组或表格</h3>
+<h2 id="wu--shu-zu-yu-biao-ge-shi-yong-can-kao_1">五、数组与表格使用参考</h2>
+<h3 id="ru-he-shu-ru-yi-ge-shu-zu-huo-biao-ge">1．如何输入一个数组或表格</h3>
 <p>通常，一个格式化后的表格比单纯的文字或排版后的文字更具有可读性。数组和表格均以 <code>begin{array}</code> 开头，并在其后定义列数及每一列的文本对齐属性，<code>c l r</code> 分别代表居中、左对齐及右对齐。若需要插入垂直分割线，在定义式中插入 <code>|</code> ，若要插入水平分割线，在下一行输入前插入 <code>\hline</code> 。与矩阵相似，每行元素间均须要插入 <code>&amp;</code> ，每行元素以 <code>\\</code> 结尾，最后以 <code>end{array}</code> 结束数组。 
 使用单个数组或表格时无需声明 <code>$</code> 或 <code>$$</code> 符号。</p>
 <div class="highlight"><pre><span></span>\begin{array}{c|lcr}
@@ -804,7 +802,7 @@ n &amp; \text{左对齐} &amp; \text{居中对齐} &amp; \text{右对齐} \\
 3 &amp; -20 &amp; 2000 &amp; 1+10i
 \end{array}
 $$</div>
-<h3 id="2.ru he shu ru yi ge qian tao de shu zu huo biao ge">2．如何输入一个嵌套的数组或表格</h3>
+<h3 id="ru-he-shu-ru-yi-ge-qian-tao-de-shu-zu-huo-biao-ge">2．如何输入一个嵌套的数组或表格</h3>
 <p>多个数组/表格可<strong>互相嵌套</strong> 并组成一组数组/一组表格。 
 使用嵌套前必须声明 <code>$$</code> 符号。</p>
 <div class="highlight"><pre><span></span><span class="c">% outer vertical array of arrays 外层垂直表格</span>
@@ -884,7 +882,7 @@ $$</div>
         % 内层第二行表格组结束
 \end{array}
 $$</div>
-<h3 id="3.ru he shu ru yi ge fang cheng zu">3．如何输入一个方程组</h3>
+<h3 id="ru-he-shu-ru-yi-ge-fang-cheng-zu">3．如何输入一个方程组</h3>
 <p>使用 <code>\begin{array}&hellip;\end{array}</code> 和 <code>\left\{&hellip;\right.</code> 来创建一个方程组。</p>
 <div class="highlight"><pre><span></span>\left\{ 
 \begin{array}{c}
@@ -917,8 +915,8 @@ a_2x+b_2y+c_2z=d_2 \\
 a_3x+b_3y+c_3z=d_3
 \end{cases}
 $$</div>
-<h2 id="liu , lian fen shu shi yong can kao_1">六、连分数使用参考</h2>
-<h3 id="1.ru he shu ru yi ge lian fen shi">1．如何输入一个连分式</h3>
+<h2 id="liu--lian-fen-shu-shi-yong-can-kao_1">六、连分数使用参考</h2>
+<h3 id="ru-he-shu-ru-yi-ge-lian-fen-shi">1．如何输入一个连分式</h3>
 <p>就像输入分式时使用 <code>\frac</code> 一样，使用 <code>\cfrac</code> 来创建一个连分数。</p>
 <div class="highlight"><pre><span></span>x = a_0 + \cfrac{1^2}{a_1
           + \cfrac{2^2}{a_2
@@ -950,8 +948,8 @@ x = a_0 + \frac{1^2}{a_1+}
           \frac{3^2}{a_3 +} \frac{4^4}{a_4 +} \cdots
 $$</div>
 <p>连分数通常都太大以至于不易排版，所以建议在连分数前后声明 <code>$$</code> 符号，或使用像 <code>[a0;a1,a2,a3,&hellip;]</code> 一样的紧缩记法。</p>
-<h2 id="qi , jiao huan tu biao shi yong can kao_1">七、交换图表使用参考</h2>
-<h3 id="1.ru he shu ru yi ge jiao huan tu biao">1．如何输入一个交换图表</h3>
+<h2 id="qi--jiao-huan-tu-biao-shi-yong-can-kao_1">七、交换图表使用参考</h2>
+<h3 id="ru-he-shu-ru-yi-ge-jiao-huan-tu-biao">1．如何输入一个交换图表</h3>
 <p>使用一行 <code>\require{AMScd}</code> 语句来允许交换图表的显示。 
 声明交换图表后，语法与矩阵相似，在开头使用 <code>begin{CD}</code>，在结尾使用 <code>end{CD}</code>，在中间插入图表元素，每个元素之间插入 <code>&amp;</code> ，并在每行结尾处使用<code>\\</code> 。</p>
 <div class="highlight"><pre><span></span>\require{AMScd}
@@ -985,9 +983,9 @@ $$</div>
 \end{CD}
 $$</div>
 <p>在本例中， "very long label"自动延长了它所在箭头以及对应箭头的长度。</p>
-<h2 id="ba , yi xie te shu de zhu yi shi xiang_1">八、一些特殊的注意事项</h2>
+<h2 id="ba--yi-xie-te-shu-de-zhu-yi-shi-xiang_1">八、一些特殊的注意事项</h2>
 <p>有些小窍门会让数学公式显得更好看，强迫症和完美主义者会喜欢下面的内容。</p>
-<h3 id="1. mou xie fen shu de xian shi wen ti">1. 某些分数的显示问题</h3>
+<h3 id="-mou-xie-fen-shu-de-xian-shi-wen-ti">1. 某些分数的显示问题</h3>
 <p>在以<code>e</code>为底的指数函数、极限和积分中尽量不要使用 <code>\frac</code> 符号：它会使整段函数看起来很怪，而且可能产生歧义。也正是因此它在专业数学排版中几乎从不出现。 
 横着写这些分式，中间使用斜线间隔 <code>/</code> （用斜线代替分数线）。</p>
 <div class="highlight"><pre><span></span>\begin{array}{c|c}
@@ -1005,7 +1003,7 @@ e^{i\frac{\pi}2} \quad e^{\frac{i\pi}2}&amp; e^{i\pi/2} \\
 \int_{-\frac\pi2}^\frac\pi2 \sin x\,dx &amp; \int_{-\pi/2}^{\pi/2}\sin x\,dx \\
 \end{array}
 $$</div>
-<h3 id="2. liu chu he li de jian ge">2. 留出合理的间隔</h3>
+<h3 id="-liu-chu-he-li-de-jian-ge">2. 留出合理的间隔</h3>
 <p><code>|</code> 符号在被当作分隔符时会产生过于狭窄的间隔，因此在需要分隔时最好使用 <code>\mid</code> 来代替它。</p>
 <div class="highlight"><pre><span></span>\begin{array}{c|c}
 \mathrm{Bad} &amp; \mathrm{Better} \\
@@ -1020,7 +1018,7 @@ $$</div>
 \{x|x^2\in\Bbb Z\} &amp; \{x\mid x^2\in\Bbb Z\} \\
 \end{array}
 $$</div>
-<h3 id="3. duo zhong ji fen fu hao de xian shi">3. 多重积分符号的显示</h3>
+<h3 id="-duo-zhong-ji-fen-fu-hao-de-xian-shi">3. 多重积分符号的显示</h3>
 <p>使用多重积分符号时，不要多次使用 <code>\int</code> 来声明，直接使用 <code>\iint</code> 来表示 二重积分 ，使用 <code>\iiint</code> 来表示 三重积分 等。对于无限次积分，可以用 <code>\int \cdots \int</code> 表示。</p>
 <div class="highlight"><pre><span></span>\begin{array}{c|c}
 \mathrm{Bad} &amp; \mathrm{Better} \\
@@ -1037,7 +1035,7 @@ $$</div>
 \int\int\int_V f(x)\,dz\,dy\,dx &amp; \iiint_V f(x)\,dz\,dy\,dx
 \end{array}
 $$</div>
-<h3 id="4. duo ge wei fen fu hao de xian shi">4. 多个微分符号的显示</h3>
+<h3 id="-duo-ge-wei-fen-fu-hao-de-xian-shi">4. 多个微分符号的显示</h3>
 <p>在微分符号前加入 <code>\</code>, 来插入一个小的间隔空隙；没有 <code>\</code>, 符号的话， 将会把不同的微分符号堆在一起。</p>
 <div class="highlight"><pre><span></span>\begin{array}{c|c}
 \mathrm{Bad} &amp; \mathrm{Better} \\
@@ -1126,24 +1124,27 @@ $$</div>
     <noscript>Please enable JavaScript to view the comments.</noscript>
   </div>
 </section>
+          </div>
+
+          <footer id="contentinfo" class="footer">
+            <div class="footer-inner">
+              无节操小广告<a href="https://freeopen.github.io/pages/da-shang.html"> 欢迎打赏 </a>
+            </div>
+          </footer><!-- /#contentinfo -->
+        </div>
+      </div>
+
+      <div class="hidden-print hidden-xs hidden-sm hidden-md col-lg" id="post_toc" role="complementary">
+        <nav class="sidebar-toc">
+<!-- <section id="main_toc"> -->
+    <ul class="nav" id="toc"><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#yi--gong-shi-shi-yong-can-kao" title="一、公式使用参考">一、公式使用参考</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#ru-he-cha-ru-gong-shi" title="1．如何插入公式">1．如何插入公式</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-shang-xia-biao" title="2．如何输入上下标">2．如何输入上下标</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-gua-hao-he-fen-ge-fu" title="3．如何输入括号和分隔符">3．如何输入括号和分隔符</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-fen-shu" title="4．如何输入分数">4．如何输入分数</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-kai-fang" title="5．如何输入开方">5．如何输入开方</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-sheng-lue-hao" title="6．如何输入省略号">6．如何输入省略号</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-shi-liang" title="7．如何输入矢量">7．如何输入矢量</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-ji-fen" title="8．如何输入积分">8．如何输入积分</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-ji-xian-yun-suan" title="9．如何输入极限运算">9．如何输入极限运算</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-lei-jia--lei-cheng-yun-suan" title="10．如何输入累加、累乘运算">10．如何输入累加、累乘运算</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-xi-la-zi-mu" title="11．如何输入希腊字母">11．如何输入希腊字母</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-qi-ta-te-shu-zi-fu" title="12．如何输入其它特殊字符">12．如何输入其它特殊字符</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-jin-xing-zi-ti-zhuan-huan" title="13．如何进行字体转换">13．如何进行字体转换</a></li><li class="nav-item"><a class="nav-link" href="#da-gua-hao-he-xing-biao-de-shi-yong" title="14．大括号和行标的使用">14．大括号和行标的使用</a></li><li class="nav-item"><a class="nav-link" href="#qi-ta-ming-ling" title="15．其它命令">15．其它命令</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#er--ju-zhen-shi-yong-can-kao_1" title="二、矩阵使用参考">二、矩阵使用参考</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-wu-kuang-ju-zhen" title="1．如何输入无框矩阵">1．如何输入无框矩阵</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-dai-bian-kuang-de-ju-zhen" title="2．如何输入带边框的矩阵">2．如何输入带边框的矩阵</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-dai-sheng-lue-fu-hao-de-ju-zhen" title="3．如何输入带省略符号的矩阵">3．如何输入带省略符号的矩阵</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-dai-fen-ge-fu-hao-de-ju-zhen" title="4．如何输入带分割符号的矩阵">4．如何输入带分割符号的矩阵</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-xing-zhong-ju-zhen" title="5．如何输入行中矩阵">5．如何输入行中矩阵</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#san--fang-cheng-shi-xu-lie-shi-yong-can-kao_1" title="三、方程式序列使用参考">三、方程式序列使用参考</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-yi-ge-fang-cheng-shi-xu-lie" title="1．如何输入一个方程式序列">1．如何输入一个方程式序列</a></li><li class="nav-item"><a class="nav-link" href="#zai-yi-ge-fang-cheng-shi-xu-lie-de-mei-yi-xing-zhong-zhu-ming-yuan-yin" title="2．在一个方程式序列的每一行中注明原因">2．在一个方程式序列的每一行中注明原因</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#si--tiao-jian-biao-da-shi-shi-yong-can-kao_1" title="四、条件表达式使用参考">四、条件表达式使用参考</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-yi-ge-tiao-jian-biao-da-shi" title="1．如何输入一个条件表达式">1．如何输入一个条件表达式</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-yi-ge-zuo-ce-dui-qi-de-tiao-jian-biao-da-shi" title="2．如何输入一个左侧对齐的条件表达式">2．如何输入一个左侧对齐的条件表达式</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shi-tiao-jian-biao-da-shi-gua-pei-xing-gao" title="3．如何使条件表达式适配行高">3．如何使条件表达式适配行高</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#wu--shu-zu-yu-biao-ge-shi-yong-can-kao_1" title="五、数组与表格使用参考">五、数组与表格使用参考</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-yi-ge-shu-zu-huo-biao-ge" title="1．如何输入一个数组或表格">1．如何输入一个数组或表格</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-yi-ge-qian-tao-de-shu-zu-huo-biao-ge" title="2．如何输入一个嵌套的数组或表格">2．如何输入一个嵌套的数组或表格</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-yi-ge-fang-cheng-zu" title="3．如何输入一个方程组">3．如何输入一个方程组</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#liu--lian-fen-shu-shi-yong-can-kao_1" title="六、连分数使用参考">六、连分数使用参考</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-yi-ge-lian-fen-shi" title="1．如何输入一个连分式">1．如何输入一个连分式</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#qi--jiao-huan-tu-biao-shi-yong-can-kao_1" title="七、交换图表使用参考">七、交换图表使用参考</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-yi-ge-jiao-huan-tu-biao" title="1．如何输入一个交换图表">1．如何输入一个交换图表</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#ba--yi-xie-te-shu-de-zhu-yi-shi-xiang_1" title="八、一些特殊的注意事项">八、一些特殊的注意事项</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#-mou-xie-fen-shu-de-xian-shi-wen-ti" title="1. 某些分数的显示问题">1. 某些分数的显示问题</a></li><li class="nav-item"><a class="nav-link" href="#-liu-chu-he-li-de-jian-ge" title="2. 留出合理的间隔">2. 留出合理的间隔</a></li><li class="nav-item"><a class="nav-link" href="#-duo-zhong-ji-fen-fu-hao-de-xian-shi" title="3. 多重积分符号的显示">3. 多重积分符号的显示</a></li><li class="nav-item"><a class="nav-link" href="#-duo-ge-wei-fen-fu-hao-de-xian-shi" title="4. 多个微分符号的显示">4. 多个微分符号的显示</a></li></ul></li></ul></ul>
+<!-- </section> -->
+<!-- </section> -->
+        </nav>
+      </div>
     </div>
-    <footer id="contentinfo" class="pagination" style="font-size:85%">
-            <address id="about" class="vcard body">
-            无节操小广告<a href="https://freeopen.github.io/pages/da-shang.html"> 欢迎打赏 </a>
-            </address><!-- /#about -->
-    </footer><!-- /#contentinfo -->
   </div>
 
-  <!--Right-->
-  <div id="main_toc" class="sidebar-toc">
-<section id="main_toc">
-    <!-- <div class="col-lg-2 hidden-xs hidden-sm"> -->
-    <nav toc-data class="col-lg-2 hidden-xs hidden-sm">
-      <div id="toc"><ul><li><a class="toc-href" href="#yi , gong shi shi yong can kao" title="一、公式使用参考">一、公式使用参考</a><ul><li><a class="toc-href" href="#1.ru he cha ru gong shi" title="1．如何插入公式">1．如何插入公式</a></li><li><a class="toc-href" href="#2.ru he shu ru shang xia biao" title="2．如何输入上下标">2．如何输入上下标</a></li><li><a class="toc-href" href="#3.ru he shu ru gua hao he fen ge fu" title="3．如何输入括号和分隔符">3．如何输入括号和分隔符</a></li><li><a class="toc-href" href="#4.ru he shu ru fen shu" title="4．如何输入分数">4．如何输入分数</a></li><li><a class="toc-href" href="#5.ru he shu ru kai fang" title="5．如何输入开方">5．如何输入开方</a></li><li><a class="toc-href" href="#6.ru he shu ru sheng lue hao" title="6．如何输入省略号">6．如何输入省略号</a></li><li><a class="toc-href" href="#7.ru he shu ru shi liang" title="7．如何输入矢量">7．如何输入矢量</a></li><li><a class="toc-href" href="#8.ru he shu ru ji fen" title="8．如何输入积分">8．如何输入积分</a></li><li><a class="toc-href" href="#9.ru he shu ru ji xian yun suan" title="9．如何输入极限运算">9．如何输入极限运算</a></li><li><a class="toc-href" href="#10.ru he shu ru lei jia , lei cheng yun suan" title="10．如何输入累加、累乘运算">10．如何输入累加、累乘运算</a></li><li><a class="toc-href" href="#11.ru he shu ru xi la zi mu" title="11．如何输入希腊字母">11．如何输入希腊字母</a></li><li><a class="toc-href" href="#12.ru he shu ru qi ta te shu zi fu" title="12．如何输入其它特殊字符">12．如何输入其它特殊字符</a></li><li><a class="toc-href" href="#13.ru he jin xing zi ti zhuan huan" title="13．如何进行字体转换">13．如何进行字体转换</a></li><li><a class="toc-href" href="#14.da gua hao he xing biao de shi yong" title="14．大括号和行标的使用">14．大括号和行标的使用</a></li><li><a class="toc-href" href="#15.qi ta ming ling" title="15．其它命令">15．其它命令</a></li></ul></li><li><a class="toc-href" href="#er , ju zhen shi yong can kao_1" title="二、矩阵使用参考">二、矩阵使用参考</a><ul><li><a class="toc-href" href="#1.ru he shu ru wu kuang ju zhen" title="1．如何输入无框矩阵">1．如何输入无框矩阵</a></li><li><a class="toc-href" href="#2.ru he shu ru dai bian kuang de ju zhen" title="2．如何输入带边框的矩阵">2．如何输入带边框的矩阵</a></li><li><a class="toc-href" href="#3.ru he shu ru dai sheng lue fu hao de ju zhen" title="3．如何输入带省略符号的矩阵">3．如何输入带省略符号的矩阵</a></li><li><a class="toc-href" href="#4.ru he shu ru dai fen ge fu hao de ju zhen" title="4．如何输入带分割符号的矩阵">4．如何输入带分割符号的矩阵</a></li><li><a class="toc-href" href="#5.ru he shu ru xing zhong ju zhen" title="5．如何输入行中矩阵">5．如何输入行中矩阵</a></li></ul></li><li><a class="toc-href" href="#san , fang cheng shi xu lie shi yong can kao_1" title="三、方程式序列使用参考">三、方程式序列使用参考</a><ul><li><a class="toc-href" href="#1.ru he shu ru yi ge fang cheng shi xu lie" title="1．如何输入一个方程式序列">1．如何输入一个方程式序列</a></li><li><a class="toc-href" href="#2.zai yi ge fang cheng shi xu lie de mei yi xing zhong zhu ming yuan yin" title="2．在一个方程式序列的每一行中注明原因">2．在一个方程式序列的每一行中注明原因</a></li></ul></li><li><a class="toc-href" href="#si , tiao jian biao da shi shi yong can kao_1" title="四、条件表达式使用参考">四、条件表达式使用参考</a><ul><li><a class="toc-href" href="#1.ru he shu ru yi ge tiao jian biao da shi" title="1．如何输入一个条件表达式">1．如何输入一个条件表达式</a></li><li><a class="toc-href" href="#2.ru he shu ru yi ge zuo ce dui qi de tiao jian biao da shi" title="2．如何输入一个左侧对齐的条件表达式">2．如何输入一个左侧对齐的条件表达式</a></li><li><a class="toc-href" href="#3.ru he shi tiao jian biao da shi gua pei xing gao" title="3．如何使条件表达式适配行高">3．如何使条件表达式适配行高</a></li></ul></li><li><a class="toc-href" href="#wu , shu zu yu biao ge shi yong can kao_1" title="五、数组与表格使用参考">五、数组与表格使用参考</a><ul><li><a class="toc-href" href="#1.ru he shu ru yi ge shu zu huo biao ge" title="1．如何输入一个数组或表格">1．如何输入一个数组或表格</a></li><li><a class="toc-href" href="#2.ru he shu ru yi ge qian tao de shu zu huo biao ge" title="2．如何输入一个嵌套的数组或表格">2．如何输入一个嵌套的数组或表格</a></li><li><a class="toc-href" href="#3.ru he shu ru yi ge fang cheng zu" title="3．如何输入一个方程组">3．如何输入一个方程组</a></li></ul></li><li><a class="toc-href" href="#liu , lian fen shu shi yong can kao_1" title="六、连分数使用参考">六、连分数使用参考</a><ul><li><a class="toc-href" href="#1.ru he shu ru yi ge lian fen shi" title="1．如何输入一个连分式">1．如何输入一个连分式</a></li></ul></li><li><a class="toc-href" href="#qi , jiao huan tu biao shi yong can kao_1" title="七、交换图表使用参考">七、交换图表使用参考</a><ul><li><a class="toc-href" href="#1.ru he shu ru yi ge jiao huan tu biao" title="1．如何输入一个交换图表">1．如何输入一个交换图表</a></li></ul></li><li><a class="toc-href" href="#ba , yi xie te shu de zhu yi shi xiang_1" title="八、一些特殊的注意事项">八、一些特殊的注意事项</a><ul><li><a class="toc-href" href="#1. mou xie fen shu de xian shi wen ti" title="1. 某些分数的显示问题">1. 某些分数的显示问题</a></li><li><a class="toc-href" href="#2. liu chu he li de jian ge" title="2. 留出合理的间隔">2. 留出合理的间隔</a></li><li><a class="toc-href" href="#3. duo zhong ji fen fu hao de xian shi" title="3. 多重积分符号的显示">3. 多重积分符号的显示</a></li><li><a class="toc-href" href="#4. duo ge wei fen fu hao de xian shi" title="4. 多个微分符号的显示">4. 多个微分符号的显示</a></li></ul></li></ul></div>
-    </nav>
-    <!-- </div> -->
-</section>
-  </div>
 
     <script type="text/javascript">
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -1163,5 +1164,9 @@ $$</div>
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>
+<script src="https://freeopen.github.io/theme/js/jquery-3.3.1.slim.min.js"></script>
+<script src="https://freeopen.github.io/theme/js/popper.min.js"></script>
+<script src="https://freeopen.github.io/theme/js/bootstrap.min.js"></script>
+
 </body>
 </html>

@@ -33,7 +33,6 @@
 
 /* Imports */
 @import url("poole.css");
-@import url("mycss.css");
 @import url("syntax.css");
 @import url("bootstrap-toc.css");
 
@@ -41,29 +40,34 @@ html {
   font-family: "PT Sans", Helvetica, -apple-system, BlinkMacSystemFont,'Microsoft YaHei', Arial, sans-serif;
 }
 
-/* iphone se 640 40em */
-/* iphone 6  750 46.875em */
-/* iphone xr 828 51.75em */
-/* iphone 8  1080 67.5em */
-/* iphone x xs 1125 70.31em */
-/* iphone plus 1242 77.625em */
+/**
+iphone se 640 40em 
+iphone 6  750 46.875em 
+iphone xr 828 51.75em 
+iphone 8  1080 67.5em 
+iphone x xs 1125 70.31em 
+iphone plus 1242 77.625em 
 
-/* 480px */
-@media (min-width: 30rem) {
-  body {
-    font-size: 20px;
-  }
+>=576 sm  36rem
+>=768 md  48rem
+>=992 lg  62rem
+>=1200 xl 75rem
+**/
+
+
+body {
+  font-size: 20px;
 }
 
-/* screen width >= 768 */
-@media (min-width: 48rem) {
+/* screen width >= 576 */
+@media (min-width: 36rem) {
   body {
     font-size: 18px;
   }
 }
 
-/* screen width >= 1024px */
-@media (min-width: 64rem) {
+/* screen width >= 768 */
+@media (min-width: 48rem) {
   body {
     font-size: 16px;
   }
@@ -78,115 +82,72 @@ html {
 
 /* left */
 .sidebar {
-  text-align: center;
-  padding: 1rem 1rem;
-  /*color: rgba(255,255,255,.5);*/
   color: black;
   background-color: #202020;
-  border-right: dashed black 1px;
   border-bottom: dashed black 1px;
 }
 
 .sidebar-toc {
   text-align: left;
-  padding: 1rem 1rem;
+  padding: 0rem 1rem;
   color: black;
   background-color: #202020;
   display: none;
 }
 
-
-/* desktop screen 1024 x 768 */
-/* show left nav */
-@media (min-width: 64rem) {
-  .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    /* sidebar width */
-    width: 14rem;
-    text-align: left;
-  }
+.sidebar-about {
+  color: black;
+  margin-top: 0;
+  font-family: "Abril Fatface", serif;
+  font-size: 1.5rem;
+  flex-direction: row;
 }
 
-/* desktop screen */
-/* 67.5rem 1080px */
+.sidebar-icons {
+  display: none;
+}
+
 /* show right TOC */
-@media (min-width: 67.5rem) {
+@media (min-width: 62rem) {
+  /* Left */
+  .sidebar {
+    flex-direction: column;
+    position: fixed;
+    top: 1rem;
+    bottom: 0;
+    width: 12rem;
+    border-right: dashed black 1px;
+  }
   /* right */
   .sidebar-toc {
     position: fixed;
-    top: 0;
+    top: 1rem;
     right: 0;
-    bottom: 0;
-    /* sidebar width */
+    padding-bottom: 2rem;
     width: 14rem;
     overflow:auto;
     height:100%;
     display: block;
   }
 
-}
-/* Sidebar links */
-.sidebar a {
-  /*color: #fff;*/
-  color: black;
+  .sidebar-about {
+    font-family: "Abril Fatface", serif;
+    font-size: 2rem;
+  }
+
+  .sidebar-icons {
+    display: block;
+  }
 }
 
-/* About section */
-.sidebar-about h1 {
-  /*color: #fff;*/
+/* Sidebar links */
+.sidebar a {
   color: black;
-  margin-top: 0;
-  font-family: "Abril Fatface", serif;
-  font-size: 2.0rem;
-  list-style: none;
 }
 
 /* Sidebar nav */
 .sidebar-nav {
   margin-bottom: 1rem;
-}
-
-/* mobile screen */
-@media (min-width: 30rem) {
-  .sidebar-nav-item {
-    display: inline;
-    line-height: 1.5;
-  }
-}
-
-/* middle-size screen */
-@media (min-width: 64em) {
-  .sidebar-nav-item {
-    display: block;
-    line-height: 1.75;
-  }
-}
-
-a.sidebar-nav-item:hover,
-a.sidebar-nav-item:focus {
-  /*text-decoration: underline;*/
-  font-weight: bold;
-}
-.sidebar-nav-item.active {
-  font-weight: bold;
-}
-
-/* Sticky sidebar
- *
- * Add the `sidebar-sticky` class to the sidebar's container to affix it the
- * contents to the bottom of the sidebar in tablets and up.
- */
-
-@media (min-width: 64rem) {
-  .sidebar-sticky {
-    position: absolute;
-    top: 2rem;
-    left:   1rem;
-    right:  1rem;
-  }
 }
 
 /* Container
@@ -200,52 +161,12 @@ a.sidebar-nav-item:focus {
   padding-bottom: 2rem;
 }
 
-@media (min-width: 30rem) {
-  .content {
-    margin-left: 1rem;
-    margin-right: 1rem;
-  }
+.footer {
+  font-size: 0.8rem;
+  color: #999;
 }
-
-@media (min-width: 64rem) {
-  .content {
-    /* max-width: 40rem; */
-    margin-left: 14rem;
-    margin-right: 1rem;
-  }
-}
-
-@media (min-width: 80rem) {
-  .content {
-    /* max-width: 50rem; */
-    margin-left: 15rem;
-    margin-right: 1rem;
-  }
-}
-
-/*
- * Reverse layout
- *
- * Flip the orientation of the page by placing the `.sidebar` on the right.
- * 侧边栏放在右边的情况
- */
-
-@media (min-width: 48rem) {
-  .layout-reverse .sidebar {
-    left: auto;
-    right: 0;
-  }
-  .layout-reverse .content {
-    margin-left: 2rem;
-    margin-right: 20rem;
-  }
-}
-
-@media (min-width: 64rem) {
-  .layout-reverse .content {
-    margin-left: 4rem;
-    margin-right: 22rem;
-  }
+.footer-inner {
+  text-align: center;
 }
 
 /*
@@ -257,81 +178,8 @@ a.sidebar-nav-item:focus {
 
 /* Base16 (http://chriskempson.github.io/base16/#default) */
 
-/* Red */
-.theme-base-08 .sidebar{
-  background-color: #ac4142;
-}
-.theme-base-08 .content a,
-.theme-base-08 .related-posts li a:hover {
-  color: #ac4142;
-}
-
-/* Orange */
-.theme-base-09 .sidebar{
-  background-color: #d28445;
-}
-.theme-base-09 .content a,
-.theme-base-09 .related-posts li a:hover {
-  color: #d28445;
-}
-
-/* Yellow */
-.theme-base-0a .sidebar{
-  background-color: #f4bf75;
-}
-.theme-base-0a .content a,
-.theme-base-0a .related-posts li a:hover {
-  color: #f4bf75;
-}
-
-/* Green */
-.theme-base-0b .sidebar{
-  background-color: #90a959;
-}
-.theme-base-0b .content a,
-.theme-base-0b .related-posts li a:hover {
-  color: #90a959;
-}
-
-/* Cyan */
-.theme-base-0c .sidebar{
-  background-color: #75b5aa;
-}
-.theme-base-0c .content a,
-.theme-base-0c .related-posts li a:hover {
-  color: #75b5aa;
-}
-
-/* Blue */
-.theme-base-0d .sidebar{
-  background-color: #6a9fb5;
-}
-.theme-base-0d .content a,
-.theme-base-0d .related-posts li a:hover {
-  color: #6a9fb5;
-}
-
-/* Magenta */
-.theme-base-0e .sidebar{
-  background-color: #aa759f;
-}
-.theme-base-0e .content a,
-.theme-base-0e .related-posts li a:hover {
-  color: #aa759f;
-}
-
-/* Brown */
-.theme-base-0f .sidebar{
-  background-color: #8f5536;
-}
-.theme-base-0f .content a,
-.theme-base-0f .related-posts li a:hover {
-  color: #8f5536;
-}
-
 /* my blue theme */
 .theme-myblue .sidebar{
-  /*background-color: #12466e;*/
   background-color: white;
 }
 
@@ -340,13 +188,7 @@ a.sidebar-nav-item:focus {
   color: #268bda;
 }
 
-/* my blue theme */
 .theme-myblue .sidebar-toc{
-  /*background-color: #12466e;*/
   background-color: white;
 }
 
-.theme-myblue .content a,
-.theme-myblue .related-posts li a:hover {
-  color: #268bda;
-}

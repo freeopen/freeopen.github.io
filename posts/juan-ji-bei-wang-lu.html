@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
         <title>Freeopen - 卷积备忘录</title>
-
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://freeopen.github.io/theme/css/main.css" />
         <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/academicons/css/academicons.min.css" />
         <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/font-awesome/css/font-awesome.min.css" />
@@ -22,72 +22,70 @@
 
 </head>
 
-<!-- <body class="theme-myblue"id="index" class="home"> -->
-<body id="index" class="theme-myblue">
+<body id="index" class="theme-myblue" data-spy="scroll" data-target="#post_toc">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-lg">
+        <nav class="navbar navbar-expand-lg navbar-light sidebar" role="navigation">
+          <a class="sidebar-about" href="https://freeopen.github.io/">Freeopen</a>
+          <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <nav class="collapse navbar-collapse sidebar-nav flex-column" id="navbarNav">
 
-  <div class="sidebar">
-    <div class="container sidebar-sticky">
-      <div class="sidebar-about">
-        <h1><a href="https://freeopen.github.io/">Freeopen <strong></strong></a></h1>
-        <p class="lead"></p>
+              <a class="nav-link" href="https://freeopen.github.io/pages/about.html">About</a>
+              <a class="nav-link" href="https://freeopen.github.io/pages/da-shang.html">打赏</a>
+
+              <a class="nav-link" href="https://freeopen.github.io/category/bian-cheng.html">编程</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/shou-ce.html">手册</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/shu-xue.html">数学</a>
+            <div class="sidebar-icons">
+              <hr>
+                <a href="" title="Atom feed" target="_blank" 
+                    style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;">
+                  <i class="fa fa-rss-square"></i>
+                </a>
+                <a href="https://github.com/freeopen" title="Software I released on Github" 
+                      target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="fa fa-github-square"></i> </a>
+                <a href="Mailto:freeopen@163.com" title="My email" 
+                    target="_blank" style="display: inline; padding: 0px 0px 0px 0;
+                    margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i
+                  class="fa fa-envelope-square"></i> </a>
+
+            </div>
+          </nav>
+
+        </nav>
+
       </div>
-      <nav id="menu" class="sidebar-nav">
 
-
-            <a class="sidebar-nav-item" href="https://freeopen.github.io/pages/about.html">About</a>
-            <a class="sidebar-nav-item" href="https://freeopen.github.io/pages/da-shang.html">打赏</a>
-
-            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/bian-cheng.html">编程</a>
-            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
-            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/shou-ce.html">手册</a>
-            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/shu-xue.html">数学</a>
-
-        <hr>
-
-          <a href="" title="Atom feed" target="_blank" 
-              style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;">
-            <i class="fa fa-rss-square"></i>
-          </a>
-          <a href="https://github.com/freeopen" title="Software I released on Github" 
-                target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="fa fa-github-square"></i> </a>
-          <!-- <a href="" title="Google Scholar" --> 
-          <!--     target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="ai ai-google-scholar-square"></i> </a> -->
-          <!-- <a href="" title="LinkedIn" --> 
-          <!--     target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="fa fa-linkedin-square"></i> </a> -->
-          <!-- <a href="" title="ResearchGate" --> 
-          <!--     target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="ai ai-researchgate-square"></i> </a> -->
-          <a href="Mailto:freeopen@163.com" title="My email" 
-              target="_blank" style="display: inline; padding: 0px 0px 0px 0;
-              margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i
-            class="fa fa-envelope-square"></i> </a>
-      </nav>
-
-    </div>
-  </div>
-
-  <div id="content" class="container content">
-    <div class="post">
+      <div class="col-12 col-lg-7" role="main">
+        <div id="content" class="content">
+          <div class="post">
 <section id="content" class="body">
   <header>
     <h1 class="entry-title">卷积备忘录</h2>
  
   </header>
-  <footer class="post-info">
-    <time class="published" datetime="2019-01-05T00:00:00+08:00">
-      2019-01-05
-    </time>
-    <address class="vcard author">
-      By           <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
-    </address>
-    <div class="category">
-        Category: <a href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
-    </div>
-  </footer><!-- /.post-info -->
-  <div class="entry-content">
+  <div class="post-info">
+
+    <span>2019-01-05</span>
+
+
+    <span>| By             <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
+    </span>
+
+    <span>
+      | 分类于 <a href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
+    </span>
+
+  </div><!-- /.post-info -->
+  <div class="related-posts">
     <blockquote>
 <p>学习了一段时间卷积，到了该整理的时候了。这是一篇不会写完的文章，它将跟进卷积技术的发展和演变，进行增补。</p>
 </blockquote>
-<h2 id="juan ji de shu xue yuan li">卷积的数学原理</h2>
+<h2 id="juan-ji-de-shu-xue-yuan-li">卷积的数学原理</h2>
 <p>在图像处理中，卷积计算属于二维卷积的离散形式，公式如下：
 </p>
 <div class="math">$$(f*g)[n_1, n_2] = \sum_{m_1 = -\infty}^{+\infty}\sum_{m_2 = -\infty}^{+\infty}f[m_1, m_2]\cdot g[n_1 - m_1, n_2 - m_2]$$</div>
@@ -100,7 +98,7 @@
     位置为中心，宽w高h的一块矩形区域的所有值之列表</li>
 </ul>
 <p>离散的二维卷积计算表现为卷积核（也称 <code>过滤器</code> ）在二维平面上平移， 且卷积核的每个元素与被卷积的图像像素点数值对位相乘，再求和。 为什么简单的相乘再求和运算，就能抽取出图像的特征呢？因为这种计算方式就是两个向量的内积计算，线性代数中两个向量的余弦相似度即是两个向量求内积再除以它们的模，或者先把两个向量标准化后再求它们的内积，所以卷积计算即是对相似度的衡量，其输出的值表示某区域图像与过滤器的相似程度。</p>
-<h2 id="juan ji de biao shi">卷积的表示</h2>
+<h2 id="juan-ji-de-biao-shi">卷积的表示</h2>
 <p>在机器学习中，我们常以四个超参数来定义卷积，它们分别是:</p>
 <ul>
 <li>卷积核的尺寸 <span class="math">\(K\)</span> (kernal
@@ -110,9 +108,9 @@ size);</li>
 <li>以及被卷积对象边缘填充零的数量 <span class="math">\(P\)</span> (padding)。</li>
 </ul>
 <p>如果要表示<a href="#kong dong juan ji">空洞卷积</a>，还需要一个表示空洞数量的超参数，我喜欢把它记为 <span class="math">\(D\)</span>。</p>
-<h2 id="juan ji de shu chu chi cun">卷积的输出尺寸</h2>
+<h2 id="juan-ji-de-shu-chu-chi-cun">卷积的输出尺寸</h2>
 <p>假如我们有一张&nbsp;<code>32x32x3</code>&nbsp;的输入图像，我们使用&nbsp;10&nbsp;个尺寸为&nbsp;<code>3x3x3</code>&nbsp;的过滤器，单步幅和零填充。在这里，<span class="math">\(W\)</span>&nbsp;是输入尺寸，<span class="math">\(K\)</span>&nbsp;是过滤器的尺寸，<span class="math">\(P\)</span>&nbsp;是填充数量，<span class="math">\(S\)</span>&nbsp;是步幅数。那么，输出图像的空间尺寸可以计算为 <span class="math">\(([W - K&nbsp;+&nbsp;2P]&nbsp;\div&nbsp;S) + 1\)</span> 。即 <span class="math">\(W=32，K=3，P=0，S=1\)</span>， 输出深度等于应用的过滤器的数量 10， 输出尺寸大小为&nbsp;<span class="math">\(([32 - 3 + 0] \div 1) + 1&nbsp;=&nbsp;30\)</span>, 因此输出尺寸是&nbsp;<code>30x30x10</code>。</p>
-<h2 id="juan ji wang luo de gan shou ye">卷积网络的感受野</h2>
+<h2 id="juan-ji-wang-luo-de-gan-shou-ye">卷积网络的感受野</h2>
 <p>感受野( Receptive Field )表示经过卷积网络输出的一个点能看到原始输入的范围大小。对仅有一层的卷积网络来说，感受野的大小就是卷积核的大小，但对于层叠网络来说，感受野的计算就会稍微复杂些。习惯上，我们把层叠模型中靠近原始输入端的叫做低层，把靠近最终结果的层称为高层，计算感受野的公式为：
 </p>
 <div class="math">$$F(i, j-1) = K_j + (F(i,j) - 1) \times (S_j - D_j)$$</div>
@@ -125,11 +123,11 @@ size);</li>
 <li><span class="math">\(D_j\)</span> 表示第 <span class="math">\(j\)</span> 层卷积核的空洞数量。</li>
 </ul>
 <p>按上述公式递归计算后，顶层对底层的感受野就能算出了。</p>
-<h2 id="juan ji de jin hua">卷积的进化</h2>
+<h2 id="juan-ji-de-jin-hua">卷积的进化</h2>
 <p>卷积形式经过各种排列组合，诞生了不少经典神经网络结构，我想要探索的不仅仅是这些结构本身，更想要搞明白这些结构设计的初衷，以及带来的好处是什么。</p>
-<h3 id="zu juan ji">组卷积</h3>
+<h3 id="zu-juan-ji">组卷积</h3>
 <p>组卷积(Grouped Convolution)曾被用于 AlexNet 中，将模型分布在两个 GPU 上以解决内存处理问题。用一个 32 通道的例子来解释一下组卷积：把 32 个输入通道平均分为 4 组，每组拥有 8 个通道，并分别对 4 组单独做卷积运算。这样的好处是参数较少可以提升计算速度，但是同时，由于每组卷积之间不存在交互，不同组的输出通道与输入通道并不相关。</p>
-<h3 id="kong dong juan ji">空洞卷积</h3>
+<h3 id="kong-dong-juan-ji">空洞卷积</h3>
 <p>空洞卷积 (Dilated Convolution) 又叫膨胀卷积 ( Atrous Convolution)， 它的想法是在卷积核中增加&ldquo;空洞&rdquo;， 从而在不增加参数量的情况下捕捉到更远的距离。换种说法就是空洞卷积能增加感受野。</p>
 <p>空洞卷积核的设计很简单，其实就是对卷积核的插 0 操作， 比如由&ldquo;111&rdquo;变为&ldquo;10101&rdquo;这样。空洞卷积常用于一维卷积的场景，比如 NLP  的语义分割、文本抽取等任务，语音合成等任务。</p>
 <p>空洞卷积在不增加参数的前提下增加感受野，我们举个例子算一下。设有4层网络，第1层为一维序列，第2层为普通卷积(核尺寸,步幅数,空洞数) = (K,S,D) = (3,2,0)，第3层为空洞卷积(3,4,2)，第4层为空洞卷积(3,8,6)，那么第4层到第1层的感受野为15，计算步骤如下：</p>
@@ -137,12 +135,12 @@ size);</li>
 <div class="math">$$F(2,1) = 3$$</div>
 <div class="math">$$F(3,1) = 3 + (3-1)\times(4-2) = 7$$</div>
 <div class="math">$$F(4,1) = 3 + (7-1)\times(8-6) = 15$$</div>
-<h3 id="hun he juan ji">混合卷积</h3>
+<h3 id="hun-he-juan-ji">混合卷积</h3>
 <p>传统的层叠式网络，基本上都是一个个卷积层的堆叠，每层只用一个尺寸的卷积核。于是有人想，如果每层用多个尺寸的卷积核，是否能提炼到更好的特征呢？</p>
 <p>Google的研究员首次在 Inception
 家族的结构中采用了这种想法，把上层的输入分别同时经过 1x1、3x3、5x5
 的卷积核进行处理，得出的特征再组合起来，传到下一层。这种方法确实令模型的性能有所提高，但紧接而来的副作用是，由于卷积核的数量增多，参数量暴增。</p>
-<h3 id="ping jing juan ji">瓶颈卷积</h3>
+<h3 id="ping-jing-juan-ji">瓶颈卷积</h3>
 <p>常被称为瓶颈层( Bottleneck Layer)，用来缩减参数量，瓶颈层的叫法很形象，就像漏斗一样。瓶颈层的计算方式也常被称为 Pointwise 操作，所以瓶颈卷积也叫做 Pointwise Convolution。</p>
 <p>举例解释一下参数如何被降低的。</p>
 <div class="math">$$input\;256d \to 1\times 1\times 64 \to 3\times 3\times 64 \to 1\times1\times 256 \to output\; 256d$$</div>
@@ -153,7 +151,7 @@ size);</li>
 <div class="math">$$input\; 256d \to 3\times 3\times 256 \to output\; 256d$$</div>
 <p>其参数量为：<span class="math">\(256\times 3\times 3\times 256 = 589,824\)</span>, 瓶颈卷积的参数较传统方案降低了约 8.5 倍。</p>
 <p>仔细想一想，发现瓶颈层在计算上的效果和全连接层一样，通过一个权重变换达到降维目的。</p>
-<h3 id="shen du juan ji">深度卷积</h3>
+<h3 id="shen-du-juan-ji">深度卷积</h3>
 <p>深度卷积( Depthwise Convolution
 )的想法是一个卷积核仅对一个通道进行计算，且输入通道数等于输出通道数，这种计算方式又被叫做 depthwise
 操作。之所以叫做深度卷积，是因为通道这个维度常被称为深度，比如一个RGB图像，我们可以用高x宽x深度(或通道数)来标定它的尺寸。
@@ -172,15 +170,15 @@ X_{(i+j-\lceil{k+1\over 2}\rceil),c}$$</div>
     个元素为中心，以 <span class="math">\(\lceil{k+1\over 2}\rceil\)</span> 为半径范围内的所有元素，<span class="math">\(\lceil
     \cdot \rceil\)</span> 表示向上取整; <span class="math">\(W_{c,j}\)</span> 表示第 c 个卷积核中第 j 个元素。</li>
 </ul>
-<h3 id="shen du ke fen chi juan ji">深度可分离卷积</h3>
+<h3 id="shen-du-ke-fen-chi-juan-ji">深度可分离卷积</h3>
 <p>深度可分离卷积 (Depthwise Separable Convolution) 的流行来自谷歌 Xception 结构的流行。这种卷积的思想是把过去一个卷积核对多通道的计算变为一个卷积核仅针对一个通道，被称为 Depthwise 操作，然后再用1x1卷积将每个通道输出的特征图( Feature map) <sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup>进行融合，这被称为 Pointwise 操作，也即是前面提到的瓶颈卷积。
 因此，深度可分离卷积实质上是 Depthwise Convolution 和 Pointwise Convolution
 的组合。</p>
 <p>深度可分离卷积可以看成是交错组卷积的特例，显著降低了参数量，从而增加了神经网络性能。假设卷积核的尺寸为 k，输入的通道和卷积核的数量均为 c ，则对于一个感受野来说，所需的参数量为 <span class="math">\(k\cdot c + c^2\)</span>，而传统卷积的参数量为 <span class="math">\(k\cdot c^2\)</span>。</p>
-<h3 id="jiao cuo zu juan ji">交错组卷积</h3>
+<h3 id="jiao-cuo-zu-juan-ji">交错组卷积</h3>
 <p>交错组卷积( Interleaved Group Convolution ) 的思路由微软研究院提出。前面提到，组卷积中不同组的输出与输入通道之间缺乏相关性，要增加这种相关性，只需要把其他组的输出通道叠加进来，再次进行卷积运算即可。</p>
 <p>具体方法为，做两次组卷积，第一次还是和一般组卷积一样，然后把所有组卷积的输出交错排列后，作为第二次组卷积的输入，以达到交错互补的目的。交错组卷积增加了网络的宽度，同时增加了通道间的相关性，自然模型性能会提升。</p>
-<h3 id="qing quan zhong juan ji">轻权重卷积</h3>
+<h3 id="qing-quan-zhong-juan-ji">轻权重卷积</h3>
 <p>轻权重卷积(Lightweight Convolution) 由 Depthwise
 卷积进化而来，如果你理解了上面的公式，那么你就能根据轻权重卷积的公式立即明白它改进了什么。</p>
 <div class="math">$$LightConv(X, W_{\lceil{cH\over d}\rceil, :}, i, c) = DepthwiseConv(X,
@@ -195,7 +193,7 @@ softmax 函数的公式为：
 <div class="math">$$ softmax(W)_{h,j} = {exp W_{h,j}\over \sum_{j'=1}^k exp W_{h,j'}} $$</div>
 <p>对比深度可分离卷积，如果不考虑 Pointwise 部分，在一个感受野下，轻权重卷积的参数量由
 Depthwise 卷积的 <span class="math">\(k\cdot c\)</span> 降低到 <span class="math">\(k\cdot H\)</span>。</p>
-<h3 id="dong tai juan ji">动态卷积</h3>
+<h3 id="dong-tai-juan-ji">动态卷积</h3>
 <p>动态卷积 ( Dynamic Convolution )
 继续在卷积核上做文章，前面的卷积核仅仅是个可训练的权重，动态卷积把它发展为一个随输入
 X 中元素变化的线性函数。
@@ -210,7 +208,7 @@ X 中元素变化的线性函数。
 \cdot d\)</span>。</p>
 <p>观察轻权重卷积和动态卷积的构成，我认为都属于 depthwise
 卷积家族，它们的不同点仅在于对卷积核上施加了不同的函数。对于轻权重卷积而已，它通过减少卷积核数量，同时兼顾卷积核中其他元素的相关性，进一步降低了参数量；对于动态卷积而言，它在轻权重卷积基础上，又多兼顾了通道间的相关性，但参数量有所增加。</p>
-<h3 id="duo tou zi zhu yi li">多头自注意力</h3>
+<h3 id="duo-tou-zi-zhu-yi-li">多头自注意力</h3>
 <p>没错，你没看错，如果你参悟透了多头自注意力结构，它实质仍然是卷积计算。
 多头自注意力(Multi-Head Self-Attention，以下简称"MHSA") 来自 Google Brain
 的大作。2018年底，在这个基础上又诞生了 Bert 模型，当时拿下 11
@@ -232,7 +230,7 @@ Q、K、V，它们其实都是单词的语义表达，降低参数量是我们�
 <p>在公式 (2) 中，将 (1) 式重复做 h
 次，再把结果拼接起来，乘以一个权重得到一个维度为 <span class="math">\(d_{model}\)</span>
 的向量。这里的重复次数就好比一个卷积核的多个通道，它算出当前词向量表达的不同方面的特征。观察动态卷积的设计，发现和多头自注意力的设计似有借鉴之处。</p>
-<h3 id="can chai wang luo">残差网络</h3>
+<h3 id="can-chai-wang-luo">残差网络</h3>
 <p>当卷积的层数加深时，网络的表现会越来越差，很大程度上的原因是因为当层数加深时，梯度消散得越来越严重，以至于反向传播很难训练到浅层的网络（靠近输入层的网络）。残差网络 ( Resnet ) 思想是在原来层叠网络的基础上增加跳线连接，在跳线的末端那层同时接入上层输入和跳线过来的输入（即前面某层的输出）。</p>
 <p>下面解释一下残差结构为什么能解决梯度消散问题。</p>
 <div class="math">$$ a^{l+2} = g(z^{l+2} + a^l) = g(W^{l+2} a^{l+1} + b^{l+2} + a^l)$$</div>
@@ -249,11 +247,11 @@ Q、K、V，它们其实都是单词的语义表达，降低参数量是我们�
 <li>将 <span class="math">\(W_s\)</span> 作为学习参数训练得到；</li>
 <li>固定 <span class="math">\(W_s\)</span> 值( 类似单位矩阵 ) ，<span class="math">\({W_s} \cdot {a^l}\)</span> 仅使 <span class="math">\(a^l\)</span> 截断或补零。</li>
 </ol>
-<h3 id="ke bian xing juan ji">可变形卷积</h3>
+<h3 id="ke-bian-xing-juan-ji">可变形卷积</h3>
 <p>可变形卷积 (Deformable Convolution) 的想法是在卷积核上做文章。卷积核一般的形状为正方形或长方形，由于图像中我们感兴趣的区域往往是不规则图形，如果让卷积核的形状能根据关注区域的形状发生形变，那么是否会获得更好的性能呢？比如针对缩放的物体，就训练出能缩放的卷积核，对于旋转的物体，就训练出能旋转的卷积核，这样抽取出的特征将有更好的范化性。</p>
 <p>该想法的提出来自微软亚洲研究院。它的方法是在原来的卷积核前面再加一层过滤器（记为偏移过滤器），这层过滤器学习的是下一层卷积核的位置偏移量。假设输入的形状为 [H，W，C]，经过偏移过滤器后输出的形状为 [H, W, 2 x C]，这里的通道变为原来的两倍。因为我们需要在这个offset field里面取一组卷积核的offsets，而一个offset肯定不能一个值就表示的，最少也要用两个值（x方向上的偏移和y方向上的偏移）。取完了这些值，就可以顺利使卷积核形变，后面再按常规卷积操作即可。</p>
 <p>该卷积网络在自动驾驶的图像语义分割任务上获得了 5 个点的提升。</p>
-<h3 id="te zheng zhong biao ding juan ji">特征重标定卷积</h3>
+<h3 id="te-zheng-zhong-biao-ding-juan-ji">特征重标定卷积</h3>
 <p>图像的特征通过卷积核抽取出来，形成一个个特征通道，那么每个特征通道的作用都同等重要么？显然不是。如果有办法通过学习的方式自动获取每个特征通道的重要程度，然后依照计算出来的重要程度去提升有用的特征，抑制用处不大的特征，这就是特征重标定卷积思想的由来。该思路构建的模型结构叫做Squeeze-and-Excitation Network，简称 SENet，曾是 ImageNet 2017 竞赛的冠军模型。</p>
 <p>SENet 结构为：首先做普通卷积，得到了一个的 output feature map，它的shape为[C，H，W]，再分两条路线，第一条直接通过，第二条首先进行Squeeze操作（Global Average Pooling），把每个通道 2 维的特征压缩成 1 维，得到长度为 C 的特征通道向量（每个数字代表对应通道的特征）；然后进行 Excitation 操作，即对特征通道向量加两个全连接层( FC Layer )，和非线性映射( Sigmoid )，建模出特征通道间的相关性，得到的输出其实就是每个通道对应的权重，把这些权重加权到原来的特征上（第一条路），这样就完成了特征通道的权重分配。</p>
 <p>第一步 Squeeze 操作为每个特征通道生成一个实数，该实数在某种程度上拥有全局感受野，表征着在特征通道上响应的全局分布，而且使得靠近输入的层也可以获得全局的感受野。</p>
@@ -264,7 +262,7 @@ Q、K、V，它们其实都是单词的语义表达，降低参数量是我们�
 <div class="math">$$ s = F_ex(z,W) = \sigma(g(z,W)) = \sigma(W_2(\delta(W_{1}z)) $$</div>
 <p>
 其中，<span class="math">\(\sigma\)</span> 表示 <span class="math">\(ReLU\)</span> 函数,  <span class="math">\(\delta\)</span> 表示 <span class="math">\(sigmoid\)</span> 函数。 </p>
-<h2 id="bu wan quan xiao jie_1">不完全小结</h2>
+<h2 id="bu-wan-quan-xiao-jie_1">不完全小结</h2>
 <p>神经网络恒古不变的追求其实就一条，减少参数并提升性能。
 观察上述各种卷积的变化，发现确有规律可循，它们包括：</p>
 <ul>
@@ -275,7 +273,7 @@ Q、K、V，它们其实都是单词的语义表达，降低参数量是我们�
   再做卷积运算，这样的卷积有轻权重卷积和动态卷积。</li>
 </ul>
 <p>其实，对于卷积网络，还可以讨论的方面有激活函数的选择，卷积网络的宽度和深度如何平衡，池化层和dropout的考虑等等，但考虑到上述有些问题目前还没定论，有些内容写在这里，可能会冲淡主题，所以暂时略过，以后发现有必要时再增补。</p>
-<h2 id="can kao wen xian">参考文献</h2>
+<h2 id="can-kao-wen-xian">参考文献</h2>
 <ul>
 <li><a href="https://arxiv.org/pdf/1901.10430v1.pdf">F. Wu, A. Fan, A. Baevski, Y. N. Dauphin, and M. Auli. Pay Less Attention With Lightweight and Dynamic Convolutions. 2019.</a></li>
 <li><a href="https://arxiv.org/pdf/1709.01507.pdf">J. Hu, L. Shen, S. Albanie, G. Sun, and E. Wu. Squeeze-and-Excitation Networks. 2017.</a></li>
@@ -366,24 +364,27 @@ Q、K、V，它们其实都是单词的语义表达，降低参数量是我们�
     <noscript>Please enable JavaScript to view the comments.</noscript>
   </div>
 </section>
+          </div>
+
+          <footer id="contentinfo" class="footer">
+            <div class="footer-inner">
+              无节操小广告<a href="https://freeopen.github.io/pages/da-shang.html"> 欢迎打赏 </a>
+            </div>
+          </footer><!-- /#contentinfo -->
+        </div>
+      </div>
+
+      <div class="hidden-print hidden-xs hidden-sm hidden-md col-lg" id="post_toc" role="complementary">
+        <nav class="sidebar-toc">
+<!-- <section id="main_toc"> -->
+    <ul class="nav" id="toc"><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#juan-ji-de-shu-xue-yuan-li" title="卷积的数学原理">卷积的数学原理</a></li><li class="nav-item"><a class="nav-link" href="#juan-ji-de-biao-shi" title="卷积的表示">卷积的表示</a></li><li class="nav-item"><a class="nav-link" href="#juan-ji-de-shu-chu-chi-cun" title="卷积的输出尺寸">卷积的输出尺寸</a></li><li class="nav-item"><a class="nav-link" href="#juan-ji-wang-luo-de-gan-shou-ye" title="卷积网络的感受野">卷积网络的感受野</a></li><li class="nav-item"><a class="nav-link" href="#juan-ji-de-jin-hua" title="卷积的进化">卷积的进化</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#zu-juan-ji" title="组卷积">组卷积</a></li><li class="nav-item"><a class="nav-link" href="#kong-dong-juan-ji" title="空洞卷积">空洞卷积</a></li><li class="nav-item"><a class="nav-link" href="#hun-he-juan-ji" title="混合卷积">混合卷积</a></li><li class="nav-item"><a class="nav-link" href="#ping-jing-juan-ji" title="瓶颈卷积">瓶颈卷积</a></li><li class="nav-item"><a class="nav-link" href="#shen-du-juan-ji" title="深度卷积">深度卷积</a></li><li class="nav-item"><a class="nav-link" href="#shen-du-ke-fen-chi-juan-ji" title="深度可分离卷积">深度可分离卷积</a></li><li class="nav-item"><a class="nav-link" href="#jiao-cuo-zu-juan-ji" title="交错组卷积">交错组卷积</a></li><li class="nav-item"><a class="nav-link" href="#qing-quan-zhong-juan-ji" title="轻权重卷积">轻权重卷积</a></li><li class="nav-item"><a class="nav-link" href="#dong-tai-juan-ji" title="动态卷积">动态卷积</a></li><li class="nav-item"><a class="nav-link" href="#duo-tou-zi-zhu-yi-li" title="多头自注意力">多头自注意力</a></li><li class="nav-item"><a class="nav-link" href="#can-chai-wang-luo" title="残差网络">残差网络</a></li><li class="nav-item"><a class="nav-link" href="#ke-bian-xing-juan-ji" title="可变形卷积">可变形卷积</a></li><li class="nav-item"><a class="nav-link" href="#te-zheng-zhong-biao-ding-juan-ji" title="特征重标定卷积">特征重标定卷积</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#bu-wan-quan-xiao-jie_1" title="不完全小结">不完全小结</a></li><li class="nav-item"><a class="nav-link" href="#can-kao-wen-xian" title="参考文献">参考文献</a></li></ul></ul>
+<!-- </section> -->
+<!-- </section> -->
+        </nav>
+      </div>
     </div>
-    <footer id="contentinfo" class="pagination" style="font-size:85%">
-            <address id="about" class="vcard body">
-            无节操小广告<a href="https://freeopen.github.io/pages/da-shang.html"> 欢迎打赏 </a>
-            </address><!-- /#about -->
-    </footer><!-- /#contentinfo -->
   </div>
 
-  <!--Right-->
-  <div id="main_toc" class="sidebar-toc">
-<section id="main_toc">
-    <!-- <div class="col-lg-2 hidden-xs hidden-sm"> -->
-    <nav toc-data class="col-lg-2 hidden-xs hidden-sm">
-      <div id="toc"><ul><li><a class="toc-href" href="#juan ji de shu xue yuan li" title="卷积的数学原理">卷积的数学原理</a></li><li><a class="toc-href" href="#juan ji de biao shi" title="卷积的表示">卷积的表示</a></li><li><a class="toc-href" href="#juan ji de shu chu chi cun" title="卷积的输出尺寸">卷积的输出尺寸</a></li><li><a class="toc-href" href="#juan ji wang luo de gan shou ye" title="卷积网络的感受野">卷积网络的感受野</a></li><li><a class="toc-href" href="#juan ji de jin hua" title="卷积的进化">卷积的进化</a><ul><li><a class="toc-href" href="#zu juan ji" title="组卷积">组卷积</a></li><li><a class="toc-href" href="#kong dong juan ji" title="空洞卷积">空洞卷积</a></li><li><a class="toc-href" href="#hun he juan ji" title="混合卷积">混合卷积</a></li><li><a class="toc-href" href="#ping jing juan ji" title="瓶颈卷积">瓶颈卷积</a></li><li><a class="toc-href" href="#shen du juan ji" title="深度卷积">深度卷积</a></li><li><a class="toc-href" href="#shen du ke fen chi juan ji" title="深度可分离卷积">深度可分离卷积</a></li><li><a class="toc-href" href="#jiao cuo zu juan ji" title="交错组卷积">交错组卷积</a></li><li><a class="toc-href" href="#qing quan zhong juan ji" title="轻权重卷积">轻权重卷积</a></li><li><a class="toc-href" href="#dong tai juan ji" title="动态卷积">动态卷积</a></li><li><a class="toc-href" href="#duo tou zi zhu yi li" title="多头自注意力">多头自注意力</a></li><li><a class="toc-href" href="#can chai wang luo" title="残差网络">残差网络</a></li><li><a class="toc-href" href="#ke bian xing juan ji" title="可变形卷积">可变形卷积</a></li><li><a class="toc-href" href="#te zheng zhong biao ding juan ji" title="特征重标定卷积">特征重标定卷积</a></li></ul></li><li><a class="toc-href" href="#bu wan quan xiao jie_1" title="不完全小结">不完全小结</a></li><li><a class="toc-href" href="#can kao wen xian" title="参考文献">参考文献</a></li></ul></div>
-    </nav>
-    <!-- </div> -->
-</section>
-  </div>
 
     <script type="text/javascript">
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -403,5 +404,9 @@ Q、K、V，它们其实都是单词的语义表达，降低参数量是我们�
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>
+<script src="https://freeopen.github.io/theme/js/jquery-3.3.1.slim.min.js"></script>
+<script src="https://freeopen.github.io/theme/js/popper.min.js"></script>
+<script src="https://freeopen.github.io/theme/js/bootstrap.min.js"></script>
+
 </body>
 </html>

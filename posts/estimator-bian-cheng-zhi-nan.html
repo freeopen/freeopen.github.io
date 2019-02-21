@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
         <title>Freeopen - Estimator 编程指南</title>
-
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://freeopen.github.io/theme/css/main.css" />
         <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/academicons/css/academicons.min.css" />
         <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/font-awesome/css/font-awesome.min.css" />
@@ -22,68 +22,67 @@
 
 </head>
 
-<!-- <body class="theme-myblue"id="index" class="home"> -->
-<body id="index" class="theme-myblue">
+<body id="index" class="theme-myblue" data-spy="scroll" data-target="#post_toc">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-lg">
+        <nav class="navbar navbar-expand-lg navbar-light sidebar" role="navigation">
+          <a class="sidebar-about" href="https://freeopen.github.io/">Freeopen</a>
+          <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <nav class="collapse navbar-collapse sidebar-nav flex-column" id="navbarNav">
 
-  <div class="sidebar">
-    <div class="container sidebar-sticky">
-      <div class="sidebar-about">
-        <h1><a href="https://freeopen.github.io/">Freeopen <strong></strong></a></h1>
-        <p class="lead"></p>
+              <a class="nav-link" href="https://freeopen.github.io/pages/about.html">About</a>
+              <a class="nav-link" href="https://freeopen.github.io/pages/da-shang.html">打赏</a>
+
+              <a class="nav-link" href="https://freeopen.github.io/category/bian-cheng.html">编程</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/shou-ce.html">手册</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/shu-xue.html">数学</a>
+            <div class="sidebar-icons">
+              <hr>
+                <a href="" title="Atom feed" target="_blank" 
+                    style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;">
+                  <i class="fa fa-rss-square"></i>
+                </a>
+                <a href="https://github.com/freeopen" title="Software I released on Github" 
+                      target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="fa fa-github-square"></i> </a>
+                <a href="Mailto:freeopen@163.com" title="My email" 
+                    target="_blank" style="display: inline; padding: 0px 0px 0px 0;
+                    margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i
+                  class="fa fa-envelope-square"></i> </a>
+
+            </div>
+          </nav>
+
+        </nav>
+
       </div>
-      <nav id="menu" class="sidebar-nav">
 
-
-            <a class="sidebar-nav-item" href="https://freeopen.github.io/pages/about.html">About</a>
-            <a class="sidebar-nav-item" href="https://freeopen.github.io/pages/da-shang.html">打赏</a>
-
-            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/bian-cheng.html">编程</a>
-            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
-            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/shou-ce.html">手册</a>
-            <a class="sidebar-nav-item" href="https://freeopen.github.io/category/shu-xue.html">数学</a>
-
-        <hr>
-
-          <a href="" title="Atom feed" target="_blank" 
-              style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;">
-            <i class="fa fa-rss-square"></i>
-          </a>
-          <a href="https://github.com/freeopen" title="Software I released on Github" 
-                target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="fa fa-github-square"></i> </a>
-          <!-- <a href="" title="Google Scholar" --> 
-          <!--     target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="ai ai-google-scholar-square"></i> </a> -->
-          <!-- <a href="" title="LinkedIn" --> 
-          <!--     target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="fa fa-linkedin-square"></i> </a> -->
-          <!-- <a href="" title="ResearchGate" --> 
-          <!--     target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="ai ai-researchgate-square"></i> </a> -->
-          <a href="Mailto:freeopen@163.com" title="My email" 
-              target="_blank" style="display: inline; padding: 0px 0px 0px 0;
-              margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i
-            class="fa fa-envelope-square"></i> </a>
-      </nav>
-
-    </div>
-  </div>
-
-  <div id="content" class="container content">
-    <div class="post">
+      <div class="col-12 col-lg-7" role="main">
+        <div id="content" class="content">
+          <div class="post">
 <section id="content" class="body">
   <header>
     <h1 class="entry-title">Estimator 编程指南</h2>
  
   </header>
-  <footer class="post-info">
-    <time class="published" datetime="2018-03-04T00:00:00+08:00">
-      2018-03-04
-    </time>
-    <address class="vcard author">
-      By           <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
-    </address>
-    <div class="category">
-        Category: <a href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
-    </div>
-  </footer><!-- /.post-info -->
-  <div class="entry-content">
+  <div class="post-info">
+
+    <span>2018-03-04</span>
+
+    <span>| 更新于 2018-04-12</span>
+
+    <span>| By             <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
+    </span>
+
+    <span>
+      | 分类于 <a href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
+    </span>
+
+  </div><!-- /.post-info -->
+  <div class="related-posts">
     <blockquote>
 <p>2018-04-12 第一次修订, 新增"多GPU下的写法"</p>
 </blockquote>
@@ -158,7 +157,7 @@
 </ul>
 <h2 id="input_fn">input_fn</h2>
 <p>原始数据一般工整的很少，所以要把input_fn写好，还是蛮难的。</p>
-<h3 id="xiao shu ju de qing kuang">小数据的情况</h3>
+<h3 id="xiao-shu-ju-de-qing-kuang">小数据的情况</h3>
 <p>通常实验性的项目采用小规模的数据，这时只需要简单把数据载入内存作训练即可, 我们可以用numpy、pandas等通用工具来处理数据。
 假如原始数据是csv文件，选用pandas读入并作预处理：</p>
 <div class="highlight"><pre><span></span><span class="c1"># 定义列名</span>
@@ -206,7 +205,7 @@
 <span class="n">eval_input_fn</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">pandas_input_fn</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">eval_data</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">eval_label</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 </pre></div>
 <p>这样，input_fn就快速的写好了。</p>
-<h3 id="da shu ju de qing kuang">大数据的情况</h3>
+<h3 id="da-shu-ju-de-qing-kuang">大数据的情况</h3>
 <p>pandas一次性把数据载入内存中，不适合大数据量的情形。
 面对大规模数据时，需要给数据和模型之间接上管道，然后打开水龙头，按照你想要的流量把数据传入模型。
 这时，TF提供的 dataset api 就派上用场了。</p>
@@ -312,7 +311,7 @@ input_fn函数的写法如下：</p>
 <span class="n">classifier</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
   <span class="n">input_fn</span><span class="o">=</span><span class="n">train_input_fn</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
-<h2 id="te zheng lie_1">特征列</h2>
+<h2 id="te-zheng-lie_1">特征列</h2>
 <p>特征列实质上是对input_fn()输出的数据做的二次封装，它是做特征工程的强力工具之一。
 特征列好比一种约定，它规定了estimator使用input_fn传入的数据具备什么样的形式, 
 主要目的是令特征数据变得更方便机器运算。</p>
@@ -335,7 +334,7 @@ input_fn函数的写法如下：</p>
 <li>crossed_column : 合成列</li>
 <li>weighted_categorical_column : 权重类别列</li>
 </ul>
-<h3 id="shu zhi lie">数值列</h3>
+<h3 id="shu-zhi-lie">数值列</h3>
 <p>以鸢尾花分类问题举例，其输入特征 SepalLength, SepalWidth, PetalLength, PetalWidth （萼片的长宽、花瓣的长宽）就是数值类型。用法：</p>
 <div class="highlight"><pre><span></span><span class="c1"># 缺省为tf.float32的标量.</span>
 <span class="n">numeric_feature_column</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">numeric_column</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">"SepalLength"</span><span class="p">)</span>
@@ -352,7 +351,7 @@ input_fn函数的写法如下：</p>
 <span class="n">matrix_feature_column</span>
    <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">numeric_column</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">"MyMatrix"</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span> 
 </pre></div>
-<h3 id="fen qu lie">分区列</h3>
+<h3 id="fen-qu-lie">分区列</h3>
 <p>如果要把一个数值分成不同区间，比如按年份划分：
 <p align="center">
 <img src="/images/4_.jpg" width="60%"/>
@@ -393,7 +392,7 @@ input_fn函数的写法如下：</p>
     <span class="n">source_column</span> <span class="o">=</span> <span class="n">numeric_feature_column</span><span class="p">,</span>
     <span class="n">boundaries</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1960</span><span class="p">,</span> <span class="mi">1980</span><span class="p">,</span> <span class="mi">2000</span><span class="p">])</span>
 </pre></div>
-<h3 id="lei bie idlie">类别Id列</h3>
+<h3 id="lei-bie-idlie">类别Id列</h3>
 <p>如图，所谓类别Id列是指把左边的单值数据转换为右边的one-hot矢量形式。
 <p align="center">
 <img src="/images/5_.jpg" width="40%"/>
@@ -418,7 +417,7 @@ input_fn函数的写法如下：</p>
     <span class="k">return</span> <span class="p">({</span> <span class="s1">'Integer_1'</span><span class="p">:[</span><span class="n">values</span><span class="p">],</span> <span class="o">..&lt;</span><span class="n">etc</span><span class="o">&gt;..</span><span class="p">,</span> <span class="s1">'Integer_2'</span><span class="p">:[</span><span class="n">values</span><span class="p">]</span> <span class="p">},</span>
             <span class="p">[</span><span class="n">Label_values</span><span class="p">])</span>
 </pre></div>
-<h3 id="lei bie ci biao lie">类别词表列</h3>
+<h3 id="lei-bie-ci-biao-lie">类别词表列</h3>
 <p>在NLP任务中，我们不会把词条直接输入模型，而是首先把它转换成数值或向量。类别词表列可以把词条转换为one-hot向量形式，如下图：
 <p align="center">
 <img src="/images/6_.jpg" width="50%"/>
@@ -442,7 +441,7 @@ input_fn函数的写法如下：</p>
 <span class="n">electronics</span>
 <span class="n">sports</span>
 </pre></div>
-<h3 id="lei bie ha xi lie">类别哈希列</h3>
+<h3 id="lei-bie-ha-xi-lie">类别哈希列</h3>
 <p>如果待分类的数据量很大，势必会消耗很大内存。tensorflow提供一种用哈希表分类的方法。</p>
 <div class="highlight"><pre><span></span><span class="n">hashed_feature_column</span> <span class="o">=</span>
     <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">categorical_column_with_hash_bucket</span><span class="p">(</span>
@@ -454,7 +453,7 @@ input_fn函数的写法如下：</p>
 <br/>
 </p>
 <p>当分类数量大于哈希分布尺寸的时候，必然会有几个特征指向同一个哈希位置。如图所示，<code>kitchenware</code>和<code>sports</code>的哈希值同为12，这没有关系，模型可以通过你提供的其他特征进一步区分到底是<code>kitchenware</code>还是<code>sports</code>。</p>
-<h3 id="he cheng lie">合成列</h3>
+<h3 id="he-cheng-lie">合成列</h3>
 <p>有时我们需要组合多个特征为一个特征，这种特征叫合成特征。组合方式通常采用相乘或求笛卡尔积，特征组合有助于表示非线性关系。举个例子，假设我们的模型要计算北京的房产价格，而房产价格与它所处的位置密切相关，而对于位置而言，我们需要用经纬度两个数据同时标定，因此这个经纬度就构成了合成特征。假设我们把北京均匀的纵横切100x100刀，这样就会产生10000个可区分的矩形区域。</p>
 <div class="highlight"><pre><span></span><span class="c1"># 将经纬度转换为[0, 100)范围内的整型值</span>
 <span class="k">def</span> <span class="nf">input_fn</span><span class="p">():</span>
@@ -493,7 +492,7 @@ input_fn函数的写法如下：</p>
 (99,0),(99,1)...(99, 99)
 </pre></div>
 <p>注意，使用合成列后，仍需在模型中包含你用来合成特征列的原始特征列，它们负责在哈希冲突时，作为附加特征来进一步做类别区分。</p>
-<h3 id="zhi shi lie">指示列</h3>
+<h3 id="zhi-shi-lie">指示列</h3>
 <p>指示列和后面要说的嵌入列均不能直接作为特征给模型使用，它的数据来源于类别特征列，即类别特征列是它的输入。
 为什么要作这样的设计？因为estimator执行深度神经网络的任务时，只能使用密集特征列，而类别特征列为稀疏列，需要用指示列或嵌入列作下变换才能被使用。
 至于指示列封装后，数据变成什么样子，我在官方文档中没找到，以后知道了再补充。</p>
@@ -502,7 +501,7 @@ input_fn函数的写法如下：</p>
 <span class="c1"># 定义一个指示列，该列中的每个元素为one-hot向量. </span>
 <span class="n">indicator_column</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">indicator_column</span><span class="p">(</span><span class="n">categorical_column</span><span class="p">)</span>
 </pre></div>
-<h3 id="qian ru lie">嵌入列</h3>
+<h3 id="qian-ru-lie">嵌入列</h3>
 <p>如果类别数据量很大，比如上百万、上亿等，这时采用one-hot来表示就不经济了。记得词嵌入模型中的词向量吗，用一组浮点数来代替one-hot形式来表示一个词条，这种形式在这里被叫做嵌入列，这种方法明显的好处就是令向量维度变得很小。</p>
 <p>如下图，假设我们有81个不同的单词，采用one-hot形式需要81维的向量，而采用嵌入列则仅需要3维向量就能表达。
 <p align="center">
@@ -529,7 +528,7 @@ input_fn函数的写法如下：</p>
     <span class="n">dimension</span><span class="o">=</span><span class="n">embedding_dimensions</span><span class="p">)</span>
 </pre></div>
 <p>注意，这仅仅是个一般规则，你也可以自行设定你希望的维度数。</p>
-<h3 id="quan zhong lei bie lie">权重类别列</h3>
+<h3 id="quan-zhong-lei-bie-lie">权重类别列</h3>
 <p>有时会遇到一种配对特征，特征一是本体，特征二是本体对应的权重（或出现频率）。
 这就是权重类别列的使用场景。
 下面是从Tensorflow源码里抠出例子，话说有个<code>tf.Example</code>对象，它的proto形式如下：</p>
@@ -572,7 +571,7 @@ frequencies: [  0.3 ,    0.1 ]
 <span class="n">features</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">parse_example</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="n">make_parse_example_spec</span><span class="p">(</span><span class="n">columns</span><span class="p">))</span>
 <span class="n">linear_prediction</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">linear_model</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">columns</span><span class="p">)</span>
 </pre></div>
-<h3 id="shi yong te zheng lie">使用特征列</h3>
+<h3 id="shi-yong-te-zheng-lie">使用特征列</h3>
 <p>我们须把多个特征列封装成一个列表，才能作为参数拿给估计器(estimator)用。
 在使用特征列时，要注意区分特征列类型和模型类型。特征列只有两种类型，类别列和密集列；
 模型也分两种，线性模型和深度模型。具体如下：</p>
@@ -598,8 +597,8 @@ frequencies: [  0.3 ,    0.1 ]
     <span class="n">dnn_feature_columns</span><span class="o">=</span><span class="n">deep_columns</span><span class="p">,</span>
     <span class="n">dnn_hidden_units</span><span class="o">=</span><span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">])</span>
 </pre></div>
-<h2 id="mo xing ding yi_1">模型定义</h2>
-<h3 id="yu ding yi">预定义</h3>
+<h2 id="mo-xing-ding-yi_1">模型定义</h2>
+<h3 id="yu-ding-yi">预定义</h3>
 <p align="center">
 <img src="/images/image2.jpg" width="75%"/>
 <br/>
@@ -612,7 +611,7 @@ frequencies: [  0.3 ,    0.1 ]
    <span class="n">n_classes</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>                     <span class="c1"># 输出3个类别</span>
    <span class="n">model_dir</span><span class="o">=</span><span class="n">PATH</span><span class="p">)</span>                  <span class="c1"># 存 checkpoints 的路径</span>
 </pre></div>
-<h3 id="zi ding yi">自定义</h3>
+<h3 id="zi-ding-yi">自定义</h3>
 <p>写自定义模型时，其实和传统的写法差不多，只是有些小地方要注意一下。</p>
 <p>基本思路是，定义模型函数，它接收从input_fn()传来的特征和标签，输出由tf.estimator.EstimatorSpec封装后的结果, 
 函数体主要做两件事情，一件是定义模型，一件是通过分支语句分别实现训练、评估和预测。</p>
@@ -706,7 +705,7 @@ mode_fn()的返回用tf.estimator.EstimatorSpec封装，详见下面的例子：
       <span class="n">loss</span><span class="o">=</span><span class="n">loss</span><span class="p">,</span>
       <span class="n">train_op</span><span class="o">=</span><span class="n">train_op</span><span class="p">)</span>
 </pre></div>
-<h2 id="zu zhuang_1">组装</h2>
+<h2 id="zu-zhuang_1">组装</h2>
 <p>准备好上面的内容后，就可以把model_fn()和input_fn组装在一起了。方法是用estimator实例化
 估计器对象，然后用这个对象分别进行训练、评估、预测即可。</p>
 <p>在组装时，我们还要加入一些常规的东西。比如设置checkpoint的保存规则，定义一些观测变量，
@@ -764,7 +763,7 @@ mode_fn()的返回用tf.estimator.EstimatorSpec封装，详见下面的例子：
     <span class="n">eval_results</span> <span class="o">=</span> <span class="n">classifier</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">input_fn</span><span class="o">=</span><span class="n">input_fn_eval</span><span class="p">)</span>
     <span class="k">print</span><span class="p">(</span><span class="n">eval_results</span><span class="p">)</span>
 </pre></div>
-<h2 id="duo gpuxia de xie fa">多GPU下的写法</h2>
+<h2 id="duo-gpuxia-de-xie-fa">多GPU下的写法</h2>
 <p>在多GPU的情况下，代码需要做几点小变化。</p>
 <p>首先, 检查batch_size的数量，它必须能被GPU的数量整除。其目的是让每批的输入数量被平均分配到各个GPU上。</p>
 <p>其次，在model_fn函数中的训练部分封装优化器。</p>
@@ -777,8 +776,8 @@ mode_fn()的返回用tf.estimator.EstimatorSpec封装，详见下面的例子：
     <span class="n">model_function</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">replicate_model_fn</span><span class="p">(</span>
         <span class="n">model_fn</span><span class="p">,</span> <span class="n">loss_reduction</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">Reduction</span><span class="o">.</span><span class="n">MEAN</span><span class="p">)</span>
 </pre></div>
-<h2 id="qi ta">其他</h2>
-<h3 id="san ge import">三个import</h3>
+<h2 id="qi-ta">其他</h2>
+<h3 id="san-ge-import">三个import</h3>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
@@ -789,7 +788,7 @@ mode_fn()的返回用tf.estimator.EstimatorSpec封装，详见下面的例子：
 <li>division: 精确除法，即python2.x版本中，3/4=0（截断除法），有了这句, 3/4=0.75， 而3//4=0</li>
 <li>absolute_import: 绝对路径，解决自定义包与缺省包名字冲突的问题，如你不小心自定义了string，有了这句， import string时引用系统的，没有这句就引用你本地的。</li>
 </ul>
-<h3 id="guan yu chao can shu">关于超参数</h3>
+<h3 id="guan-yu-chao-can-shu">关于超参数</h3>
 <p>既然训练始终要调参，不如把参数提前定义好，比如下面这个参数类。</p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">argparse</span>
 <span class="k">class</span> <span class="nc">MymodelArgParser</span><span class="p">(</span><span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">):</span>
@@ -848,7 +847,7 @@ mode_fn()的返回用tf.estimator.EstimatorSpec封装，详见下面的例子：
 
   <span class="k">return</span> <span class="n">hparams</span>
 </pre></div>
-<h3 id="zhu cheng xu ru kou">主程序入口</h3>
+<h3 id="zhu-cheng-xu-ru-kou">主程序入口</h3>
 <div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">FLAGS</span><span class="p">,</span> <span class="n">model_function</span><span class="p">,</span> <span class="n">input_function</span><span class="p">):</span>
   <span class="o">...</span> <span class="o">&lt;</span><span class="n">code</span><span class="o">&gt;</span> <span class="o">...</span>
 
@@ -931,24 +930,27 @@ mode_fn()的返回用tf.estimator.EstimatorSpec封装，详见下面的例子：
     <noscript>Please enable JavaScript to view the comments.</noscript>
   </div>
 </section>
+          </div>
+
+          <footer id="contentinfo" class="footer">
+            <div class="footer-inner">
+              无节操小广告<a href="https://freeopen.github.io/pages/da-shang.html"> 欢迎打赏 </a>
+            </div>
+          </footer><!-- /#contentinfo -->
+        </div>
+      </div>
+
+      <div class="hidden-print hidden-xs hidden-sm hidden-md col-lg" id="post_toc" role="complementary">
+        <nav class="sidebar-toc">
+<!-- <section id="main_toc"> -->
+    <ul class="nav" id="toc"><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#estimator" title="Estimator">Estimator</a></li><li class="nav-item"><a class="nav-link" href="#input_fn" title="input_fn">input_fn</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#xiao-shu-ju-de-qing-kuang" title="小数据的情况">小数据的情况</a></li><li class="nav-item"><a class="nav-link" href="#da-shu-ju-de-qing-kuang" title="大数据的情况">大数据的情况</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#te-zheng-lie_1" title="特征列">特征列</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#shu-zhi-lie" title="数值列">数值列</a></li><li class="nav-item"><a class="nav-link" href="#fen-qu-lie" title="分区列">分区列</a></li><li class="nav-item"><a class="nav-link" href="#lei-bie-idlie" title="类别Id列">类别Id列</a></li><li class="nav-item"><a class="nav-link" href="#lei-bie-ci-biao-lie" title="类别词表列">类别词表列</a></li><li class="nav-item"><a class="nav-link" href="#lei-bie-ha-xi-lie" title="类别哈希列">类别哈希列</a></li><li class="nav-item"><a class="nav-link" href="#he-cheng-lie" title="合成列">合成列</a></li><li class="nav-item"><a class="nav-link" href="#zhi-shi-lie" title="指示列">指示列</a></li><li class="nav-item"><a class="nav-link" href="#qian-ru-lie" title="嵌入列">嵌入列</a></li><li class="nav-item"><a class="nav-link" href="#quan-zhong-lei-bie-lie" title="权重类别列">权重类别列</a></li><li class="nav-item"><a class="nav-link" href="#shi-yong-te-zheng-lie" title="使用特征列">使用特征列</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#mo-xing-ding-yi_1" title="模型定义">模型定义</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#yu-ding-yi" title="预定义">预定义</a></li><li class="nav-item"><a class="nav-link" href="#zi-ding-yi" title="自定义">自定义</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#zu-zhuang_1" title="组装">组装</a></li><li class="nav-item"><a class="nav-link" href="#duo-gpuxia-de-xie-fa" title="多GPU下的写法">多GPU下的写法</a></li><li class="nav-item"><a class="nav-link" href="#qi-ta" title="其他">其他</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#san-ge-import" title="三个import">三个import</a></li><li class="nav-item"><a class="nav-link" href="#guan-yu-chao-can-shu" title="关于超参数">关于超参数</a></li><li class="nav-item"><a class="nav-link" href="#zhu-cheng-xu-ru-kou" title="主程序入口">主程序入口</a></li></ul></li></ul></ul>
+<!-- </section> -->
+<!-- </section> -->
+        </nav>
+      </div>
     </div>
-    <footer id="contentinfo" class="pagination" style="font-size:85%">
-            <address id="about" class="vcard body">
-            无节操小广告<a href="https://freeopen.github.io/pages/da-shang.html"> 欢迎打赏 </a>
-            </address><!-- /#about -->
-    </footer><!-- /#contentinfo -->
   </div>
 
-  <!--Right-->
-  <div id="main_toc" class="sidebar-toc">
-<section id="main_toc">
-    <!-- <div class="col-lg-2 hidden-xs hidden-sm"> -->
-    <nav toc-data class="col-lg-2 hidden-xs hidden-sm">
-      <div id="toc"><ul><li><a class="toc-href" href="#estimator" title="Estimator">Estimator</a></li><li><a class="toc-href" href="#input_fn" title="input_fn">input_fn</a><ul><li><a class="toc-href" href="#xiao shu ju de qing kuang" title="小数据的情况">小数据的情况</a></li><li><a class="toc-href" href="#da shu ju de qing kuang" title="大数据的情况">大数据的情况</a></li></ul></li><li><a class="toc-href" href="#te zheng lie_1" title="特征列">特征列</a><ul><li><a class="toc-href" href="#shu zhi lie" title="数值列">数值列</a></li><li><a class="toc-href" href="#fen qu lie" title="分区列">分区列</a></li><li><a class="toc-href" href="#lei bie idlie" title="类别Id列">类别Id列</a></li><li><a class="toc-href" href="#lei bie ci biao lie" title="类别词表列">类别词表列</a></li><li><a class="toc-href" href="#lei bie ha xi lie" title="类别哈希列">类别哈希列</a></li><li><a class="toc-href" href="#he cheng lie" title="合成列">合成列</a></li><li><a class="toc-href" href="#zhi shi lie" title="指示列">指示列</a></li><li><a class="toc-href" href="#qian ru lie" title="嵌入列">嵌入列</a></li><li><a class="toc-href" href="#quan zhong lei bie lie" title="权重类别列">权重类别列</a></li><li><a class="toc-href" href="#shi yong te zheng lie" title="使用特征列">使用特征列</a></li></ul></li><li><a class="toc-href" href="#mo xing ding yi_1" title="模型定义">模型定义</a><ul><li><a class="toc-href" href="#yu ding yi" title="预定义">预定义</a></li><li><a class="toc-href" href="#zi ding yi" title="自定义">自定义</a></li></ul></li><li><a class="toc-href" href="#zu zhuang_1" title="组装">组装</a></li><li><a class="toc-href" href="#duo gpuxia de xie fa" title="多GPU下的写法">多GPU下的写法</a></li><li><a class="toc-href" href="#qi ta" title="其他">其他</a><ul><li><a class="toc-href" href="#san ge import" title="三个import">三个import</a></li><li><a class="toc-href" href="#guan yu chao can shu" title="关于超参数">关于超参数</a></li><li><a class="toc-href" href="#zhu cheng xu ru kou" title="主程序入口">主程序入口</a></li></ul></li></ul></div>
-    </nav>
-    <!-- </div> -->
-</section>
-  </div>
 
     <script type="text/javascript">
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -968,5 +970,9 @@ mode_fn()的返回用tf.estimator.EstimatorSpec封装，详见下面的例子：
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>
+<script src="https://freeopen.github.io/theme/js/jquery-3.3.1.slim.min.js"></script>
+<script src="https://freeopen.github.io/theme/js/popper.min.js"></script>
+<script src="https://freeopen.github.io/theme/js/bootstrap.min.js"></script>
+
 </body>
 </html>

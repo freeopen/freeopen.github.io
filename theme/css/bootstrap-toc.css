@@ -10,7 +10,7 @@
  * on 2019-01-31 
  */ 
 
-nav[toc-data]{
+#toc {
  border-left: 2px solid #4285f4
 }
 
@@ -22,39 +22,42 @@ nav[toc-data]{
   list-style: none;
 }
 
-nav[toc-data]  ul>li>a {
+#toc .nav-child {
+  display: block;
+}
+
+#toc  li > a {
   display: block;
   padding-left: .6rem;
   padding-top:.15rem;
   padding-bottom:.15rem;
-  font-size: .875rem;
+  font-size: .85rem;
   font-weight: blod;
-  color: #767676;
+  color: #666;
 }
 
-nav[toc-data]  ul>li>ul>li>a {
+#toc  li > .nav-child > li > a {
   display: block;
-  padding-left: 1rem;
+  padding-left: 1.2rem;
   padding-top:0.0625rem;
   padding-bottom:0.0625rem;
   font-size: 0.8rem;
   font-weight: blod;
-  color: #767676;
+  color: #666;
 }
 
-nav[toc-data] div>ul>li>a:hover,
-nav[toc-data] div>ul>li>a:active {
-  padding-left: .6rem;
-  color: #563d7c;
-  text-decoration: none;
-  background-color: transparent;
+#toc  a:hover {
+  color: #000;
 }
 
-nav[toc-data] div>ul>li>ul>li>a:hover,
-nav[toc-data] div>ul>li>ul>li>a:active {
-  padding-left: 1rem;
-  color: #563d7c;
-  text-decoration: none;
-  background-color: transparent;
+#toc  li > .nav-child > li > a:hover {
+  color: #000;
 }
 
+#toc  li > .active {
+  color: #fc6423;
+}
+
+#toc  li > .nav-child > li > .active {
+  color: #fc6423;
+}
