@@ -109,6 +109,15 @@ p {
   line-height: 1.8;
 }
 
+figcaption,
+.figcaption {
+  color: #9a9a9a;
+  text-align: left;
+  font-size: 80%;
+  line-height: 1.5;
+  padding: 0 3rem;
+}
+
 strong {
   color: #303030;
 }
@@ -153,7 +162,7 @@ pre {
   font-family: Menlo, Monaco, "Courier New", monospace;
 }
 code {
-  padding: .25em .5em;
+  padding: .25rem .5rem;
   font-size: 85%;
   color: #bf616a;
   background-color: #f9f9f9;
@@ -233,7 +242,7 @@ blockquote p:last-child {
 img {
   display: block;
   max-width: 100%;
-  margin: 0 0 1rem;
+  /* margin: 0 0 1rem; */
   border-radius: 5px;
 }
 

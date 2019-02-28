@@ -107,8 +107,9 @@
 </blockquote>
 <p align="center">
 <img src="https://freeopen.github.io/images/encdec.jpg" width="90%"/>
-<br/>
+<figcaption>
 图1. <b>编码器-解码器结构</b> &ndash; NMT 的通用示例. 编码器转换源语句为&ldquo;含义&rdquo;向量，再由<i>解码器</i>产生翻译结果.
+</figcaption>
 </p>
 <p>NMT 模型的具体结构有所不同. 对顺序数据而言，大多数 NMT 模型的一个自然选择是采用循环神经网络 (RNN).
 通常，RNN 同时使用编码器和解码器. 然而，RNN 模型在以下方面有所不同: (a) <em>方向性</em> &ndash;  单向或双向; (b) <em>深度</em> &ndash; 单层或多层;  (c) <em>类型</em> &ndash; 常见的有 RNN,  Long Short-term Memory (LSTM),  或 gated recurrent unit
@@ -119,10 +120,11 @@ RNN 简单的吃进输入文字，不做任何预测;
 <p>更多信息, 请参阅 <a href="https://github.com/lmthang/thesis">Luong (2016)</a> .</p>
 <p align="center">
 <img src="https://freeopen.github.io/images/seq2seq.jpg" width="58%"/>
-<br/>
+<figcaption>
 图2. <b>神经机器翻译</b> &ndash; 一个深度循环网络的例子，把源语句 "I am a student" 翻译成目标语句 
  "Je suis &eacute;tudiant". 这里, "&lt;s&gt;" 表示解码处理的开始,
 而 "&lt;/s&gt;" 表示解码结束.
+</figcaption>
 </p>
 <h3 id="an-zhuang-jiao-cheng">安装教程</h3>
 <p>要安装本教程, 你需要在系统上安装 TensorFlow. 本教程撰写时 TensorFlow 的版本为 <strong>1.2.1</strong> .<br/>
@@ -270,8 +272,9 @@ python -m nmt.nmt <span class="se">\</span>
 </ol>
 <p align="center">
 <img src="https://freeopen.github.io/images/greedy_dec.jpg" width="50%"/>
-<br/>
+<figcaption>
 图3. <b>贪心解码</b> &ndash; 如何用贪心搜索法训练 NMT 模型, 使源语句产生"Je suis &eacute;tudiant"的翻译
+</figcaption>
 </p>
 <p>第 3 步的推理与训练不同。不是总是将正确的目标词作为输入，推理使用模型预测的单词。以下是实现贪心解码的代码。它与训练解码器非常相似。</p>
 <div class="highlight"><pre><span></span><span class="c1"># Helper</span>
@@ -308,8 +311,9 @@ cat /tmp/nmt_model/output_infer <span class="c1"># To view the inference as outp
 <em>注意力机制(attention mechanism)</em>，这是由 <a href="https://arxiv.org/abs/1409.0473">Bahdanau等人2015年</a>首次引入，然后由 <a href="https://arxiv.org/abs/1508.04025">Luong等人2015年</a>完善。<em>注意力机制</em>的关键在于，通过在翻译过程中对相关的源内容进行&ldquo;关注&rdquo;，建立目标和源之间的直接连接。注意力机制 的一个很好的副产品是在源和目标句子之间生成一个易于查看的对齐矩阵（如图4所示）</p>
 <p align="center">
 <img src="https://freeopen.github.io/images/attention_vis.jpg" width="50%"/>
-<br/>
+<figcaption>
 图4. <b>Attention 可视化</b> &ndash; 源语句与目标语句的词汇对齐矩阵示例， 图片来自 (Bahdanau et al., 2015).
+</figcaption>
 </p>
 <p>请记住，在 seq2seq 模型中，当开始解码时，我们将最后的源状态从编码器传递到解码器。这对中短句的效果很好; 而对于长句，单个固定大小的隐藏状态会成为信息瓶颈。
 注意力机制不是放弃在源 RNN 中计算的所有隐藏状态，而是提供了一种允许解码器窥视它们的方法（将它们视为源信息的动态存储器）。
@@ -318,8 +322,9 @@ cat /tmp/nmt_model/output_infer <span class="c1"># To view the inference as outp
 <p>我们现在讲讲（Luong等人，2015年）中提出的注意力机制(attention mechanism)的一个实例，该实例已被用于包括 <a href="http://opennmt.net/about/">OpenNMT</a> 等开源工具包在内的多个最先进的系统，以及本教程的 TF seq2seq API 中。我们还将提供注意力机制其他变种的连接。</p>
 <p align="center">
 <img src="https://freeopen.github.io/images/attention_mechanism.jpg" width="58%"/>
-<br/>
+<figcaption>
 图5. <b>Attention mechanism</b> &ndash; (Luong et al., 2015)中提到的基于 attention NMT 系统的示例. 我们重点突出 attention 计算的第一个步骤. 为了清晰，我们没像图2那样显示 embedding 层和 projection 层.
+</figcaption>
 </p>
 <p>如图 5 所示，attention 计算发生在每个解码器的时间步长。它包括以下步骤：</p>
 <ol>
