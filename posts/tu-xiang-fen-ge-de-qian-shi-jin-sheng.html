@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <!-- Enable responsiveness on mobile devices-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+        <title>Freeopen - 图像分割的前世今生</title>
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/css/main.css" />
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/academicons/css/academicons.min.css" />
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/font-awesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/fonts-googleapis/css/googleapi-fonts.css" />
+
+        
+
+
+
+
+
+
+</head>
+
+<body id="index" class="theme-myblue" data-spy="scroll" data-target="#post_toc">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-lg">
+        <nav class="navbar navbar-expand-lg navbar-light sidebar" role="navigation">
+          <a class="sidebar-about" href="https://freeopen.github.io/">Freeopen</a>
+          <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <nav class="collapse navbar-collapse sidebar-nav flex-column" id="navbarNav">
+
+              <a class="nav-link" href="https://freeopen.github.io/pages/about.html">About</a>
+              <a class="nav-link" href="https://freeopen.github.io/pages/da-shang.html">打赏</a>
+
+              <a class="nav-link" href="https://freeopen.github.io/category/bian-cheng.html">编程</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/shou-ce.html">手册</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/shu-xue.html">数学</a>
+            <div class="sidebar-icons">
+              <hr>
+                <a href="" title="Atom feed" target="_blank" 
+                    style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;">
+                  <i class="fa fa-rss-square"></i>
+                </a>
+                <a href="https://github.com/freeopen" title="Software I released on Github" 
+                      target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="fa fa-github-square"></i> </a>
+                <a href="Mailto:freeopen@163.com" title="My email" 
+                    target="_blank" style="display: inline; padding: 0px 0px 0px 0;
+                    margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i
+                  class="fa fa-envelope-square"></i> </a>
+
+            </div>
+          </nav>
+
+        </nav>
+
+      </div>
+
+      <div class="col-12 col-lg-7" role="main">
+        <div id="content" class="content">
+          <div class="post">
+<section id="content" class="body">
+  <header>
+    <h1 class="entry-title">图像分割的前世今生</h2>
+ 
+  </header>
+  <div class="post-info">
+
+    <span>2019-03-01</span>
+
+
+    <span>| By             <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
+    </span>
+
+    <span>
+      | 分类于 <a href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
+    </span>
+
+  </div><!-- /.post-info -->
+  <div class="post content">
+    <blockquote>
+<p>又是一篇不会写完的文章，和前面那篇《卷积备忘录》一样，
+会跟进技术发展不断更新。写文章的好处，在于梳理知识的同时，
+更能加深理解。如有理解错误之处，请读者及时来信告知，如果
+你精通翻墙术，文章末尾可以留言。（已架设 Disqus 评论系统，
+因国内不可名状的原因，翻墙后才能显示。）</p>
+</blockquote>
+<h2 id="tu-xiang-fen-ge-dao-di-gan-shi-yao">图像分割到底干什么</h2>
+<p>图像分割问题主要流行三类任务，它们分别是目标检测( Object Detection )、语义分割( Semantic Segmentation )和实例分割( Instance Segmentation )。从左到右，图像分割的精度越来越高。这三类任务的意义分别为：</p>
+<ol>
+<li>目标检测：计算机看一张图，用矩形框框出我们关心的目标（定位任务），
+并告诉我们该目标是什么（分类任务）。</li>
+<li>语义分割：不同于目标检测中框出的目标，这里是用色块勾出目标图案的轮廓（论文中把色块称为&ldquo;掩膜&rdquo;，Mask）, 但同一类目标图案不做区分，比如几个人相互重叠的站在一起，只需要勾出这几个人的外轮廓色块即可；同时还要告诉我们每个色块代表什么类别。</li>
+<li>实例分割：比语义分割更进一步，对于挨在一起的同种类型的目标，
+需要区分出每个个体（即实例），比如几个人相互重叠的站在一起，实例分割时要用不同颜色的色块覆盖住每个人。</li>
+</ol>
+<p>上面三类任务我们把它统称为图像分割任务，它实质上由两个子任务构成，一个是定位任务，一个是分类任务。而这三类任务的主要区别在于定位任务的精度越来越高。</p>
+<h2 id="tu-xiang-fen-ge-de-suan-fa-si-lu">图像分割的算法思路</h2>
+<p>我个人喜欢按直觉来研究算法。比如图像分类任务，我仅从目标检测任务作为思考的起点，按人类直觉的步骤是：</p>
+<ol>
+<li>看一眼图，找到哪些位置有东西；</li>
+<li>再看看有东西的位置都是些什么东西；</li>
+<li>把我们关心的那类东西标记出来。</li>
+</ol>
+<p>再按计算机直觉来细化上面的步骤。计算机看图实质上看到的是密密麻麻的像素点，这些点在计算机眼里没有大小，没有颜色，只是一堆数字而已。计算机识别一张图片是什么内容，根据一块区域的一堆数字分布规律来做出判断，
+所以，机器判断一张图哪些位置有东西时，只能用各种大小的矩形框从图中抽取出像素点，再来判断这些像素点们到底是不是东西，进而再判断它是什么东西。故按计算机直觉，可以描述为：</p>
+<ol>
+<li>用不同尺寸的滑动窗口扫描图片，框住图中的某一部分作为候选区域；</li>
+<li>提取候选区域相关的视觉特征；</li>
+<li>用分类器识别提取的视觉特征，如果是感兴趣的目标就标记，否则忽略。</li>
+</ol>
+<p>在第 1
+步中，由于目标的大小、轮廓千变万化，要框住目标，必须采用很多尺度的矩形框做滑动窗口。这里滑动窗口好比粉墙的刷子，图片好比墙壁，不同尺寸的刷子把墙刷一遍，按每一刷（一个滑动窗口）留下痕迹来看，最终获得的候选区域必然数量巨大。另外，不同大小的滑动窗口，如果同时框住目标图像，必然造成滑动窗口重叠，这时需要保留最贴近目标轮廓的滑动窗口，抛弃较大的滑动窗口。</p>
+<p>在第 2
+步中，通常用卷积方式抽取候选区域的视觉特征，但卷积方法处理图片前，一般要将图片大小调整为某个固定大小，而候选区域框住的图片必然存在不同尺寸，需要将图片进行合理缩放。</p>
+<p>在第 3
+步中，把上层传来的视觉特征（即特征图）输入分类器打分，对相似位置的候选区域，保留分高的，忽略分低的。然后记住分高的候选区域和对应分类。</p>
+<h2 id="jing-dian-suan-fa-de-yan-jin">经典算法的演进</h2>
+<p>目前，图像分割的算法有两个流派，它们是：</p>
+<ol>
+<li>只看你一眼法：如 YOLO、SSD 等。</li>
+<li>多看你几眼法：如 OverFeat、R-CNN、SPP-net、Fast R-CNN、Faster R-CNN、R-FCN、Mask
+    R-CNN、CornerNet、PFPN 等。</li>
+</ol>
+<p>上述分类属于我的私人分类，下面说说理由。
+一般分类会把第 1 类称为端到端的，或无需候选区的方法, 第 2
+类称为基于候选区域的方法，我认为这是有问题的。</p>
+<p>比如 YOLO 模型，
+所谓无需候选区的提法是不准确的，它将图片分成均匀的网格，然后把部分网格组合成不同大小的矩形框，来定位目标的位置，
+这里的一个个小网格本质上就是候选区域；
+另外，所谓端到端意思是说一步到位，但如果你看任何模型的细节，谁敢说不是由一个个步骤组成，
+只不过有的步骤链条组成一个模型（如 YOLO），有的步骤链条组成一个个小模型，进而再把小模型组成大模型(如 Mask R-CNN)。</p>
+<p>为什么第 2 类叫多看你几眼法呢？
+因为它们都用不同大小、不同长宽比的矩形框一次次扫描图片，获得候选区域，
+图片被一种尺寸的矩形框扫描一次，就像被计算机看过一次，被很多尺寸的滑动窗口扫描，自然就是看过很多眼了。</p>
+<blockquote>
+<p>未完待续，每天写一点。</p>
+</blockquote>
+  </div><!-- /.entry-content -->
+
+  <div class="comments">
+    <!-- <h2>Comments !</h2> -->
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname = 'freeopen';
+      var disqus_identifier = 'posts/tu-xiang-fen-ge-de-qian-shi-jin-sheng';
+      var disqus_url = 'https://freeopen.github.io/posts/tu-xiang-fen-ge-de-qian-shi-jin-sheng';
+      (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//freeopen.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the comments.</noscript>
+  </div>
+</section>
+          </div>
+
+          <footer id="contentinfo" class="footer">
+            <div class="footer-inner">
+              无节操小广告<a href="https://freeopen.github.io/pages/da-shang.html"> 欢迎打赏 </a>
+            </div>
+          </footer><!-- /#contentinfo -->
+        </div>
+      </div>
+
+      <div class="hidden-print hidden-xs hidden-sm hidden-md col-lg" id="post_toc" role="complementary">
+        <nav class="sidebar-toc">
+<!-- <section id="main_toc"> -->
+    <ul class="nav" id="toc"><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#tu-xiang-fen-ge-dao-di-gan-shi-yao" title="图像分割到底干什么">图像分割到底干什么</a></li><li class="nav-item"><a class="nav-link" href="#tu-xiang-fen-ge-de-suan-fa-si-lu" title="图像分割的算法思路">图像分割的算法思路</a></li><li class="nav-item"><a class="nav-link" href="#jing-dian-suan-fa-de-yan-jin" title="经典算法的演进">经典算法的演进</a></li></ul></ul>
+<!-- </section> -->
+<!-- </section> -->
+        </nav>
+      </div>
+    </div>
+  </div>
+
+
+    <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-98793057-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+<script type="text/javascript">
+    var disqus_shortname = 'freeopen';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<script src="https://freeopen.github.io/theme/js/jquery-3.3.1.slim.min.js"></script>
+<script src="https://freeopen.github.io/theme/js/popper.min.js"></script>
+<script src="https://freeopen.github.io/theme/js/bootstrap.min.js"></script>
+
+</body>
+</html>
