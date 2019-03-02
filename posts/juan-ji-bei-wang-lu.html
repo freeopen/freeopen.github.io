@@ -109,18 +109,32 @@ size);</li>
 </ul>
 <p>如果要表示<a href="#kong dong juan ji">空洞卷积</a>，还需要一个表示空洞数量的超参数，我喜欢把它记为 <span class="math">\(D\)</span>。</p>
 <h2 id="juan-ji-de-shu-chu-chi-cun">卷积的输出尺寸</h2>
-<p>假如我们有一张&nbsp;<code>32x32x3</code>&nbsp;的输入图像，我们使用&nbsp;10&nbsp;个尺寸为&nbsp;<code>3x3x3</code>&nbsp;的过滤器，单步幅和零填充。在这里，<span class="math">\(W\)</span>&nbsp;是输入尺寸，<span class="math">\(K\)</span>&nbsp;是过滤器的尺寸，<span class="math">\(P\)</span>&nbsp;是填充数量，<span class="math">\(S\)</span>&nbsp;是步幅数。那么，输出图像的空间尺寸可以计算为 <span class="math">\(([W - K&nbsp;+&nbsp;2P]&nbsp;\div&nbsp;S) + 1\)</span> 。即 <span class="math">\(W=32，K=3，P=0，S=1\)</span>， 输出深度等于应用的过滤器的数量 10， 输出尺寸大小为&nbsp;<span class="math">\(([32 - 3 + 0] \div 1) + 1&nbsp;=&nbsp;30\)</span>, 因此输出尺寸是&nbsp;<code>30x30x10</code>。</p>
+<p>卷积输出的空间尺寸的公式为:</p>
+<div class="math">$$ O = \lfloor {I - K&nbsp;+&nbsp;2P&nbsp;\over S} + 1 \rfloor$$</div>
+<p>其中，</p>
+<ul>
+<li><span class="math">\(I\)</span> 表示输入尺寸( size of input )</li>
+<li><span class="math">\(O\)</span> 表示输出尺寸( size of output )</li>
+<li><span class="math">\(P\)</span>&nbsp;表示填充数量( padding )</li>
+<li><span class="math">\(S\)</span> 表示步幅数( strides )</li>
+<li><span class="math">\(K\)</span>&nbsp;是过滤器或卷积核的尺寸( size of kernel )</li>
+<li><span class="math">\(\lfloor \cdot \rfloor\)</span> 符号表示向下取整，即不超过该值的最大整数。</li>
+</ul>
+<p>假如我们有一张&nbsp;<code>32x32x3</code>&nbsp;的输入图像，我们使用&nbsp;10&nbsp;个尺寸为&nbsp;<code>3x3x3</code>&nbsp;的过滤器，单步幅和零填充。根据上式的符号约定，
+<span class="math">\(W=32，K=3，P=0，S=1\)</span>， 输出深度等于过滤器的数量 10， 输出尺寸大小为&nbsp;<span class="math">\(((32 - 3 + 0)/1) + 1&nbsp;=&nbsp;30\)</span>, 因此输出尺寸是&nbsp;<code>30x30x10</code>。</p>
 <h2 id="juan-ji-wang-luo-de-gan-shou-ye">卷积网络的感受野</h2>
 <p>感受野( Receptive Field )表示经过卷积网络输出的一个点能看到原始输入的范围大小。对仅有一层的卷积网络来说，感受野的大小就是卷积核的大小，但对于层叠网络来说，感受野的计算就会稍微复杂些。习惯上，我们把层叠模型中靠近原始输入端的叫做低层，把靠近最终结果的层称为高层，计算感受野的公式为：
 </p>
-<div class="math">$$F(i, j-1) = K_j + (F(i,j) - 1) \times (S_j - D_j)$$</div>
+<div class="math">$$F(i, j-1) = K_j + (F(i,j) - 1) \times (S_j - D_j(K_j-1))$$</div>
 <p>其中,</p>
 <ul>
 <li><span class="math">\(i\)</span> 表示高层，<span class="math">\(j\)</span> 表示低层；</li>
 <li><span class="math">\(F(i, j)\)</span> 表示第 <span class="math">\(i\)</span> 层对第 <span class="math">\(j\)</span> 层的感受野，当 <span class="math">\(i = j\)</span> 时， <span class="math">\(F(i,j) = 1\)</span>；</li>
 <li><span class="math">\(K_j\)</span> 表示第 <span class="math">\(j\)</span> 层的核大小；</li>
 <li><span class="math">\(S_j\)</span> 表示第 <span class="math">\(j\)</span> 层的步幅长度;</li>
-<li><span class="math">\(D_j\)</span> 表示第 <span class="math">\(j\)</span> 层卷积核的空洞数量。</li>
+<li><span class="math">\(D_j\)</span> 表示第 <span class="math">\(j\)</span>
+    层卷积核中间隔的空洞数量, 该参数仅用于空洞卷积，非空洞卷积时，该值取
+    0(举例，设1表示卷积核有效元素的值，0表示空洞，则一维卷积核&ldquo;1001001&rdquo;其间隔的空洞数为2)。</li>
 </ul>
 <p>按上述公式递归计算后，顶层对底层的感受野就能算出了。</p>
 <h2 id="juan-ji-de-jin-hua">卷积的进化</h2>
@@ -130,11 +144,24 @@ size);</li>
 <h3 id="kong-dong-juan-ji">空洞卷积</h3>
 <p>空洞卷积 (Dilated Convolution) 又叫膨胀卷积 ( Atrous Convolution)， 它的想法是在卷积核中增加&ldquo;空洞&rdquo;， 从而在不增加参数量的情况下捕捉到更远的距离。换种说法就是空洞卷积能增加感受野。</p>
 <p>空洞卷积核的设计很简单，其实就是对卷积核的插 0 操作， 比如由&ldquo;111&rdquo;变为&ldquo;10101&rdquo;这样。空洞卷积常用于一维卷积的场景，比如 NLP  的语义分割、文本抽取等任务，语音合成等任务。</p>
-<p>空洞卷积在不增加参数的前提下增加感受野，我们举个例子算一下。设有4层网络，第1层为一维序列，第2层为普通卷积(核尺寸,步幅数,空洞数) = (K,S,D) = (3,2,0)，第3层为空洞卷积(3,4,2)，第4层为空洞卷积(3,8,6)，那么第4层到第1层的感受野为15，计算步骤如下：</p>
+<p>空洞卷积在不增加参数的前提下增加感受野，我们举个例子算一下。设有4层网络，第1层为一维序列，第2层为普通卷积(核尺寸,步幅数,空洞数) = (K,S,D) = (3,2,0)，第3层为空洞卷积(3,4,1)，第4层为空洞卷积(3,8,3)，那么第4层到第1层的感受野为15，计算步骤如下：</p>
 <div class="math">$$F(1,1) = 1$$</div>
 <div class="math">$$F(2,1) = 3$$</div>
-<div class="math">$$F(3,1) = 3 + (3-1)\times(4-2) = 7$$</div>
-<div class="math">$$F(4,1) = 3 + (7-1)\times(8-6) = 15$$</div>
+<div class="math">$$F(3,1) = 3 + (3-1)\times(4-2\times 1) = 7$$</div>
+<div class="math">$$F(4,1) = 3 + (7-1)\times(8-2\times 3) = 15$$</div>
+<h3 id="fan-juan-ji">反卷积</h3>
+<p>反卷积的英文名为 Deconvolution 或 Transposed Convolution 或 Fractional-strided Convolutions， 它将特征图从低分辨率映射到大分辨率，用于扩大图像尺寸。</p>
+<p>反卷积是一种特殊的正向卷积，而不是卷积的反过程。那么反卷积如何增加尺寸呢？方法和空洞卷积类似，只是
+反卷积是在输入端填入空洞，来增加输入的尺寸，而空洞卷积是在卷积核填入空洞，来减少参数数量。</p>
+<p>沿用前面的符号约定，我来描述一下反卷积令输出尺寸增大的过程。</p>
+<p>设输入<span class="math">\(I=3\)</span>, 卷积核<span class="math">\(K=3\)</span>, 填充<span class="math">\(P=1\)</span>, 步幅<span class="math">\(S=1\)</span>, 空洞<span class="math">\(D=1\)</span>，考虑二维的情况：</p>
+<ul>
+<li>首先填充空洞令输入的尺寸变大，则输入尺寸由 3x3 变为 5x5；</li>
+<li>代入卷积的输出尺寸公式， 
+<div class="math">$$O = {I - K&nbsp;+&nbsp;2P&nbsp;\over&nbsp;S} + 1 = (5-3+2) + 1 = 5$$</div>
+</li>
+</ul>
+<p>求得该反卷积的输出尺寸为 5x5。</p>
 <h3 id="hun-he-juan-ji">混合卷积</h3>
 <p>传统的层叠式网络，基本上都是一个个卷积层的堆叠，每层只用一个尺寸的卷积核。于是有人想，如果每层用多个尺寸的卷积核，是否能提炼到更好的特征呢？</p>
 <p>Google的研究员首次在 Inception
@@ -377,7 +404,7 @@ Q、K、V，它们其实都是单词的语义表达，降低参数量是我们�
       <div class="hidden-print hidden-xs hidden-sm hidden-md col-lg" id="post_toc" role="complementary">
         <nav class="sidebar-toc">
 <!-- <section id="main_toc"> -->
-    <ul class="nav" id="toc"><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#juan-ji-de-shu-xue-yuan-li" title="卷积的数学原理">卷积的数学原理</a></li><li class="nav-item"><a class="nav-link" href="#juan-ji-de-biao-shi" title="卷积的表示">卷积的表示</a></li><li class="nav-item"><a class="nav-link" href="#juan-ji-de-shu-chu-chi-cun" title="卷积的输出尺寸">卷积的输出尺寸</a></li><li class="nav-item"><a class="nav-link" href="#juan-ji-wang-luo-de-gan-shou-ye" title="卷积网络的感受野">卷积网络的感受野</a></li><li class="nav-item"><a class="nav-link" href="#juan-ji-de-jin-hua" title="卷积的进化">卷积的进化</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#zu-juan-ji" title="组卷积">组卷积</a></li><li class="nav-item"><a class="nav-link" href="#kong-dong-juan-ji" title="空洞卷积">空洞卷积</a></li><li class="nav-item"><a class="nav-link" href="#hun-he-juan-ji" title="混合卷积">混合卷积</a></li><li class="nav-item"><a class="nav-link" href="#ping-jing-juan-ji" title="瓶颈卷积">瓶颈卷积</a></li><li class="nav-item"><a class="nav-link" href="#shen-du-juan-ji" title="深度卷积">深度卷积</a></li><li class="nav-item"><a class="nav-link" href="#shen-du-ke-fen-chi-juan-ji" title="深度可分离卷积">深度可分离卷积</a></li><li class="nav-item"><a class="nav-link" href="#jiao-cuo-zu-juan-ji" title="交错组卷积">交错组卷积</a></li><li class="nav-item"><a class="nav-link" href="#qing-quan-zhong-juan-ji" title="轻权重卷积">轻权重卷积</a></li><li class="nav-item"><a class="nav-link" href="#dong-tai-juan-ji" title="动态卷积">动态卷积</a></li><li class="nav-item"><a class="nav-link" href="#duo-tou-zi-zhu-yi-li" title="多头自注意力">多头自注意力</a></li><li class="nav-item"><a class="nav-link" href="#can-chai-wang-luo" title="残差网络">残差网络</a></li><li class="nav-item"><a class="nav-link" href="#ke-bian-xing-juan-ji" title="可变形卷积">可变形卷积</a></li><li class="nav-item"><a class="nav-link" href="#te-zheng-zhong-biao-ding-juan-ji" title="特征重标定卷积">特征重标定卷积</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#bu-wan-quan-xiao-jie_1" title="不完全小结">不完全小结</a></li><li class="nav-item"><a class="nav-link" href="#can-kao-wen-xian" title="参考文献">参考文献</a></li></ul></ul>
+    <ul class="nav" id="toc"><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#juan-ji-de-shu-xue-yuan-li" title="卷积的数学原理">卷积的数学原理</a></li><li class="nav-item"><a class="nav-link" href="#juan-ji-de-biao-shi" title="卷积的表示">卷积的表示</a></li><li class="nav-item"><a class="nav-link" href="#juan-ji-de-shu-chu-chi-cun" title="卷积的输出尺寸">卷积的输出尺寸</a></li><li class="nav-item"><a class="nav-link" href="#juan-ji-wang-luo-de-gan-shou-ye" title="卷积网络的感受野">卷积网络的感受野</a></li><li class="nav-item"><a class="nav-link" href="#juan-ji-de-jin-hua" title="卷积的进化">卷积的进化</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#zu-juan-ji" title="组卷积">组卷积</a></li><li class="nav-item"><a class="nav-link" href="#kong-dong-juan-ji" title="空洞卷积">空洞卷积</a></li><li class="nav-item"><a class="nav-link" href="#fan-juan-ji" title="反卷积">反卷积</a></li><li class="nav-item"><a class="nav-link" href="#hun-he-juan-ji" title="混合卷积">混合卷积</a></li><li class="nav-item"><a class="nav-link" href="#ping-jing-juan-ji" title="瓶颈卷积">瓶颈卷积</a></li><li class="nav-item"><a class="nav-link" href="#shen-du-juan-ji" title="深度卷积">深度卷积</a></li><li class="nav-item"><a class="nav-link" href="#shen-du-ke-fen-chi-juan-ji" title="深度可分离卷积">深度可分离卷积</a></li><li class="nav-item"><a class="nav-link" href="#jiao-cuo-zu-juan-ji" title="交错组卷积">交错组卷积</a></li><li class="nav-item"><a class="nav-link" href="#qing-quan-zhong-juan-ji" title="轻权重卷积">轻权重卷积</a></li><li class="nav-item"><a class="nav-link" href="#dong-tai-juan-ji" title="动态卷积">动态卷积</a></li><li class="nav-item"><a class="nav-link" href="#duo-tou-zi-zhu-yi-li" title="多头自注意力">多头自注意力</a></li><li class="nav-item"><a class="nav-link" href="#can-chai-wang-luo" title="残差网络">残差网络</a></li><li class="nav-item"><a class="nav-link" href="#ke-bian-xing-juan-ji" title="可变形卷积">可变形卷积</a></li><li class="nav-item"><a class="nav-link" href="#te-zheng-zhong-biao-ding-juan-ji" title="特征重标定卷积">特征重标定卷积</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#bu-wan-quan-xiao-jie_1" title="不完全小结">不完全小结</a></li><li class="nav-item"><a class="nav-link" href="#can-kao-wen-xian" title="参考文献">参考文献</a></li></ul></ul>
 <!-- </section> -->
 <!-- </section> -->
         </nav>
