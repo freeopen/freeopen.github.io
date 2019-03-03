@@ -72,6 +72,7 @@
 
     <span>2019-01-05</span>
 
+    <span>| 更新于 2019-03-02</span>
 
     <span>| By             <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
     </span>
@@ -139,8 +140,8 @@ size);</li>
 <p>按上述公式递归计算后，顶层对底层的感受野就能算出了。</p>
 <h2 id="juan-ji-de-jin-hua">卷积的进化</h2>
 <p>卷积形式经过各种排列组合，诞生了不少经典神经网络结构，我想要探索的不仅仅是这些结构本身，更想要搞明白这些结构设计的初衷，以及带来的好处是什么。</p>
-<h3 id="zu-juan-ji">组卷积</h3>
-<p>组卷积(Grouped Convolution)曾被用于 AlexNet 中，将模型分布在两个 GPU 上以解决内存处理问题。用一个 32 通道的例子来解释一下组卷积：把 32 个输入通道平均分为 4 组，每组拥有 8 个通道，并分别对 4 组单独做卷积运算。这样的好处是参数较少可以提升计算速度，但是同时，由于每组卷积之间不存在交互，不同组的输出通道与输入通道并不相关。</p>
+<p>这里讨论的卷积结构，我分为两类，一类叫<strong>卷积单元</strong>，表示单个卷积，一类叫<strong>卷积结构</strong>，表示多个卷积的组合。</p>
+<h2 id="juan-ji-dan-yuan">卷积单元</h2>
 <h3 id="kong-dong-juan-ji">空洞卷积</h3>
 <p>空洞卷积 (Dilated Convolution) 又叫膨胀卷积 ( Atrous Convolution)， 它的想法是在卷积核中增加&ldquo;空洞&rdquo;， 从而在不增加参数量的情况下捕捉到更远的距离。换种说法就是空洞卷积能增加感受野。</p>
 <p>空洞卷积核的设计很简单，其实就是对卷积核的插 0 操作， 比如由&ldquo;111&rdquo;变为&ldquo;10101&rdquo;这样。空洞卷积常用于一维卷积的场景，比如 NLP  的语义分割、文本抽取等任务，语音合成等任务。</p>
@@ -162,11 +163,6 @@ size);</li>
 </li>
 </ul>
 <p>求得该反卷积的输出尺寸为 5x5。</p>
-<h3 id="hun-he-juan-ji">混合卷积</h3>
-<p>传统的层叠式网络，基本上都是一个个卷积层的堆叠，每层只用一个尺寸的卷积核。于是有人想，如果每层用多个尺寸的卷积核，是否能提炼到更好的特征呢？</p>
-<p>Google的研究员首次在 Inception
-家族的结构中采用了这种想法，把上层的输入分别同时经过 1x1、3x3、5x5
-的卷积核进行处理，得出的特征再组合起来，传到下一层。这种方法确实令模型的性能有所提高，但紧接而来的副作用是，由于卷积核的数量增多，参数量暴增。</p>
 <h3 id="ping-jing-juan-ji">瓶颈卷积</h3>
 <p>常被称为瓶颈层( Bottleneck Layer)，用来缩减参数量，瓶颈层的叫法很形象，就像漏斗一样。瓶颈层的计算方式也常被称为 Pointwise 操作，所以瓶颈卷积也叫做 Pointwise Convolution。</p>
 <p>举例解释一下参数如何被降低的。</p>
@@ -197,17 +193,9 @@ X_{(i+j-\lceil{k+1\over 2}\rceil),c}$$</div>
     个元素为中心，以 <span class="math">\(\lceil{k+1\over 2}\rceil\)</span> 为半径范围内的所有元素，<span class="math">\(\lceil
     \cdot \rceil\)</span> 表示向上取整; <span class="math">\(W_{c,j}\)</span> 表示第 c 个卷积核中第 j 个元素。</li>
 </ul>
-<h3 id="shen-du-ke-fen-chi-juan-ji">深度可分离卷积</h3>
-<p>深度可分离卷积 (Depthwise Separable Convolution) 的流行来自谷歌 Xception 结构的流行。这种卷积的思想是把过去一个卷积核对多通道的计算变为一个卷积核仅针对一个通道，被称为 Depthwise 操作，然后再用1x1卷积将每个通道输出的特征图( Feature map) <sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup>进行融合，这被称为 Pointwise 操作，也即是前面提到的瓶颈卷积。
-因此，深度可分离卷积实质上是 Depthwise Convolution 和 Pointwise Convolution
-的组合。</p>
-<p>深度可分离卷积可以看成是交错组卷积的特例，显著降低了参数量，从而增加了神经网络性能。假设卷积核的尺寸为 k，输入的通道和卷积核的数量均为 c ，则对于一个感受野来说，所需的参数量为 <span class="math">\(k\cdot c + c^2\)</span>，而传统卷积的参数量为 <span class="math">\(k\cdot c^2\)</span>。</p>
-<h3 id="jiao-cuo-zu-juan-ji">交错组卷积</h3>
-<p>交错组卷积( Interleaved Group Convolution ) 的思路由微软研究院提出。前面提到，组卷积中不同组的输出与输入通道之间缺乏相关性，要增加这种相关性，只需要把其他组的输出通道叠加进来，再次进行卷积运算即可。</p>
-<p>具体方法为，做两次组卷积，第一次还是和一般组卷积一样，然后把所有组卷积的输出交错排列后，作为第二次组卷积的输入，以达到交错互补的目的。交错组卷积增加了网络的宽度，同时增加了通道间的相关性，自然模型性能会提升。</p>
 <h3 id="qing-quan-zhong-juan-ji">轻权重卷积</h3>
 <p>轻权重卷积(Lightweight Convolution) 由 Depthwise
-卷积进化而来，如果你理解了上面的公式，那么你就能根据轻权重卷积的公式立即明白它改进了什么。</p>
+卷积进化而来，如果你理解了深度卷积的公式，那么你就能根据轻权重卷积的公式立即明白它改进了什么。</p>
 <div class="math">$$LightConv(X, W_{\lceil{cH\over d}\rceil, :}, i, c) = DepthwiseConv(X,
 softmax(W_{\lceil{cH\over d}\rceil, :}), i, c)$$</div>
 <p>解释一下，这里的权重 <span class="math">\(W\)</span> 即卷积核 ( <span class="math">\(W\in R^{H\times k}\)</span> ) ，Depthwise时，卷积核的数量有 d 个，Lightweight
@@ -235,6 +223,26 @@ X 中元素变化的线性函数。
 \cdot d\)</span>。</p>
 <p>观察轻权重卷积和动态卷积的构成，我认为都属于 depthwise
 卷积家族，它们的不同点仅在于对卷积核上施加了不同的函数。对于轻权重卷积而已，它通过减少卷积核数量，同时兼顾卷积核中其他元素的相关性，进一步降低了参数量；对于动态卷积而言，它在轻权重卷积基础上，又多兼顾了通道间的相关性，但参数量有所增加。</p>
+<h3 id="ke-bian-xing-juan-ji">可变形卷积</h3>
+<p>可变形卷积 (Deformable Convolution) 的想法是在卷积核上做文章。卷积核一般的形状为正方形或长方形，由于图像中我们感兴趣的区域往往是不规则图形，如果让卷积核的形状能根据关注区域的形状发生形变，那么是否会获得更好的性能呢？比如针对缩放的物体，就训练出能缩放的卷积核，对于旋转的物体，就训练出能旋转的卷积核，这样抽取出的特征将有更好的泛化性。</p>
+<p>该想法的提出来自微软亚洲研究院。它的方法是在原来的卷积核前面再加一层过滤器（记为偏移过滤器），这层过滤器学习的是下一层卷积核的位置偏移量。假设输入的形状为 [H，W，C]，经过偏移过滤器后输出的形状为 [H, W, 2 x C]，这里的通道变为原来的两倍。因为我们需要在这个偏移区域( offset field  )里面取一组卷积核的偏移坐标(记为 offsets )，而一个offset肯定不能一个值就表示的，最少也要用两个值（x 方向上的偏移和 y 方向上的偏移）。取完了这些值，就可以顺利使卷积核形变，后面再按常规卷积操作即可。</p>
+<p>该卷积网络在自动驾驶的图像语义分割任务上获得了 5 个点的提升。</p>
+<h2 id="juan-ji-jie-gou_1">卷积结构</h2>
+<h3 id="zu-juan-ji">组卷积</h3>
+<p>组卷积(Grouped Convolution)曾被用于 AlexNet 中，将模型分布在两个 GPU 上以解决内存处理问题。用一个 32 通道的例子来解释一下组卷积：把 32 个输入通道平均分为 4 组，每组拥有 8 个通道，并分别对 4 组单独做卷积运算。这样的好处是参数较少可以提升计算速度，但是同时，由于每组卷积之间不存在交互，不同组的输出通道与输入通道并不相关。</p>
+<h3 id="hun-he-juan-ji">混合卷积</h3>
+<p>传统的层叠式网络，基本上都是一个个卷积层的堆叠，每层只用一个尺寸的卷积核。于是有人想，如果每层用多个尺寸的卷积核，是否能提炼到更好的特征呢？</p>
+<p>Google的研究员首次在 Inception
+家族的结构中采用了这种想法，把上层的输入分别同时经过 1x1、3x3、5x5
+的卷积核进行处理，得出的特征再组合起来，传到下一层。这种方法确实令模型的性能有所提高，但紧接而来的副作用是，由于卷积核的数量增多，参数量暴增。</p>
+<h3 id="shen-du-ke-fen-chi-juan-ji">深度可分离卷积</h3>
+<p>深度可分离卷积 (Depthwise Separable Convolution) 的流行来自谷歌 Xception 结构的流行。这种卷积的思想是把过去一个卷积核对多通道的计算变为一个卷积核仅针对一个通道，被称为 Depthwise 操作，然后再用1x1卷积将每个通道输出的特征图( Feature map) <sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup>进行融合，这被称为 Pointwise 操作，也即是前面提到的瓶颈卷积。
+因此，深度可分离卷积实质上是 Depthwise Convolution 和 Pointwise Convolution
+的组合。</p>
+<p>深度可分离卷积可以看成是交错组卷积的特例，显著降低了参数量，从而增加了神经网络性能。假设卷积核的尺寸为 k，输入的通道和卷积核的数量均为 c ，则对于一个感受野来说，所需的参数量为 <span class="math">\(k\cdot c + c^2\)</span>，而传统卷积的参数量为 <span class="math">\(k\cdot c^2\)</span>。</p>
+<h3 id="jiao-cuo-zu-juan-ji">交错组卷积</h3>
+<p>交错组卷积( Interleaved Group Convolution ) 的思路由微软研究院提出。前面提到，组卷积中不同组的输出与输入通道之间缺乏相关性，要增加这种相关性，只需要把其他组的输出通道叠加进来，再次进行卷积运算即可。</p>
+<p>具体方法为，做两次组卷积，第一次还是和一般组卷积一样，然后把所有组卷积的输出交错排列后，作为第二次组卷积的输入，以达到交错互补的目的。交错组卷积增加了网络的宽度，同时增加了通道间的相关性，自然模型性能会提升。</p>
 <h3 id="duo-tou-zi-zhu-yi-li">多头自注意力</h3>
 <p>没错，你没看错，如果你参悟透了多头自注意力结构，它实质仍然是卷积计算。
 多头自注意力(Multi-Head Self-Attention，以下简称"MHSA") 来自 Google Brain
@@ -274,21 +282,35 @@ Q、K、V，它们其实都是单词的语义表达，降低参数量是我们�
 <li>将 <span class="math">\(W_s\)</span> 作为学习参数训练得到；</li>
 <li>固定 <span class="math">\(W_s\)</span> 值( 类似单位矩阵 ) ，<span class="math">\({W_s} \cdot {a^l}\)</span> 仅使 <span class="math">\(a^l\)</span> 截断或补零。</li>
 </ol>
-<h3 id="ke-bian-xing-juan-ji">可变形卷积</h3>
-<p>可变形卷积 (Deformable Convolution) 的想法是在卷积核上做文章。卷积核一般的形状为正方形或长方形，由于图像中我们感兴趣的区域往往是不规则图形，如果让卷积核的形状能根据关注区域的形状发生形变，那么是否会获得更好的性能呢？比如针对缩放的物体，就训练出能缩放的卷积核，对于旋转的物体，就训练出能旋转的卷积核，这样抽取出的特征将有更好的范化性。</p>
-<p>该想法的提出来自微软亚洲研究院。它的方法是在原来的卷积核前面再加一层过滤器（记为偏移过滤器），这层过滤器学习的是下一层卷积核的位置偏移量。假设输入的形状为 [H，W，C]，经过偏移过滤器后输出的形状为 [H, W, 2 x C]，这里的通道变为原来的两倍。因为我们需要在这个offset field里面取一组卷积核的offsets，而一个offset肯定不能一个值就表示的，最少也要用两个值（x方向上的偏移和y方向上的偏移）。取完了这些值，就可以顺利使卷积核形变，后面再按常规卷积操作即可。</p>
-<p>该卷积网络在自动驾驶的图像语义分割任务上获得了 5 个点的提升。</p>
 <h3 id="te-zheng-zhong-biao-ding-juan-ji">特征重标定卷积</h3>
 <p>图像的特征通过卷积核抽取出来，形成一个个特征通道，那么每个特征通道的作用都同等重要么？显然不是。如果有办法通过学习的方式自动获取每个特征通道的重要程度，然后依照计算出来的重要程度去提升有用的特征，抑制用处不大的特征，这就是特征重标定卷积思想的由来。该思路构建的模型结构叫做Squeeze-and-Excitation Network，简称 SENet，曾是 ImageNet 2017 竞赛的冠军模型。</p>
-<p>SENet 结构为：首先做普通卷积，得到了一个的 output feature map，它的shape为[C，H，W]，再分两条路线，第一条直接通过，第二条首先进行Squeeze操作（Global Average Pooling），把每个通道 2 维的特征压缩成 1 维，得到长度为 C 的特征通道向量（每个数字代表对应通道的特征）；然后进行 Excitation 操作，即对特征通道向量加两个全连接层( FC Layer )，和非线性映射( Sigmoid )，建模出特征通道间的相关性，得到的输出其实就是每个通道对应的权重，把这些权重加权到原来的特征上（第一条路），这样就完成了特征通道的权重分配。</p>
+<p>SENet 结构为：首先做普通卷积，输出一个特征图，它的形状为[C，H，W]，再分两条路线，第一条直接通过( 类似残差结构的跳线 )，第二条首先进行<strong>压缩( Squeeze )</strong>操作（ 全局平均池化 Global Average Pooling ），把每个通道 2 维的特征压缩成 1 维，得到长度为 C 的特征通道向量（每个数字代表对应通道的特征）；然后进行<strong>激发( Excitation )</strong>操作，即对特征通道向量加两个全连接层( FC Layer )，和非线性映射( Sigmoid )，建模出特征通道间的相关性，得到的输出其实就是每个通道对应的权重，
+把这些权重加权到原来的特征上（第一条路），这样就完成了特征通道的权重分配。最后是<strong>赋权操作</strong>，论文里叫做
+scale 操作，把特征通道的权重先归一化，然后加权到每个通道的特征上。</p>
+<p>具体分为三个步骤：</p>
+<ul>
+<li>
 <p>第一步 Squeeze 操作为每个特征通道生成一个实数，该实数在某种程度上拥有全局感受野，表征着在特征通道上响应的全局分布，而且使得靠近输入的层也可以获得全局的感受野。</p>
+<p>
 <div class="math">$$ z_c = F_{sq}(u_c) = \frac{1}{W \times H}\sum_{i=1}^{W}\sum_{j=1}^{H}u_c(i,j)$$</div>
-<p>
-其中：<span class="math">\(u_c\)</span> 表示第c个特征通道。</p>
+</p>
+<p>其中：<span class="math">\(u_c\)</span> 表示第c个特征通道。</p>
+</li>
+<li>
 <p>第二步 Excitation 操作类似于循环神经网络的门机制， 通过参数 w 来为每个特征通道生成权重，其中参数 w 被学习用来显式地建模特征通道间的相关性。</p>
-<div class="math">$$ s = F_ex(z,W) = \sigma(g(z,W)) = \sigma(W_2(\delta(W_{1}z)) $$</div>
 <p>
-其中，<span class="math">\(\sigma\)</span> 表示 <span class="math">\(ReLU\)</span> 函数,  <span class="math">\(\delta\)</span> 表示 <span class="math">\(sigmoid\)</span> 函数。 </p>
+<div class="math">$$ s = F_ex(z,W) = \sigma(g(z,W)) = \sigma(W_2(\delta(W_{1}z)) $$</div>
+</p>
+<p>其中，<span class="math">\(\sigma\)</span> 表示 <span class="math">\(ReLU\)</span> 函数,  <span class="math">\(\delta\)</span> 表示 <span class="math">\(sigmoid\)</span> 函数。 </p>
+</li>
+<li>
+<p>第三步 赋权( Reweight or Scale )操作, 把特征通道的权重加权到每个通道的特征上。</p>
+<p>
+<div class="math">$$\tilde{x_c} = F_{scale}(u_c, s_c) = s_c \cdot u_c$$</div>
+</p>
+<p>其中，下标<span class="math">\(c\)</span>表示第 c 个通道，令<span class="math">\(u\)</span>表示特征图，<span class="math">\(s\)</span>表示所有通道的权重，则 <span class="math">\(F_{scale}(u,s)\)</span> 表示每个通道乘以各自的权重，它就是一个深度卷积( Depthwise Convolution )。</p>
+</li>
+</ul>
 <h2 id="bu-wan-quan-xiao-jie_1">不完全小结</h2>
 <p>神经网络恒古不变的追求其实就一条，减少参数并提升性能。
 观察上述各种卷积的变化，发现确有规律可循，它们包括：</p>
@@ -404,7 +426,7 @@ Q、K、V，它们其实都是单词的语义表达，降低参数量是我们�
       <div class="hidden-print hidden-xs hidden-sm hidden-md col-lg" id="post_toc" role="complementary">
         <nav class="sidebar-toc">
 <!-- <section id="main_toc"> -->
-    <ul class="nav" id="toc"><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#juan-ji-de-shu-xue-yuan-li" title="卷积的数学原理">卷积的数学原理</a></li><li class="nav-item"><a class="nav-link" href="#juan-ji-de-biao-shi" title="卷积的表示">卷积的表示</a></li><li class="nav-item"><a class="nav-link" href="#juan-ji-de-shu-chu-chi-cun" title="卷积的输出尺寸">卷积的输出尺寸</a></li><li class="nav-item"><a class="nav-link" href="#juan-ji-wang-luo-de-gan-shou-ye" title="卷积网络的感受野">卷积网络的感受野</a></li><li class="nav-item"><a class="nav-link" href="#juan-ji-de-jin-hua" title="卷积的进化">卷积的进化</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#zu-juan-ji" title="组卷积">组卷积</a></li><li class="nav-item"><a class="nav-link" href="#kong-dong-juan-ji" title="空洞卷积">空洞卷积</a></li><li class="nav-item"><a class="nav-link" href="#fan-juan-ji" title="反卷积">反卷积</a></li><li class="nav-item"><a class="nav-link" href="#hun-he-juan-ji" title="混合卷积">混合卷积</a></li><li class="nav-item"><a class="nav-link" href="#ping-jing-juan-ji" title="瓶颈卷积">瓶颈卷积</a></li><li class="nav-item"><a class="nav-link" href="#shen-du-juan-ji" title="深度卷积">深度卷积</a></li><li class="nav-item"><a class="nav-link" href="#shen-du-ke-fen-chi-juan-ji" title="深度可分离卷积">深度可分离卷积</a></li><li class="nav-item"><a class="nav-link" href="#jiao-cuo-zu-juan-ji" title="交错组卷积">交错组卷积</a></li><li class="nav-item"><a class="nav-link" href="#qing-quan-zhong-juan-ji" title="轻权重卷积">轻权重卷积</a></li><li class="nav-item"><a class="nav-link" href="#dong-tai-juan-ji" title="动态卷积">动态卷积</a></li><li class="nav-item"><a class="nav-link" href="#duo-tou-zi-zhu-yi-li" title="多头自注意力">多头自注意力</a></li><li class="nav-item"><a class="nav-link" href="#can-chai-wang-luo" title="残差网络">残差网络</a></li><li class="nav-item"><a class="nav-link" href="#ke-bian-xing-juan-ji" title="可变形卷积">可变形卷积</a></li><li class="nav-item"><a class="nav-link" href="#te-zheng-zhong-biao-ding-juan-ji" title="特征重标定卷积">特征重标定卷积</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#bu-wan-quan-xiao-jie_1" title="不完全小结">不完全小结</a></li><li class="nav-item"><a class="nav-link" href="#can-kao-wen-xian" title="参考文献">参考文献</a></li></ul></ul>
+    <ul class="nav" id="toc"><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#juan-ji-de-shu-xue-yuan-li" title="卷积的数学原理">卷积的数学原理</a></li><li class="nav-item"><a class="nav-link" href="#juan-ji-de-biao-shi" title="卷积的表示">卷积的表示</a></li><li class="nav-item"><a class="nav-link" href="#juan-ji-de-shu-chu-chi-cun" title="卷积的输出尺寸">卷积的输出尺寸</a></li><li class="nav-item"><a class="nav-link" href="#juan-ji-wang-luo-de-gan-shou-ye" title="卷积网络的感受野">卷积网络的感受野</a></li><li class="nav-item"><a class="nav-link" href="#juan-ji-de-jin-hua" title="卷积的进化">卷积的进化</a></li><li class="nav-item"><a class="nav-link" href="#juan-ji-dan-yuan" title="卷积单元">卷积单元</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#kong-dong-juan-ji" title="空洞卷积">空洞卷积</a></li><li class="nav-item"><a class="nav-link" href="#fan-juan-ji" title="反卷积">反卷积</a></li><li class="nav-item"><a class="nav-link" href="#ping-jing-juan-ji" title="瓶颈卷积">瓶颈卷积</a></li><li class="nav-item"><a class="nav-link" href="#shen-du-juan-ji" title="深度卷积">深度卷积</a></li><li class="nav-item"><a class="nav-link" href="#qing-quan-zhong-juan-ji" title="轻权重卷积">轻权重卷积</a></li><li class="nav-item"><a class="nav-link" href="#dong-tai-juan-ji" title="动态卷积">动态卷积</a></li><li class="nav-item"><a class="nav-link" href="#ke-bian-xing-juan-ji" title="可变形卷积">可变形卷积</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#juan-ji-jie-gou_1" title="卷积结构">卷积结构</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#zu-juan-ji" title="组卷积">组卷积</a></li><li class="nav-item"><a class="nav-link" href="#hun-he-juan-ji" title="混合卷积">混合卷积</a></li><li class="nav-item"><a class="nav-link" href="#shen-du-ke-fen-chi-juan-ji" title="深度可分离卷积">深度可分离卷积</a></li><li class="nav-item"><a class="nav-link" href="#jiao-cuo-zu-juan-ji" title="交错组卷积">交错组卷积</a></li><li class="nav-item"><a class="nav-link" href="#duo-tou-zi-zhu-yi-li" title="多头自注意力">多头自注意力</a></li><li class="nav-item"><a class="nav-link" href="#can-chai-wang-luo" title="残差网络">残差网络</a></li><li class="nav-item"><a class="nav-link" href="#te-zheng-zhong-biao-ding-juan-ji" title="特征重标定卷积">特征重标定卷积</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#bu-wan-quan-xiao-jie_1" title="不完全小结">不完全小结</a></li><li class="nav-item"><a class="nav-link" href="#can-kao-wen-xian" title="参考文献">参考文献</a></li></ul></ul>
 <!-- </section> -->
 <!-- </section> -->
         </nav>
