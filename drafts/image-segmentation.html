@@ -125,17 +125,19 @@
 <p><strong>算法面临的挑战：</strong></p>
 <ul>
 <li>
-<p>在第 1 步中，由于目标的大小、轮廓千变万化，要找出候选区域，有两种方案。</p>
+<p>在第 1 步中，由于目标的大小、轮廓千变万化，要找出候选区域，有多种方案。</p>
 <ul>
 <li>方法1: 把图片均匀分成细小的网格，再根据网格的特征相似度拼接网格，
     拼接后的网格即为候选区域。</li>
 <li>方法2: 用不同大小，不同长宽比的矩形框作为滑动窗口，
     在图片上从左到右、由上至下滑动，被框住的区域即为候选区域。</li>
+<li>方法3: 利用图片的几何特征(比如物体的轮廓位置的颜色梯度会较大)，用算法找出候选区域。</li>
 </ul>
 <p>对于方法1, 优点是候选区域不会重叠，难点在于网格的拼接策略。</p>
 <p>对于方法2，会产生相互重叠的候选区域，
 且候选区域不一定贴合目标的轮廓，需要有办法调整候选区域大小，
 让它最接近目标物体的轮廓。</p>
+<p>对于方法3, 只要效率高，个人认为是最优策略，但目前这类算法的性能还需要提高。</p>
 <p>思考：方法 1 和方法 2 本质上都可以看成滑动窗口扫描图片，找出候选区。
 但，如果我们用卷积网络抽取图片特征，则较低的卷积层反映图片较细节
 的特征(如纹理、边缘
@@ -202,7 +204,8 @@ R-CNN 概览：输入一张图片，定位出2000个物体候选框，
 <p>假设有 6 个矩形框都是目标车辆的边界框，用 SVM 分类器对它们打分并排序，
 从小到大属于车辆的概率分别为A、B、C、D、E、F。</p>
 <ol>
-<li>从最大概率矩形框F开始，分别判断A~E与F的重叠度<a href="/posts/ji-qi-xue-xi-zhu-yu-biao#iou">IOU</a>是否大于某个设定的阈值;</li>
+<li>从最大概率矩形框F开始，分别判断A~E与F的重叠度<a href="/posts/ji-qi-xue-xi-zhu-yu-biao#iou">IOU</a>是否
+   大于某个设定的阈值;</li>
 <li>假设B、D与F的重叠度超过阈值，那么就扔掉B、D；并标记第一个矩形框F，是我们保留下来的。</li>
 <li>从剩下的矩形框A、C、E中，选择概率最大的E，然后判断E与A、C的重叠度，
    重叠度大于一定的阈值，那么就扔掉；并标记E是我们保留下来的第二个矩形框。</li>
@@ -210,7 +213,44 @@ R-CNN 概览：输入一张图片，定位出2000个物体候选框，
 <p>就这样一直重复，找到所有被保留下来的矩形框。</p>
 <h4>如何调整边界框</h4>
 <p>找到边界框中的目标物体后，进一步调整边界框，使其更贴近物体周围。
-用一个线性回归训练出更贴身的边界框。</p>
+这里的创新点为，用线性回归代替过去的DPM算法
+(依赖图像几何特征训练出物体边界框的方法), 训练出更贴身的边界框</p>
+<p>其思路为:</p>
+<p>令<span class="math">\(P^i = (P_x, P_y, P_w, P_h)\)</span> 表示由选择性搜索算法找出，
+并被SVM分类器打过分的边界框，简称&ldquo;预测框&rdquo;，
+其中<span class="math">\(P_x, P_y\)</span> 表示边界框的中心点坐标，
+<span class="math">\(P_w, P_h\)</span> 表示边界框的宽、高；</p>
+<p><span class="math">\(G^i = (G_x, G_y, G_w, G_h)\)</span> 表示训练集边界框标准答案，简称&ldquo;目标框&rdquo;，
+括号内的值与预测框一一对应。</p>
+<p>欲得到调整后的预测框，即是训练四个函数<span class="math">\(d_x(P),d_y(P),d_w(P),d_h(P)\)</span>，
+这几个函数满足：</p>
+<div class="math">$$\hat{G_x} = P_wd_x(P)+P_x  \tag{1}$$</div>
+<div class="math">$$\hat{G_y} = P_hd_y(P)+P_y  \tag{2}$$</div>
+<div class="math">$$\hat{G_w} = P_w exp(d_w(P))  \tag{3}$$</div>
+<div class="math">$$\hat{G_h} = P_h exp(d_h(P))  \tag{4}$$</div>
+<p>函数<span class="math">\(d_*(P)\)</span>(<span class="math">\(*\)</span>号代表<span class="math">\(x,y,h,w\)</span>中的一个)是候选框对应的
+特征图(记为<span class="math">\(\phi_5(P)\)</span>, 下标5表示是第5层池化层输出的特征图)的线性函数，
+代表从预测框到调整后的预测框的变换关系，所以有：
+</p>
+<div class="math">$$d_*(P) = w_*^T\phi_5(P)$$</div>
+<p>训练的目标函数为岭回归（ridge regression）：
+</p>
+<div class="math">$$w_* =
+argmin_{\hat{w_*}}\sum_i^N(t_*^i-\hat{w_*}\phi_5(P^i))^2+\lambda||\hat{w_*}||^2 \tag{5}$$</div>
+<p>(5)式中回归目标 <span class="math">\(t_*\)</span> 分别定义如下：</p>
+<div class="math">$$t_x = (G_x-P_x)/P_w$$</div>
+<div class="math">$$t_y = (G_y-P_y)/P_h$$</div>
+<div class="math">$$t_w = log(G_w/P_w)$$</div>
+<div class="math">$$t_h = log(G_h/P_h)$$</div>
+<h4>训练配置</h4>
+<p>空间特征提取时，学习率设为0.001, 候选框与目标框重叠率大于等于0.5
+的设为正例，否则设为负例; batch_size 设为128， 正负例比例为1:3。</p>
+<p>SVM分类时，分类数量为物体类别数加一，增加的一个分类表示&ldquo;背景&rdquo;类型。
+这里有个特殊设置，即但候选框部分包含物体时，如果区分正例还是负例呢？
+论文在这种情况下选择 IoU 小于0.3时，就标记为负例。</p>
+<p>回归训练时，其目的是调整边界框大小，很显然当预测框与目标框差得很远时，
+回归训练是无效的，所以回归训练只训练靠近目标框的预测框，
+即选择 IoU 阈值设为大于等于 0.6 的预测框。</p>
 <h4>R-CNN 面临的问题</h4>
 <ul>
 <li>选择性搜索算法不能 GPU 加速，降低模型速度；</li>
@@ -241,6 +281,61 @@ R-CNN 概览：输入一张图片，定位出2000个物体候选框，
 </li>
 </ol>
 </div>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
   </div><!-- /.entry-content -->
 
 </section>
