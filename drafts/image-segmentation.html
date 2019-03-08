@@ -234,8 +234,8 @@ R-CNN 概览：输入一张图片，定位出2000个物体候选框，
 <div class="math">$$d_*(P) = w_*^T\phi_5(P)$$</div>
 <p>训练的目标函数为岭回归（ridge regression）：
 </p>
-<div class="math">$$w_* =
-argmin_{\hat{w}_*}\sum_i^N(t_*^i-\hat{w}_*\phi_5(P^i))^2+\lambda||\hat{w}_*||^2 \tag{5}$$</div>
+<div class="math">$$w_* = \underset{\hat{w}_*}{\operatorname{argmin}} 
+\sum_i^N(t_*^i-\hat{w}_*\phi_5(P^i))^2+\lambda\lVert\hat{w}_*\rVert^2 \tag{5}$$</div>
 <p>(5)式中回归目标 <span class="math">\(t_*\)</span> 分别定义如下：</p>
 <div class="math">$$t_x = (G_x-P_x)/P_w$$</div>
 <div class="math">$$t_y = (G_y-P_y)/P_h$$</div>
