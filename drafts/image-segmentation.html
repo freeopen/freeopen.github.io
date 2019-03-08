@@ -224,19 +224,18 @@ R-CNN 概览：输入一张图片，定位出2000个物体候选框，
 括号内的值与预测框一一对应。</p>
 <p>欲得到调整后的预测框，即是训练四个函数<span class="math">\(d_x(P),d_y(P),d_w(P),d_h(P)\)</span>，
 这几个函数满足：</p>
-<div class="math">$$\hatG_x = P_wd_x(P)+P_x  \tag{1}$$</div>
-<div class="math">$$\hatG_y = P_hd_y(P)+P_y  \tag{2}$$</div>
-<div class="math">$$\hatG_w = P_w exp(d_w(P))  \tag{3}$$</div>
-<div class="math">$$\hatG_h = P_h exp(d_h(P))  \tag{4}$$</div>
+<div class="math">$$\hat{G}_x = P_wd_x(P)+P_x  \tag{1}$$</div>
+<div class="math">$$\hat{G}_y = P_hd_y(P)+P_y  \tag{2}$$</div>
+<div class="math">$$\hat{G}_w = P_w exp(d_w(P))  \tag{3}$$</div>
+<div class="math">$$\hat{G}_h = P_h exp(d_h(P))  \tag{4}$$</div>
 <p>函数<span class="math">\(d_*(P)\)</span>(<span class="math">\(*\)</span>号代表<span class="math">\(x,y,h,w\)</span>中的一个)是候选框对应的
 特征图(记为<span class="math">\(\phi_5(P)\)</span>, 下标5表示是第5层池化层输出的特征图)的线性函数，
-代表从预测框到调整后的预测框的变换关系，所以有：
-</p>
+代表从预测框到调整后的预测框的变换关系，所以有：</p>
 <div class="math">$$d_*(P) = w_*^T\phi_5(P)$$</div>
 <p>训练的目标函数为岭回归（ridge regression）：
 </p>
 <div class="math">$$w_* =
-argmin_{\hatw_*}\sum_i^N(t_*^i-\hatw_*\phi_5(P^i))^2+\lambda||\hatw_*||^2 \tag{5}$$</div>
+argmin_{\hat{w}_*}\sum_i^N(t_*^i-\hat{w}_*\phi_5(P^i))^2+\lambda||\hat{w}_*||^2 \tag{5}$$</div>
 <p>(5)式中回归目标 <span class="math">\(t_*\)</span> 分别定义如下：</p>
 <div class="math">$$t_x = (G_x-P_x)/P_w$$</div>
 <div class="math">$$t_y = (G_y-P_y)/P_h$$</div>
