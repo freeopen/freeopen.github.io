@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <!-- Enable responsiveness on mobile devices-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+        <title>Freeopen - 基于深度学习的图像分割算法思路演进</title>
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/css/main.css" />
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/academicons/css/academicons.min.css" />
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/font-awesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/fonts-googleapis/css/googleapi-fonts.css" />
+
+        
+
+
+
+
+
+
+</head>
+
+<body id="index" class="theme-myblue" data-spy="scroll" data-target="#post_toc">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-lg">
+        <nav class="navbar navbar-expand-lg navbar-light sidebar" role="navigation">
+          <a class="sidebar-about" href="https://freeopen.github.io/">Freeopen</a>
+          <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <nav class="collapse navbar-collapse sidebar-nav flex-column" id="navbarNav">
+
+              <a class="nav-link" href="https://freeopen.github.io/pages/about.html">About</a>
+              <a class="nav-link" href="https://freeopen.github.io/pages/da-shang.html">打赏</a>
+
+              <a class="nav-link" href="https://freeopen.github.io/category/bian-cheng.html">编程</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/shou-ce.html">手册</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/shu-xue.html">数学</a>
+            <div class="sidebar-icons">
+              <hr>
+                <a href="" title="Atom feed" target="_blank" 
+                    style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;">
+                  <i class="fa fa-rss-square"></i>
+                </a>
+                <a href="https://github.com/freeopen" title="Software I released on Github" 
+                      target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="fa fa-github-square"></i> </a>
+                <a href="Mailto:freeopen@163.com" title="My email" 
+                    target="_blank" style="display: inline; padding: 0px 0px 0px 0;
+                    margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i
+                  class="fa fa-envelope-square"></i> </a>
+
+            </div>
+          </nav>
+
+        </nav>
+
+      </div>
+
+      <div class="col-12 col-lg-7" role="main">
+        <div id="content" class="content">
+          <div class="post">
+<section id="content" class="body">
+  <header>
+    <h1 class="entry-title">基于深度学习的图像分割算法思路演进</h2>
+ 
+  </header>
+  <div class="post-info">
+
+    <span>2019-03-01</span>
+
+
+    <span>| By             <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
+    </span>
+
+    <span>
+      | 分类于 <a href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
+    </span>
+
+  </div><!-- /.post-info -->
+  <div class="post content">
+    <blockquote>
+<p>又是一篇不会写完的文章，和前面那篇《卷积备忘录》一样，
+会跟进技术发展不断更新。读了一系列论文，有必要再次整理自己的思考了，
+就怕笔不勤忘得快。如有理解错误之处，请读者及时来信告知，如果
+你精通翻墙术，文章末尾可以留言。（已架设 Disqus 评论系统，
+因国内不可名状的原因，翻墙后才能显示。）</p>
+</blockquote>
+<h2 id="tu-xiang-fen-ge-dao-di-gan-shi-yao">图像分割到底干什么</h2>
+<p>图像分割问题主要流行四类任务，它们分别是目标检测( Object Detection )、语义分割( Semantic Segmentation )、实例分割( Instance Segmentation ) 和全景分割( Panoptic Segmentation )。这四类任务的意义分别为：</p>
+<ol>
+<li>目标检测：计算机看一张图，用矩形框框出我们感兴趣的目标（定位任务），
+   并告诉我们该目标是什么（分类任务）。</li>
+<li>语义分割：把整张图像的每个像素赋予一个类别标签。
+   不过语义分割的任务是只判断类别，不区分个体。 </li>
+<li>实例分割：比目标分割更进一步，对我们感兴趣目标的像素赋予类别标签，
+   且对于挨在一起的同种类型的目标，需要区分出个体（即实例），
+   比如几个人相互重叠的站在一起，实例分割时要用不同颜色的色块(论文中称为&ldquo;掩膜&rdquo;, mask)覆盖住每个人。</li>
+<li>全景分割：是语义分割和实体分割的结合，每个像素都被分为一类，
+   如果一种类别里有多个实例，会用不同的颜色进行区分，
+   我们可以知道哪个像素属于哪个类中的哪个实例。</li>
+</ol>
+<p>上面四类任务我把它统称为图像分割任务，它实质上由两个子任务构成，一个是定位任务，一个是分类任务。
+其中，目标检测和实例分割只分割出感兴趣区域，不关心其他区域；语义分割和全景分割对图片的所有区域进行分割，
+但语义分割不区分连在一起的同类个体。</p>
+<h2 id="tu-xiang-fen-ge-de-suan-fa-si-lu">图像分割的算法思路</h2>
+<p>如果你同意图像分割问题均由定位任务和分类任务组成，那么上面的四类任务的算法应该能互相借鉴，
+并最终会统一在一起（即一个模型能同时干完所有的活 -- 四类任务）。</p>
+<p>我先按照人类直觉来思考图像分割问题, 步骤为：</p>
+<ol>
+<li>看一眼图，找到哪些位置有东西；</li>
+<li>再看看有东西的位置都是些什么东西；</li>
+<li>把我们关心的那类东西标记出来。</li>
+</ol>
+<p>再按计算机直觉来细化上面的步骤。计算机看图实质上看到的是密密麻麻的像素点，这些点在计算机眼里没有大小，没有颜色，只是一堆数字而已。计算机识别一张图片是什么内容，根据一块区域的一堆数字分布规律来做出判断，
+所以，机器判断一张图哪些位置有东西时，只能用各种大小的矩形框从图中抽取出像素点，再来判断这些像素点们到底是不是东西，进而再判断它是什么东西。故根据计算机看图的特点，算法进一步描述为：</p>
+<ol>
+<li>扫描图片，找到一堆可能有东西的候选区域；</li>
+<li>取得候选区域对应的视觉特征，对其进行识别，判断有东西还是没东西；</li>
+<li>如果有东西，判断它是什么东西，并标记出它的位置。</li>
+</ol>
+<p><strong>算法面临的挑战：</strong></p>
+<ul>
+<li>
+<p>在第 1 步中，由于目标的大小、轮廓千变万化，要找出候选区域，有两种方案。</p>
+<ul>
+<li>方法1: 把图片均匀分成细小的网格，再根据网格的特征相似度拼接网格，
+    拼接后的网格即为候选区域。</li>
+<li>方法2: 用不同大小，不同长宽比的矩形框作为滑动窗口，
+    在图片上从左到右、由上至下滑动，被框住的区域即为候选区域。</li>
+</ul>
+<p>对于方法1, 优点是候选区域不会重叠，难点在于网格的拼接策略。</p>
+<p>对于方法2，会产生相互重叠的候选区域，
+且候选区域不一定贴合目标的轮廓，需要有办法调整候选区域大小，
+让它最接近目标物体的轮廓。</p>
+<p>思考：方法 1 和方法 2 本质上都可以看成滑动窗口扫描图片，找出候选区。
+但，如果我们用卷积网络抽取图片特征，则较低的卷积层反映图片较细节
+的特征(如纹理、边缘
+等)，较高的卷积层反映图片较宏观的特征（如物体的轮廓等），所以
+候选区域在较高的卷积层输出的特征图上取得，
+理论上效果会比直接从原图上取得的要好, 且所需参数也较少。</p>
+</li>
+<li>
+<p>在第 2 步中，相当于一个二分类问题，判断候选区域框住的东西是
+    前景还是背景。
+    面临的难题是候选区域输出的特征图大小不一，
+    这些特征图在进行分类前，须调成固定尺寸的向量。</p>
+</li>
+<li>
+<p>在第 3 步中，有两个分支，一个判断目标类型的分类器和一个标记目标位置
+    的定位器。难点在于定位任务，因为这时看到的特征图尺寸小于原图，
+    需要找到一个办法把特征图的坐标还原成原图的坐标。</p>
+</li>
+</ul>
+<p>上述的这些难题被解决的越好，那么图像分割的效果也就越好。
+下面看看研究者们都有些什么巧思，来跨越这些鸿沟。</p>
+<h2 id="jing-dian-suan-fa-de-yan-jin">经典算法的演进</h2>
+<h3 id="r-cnn">R-CNN</h3>
+<p>R-CNN( Regions with Convolutional Neural Network Features )
+模型可称为深度学习用于目标检测的开山之作，来自 
+Ross Girshick 于2013年11月发表的一篇论文，
+论文名为《Rich feature hierarchies for Accurate Object Detection and Segmentation》。</p>
+<p>模型结构如下：</p>
+<p align="center">
+<img src="/images/r-cnn.png" width="90%"/>
+<figcaption>
+R-CNN 概览：输入一张图片，定位出2000个物体候选框，
+然后采用CNN提取每个候选框中图片的特征向量，
+特征向量的维度为4096维，接着采用svm算法对各个候选框中的物体进行分类识别。
+</figcaption>
+</p>
+<p>上图仅为模型概要，算法实质上分为三步：</p>
+<ol>
+<li>找出候选区域(regions proposals), 将其作为边界框(Bounding Box)；</li>
+<li>用预训练好的卷积网络(如 AlexNet)提取特征向量, 并用 SVM
+   算法判断边界框中对应的物体类型；</li>
+<li>对已分类物体的边界框进行线性回归，输出其对应的贴近物体轮廓的紧身边界框(tighter bounding boxes)。</li>
+</ol>
+<h4>如何找出候选区域</h4>
+<p>R-CNN 用选择性搜索( Selective Search )算法从原始图片上找出一堆候选框，
+并选出得分最高的2000个。</p>
+<p><strong>选择性搜索( Selective Search )算法</strong></p>
+<ol>
+<li>生成原始的候选框集合 R（利用<strong>felzenszwalb算法</strong><sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup>）;</li>
+<li>计算候选框集 R 里每个相邻区域的相似度 S={s1,s2,&hellip;},
+   这里考虑了四种类型的相似度，包括纹理、颜色、尺寸及交叠;</li>
+<li>找出相似度最高的两个区域，将其合并为新集，添加进 R&nbsp;;</li>
+<li>从 S 中移除所有与第 3 步中有关的子集;&nbsp;</li>
+<li>计算新集与所有子集的相似度;&nbsp;</li>
+<li>跳至第三步，不断循环，合并，直至 S 为空（到不能再合并时为止）。</li>
+</ol>
+<h4>如何从不同大小的候选框提取空间特征</h4>
+<p>直接缩放成固定大小的正方形（论文采用227&times;227）, 送进
+修改版的 AlexNet 抽取空间特征。</p>
+<p>不过缩放会导致图片的扭曲。</p>
+<h4>如何选择最好的边界框</h4>
+<p>比如定位一个物体，算法可能会找出一堆边界框，我们需要选出最好的边界框。
+这里用到了<strong>非极大值抑制(Non-maximum suppression, NMS)</strong>算法，该算法
+其本质是搜索局部极大值，抑制非极大值元素, 具体如下：</p>
+<p>假设有 6 个矩形框都是目标车辆的边界框，根据SVM分类器对它们打分并排序，
+从小到大分别属于车辆的概率分别为A、B、C、D、E、F。</p>
+<ol>
+<li>从最大概率矩形框F开始，分别判断A~E与F的重叠度<a href="/posts/ji-qi-xue-xi-zhu-yu-biao#iou">IOU</a>是否大于某个设定的阈值;</li>
+<li>假设B、D与F的重叠度超过阈值，那么就扔掉B、D；并标记第一个矩形框F，是我们保留下来的。</li>
+<li>从剩下的矩形框A、C、E中，选择概率最大的E，然后判断E与A、C的重叠度，
+   重叠度大于一定的阈值，那么就扔掉；并标记E是我们保留下来的第二个矩形框。</li>
+</ol>
+<p>就这样一直重复，找到所有被保留下来的矩形框。</p>
+<h4>如何调整边界框</h4>
+<p>找到边界框中的目标物体后，进一步调整边界框，使其更贴近物体周围。
+用一个线性回归训练出更贴身的边界框。</p>
+<h4>R-CNN 面临的问题</h4>
+<ul>
+<li>选择性搜索算法不能 GPU 加速，降低模型速度；</li>
+<li>对每张图做2000次前向CNN, 效率过低；</li>
+<li>CNN提取图像特征、分类器预测类别、回归模型提取紧身边界框，
+  但在算法上它们是分开训练的，训练起来较麻烦。</li>
+</ul>
+<h3 id="overfeat">OverFeat</h3>
+<h3 id="fcn">FCN</h3>
+<h3 id="spp-net">SPP-Net</h3>
+<h3 id="fast-r-cnn">Fast R-CNN</h3>
+<h3 id="faster-r-cnn">Faster R-CNN</h3>
+<h3 id="fpn">FPN</h3>
+<h3 id="mask-r-cnn">Mask R-CNN</h3>
+<h3 id="cornernet">CornerNet</h3>
+<h3 id="pfpn">PFPN</h3>
+<div class="footnote">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>基于图论进行图像分割的算法，把图像中的像素点看做是一个个节点，
+像素点之间的不相似度作为边的权重，通过将相似的像素聚合到一起，
+产生同一区域(表现为最小生成树)。像素聚合成区域后，判断两个相邻区域是否应该合并，
+要检查它们的区域间间距(即所有分别属于两个区域且有边连接的点对中，寻找权重最小的那对,若两个区域内的点没有边相连，则定义间距为正无穷大)和区域内间距(即区域对应最小生成树中权重最大的边的权重值)的值。
+如果两个区域的区域间间距明显大于其中任意一个区域的区域内间距，
+那么就认为这两个区域之间存在明显的界限（即不能合并）。(freeopen:
+只能写个大概，详述篇幅太长)&nbsp;<a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+</ol>
+</div>
+  </div><!-- /.entry-content -->
+
+</section>
+          </div>
+
+          <footer id="contentinfo" class="footer">
+            <div class="footer-inner">
+              无节操小广告<a href="https://freeopen.github.io/pages/da-shang.html"> 欢迎打赏 </a>
+            </div>
+          </footer><!-- /#contentinfo -->
+        </div>
+      </div>
+
+      <div class="hidden-print hidden-xs hidden-sm hidden-md col-lg" id="post_toc" role="complementary">
+        <nav class="sidebar-toc">
+<!-- <section id="main_toc"> -->
+    <ul class="nav" id="toc"><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#tu-xiang-fen-ge-dao-di-gan-shi-yao" title="图像分割到底干什么">图像分割到底干什么</a></li><li class="nav-item"><a class="nav-link" href="#tu-xiang-fen-ge-de-suan-fa-si-lu" title="图像分割的算法思路">图像分割的算法思路</a></li><li class="nav-item"><a class="nav-link" href="#jing-dian-suan-fa-de-yan-jin" title="经典算法的演进">经典算法的演进</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#r-cnn" title="R-CNN">R-CNN</a></li><li class="nav-item"><a class="nav-link" href="#overfeat" title="OverFeat">OverFeat</a></li><li class="nav-item"><a class="nav-link" href="#fcn" title="FCN">FCN</a></li><li class="nav-item"><a class="nav-link" href="#spp-net" title="SPP-Net">SPP-Net</a></li><li class="nav-item"><a class="nav-link" href="#fast-r-cnn" title="Fast R-CNN">Fast R-CNN</a></li><li class="nav-item"><a class="nav-link" href="#faster-r-cnn" title="Faster R-CNN">Faster R-CNN</a></li><li class="nav-item"><a class="nav-link" href="#fpn" title="FPN">FPN</a></li><li class="nav-item"><a class="nav-link" href="#mask-r-cnn" title="Mask R-CNN">Mask R-CNN</a></li><li class="nav-item"><a class="nav-link" href="#cornernet" title="CornerNet">CornerNet</a></li><li class="nav-item"><a class="nav-link" href="#pfpn" title="PFPN">PFPN</a></li></ul></li></ul></ul>
+<!-- </section> -->
+<!-- </section> -->
+        </nav>
+      </div>
+    </div>
+  </div>
+
+
+    <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-98793057-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+<script type="text/javascript">
+    var disqus_shortname = 'freeopen';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<script src="https://freeopen.github.io/theme/js/jquery-3.3.1.slim.min.js"></script>
+<script src="https://freeopen.github.io/theme/js/popper.min.js"></script>
+<script src="https://freeopen.github.io/theme/js/bootstrap.min.js"></script>
+
+</body>
+</html>

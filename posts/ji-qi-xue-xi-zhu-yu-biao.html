@@ -646,14 +646,14 @@ coordinate (1,0).</desc>
 <h3 id="iou">IoU</h3>
 <p>IoU( Intersection over Union ), 交集并集比。</p>
 <p align="center">
-<img src="/images/IoU_sample.png" width="90%">
+<img src="/images/IoU_sample.png" width="70%">
 <figcaption>
 A typical convex function is shaped like the letter 'U'.
 </figcaption>
 </img></p>
 <p>在目标检测任务中，要用矩形框标出目标物体的位置。上图绿色框是贴合目标物体的区域，红色框是预测区域，这种情况下交集确实是最大的，但是红色框并不能准确预测物体位置。因为预测区域总是试图覆盖目标物体而不是正好预测物体位置。如果我们能除以一个并集的大小，就可以规避这种问题, 公式如下：</p>
-<div class="math">$$IoU = {Area(B_p \bigcap B_gt) \over Area(B_p \bigcup B_gt)}$$</div>
-<p>其中， <span class="math">\(B_p\)</span>代表预测框， <span class="math">\(B_gt\)</span>代表真值框。</p>
+<div class="math">$$IoU = {Area(B_p \bigcap B_{gt}) \over Area(B_p \bigcup B_{gt})}$$</div>
+<p>其中， <span class="math">\(B_p\)</span>代表预测框， <span class="math">\(B_{gt}\)</span>代表真值框。</p>
 <h3 id="iteration">iteration</h3>
 <p>A single update of a model's weights during training. An iteration consists of computing the gradients of the parameters with respect to the loss on a single <a href="#batch"><strong>batch</strong></a> of data.</p>
 <p>模型的权重在训练期间的一次更新。迭代包含计算参数在单个<a href="#batch"><strong>批量</strong></a>数据上的梯度损失。</p>
