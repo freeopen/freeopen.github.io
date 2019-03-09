@@ -169,7 +169,7 @@ Ross Girshick 于2013年11月发表的一篇论文，
 论文名为《Rich feature hierarchies for Accurate Object Detection and Segmentation》。</p>
 <p>模型结构如下：</p>
 <p align="center">
-<img src="/images/r-cnn.png" width="90%"/>
+<img src="/images/r-cnn.png" width="75%"/>
 <figcaption>
 R-CNN 概览：输入一张图片，定位出2000个物体候选框，
 然后采用CNN提取每个候选框中图片的特征向量，
@@ -283,7 +283,7 @@ R-CNN 概览：输入一张图片，定位出2000个物体候选框，
 图3: 多尺度方法的空间维度, 列举 6 种尺寸图片作为输入 
 </figcaption>
 </p>
-<p>在AlexNet的文献中，他们预测的方法是输入一张图片256*256，然后进行
+<p>在AlexNet的文献中，他们预测的方法是输入一张图片256x256，然后进行
 multi-view裁剪，也就是从图片的四个角进行裁剪，还有就是一图片的中心进行裁剪，这样可以裁剪到5张
 224x224的图片。然后把原图片水平翻转一下，再用同样的方式进行裁剪，又可以裁剪到5张图片。
 把这10张图片作为输入，分别进行预测分类，在后在softmax的最后一层，求取个各类的总概率，求取平均值。</p>
