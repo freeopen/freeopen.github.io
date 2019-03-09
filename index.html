@@ -63,6 +63,32 @@
 
 <ol id="post-list">
         <li class="related"><article>
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/image-segmentation" rel="bookmark" title="Permalink to 基于深度学习的图像分割算法思路演进">基于深度学习的图像分割算法思路演进</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2019-03-05T00:00:00+08:00"> 2019-03-05 </time>
+                    <address class="vcard author">By
+                        <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
+                    </address>
+                </footer><!-- /.post-info -->
+                <div> <blockquote>
+<p>又是一篇不会写完的文章，和前面那篇《卷积备忘录》一样，
+会跟进技术发展不断更新。读了一系列论文，有必要再次整理自己的思考了，
+就怕笔不勤忘得快。如有理解错误之处，请读者及时来信告知，如果
+你精通翻墙术，文章末尾可以留言。（已架设 Disqus 评论系统，
+因国内不可名状的原因，翻墙后才能显示。）</p>
+<p>边写边发，未完待续</p>
+</blockquote>
+<h2 id="tu-xiang-fen-ge-dao-di-gan-shi-yao">图像分割到底干什么</h2>
+<p>图像分割问题主要流行四类任务，它们分别是目标检测( Object Detection )、语义分割( Semantic Segmentation )、实例分割( Instance Segmentation ) 和全景分割( Panoptic Segmentation )。这四类任务的意义分别为：</p>
+<ol>
+<li>目标检测：计算机看一张图，用矩形框框出我们感兴趣的目标（定位任务），
+   并告诉我们该目标是什么（分类任务）。</li>
+<li>语义分割：把整张图像的每个像素赋予一个类别标签。
+   不过语义分割的任务是只判断类别，不区分个体。 </li>
+<li>实例分割：比目标分割更进一步，对我们感兴趣目标的像素赋予类别标签，
+   且对于挨在一起的同种类型的目标，需要区分出个体 …</li></ol> </div><!-- /.entry-content -->
+        </article></li>
+        <li class="related"><article>
                 <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/understand-matrix" rel="bookmark" title="Permalink to 理解矩阵">理解矩阵</a></h2> </header>
                 <footer class="post-info">
                     <time class="published" datetime="2019-02-15T00:00:00+08:00"> 2019-02-15 </time>
@@ -257,33 +283,6 @@ provider来输出数据，可能我的数据维度太大，程序不报错，但
 <li>使用最新的 解码器 / attention wrapper <a href="https://github.com/tensorflow/tensorflow/tree/master/tensorflow/contrib/seq2seq/python/ops">API</a>, TensorFlow 1.2 数据迭代器</li>
 <li>结合我们在建立循环神经网络和序列到序列模型方面的强大专长</li>
 <li>提供一些巧思来构建最好的 NMT 模型，并复制一个谷歌神经机器翻译系统 <a href="https://research.google.com/pubs/pub45610.html">Google …</a></li></ol> </div><!-- /.entry-content -->
-        </article></li>
-        <li class="related"><article>
-                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/eponine-letter" rel="bookmark" title="Permalink to 艾波寧捎信">艾波寧捎信</a></h2> </header>
-                <footer class="post-info">
-                    <time class="published" datetime="2017-06-11T00:00:00+08:00"> 2017-06-11 </time>
-                    <address class="vcard author">By
-                        <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
-                    </address>
-                </footer><!-- /.post-info -->
-                <div> <blockquote>
-<p>由台大葉丙成老師的学生创作的概率问题，文章本身比问题更有趣。</p>
-</blockquote>
-<p>巴黎, 1832 年 6 月, 一個飄著毛雨的濕熱夜晚。</p>
-<p>一間破舊的旅社, 歪一邊的招牌寫著「德納第客棧」(Thénardier&rsquo;s)。
-一樓的大廳裡, &mdash;&mdash; 說大廳, 其實只是兩張沙發跟一個小圓桌組成的狹窄空間 &mdash;&mdash; 只有坐著的兩位老友,
-他們多年不見, 正在暢談。</p>
-<p>留著滿臉花白大鬍子跟八字鬚,滔滔不絕的是作家維克托.雨果(Victor Hugo)。
-旁邊靜靜聽著的那人是雨果的朋友, 一位正直的英國詩人。
-他年輕許多,留著捲髮,有深 邃的眼神跟鷹鉤鼻。</p>
-<p>「最近交稿期限又要到了,」雨果說,
-「我的靈感卻像這個酒杯一樣枯竭呀。老闆娘! 來一瓶上好的波本威士忌,再來一盤肉乾下酒。」</p>
-<p>一直低頭擦盤子的老闆娘放下工作, 來招呼她的顧客。</p>
-<p>「我也何嘗不是入不敷出。」英國詩人說。「畢竟作詩這種東西又不能當飯吃。」</p>
-<p>這時有人推開嘎吱作響的木門, 匆忙走進旅社, 靠近沙發上的兩人。
-他的臉有點圓而結實, 額上的皺紋大概是常年經過思考的結果。
-「維克托! 」他喊道。</p>
-<p>「大數學家西米翁 …</p> </div><!-- /.entry-content -->
         </article></li>
 </ol><!-- /#posts-list -->
 <p class="pagination">
