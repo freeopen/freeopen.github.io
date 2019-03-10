@@ -378,16 +378,15 @@ R-CNN 的进化版, 论文第一作者何凯明，首发于2014年6月，
 再对各个候选框采用空间金字塔池化，提取出固定长度的特征向量。</p>
 <p>而R-CNN输入的是每个候选框，然后在进入CNN，因为SPP-Net只需要一次对整张图片进行特征提取，
 因为R-CNN就相当于遍历一个CNN两千次，而SPP-Net只需要遍历1次,
-光这一个改进，就要百倍加速的效果。</p>
+光这一个改进，就有百倍加速的效果。</p>
 <h4>如何在CNN最后一层特征图中找到原始图片中候选框的对应区域？</h4>
 <p>办法只有一条，算出来，前面提过，一旦卷积网络结构选定，从输入端到输出端的
 缩小比例就能算出来，影响这个比例的包括每层的卷积方式和池化方式。</p>
 <p>论文提出，为简化计算，在卷积时，填充<span class="math">\(\lfloor p/2 \rfloor\)</span>,
 其中<span class="math">\(p\)</span>表示卷积核的尺寸， 
 令<span class="math">\(S\)</span>表示卷积层的缩小比例，<span class="math">\((x,y)\)</span>表示原图片上候选框的中心坐标, 
-则与特征图上对应候选框的中心坐标<span class="math">\((x^',y^')\)</span>之间的关系为:<br/>
-</p>
-<div class="math">$$(x,y)=(Sx^',Sy^')$$</div>
+则与特征图上对应候选框的中心坐标<span class="math">\((x^{'},y^{'})\)</span>之间的关系为:  </p>
+<div class="math">$$(x,y)=(Sx^{'},Sy^{'})$$</div>
 <p>给定原图片上候选框左上角坐标<span class="math">\((x_0, y_0)\)</span>和右下角坐标<span class="math">\((x_1, y_1)\)</span>，
 对应的特征图坐标分别为：</p>
 <div class="math">$$x_0^&prime; = \lfloor x_0/S \rfloor + 1$$</div>
