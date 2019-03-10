@@ -296,7 +296,7 @@ multi-view裁剪，也就是从图片的四个角进行裁剪，还有就是一�
 会输出不同尺寸的特征图(如图3第3列)，再进行下采样时，如果保证不同尺寸情况下，
 信息不丢失呢？ 论文介绍了一种<strong>offset池化</strong>方法，说明如下：</p>
 <p align="center">
-<img src="/images/offset_poolling_1.png" width="90%"/>
+<img src="/images/offset_poolling_1.png" width="70%"/>
 </p>
 <p>以一维情况来说明，设x轴上有20个神经元，以poolling size=3做非重叠池化,
 而20除以3除不尽，为保证池化信息完备性，将20个神经元分为三组：</p>
@@ -313,7 +313,7 @@ multi-view裁剪，也就是从图片的四个角进行裁剪，还有就是一�
 这样的话，我们网络在最后输出的时候，就会出现3种预测结果了。</p>
 <p>如果是2维图片的话，那么就会有 9 种池化结果, 
 最后我们的图片分类输出结果就可以得到9个预测结果(每个类别都可以得到9种概率值), 然后我们对每个类别的9种概率，取其最大值，做为此类别的预测概率值。</p>
-<p>用大小为3x3的核、按步幅3做offset池化后，就形成图3第4列的空间维度;
+<p>用大小为3x3的滑动窗口、按步幅3做offset池化后，就形成图3第4列的空间维度;
 再用大小为5x5的核、按步幅1做卷积后，就形成图3第5列的空间维度(参考图2第7层)。
 论文里把这种方法称为全卷积网络，我没把这种结构归类到<a href="/posts/cnn-notes">《卷积备忘录》</a>中,
 因为它仅仅有一个固定大小的卷积核，再把输出接上一个<a href="/posts/cnn-notes#ping-jing-juan-ji">瓶颈卷积层</a>,
@@ -385,8 +385,8 @@ R-CNN 的进化版, 论文第一作者何凯明，首发于2014年6月，
 <p>论文提出，为简化计算，在卷积时，填充<span class="math">\(\lfloor p/2 \rfloor\)</span>,
 其中<span class="math">\(p\)</span>表示卷积核的尺寸， 
 令<span class="math">\(S\)</span>表示卷积层的缩小比例，<span class="math">\((x,y)\)</span>表示原图片上候选框的中心坐标, 
-则与特征图上对应候选框的中心坐标<span class="math">\((x^{'},y^{'})\)</span>之间的关系为:  </p>
-<div class="math">$$(x,y)=(Sx^{'},Sy^{'})$$</div>
+则与特征图上对应候选框的中心坐标<span class="math">\(( x^{'}, y^{'})\)</span>之间的关系为:  </p>
+<div class="math">$$(x,y)=(S x^{'},S y^{'})$$</div>
 <p>给定原图片上候选框左上角坐标<span class="math">\((x_0, y_0)\)</span>和右下角坐标<span class="math">\((x_1, y_1)\)</span>，
 对应的特征图坐标分别为：</p>
 <div class="math">$$x_0^&prime; = \lfloor x_0/S \rfloor + 1$$</div>
