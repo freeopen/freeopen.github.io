@@ -419,7 +419,7 @@ R-CNN 的进化版, 论文第一作者何凯明，首发于2014年6月，
    这将导致这些网格对应的感受野过大，从而使反向传播时涉及的参数量也过多，
    这也将降低反向传播的效率。</li>
 </ol>
-<p>作者针对这些问题改进后，训练速度提高约 64 倍。(详见<a href="#xun-lian-wei-tiao">训练微调</a>)</p>
+<p>作者针对这些问题改进后，训练速度提高约 64 倍。(详见<a href="#xun-lian-wei-diao">训练微调</a>)</p>
 <p>然后在 R-CNN 和 SPP-Net 基础上提出了新的模型 Fast R-CNN。</p>
 <p align="center">
 <img src="/images/fast.r-cnn.png" width="80%"/>
@@ -478,16 +478,16 @@ Regions Proposals Networks)来提取这些候选框。</p>
   获得的结果叫做特征图；</p>
 </li>
 <li>
-<p>生成候选框：在获得的特征图的每一个点上做多个候选框，
-  然后利用分类器将这些候选框区分为背景和前景，
-  同时利用回归器对这些候选框的位置进行初步的调整；</p>
+<p>生成候选框：在获得的特征图的每一个点上做多个候选框；</p>
 </li>
 <li>
-<p>候选框分类：在 RPN 阶段，用来区分前景（于真实目标重叠并且其重叠区域大于0.5）
-  和背景（不与任何目标重叠或者其重叠区域小于0.1）；在Fast R-CNN阶段，用于区分不同种类的目标（猫、狗、人等）；</p>
+<p>候选框分类：在 RPN 阶段(<a href="#faster-r-cnn-xun-lian-ce-lue">图8</a>第1步)，用来区分前景（与标定边界框的重叠区域大于0.5）
+  和背景（不与任何标定边界框重叠或者其重叠区域小于0.1）；
+  在 Fast R-CNN 阶段(<a href="#faster-r-cnn-xun-lian-ce-lue">图8</a>第4步)，用于区分不同种类的目标（猫、狗、人等）；</p>
 </li>
 </ul>
-<p>-&nbsp;候选框回归：在 RPN 阶段，进行初步调整；在Fast R-CNN 阶段进行精确调整；</p>
+<p>-&nbsp;候选框回归：在 RPN 阶段(<a href="#faster-r-cnn-xun-lian-ce-lue">图8</a>第1步)，进行初步调整；
+  在Fast R-CNN 阶段(<a href="#faster-r-cnn-xun-lian-ce-lue">图8</a>第4步)进行精确调整；</p>
 <p>其整体流程如下：</p>
 <ul>
 <li>首先对输入的图片进行裁剪操作，并将裁剪后的图片送入预训练好的分类网络中获取该图像对应的特征图；</li>
@@ -561,8 +561,8 @@ Regions Proposals Networks)来提取这些候选框。</p>
 <li>使用第二步的Fast-RCNN网络参数初始化一个新的RPN网络，但是把RPN、
   Fast-RCNN共享的那些卷积层的learning rate设置为0，也就是不更新，
   仅仅更新RPN特有的那些网络层，重新训练，此时，两个网络已经共享了所有公共的卷积层；</li>
-<li>仍然固定共享的那些网络层，把Fast-RCNN特有的网络层也加入进来，形成一个统一网络，继续训练，
-  微调 Fast-RCNN 特有的网络层，此时，该网络已经实现我们设想的目标，
+<li>仍然固定共享的那些网络层，把Fast-RCNN的非共享网络层也加入进来，形成一个统一网络，继续训练，
+  微调 Fast-RCNN 非共享网络层，此时，该网络已经实现我们设想的目标，
   即网络内部预测边界框并实现检测的功能。</li>
 </ul>
 <p>即进行交替训练，迭代2次的原因是作者发现多次的迭代并没有显著的改善性能。</p>
@@ -583,7 +583,61 @@ ROI Pooling直接将它量化为20。在这里引入了一次偏差。
 经过这两次的量化，候选ROI已经出现了严重的偏差。
 更重要的是，在特征图上差0.1个像素，对应到原图上就是3.2个像素。</p>
 <h2 id="fpn_1">FPN</h2>
-<h2 id="mask-r-cnn">Mask R-CNN</h2>
+<p>R-CNN系列是在最后一层特征图上进行特征提取，从而进行目标识别的。
+对于卷积神经网络而言，不同深度对应着不同层次的语义特征，浅层网络分辨率高，
+学的更多是细节特征，深层网络分辨率低，学的更多是语义特征。
+因此这样做的弊端在于，顶层(即深层)特征中忽略了小物体的一些信息，
+因此只根据顶层特征进行目标识别，不能完整地反映小目标物体的信息。
+如果可以结合多层级的特征，就可以大大提高多尺度检测的准确性。    </p>
+<h3 id="fpnte-zheng-jin-zi-ta-wang-luo-jie-gou">FPN(特征金字塔网络)结构</h3>
+<p align="center">
+<img src="/images/fpn.png" width="60%"/>
+<figcaption>
+图9:  特征金字塔网络
+</figcaption>
+</p>
+<p>如图9结构分为三部分：</p>
+<ol>
+<li>自下而上的卷积神经网络（上图左）;</li>
+<li>自上而下过程（上图右）;</li>
+<li>和特征与特征之间的侧边连接。</li>
+</ol>
+<p>自上而下的过程采用上采样进行。上采样几乎都是采用内插值方法，
+即在原有图像像素的基础上在像素点之间采用合适的插值算法插入新的元素，从而扩大原图像的大小。
+通过对特征图进行上采样，使得上采样后的特征图具有和下一层的特征图相同的大小。</p>
+<p align="center">
+<img src="/images/fpn_add.png" width="60%"/>
+<figcaption>
+图10: 横向连接和自上而下的特征融合
+</figcaption>
+</p>
+<p>侧边之间的横向连接的过程在如图10所示。根本上来说，
+是将上采样的结果和自下而上生成的特征图进行融合。
+我们将卷积神经网络中生成的对应层的特征图进行1&times;1的卷积操作，
+将之与经过上采样的特征图融合，得到一个新的特征图，
+这个特征图融合了不同层的特征，具有更丰富的信息。 
+这里1&times;1的卷积操作目的是改变通道数，要求和后一层的通道数相同。
+在融合之后还会再采用3x3的卷积核对每个融合结果进行卷积，目的是消除上采样的混叠效应，
+如此就得到了一个新的特征图。这样一层一层地迭代下去，就可以得到多个新的特征图。
+假设生成的特征图结果是P2，P3，P4，P5，它们和原来自底向上的卷积结果C2，C3，C4，C5一一对应。
+金字塔结构中所有层级共享分类层（回归层）。</p>
+<h3 id="fpndui-rpnde-gai-zao">FPN对RPN的改造</h3>
+<p>RPN是 Faster R-CNN 用于候选框选择的子网络。RPN在特征图上应用9种不同尺度的
+锚点候选框，然后进行二分类和边界框回归。考虑到越是低层的特征图包含的信息越精细，
+于是没必要在所有特征图上都应用9种不同尺寸的候选框，可以在低层特征图中应用尺度较小的候选框，
+在高层特征图中应用尺度较大的候选框。</p>
+<p>比如P2, P3, P4, P5 层特征图分别对应的候选框尺度为32, 64, 128, 256, 而候选框的
+长宽比依然采用1:1, 1:2, 2:1。</p>
+<h3 id="fpndui-roichi-hua-ceng-de-gai-zao">FPN对ROI池化层的改造</h3>
+<p>考虑到不同层次的特征图包含的物体大小不一样，故大尺度的ROI用在较深层的特征图上，
+小尺度的ROI用在较浅层的特征图上。论文给了一个参考公式，用来计算多大尺寸的候选框
+适用于哪一层特征图。</p>
+<div class="math">$$k = \lfloor k_0+log_2(\sqrt{wh}/224) \rfloor$$</div>
+<p>其中，224是原始图片的输入尺寸，<span class="math">\(k_0\)</span>是基准值，设置为5，代表P5层的输出，
+w 和 h 是ROI区域(候选框)的长和宽。
+假设ROI是 112x112 的大小，那么<span class="math">\(k = k_0-1 = 5-1 = 4\)</span>，
+意味着该ROI应该使用P4的特征层。</p>
+<h2 id="mask-r-cnn_1">Mask R-CNN</h2>
 <h2 id="cornernet">CornerNet</h2>
 <h2 id="pfpn">PFPN</h2>
 <h2 id="can-kao-wen-xian">参考文献</h2>
@@ -687,7 +741,7 @@ ROI Pooling直接将它量化为20。在这里引入了一次偏差。
       <div class="hidden-print hidden-xs hidden-sm hidden-md col-lg" id="post_toc" role="complementary">
         <nav class="sidebar-toc">
 <!-- <section id="main_toc"> -->
-    <ul class="nav" id="toc"><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#tu-xiang-fen-ge-dao-di-gan-shi-yao" title="图像分割到底干什么">图像分割到底干什么</a></li><li class="nav-item"><a class="nav-link" href="#tu-xiang-fen-ge-de-suan-fa-si-lu" title="图像分割的算法思路">图像分割的算法思路</a></li><li class="nav-item"><a class="nav-link" href="#jing-dian-suan-fa-de-yan-jin" title="经典算法的演进">经典算法的演进</a></li><li class="nav-item"><a class="nav-link" href="#r-cnn" title="R-CNN">R-CNN</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#ru-he-zhao-chu-hou-xuan-qu-yu" title="如何找出候选区域">如何找出候选区域</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-cong-bu-tong-da-xiao-de-hou-xuan-kuang-ti-qu-kong-jian-te-zheng" title="如何从不同大小的候选框提取空间特征">如何从不同大小的候选框提取空间特征</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-xuan-ze-zui-hao-de-bian-jie-kuang" title="如何选择最好的边界框">如何选择最好的边界框</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-diao-zheng-bian-jie-kuang" title="如何调整边界框">如何调整边界框</a></li><li class="nav-item"><a class="nav-link" href="#xun-lian-pei-zhi" title="训练配置">训练配置</a></li><li class="nav-item"><a class="nav-link" href="#r-cnn-de-que-xian" title="R-CNN 的缺陷">R-CNN 的缺陷</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#overfeat_1" title="OverFeat">OverFeat</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#yu-ce-shi-de-duo-chi-du-fen-lei" title="预测时的多尺度分类">预测时的多尺度分类</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-zhao-chu-hou-xuan-qu-yu_1" title="如何找出候选区域">如何找出候选区域</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-zhao-chu-bian-jie-kuang" title="如何找出边界框">如何找出边界框</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#fcn_1" title="FCN">FCN</a></li><li class="nav-item"><a class="nav-link" href="#spp-net" title="SPP-Net">SPP-Net</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#kong-jian-jin-zi-ta-chi-hua-ceng" title="空间金字塔池化层">空间金字塔池化层</a></li><li class="nav-item"><a class="nav-link" href="#te-zheng-ti-qu-jia-su" title="特征提取加速">特征提取加速</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-zai-cnnzui-hou-yi-ceng-te-zheng-tu-zhong-zhao-dao-yuan-shi-tu-pian-zhong-hou-xuan-kuang-de-dui-ying-qu-yu-?" title="如何在CNN最后一层特征图中找到原始图片中候选框的对应区域？">如何在CNN最后一层特征图中找到原始图片中候选框的对应区域？</a></li><li class="nav-item"><a class="nav-link" href="#xiao-jie" title="小结">小结</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#fast-r-cnn_1" title="Fast R-CNN">Fast R-CNN</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#gan-xing-qu-qu-yu-roichi-hua" title="感兴趣区域(RoI)池化">感兴趣区域(RoI)池化</a></li><li class="nav-item"><a class="nav-link" href="#xun-lian-wei-diao" title="训练微调">训练微调</a></li><li class="nav-item"><a class="nav-link" href="#duo-ren-wu-sun-shi--multi-task-loss" title="多任务损失 (Multi-task loss)">多任务损失 (Multi-task loss)</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#faster-r-cnn_1" title="Faster R-CNN">Faster R-CNN</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#mao-dian-de-gai-nian" title="锚点的概念">锚点的概念</a></li><li class="nav-item"><a class="nav-link" href="#zheng-fu-yang-ben-de-hua-fen" title="正负样本的划分">正负样本的划分</a></li><li class="nav-item"><a class="nav-link" href="#rpn-wang-luo-jie-gou" title="RPN 网络结构">RPN 网络结构</a></li><li class="nav-item"><a class="nav-link" href="#faster-r-cnn-xun-lian-ce-lue" title="Faster R-CNN 训练策略">Faster R-CNN 训练策略</a></li><li class="nav-item"><a class="nav-link" href="#que-xian-:roichi-hua-de-er-ci-liang-hua-pian-chai-wen-ti" title="缺陷：ROI池化的二次量化偏差问题">缺陷：ROI池化的二次量化偏差问题</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#fpn_1" title="FPN">FPN</a></li><li class="nav-item"><a class="nav-link" href="#mask-r-cnn" title="Mask R-CNN">Mask R-CNN</a></li><li class="nav-item"><a class="nav-link" href="#cornernet" title="CornerNet">CornerNet</a></li><li class="nav-item"><a class="nav-link" href="#pfpn" title="PFPN">PFPN</a></li><li class="nav-item"><a class="nav-link" href="#can-kao-wen-xian" title="参考文献">参考文献</a></li></ul></ul>
+    <ul class="nav" id="toc"><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#tu-xiang-fen-ge-dao-di-gan-shi-yao" title="图像分割到底干什么">图像分割到底干什么</a></li><li class="nav-item"><a class="nav-link" href="#tu-xiang-fen-ge-de-suan-fa-si-lu" title="图像分割的算法思路">图像分割的算法思路</a></li><li class="nav-item"><a class="nav-link" href="#jing-dian-suan-fa-de-yan-jin" title="经典算法的演进">经典算法的演进</a></li><li class="nav-item"><a class="nav-link" href="#r-cnn" title="R-CNN">R-CNN</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#ru-he-zhao-chu-hou-xuan-qu-yu" title="如何找出候选区域">如何找出候选区域</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-cong-bu-tong-da-xiao-de-hou-xuan-kuang-ti-qu-kong-jian-te-zheng" title="如何从不同大小的候选框提取空间特征">如何从不同大小的候选框提取空间特征</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-xuan-ze-zui-hao-de-bian-jie-kuang" title="如何选择最好的边界框">如何选择最好的边界框</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-diao-zheng-bian-jie-kuang" title="如何调整边界框">如何调整边界框</a></li><li class="nav-item"><a class="nav-link" href="#xun-lian-pei-zhi" title="训练配置">训练配置</a></li><li class="nav-item"><a class="nav-link" href="#r-cnn-de-que-xian" title="R-CNN 的缺陷">R-CNN 的缺陷</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#overfeat_1" title="OverFeat">OverFeat</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#yu-ce-shi-de-duo-chi-du-fen-lei" title="预测时的多尺度分类">预测时的多尺度分类</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-zhao-chu-hou-xuan-qu-yu_1" title="如何找出候选区域">如何找出候选区域</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-zhao-chu-bian-jie-kuang" title="如何找出边界框">如何找出边界框</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#fcn_1" title="FCN">FCN</a></li><li class="nav-item"><a class="nav-link" href="#spp-net" title="SPP-Net">SPP-Net</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#kong-jian-jin-zi-ta-chi-hua-ceng" title="空间金字塔池化层">空间金字塔池化层</a></li><li class="nav-item"><a class="nav-link" href="#te-zheng-ti-qu-jia-su" title="特征提取加速">特征提取加速</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-zai-cnnzui-hou-yi-ceng-te-zheng-tu-zhong-zhao-dao-yuan-shi-tu-pian-zhong-hou-xuan-kuang-de-dui-ying-qu-yu-?" title="如何在CNN最后一层特征图中找到原始图片中候选框的对应区域？">如何在CNN最后一层特征图中找到原始图片中候选框的对应区域？</a></li><li class="nav-item"><a class="nav-link" href="#xiao-jie" title="小结">小结</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#fast-r-cnn_1" title="Fast R-CNN">Fast R-CNN</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#gan-xing-qu-qu-yu-roichi-hua" title="感兴趣区域(RoI)池化">感兴趣区域(RoI)池化</a></li><li class="nav-item"><a class="nav-link" href="#xun-lian-wei-diao" title="训练微调">训练微调</a></li><li class="nav-item"><a class="nav-link" href="#duo-ren-wu-sun-shi--multi-task-loss" title="多任务损失 (Multi-task loss)">多任务损失 (Multi-task loss)</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#faster-r-cnn_1" title="Faster R-CNN">Faster R-CNN</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#mao-dian-de-gai-nian" title="锚点的概念">锚点的概念</a></li><li class="nav-item"><a class="nav-link" href="#zheng-fu-yang-ben-de-hua-fen" title="正负样本的划分">正负样本的划分</a></li><li class="nav-item"><a class="nav-link" href="#rpn-wang-luo-jie-gou" title="RPN 网络结构">RPN 网络结构</a></li><li class="nav-item"><a class="nav-link" href="#faster-r-cnn-xun-lian-ce-lue" title="Faster R-CNN 训练策略">Faster R-CNN 训练策略</a></li><li class="nav-item"><a class="nav-link" href="#que-xian-:roichi-hua-de-er-ci-liang-hua-pian-chai-wen-ti" title="缺陷：ROI池化的二次量化偏差问题">缺陷：ROI池化的二次量化偏差问题</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#fpn_1" title="FPN">FPN</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#fpnte-zheng-jin-zi-ta-wang-luo-jie-gou" title="FPN(特征金字塔网络)结构">FPN(特征金字塔网络)结构</a></li><li class="nav-item"><a class="nav-link" href="#fpndui-rpnde-gai-zao" title="FPN对RPN的改造">FPN对RPN的改造</a></li><li class="nav-item"><a class="nav-link" href="#fpndui-roichi-hua-ceng-de-gai-zao" title="FPN对ROI池化层的改造">FPN对ROI池化层的改造</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#mask-r-cnn_1" title="Mask R-CNN">Mask R-CNN</a></li><li class="nav-item"><a class="nav-link" href="#cornernet" title="CornerNet">CornerNet</a></li><li class="nav-item"><a class="nav-link" href="#pfpn" title="PFPN">PFPN</a></li><li class="nav-item"><a class="nav-link" href="#can-kao-wen-xian" title="参考文献">参考文献</a></li></ul></ul>
 <!-- </section> -->
 <!-- </section> -->
         </nav>
