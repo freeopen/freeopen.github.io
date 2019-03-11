@@ -422,7 +422,7 @@ R-CNN 的进化版, 论文第一作者何凯明，首发于2014年6月，
 <p>作者针对这些问题改进后，训练速度提高约 64 倍。(详见<a href="#xun-lian-wei-tiao">训练微调</a>)</p>
 <p>然后在 R-CNN 和 SPP-Net 基础上提出了新的模型 Fast R-CNN。</p>
 <p align="center">
-<img src="/images/spp-net.png" width="80%"/>
+<img src="/images/fast.r-cnn.png" width="80%"/>
 <figcaption>
 图5:  Fast R-CNN 结构. 
 一个图像和多个感兴趣区域(RoI, regions of interest)
@@ -457,11 +457,22 @@ RoI 池化的思路来自空间金字塔池化，只取空间金字塔中的一�
 起到互相促进的作用。</p>
 <h3 id="faster-r-cnn">Faster R-CNN</h3>
 <p>Faster R-CNN 的论文发表于2015年6月，相对于Fast
-R-CNN，这个版本是真正的端到端模型。过去的版本，图片上候选区域都有用
-选择性搜索算法(selective search)、边缘框算法(edge bbox)来得到的，
+R-CNN，这个版本是真正的端到端模型。过去的版本，图片上候选区域都是用
+选择性搜索算法(selective search)、或者边缘框算法(edge bbox)来得到的，
 这个步骤和模型训练是分阶段的，所以不算真正的端到端版本。
 从Faster R-CNN 开始，首次使用神经网络--候选区域网络(RPN, 
 Regions Proposals Networks)来提取这些候选框。</p>
+<p align="center">
+<img src="/images/faster.r-cnn.png" width="80%"/>
+<figcaption>
+图5:  Fast R-CNN 结构. 
+一个图像和多个感兴趣区域(RoI, regions of interest)
+输入到全卷积网络中。
+每个 RoI 被池化为固定大小的特征图，然后通过全连接层(FC)映射到特征向量。
+网络对于每个RoI有两个输出向量：一个为Softmax的分类概率, 
+一个为每类边界框的回归偏移量。该架构采用多任务损失函数端到端训练的。
+</figcaption>
+</p>
 <h3 id="fpn">FPN</h3>
 <h3 id="mask-r-cnn">Mask R-CNN</h3>
 <h3 id="cornernet">CornerNet</h3>
