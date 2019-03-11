@@ -162,7 +162,7 @@
 <p>上述的这些难题被解决的越好，那么图像分割的效果也就越好。
 下面看看研究者们都有些什么巧思，来跨越这些鸿沟。</p>
 <h2 id="jing-dian-suan-fa-de-yan-jin">经典算法的演进</h2>
-<h3 id="r-cnn">R-CNN</h3>
+<h2 id="r-cnn">R-CNN</h2>
 <p>R-CNN( Regions with Convolutional Neural Network Features )
 模型可称为深度学习用于目标检测的开山之作，来自 
 Ross Girshick 于2013年11月发表的一篇论文，
@@ -183,7 +183,7 @@ R-CNN 概览：输入一张图片，定位出2000个物体候选框，
    算法判断边界框中对应的物体类型；</li>
 <li>对已分类物体的边界框进行线性回归，输出其对应的贴近物体轮廓的紧身边界框(tighter bounding boxes)。</li>
 </ol>
-<h4>如何找出候选区域</h4>
+<h3 id="ru-he-zhao-chu-hou-xuan-qu-yu">如何找出候选区域</h3>
 <p>R-CNN 用选择性搜索( Selective Search )算法从原始图片上找出一堆候选框，
 并选出得分最高的2000个。</p>
 <p><strong>选择性搜索( Selective Search )算法</strong></p>
@@ -196,10 +196,10 @@ R-CNN 概览：输入一张图片，定位出2000个物体候选框，
 <li>计算新集与所有子集的相似度;&nbsp;</li>
 <li>跳至第三步，不断循环，合并，直至 S 为空（到不能再合并时为止）。</li>
 </ol>
-<h4>如何从不同大小的候选框提取空间特征</h4>
+<h3 id="ru-he-cong-bu-tong-da-xiao-de-hou-xuan-kuang-ti-qu-kong-jian-te-zheng">如何从不同大小的候选框提取空间特征</h3>
 <p>直接缩放成固定大小的正方形（论文采用227&times;227）, 送进
 卷积网络( 修改版的 AlexNet )抽取空间特征。</p>
-<h4>如何选择最好的边界框</h4>
+<h3 id="ru-he-xuan-ze-zui-hao-de-bian-jie-kuang">如何选择最好的边界框</h3>
 <p>比如定位一个物体，算法可能会找出一堆边界框，我们需要选出最好的边界框。
 这里用到了<strong>非极大值抑制(Non-maximum suppression, NMS)</strong>算法，该算法
 其本质是搜索局部极大值，抑制非极大值元素, 具体如下：</p>
@@ -213,7 +213,7 @@ R-CNN 概览：输入一张图片，定位出2000个物体候选框，
    重叠度大于一定的阈值，那么就扔掉；并标记E是我们保留下来的第二个矩形框。</li>
 </ol>
 <p>就这样一直重复，找到所有被保留下来的矩形框。</p>
-<h4>如何调整边界框</h4>
+<h3 id="ru-he-diao-zheng-bian-jie-kuang">如何调整边界框</h3>
 <p>找到边界框中的目标物体后，进一步调整边界框，使其更贴近物体周围。
 这里的创新点为，用线性回归代替过去的DPM算法
 (依赖图像几何特征训练出物体边界框的方法), 训练出更贴身的边界框</p>
@@ -243,7 +243,7 @@ R-CNN 概览：输入一张图片，定位出2000个物体候选框，
 <div class="math">$$t_y = (G_y-P_y)/P_h$$</div>
 <div class="math">$$t_w = log(G_w/P_w)$$</div>
 <div class="math">$$t_h = log(G_h/P_h )$$</div>
-<h4>训练配置</h4>
+<h3 id="xun-lian-pei-zhi">训练配置</h3>
 <p>空间特征提取时，学习率设为0.001, 候选框与目标框重叠率大于等于0.5
 的设为正例，否则设为负例; batch_size 设为128， 正负例比例为1:3。</p>
 <p>SVM分类时，分类数量为物体类别数加一，增加的一个分类表示&ldquo;背景&rdquo;类型。
@@ -252,7 +252,7 @@ R-CNN 概览：输入一张图片，定位出2000个物体候选框，
 <p>回归训练时，其目的是调整边界框大小，很显然当预测框与目标框差得很远时，
 回归训练是无效的，所以回归训练只训练靠近目标框的预测框，
 即选择 IoU 阈值设为大于等于 0.6 的预测框。</p>
-<h4>R-CNN 的缺陷</h4>
+<h3 id="r-cnn-de-que-xian">R-CNN 的缺陷</h3>
 <ul>
 <li>选择性搜索算法不能 GPU 加速，降低模型速度；</li>
 <li>对每张图做2000次前向CNN, 效率过低；</li>
@@ -260,7 +260,7 @@ R-CNN 概览：输入一张图片，定位出2000个物体候选框，
 <li>CNN提取图像特征、分类器预测类别、回归模型提取紧身边界框，
   但在算法上它们是分开训练的，训练起来较麻烦。</li>
 </ul>
-<h3 id="overfeat">OverFeat</h3>
+<h2 id="overfeat_1">OverFeat</h2>
 <p>OverFeat 的论文首发于2013年12月份，OverFeat 模型分为前后两部分，
 前面部分可叫做特征提取层，后面部分可叫做任务层，
 只需要改变网络的最后几层，就可以实现分类、定位、检测等任务。
@@ -274,7 +274,7 @@ R-CNN 概览：输入一张图片，定位出2000个物体候选框，
 图2: OverFeat模型分为快速版和精确版, 此为精确版结构
 </figcaption>
 </p>
-<h4>预测时的多尺度分类</h4>
+<h3 id="yu-ce-shi-de-duo-chi-du-fen-lei">预测时的多尺度分类</h3>
 <p>OverFeat在训练时，将每张256x256原图片随机裁剪为221x221的大小, 作为CNN输入。
 但预测时，不再是用一张221x221大小的图片作为网络的输入，
 而是用任意大小都不相同的图片，也就是所谓的多尺度输入预测，如下表格所示：</p>
@@ -321,7 +321,7 @@ multi-view裁剪，也就是从图片的四个角进行裁剪，还有就是一�
 使最后输出一个 C 维向量, 其中 C 表示分类数量(个人觉得没什么特别)。
 而这个C维分类向量的形状就是图3最后一列的样子。
 写到这里，多尺度图片的分类预测方法就说完了。</p>
-<h4>如何找出候选区域</h4>
+<h3 id="ru-he-zhao-chu-hou-xuan-qu-yu_1">如何找出候选区域</h3>
 <p>在R-CNN论文的修订版本中, 有一节专门提到受OverFeat模型的启发，
 如果对图片的特征提取只做一次，再
 用不同尺寸的滑动窗口在提取后的特征图上来选出候选区域，
@@ -330,14 +330,14 @@ R-CNN的性能至少提高9倍。所以，用多尺寸滑动窗口选出候选�
 <p>多说一句，滑动窗口方式为什么不在原图上圈出候选区呢？没有必要，
 因为卷积网络结构一旦确定，对于图片来说就有固定的缩放比，而对候选区而言，
 用来分析的是抽取出来的特征图，所以在特征图上圈出候选区域，简单直接靠谱。</p>
-<h4>如何找出边界框</h4>
+<h3 id="ru-he-zhao-chu-bian-jie-kuang">如何找出边界框</h3>
 <p>即OverFeat的定位任务，把用图片分类学习的特征提取层的参数固定下来，
 然后继续训练后面的回归层的参数，网络包含了4个输出，
 对应于边界框的上左上角点和右下角点的纵横坐标，
 然后损失函数采用欧式距离L2损失函数。</p>
 <p>OverFeat 用到的回归方法不如R-CNN, 略过不提。</p>
-<h3 id="fcn">FCN</h3>
-<h3 id="spp-net">SPP-Net</h3>
+<h2 id="fcn_1">FCN</h2>
+<h2 id="spp-net">SPP-Net</h2>
 <p>SPP-Net( Spatial Pyramid Pooling in Deep Convolutional Networks )模型算是 
 R-CNN 的进化版, 论文第一作者何凯明，首发于2014年6月，
 当时他还在微软中国研究院。</p>
@@ -361,7 +361,7 @@ R-CNN 的进化版, 论文第一作者何凯明，首发于2014年6月，
 图4:  SPP-Net 模型结构, 中间层称为空间金字塔池化层
 </figcaption>
 </p>
-<h4>空间金字塔池化层</h4>
+<h3 id="kong-jian-jin-zi-ta-chi-hua-ceng">空间金字塔池化层</h3>
 <p>该池化层的作用为把不同尺寸的卷积网络最后一层输出变成固定维度的特征表达。
 图4中黑色图片代表卷积之后的特征图, 它被4x4，2x2，1x1
 大小的网格划分，每个块提取出一个特征, 得到 16 + 4 + 1 = 21 个的特征块,
@@ -372,7 +372,7 @@ R-CNN 的进化版, 论文第一作者何凯明，首发于2014年6月，
 表示向上取整，不足部分用 pad 补齐), 
 滑动步幅分别为<span class="math">\(\lfloor w/n \rfloor\)</span>和<span class="math">\(\lfloor h/n \rfloor\)</span>(<span class="math">\(\lfloor \cdot
 \rfloor\)</span> 表示向下取整)。</p>
-<h4>特征提取加速</h4>
+<h3 id="te-zheng-ti-qu-jia-su">特征提取加速</h3>
 <p>SPP-Net 相对于 R-CNN 来说，特征提取的速度有了质的提高。具体操作如下：</p>
 <p>把整张待检测的图片，输入卷积网络中，进行一次性特征提取，得到
 特征图， 然后在特征图中找到各个候选框的区域，
@@ -380,7 +380,7 @@ R-CNN 的进化版, 论文第一作者何凯明，首发于2014年6月，
 <p>而R-CNN输入的是每个候选框，然后在进入CNN，因为SPP-Net只需要一次对整张图片进行特征提取，
 因为R-CNN就相当于遍历一个CNN两千次，而SPP-Net只需要遍历1次,
 光这一个改进，就有百倍加速的效果。</p>
-<h4>如何在CNN最后一层特征图中找到原始图片中候选框的对应区域？</h4>
+<h3 id="ru-he-zai-cnnzui-hou-yi-ceng-te-zheng-tu-zhong-zhao-dao-yuan-shi-tu-pian-zhong-hou-xuan-kuang-de-dui-ying-qu-yu-?">如何在CNN最后一层特征图中找到原始图片中候选框的对应区域？</h3>
 <p>办法只有一条，算出来，前面提过，一旦卷积网络结构选定，从输入端到输出端的
 缩小比例就能算出来，影响这个比例的包括每层的卷积方式和池化方式。</p>
 <p>论文提出，为简化计算，在卷积时，填充<span class="math">\(\lfloor p/2 \rfloor\)</span>,
@@ -394,14 +394,14 @@ R-CNN 的进化版, 论文第一作者何凯明，首发于2014年6月，
 <div class="math">$$y_0^&prime; = \lfloor y_0/S \rfloor + 1$$</div>
 <div class="math">$$x_1^&prime; = \lceil x_1/S \rceil - 1$$</div>
 <div class="math">$$y_1^&prime; = \lceil y_1/S \rceil - 1$$</div>
-<h4>小结</h4>
+<h3 id="xiao-jie">小结</h3>
 <p>SPP-Net 相对于 R-CNN 最大改进有两点：</p>
 <ol>
 <li>由于找到图片坐标到特征图坐标的换算关系，
    故对图片特征提取只做一次，也能取出候选框对应的特征图；</li>
 <li>采用空间金字塔池化方法，把不同尺寸的候选框特征图输出为固定大小的特征表达</li>
 </ol>
-<h3 id="fast-r-cnn">Fast R-CNN</h3>
+<h2 id="fast-r-cnn_1">Fast R-CNN</h2>
 <p>2015年4月，R-CNN 的第一作者 Ross Girshick 又发了一篇论文《Fast R-CNN》，论文开篇
 就列举 R-CNN 各种明显缺点，同时也提出SPP-Net存在的两个缺陷：</p>
 <ol>
@@ -440,22 +440,22 @@ R-CNN 的进化版, 论文第一作者何凯明，首发于2014年6月，
 一个输出K个类别加上1个背景类别的Softmax概率估计，
 另一个为K个类别的每一个类别输出四个实数值。
 每组4个值对K类之一的精细边界框位置进行编码。</p>
-<h4>感兴趣区域(RoI)池化</h4>
+<h3 id="gan-xing-qu-qu-yu-roichi-hua">感兴趣区域(RoI)池化</h3>
 <p>这里的感兴趣区域(RoI)和前面提到的候选区域(regions proposals)是一回事， 
 它是一个的矩形窗口, 每个RoI由其左上角坐标及其高度和宽度的四元组(r,c,h,w)定义。
 RoI 池化的思路来自空间金字塔池化，只取空间金字塔中的一层， 
 把一个感兴趣区域分为 H&times;W 个网格， 每个网格大小约为h/H &times; w/W，
 然后对网格最大池化，从而输出固定大小的向量。</p>
-<h4>训练微调</h4>
+<h3 id="xun-lian-wei-diao">训练微调</h3>
 <p>对边界框进行回归训练时，选择少量图片多个候选区域。
 假设每批仍然为128，可同时选择2个不同图片，每个图片选出64个候选框，
 这时，能较好共享参数，反向传播时具备较好相关性。
 另外，RoI池化也使感受野范围变小，使得需要更新的参数也变少，从而全部提升训练速度。</p>
-<h4>多任务损失 (Multi-task loss)</h4>
+<h3 id="duo-ren-wu-sun-shi--multi-task-loss">多任务损失 (Multi-task loss)</h3>
 <p>Fast R-CNN 把分类任务和边界框的回归任务分别对应的两个损失函数合二为一，
 让它们共享参数，一起训练。这个调整很小，但训练起来更方便，且共同训练还
 起到互相促进的作用。</p>
-<h3 id="faster-r-cnn">Faster R-CNN</h3>
+<h2 id="faster-r-cnn_1">Faster R-CNN</h2>
 <p>Faster R-CNN 的论文发表于2015年6月，相对于Fast
 R-CNN，这个版本是真正的端到端模型。过去的版本，图片上候选区域都是用
 选择性搜索算法(selective search)、或者边缘框算法(edge bbox)来得到的，
@@ -463,21 +463,130 @@ R-CNN，这个版本是真正的端到端模型。过去的版本，图片上候
 从Faster R-CNN 开始，首次使用神经网络--候选区域网络(RPN, 
 Regions Proposals Networks)来提取这些候选框。</p>
 <p align="center">
-<img src="/images/faster.r-cnn.png" width="80%"/>
+<img src="/images/faster.r-cnn.png" width="60%"/>
 <figcaption>
-图5:  Fast R-CNN 结构. 
-一个图像和多个感兴趣区域(RoI, regions of interest)
-输入到全卷积网络中。
-每个 RoI 被池化为固定大小的特征图，然后通过全连接层(FC)映射到特征向量。
-网络对于每个RoI有两个输出向量：一个为Softmax的分类概率, 
-一个为每类边界框的回归偏移量。该架构采用多任务损失函数端到端训练的。
+图6:  Faster R-CNN 是用于目标检测的单个统一网络，
+而 RPN 模块相当于这个网络的"注意力机制"。
 </figcaption>
 </p>
-<h3 id="fpn">FPN</h3>
-<h3 id="mask-r-cnn">Mask R-CNN</h3>
-<h3 id="cornernet">CornerNet</h3>
-<h3 id="pfpn">PFPN</h3>
-<h2 id="can-kao-wen-xian_1">参考文献</h2>
+<p>Faster R-CNN 主要包括4个关键模块，
+特征提取网络、生成候选框(ROI)、候选框(ROI)分类、候选框(ROI)回归。</p>
+<ul>
+<li>
+<p>特征提取网络：它用来从大量的图片中提取出一些不同目标的重要特征，
+  通常由conv+relu+pool层构成，常用一些预训练好的网络（VGG、Inception、Resnet等），
+  获得的结果叫做特征图；</p>
+</li>
+<li>
+<p>生成候选框：在获得的特征图的每一个点上做多个候选框，
+  然后利用分类器将这些候选框区分为背景和前景，
+  同时利用回归器对这些候选框的位置进行初步的调整；</p>
+</li>
+<li>
+<p>候选框分类：在 RPN 阶段，用来区分前景（于真实目标重叠并且其重叠区域大于0.5）
+  和背景（不与任何目标重叠或者其重叠区域小于0.1）；在Fast R-CNN阶段，用于区分不同种类的目标（猫、狗、人等）；</p>
+</li>
+</ul>
+<p>-&nbsp;候选框回归：在 RPN 阶段，进行初步调整；在Fast R-CNN 阶段进行精确调整；</p>
+<p>其整体流程如下：</p>
+<ul>
+<li>首先对输入的图片进行裁剪操作，并将裁剪后的图片送入预训练好的分类网络中获取该图像对应的特征图；</li>
+<li>然后在特征图上的每一个锚点上取9个候选框（3个不同尺度，3个不同长宽比），
+  并根据相应的比例将其映射到原始图像中；</li>
+<li>接着将这些候选框输入到 RPN 网络中，RPN 网络对这些候选框进行分类
+ （即确定这些候选框是前景还是背景）, 同时对其进行初步回归
+ （即计算这些前景候选框与标定边界框之间的偏差值，包括&Delta;x、&Delta;y、&Delta;w、&Delta;h）,
+  然后做NMS（非极大值抑制，即根据分类的得分对这些候选框进行排序，
+  然后选择其中的前N个候选框）；</li>
+<li>接着对这些不同大小的候选框进行ROI Pooling操作
+ （即将其映射为特定大小的网格, 文中是7x7），输出固定大小的特征图；</li>
+<li>最后将其输入简单的检测网络中，然后利用1x1的卷积进行分类
+ （区分不同的类别，N+1类，
+  多余的一类是背景，用于删除不准确的候选框），
+  同时进行边界框回归，输出更精准的一个边界框集合。&nbsp;</li>
+</ul>
+<h3 id="mao-dian-de-gai-nian">锚点的概念</h3>
+<p>即特征图上的最小单位点，比如原始图像的大小是256x256,
+特征提取网络中含有 4 个池化层，
+然后最终获得的特征图的大小为 256/16 x 256/16，
+即获得一个 16x16 的特征图，该图中的最小单位即是锚点，
+由于特征图和原始图像之间存在比例关系，
+在特征图上面密集的点对应到原始图像上面就有16个像素的间隔。</p>
+<p>一个锚点对应一套候选框，它们是在原图上以锚点为中心，
+根据不同尺度(128、256、512), 不同长宽比(1:1, 1:2: 2:1)产生
+的9个候选框。比如16x16的特征图，将产生16x16x9=2304个候选框。</p>
+<p>一个候选框表达为(x,y,w,h), 对应原始图片上的锚点横纵坐标和宽高。</p>
+<h3 id="zheng-fu-yang-ben-de-hua-fen">正负样本的划分</h3>
+<p>上面那些候选框，在训练和测试时将被进一步筛选。规则如下：</p>
+<ol>
+<li>与每个标定边界框(ground true box)的重叠率(IoU)最高锚点候选框，记为正样本；</li>
+<li>与某个标定边界框重叠率(IoU)大于0.7的锚点候选框，记为正样本。</li>
+</ol>
+<p>注意，一个标定边界框可以为多个锚点分配正样本，且通常第2个条件就足以确定正样本，
+但在少数情况下须用第1个条件来确定正样本。</p>
+<ol>
+<li>与任意一个标定边界框的重叠率(IoU)都小于0.3的，记为负样本。</li>
+<li>既不是正样本，也不是负样本的锚点候选框，对训练目标没有贡献，抛弃不用。</li>
+</ol>
+<p>在训练阶段，如果锚点候选框超过了原始图片的边界，则忽略这个候选框;
+在测试阶段，如果锚点候选框超过了原始图片的边界, 则把候选框裁剪到图片边界。</p>
+<h3 id="rpn-wang-luo-jie-gou">RPN 网络结构</h3>
+<p align="center">
+<img src="/images/rpn.png" width="70%"/>
+<figcaption>
+图7:  RPN 网络结构 
+</figcaption>
+</p>
+<ul>
+<li>第一层，3x3的卷积核，输出特征图的数量为256；</li>
+<li>第二层，有两个分支，每个分支都用1x1的卷积核，
+  第一个分支过滤器的shape=(1,1,256,9x2), 
+  得到的特征图shape=(h,w,9x2)；第二个分支过滤器的
+  shape=(1,1,256,9x4), 得到特征图的shape=(h,w,9x4)。
+  这样特征图的每个像素点就有一个9x6维向量，对应到原始图片的9个
+  候选框，每个候选框有一个6维向量，前两个维度用于判断候选框中
+  是否有物体，后四个维度用于判断候选框中物体的坐标。</li>
+</ul>
+<h3 id="faster-r-cnn-xun-lian-ce-lue">Faster R-CNN 训练策略</h3>
+<p align="center">
+<img src="/images/faster-rcnn.training.jpeg" width="90%"/>
+<figcaption>
+图8:  Faster R-CNN 训练策略
+</figcaption>
+</p>
+<ul>
+<li>用ImageNet模型初始化，独立训练一个RPN网络；</li>
+<li>仍然用ImageNet模型初始化，但是使用上一步 RPN 网络产生的候选框作为输入，
+  训练一个Fast-RCNN网络，至此，两个网络每一层的参数完全不共享；</li>
+<li>使用第二步的Fast-RCNN网络参数初始化一个新的RPN网络，但是把RPN、
+  Fast-RCNN共享的那些卷积层的learning rate设置为0，也就是不更新，
+  仅仅更新RPN特有的那些网络层，重新训练，此时，两个网络已经共享了所有公共的卷积层；</li>
+<li>仍然固定共享的那些网络层，把Fast-RCNN特有的网络层也加入进来，形成一个统一网络，继续训练，
+  微调 Fast-RCNN 特有的网络层，此时，该网络已经实现我们设想的目标，
+  即网络内部预测边界框并实现检测的功能。</li>
+</ul>
+<p>即进行交替训练，迭代2次的原因是作者发现多次的迭代并没有显著的改善性能。</p>
+<h3 id="que-xian-:roichi-hua-de-er-ci-liang-hua-pian-chai-wen-ti">缺陷：ROI池化的二次量化偏差问题</h3>
+<p>由于候选框的位置由模型回归得到，一般来说是浮点数，而池化后的特征图要求尺度固定，
+因此感兴趣区域(ROI)池化这个操作存在两次数据量化的过程。</p>
+<ol>
+<li>将候选框边界量化为整数点坐标值；</li>
+<li>将量化后的边界区域平均分割成 HxW 个单元，对每个单元的边界进行量化。</li>
+</ol>
+<p>事实上，经过上面的两次量化操作，此时的ROI已经和最开始的ROI之间存在一定的偏差，
+这个偏差会影响检测的精确度。</p>
+<p>举例说明：输入一张800x800的图片，图片中有一个665x665的边界框。
+图片经过特征提取网络之后，整个图片的特征图变为800/32 x 800/32, 即25x25，但是665/32=20.87，带有小数，
+ROI Pooling直接将它量化为20。在这里引入了一次偏差。
+由于最终的特征映射的大小为7x7，即需要将20x20的区域映射成7x7,
+矩形区域的边长为2.86，又一次将其量化为2。这里再次引入了一次量化误差。
+经过这两次的量化，候选ROI已经出现了严重的偏差。
+更重要的是，在特征图上差0.1个像素，对应到原图上就是3.2个像素。</p>
+<h2 id="fpn_1">FPN</h2>
+<h2 id="mask-r-cnn">Mask R-CNN</h2>
+<h2 id="cornernet">CornerNet</h2>
+<h2 id="pfpn">PFPN</h2>
+<h2 id="can-kao-wen-xian">参考文献</h2>
 <div class="footnote">
 <hr/>
 <ol>
@@ -578,7 +687,7 @@ Regions Proposals Networks)来提取这些候选框。</p>
       <div class="hidden-print hidden-xs hidden-sm hidden-md col-lg" id="post_toc" role="complementary">
         <nav class="sidebar-toc">
 <!-- <section id="main_toc"> -->
-    <ul class="nav" id="toc"><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#tu-xiang-fen-ge-dao-di-gan-shi-yao" title="图像分割到底干什么">图像分割到底干什么</a></li><li class="nav-item"><a class="nav-link" href="#tu-xiang-fen-ge-de-suan-fa-si-lu" title="图像分割的算法思路">图像分割的算法思路</a></li><li class="nav-item"><a class="nav-link" href="#jing-dian-suan-fa-de-yan-jin" title="经典算法的演进">经典算法的演进</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#r-cnn" title="R-CNN">R-CNN</a></li><li class="nav-item"><a class="nav-link" href="#overfeat" title="OverFeat">OverFeat</a></li><li class="nav-item"><a class="nav-link" href="#fcn" title="FCN">FCN</a></li><li class="nav-item"><a class="nav-link" href="#spp-net" title="SPP-Net">SPP-Net</a></li><li class="nav-item"><a class="nav-link" href="#fast-r-cnn" title="Fast R-CNN">Fast R-CNN</a></li><li class="nav-item"><a class="nav-link" href="#faster-r-cnn" title="Faster R-CNN">Faster R-CNN</a></li><li class="nav-item"><a class="nav-link" href="#fpn" title="FPN">FPN</a></li><li class="nav-item"><a class="nav-link" href="#mask-r-cnn" title="Mask R-CNN">Mask R-CNN</a></li><li class="nav-item"><a class="nav-link" href="#cornernet" title="CornerNet">CornerNet</a></li><li class="nav-item"><a class="nav-link" href="#pfpn" title="PFPN">PFPN</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#can-kao-wen-xian_1" title="参考文献">参考文献</a></li></ul></ul>
+    <ul class="nav" id="toc"><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#tu-xiang-fen-ge-dao-di-gan-shi-yao" title="图像分割到底干什么">图像分割到底干什么</a></li><li class="nav-item"><a class="nav-link" href="#tu-xiang-fen-ge-de-suan-fa-si-lu" title="图像分割的算法思路">图像分割的算法思路</a></li><li class="nav-item"><a class="nav-link" href="#jing-dian-suan-fa-de-yan-jin" title="经典算法的演进">经典算法的演进</a></li><li class="nav-item"><a class="nav-link" href="#r-cnn" title="R-CNN">R-CNN</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#ru-he-zhao-chu-hou-xuan-qu-yu" title="如何找出候选区域">如何找出候选区域</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-cong-bu-tong-da-xiao-de-hou-xuan-kuang-ti-qu-kong-jian-te-zheng" title="如何从不同大小的候选框提取空间特征">如何从不同大小的候选框提取空间特征</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-xuan-ze-zui-hao-de-bian-jie-kuang" title="如何选择最好的边界框">如何选择最好的边界框</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-diao-zheng-bian-jie-kuang" title="如何调整边界框">如何调整边界框</a></li><li class="nav-item"><a class="nav-link" href="#xun-lian-pei-zhi" title="训练配置">训练配置</a></li><li class="nav-item"><a class="nav-link" href="#r-cnn-de-que-xian" title="R-CNN 的缺陷">R-CNN 的缺陷</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#overfeat_1" title="OverFeat">OverFeat</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#yu-ce-shi-de-duo-chi-du-fen-lei" title="预测时的多尺度分类">预测时的多尺度分类</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-zhao-chu-hou-xuan-qu-yu_1" title="如何找出候选区域">如何找出候选区域</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-zhao-chu-bian-jie-kuang" title="如何找出边界框">如何找出边界框</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#fcn_1" title="FCN">FCN</a></li><li class="nav-item"><a class="nav-link" href="#spp-net" title="SPP-Net">SPP-Net</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#kong-jian-jin-zi-ta-chi-hua-ceng" title="空间金字塔池化层">空间金字塔池化层</a></li><li class="nav-item"><a class="nav-link" href="#te-zheng-ti-qu-jia-su" title="特征提取加速">特征提取加速</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-zai-cnnzui-hou-yi-ceng-te-zheng-tu-zhong-zhao-dao-yuan-shi-tu-pian-zhong-hou-xuan-kuang-de-dui-ying-qu-yu-?" title="如何在CNN最后一层特征图中找到原始图片中候选框的对应区域？">如何在CNN最后一层特征图中找到原始图片中候选框的对应区域？</a></li><li class="nav-item"><a class="nav-link" href="#xiao-jie" title="小结">小结</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#fast-r-cnn_1" title="Fast R-CNN">Fast R-CNN</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#gan-xing-qu-qu-yu-roichi-hua" title="感兴趣区域(RoI)池化">感兴趣区域(RoI)池化</a></li><li class="nav-item"><a class="nav-link" href="#xun-lian-wei-diao" title="训练微调">训练微调</a></li><li class="nav-item"><a class="nav-link" href="#duo-ren-wu-sun-shi--multi-task-loss" title="多任务损失 (Multi-task loss)">多任务损失 (Multi-task loss)</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#faster-r-cnn_1" title="Faster R-CNN">Faster R-CNN</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#mao-dian-de-gai-nian" title="锚点的概念">锚点的概念</a></li><li class="nav-item"><a class="nav-link" href="#zheng-fu-yang-ben-de-hua-fen" title="正负样本的划分">正负样本的划分</a></li><li class="nav-item"><a class="nav-link" href="#rpn-wang-luo-jie-gou" title="RPN 网络结构">RPN 网络结构</a></li><li class="nav-item"><a class="nav-link" href="#faster-r-cnn-xun-lian-ce-lue" title="Faster R-CNN 训练策略">Faster R-CNN 训练策略</a></li><li class="nav-item"><a class="nav-link" href="#que-xian-:roichi-hua-de-er-ci-liang-hua-pian-chai-wen-ti" title="缺陷：ROI池化的二次量化偏差问题">缺陷：ROI池化的二次量化偏差问题</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#fpn_1" title="FPN">FPN</a></li><li class="nav-item"><a class="nav-link" href="#mask-r-cnn" title="Mask R-CNN">Mask R-CNN</a></li><li class="nav-item"><a class="nav-link" href="#cornernet" title="CornerNet">CornerNet</a></li><li class="nav-item"><a class="nav-link" href="#pfpn" title="PFPN">PFPN</a></li><li class="nav-item"><a class="nav-link" href="#can-kao-wen-xian" title="参考文献">参考文献</a></li></ul></ul>
 <!-- </section> -->
 <!-- </section> -->
         </nav>
