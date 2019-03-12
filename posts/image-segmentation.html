@@ -213,7 +213,7 @@ Ross Girshick 于2013年11月发表的一篇论文，
    重叠度大于一定的阈值，那么就扔掉；并标记E是我们保留下来的第二个矩形框。</li>
 </ol>
 <p>就这样一直重复，找到所有被保留下来的矩形框。</p>
-<p><font color="red"><strong>NMS的缺陷</strong></font></p>
+<p><strong><font color="red">NMS的缺陷</font></strong></p>
 <p align="center">
 <img src="/images/nms.jpeg" width="65%"/>
 <figcaption>
@@ -677,7 +677,7 @@ Regions Proposals Networks)来提取这些候选框。</p>
   候选框，每个候选框有一个6维向量，前两个维度用于判断候选框中
   是否有物体，后四个维度用于判断候选框中物体的坐标。</li>
 </ul>
-<p><font color="red"><strong>RPN 的缺陷</strong></font></p>
+<p><strong><font color="red">RPN 的缺陷</font></strong></p>
 <ul>
 <li>训练阶段，RPN 提出约2000个候选框，这些候选框被送入到Fast R-CNN结构中，
   在Fast R-CNN结构中，首先计算每个候选框和标定边界框(GT)之间的IoU，
