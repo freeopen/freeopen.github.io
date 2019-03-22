@@ -1028,6 +1028,8 @@ $$</div>
 <li><span class="math">\(e_k\)</span>表示<span class="math">\(e_{t_k}\)</span>和<span class="math">\(e_{b_k}\)</span>的均值, <span class="math">\(e_j\)</span>表示第j类目标两个角点的均值</li>
 <li><span class="math">\(\Delta\)</span> 表示阈值，论文中取值为 1</li>
 </ul>
+<p>(4)式用来缩小属于同一个目标的两个角点对应嵌入向量的距离，
+(5)式用来扩大不属于同一个目标的两个角点对应嵌入向量的距离。</p>
 <h3 id="corner-pooling">corner pooling</h3>
 <p>这是针对角点专门设计的池化方式，对于左上角点，它池化的目标是该点右边和下边的信息，
 对于右下角点，它池化的目标是该点左边和上边的信息。池化是什么，除了起到降维作用外，
@@ -1076,6 +1078,7 @@ $$</div>
   arXiv:1703.06870v3, 2018.</li>
 <li>B. Singh, L. Davis. An Analysis of Scale Invariance in Object Detection &ndash;
   SNIP. arXiv:1711.08189v2, 2018.</li>
+<li>H. Law, J. Deng. CornerNet: Detecting Objects as Paired Keypoints. arXiv:1808.01244v1, 2018.</li>
 </ul>
 <div class="footnote">
 <hr/>
