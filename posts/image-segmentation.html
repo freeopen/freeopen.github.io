@@ -817,16 +817,16 @@ w 和 h 是ROI区域(候选框)的长和宽。
 假设ROI是 112x112 的大小，那么<span class="math">\(k = k_0-1 = 5-1 = 4\)</span>，
 意味着该ROI应该使用P4的特征层。</p>
 <h2 id="mask-r-cnn_1">Mask R-CNN</h2>
-<p>2017年3月，已加盟facebook AI 研究院的何凯明团队发表重磅论文《Mask R-CNN》,
+<p>2017年3月，已加盟facebook AI 研究院的何凯明携团队发表重磅论文《Mask R-CNN》,
 该模型非常灵活，可以用来完成多种任务，
 包括目标分类、目标检测、语义分割、实例分割、人体姿态识别等。
 除此之外，我们可以更换不同的主干结构(Backbone Architecture)和
 头部结构(Head Architecture)来获得不同性能的结果。</p>
 <p>Mask R-CNN是以往经典算法的集大成之作，算法思路并不复杂，
 即在原始<a href="#faster-r-cnn_1">Faster R-CNN</a>算法的基础上面增加了<a href="#fcn_1">FCN</a>算法来产生对应的MASK分支。 
-Mask R-CNN比Faster R-CNN复杂，但和原始的Faster-rcnn的速度相当。
-由于发现了ROI Pooling中所存在的<a href="#que-xian-:roichi-hua-de-er-ci-liang-hua-pian-chai-wen-ti">像素偏差问题</a>，提出了对应的ROIAlign策略，
-加上FCN精准的像素掩膜(Mask)，使得其可以获得高准确率。</p>
+Mask R-CNN 比 Faster R-CNN 复杂，但和原始的 Faster R-CNN 的速度相当。
+由于发现了ROI Pooling中所存在的<a href="#que-xian-:roichi-hua-de-er-ci-liang-hua-pian-chai-wen-ti">像素偏差问题</a>，提出了对应的 ROIAlign 策略，
+加上 FCN 精准的像素掩膜(Mask)，使得其可以获得高准确率。</p>
 <p>所以，Mask R-CNN 的结构如下图，即Faster R-CNN + FCN, 
 更细致的是 RPN + ROIAlign + Fast-rcnn + FCN。</p>
 <p><img src="/images/mask-rcnn.jpeg" width="90%"/>
@@ -838,10 +838,10 @@ Mask R-CNN比Faster R-CNN复杂，但和原始的Faster-rcnn的速度相当。
 <ol>
 <li>输入一幅你想处理的图片，然后进行对应的预处理操作，或者预处理后的图片；</li>
 <li>将其输入到一个预训练好的神经网络中（ResNet等）获得对应的feature map；</li>
-<li>对这个feature map中的每一点设定预定个的ROI，从而获得多个候选ROI；</li>
-<li>将这些候选的ROI送入RPN网络进行二值分类（前景或背景）和BB回归，过滤掉一部分候选的ROI；</li>
-<li>对这些剩下的ROI进行ROIAlign操作；</li>
-<li>对这些ROI进行分类（N类别分类）、边界框(BBox)回归和MASK生成（在每一个ROI里面进行FCN操作）。</li>
+<li>对这个feature map中的每一点设定预定个的ROI(候选区域)，从而获得多个候选ROI；</li>
+<li>将这些候选的 ROI 送入 RPN 网络进行二值分类（前景或背景）和边界框(BBox)回归，过滤掉一部分候选的ROI；</li>
+<li>对这些剩下的 ROI 进行 ROIAlign 操作；</li>
+<li>对这些 ROI 进行分类（N类别分类）、边界框(BBox)回归和MASK生成（在每一个 ROI 里面进行 FCN 操作）。</li>
 </ol>
 <h3 id="roialign">ROIAlign</h3>
 <p align="center">
