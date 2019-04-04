@@ -713,8 +713,8 @@ $$</div>
 <li><span class="math">\(t_i\)</span>是预测边界框的定位信息，<span class="math">\(t_i^*\)</span>是标定边界框的定位信息, 定义见(2)式，
   这里与Fast R-CNN 不同。
   对每个矩形框，(x,y,w,h)分别对应矩形框的中心点坐标和宽高，
-  (2)式中，<span class="math">\(x, x_a, x^*\)</span>分别对应预测边界框、锚点候选框、标定边界框的x,
-  y,w,h与其表示类似</li>
+  (2)式中，<span class="math">\(x, x_a, x^*\)</span>分别对应预测边界框、锚点候选框、标定边界框的 x 坐标,
+  (y、w、h 的情形与 x 类似)</li>
 <li><span class="math">\(L_{reg}(t_i, t_i^* ) = R(t_i &minus; t_i^*)\)</span>, 
   这里的<span class="math">\(R\)</span>函数是 <a href="#duo-ren-wu-sun-shi-han-shu--multi-task-loss">smooth L1 损失函数</a></li>
 <li><span class="math">\(L_{cls}(p_i, p_i^*)\)</span>是对数损失函数，与Fast R-CNN定义一致</li>
@@ -894,7 +894,7 @@ ROIAlign 算法没有使用量化操作，保留计算中的小数位。
 <p>实验表明，右边的架构在速度和精度上都有提升。</p>
 <h3 id="sun-shi-han-shu_1">损失函数</h3>
 <div class="math">$$L = L_{cls} + L_{box} + L_{mask}$$</div>
-<p>其中<span class="math">\(L_{cls}\)</span>和<span class="math">\(L_{box}\)</span>和Faster R-CNN 中定义的相同。对于每一个ROI，
+<p>其中<span class="math">\(L_{cls}\)</span>和<span class="math">\(L_{box}\)</span>和Faster R-CNN 中<a href="#sun-shi-han-shu">定义</a> 的相同。对于每一个ROI，
 mask分支有<span class="math">\(K \cdot m^2\)</span> 维度的输出，其对 K 个大小为 mxm 的 mask 进行编码，
 每一个 mask 有 K 个类别。
 这里对每个像素用sigmoid分类，并且将<span class="math">\(L_{mask}\)</span>定义为二分类的交叉熵损失函数&nbsp;。
