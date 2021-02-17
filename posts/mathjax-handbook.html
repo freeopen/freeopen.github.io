@@ -33,13 +33,13 @@
           </button>
           <nav class="collapse navbar-collapse sidebar-nav flex-column" id="navbarNav">
 
-              <a class="nav-link" href="https://freeopen.github.io/pages/about.html">About</a>
-              <a class="nav-link" href="https://freeopen.github.io/pages/da-shang.html">打赏</a>
+              <a class="nav-link" href="https://freeopen.github.io/pages/guan-yu-zhe-li.html">关于这里</a>
+              <a class="nav-link" href="https://freeopen.github.io/pages/zou-guo-lu-guo.html">走过路过</a>
 
-              <a class="nav-link" href="https://freeopen.github.io/category/bian-cheng.html">编程</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/bian-cheng-zhi-hui.html">编程智慧</a>
               <a class="nav-link" href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
-              <a class="nav-link" href="https://freeopen.github.io/category/shou-ce.html">手册</a>
-              <a class="nav-link" href="https://freeopen.github.io/category/shu-xue.html">数学</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/shu-xue-za-tan.html">数学杂谈</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/su-cha-shou-ce.html">速查手册</a>
             <div class="sidebar-icons">
               <hr>
                 <a href="" title="Atom feed" target="_blank" 
@@ -77,7 +77,7 @@
     </span>
 
     <span>
-      | 分类于 <a href="https://freeopen.github.io/category/shou-ce.html">手册</a>
+      | 分类于 <a href="https://freeopen.github.io/category/su-cha-shou-ce.html">速查手册</a>
     </span>
 
   </div><!-- /.post-info -->
@@ -86,8 +86,8 @@
 <blockquote>
 <p><em>Note: 鼠标右键单击公式表达式, 选择 "Show Math As &gt; TeX Commands", 即可查看公式的LaTex代码。</em></p>
 </blockquote>
-<h2 id="yi--gong-shi-shi-yong-can-kao">一、公式使用参考</h2>
-<h3 id="ru-he-cha-ru-gong-shi">1．如何插入公式</h3>
+<h2 id="yi-gong-shi-shi-yong-can-kao">一、公式使用参考</h2>
+<h3 id="1ru-he-cha-ru-gong-shi">1．如何插入公式</h3>
 <p>LaTex 的数学公式有两种：行中公式和独立公式。行中公式放在文中与其它文字混编，独立公式单独成行。</p>
 <p>行中公式示例: <code>$\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}$</code> <span class="math">\(\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}\)</span></p>
 <p>独立公式示例：<code>$$\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}$$</code> </p>
@@ -99,22 +99,22 @@
 <li>自动编号的公式可以用如下方法表示：</li>
 </ul>
 <p>若需要手动编号，参见 <a href="#大括号和行标的使用">大括号和行标的使用</a> 。</p>
-<div class="highlight"><pre><span></span>\begin{equation}
-数学公式
-\label{eq:当前公式名}
-\end{equation}
+<div class="highlight"><pre><span></span><span class="err">\begin{equation}</span>
+<span class="err">数学公式</span>
+<span class="err">\label{eq:当前公式名}</span>
+<span class="err">\end{equation}</span>
 </pre></div>
 <p>自动编号后的公式可在全文任意处使用<code>\eqref{eq:公式名}</code> 语句引用。</p>
-<h3 id="ru-he-shu-ru-shang-xia-biao">2．如何输入上下标</h3>
+<h3 id="2ru-he-shu-ru-shang-xia-biao">2．如何输入上下标</h3>
 <p><code>^</code> 表示上标,<code>_</code> 表示下标。如果上下标的内容多于一个字符，需要用 <code>{}</code> 将这些内容括成一个整体。上下标可以嵌套，也可以同时使用。</p>
-<div class="highlight"><pre><span></span>x^{y^z}=(1+{\rm e}^x)^{-2xy^w} 
+<div class="highlight"><pre><span></span><span class="err">$$ x^{y^z}=(1+{\rm e}^x)^{-2xy^w} $$</span>
 </pre></div>
 <div class="math">$$ x^{y^z}=(1+{\rm e}^x)^{-2xy^w} $$</div>
 <p>另外，如果要在左右两边都有上下标，可以用 <code>\sideset</code> 命令。</p>
-<div class="highlight"><pre><span></span>\sideset{^1_2}{^3_4}\bigotimes 
+<div class="highlight"><pre><span></span><span class="err">\sideset{^1_2}{^3_4}\bigotimes </span>
 </pre></div>
 <div class="math">$$ \sideset{^1_2}{^3_4}\bigotimes $$</div>
-<h3 id="ru-he-shu-ru-gua-hao-he-fen-ge-fu">3．如何输入括号和分隔符</h3>
+<h3 id="3ru-he-shu-ru-gua-hao-he-fen-ge-fu">3．如何输入括号和分隔符</h3>
 <p><code>()</code>、<code>[]</code> 和 <code>|</code> 表示符号本身，使用 <code>\{\}</code> 来表示 <code>{}</code> 。当要显示大号的括号或分隔符时，要用 <code>\left</code> 和 <code>\right</code> 命令。</p>
 <p>一些特殊的括号：</p>
 <div class="math">$$
@@ -129,57 +129,57 @@
 \hline 
 \end{array}
 $$</div>
-<div class="highlight"><pre><span></span>f(x,y,z) = 3y^2z \left( 3+\frac{7x+5}{1+y^2} \right) 
+<div class="highlight"><pre><span></span><span class="err">$$ f(x,y,z) = 3y^2z \left( 3+\frac{7x+5}{1+y^2} \right) $$</span>
 </pre></div>
 <div class="math">$$ f(x,y,z) = 3y^2z \left( 3+\frac{7x+5}{1+y^2} \right) $$</div>
 <p>有时候要用 <code>\left.</code> 或 <code>\right.</code> 进行匹配而不显示本身。</p>
-<div class="highlight"><pre><span></span>\left. \frac{{\rm d}u}{{\rm d}x} \right| _{x=0} 
+<div class="highlight"><pre><span></span><span class="err">$$ \left. \frac{{\rm d}u}{{\rm d}x} \right| _{x=0} $$</span>
 </pre></div>
 <div class="math">$$ \left. \frac{{\rm d}u}{{\rm d}x} \right| _{x=0} $$</div>
-<h3 id="ru-he-shu-ru-fen-shu">4．如何输入分数</h3>
+<h3 id="4ru-he-shu-ru-fen-shu">4．如何输入分数</h3>
 <p>通常使用 <code>\frac {分子} {分母}</code> 命令产生一个分数，分数可嵌套。 
 便捷情况可直接输入 \frac ab 来快速生成一个  。 
 如果分式很复杂，亦可使用 <code>分子 \over 分母</code> 命令，此时分数仅有一层。</p>
-<div class="highlight"><pre><span></span>\frac{a-1}{b-1} \quad and \quad {a+1\over b+1}
+<div class="highlight"><pre><span></span><span class="err">$$\frac{a-1}{b-1} \quad and \quad {a+1\over b+1}$$</span>
 </pre></div>
 <div class="math">$$\frac{a-1}{b-1} \quad and \quad {a+1\over b+1}$$</div>
-<h3 id="ru-he-shu-ru-kai-fang">5．如何输入开方</h3>
+<h3 id="5ru-he-shu-ru-kai-fang">5．如何输入开方</h3>
 <p>使用 <code>\sqrt [根指数，省略时为2] {被开方数}</code> 命令输入开方。</p>
-<div class="highlight"><pre><span></span>\sqrt{2} \quad and \quad \sqrt[n]{3}
+<div class="highlight"><pre><span></span><span class="err">$$\</span><span class="nf">sqrt</span><span class="err">{</span><span class="mi">2</span><span class="err">}</span><span class="w"> </span><span class="err">\</span><span class="n">quad</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="err">\</span><span class="n">quad</span><span class="w"> </span><span class="err">\</span><span class="nf">sqrt</span><span class="o">[</span><span class="n">n</span><span class="o">]</span><span class="err">{</span><span class="mi">3</span><span class="err">}$$</span><span class="w"></span>
 </pre></div>
 <div class="math">$$\sqrt{2} \quad and \quad \sqrt[n]{3}$$</div>
-<h3 id="ru-he-shu-ru-sheng-lue-hao">6．如何输入省略号</h3>
+<h3 id="6ru-he-shu-ru-sheng-lue-hao">6．如何输入省略号</h3>
 <p>数学公式中常见的省略号有两种，<code>\ldots</code> 表示与文本底线对齐的省略号，<code>\cdots</code> 表示与文本中线对齐的省略号。</p>
-<div class="highlight"><pre><span></span>f(x_1,x_2,\underbrace{\ldots}_{\rm ldots} ,x_n) = x_1^2 + x_2^2 + \underbrace{\cdots}_{\rm cdots} + x_n^2
+<div class="highlight"><pre><span></span><span class="err">f(x_1,x_2,\underbrace{\ldots}_{\rm ldots} ,x_n) = x_1^2 + x_2^2 + \underbrace{\cdots}_{\rm cdots} + x_n^2</span>
 </pre></div>
 <div class="math">$$f(x_1,x_2,\underbrace{\ldots}_{\rm ldots} ,x_n) = x_1^2 + x_2^2 + \underbrace{\cdots}_{\rm cdots} + x_n^2$$</div>
-<h3 id="ru-he-shu-ru-shi-liang">7．如何输入矢量</h3>
+<h3 id="7ru-he-shu-ru-shi-liang">7．如何输入矢量</h3>
 <p>使用 <code>\vec{矢量}</code> 来自动产生一个矢量。也可以使用 <code>\overrightarrow</code> 等命令自定义字母上方的符号。</p>
-<div class="highlight"><pre><span></span>\vec{a} \cdot \vec{b}=0
+<div class="highlight"><pre><span></span><span class="err">\vec{a} \cdot \vec{b}=0</span>
 </pre></div>
 <div class="math">$$\vec{a} \cdot \vec{b}=0$$</div>
-<div class="highlight"><pre><span></span>\overleftarrow{xy} \quad and \quad \overleftrightarrow{xy} \quad and \quad \overrightarrow{xy}
+<div class="highlight"><pre><span></span><span class="err">\overleftarrow{xy} \quad and \quad \overleftrightarrow{xy} \quad and \quad \overrightarrow{xy}</span>
 </pre></div>
 <div class="math">$$\overleftarrow{xy} \quad and \quad \overleftrightarrow{xy} \quad and \quad \overrightarrow{xy}$$</div>
-<h3 id="ru-he-shu-ru-ji-fen">8．如何输入积分</h3>
+<h3 id="8ru-he-shu-ru-ji-fen">8．如何输入积分</h3>
 <p>使用 <code>\int_积分下限^积分上限 {被积表达式}</code> 来输入一个积分。</p>
-<div class="highlight"><pre><span></span>\int_0^1 {x^2} \,{\rm d}x
+<div class="highlight"><pre><span></span><span class="err">\int_0^1 {x^2} \,{\rm d}x</span>
 </pre></div>
 <div class="math">$$\int_0^1 {x^2} \,{\rm d}x$$</div>
 <p>本例中 <code>\,</code> 和 <code>{\rm d}</code> 部分可省略，但建议加入，能使式子更美观。</p>
-<h3 id="ru-he-shu-ru-ji-xian-yun-suan">9．如何输入极限运算</h3>
+<h3 id="9ru-he-shu-ru-ji-xian-yun-suan">9．如何输入极限运算</h3>
 <p>使用 <code>\lim_{变量 \to 表达式}</code> 表达式 来输入一个极限。如有需求，可以更改 <code>\to</code> 符号至任意符号。</p>
-<div class="highlight"><pre><span></span>\lim_{n \to +\infty} \frac{1}{n(n+1)} \quad and \quad \lim_{x\leftarrow{示例}} \frac{1}{n(n+1)} 
+<div class="highlight"><pre><span></span><span class="err">\lim_{n \to +\infty} \frac{1}{n(n+1)} \quad and \quad \lim_{x\leftarrow{示例}} \frac{1}{n(n+1)} </span>
 </pre></div>
 <div class="math">$$ \lim_{n \to +\infty} \frac{1}{n(n+1)} \quad and \quad \lim_{x\leftarrow{示例}} \frac{1}{n(n+1)} $$</div>
-<h3 id="ru-he-shu-ru-lei-jia--lei-cheng-yun-suan">10．如何输入累加、累乘运算</h3>
+<h3 id="10ru-he-shu-ru-lei-jia-lei-cheng-yun-suan">10．如何输入累加、累乘运算</h3>
 <p>使用 <code>\sum_{下标表达式}^{上标表达式} {累加表达式}</code> 来输入一个累加。 
 与之类似，使用 <code>\prod \bigcup \bigcap</code> 来分别输入累乘、并集和交集。 
 此类符号在行内显示时上下标表达式将会移至右上角和右下角。</p>
-<div class="highlight"><pre><span></span>sum_{i=1}^n \frac{1}{i^2} \quad and \quad \prod_{i=1}^n \frac{1}{i^2} \quad and \quad \bigcup_{i=1}^{2} R
+<div class="highlight"><pre><span></span><span class="err">sum_{i=1}^n \frac{1}{i^2} \quad and \quad \prod_{i=1}^n \frac{1}{i^2} \quad and \quad \bigcup_{i=1}^{2} R</span>
 </pre></div>
 <div class="math">$$\sum_{i=1}^n \frac{1}{i^2} \quad and \quad \prod_{i=1}^n \frac{1}{i^2} \quad and \quad \bigcup_{i=1}^{2} R$$</div>
-<h3 id="ru-he-shu-ru-xi-la-zi-mu">11．如何输入希腊字母</h3>
+<h3 id="11ru-he-shu-ru-xi-la-zi-mu">11．如何输入希腊字母</h3>
 <p>输入 <code>\小写希腊字母英文全称</code> 和 <code>\首字母大写希腊字母英文全称</code> 来分别输入小写和大写希腊字母。 
 对于大写希腊字母与现有字母相同的，直接输入大写字母即可。</p>
 <div class="math">\begin{array}{cccc|cccc|cccc}
@@ -231,7 +231,7 @@ M  &amp; \mu &amp; mu &amp; \text{/mju:/} &amp; \Omega &amp; \omega &amp; omega 
 \phi &amp;  \Phi &amp;  \varphi &amp;  \text{\varphi} \\
 \hline
 \end{array}</div>
-<h3 id="ru-he-shu-ru-qi-ta-te-shu-zi-fu">12．如何输入其它特殊字符</h3>
+<h3 id="12ru-he-shu-ru-qi-ta-te-shu-zi-fu">12．如何输入其它特殊字符</h3>
 <p>若需要显示更大或更小的字符，在符号前插入 <code>\large</code> 或 <code>\small</code> 命令。</p>
 <p>若找不到需要的符号，使用 <a href="http://detexify.kirelabs.org/classify.html">Detexify</a> 来画出想要的符号。</p>
 <ul>
@@ -375,7 +375,7 @@ $$</div>
 \text{\mapsto} &amp; \mapsto  &amp; \text{ } &amp; \text{ } \\  
 \hline
 \end{array}</div>
-<h3 id="ru-he-jin-xing-zi-ti-zhuan-huan">13．如何进行字体转换</h3>
+<h3 id="13ru-he-jin-xing-zi-ti-zhuan-huan">13．如何进行字体转换</h3>
 <p>若要对公式的某一部分字符进行字体转换，可以用 <code>{\字体 {需转换的部分字符}}</code> 命令，其中 <code>\字体</code> 部分可以参照下表选择合适的字体。一般情况下，公式默认为意大利体  。</p>
 <p>示例中 <strong>全部大写</strong> 的字体仅大写可用。</p>
 <div class="math">\begin{array}{l|c|l|c}
@@ -391,11 +391,11 @@ $$</div>
 \hline
 \end{array}</div>
 <p>转换字体十分常用，例如在积分中：</p>
-<div class="highlight"><pre><span></span>\begin{array}{c | c}
-\mathrm{Bad} &amp; \mathrm{Better} \\
-\hline \\
-\int_0^1 x^2 dx &amp; \int_0^1 x^2 \,{\rm d}x
-\end{array}
+<div class="highlight"><pre><span></span><span class="err">\begin{array}{c | c}</span>
+<span class="err">\mathrm{Bad} &amp; \mathrm{Better} \\</span>
+<span class="err">\hline \\</span>
+<span class="err">\int_0^1 x^2 dx &amp; \int_0^1 x^2 \,{\rm d}x</span>
+<span class="err">\end{array}</span>
 </pre></div>
 <div class="math">$$
 \begin{array}{c | c}
@@ -406,22 +406,22 @@ $$</div>
 $$</div>
 <p>注意比较两个式子间 <code>dx</code> 的不同。 
 使用 <code>\operatorname</code> 命令也可以达到相同的效果，详见 [定义新的符号 <code>\operatorname</code>] 。</p>
-<h3 id="da-gua-hao-he-xing-biao-de-shi-yong">14．大括号和行标的使用</h3>
+<h3 id="14da-gua-hao-he-xing-biao-de-shi-yong">14．大括号和行标的使用</h3>
 <p>使用 <code>\left</code> 和 <code>\right</code> 来创建自动匹配高度的 (圆括号)，[方括号] 和 {花括号} 。 
 在每个公式末尾前使用 <code>\tag{行标}</code> 来实现行标。</p>
-<div class="highlight"><pre><span></span>f\left(
-   \left[ 
-     \frac{
-       1+\left\{x,y\right\}
-     }{
-       \left(
-          \frac{x}{y}+\frac{y}{x}
-       \right)
-       \left(u+1\right)
-     }+a
-   \right]^{3/2}
-\right)
-\tag{行标}
+<div class="highlight"><pre><span></span><span class="err">f\left(</span>
+<span class="err">   \left[ </span>
+<span class="err">     \frac{</span>
+<span class="err">       1+\left\{x,y\right\}</span>
+<span class="err">     }{</span>
+<span class="err">       \left(</span>
+<span class="err">          \frac{x}{y}+\frac{y}{x}</span>
+<span class="err">       \right)</span>
+<span class="err">       \left(u+1\right)</span>
+<span class="err">     }+a</span>
+<span class="err">   \right]^{3/2}</span>
+<span class="err">\right)</span>
+<span class="err">\tag{行标}</span>
 </pre></div>
 <div class="math">$$
 f\left(
@@ -439,10 +439,10 @@ f\left(
 \tag{行标}
 $$</div>
 <p>如果你需要在不同的行显示对应括号，可以在每一行对应处使用 <code>\left.</code> 或 <code>\right.</code> 来放一个"影子"括号：</p>
-<div class="highlight"><pre><span></span>\begin{aligned}
-a=&amp;\left(1+2+3+  \cdots \right. \\
-&amp; \cdots+ \left. \infty-2+\infty-1+\infty\right)
-\end{aligned}
+<div class="highlight"><pre><span></span><span class="err">\begin{aligned}</span>
+<span class="err">a=&amp;\left(1+2+3+  \cdots \right. \\</span>
+<span class="err">&amp; \cdots+ \left. \infty-2+\infty-1+\infty\right)</span>
+<span class="err">\end{aligned}</span>
 </pre></div>
 <div class="math">$$
 \begin{aligned}
@@ -451,13 +451,13 @@ a=&amp;\left(1+2+3+  \cdots \right. \\
 \end{aligned}
 $$</div>
 <p>如果你需要将行内显示的分隔符也变大，可以使用 <code>\middle</code> 命令：</p>
-<div class="highlight"><pre><span></span>\left\langle  
-  q
-\middle\|
-  \frac{\frac{x}{y}}{\frac{u}{v}}
-\middle| 
-   p 
-\right\rangle
+<div class="highlight"><pre><span></span><span class="err">\left\langle  </span>
+<span class="err">  q</span>
+<span class="err">\middle\|</span>
+<span class="err">  \frac{\frac{x}{y}}{\frac{u}{v}}</span>
+<span class="err">\middle| </span>
+<span class="err">   p </span>
+<span class="err">\right\rangle</span>
 </pre></div>
 <div class="math">$$
 \left\langle  
@@ -468,26 +468,26 @@ $$</div>
    p 
 \right\rangle
 $$</div>
-<h3 id="qi-ta-ming-ling">15．其它命令</h3>
+<h3 id="15qi-ta-ming-ling">15．其它命令</h3>
 <ul>
 <li>(1)．定义新的符号 <code>\operatorname</code></li>
 </ul>
 <p>查询 <a href="http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference/15077#15077">关于此命令的定义</a> 和 <a href="http://meta.math.stackexchange.com/search?q=operatorname">关于此命令的讨论</a> 来进一步了解此命令。</p>
-<div class="highlight"><pre><span></span>\operatorname{Symbol} A 
+<div class="highlight"><pre><span></span><span class="err">\operatorname{Symbol} A </span>
 </pre></div>
 <div class="math">$$ \operatorname{Symbol} A $$</div>
 <ul>
 <li>(2)．添加注释文字 <code>\text</code></li>
 </ul>
 <p>在 <code>\text {文字}</code> 中仍可以使用 <code>$公式$</code> 插入其它公式。</p>
-<div class="highlight"><pre><span></span>f(n)= \begin{cases} n/2, &amp; \text {if $n$ is even} \\ 3n+1, &amp; \text{if $n$ is odd} \end{cases} 
+<div class="highlight"><pre><span></span><span class="err">f(n)= \begin{cases} n/2, &amp; \text {if $n$ is even} \\ 3n+1, &amp; \text{if $n$ is odd} \end{cases} </span>
 </pre></div>
 <div class="math">$$ f(n)= \begin{cases} n/2, &amp; \text {if $n$ is even} \\ 3n+1, &amp; \text{if $n$ is odd} \end{cases} $$</div>
 <ul>
 <li>(3)．在字符间加入空格</li>
 </ul>
 <p>有四种宽度的空格可以使用： <code>\,</code>、<code>\;</code>、<code>\quad</code> 和 <code>\qquad</code> 。</p>
-<div class="highlight"><pre><span></span>a \, b \mid a \; b \mid a \quad b \mid a \qquad b 
+<div class="highlight"><pre><span></span><span class="err">a \, b \mid a \; b \mid a \quad b \mid a \qquad b </span>
 </pre></div>
 <div class="math">$$ a \, b \mid a \; b \mid a \quad b \mid a \qquad b $$</div>
 <p>当然，使用 <code>\text {n个空格}</code> 也可以达到同样效果</p>
@@ -499,24 +499,24 @@ $$</div>
 <p>对于较旧的浏览器（HTML4与CSS2），支持的颜色较少;
 对于较新的浏览器（HTML5与CSS3），额外的124种颜色将被支持
 输入 <code>\color {#rgb} {text}</code> 来自定义更多的颜色，其中 <code>#rgb</code> 的 <code>r g b</code> 可输入 <code>0-9</code> 和 <code>a-f</code> 来表示红色、绿色和蓝色的纯度（饱和度）。</p>
-<div class="highlight"><pre><span></span>\begin{array}{|rrrrrrrr|}
-\hline
-\verb+#000+ &amp; \color{#000}{text} &amp; \verb+#005+ &amp; \color{#005}{text} &amp; \verb+#00A+ &amp; \color{#00A}{text} &amp; \verb+#00F+ &amp; \color{#00F}{text}  \\
-\verb+#500+ &amp; \color{#500}{text} &amp; \verb+#505+ &amp; \color{#505}{text} &amp; \verb+#50A+ &amp; \color{#50A}{text} &amp; \verb+#50F+ &amp; \color{#50F}{text}  \\
-\verb+#A00+ &amp; \color{#A00}{text} &amp; \verb+#A05+ &amp; \color{#A05}{text} &amp; \verb+#A0A+ &amp; \color{#A0A}{text} &amp; \verb+#A0F+ &amp; \color{#A0F}{text}  \\
-\verb+#F00+ &amp; \color{#F00}{text} &amp; \verb+#F05+ &amp; \color{#F05}{text} &amp; \verb+#F0A+ &amp; \color{#F0A}{text} &amp; \verb+#F0F+ &amp; \color{#F0F}{text}  \\
-\hline
-\verb+#080+ &amp; \color{#080}{text} &amp; \verb+#085+ &amp; \color{#085}{text} &amp; \verb+#08A+ &amp; \color{#08A}{text} &amp; \verb+#08F+ &amp; \color{#08F}{text}  \\
-\verb+#580+ &amp; \color{#580}{text} &amp; \verb+#585+ &amp; \color{#585}{text} &amp; \verb+#58A+ &amp; \color{#58A}{text} &amp; \verb+#58F+ &amp; \color{#58F}{text}  \\
-\verb+#A80+ &amp; \color{#A80}{text} &amp; \verb+#A85+ &amp; \color{#A85}{text} &amp; \verb+#A8A+ &amp; \color{#A8A}{text} &amp; \verb+#A8F+ &amp; \color{#A8F}{text}  \\
-\verb+#F80+ &amp; \color{#F80}{text} &amp; \verb+#F85+ &amp; \color{#F85}{text} &amp; \verb+#F8A+ &amp; \color{#F8A}{text} &amp; \verb+#F8F+ &amp; \color{#F8F}{text}  \\
-\hline
-\verb+#0F0+ &amp; \color{#0F0}{text} &amp; \verb+#0F5+ &amp; \color{#0F5}{text} &amp; \verb+#0FA+ &amp; \color{#0FA}{text} &amp; \verb+#0FF+ &amp; \color{#0FF}{text}  \\
-\verb+#5F0+ &amp; \color{#5F0}{text} &amp; \verb+#5F5+ &amp; \color{#5F5}{text} &amp; \verb+#5FA+ &amp; \color{#5FA}{text} &amp; \verb+#5FF+ &amp; \color{#5FF}{text}  \\
-\verb+#AF0+ &amp; \color{#AF0}{text} &amp; \verb+#AF5+ &amp; \color{#AF5}{text} &amp; \verb+#AFA+ &amp; \color{#AFA}{text} &amp; \verb+#AFF+ &amp; \color{#AFF}{text}  \\
-\verb+#FF0+ &amp; \color{#FF0}{text} &amp; \verb+#FF5+ &amp; \color{#FF5}{text} &amp; \verb+#FFA+ &amp; \color{#FFA}{text} &amp; \verb+#FFF+ &amp; \color{#FFF}{text}  \\
-\hline
-\end{array}
+<div class="highlight"><pre><span></span><span class="err">\begin{array}{|rrrrrrrr|}</span>
+<span class="err">\hline</span>
+<span class="err">\verb+#000+ &amp; \color{#000}{text} &amp; \verb+#005+ &amp; \color{#005}{text} &amp; \verb+#00A+ &amp; \color{#00A}{text} &amp; \verb+#00F+ &amp; \color{#00F}{text}  \\</span>
+<span class="err">\verb+#500+ &amp; \color{#500}{text} &amp; \verb+#505+ &amp; \color{#505}{text} &amp; \verb+#50A+ &amp; \color{#50A}{text} &amp; \verb+#50F+ &amp; \color{#50F}{text}  \\</span>
+<span class="err">\verb+#A00+ &amp; \color{#A00}{text} &amp; \verb+#A05+ &amp; \color{#A05}{text} &amp; \verb+#A0A+ &amp; \color{#A0A}{text} &amp; \verb+#A0F+ &amp; \color{#A0F}{text}  \\</span>
+<span class="err">\verb+#F00+ &amp; \color{#F00}{text} &amp; \verb+#F05+ &amp; \color{#F05}{text} &amp; \verb+#F0A+ &amp; \color{#F0A}{text} &amp; \verb+#F0F+ &amp; \color{#F0F}{text}  \\</span>
+<span class="err">\hline</span>
+<span class="err">\verb+#080+ &amp; \color{#080}{text} &amp; \verb+#085+ &amp; \color{#085}{text} &amp; \verb+#08A+ &amp; \color{#08A}{text} &amp; \verb+#08F+ &amp; \color{#08F}{text}  \\</span>
+<span class="err">\verb+#580+ &amp; \color{#580}{text} &amp; \verb+#585+ &amp; \color{#585}{text} &amp; \verb+#58A+ &amp; \color{#58A}{text} &amp; \verb+#58F+ &amp; \color{#58F}{text}  \\</span>
+<span class="err">\verb+#A80+ &amp; \color{#A80}{text} &amp; \verb+#A85+ &amp; \color{#A85}{text} &amp; \verb+#A8A+ &amp; \color{#A8A}{text} &amp; \verb+#A8F+ &amp; \color{#A8F}{text}  \\</span>
+<span class="err">\verb+#F80+ &amp; \color{#F80}{text} &amp; \verb+#F85+ &amp; \color{#F85}{text} &amp; \verb+#F8A+ &amp; \color{#F8A}{text} &amp; \verb+#F8F+ &amp; \color{#F8F}{text}  \\</span>
+<span class="err">\hline</span>
+<span class="err">\verb+#0F0+ &amp; \color{#0F0}{text} &amp; \verb+#0F5+ &amp; \color{#0F5}{text} &amp; \verb+#0FA+ &amp; \color{#0FA}{text} &amp; \verb+#0FF+ &amp; \color{#0FF}{text}  \\</span>
+<span class="err">\verb+#5F0+ &amp; \color{#5F0}{text} &amp; \verb+#5F5+ &amp; \color{#5F5}{text} &amp; \verb+#5FA+ &amp; \color{#5FA}{text} &amp; \verb+#5FF+ &amp; \color{#5FF}{text}  \\</span>
+<span class="err">\verb+#AF0+ &amp; \color{#AF0}{text} &amp; \verb+#AF5+ &amp; \color{#AF5}{text} &amp; \verb+#AFA+ &amp; \color{#AFA}{text} &amp; \verb+#AFF+ &amp; \color{#AFF}{text}  \\</span>
+<span class="err">\verb+#FF0+ &amp; \color{#FF0}{text} &amp; \verb+#FF5+ &amp; \color{#FF5}{text} &amp; \verb+#FFA+ &amp; \color{#FFA}{text} &amp; \verb+#FFF+ &amp; \color{#FFF}{text}  \\</span>
+<span class="err">\hline</span>
+<span class="err">\end{array}</span>
 </pre></div>
 <div class="math">$$
 \begin{array}{|rrrrrrrr|}
@@ -544,14 +544,14 @@ $$</div>
 <p>使用删除线功能必须声明 <code>$$</code> 符号。</p>
 <p>在公式内使用 <code>\require{cancel}</code> 来允许 <em>片段删除线</em> 的显示。 
 声明片段删除线后，使用 <code>\cancel{字符}</code>、<code>\bcancel{字符}</code>、<code>\xcancel{字符}</code> 和 <code>\cancelto{字符}</code> 来实现各种片段删除线效果。</p>
-<div class="highlight"><pre><span></span>\require{cancel}\begin{array}{rl}
-\verb|y+\cancel{x}| &amp; y+\cancel{x}\\
-\verb|\cancel{y+x}| &amp; \cancel{y+x}\\
-\verb|y+\bcancel{x}| &amp; y+\bcancel{x}\\
-\verb|y+\xcancel{x}| &amp; y+\xcancel{x}\\
-\verb|y+\cancelto{0}{x}| &amp; y+\cancelto{0}{x}\\
-\verb+\frac{1\cancel9}{\cancel95} = \frac15+&amp; \frac{1\cancel9}{\cancel95} = \frac15 \\
-\end{array}
+<div class="highlight"><pre><span></span><span class="err">\require{cancel}\begin{array}{rl}</span>
+<span class="err">\verb|y+\cancel{x}| &amp; y+\cancel{x}\\</span>
+<span class="err">\verb|\cancel{y+x}| &amp; \cancel{y+x}\\</span>
+<span class="err">\verb|y+\bcancel{x}| &amp; y+\bcancel{x}\\</span>
+<span class="err">\verb|y+\xcancel{x}| &amp; y+\xcancel{x}\\</span>
+<span class="err">\verb|y+\cancelto{0}{x}| &amp; y+\cancelto{0}{x}\\</span>
+<span class="err">\verb+\frac{1\cancel9}{\cancel95} = \frac15+&amp; \frac{1\cancel9}{\cancel95} = \frac15 \\</span>
+<span class="err">\end{array}</span>
 </pre></div>
 <div class="math">$$
 \require{cancel}\begin{array}{rl}
@@ -566,13 +566,13 @@ $$</div>
 <p>使用 <code>\require{enclose}</code> 来允许 整段删除线 的显示。 
 声明整段删除线后，使用 <code>\enclose{删除线效果}{字符}</code> 来实现各种整段删除线效果。 
 其中，删除线效果有 <code>horizontalstrike</code>、<code>verticalstrike</code>、<code>updiagonalstrike</code> 和 <code>downdiagonalstrike</code>，可叠加使用。</p>
-<div class="highlight"><pre><span></span>\require{enclose}\begin{array}{rl}
-\verb|\enclose{horizontalstrike}{x+y}| &amp; \enclose{horizontalstrike}{x+y}\\
-\verb|\enclose{verticalstrike}{\frac xy}| &amp; \enclose{verticalstrike}{\frac xy}\\
-\verb|\enclose{updiagonalstrike}{x+y}| &amp; \enclose{updiagonalstrike}{x+y}\\
-\verb|\enclose{downdiagonalstrike}{x+y}| &amp; \enclose{downdiagonalstrike}{x+y}\\
-\verb|\enclose{horizontalstrike,updiagonalstrike}{x+y}| &amp; \enclose{horizontalstrike,updiagonalstrike}{x+y}\\
-\end{array}
+<div class="highlight"><pre><span></span><span class="err">\require{enclose}\begin{array}{rl}</span>
+<span class="err">\verb|\enclose{horizontalstrike}{x+y}| &amp; \enclose{horizontalstrike}{x+y}\\</span>
+<span class="err">\verb|\enclose{verticalstrike}{\frac xy}| &amp; \enclose{verticalstrike}{\frac xy}\\</span>
+<span class="err">\verb|\enclose{updiagonalstrike}{x+y}| &amp; \enclose{updiagonalstrike}{x+y}\\</span>
+<span class="err">\verb|\enclose{downdiagonalstrike}{x+y}| &amp; \enclose{downdiagonalstrike}{x+y}\\</span>
+<span class="err">\verb|\enclose{horizontalstrike,updiagonalstrike}{x+y}| &amp; \enclose{horizontalstrike,updiagonalstrike}{x+y}\\</span>
+<span class="err">\end{array}</span>
 </pre></div>
 <div class="math">$$
 \require{enclose}\begin{array}{rl}
@@ -584,15 +584,15 @@ $$</div>
 \end{array}
 $$</div>
 <p>此外，<code>\enclose</code> 命令还可以产生包围的边框和圆等，参见 <a href="https://developer.mozilla.org/en-US/docs/Web/MathML/Element/menclose">MathML Menclose Documentation</a> 以查看更多效果。</p>
-<h2 id="er--ju-zhen-shi-yong-can-kao_1">二、矩阵使用参考</h2>
-<h3 id="ru-he-shu-ru-wu-kuang-ju-zhen">1．如何输入无框矩阵</h3>
+<h2 id="er-ju-zhen-shi-yong-can-kao_1">二、矩阵使用参考</h2>
+<h3 id="1ru-he-shu-ru-wu-kuang-ju-zhen">1．如何输入无框矩阵</h3>
 <p>在开头使用 <code>begin{matrix}</code>，在结尾使用 <code>end{matrix}</code>，在中间插入矩阵元素，每个元素之间插入 <code>&amp;</code> ，并在每行结尾处使用 \ 。 
 使用矩阵时必须声明 <code>$</code> 或 <code>$$</code> 符号。</p>
-<div class="highlight"><pre><span></span>        \begin{matrix}
-        1 &amp; x &amp; x^2 \\
-        1 &amp; y &amp; y^2 \\
-        1 &amp; z &amp; z^2 \\
-        \end{matrix}
+<div class="highlight"><pre><span></span><span class="err">        \begin{matrix}</span>
+<span class="err">        1 &amp; x &amp; x^2 \\</span>
+<span class="err">        1 &amp; y &amp; y^2 \\</span>
+<span class="err">        1 &amp; z &amp; z^2 \\</span>
+<span class="err">        \end{matrix}</span>
 </pre></div>
 <div class="math">$$
         \begin{matrix}
@@ -601,7 +601,7 @@ $$</div>
         1 &amp; z &amp; z^2 \\
         \end{matrix}
 $$</div>
-<h3 id="ru-he-shu-ru-dai-bian-kuang-de-ju-zhen">2．如何输入带边框的矩阵</h3>
+<h3 id="2ru-he-shu-ru-dai-bian-kuang-de-ju-zhen">2．如何输入带边框的矩阵</h3>
 <p>在开头将 <code>matrix</code> 替换为 <code>pmatrix bmatrix Bmatrix vmatrix Vmatrix</code> 。</p>
 <ul>
 <li>
@@ -630,14 +630,14 @@ $$</div>
 </p>
 </li>
 </ul>
-<h3 id="ru-he-shu-ru-dai-sheng-lue-fu-hao-de-ju-zhen">3．如何输入带省略符号的矩阵</h3>
+<h3 id="3ru-he-shu-ru-dai-sheng-lue-fu-hao-de-ju-zhen">3．如何输入带省略符号的矩阵</h3>
 <p>使用 <code>\cdots</code>  , <code>\ddots</code>  , <code>\vdots</code>  来输入省略符号。</p>
-<div class="highlight"><pre><span></span>        \begin{pmatrix}
-        1 &amp; a_1 &amp; a_1^2 &amp; \cdots &amp; a_1^n \\
-        1 &amp; a_2 &amp; a_2^2 &amp; \cdots &amp; a_2^n \\
-        \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
-        1 &amp; a_m &amp; a_m^2 &amp; \cdots &amp; a_m^n \\
-        \end{pmatrix}
+<div class="highlight"><pre><span></span><span class="err">        \begin{pmatrix}</span>
+<span class="err">        1 &amp; a_1 &amp; a_1^2 &amp; \cdots &amp; a_1^n \\</span>
+<span class="err">        1 &amp; a_2 &amp; a_2^2 &amp; \cdots &amp; a_2^n \\</span>
+<span class="err">        \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\</span>
+<span class="err">        1 &amp; a_m &amp; a_m^2 &amp; \cdots &amp; a_m^n \\</span>
+<span class="err">        \end{pmatrix}</span>
 </pre></div>
 <div class="math">$$
         \begin{pmatrix}
@@ -647,13 +647,13 @@ $$</div>
         1 &amp; a_m &amp; a_m^2 &amp; \cdots &amp; a_m^n \\
         \end{pmatrix}
 $$</div>
-<h3 id="ru-he-shu-ru-dai-fen-ge-fu-hao-de-ju-zhen">4．如何输入带分割符号的矩阵</h3>
-<div class="highlight"><pre><span></span>        \left[
-            \begin{array}{cc|c}
-              1&amp;2&amp;3\\
-              4&amp;5&amp;6
-            \end{array}
-        \right]
+<h3 id="4ru-he-shu-ru-dai-fen-ge-fu-hao-de-ju-zhen">4．如何输入带分割符号的矩阵</h3>
+<div class="highlight"><pre><span></span><span class="err">        \left[</span>
+<span class="err">            \begin{array}{cc|c}</span>
+<span class="err">              1&amp;2&amp;3\\</span>
+<span class="err">              4&amp;5&amp;6</span>
+<span class="err">            \end{array}</span>
+<span class="err">        \right]</span>
 </pre></div>
 <p>其中 <code>cc|c</code> 代表在一个三列矩阵中的第二和第三列之间插入分割线。</p>
 <div class="math">$$
@@ -664,24 +664,24 @@ $$</div>
     \end{array}
 \right]
 $$</div>
-<h3 id="ru-he-shu-ru-xing-zhong-ju-zhen">5．如何输入行中矩阵</h3>
+<h3 id="5ru-he-shu-ru-xing-zhong-ju-zhen">5．如何输入行中矩阵</h3>
 <p>若想在一行内显示矩阵，使用<code>\bigl(\begin{smallmatrix} ... \end{smallmatrix}\bigr)</code>。</p>
-<div class="highlight"><pre><span></span>这是一个行中矩阵的示例 $\bigl( \begin{smallmatrix} a &amp; b \\ c &amp; d \end{smallmatrix} \bigr)$ 。
+<div class="highlight"><pre><span></span><span class="err">这是一个行中矩阵的示例 $\bigl( \begin{smallmatrix} a &amp; b \\ c &amp; d \end{smallmatrix} \bigr)$ 。</span>
 </pre></div>
 <p>这是一个行中矩阵的示例 </p>
 <div class="math">$$\bigl(\begin{smallmatrix} a &amp; b \\ c &amp; d \end{smallmatrix}\bigr)$$</div>
-<h2 id="san--fang-cheng-shi-xu-lie-shi-yong-can-kao_1">三、方程式序列使用参考</h2>
-<h3 id="ru-he-shu-ru-yi-ge-fang-cheng-shi-xu-lie">1．如何输入一个方程式序列</h3>
+<h2 id="san-fang-cheng-shi-xu-lie-shi-yong-can-kao_1">三、方程式序列使用参考</h2>
+<h3 id="1ru-he-shu-ru-yi-ge-fang-cheng-shi-xu-lie">1．如何输入一个方程式序列</h3>
 <p>人们经常想要一列整齐且居中的方程式序列。使用 <code>\begin{align}&hellip;\end{align}</code> 来创造一列方程式，其中在每行结尾处使用 <code>\\</code> 。 
 使用方程式序列无需声明公式符号 <code>$</code> 或 <code>$$</code> 。</p>
 <p>请注意 <code>{align}</code> 语句是 <strong>自动编号</strong> 的。</p>
-<div class="highlight"><pre><span></span>\begin{align}
-\sqrt{37} &amp; = \sqrt{\frac{73^2-1}{12^2}}  \\
- &amp; = \sqrt{\frac{73^2}{12^2}\cdot\frac{73^2-1}{73^2}}  \\ 
- &amp; = \sqrt{\frac{73^2}{12^2}}\sqrt{\frac{73^2-1}{73^2}}  \\
- &amp; = \frac{73}{12}\sqrt{1 - \frac{1}{73^2}}  \\ 
- &amp; \approx \frac{73}{12}\left(1 - \frac{1}{2\cdot73^2}\right)
-\end{align}
+<div class="highlight"><pre><span></span><span class="err">\begin{align}</span>
+<span class="err">\sqrt{37} &amp; = \sqrt{\frac{73^2-1}{12^2}}  \\</span>
+<span class="err"> &amp; = \sqrt{\frac{73^2}{12^2}\cdot\frac{73^2-1}{73^2}}  \\ </span>
+<span class="err"> &amp; = \sqrt{\frac{73^2}{12^2}}\sqrt{\frac{73^2-1}{73^2}}  \\</span>
+<span class="err"> &amp; = \frac{73}{12}\sqrt{1 - \frac{1}{73^2}}  \\ </span>
+<span class="err"> &amp; \approx \frac{73}{12}\left(1 - \frac{1}{2\cdot73^2}\right)</span>
+<span class="err">\end{align}</span>
 </pre></div>
 <div class="math">\begin{align}
 \sqrt{37} &amp; = \sqrt{\frac{73^2-1}{12^2}} \tag{1} \\
@@ -693,13 +693,13 @@ $$</div>
 <blockquote>
 <p><em>Note: 本blog不能自动编号, 示例效果采用手动编号</em></p>
 </blockquote>
-<h3 id="zai-yi-ge-fang-cheng-shi-xu-lie-de-mei-yi-xing-zhong-zhu-ming-yuan-yin">2．在一个方程式序列的每一行中注明原因</h3>
+<h3 id="2zai-yi-ge-fang-cheng-shi-xu-lie-de-mei-yi-xing-zhong-zhu-ming-yuan-yin">2．在一个方程式序列的每一行中注明原因</h3>
 <p>在 <code>{align}</code> 中灵活组合 <code>\text</code> 和 <code>\tag</code> 语句。<code>\tag</code> 语句编号优先级高于自动编号。</p>
-<div class="highlight"><pre><span></span>\begin{align}
-   v + w &amp; = 0  &amp;\text{Given} \tag 1\\
-   -w &amp; = -w + 0 &amp; \text{additive identity} \tag 2\\
-   -w + 0 &amp; = -w + (v + w) &amp; \text{equations $(1)$ and $(2)$}
-\end{align}
+<div class="highlight"><pre><span></span><span class="err">\begin{align}</span>
+<span class="err">   v + w &amp; = 0  &amp;\text{Given} \tag 1\\</span>
+<span class="err">   -w &amp; = -w + 0 &amp; \text{additive identity} \tag 2\\</span>
+<span class="err">   -w + 0 &amp; = -w + (v + w) &amp; \text{equations $(1)$ and $(2)$}</span>
+<span class="err">\end{align}</span>
 </pre></div>
 <div class="math">$$
 \begin{align}
@@ -709,15 +709,15 @@ $$</div>
 \end{align}
 $$</div>
 <p>本例中第一、第二行的自动编号被 <code>\tag</code> 语句覆盖，第三行的编号为自动编号。</p>
-<h2 id="si--tiao-jian-biao-da-shi-shi-yong-can-kao_1">四、条件表达式使用参考</h2>
-<h3 id="ru-he-shu-ru-yi-ge-tiao-jian-biao-da-shi">1．如何输入一个条件表达式</h3>
+<h2 id="si-tiao-jian-biao-da-shi-shi-yong-can-kao_1">四、条件表达式使用参考</h2>
+<h3 id="1ru-he-shu-ru-yi-ge-tiao-jian-biao-da-shi">1．如何输入一个条件表达式</h3>
 <p>使用 <code>begin{cases}</code> 来创造一组条件表达式，在每一行条件中插入 <code>&amp;</code> 来指定需要对齐的内容，并在每一行结尾处使用 <code>\\</code>，以 <code>end{cases}</code> 结束。 
 条件表达式无需声明 <code>$</code> 或 <code>$$</code> 符号。</p>
-<div class="highlight"><pre><span></span>        f(n) =
-        \begin{cases}
-        n/2,  &amp; \text{if $n$ is even} \\
-        3n+1, &amp; \text{if $n$ is odd}
-        \end{cases}
+<div class="highlight"><pre><span></span><span class="err">        f(n) =</span>
+<span class="err">        \begin{cases}</span>
+<span class="err">        n/2,  &amp; \text{if $n$ is even} \\</span>
+<span class="err">        3n+1, &amp; \text{if $n$ is odd}</span>
+<span class="err">        \end{cases}</span>
 </pre></div>
 <div class="math">$$
         f(n) =
@@ -726,15 +726,15 @@ $$</div>
         3n+1, &amp; \text{if $n$ is odd}
         \end{cases}
 $$</div>
-<h3 id="ru-he-shu-ru-yi-ge-zuo-ce-dui-qi-de-tiao-jian-biao-da-shi">2．如何输入一个左侧对齐的条件表达式</h3>
+<h3 id="2ru-he-shu-ru-yi-ge-zuo-ce-dui-qi-de-tiao-jian-biao-da-shi">2．如何输入一个左侧对齐的条件表达式</h3>
 <p>若想让文字在 左侧对齐显示 ，则有如下方式：</p>
-<div class="highlight"><pre><span></span>        \left.
-        \begin{array}{l}
-        \text{if $n$ is even:}&amp;n/2\\
-        \text{if $n$ is odd:}&amp;3n+1
-        \end{array}
-        \right\}
-        =f(n)
+<div class="highlight"><pre><span></span><span class="err">        \left.</span>
+<span class="err">        \begin{array}{l}</span>
+<span class="err">        \text{if $n$ is even:}&amp;n/2\\</span>
+<span class="err">        \text{if $n$ is odd:}&amp;3n+1</span>
+<span class="err">        \end{array}</span>
+<span class="err">        \right\}</span>
+<span class="err">        =f(n)</span>
 </pre></div>
 <div class="math">$$
         \left.
@@ -745,16 +745,16 @@ $$</div>
         \right\}
         =f(n)
 $$</div>
-<h3 id="ru-he-shi-tiao-jian-biao-da-shi-gua-pei-xing-gao">3．如何使条件表达式适配行高</h3>
+<h3 id="3ru-he-shi-tiao-jian-biao-da-shi-gua-pei-xing-gao">3．如何使条件表达式适配行高</h3>
 <p>在一些情况下，条件表达式中某些行的行高为非标准高度，此时使用 <code>\\[2ex]</code> 语句代替该行末尾的 <code>\\</code> 来让编辑器适配。</p>
 <ul>
 <li>不适配[2ex]</li>
 </ul>
-<div class="highlight"><pre><span></span>f(n) = 
-\begin{cases}
-\frac{n}{2},  &amp; \text{if $n$ is even} \\
-3n+1, &amp; \text{if $n$ is odd}
-\end{cases}
+<div class="highlight"><pre><span></span><span class="err">f(n) = </span>
+<span class="err">\begin{cases}</span>
+<span class="err">\frac{n}{2},  &amp; \text{if $n$ is even} \\</span>
+<span class="err">3n+1, &amp; \text{if $n$ is odd}</span>
+<span class="err">\end{cases}</span>
 </pre></div>
 <div class="math">$$
 f(n) = 
@@ -766,11 +766,11 @@ $$</div>
 <ul>
 <li>适配[2ex]</li>
 </ul>
-<div class="highlight"><pre><span></span>f(n) = 
-\begin{cases}
-\frac{n}{2},  &amp; \text{if $n$ is even} \\[2ex]
-3n+1, &amp; \text{if $n$ is odd}
-\end{cases}
+<div class="highlight"><pre><span></span><span class="err">f(n) = </span>
+<span class="err">\begin{cases}</span>
+<span class="err">\frac{n}{2},  &amp; \text{if $n$ is even} \\[2ex]</span>
+<span class="err">3n+1, &amp; \text{if $n$ is odd}</span>
+<span class="err">\end{cases}</span>
 </pre></div>
 <div class="math">$$
 f(n) = 
@@ -781,17 +781,17 @@ f(n) =
 $$</div>
 <p>一个 <code>[ex]</code> 指一个 "X-Height"，即<code>x</code>字母高度。可以根据情况指定多个 <code>[ex]</code>，如 <code>[3ex]</code>、<code>[4ex]</code> 等。 
 其实可以在任何地方使用 <code>\\[2ex]</code> 语句，只要你觉得合适。</p>
-<h2 id="wu--shu-zu-yu-biao-ge-shi-yong-can-kao_1">五、数组与表格使用参考</h2>
-<h3 id="ru-he-shu-ru-yi-ge-shu-zu-huo-biao-ge">1．如何输入一个数组或表格</h3>
+<h2 id="wu-shu-zu-yu-biao-ge-shi-yong-can-kao_1">五、数组与表格使用参考</h2>
+<h3 id="1ru-he-shu-ru-yi-ge-shu-zu-huo-biao-ge">1．如何输入一个数组或表格</h3>
 <p>通常，一个格式化后的表格比单纯的文字或排版后的文字更具有可读性。数组和表格均以 <code>begin{array}</code> 开头，并在其后定义列数及每一列的文本对齐属性，<code>c l r</code> 分别代表居中、左对齐及右对齐。若需要插入垂直分割线，在定义式中插入 <code>|</code> ，若要插入水平分割线，在下一行输入前插入 <code>\hline</code> 。与矩阵相似，每行元素间均须要插入 <code>&amp;</code> ，每行元素以 <code>\\</code> 结尾，最后以 <code>end{array}</code> 结束数组。 
 使用单个数组或表格时无需声明 <code>$</code> 或 <code>$$</code> 符号。</p>
-<div class="highlight"><pre><span></span>\begin{array}{c|lcr}
-n &amp; \text{左对齐} &amp; \text{居中对齐} &amp; \text{右对齐} \\
-\hline
-1 &amp; 0.24 &amp; 1 &amp; 125 \\
-2 &amp; -1 &amp; 189 &amp; -8 \\
-3 &amp; -20 &amp; 2000 &amp; 1+10i
-\end{array}
+<div class="highlight"><pre><span></span><span class="err">\begin{array}{c|lcr}</span>
+<span class="err">n &amp; \text{左对齐} &amp; \text{居中对齐} &amp; \text{右对齐} \\</span>
+<span class="err">\hline</span>
+<span class="err">1 &amp; 0.24 &amp; 1 &amp; 125 \\</span>
+<span class="err">2 &amp; -1 &amp; 189 &amp; -8 \\</span>
+<span class="err">3 &amp; -20 &amp; 2000 &amp; 1+10i</span>
+<span class="err">\end{array}</span>
 </pre></div>
 <div class="math">$$
 \begin{array}{c|lcr}
@@ -802,7 +802,7 @@ n &amp; \text{左对齐} &amp; \text{居中对齐} &amp; \text{右对齐} \\
 3 &amp; -20 &amp; 2000 &amp; 1+10i
 \end{array}
 $$</div>
-<h3 id="ru-he-shu-ru-yi-ge-qian-tao-de-shu-zu-huo-biao-ge">2．如何输入一个嵌套的数组或表格</h3>
+<h3 id="2ru-he-shu-ru-yi-ge-qian-tao-de-shu-zu-huo-biao-ge">2．如何输入一个嵌套的数组或表格</h3>
 <p>多个数组/表格可<strong>互相嵌套</strong> 并组成一组数组/一组表格。 
 使用嵌套前必须声明 <code>$$</code> 符号。</p>
 <div class="highlight"><pre><span></span><span class="c">% outer vertical array of arrays 外层垂直表格</span>
@@ -882,15 +882,15 @@ $$</div>
         % 内层第二行表格组结束
 \end{array}
 $$</div>
-<h3 id="ru-he-shu-ru-yi-ge-fang-cheng-zu">3．如何输入一个方程组</h3>
+<h3 id="3ru-he-shu-ru-yi-ge-fang-cheng-zu">3．如何输入一个方程组</h3>
 <p>使用 <code>\begin{array}&hellip;\end{array}</code> 和 <code>\left\{&hellip;\right.</code> 来创建一个方程组。</p>
-<div class="highlight"><pre><span></span>\left\{ 
-\begin{array}{c}
-a_1x+b_1y+c_1z=d_1 \\ 
-a_2x+b_2y+c_2z=d_2 \\ 
-a_3x+b_3y+c_3z=d_3
-\end{array}
-\right. 
+<div class="highlight"><pre><span></span><span class="err">\left\{ </span>
+<span class="err">\begin{array}{c}</span>
+<span class="err">a_1x+b_1y+c_1z=d_1 \\ </span>
+<span class="err">a_2x+b_2y+c_2z=d_2 \\ </span>
+<span class="err">a_3x+b_3y+c_3z=d_3</span>
+<span class="err">\end{array}</span>
+<span class="err">\right. </span>
 </pre></div>
 <div class="math">$$
 \left\{ 
@@ -902,11 +902,11 @@ a_3x+b_3y+c_3z=d_3
 \right. 
 $$</div>
 <p>或者使用条件表达式组 <code>\begin{cases}&hellip;\end{cases}</code> 来实现相同效果：</p>
-<div class="highlight"><pre><span></span>\begin{cases}
-a_1x+b_1y+c_1z=d_1 \\ 
-a_2x+b_2y+c_2z=d_2 \\ 
-a_3x+b_3y+c_3z=d_3
-\end{cases}
+<div class="highlight"><pre><span></span><span class="err">\begin{cases}</span>
+<span class="err">a_1x+b_1y+c_1z=d_1 \\ </span>
+<span class="err">a_2x+b_2y+c_2z=d_2 \\ </span>
+<span class="err">a_3x+b_3y+c_3z=d_3</span>
+<span class="err">\end{cases}</span>
 </pre></div>
 <div class="math">$$
 \begin{cases}
@@ -915,12 +915,12 @@ a_2x+b_2y+c_2z=d_2 \\
 a_3x+b_3y+c_3z=d_3
 \end{cases}
 $$</div>
-<h2 id="liu--lian-fen-shu-shi-yong-can-kao_1">六、连分数使用参考</h2>
-<h3 id="ru-he-shu-ru-yi-ge-lian-fen-shi">1．如何输入一个连分式</h3>
+<h2 id="liu-lian-fen-shu-shi-yong-can-kao_1">六、连分数使用参考</h2>
+<h3 id="1ru-he-shu-ru-yi-ge-lian-fen-shi">1．如何输入一个连分式</h3>
 <p>就像输入分式时使用 <code>\frac</code> 一样，使用 <code>\cfrac</code> 来创建一个连分数。</p>
-<div class="highlight"><pre><span></span>x = a_0 + \cfrac{1^2}{a_1
-          + \cfrac{2^2}{a_2
-          + \cfrac{3^2}{a_3 + \cfrac{4^4}{a_4 + \cdots}}}}
+<div class="highlight"><pre><span></span><span class="err">x = a_0 + \cfrac{1^2}{a_1</span>
+<span class="err">          + \cfrac{2^2}{a_2</span>
+<span class="err">          + \cfrac{3^2}{a_3 + \cfrac{4^4}{a_4 + \cdots}}}}</span>
 </pre></div>
 <div class="math">$$
 x = a_0 + \cfrac{1^2}{a_1
@@ -928,9 +928,9 @@ x = a_0 + \cfrac{1^2}{a_1
           + \cfrac{3^2}{a_3 + \cfrac{4^4}{a_4 + \cdots}}}}
 $$</div>
 <p>不要使用普通的 <code>\frac</code> 或 <code>\over</code> 来创建，否则会看起来 <strong>很恶心</strong> 。</p>
-<div class="highlight"><pre><span></span>x = a_0 + \frac{1^2}{a_1
-          + \frac{2^2}{a_2
-          + \frac{3^2}{a_3 + \frac{4^4}{a_4 + \cdots}}}}
+<div class="highlight"><pre><span></span><span class="err">x = a_0 + \frac{1^2}{a_1</span>
+<span class="err">          + \frac{2^2}{a_2</span>
+<span class="err">          + \frac{3^2}{a_3 + \frac{4^4}{a_4 + \cdots}}}}</span>
 </pre></div>
 <div class="math">$$
 x = a_0 + \frac{1^2}{a_1
@@ -938,9 +938,9 @@ x = a_0 + \frac{1^2}{a_1
           + \frac{3^2}{a_3 + \frac{4^4}{a_4 + \cdots}}}}
 $$</div>
 <p>当然，你可以使用 <code>\frac</code> 来表达连分数的 <strong>紧缩记法</strong> 。</p>
-<div class="highlight"><pre><span></span>x = a_0 + \frac{1^2}{a_1+}
-          \frac{2^2}{a_2+}
-          \frac{3^2}{a_3 +} \frac{4^4}{a_4 +} \cdots
+<div class="highlight"><pre><span></span><span class="err">x = a_0 + \frac{1^2}{a_1+}</span>
+<span class="err">          \frac{2^2}{a_2+}</span>
+<span class="err">          \frac{3^2}{a_3 +} \frac{4^4}{a_4 +} \cdots</span>
 </pre></div>
 <div class="math">$$
 x = a_0 + \frac{1^2}{a_1+}
@@ -948,16 +948,16 @@ x = a_0 + \frac{1^2}{a_1+}
           \frac{3^2}{a_3 +} \frac{4^4}{a_4 +} \cdots
 $$</div>
 <p>连分数通常都太大以至于不易排版，所以建议在连分数前后声明 <code>$$</code> 符号，或使用像 <code>[a0;a1,a2,a3,&hellip;]</code> 一样的紧缩记法。</p>
-<h2 id="qi--jiao-huan-tu-biao-shi-yong-can-kao_1">七、交换图表使用参考</h2>
-<h3 id="ru-he-shu-ru-yi-ge-jiao-huan-tu-biao">1．如何输入一个交换图表</h3>
+<h2 id="qi-jiao-huan-tu-biao-shi-yong-can-kao_1">七、交换图表使用参考</h2>
+<h3 id="1ru-he-shu-ru-yi-ge-jiao-huan-tu-biao">1．如何输入一个交换图表</h3>
 <p>使用一行 <code>\require{AMScd}</code> 语句来允许交换图表的显示。 
 声明交换图表后，语法与矩阵相似，在开头使用 <code>begin{CD}</code>，在结尾使用 <code>end{CD}</code>，在中间插入图表元素，每个元素之间插入 <code>&amp;</code> ，并在每行结尾处使用<code>\\</code> 。</p>
-<div class="highlight"><pre><span></span>\require{AMScd}
-\begin{CD}
-    A @&gt;a&gt;&gt; B\\
-    @V b V V\# @VV c V\\
-    C @&gt;&gt;d&gt; D
-\end{CD}
+<div class="highlight"><pre><span></span><span class="err">\require{AMScd}</span>
+<span class="err">\begin{CD}</span>
+<span class="err">    A @&gt;a&gt;&gt; B\\</span>
+<span class="err">    @V b V V\# @VV c V\\</span>
+<span class="err">    C @&gt;&gt;d&gt; D</span>
+<span class="err">\end{CD}</span>
 </pre></div>
 <div class="math">$$
 \require{AMScd}
@@ -969,11 +969,11 @@ $$</div>
 $$</div>
 <p>其中，<code>@&gt;&gt;&gt;</code> 代表右箭头、<code>@&lt;&lt;&lt;</code> 代表左箭头、<code>@VVV</code> 代表下箭头、<code>@AAA</code> 代表上箭头、<code>@=</code> 代表水平双实线、<code>@|</code> 代表竖直双实线、<code>@.</code>代表没有箭头。 
 在 <code>@&gt;&gt;&gt;</code> 的 <code>&gt;&gt;&gt;</code> 之间任意插入文字即代表该箭头的注释文字。</p>
-<div class="highlight"><pre><span></span>\begin{CD}
-    A @&gt;&gt;&gt; B @&gt;{\text{very long label}}&gt;&gt; C \\
-    @. @AAA @| \\
-    D @= E @&lt;&lt;&lt; F
-\end{CD}
+<div class="highlight"><pre><span></span><span class="err">\begin{CD}</span>
+<span class="err">    A @&gt;&gt;&gt; B @&gt;{\text{very long label}}&gt;&gt; C \\</span>
+<span class="err">    @. @AAA @| \\</span>
+<span class="err">    D @= E @&lt;&lt;&lt; F</span>
+<span class="err">\end{CD}</span>
 </pre></div>
 <div class="math">$$
 \begin{CD}
@@ -983,17 +983,17 @@ $$</div>
 \end{CD}
 $$</div>
 <p>在本例中， "very long label"自动延长了它所在箭头以及对应箭头的长度。</p>
-<h2 id="ba--yi-xie-te-shu-de-zhu-yi-shi-xiang_1">八、一些特殊的注意事项</h2>
+<h2 id="ba-yi-xie-te-shu-de-zhu-yi-shi-xiang_1">八、一些特殊的注意事项</h2>
 <p>有些小窍门会让数学公式显得更好看，强迫症和完美主义者会喜欢下面的内容。</p>
-<h3 id="-mou-xie-fen-shu-de-xian-shi-wen-ti">1. 某些分数的显示问题</h3>
+<h3 id="1-mou-xie-fen-shu-de-xian-shi-wen-ti">1. 某些分数的显示问题</h3>
 <p>在以<code>e</code>为底的指数函数、极限和积分中尽量不要使用 <code>\frac</code> 符号：它会使整段函数看起来很怪，而且可能产生歧义。也正是因此它在专业数学排版中几乎从不出现。 
 横着写这些分式，中间使用斜线间隔 <code>/</code> （用斜线代替分数线）。</p>
-<div class="highlight"><pre><span></span>\begin{array}{c|c}
-\mathrm{Bad} &amp; \mathrm{Better} \\
-\hline \\
-e^{i\frac{\pi}2} \quad e^{\frac{i\pi}2}&amp; e^{i\pi/2} \\
-\int_{-\frac\pi2}^\frac\pi2 \sin x\,dx &amp; \int_{-\pi/2}^{\pi/2}\sin x\,dx \\
-\end{array}
+<div class="highlight"><pre><span></span><span class="err">\begin{array}{c|c}</span>
+<span class="err">\mathrm{Bad} &amp; \mathrm{Better} \\</span>
+<span class="err">\hline \\</span>
+<span class="err">e^{i\frac{\pi}2} \quad e^{\frac{i\pi}2}&amp; e^{i\pi/2} \\</span>
+<span class="err">\int_{-\frac\pi2}^\frac\pi2 \sin x\,dx &amp; \int_{-\pi/2}^{\pi/2}\sin x\,dx \\</span>
+<span class="err">\end{array}</span>
 </pre></div>
 <div class="math">$$
 \begin{array}{c|c}
@@ -1003,13 +1003,13 @@ e^{i\frac{\pi}2} \quad e^{\frac{i\pi}2}&amp; e^{i\pi/2} \\
 \int_{-\frac\pi2}^\frac\pi2 \sin x\,dx &amp; \int_{-\pi/2}^{\pi/2}\sin x\,dx \\
 \end{array}
 $$</div>
-<h3 id="-liu-chu-he-li-de-jian-ge">2. 留出合理的间隔</h3>
+<h3 id="2-liu-chu-he-li-de-jian-ge">2. 留出合理的间隔</h3>
 <p><code>|</code> 符号在被当作分隔符时会产生过于狭窄的间隔，因此在需要分隔时最好使用 <code>\mid</code> 来代替它。</p>
-<div class="highlight"><pre><span></span>\begin{array}{c|c}
-\mathrm{Bad} &amp; \mathrm{Better} \\
-\hline \\
-\{x|x^2\in\Bbb Z\} &amp; \{x\mid x^2\in\Bbb Z\} \\
-\end{array}
+<div class="highlight"><pre><span></span><span class="err">\begin{array}{c|c}</span>
+<span class="err">\mathrm{Bad} &amp; \mathrm{Better} \\</span>
+<span class="err">\hline \\</span>
+<span class="err">\{x|x^2\in\Bbb Z\} &amp; \{x\mid x^2\in\Bbb Z\} \\</span>
+<span class="err">\end{array}</span>
 </pre></div>
 <div class="math">$$
 \begin{array}{c|c}
@@ -1018,14 +1018,14 @@ $$</div>
 \{x|x^2\in\Bbb Z\} &amp; \{x\mid x^2\in\Bbb Z\} \\
 \end{array}
 $$</div>
-<h3 id="-duo-zhong-ji-fen-fu-hao-de-xian-shi">3. 多重积分符号的显示</h3>
+<h3 id="3-duo-zhong-ji-fen-fu-hao-de-xian-shi">3. 多重积分符号的显示</h3>
 <p>使用多重积分符号时，不要多次使用 <code>\int</code> 来声明，直接使用 <code>\iint</code> 来表示 二重积分 ，使用 <code>\iiint</code> 来表示 三重积分 等。对于无限次积分，可以用 <code>\int \cdots \int</code> 表示。</p>
-<div class="highlight"><pre><span></span>\begin{array}{c|c}
-\mathrm{Bad} &amp; \mathrm{Better} \\
-\hline \\
-\int\int_S f(x)\,dy\,dx &amp; \iint_S f(x)\,dy\,dx \\
-\int\int\int_V f(x)\,dz\,dy\,dx &amp; \iiint_V f(x)\,dz\,dy\,dx
-\end{array}
+<div class="highlight"><pre><span></span><span class="err">\begin{array}{c|c}</span>
+<span class="err">\mathrm{Bad} &amp; \mathrm{Better} \\</span>
+<span class="err">\hline \\</span>
+<span class="err">\int\int_S f(x)\,dy\,dx &amp; \iint_S f(x)\,dy\,dx \\</span>
+<span class="err">\int\int\int_V f(x)\,dz\,dy\,dx &amp; \iiint_V f(x)\,dz\,dy\,dx</span>
+<span class="err">\end{array}</span>
 </pre></div>
 <div class="math">$$
 \begin{array}{c|c}
@@ -1035,13 +1035,13 @@ $$</div>
 \int\int\int_V f(x)\,dz\,dy\,dx &amp; \iiint_V f(x)\,dz\,dy\,dx
 \end{array}
 $$</div>
-<h3 id="-duo-ge-wei-fen-fu-hao-de-xian-shi">4. 多个微分符号的显示</h3>
+<h3 id="4-duo-ge-wei-fen-fu-hao-de-xian-shi">4. 多个微分符号的显示</h3>
 <p>在微分符号前加入 <code>\</code>, 来插入一个小的间隔空隙；没有 <code>\</code>, 符号的话， 将会把不同的微分符号堆在一起。</p>
-<div class="highlight"><pre><span></span>\begin{array}{c|c}
-\mathrm{Bad} &amp; \mathrm{Better} \\
-\hline \\
-\iiint_V f(x){\rm d}z {\rm d}y {\rm d}x &amp; \iiint_V f(x)\,{\rm d}z\,{\rm d}y\,{\rm d}x
-\end{array}
+<div class="highlight"><pre><span></span><span class="err">\begin{array}{c|c}</span>
+<span class="err">\mathrm{Bad} &amp; \mathrm{Better} \\</span>
+<span class="err">\hline \\</span>
+<span class="err">\iiint_V f(x){\rm d}z {\rm d}y {\rm d}x &amp; \iiint_V f(x)\,{\rm d}z\,{\rm d}y\,{\rm d}x</span>
+<span class="err">\end{array}</span>
 </pre></div>
 <div class="math">$$
 \begin{array}{c|c}
@@ -1065,7 +1065,7 @@ $$</div>
     var mathjaxscript = document.createElement('script');
     mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
     mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript.src = 'https://cdn.bootcdn.net/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
     mathjaxscript[(window.opera ? "innerHTML" : "text")] =
         "MathJax.Hub.Config({" +
         "    config: ['MMLorHTML.js']," +
@@ -1108,21 +1108,32 @@ $$</div>
 </script>
   </div><!-- /.entry-content -->
 
-  <div class="comments">
-    <!-- <h2>Comments !</h2> -->
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-      var disqus_shortname = 'freeopen';
-      var disqus_identifier = 'posts/mathjax-handbook';
-      var disqus_url = 'https://freeopen.github.io/posts/mathjax-handbook';
-      (function() {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//freeopen.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      })();
-    </script>
-    <noscript>Please enable JavaScript to view the comments.</noscript>
-  </div>
+  <!-- DISQUS 评论系统 -->
+
+  <!-- giteement评论系统 -->
+
+  <!-- Gitalk 评论 start  -->
+  <!-- Link Gitalk 的支持文件  -->
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+
+  <div id="gitalk-container"></div>
+      <script type="text/javascript">
+      var gitalk = new Gitalk({
+
+      // gitalk的主要参数
+          clientID: '8a8232de9043fc407bf4',
+          clientSecret: 'aab87cee1582588743573358e51f4a785ceb49a3',
+          repo: 'blog-discuss',
+          owner: 'freeopen',
+          admin: ['freeopen'],
+          id: 'posts/mathjax-handbook',
+      
+      });
+      gitalk.render('gitalk-container');
+  </script>
+  <!-- Gitalk end -->
+
 </section>
           </div>
 
@@ -1137,7 +1148,7 @@ $$</div>
       <div class="hidden-print hidden-xs hidden-sm hidden-md col-lg" id="post_toc" role="complementary">
         <nav class="sidebar-toc">
 <!-- <section id="main_toc"> -->
-    <ul class="nav" id="toc"><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#yi--gong-shi-shi-yong-can-kao" title="一、公式使用参考">一、公式使用参考</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#ru-he-cha-ru-gong-shi" title="1．如何插入公式">1．如何插入公式</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-shang-xia-biao" title="2．如何输入上下标">2．如何输入上下标</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-gua-hao-he-fen-ge-fu" title="3．如何输入括号和分隔符">3．如何输入括号和分隔符</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-fen-shu" title="4．如何输入分数">4．如何输入分数</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-kai-fang" title="5．如何输入开方">5．如何输入开方</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-sheng-lue-hao" title="6．如何输入省略号">6．如何输入省略号</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-shi-liang" title="7．如何输入矢量">7．如何输入矢量</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-ji-fen" title="8．如何输入积分">8．如何输入积分</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-ji-xian-yun-suan" title="9．如何输入极限运算">9．如何输入极限运算</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-lei-jia--lei-cheng-yun-suan" title="10．如何输入累加、累乘运算">10．如何输入累加、累乘运算</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-xi-la-zi-mu" title="11．如何输入希腊字母">11．如何输入希腊字母</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-qi-ta-te-shu-zi-fu" title="12．如何输入其它特殊字符">12．如何输入其它特殊字符</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-jin-xing-zi-ti-zhuan-huan" title="13．如何进行字体转换">13．如何进行字体转换</a></li><li class="nav-item"><a class="nav-link" href="#da-gua-hao-he-xing-biao-de-shi-yong" title="14．大括号和行标的使用">14．大括号和行标的使用</a></li><li class="nav-item"><a class="nav-link" href="#qi-ta-ming-ling" title="15．其它命令">15．其它命令</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#er--ju-zhen-shi-yong-can-kao_1" title="二、矩阵使用参考">二、矩阵使用参考</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-wu-kuang-ju-zhen" title="1．如何输入无框矩阵">1．如何输入无框矩阵</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-dai-bian-kuang-de-ju-zhen" title="2．如何输入带边框的矩阵">2．如何输入带边框的矩阵</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-dai-sheng-lue-fu-hao-de-ju-zhen" title="3．如何输入带省略符号的矩阵">3．如何输入带省略符号的矩阵</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-dai-fen-ge-fu-hao-de-ju-zhen" title="4．如何输入带分割符号的矩阵">4．如何输入带分割符号的矩阵</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-xing-zhong-ju-zhen" title="5．如何输入行中矩阵">5．如何输入行中矩阵</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#san--fang-cheng-shi-xu-lie-shi-yong-can-kao_1" title="三、方程式序列使用参考">三、方程式序列使用参考</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-yi-ge-fang-cheng-shi-xu-lie" title="1．如何输入一个方程式序列">1．如何输入一个方程式序列</a></li><li class="nav-item"><a class="nav-link" href="#zai-yi-ge-fang-cheng-shi-xu-lie-de-mei-yi-xing-zhong-zhu-ming-yuan-yin" title="2．在一个方程式序列的每一行中注明原因">2．在一个方程式序列的每一行中注明原因</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#si--tiao-jian-biao-da-shi-shi-yong-can-kao_1" title="四、条件表达式使用参考">四、条件表达式使用参考</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-yi-ge-tiao-jian-biao-da-shi" title="1．如何输入一个条件表达式">1．如何输入一个条件表达式</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-yi-ge-zuo-ce-dui-qi-de-tiao-jian-biao-da-shi" title="2．如何输入一个左侧对齐的条件表达式">2．如何输入一个左侧对齐的条件表达式</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shi-tiao-jian-biao-da-shi-gua-pei-xing-gao" title="3．如何使条件表达式适配行高">3．如何使条件表达式适配行高</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#wu--shu-zu-yu-biao-ge-shi-yong-can-kao_1" title="五、数组与表格使用参考">五、数组与表格使用参考</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-yi-ge-shu-zu-huo-biao-ge" title="1．如何输入一个数组或表格">1．如何输入一个数组或表格</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-yi-ge-qian-tao-de-shu-zu-huo-biao-ge" title="2．如何输入一个嵌套的数组或表格">2．如何输入一个嵌套的数组或表格</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-yi-ge-fang-cheng-zu" title="3．如何输入一个方程组">3．如何输入一个方程组</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#liu--lian-fen-shu-shi-yong-can-kao_1" title="六、连分数使用参考">六、连分数使用参考</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-yi-ge-lian-fen-shi" title="1．如何输入一个连分式">1．如何输入一个连分式</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#qi--jiao-huan-tu-biao-shi-yong-can-kao_1" title="七、交换图表使用参考">七、交换图表使用参考</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#ru-he-shu-ru-yi-ge-jiao-huan-tu-biao" title="1．如何输入一个交换图表">1．如何输入一个交换图表</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#ba--yi-xie-te-shu-de-zhu-yi-shi-xiang_1" title="八、一些特殊的注意事项">八、一些特殊的注意事项</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#-mou-xie-fen-shu-de-xian-shi-wen-ti" title="1. 某些分数的显示问题">1. 某些分数的显示问题</a></li><li class="nav-item"><a class="nav-link" href="#-liu-chu-he-li-de-jian-ge" title="2. 留出合理的间隔">2. 留出合理的间隔</a></li><li class="nav-item"><a class="nav-link" href="#-duo-zhong-ji-fen-fu-hao-de-xian-shi" title="3. 多重积分符号的显示">3. 多重积分符号的显示</a></li><li class="nav-item"><a class="nav-link" href="#-duo-ge-wei-fen-fu-hao-de-xian-shi" title="4. 多个微分符号的显示">4. 多个微分符号的显示</a></li></ul></li></ul></ul>
+    <div id="toc"><ul><li><a class="toc-href" href="#yi-gong-shi-shi-yong-can-kao" title="一、公式使用参考">一、公式使用参考</a><ul><li><a class="toc-href" href="#1ru-he-cha-ru-gong-shi" title="1．如何插入公式">1．如何插入公式</a></li><li><a class="toc-href" href="#2ru-he-shu-ru-shang-xia-biao" title="2．如何输入上下标">2．如何输入上下标</a></li><li><a class="toc-href" href="#3ru-he-shu-ru-gua-hao-he-fen-ge-fu" title="3．如何输入括号和分隔符">3．如何输入括号和分隔符</a></li><li><a class="toc-href" href="#4ru-he-shu-ru-fen-shu" title="4．如何输入分数">4．如何输入分数</a></li><li><a class="toc-href" href="#5ru-he-shu-ru-kai-fang" title="5．如何输入开方">5．如何输入开方</a></li><li><a class="toc-href" href="#6ru-he-shu-ru-sheng-lue-hao" title="6．如何输入省略号">6．如何输入省略号</a></li><li><a class="toc-href" href="#7ru-he-shu-ru-shi-liang" title="7．如何输入矢量">7．如何输入矢量</a></li><li><a class="toc-href" href="#8ru-he-shu-ru-ji-fen" title="8．如何输入积分">8．如何输入积分</a></li><li><a class="toc-href" href="#9ru-he-shu-ru-ji-xian-yun-suan" title="9．如何输入极限运算">9．如何输入极限运算</a></li><li><a class="toc-href" href="#10ru-he-shu-ru-lei-jia-lei-cheng-yun-suan" title="10．如何输入累加、累乘运算">10．如何输入累加、累乘运算</a></li><li><a class="toc-href" href="#11ru-he-shu-ru-xi-la-zi-mu" title="11．如何输入希腊字母">11．如何输入希腊字母</a></li><li><a class="toc-href" href="#12ru-he-shu-ru-qi-ta-te-shu-zi-fu" title="12．如何输入其它特殊字符">12．如何输入其它特殊字符</a></li><li><a class="toc-href" href="#13ru-he-jin-xing-zi-ti-zhuan-huan" title="13．如何进行字体转换">13．如何进行字体转换</a></li><li><a class="toc-href" href="#14da-gua-hao-he-xing-biao-de-shi-yong" title="14．大括号和行标的使用">14．大括号和行标的使用</a></li><li><a class="toc-href" href="#15qi-ta-ming-ling" title="15．其它命令">15．其它命令</a></li></ul></li><li><a class="toc-href" href="#er-ju-zhen-shi-yong-can-kao_1" title="二、矩阵使用参考">二、矩阵使用参考</a><ul><li><a class="toc-href" href="#1ru-he-shu-ru-wu-kuang-ju-zhen" title="1．如何输入无框矩阵">1．如何输入无框矩阵</a></li><li><a class="toc-href" href="#2ru-he-shu-ru-dai-bian-kuang-de-ju-zhen" title="2．如何输入带边框的矩阵">2．如何输入带边框的矩阵</a></li><li><a class="toc-href" href="#3ru-he-shu-ru-dai-sheng-lue-fu-hao-de-ju-zhen" title="3．如何输入带省略符号的矩阵">3．如何输入带省略符号的矩阵</a></li><li><a class="toc-href" href="#4ru-he-shu-ru-dai-fen-ge-fu-hao-de-ju-zhen" title="4．如何输入带分割符号的矩阵">4．如何输入带分割符号的矩阵</a></li><li><a class="toc-href" href="#5ru-he-shu-ru-xing-zhong-ju-zhen" title="5．如何输入行中矩阵">5．如何输入行中矩阵</a></li></ul></li><li><a class="toc-href" href="#san-fang-cheng-shi-xu-lie-shi-yong-can-kao_1" title="三、方程式序列使用参考">三、方程式序列使用参考</a><ul><li><a class="toc-href" href="#1ru-he-shu-ru-yi-ge-fang-cheng-shi-xu-lie" title="1．如何输入一个方程式序列">1．如何输入一个方程式序列</a></li><li><a class="toc-href" href="#2zai-yi-ge-fang-cheng-shi-xu-lie-de-mei-yi-xing-zhong-zhu-ming-yuan-yin" title="2．在一个方程式序列的每一行中注明原因">2．在一个方程式序列的每一行中注明原因</a></li></ul></li><li><a class="toc-href" href="#si-tiao-jian-biao-da-shi-shi-yong-can-kao_1" title="四、条件表达式使用参考">四、条件表达式使用参考</a><ul><li><a class="toc-href" href="#1ru-he-shu-ru-yi-ge-tiao-jian-biao-da-shi" title="1．如何输入一个条件表达式">1．如何输入一个条件表达式</a></li><li><a class="toc-href" href="#2ru-he-shu-ru-yi-ge-zuo-ce-dui-qi-de-tiao-jian-biao-da-shi" title="2．如何输入一个左侧对齐的条件表达式">2．如何输入一个左侧对齐的条件表达式</a></li><li><a class="toc-href" href="#3ru-he-shi-tiao-jian-biao-da-shi-gua-pei-xing-gao" title="3．如何使条件表达式适配行高">3．如何使条件表达式适配行高</a></li></ul></li><li><a class="toc-href" href="#wu-shu-zu-yu-biao-ge-shi-yong-can-kao_1" title="五、数组与表格使用参考">五、数组与表格使用参考</a><ul><li><a class="toc-href" href="#1ru-he-shu-ru-yi-ge-shu-zu-huo-biao-ge" title="1．如何输入一个数组或表格">1．如何输入一个数组或表格</a></li><li><a class="toc-href" href="#2ru-he-shu-ru-yi-ge-qian-tao-de-shu-zu-huo-biao-ge" title="2．如何输入一个嵌套的数组或表格">2．如何输入一个嵌套的数组或表格</a></li><li><a class="toc-href" href="#3ru-he-shu-ru-yi-ge-fang-cheng-zu" title="3．如何输入一个方程组">3．如何输入一个方程组</a></li></ul></li><li><a class="toc-href" href="#liu-lian-fen-shu-shi-yong-can-kao_1" title="六、连分数使用参考">六、连分数使用参考</a><ul><li><a class="toc-href" href="#1ru-he-shu-ru-yi-ge-lian-fen-shi" title="1．如何输入一个连分式">1．如何输入一个连分式</a></li></ul></li><li><a class="toc-href" href="#qi-jiao-huan-tu-biao-shi-yong-can-kao_1" title="七、交换图表使用参考">七、交换图表使用参考</a><ul><li><a class="toc-href" href="#1ru-he-shu-ru-yi-ge-jiao-huan-tu-biao" title="1．如何输入一个交换图表">1．如何输入一个交换图表</a></li></ul></li><li><a class="toc-href" href="#ba-yi-xie-te-shu-de-zhu-yi-shi-xiang_1" title="八、一些特殊的注意事项">八、一些特殊的注意事项</a><ul><li><a class="toc-href" href="#1-mou-xie-fen-shu-de-xian-shi-wen-ti" title="1. 某些分数的显示问题">1. 某些分数的显示问题</a></li><li><a class="toc-href" href="#2-liu-chu-he-li-de-jian-ge" title="2. 留出合理的间隔">2. 留出合理的间隔</a></li><li><a class="toc-href" href="#3-duo-zhong-ji-fen-fu-hao-de-xian-shi" title="3. 多重积分符号的显示">3. 多重积分符号的显示</a></li><li><a class="toc-href" href="#4-duo-ge-wei-fen-fu-hao-de-xian-shi" title="4. 多个微分符号的显示">4. 多个微分符号的显示</a></li></ul></li></ul></div>
 <!-- </section> -->
 <!-- </section> -->
         </nav>
@@ -1146,27 +1157,11 @@ $$</div>
   </div>
 
 
-    <script type="text/javascript">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+<!--  -->
+<!--  -->
 
-    ga('create', 'UA-98793057-1', 'auto');
-    ga('send', 'pageview');
-    </script>
-<script type="text/javascript">
-    var disqus_shortname = 'freeopen';
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
 <script src="https://freeopen.github.io/theme/js/jquery-3.3.1.slim.min.js"></script>
 <script src="https://freeopen.github.io/theme/js/popper.min.js"></script>
 <script src="https://freeopen.github.io/theme/js/bootstrap.min.js"></script>
-
 </body>
 </html>

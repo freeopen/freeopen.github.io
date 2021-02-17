@@ -33,13 +33,13 @@
           </button>
           <nav class="collapse navbar-collapse sidebar-nav flex-column" id="navbarNav">
 
-              <a class="nav-link" href="https://freeopen.github.io/pages/about.html">About</a>
-              <a class="nav-link" href="https://freeopen.github.io/pages/da-shang.html">打赏</a>
+              <a class="nav-link" href="https://freeopen.github.io/pages/guan-yu-zhe-li.html">关于这里</a>
+              <a class="nav-link" href="https://freeopen.github.io/pages/zou-guo-lu-guo.html">走过路过</a>
 
-              <a class="nav-link" href="https://freeopen.github.io/category/bian-cheng.html">编程</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/bian-cheng-zhi-hui.html">编程智慧</a>
               <a class="nav-link" href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
-              <a class="nav-link" href="https://freeopen.github.io/category/shou-ce.html">手册</a>
-              <a class="nav-link" href="https://freeopen.github.io/category/shu-xue.html">数学</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/shu-xue-za-tan.html">数学杂谈</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/su-cha-shou-ce.html">速查手册</a>
             <div class="sidebar-icons">
               <hr>
                 <a href="" title="Atom feed" target="_blank" 
@@ -132,7 +132,7 @@ RNN 简单的吃进输入文字，不做任何预测;
 <p>一旦安装了 TensorFlow, 你就可以运行以下脚本下载本教程的源码了:</p>
 <div class="highlight"><pre><span></span>git clone https://github.com/tensorflow/nmt/
 </pre></div>
-<h3 id="xun-lian----ru-he-jian-li-wo-men-de-di-yi-ge--nmt-xi-tong">训练 &ndash; 如何建立我们的第一个 NMT 系统</h3>
+<h3 id="xun-lian-ru-he-jian-li-wo-men-de-di-yi-ge-nmt-xi-tong">训练 &ndash; 如何建立我们的第一个 NMT 系统</h3>
 <p>让我们先走进构建 NMT 模型的核心代码，一会儿我们将详细解释图 2 . 我们晚点再来看完整代码及数据准备部分. 这部分的代码文件为
 <em><a href="https://github.com/tensorflow/nmt/blob/master/nmt/model.py">model.py</a></em>.</p>
 <p>如图 2 的底层, 编码器和解码器的循环神经网络接收下列输入: 首先, 是待翻译的句子, 接着是一个边界标记 "&lt;s&gt;&rdquo;，表示从编码到解码模式的转换, 最后是翻译好的句子.  为了<em>训练</em>, 我们将为系统提供以下张量,
@@ -169,7 +169,7 @@ RNN 简单的吃进输入文字，不做任何预测;
 <span class="c1">#   encoder_state: [batch_size, num_units]</span>
 <span class="n">encoder_outputs</span><span class="p">,</span> <span class="n">encoder_state</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">dynamic_rnn</span><span class="p">(</span>
     <span class="n">encoder_cell</span><span class="p">,</span> <span class="n">encoder_emb_inp</span><span class="p">,</span>
-    <span class="n">sequence_length</span><span class="o">=</span><span class="n">source_seqence_length</span><span class="p">,</span> <span class="n">time_major</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">sequence_length</span><span class="o">=</span><span class="n">source_seqence_length</span><span class="p">,</span> <span class="n">time_major</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 <p>注意, 句子有不同的长度，我们通过 <em>source_sequence_length</em> 来告诉 <em>dynamic_rnn</em> 确切的源句长度，以避免计算上的浪费. 由于我们的输入有时序，我们设置 <em>time_major=True</em> . 这里，我们仅建立一个单层的 LSTM <em>编码器单元</em>. 我们将在后面的章节说明如何构建多层LSTM，增加 dropout, 和使用 attention.</p>
 <h4>解码器</h4>
@@ -179,7 +179,7 @@ RNN 简单的吃进输入文字，不做任何预测;
 </pre></div>
 <div class="highlight"><pre><span></span><span class="c1"># Helper</span>
 <span class="n">helper</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">seq2seq</span><span class="o">.</span><span class="n">TrainingHelper</span><span class="p">(</span>
-    <span class="n">decoder_emb_inp</span><span class="p">,</span> <span class="n">decoder_lengths</span><span class="p">,</span> <span class="n">time_major</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">decoder_emb_inp</span><span class="p">,</span> <span class="n">decoder_lengths</span><span class="p">,</span> <span class="n">time_major</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="c1"># Decoder</span>
 <span class="n">decoder</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">seq2seq</span><span class="o">.</span><span class="n">BasicDecoder</span><span class="p">(</span>
     <span class="n">decoder_cell</span><span class="p">,</span> <span class="n">helper</span><span class="p">,</span> <span class="n">encoder_state</span><span class="p">,</span>
@@ -191,7 +191,7 @@ RNN 简单的吃进输入文字，不做任何预测;
 <p>这里，这个代码的核心部分是 <em>BasicDecoder</em>，它接收 <em>decoder_cell</em> (类似 encoder_cell)、<em>helper</em>、前一个 <em>encoder_state</em> 作为输入输出到 <em>decoder</em> 对象。通过分开 decoder 和 helper，我们可以在不同代码中重用。例如，<em>TrainingHelper</em> 可以被 <em>GreedyEmbeddingHelper</em> 取代做贪心解码。更多内容请看<a href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/contrib/seq2seq/python/ops/helper.py">helper.py</a>.</p>
 <p>最后，我们没提到的 <em>projection_layer</em> 是个密集矩阵，它将顶部的隐藏状态转为 V 个维度的 logit 向量。我们在图 2 的顶部展示了这个过程。</p>
 <div class="highlight"><pre><span></span><span class="n">projection_layer</span> <span class="o">=</span> <span class="n">layers_core</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span>
-    <span class="n">tgt_vocab_size</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">tgt_vocab_size</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 <h4>误差</h4>
 <p>根据上面给定的 <em>logits</em> ，我们现在准备计算我们的训练误差:</p>
@@ -217,7 +217,7 @@ RNN 简单的吃进输入文字，不做任何预测;
     <span class="nb">zip</span><span class="p">(</span><span class="n">clipped_gradients</span><span class="p">,</span> <span class="n">params</span><span class="p">))</span>
 </pre></div>
 <p>在我们自己的实验中，我们采用可自动降低学习率的标准 SGD 优化器（tf.train.GradientDescentOptimizer），从而产生更好的性能。参见 <a href="#评测">评测</a>. </p>
-<h3 id="dong-shou----rang-wo-men-xun-lian-yi-ge-nmtmo-xing">动手 - 让我们训练一个NMT模型</h3>
+<h3 id="dong-shou-rang-wo-men-xun-lian-yi-ge-nmtmo-xing">动手 - 让我们训练一个NMT模型</h3>
 <p>让我们训练我们的第一个 NMT 模型，把越南语翻译成英语！我们代码的入口是
 <a href="https://github.com/tensorflow/nmt/blob/master/nmt/nmt.py"><em>nmt.py</em></a>.</p>
 <p>我们将使用 <em>small-scale parallel corpus of TED talks</em> (133K training
@@ -261,7 +261,7 @@ python -m nmt.nmt <span class="se">\</span>
 </pre></div>
 <p>从英语到越南语的训练可以简单地改变:
 <code>--src=en --tgt=vi</code></p>
-<h3 id="tui-li----ru-he-chan-sheng-fan-yi">推理 &ndash; 如何产生翻译</h3>
+<h3 id="tui-li-ru-he-chan-sheng-fan-yi">推理 &ndash; 如何产生翻译</h3>
 <p>当你训练你的 NMT 模型（一旦你已训练好模型），你可以得到以前未见过的源语句的翻译。这个过程称为推理。训练和推理（测试）之间有明确的区别：在推理时，我们只能访问源语句，即 encoder_inputs。解码有很多种方法, 包括贪心、采样和定向搜索几种。在这里，我们将讨论贪心解码法。</p>
 <p>这个想法很简单，我们在图 3 中说明:</p>
 <ol>
@@ -364,7 +364,7 @@ cat /tmp/nmt_model/output_infer <span class="c1"># To view the inference as outp
     <span class="n">attention_layer_size</span><span class="o">=</span><span class="n">num_units</span><span class="p">)</span>
 </pre></div>
 <p>代码的其余部分与<a href="#解码器">解码器</a>部分几乎相同！</p>
-<h3 id="dong-shou----jian-li-ji-yu--attention-de--nmt-mo-xing">动手 &ndash; 建立基于 attention 的 NMT 模型</h3>
+<h3 id="dong-shou-jian-li-ji-yu-attention-de-nmt-mo-xing">动手 &ndash; 建立基于 attention 的 NMT 模型</h3>
 <p>要启用的 attention ，在训练时我们需要使用 <code>luong</code>、<code>scaled_luong</code>、<code>bahdanau</code>  或 <code>normed_bahdanau</code> 中的一个作为 <code>attention</code> 标志的值。该标志指定了我们将要使用的 attention mechanism。此外，我们需要为 attention 模型创建一个新的目录，所以我们不能重复使用前面训练过的简单 NMT 模型。</p>
 <p>运行以下命令开始训练:</p>
 <div class="highlight"><pre><span></span>mkdir /tmp/nmt_attention_model
@@ -390,8 +390,8 @@ python -m nmt.nmt <span class="se">\</span>
     --inference_input_file<span class="o">=</span>/tmp/my_infer_file.vi <span class="se">\</span>
     --inference_output_file<span class="o">=</span>/tmp/nmt_attention_model/output_infer
 </pre></div>
-<h2 id="ti-shi---ji-qiao_1">提示 &amp; 技巧</h2>
-<h3 id="xun-lian--ping-gu--he-tui-li-tu">训练, 评估, 和推理图</h3>
+<h2 id="ti-shi-ji-qiao_1">提示 &amp; 技巧</h2>
+<h3 id="xun-lian-ping-gu-he-tui-li-tu">训练, 评估, 和推理图</h3>
 <blockquote>
 <p>译者注：&ldquo;图&rdquo;的定义原文，A Graph contains a set of Operation objects, which represent units of computation; and Tensor objects, which represent the units of data that flow between operations. 简单说, &ldquo;图&rdquo;相当于一个数学公式，其中的 tensor 相当于变量 x  ，而定义的 op 相当于连接变量的运算符号.  </p>
 </blockquote>
@@ -437,11 +437,11 @@ python -m nmt.nmt <span class="se">\</span>
   <span class="n">train_op</span><span class="p">,</span> <span class="n">loss</span> <span class="o">=</span> <span class="n">BuildTrainModel</span><span class="p">(</span><span class="n">train_inputs</span><span class="p">)</span>
   <span class="n">initializer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">global_variables_initializer</span><span class="p">()</span>
 
-<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">variable_scope</span><span class="p">(</span><span class="s1">'root'</span><span class="p">,</span> <span class="n">reuse</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">variable_scope</span><span class="p">(</span><span class="s1">'root'</span><span class="p">,</span> <span class="n">reuse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
   <span class="n">eval_inputs</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">()</span>
   <span class="n">eval_loss</span> <span class="o">=</span> <span class="n">BuildEvalModel</span><span class="p">(</span><span class="n">eval_inputs</span><span class="p">)</span>
 
-<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">variable_scope</span><span class="p">(</span><span class="s1">'root'</span><span class="p">,</span> <span class="n">reuse</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">variable_scope</span><span class="p">(</span><span class="s1">'root'</span><span class="p">,</span> <span class="n">reuse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
   <span class="n">infer_inputs</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">()</span>
   <span class="n">inference_output</span> <span class="o">=</span> <span class="n">BuildInferenceModel</span><span class="p">(</span><span class="n">infer_inputs</span><span class="p">)</span>
 
@@ -549,9 +549,9 @@ python -m nmt.nmt <span class="se">\</span>
 </blockquote>
 <div class="highlight"><pre><span></span><span class="n">batched_dataset</span> <span class="o">=</span> <span class="n">source_target_dataset</span><span class="o">.</span><span class="n">padded_batch</span><span class="p">(</span>
     <span class="n">batch_size</span><span class="p">,</span>
-    <span class="n">padded_shapes</span><span class="o">=</span><span class="p">((</span><span class="n">tf</span><span class="o">.</span><span class="n">TensorShape</span><span class="p">([</span><span class="bp">None</span><span class="p">]),</span>  <span class="c1"># source vectors of unknown size</span>
+    <span class="n">padded_shapes</span><span class="o">=</span><span class="p">((</span><span class="n">tf</span><span class="o">.</span><span class="n">TensorShape</span><span class="p">([</span><span class="kc">None</span><span class="p">]),</span>  <span class="c1"># source vectors of unknown size</span>
                     <span class="n">tf</span><span class="o">.</span><span class="n">TensorShape</span><span class="p">([])),</span>     <span class="c1"># size(source)</span>
-                   <span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">TensorShape</span><span class="p">([</span><span class="bp">None</span><span class="p">]),</span>  <span class="c1"># target vectors of unknown size</span>
+                   <span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">TensorShape</span><span class="p">([</span><span class="kc">None</span><span class="p">]),</span>  <span class="c1"># target vectors of unknown size</span>
                     <span class="n">tf</span><span class="o">.</span><span class="n">TensorShape</span><span class="p">([]))),</span>    <span class="c1"># size(target)</span>
     <span class="n">padding_values</span><span class="o">=</span><span class="p">((</span><span class="n">src_eos_id</span><span class="p">,</span>  <span class="c1"># source vectors padded on the right with src_eos_id</span>
                      <span class="mi">0</span><span class="p">),</span>          <span class="c1"># size(source) -- unused</span>
@@ -575,7 +575,7 @@ python -m nmt.nmt <span class="se">\</span>
 <span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">batched_iterator</span><span class="o">.</span><span class="n">initializer</span><span class="p">,</span> <span class="n">feed_dict</span><span class="o">=</span><span class="p">{</span><span class="o">...</span><span class="p">})</span>
 </pre></div>
 <p>一旦迭代器被初始化，每个 <em>session.run</em> 调用（访问源或目标张量）将从底层数据集请求下一批数据。</p>
-<h3 id="guan-yu-zeng-qiang--nmt-mo-xing-de-qi-ta-xi-jie">关于增强 NMT 模型的其它细节</h3>
+<h3 id="guan-yu-zeng-qiang-nmt-mo-xing-de-qi-ta-xi-jie">关于增强 NMT 模型的其它细节</h3>
 <h4>双向 RNNs</h4>
 <p>在编码器端双向化通常会带来更好的性能(随着层数的增加速度会有所降低). 这里, 我们给个简单的例子，建立一个双向单层的编码器：</p>
 <div class="highlight"><pre><span></span><span class="c1"># Construct forward and backward cells</span>
@@ -584,7 +584,7 @@ python -m nmt.nmt <span class="se">\</span>
 
 <span class="n">bi_outputs</span><span class="p">,</span> <span class="n">encoder_state</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">bidirectional_dynamic_rnn</span><span class="p">(</span>
     <span class="n">forward_cell</span><span class="p">,</span> <span class="n">backward_cell</span><span class="p">,</span> <span class="n">encoder_emb_inp</span><span class="p">,</span>
-    <span class="n">sequence_length</span><span class="o">=</span><span class="n">source_sequence_length</span><span class="p">,</span> <span class="n">time_major</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">sequence_length</span><span class="o">=</span><span class="n">source_sequence_length</span><span class="p">,</span> <span class="n">time_major</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">encoder_outputs</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">bi_outputs</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 <p>变量 <em>encoder_outputs</em> 和 <em>encoder_state</em> 的用法与编码器那节中说的一样. 注意, 对多个双向层, 我们需要对 encoder_state 做些修改, 详见 <a href="https://github.com/tensorflow/nmt/blob/master/nmt/model.py">model.py</a>,中的 <em>_build_bidirectional_rnn()</em> 方法 .</p>
@@ -640,12 +640,12 @@ python -m nmt.nmt <span class="se">\</span>
 <span class="n">attention_cell</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">seq2seq</span><span class="o">.</span><span class="n">AttentionWrapper</span><span class="p">(</span>
     <span class="n">attention_cell</span><span class="p">,</span>
     <span class="n">attention_mechanism</span><span class="p">,</span>
-    <span class="n">attention_layer_size</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>  <span class="c1"># don't add an additional dense layer.</span>
-    <span class="n">output_attention</span><span class="o">=</span><span class="bp">False</span><span class="p">,)</span>
+    <span class="n">attention_layer_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># don't add an additional dense layer.</span>
+    <span class="n">output_attention</span><span class="o">=</span><span class="kc">False</span><span class="p">,)</span>
 <span class="n">cell</span> <span class="o">=</span> <span class="n">GNMTAttentionMultiCell</span><span class="p">(</span><span class="n">attention_cell</span><span class="p">,</span> <span class="n">cells</span><span class="p">)</span>
 </pre></div>
 <h2 id="ping-ce_1">评测</h2>
-<h3 id="iwslt-ying-yu--yue-nan-yu">IWSLT 英语-越南语</h3>
+<h3 id="iwslt-ying-yu-yue-nan-yu">IWSLT 英语-越南语</h3>
 <p>样本集: 133K examples, 训练集=tst2012, 测试集=tst2013,
 <a href="https://github.com/tensorflow/nmt/blob/master/nmt/scripts/download_iwslt15.sh">下载脚本</a>.</p>
 <p><strong><em>训练细节</em></strong>. 我们用双向编码器（编码器有一个双向层）训练 512 单元的 2 层 LSTM，embedding 维度为 512。LuongAttention (scale=True) 与 keep_prob 为 0.8 的 dropout 一起使用。所有参数均匀。我们采用学习率为 1.0 的 SGD 算法：训练12K 步（12 轮）；8K 步后，我们开始每 1K 步减半学习率。 </p>
@@ -682,7 +682,7 @@ TODO(rzhao): 添加英语-越南语模型的 URL。</p>
 </table>
 <p><strong>训练速度</strong>: 在 <em>K40m</em> 上 (0.37 秒每步 , 15.3K 字每秒)  &amp; 在 <em>TitanX</em> 上 (0.17 秒每步, 32.2K 字每秒) .
 这里，每步时间指运行一个小批量（128个）所需的时间。对于字每秒，我们统计的是源和目标上的单词。</p>
-<h3 id="wmt-de-yu--ying-yu">WMT 德语-英语</h3>
+<h3 id="wmt-de-yu-ying-yu">WMT 德语-英语</h3>
 <p>样本集: 4.5M examples, 训练集=newstest2013, 测试集=newstest2015
 <a href="nmt/scripts/wmt16_en_de.sh">下载脚本</a></p>
 <p><strong><em>训练细节</em></strong>. 我们训练的超参数与英语-越南语的实验类似，除了以下细节. 采用 <a href="https://github.com/rsennrich/subword-nmt">BPE</a>(32K 操作)将数据分成子字单元. 我们用双向编码器 1024（编码器有2个双向层）训练 1024 单元的 4 层 LSTM , embedding 维度为 1024. 我们训练了 359K 步 (10轮); 170K 步后, 我们开始每 17K 步减半学习率.</p>
@@ -762,7 +762,7 @@ TODO(rzhao): 添加德语-英语模型的 URL.</p>
 </tbody>
 </table>
 <p>这些结果表明，没有 GNMT attention，使用多 GPU 获得的效果很小。而使用 GNMT attention，我们从多 GPU 上获得了 50%-100% 的速度提升。</p>
-<h3 id="wmt-ying-yu--de-yu-----wan-quan-bi-jiao">WMT 英语-德语 &mdash; 完全比较</h3>
+<h3 id="wmt-ying-yu-de-yu-wan-quan-bi-jiao">WMT 英语-德语 &mdash; 完全比较</h3>
 <p>前 2 行是 GNMT attention 模型: <a href="http://download.tensorflow.org/models/nmt/ende_gnmt_model_4_layer.zip">model 1 (4 层)</a>,<a href="http://download.tensorflow.org/models/nmt/ende_gnmt_model_8_layer.zip">model 2 (8 层)</a>.</p>
 <table>
 <thead>
@@ -850,7 +850,7 @@ V. Le. 2014.<a href="https://papers.nips.cc/paper/5346-sequence-to-sequence-lear
     var mathjaxscript = document.createElement('script');
     mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
     mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript.src = 'https://cdn.bootcdn.net/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
     mathjaxscript[(window.opera ? "innerHTML" : "text")] =
         "MathJax.Hub.Config({" +
         "    config: ['MMLorHTML.js']," +
@@ -893,21 +893,32 @@ V. Le. 2014.<a href="https://papers.nips.cc/paper/5346-sequence-to-sequence-lear
 </script>
   </div><!-- /.entry-content -->
 
-  <div class="comments">
-    <!-- <h2>Comments !</h2> -->
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-      var disqus_shortname = 'freeopen';
-      var disqus_identifier = 'posts/nmt-cn';
-      var disqus_url = 'https://freeopen.github.io/posts/nmt-cn';
-      (function() {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//freeopen.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      })();
-    </script>
-    <noscript>Please enable JavaScript to view the comments.</noscript>
-  </div>
+  <!-- DISQUS 评论系统 -->
+
+  <!-- giteement评论系统 -->
+
+  <!-- Gitalk 评论 start  -->
+  <!-- Link Gitalk 的支持文件  -->
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+
+  <div id="gitalk-container"></div>
+      <script type="text/javascript">
+      var gitalk = new Gitalk({
+
+      // gitalk的主要参数
+          clientID: '8a8232de9043fc407bf4',
+          clientSecret: 'aab87cee1582588743573358e51f4a785ceb49a3',
+          repo: 'blog-discuss',
+          owner: 'freeopen',
+          admin: ['freeopen'],
+          id: 'posts/nmt-cn',
+      
+      });
+      gitalk.render('gitalk-container');
+  </script>
+  <!-- Gitalk end -->
+
 </section>
           </div>
 
@@ -922,7 +933,7 @@ V. Le. 2014.<a href="https://papers.nips.cc/paper/5346-sequence-to-sequence-lear
       <div class="hidden-print hidden-xs hidden-sm hidden-md col-lg" id="post_toc" role="complementary">
         <nav class="sidebar-toc">
 <!-- <section id="main_toc"> -->
-    <ul class="nav" id="toc"><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#jie-shao" title="介绍">介绍</a></li><li class="nav-item"><a class="nav-link" href="#ji-chu" title="基础">基础</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#shen-jing-ji-qi-fan-yi-de-bei-jing" title="神经机器翻译的背景">神经机器翻译的背景</a></li><li class="nav-item"><a class="nav-link" href="#an-zhuang-jiao-cheng" title="安装教程">安装教程</a></li><li class="nav-item"><a class="nav-link" href="#xun-lian----ru-he-jian-li-wo-men-de-di-yi-ge--nmt-xi-tong" title="训练 &ndash; 如何建立我们的第一个 NMT 系统">训练 &ndash; 如何建立我们的第一个 NMT 系统</a></li><li class="nav-item"><a class="nav-link" href="#dong-shou----rang-wo-men-xun-lian-yi-ge-nmtmo-xing" title="动手 - 让我们训练一个NMT模型">动手 - 让我们训练一个NMT模型</a></li><li class="nav-item"><a class="nav-link" href="#tui-li----ru-he-chan-sheng-fan-yi" title="推理 &ndash; 如何产生翻译">推理 &ndash; 如何产生翻译</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#jin-jie_1" title="进阶">进阶</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#zhu-yi-li-ji-zhi-de-bei-jing" title="注意力机制的背景">注意力机制的背景</a></li><li class="nav-item"><a class="nav-link" href="#attention-wrapper-api" title="Attention Wrapper API">Attention Wrapper API</a></li><li class="nav-item"><a class="nav-link" href="#dong-shou----jian-li-ji-yu--attention-de--nmt-mo-xing" title="动手 &ndash; 建立基于 attention 的 NMT 模型">动手 &ndash; 建立基于 attention 的 NMT 模型</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#ti-shi---ji-qiao_1" title="提示 &amp; 技巧">提示 &amp; 技巧</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#xun-lian--ping-gu--he-tui-li-tu" title="训练, 评估, 和推理图">训练, 评估, 和推理图</a></li><li class="nav-item"><a class="nav-link" href="#shu-ju-shu-ru-guan-dao" title="数据输入管道">数据输入管道</a></li><li class="nav-item"><a class="nav-link" href="#guan-yu-zeng-qiang--nmt-mo-xing-de-qi-ta-xi-jie" title="关于增强 NMT 模型的其它细节">关于增强 NMT 模型的其它细节</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#ping-ce_1" title="评测">评测</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#iwslt-ying-yu--yue-nan-yu" title="IWSLT 英语-越南语">IWSLT 英语-越南语</a></li><li class="nav-item"><a class="nav-link" href="#wmt-de-yu--ying-yu" title="WMT 德语-英语">WMT 德语-英语</a></li><li class="nav-item"><a class="nav-link" href="#wmt-ying-yu--de-yu-----wan-quan-bi-jiao" title="WMT 英语-德语 &mdash; 完全比较">WMT 英语-德语 &mdash; 完全比较</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#qi-ta-zi-yuan_1" title="其它资源">其它资源</a></li><li class="nav-item"><a class="nav-link" href="#zhi-xie" title="致谢">致谢</a></li><li class="nav-item"><a class="nav-link" href="#can-kao" title="参考">参考</a></li><li class="nav-item"><a class="nav-link" href="#yi-hou-yu" title="译后语">译后语</a></li></ul></ul>
+    <div id="toc"><ul><li><a class="toc-href" href="#jie-shao" title="介绍">介绍</a></li><li><a class="toc-href" href="#ji-chu" title="基础">基础</a><ul><li><a class="toc-href" href="#shen-jing-ji-qi-fan-yi-de-bei-jing" title="神经机器翻译的背景">神经机器翻译的背景</a></li><li><a class="toc-href" href="#an-zhuang-jiao-cheng" title="安装教程">安装教程</a></li><li><a class="toc-href" href="#xun-lian-ru-he-jian-li-wo-men-de-di-yi-ge-nmt-xi-tong" title="训练 &ndash; 如何建立我们的第一个 NMT 系统">训练 &ndash; 如何建立我们的第一个 NMT 系统</a></li><li><a class="toc-href" href="#dong-shou-rang-wo-men-xun-lian-yi-ge-nmtmo-xing" title="动手 - 让我们训练一个NMT模型">动手 - 让我们训练一个NMT模型</a></li><li><a class="toc-href" href="#tui-li-ru-he-chan-sheng-fan-yi" title="推理 &ndash; 如何产生翻译">推理 &ndash; 如何产生翻译</a></li></ul></li><li><a class="toc-href" href="#jin-jie_1" title="进阶">进阶</a><ul><li><a class="toc-href" href="#zhu-yi-li-ji-zhi-de-bei-jing" title="注意力机制的背景">注意力机制的背景</a></li><li><a class="toc-href" href="#attention-wrapper-api" title="Attention Wrapper API">Attention Wrapper API</a></li><li><a class="toc-href" href="#dong-shou-jian-li-ji-yu-attention-de-nmt-mo-xing" title="动手 &ndash; 建立基于 attention 的 NMT 模型">动手 &ndash; 建立基于 attention 的 NMT 模型</a></li></ul></li><li><a class="toc-href" href="#ti-shi-ji-qiao_1" title="提示 &amp; 技巧">提示 &amp; 技巧</a><ul><li><a class="toc-href" href="#xun-lian-ping-gu-he-tui-li-tu" title="训练, 评估, 和推理图">训练, 评估, 和推理图</a></li><li><a class="toc-href" href="#shu-ju-shu-ru-guan-dao" title="数据输入管道">数据输入管道</a></li><li><a class="toc-href" href="#guan-yu-zeng-qiang-nmt-mo-xing-de-qi-ta-xi-jie" title="关于增强 NMT 模型的其它细节">关于增强 NMT 模型的其它细节</a></li></ul></li><li><a class="toc-href" href="#ping-ce_1" title="评测">评测</a><ul><li><a class="toc-href" href="#iwslt-ying-yu-yue-nan-yu" title="IWSLT 英语-越南语">IWSLT 英语-越南语</a></li><li><a class="toc-href" href="#wmt-de-yu-ying-yu" title="WMT 德语-英语">WMT 德语-英语</a></li><li><a class="toc-href" href="#wmt-ying-yu-de-yu-wan-quan-bi-jiao" title="WMT 英语-德语 &mdash; 完全比较">WMT 英语-德语 &mdash; 完全比较</a></li></ul></li><li><a class="toc-href" href="#qi-ta-zi-yuan_1" title="其它资源">其它资源</a></li><li><a class="toc-href" href="#zhi-xie" title="致谢">致谢</a></li><li><a class="toc-href" href="#can-kao" title="参考">参考</a></li><li><a class="toc-href" href="#yi-hou-yu" title="译后语">译后语</a></li></ul></div>
 <!-- </section> -->
 <!-- </section> -->
         </nav>
@@ -931,27 +942,11 @@ V. Le. 2014.<a href="https://papers.nips.cc/paper/5346-sequence-to-sequence-lear
   </div>
 
 
-    <script type="text/javascript">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+<!--  -->
+<!--  -->
 
-    ga('create', 'UA-98793057-1', 'auto');
-    ga('send', 'pageview');
-    </script>
-<script type="text/javascript">
-    var disqus_shortname = 'freeopen';
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
 <script src="https://freeopen.github.io/theme/js/jquery-3.3.1.slim.min.js"></script>
 <script src="https://freeopen.github.io/theme/js/popper.min.js"></script>
 <script src="https://freeopen.github.io/theme/js/bootstrap.min.js"></script>
-
 </body>
 </html>

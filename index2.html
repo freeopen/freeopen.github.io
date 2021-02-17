@@ -28,13 +28,13 @@
           </button>
           <nav class="collapse navbar-collapse sidebar-nav flex-column" id="navbarNav">
 
-              <a class="nav-link" href="https://freeopen.github.io/pages/about.html">About</a>
-              <a class="nav-link" href="https://freeopen.github.io/pages/da-shang.html">打赏</a>
+              <a class="nav-link" href="https://freeopen.github.io/pages/guan-yu-zhe-li.html">关于这里</a>
+              <a class="nav-link" href="https://freeopen.github.io/pages/zou-guo-lu-guo.html">走过路过</a>
 
-              <a class="nav-link" href="https://freeopen.github.io/category/bian-cheng.html">编程</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/bian-cheng-zhi-hui.html">编程智慧</a>
               <a class="nav-link" href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
-              <a class="nav-link" href="https://freeopen.github.io/category/shou-ce.html">手册</a>
-              <a class="nav-link" href="https://freeopen.github.io/category/shu-xue.html">数学</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/shu-xue-za-tan.html">数学杂谈</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/su-cha-shou-ce.html">速查手册</a>
             <div class="sidebar-icons">
               <hr>
                 <a href="" title="Atom feed" target="_blank" 
@@ -63,89 +63,232 @@
 
 <ol id="post-list">
         <li class="related"><article>
-                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/eponine-letter" rel="bookmark" title="Permalink to 艾波寧捎信">艾波寧捎信</a></h2> </header>
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/image-segmentation" rel="bookmark" title="Permalink to 基于深度学习的图像分割算法思路演进">基于深度学习的图像分割算法思路演进</a></h2> </header>
                 <footer class="post-info">
-                    <time class="published" datetime="2017-06-11T00:00:00+08:00"> 2017-06-11 </time>
+                    <time class="published" datetime="2019-03-05T00:00:00+08:00"> 2019-03-05 </time>
                     <address class="vcard author">By
                         <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
                     </address>
                 </footer><!-- /.post-info -->
                 <div> <blockquote>
-<p>由台大葉丙成老師的学生创作的概率问题，文章本身比问题更有趣。</p>
+<p>又是一篇不会写完的文章，和前面那篇《卷积备忘录》一样，
+会跟进技术发展不断更新。读了一系列论文，有必要再次整理自己的思考了，
+好记性不如烂笔头嘛。如有理解错误之处，请读者及时来信告知，如果
+你精通翻墙术，文章末尾可以留言。（已架设 Disqus 评论系统，
+因国内不可名状的原因，翻墙后才能显示。）</p>
+<p>每天写一点，边写边发。</p>
 </blockquote>
-<p>巴黎, 1832 年 6 月, 一個飄著毛雨的濕熱夜晚。</p>
-<p>一間破舊的旅社, 歪一邊的招牌寫著「德納第客棧」(Thénardier&rsquo;s)。
-一樓的大廳裡, &mdash;&mdash; 說大廳, 其實只是兩張沙發跟一個小圓桌組成的狹窄空間 &mdash;&mdash; 只有坐著的兩位老友,
-他們多年不見, 正在暢談。</p>
-<p>留著滿臉花白大鬍子跟八字鬚,滔滔不絕的是作家維克托.雨果(Victor Hugo)。
-旁邊靜靜聽著的那人是雨果的朋友, 一位正直的英國詩人。
-他年輕許多,留著捲髮,有深 邃的眼神跟鷹鉤鼻。</p>
-<p>「最近交稿期限又要到了,」雨果說,
-「我的靈感卻像這個酒杯一樣枯竭呀。老闆娘! 來一瓶上好的波本威士忌,再來一盤肉乾下酒。」</p>
-<p>一直低頭擦盤子的老闆娘放下工作, 來招呼她的顧客。</p>
-<p>「我也何嘗不是入不敷出。」英國詩人說。「畢竟作詩這種東西又不能當飯吃。」</p>
-<p>這時有人推開嘎吱作響的木門, 匆忙走進旅社, 靠近沙發上的兩人。
-他的臉有點圓而結實, 額上的皺紋大概是常年經過思考的結果。
-「維克托! 」他喊道。</p>
-<p>「大數學家西米翁 …</p> </div><!-- /.entry-content -->
+<h2 id="tu-xiang-fen-ge-dao-di-gan-shi-yao">图像分割到底干什么</h2>
+<p>图像分割问题主要流行四类任务，它们分别是目标检测( Object Detection )、语义分割( Semantic Segmentation )、实例分割( Instance Segmentation ) 和全景分割( Panoptic Segmentation )。这四类任务的意义分别为：</p>
+<ol>
+<li>目标检测：计算机看一张图，用矩形框框出我们感兴趣的目标（定位任务），
+   并告诉我们该目标是什么（分类任务）。</li>
+<li>语义分割：把整张图像的每个像素赋予一个类别标签。
+   不过语义分割的任务是只判断类别，不区分个体。 </li>
+<li>实例分割：对我们感兴趣目标的像素赋予类别标签，
+   且对于挨在一起的同种类型的目标，需要区分出个体（即实例 …</li></ol> </div><!-- /.entry-content -->
         </article></li>
         <li class="related"><article>
-                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/programming" rel="bookmark" title="Permalink to 编程的智慧">编程的智慧</a></h2> </header>
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/understand-matrix" rel="bookmark" title="Permalink to 理解矩阵">理解矩阵</a></h2> </header>
                 <footer class="post-info">
-                    <time class="published" datetime="2017-05-16T00:00:00+08:00"> 2017-05-16 </time>
+                    <time class="published" datetime="2019-02-15T00:00:00+08:00"> 2019-02-15 </time>
                     <address class="vcard author">By
-                        <a class="url fn" href="https://freeopen.github.io/author/wang-yin.html">王垠</a>
+                        <a class="url fn" href="https://freeopen.github.io/author/meng-yan.html">孟岩</a>
                     </address>
                 </footer><!-- /.post-info -->
                 <div> <blockquote>
-<p>转自<a href="http://www.yinwang.org/blog-cn/2015/11/21/programming-philosophy">王垠博客</a> 2015-11-21 的旧文，作为程序语言专家，此君的建议很值得借鉴和参考。</p>
+<p>为阅读方便，将孟岩的《理解矩阵》一、二、三篇合为一篇，在保证内容完备的前提下删除少量不相干内容。遇到这篇文章是缘分，它是开启线性代数学习的一把钥匙，不管你是初学者还是老手，有幸读到这篇，一定会有茅塞顿开的感觉。</p>
 </blockquote>
-<p>编程是一种创造性的工作，是一门艺术。精通任何一门艺术，都需要很多的练习和领悟，所
-以这里提出的&ldquo;智慧&rdquo;，并不是号称一天瘦十斤的减肥药，它并不能代替你自己的勤奋。然而
-由于软件行业喜欢标新立异，喜欢把简单的事情搞复杂，我希望这些文字能给迷惑中的人们
-指出一些正确的方向，让他们少走一些弯路，基本做到一分耕耘一分收获。</p>
-<h2 id="fan-fu-tui-qiao-dai-ma">反复推敲代码</h2>
-<p>既然&ldquo;天才是百分之一的灵感，百分之九十九的汗水&rdquo;，那我先来谈谈这汗水的部分吧。有人
-问我，提高编程水平最有效的办法是什么？我想了很久，终于发现最有效的办法，其实是反
-反复复地修改和推敲代码。</p>
-<p>在IU的时候，由于Dan Friedman的严格教导，我们以写出冗长复杂的代码为耻。如果你代码
-多写了几行，这老顽童就会大笑，说：&ldquo;当年我解决这个问题，只写了5行代码，你回去再想
-想吧&hellip;&hellip;&rdquo; 当然，有时候他只是夸张一下，故意刺激你的，其实没有人能只用5行代码完成 …</p> </div><!-- /.entry-content -->
+<p><a href="http://blog.csdn.net/myan/article/details/647511">原文</a></p>
+<p>一般工科学生初学线性代数，通常都会感到困难。这种情形在国内外皆然。瑞典数学家 Lars Garding 在其名著 Encounter with Mathematics 中说：&ldquo;如果不熟悉线性代数的概念，要去学习自然科学，现在看来就和文盲差不多。&rdquo;，然而&ldquo;按照现行的国际标准，线性代数是通过公理化来表述的，它是第二代数学模型，...，这就带来了教学上的困难。&rdquo;事实上，当我们开始学习线性代数的时候，不知不觉就进入了&ldquo;第二代数学模型&rdquo;的范畴当中，这意味着数学的表述方式和抽象性有了一次全面的进化，对于从小一直在&ldquo;第一代数学模型&rdquo;，即以实用为导向的、具体的数学模型中学习的我们来说，在没有并明确告知的情况下进行如此剧烈的 paradigm shift，不感到困难才是奇怪的。</p>
+<p>大部分工科学生，往往是在学习了一些后继课程，如数值分析、数学规划 …</p> </div><!-- /.entry-content -->
         </article></li>
         <li class="related"><article>
-                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/markdown-handbook" rel="bookmark" title="Permalink to Pandoc's Markdown 語法中文翻譯">Pandoc's Markdown 語法中文翻譯</a></h2> </header>
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/cnn-notes" rel="bookmark" title="Permalink to 卷积备忘录">卷积备忘录</a></h2> </header>
                 <footer class="post-info">
-                    <time class="published" datetime="2017-05-11T00:00:00+08:00"> 2017-05-11 </time>
+                    <time class="published" datetime="2019-01-05T00:00:00+08:00"> 2019-01-05 </time>
                     <address class="vcard author">By
-                        <a class="url fn" href="https://freeopen.github.io/author/john-macfarlane-tzeng-yuxiotranslated.html">John MacFarlane; Tzeng Yuxio(translated)</a>
+                        <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
                     </address>
                 </footer><!-- /.post-info -->
-                <div> <h2 id="qian-yan">前言</h2>
-<p>這份文件是 <a href="http://johnmacfarlane.net/pandoc/">Pandoc</a> 版本 Markdown 語法的中文翻譯。Pandoc 本身是由 <a href="http://johnmacfarlane.net/">John MacFarlane</a> 所開發的文件轉換工具，可以在 HTML, Markdown, PDF, TeX...等等格式之間進行轉換。有許多喜歡純文字編輯的人，利用 Pandoc 來進行論文的撰寫或投影片製作。但除了轉換的功能外，Pandoc 所定義的 Markdown 擴充語法也是這套工具的一大亮點，在 Pandoc 的官方使用說明文件中，光是其針對 Markdown 格式的擴充就佔了整整一半左右的篇幅。 </p>
-<p>本文件翻譯自 <a href="http://johnmacfarlane.net/pandoc/README.html#pandocs-markdown">Pandoc - Pandoc User&rsquo;s Guide</a> 中的 "Pandoc's markdown" 一節。你可以看看<a href="https://raw.github.com/tzengyuxio/pages/gh-pages/pandoc/pandoc.markdown">這份文件的原始檔</a>、產生文件<a href="https://github.com/tzengyuxio/pages/blob/gh-pages/pandoc/pm-template.html5">所使用的 HTML 範本</a>，以及<a href="https://github.com/tzengyuxio/pages/blob/gh-pages/pandoc/convert.sh">轉換時的命令參數 …</a></p> </div><!-- /.entry-content -->
+                <div> <blockquote>
+<p>学习了一段时间卷积，到了该整理的时候了。这是一篇不会写完的文章，它将跟进卷积技术的发展和演变，进行增补。</p>
+</blockquote>
+<h2 id="juan-ji-de-shu-xue-yuan-li">卷积的数学原理</h2>
+<p>在图像处理中，卷积计算属于二维卷积的离散形式，公式如下：
+</p>
+<div class="math">$$(f*g)[n_1, n_2] = \sum_{m_1 = -\infty}^{+\infty}\sum_{m_2 = -\infty}^{+\infty}f[m_1, m_2]\cdot g[n_1 - m_1, n_2 - m_2]$$</div>
+<p>其中，</p>
+<ul>
+<li><span class="math">\((f*g)[n_1, n_2]\)</span> 表示 <span class="math">\(g\)</span> 图像位于<span class="math">\((n_1,n_2)\)</span> 坐标对应的值在过滤器 <span class="math">\(f\)</span> 上的卷积</li>
+<li><span class="math">\(f[m_1,m_2]\)</span> 为卷积核，方括号表示序列，
+  例如<span class="math">\(f …</span></li></ul> </div><!-- /.entry-content -->
         </article></li>
         <li class="related"><article>
-                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/mathjax-handbook" rel="bookmark" title="Permalink to Markdown 数学公式指导手册">Markdown 数学公式指导手册</a></h2> </header>
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/hmm-memm-crf" rel="bookmark" title="Permalink to 概率图模型 HMM、MEMM、CRF">概率图模型 HMM、MEMM、CRF</a></h2> </header>
                 <footer class="post-info">
-                    <time class="published" datetime="2017-05-11T00:00:00+08:00"> 2017-05-11 </time>
+                    <time class="published" datetime="2018-05-08T00:00:00+08:00"> 2018-05-08 </time>
                     <address class="vcard author">By
-                        <a class="url fn" href="https://freeopen.github.io/author/pan-jia-hao-bian-yi-freeopenxiu-ding.html">潘嘉豪(编译), freeopen(修订)</a>
+                        <a class="url fn" href="https://freeopen.github.io/author/scofield.html">Scofield</a>
                     </address>
                 </footer><!-- /.post-info -->
-                <div> <p>本手册的主要内容来自 <a href="https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference">mathjax-basic-tutorial-and-quick-reference</a>.</p>
+                <div> <p><a href="https://www.zhihu.com/question/35866596/answer/236886066">转自知乎</a></p>
 <blockquote>
-<p><em>Note: 鼠标右键单击公式表达式, 选择 "Show Math As &gt; TeX Commands", 即可查看公式的LaTex代码。</em></p>
+<p>freeopen: 此文不错，有些小错，顺手改了</p>
 </blockquote>
-<h2 id="yi--gong-shi-shi-yong-can-kao">一、公式使用参考</h2>
-<h3 id="ru-he-cha-ru-gong-shi">1．如何插入公式</h3>
-<p>LaTex 的数学公式有两种：行中公式和独立公式。行中公式放在文中与其它文字混编，独立公式单独成行。</p>
-<p>行中公式示例: <code>$\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}$</code> <span class="math">\(\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}\)</span></p>
-<p>独立公式示例：<code>$$\sum_{i …</code></p> </div><!-- /.entry-content -->
+<h2 id="yi-preface"><strong>一、Preface</strong></h2>
+<p>之前刚接触NLP时做相关的任务，也必然地涉及到了序列处理任务，然后自然要接触到概率图模型。当时在全网搜中文资料，陆续失望地发现竟然真的没有讲得清楚的博文，发现基本是把李航老师书里或CRF tutorial等资料的文字论述和公式抄来抄去的。当然，没有说别人讲的是错的，只是觉得，要是没有把东西说的让读者看得懂，那也是没意义啊。或者有些吧，就是讲了一大堆的东西，貌似也明白了啥，但还是不能让我很好的理解CRF这些模型究竟是个啥，完了还是有一头雾水散不开的感觉。试想，一堆公式扔过来，没有个感性理解的过渡，怎么可能理解的了。我甚至觉得，如果博客让人看不懂，那说明要么自己没理解透要么就是思维不清晰讲不清楚。所以默想，深水区攻坚还是要靠自己，然后去做调研做research，所以就写了个这个学习记录。</p>
+<p>所以概率图的研究学习思考列入了我的任务清单。不过平时的时间又非常的紧，只能陆陆续续的思考着，所以时间拖得也真是长啊。</p>
+<p>这是个学习笔记。相比其他的学习模型，概率图貌似确实是比较难以理解的。这里我基本全部用自己的理解加上自己的语言习惯表达出来，off the official form，表达尽量接地气。我会尽量将我所有理解过程中的每个关键小细节都详细描述出来，以使对零基础的初学者友好 …</p> </div><!-- /.entry-content -->
+        </article></li>
+        <li class="related"><article>
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/estimator" rel="bookmark" title="Permalink to Estimator 编程指南">Estimator 编程指南</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2018-03-04T00:00:00+08:00"> 2018-03-04 </time>
+                    <address class="vcard author">By
+                        <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
+                    </address>
+                </footer><!-- /.post-info -->
+                <div> <blockquote>
+<p>2018-04-12 第一次修订, 新增"多GPU下的写法"</p>
+</blockquote>
+<p>注：代码适用于 TF1.4 ~ TF1.7 。</p>
+<p>为什么要使用Estimator, 仅<a href="https://www.tensorflow.org/programmers_guide/estimators">官方文档</a>里提到的第一条优点就让我不得不重视它。
+大意是不管你在本地环境还是分布式环境，不管你用一个或多个CPU、GPU还是TPU训练模型，你的模型代码不需要做任何改变。</p>
+<p>但看了一些Estimator教程，不怎么满意。因为大部分介绍的方法过于简单，仅适用于实验环境。当你面对大数据、复杂模型和机能限制时，发现那些方法就不灵了。
+所以就自己写了一本，方便自查自检。这篇文章，会随着本人的打怪升级等级进行增补。</p>
+<h2 id="estimator">Estimator</h2>
+<p align="center">
+<img src="/images/image2.jpg" width="75%"/>
+<br/>
+</p>
+<p>Estimator 作为高层API，可以让我们写出结构清晰的代码。你有两种方法通过 estimator 来构建模型：</p>
+<ul>
+<li>Pre-mode Estimator: 创建指定类型的模型，如上图，它们分别是线性分类和回归模型、深度神经网络分类和回归模型，还有线性和深度混合的分类、回归模型。</li>
+<li>自定义 Estimator: 按传统的方法写模型，然后用 model_fn 函数封装 …</li></ul> </div><!-- /.entry-content -->
+        </article></li>
+        <li class="related"><article>
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/ml-glossary" rel="bookmark" title="Permalink to 机器学习术语表">机器学习术语表</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2018-02-26T00:00:00+08:00"> 2018-02-26 </time>
+                    <address class="vcard author">By
+                        <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
+                    </address>
+                </footer><!-- /.post-info -->
+                <div> <blockquote>
+<p>为方便读论文时查询术语，只做英文目录，我会不时把新遇到的术语增补到这里。
+<a href="https://developers.google.com/machine-learning/glossary/">初版</a>来自 Google Developers 网站。
+有不准确的地方请来信告知，我会即时更正。</p>
+</blockquote>
+<p>本术语表定义了一般机器学习术语以及特定于 TensorFlow 的术语。</p>
+<p><font color="red">常用评价指标导航</font></p>
+<ul>
+<li><a href="#accuracy">accuracy</a></li>
+<li><a href="#precision">precision</a></li>
+<li><a href="#recall">recall</a></li>
+<li><a href="#f-score">F1-Score</a></li>
+<li><a href="#ap">AP</a></li>
+<li><a href="#map">mAP</a></li>
+<li><a href="#auc-area-under-the-roc-curve">AUC</a></li>
+<li><a href="#roc-receiver-operating-characteristic-curve">ROC</a></li>
+<li><a href="#bleu">BLEU</a></li>
+<li><a href="#iou">IoU</a></li>
+</ul>
+<h2 id="a">A</h2>
+<h3 id="ab-testing">A/B testing</h3>
+<p>A statistical way of comparing two (or more) techniques, typically an incumbent against a new rival. A/B testing aims to determine …</p> </div><!-- /.entry-content -->
+        </article></li>
+        <li class="related"><article>
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/python-numpy" rel="bookmark" title="Permalink to Python Numpy 教程">Python Numpy 教程</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2017-12-11T00:00:00+08:00"> 2017-12-11 </time>
+                    <address class="vcard author">By
+                        <a class="url fn" href="https://freeopen.github.io/author/justin-johnson-du-ke-yi-freeopenbian.html">Justin Johnson, 杜客(译), freeopen(编)</a>
+                    </address>
+                </footer><!-- /.post-info -->
+                <div> <p><a href="http://cs231n.github.io/python-numpy-tutorial/">原文</a> | <a href="https://zhuanlan.zhihu.com/p/20878530?refer=intelligentunit">原译文</a></p>
+<blockquote>
+<p>freeopen: 原译文没有目录导航，阅读起来不方便。补全少量漏翻的地方。虽然内容很基础，但需要时快速查阅一下还是很不错的。</p>
+</blockquote>
+<h2 id="introduction">Introduction</h2>
+<p>Python是一门伟大的通用编程语言，在一些常用库（numpy, scipy, matplotlib）的帮助下，它又会变成一个强大的科学计算环境。</p>
+<p>我们期望你们中大多数人对于Python语言和Numpy库比较熟悉，而对于没有Python经验的同学，这篇教程可以帮助你们快速了解Python编程环境和如何使用Python作为科学计算工具。</p>
+<p>一部分同学对于Matlab有一定经验。对于这部分同学，我们推荐阅读 <a href="https://docs.scipy.org/doc/numpy-dev/user/numpy-for-matlab-users.html">numpy for Matlab users 页面</a>。</p>
+<p>本教程内容涵盖:</p>
+<ul>
+<li>Basic Python: Basic data types (Containers, Lists, Dictionaries, Sets, Tuples), Functions, Classes</li>
+<li>Numpy: Arrays, Array indexing, Datatypes, Array math, Broadcasting</li>
+<li>SciPy: Image …</li></ul> </div><!-- /.entry-content -->
+        </article></li>
+        <li class="related"><article>
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/tensorlayer" rel="bookmark" title="Permalink to TensorLayer 教程">TensorLayer 教程</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2017-09-09T00:00:00+08:00"> 2017-09-09 </time>
+                    <address class="vcard author">By
+                        <a class="url fn" href="https://freeopen.github.io/author/xiaoping-fanyi-freeopenxiu-ding.html">Xiaoping Fan(译), freeopen(修订)</a>
+                    </address>
+                </footer><!-- /.post-info -->
+                <div> <p><a href="https://github.com/zsdonghao/tensorlayer/blob/master/docs/user/tutorial.rst">原文</a> | <a href="https://github.com/shorxp/tensorlayer-chinese/blob/master/docs/user/tutorial.rst">原译文</a></p>
+<blockquote>
+<p>freeopen: 为什么研究 TensorLayer ? <br/>
+在TF的编码中，常看到model被封装成class，进一步研究，发现为了简化模型的创建，有各种封装库，包括Keras, Tflearn, TFSlim, tf.contrib.learn(或称skflow) 等。
+其中TFSlim和skflow属TensorFlow自带，考虑到TFSlim中有现成的模型，就修改了一个试试，发现坑不小。我需要首先把数据源转成TFRecord格式，然后用模型训练后报错（out of range), 然后我就首先检查数据源的格式是否有问题，我采用TFSlim的Data
+provider来输出数据，可能我的数据维度太大，程序不报错，但一直死在那里不出结果，而同样我在使用numpy输出数据源数据时，没有任何问题，也没什么延时，瞬间我感觉到TFSlim的封装模式不仅把问题复杂化了，甚至还降低了程序的性能。Keras据说跑TF性能较慢，Tflearn感觉活跃度较低，考虑到TensorLayer是skflow上的再次封装，且不丧失灵活性，加上这篇最主要的教程写得真心不错，所以我发愿要好好研究一番。 <br/></p>
+<p>为什么我总喜欢修订一些长文翻译？<br/>
+技术翻译文章经常在阅读时有不知所云的现象，我总结的原因主要有三：一是译者没有理解作者意图，甚至连文章都没读懂，就开始直译 …</p></blockquote> </div><!-- /.entry-content -->
+        </article></li>
+        <li class="related"><article>
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/mnist" rel="bookmark" title="Permalink to TensorFlow 的 MNIST 教程">TensorFlow 的 MNIST 教程</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2017-08-02T00:00:00+08:00"> 2017-08-02 </time>
+                    <address class="vcard author">By
+                        <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
+                    </address>
+                </footer><!-- /.post-info -->
+                <div> <p><a href="https://www.tensorflow.org/get_started/mnist/pros">原文</a></p>
+<blockquote>
+<p>译者注：这篇文章对初学tensorflow的朋友来说，有很好的参考作用。曾经在网上看过本教程的翻译稿，但版本偏老。本文翻译时，tensorflow的版本为1.3.0-rc1. 新版相较于老版，示例代码有变化，文字说明也有增补。</p>
+</blockquote>
+<p>TensorFlow是一个非常强大的用来做大规模数值计算的库。其所擅长的任务之一就是实现以及训练深度神经网络。
+在本教程中，我们将学到构建一个TensorFlow模型的基本步骤，并将通过这些步骤为MNIST构建一个深度卷积神经网络。</p>
+<p>这个教程假设你已经熟悉神经网络和MNIST数据集。如果你尚未了解，请查看新手指南.</p>
+<h2 id="guan-yu-ben-jiao-cheng">关于本教程</h2>
+<p>本教程第一部分讲解 <a href="https://www.github.com/tensorflow/tensorflow/blob/r1.2/tensorflow/examples/tutorials/mnist/mnist_softmax.py">mnist_softmax.py</a> 代码, 一个简单的tensorflow模型实现。第二部分介绍一些提高精度的方法。</p>
+<p>你可以从本教程拷贝和粘贴代码块到你的python环境，或者下载完整代码 <a href="https://www.github.com/tensorflow/tensorflow/blob/r1.2/tensorflow/examples/tutorials/mnist/mnist_deep.py">mnist_deep.py</a>.</p>
+<p>我们将完成如下目标：</p>
+<ul>
+<li>基于图片像素，创建一个softmax回归函数的模型来识别MNIST数字。</li>
+<li>用tensorflow训练模型识别数字。</li>
+<li>用测试数据检查模型精度</li>
+<li>构建、训练和测试一个多层卷积神经网络来提升模型精度。</li>
+</ul>
+<h2 id="an-zhuang">安装</h2>
+<p>在创建模型之前，我们会先加载MNIST数据集，然后启动一个TensorFlow的session。</p>
+<h3 id="jia-zai-mnistshu-ju">加载MNIST数据</h3>
+<p>为了方便起见，我们已经准备了一个脚本来自动下载和导入MNIST数据集。它会自动创建一个'MNIST_data'的目录来存储数据。</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorflow.examples …</span></pre></div> </div><!-- /.entry-content -->
+        </article></li>
+        <li class="related"><article>
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/nmt-cn" rel="bookmark" title="Permalink to Neural Machine Translation (seq2seq) 教程">Neural Machine Translation (seq2seq) 教程</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2017-07-18T00:00:00+08:00"> 2017-07-18 </time>
+                    <address class="vcard author">By
+                        <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
+                    </address>
+                </footer><!-- /.post-info -->
+                <div> <p><a href="https://github.com/tensorflow/nmt">原文</a></p>
+<h2 id="jie-shao">介绍</h2>
+<p>序列到序列(seq2seq)模型 (<a href="https://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf">Sutskever et al., 2014</a>, <a href="http://emnlp2014.org/papers/pdf/EMNLP2014179.pdf">Cho et al., 2014</a>) 在诸如机器翻译、语音识别和文本概括等任务中取得了巨大成功. 本教程为读者提供对 seq2seq 模型的全面理解，并展示如何从头构建一个有竞争力的 seq2seq 模型. 我们专注于神经机器翻译（NMT）任务，这是一个很好的、已获得广泛<a href="https://research.googleblog.com/2016/09/a-neural-network-for-machine.html">成功</a>的 seq2seq 模型的试验台. 所含的代码轻量、高质、实用，并整合了最新的研究思路。我们通过以下方式达成此目标 :</p>
+<ol>
+<li>使用最新的 解码器 / attention wrapper <a href="https://github.com/tensorflow/tensorflow/tree/master/tensorflow/contrib/seq2seq/python/ops">API</a>, TensorFlow 1.2 数据迭代器</li>
+<li>结合我们在建立循环神经网络和序列到序列模型方面的强大专长</li>
+<li>提供一些巧思来构建最好的 NMT 模型，并复制一个谷歌神经机器翻译系统 <a href="https://research.google.com/pubs/pub45610.html">Google …</a></li></ol> </div><!-- /.entry-content -->
         </article></li>
 </ol><!-- /#posts-list -->
 <p class="pagination">
         <a href="https://freeopen.github.io/index.html">&laquo;&emsp;</a>
-    Page 2 / 2
+    Page 2 / 3
+        <a href="https://freeopen.github.io/index3.html">&emsp;&raquo;</a>
 </p>
 </section><!-- /#content -->
           </div>
@@ -166,27 +309,11 @@
   </div>
 
 
-    <script type="text/javascript">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+<!--  -->
+<!--  -->
 
-    ga('create', 'UA-98793057-1', 'auto');
-    ga('send', 'pageview');
-    </script>
-<script type="text/javascript">
-    var disqus_shortname = 'freeopen';
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
 <script src="https://freeopen.github.io/theme/js/jquery-3.3.1.slim.min.js"></script>
 <script src="https://freeopen.github.io/theme/js/popper.min.js"></script>
 <script src="https://freeopen.github.io/theme/js/bootstrap.min.js"></script>
-
 </body>
 </html>

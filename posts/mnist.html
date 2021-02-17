@@ -33,13 +33,13 @@
           </button>
           <nav class="collapse navbar-collapse sidebar-nav flex-column" id="navbarNav">
 
-              <a class="nav-link" href="https://freeopen.github.io/pages/about.html">About</a>
-              <a class="nav-link" href="https://freeopen.github.io/pages/da-shang.html">打赏</a>
+              <a class="nav-link" href="https://freeopen.github.io/pages/guan-yu-zhe-li.html">关于这里</a>
+              <a class="nav-link" href="https://freeopen.github.io/pages/zou-guo-lu-guo.html">走过路过</a>
 
-              <a class="nav-link" href="https://freeopen.github.io/category/bian-cheng.html">编程</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/bian-cheng-zhi-hui.html">编程智慧</a>
               <a class="nav-link" href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
-              <a class="nav-link" href="https://freeopen.github.io/category/shou-ce.html">手册</a>
-              <a class="nav-link" href="https://freeopen.github.io/category/shu-xue.html">数学</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/shu-xue-za-tan.html">数学杂谈</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/su-cha-shou-ce.html">速查手册</a>
             <div class="sidebar-icons">
               <hr>
                 <a href="" title="Atom feed" target="_blank" 
@@ -104,13 +104,13 @@
 <h3 id="jia-zai-mnistshu-ju">加载MNIST数据</h3>
 <p>为了方便起见，我们已经准备了一个脚本来自动下载和导入MNIST数据集。它会自动创建一个'MNIST_data'的目录来存储数据。</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorflow.examples.tutorials.mnist</span> <span class="kn">import</span> <span class="n">input_data</span>
-<span class="n">mnist</span> <span class="o">=</span> <span class="n">input_data</span><span class="o">.</span><span class="n">read_data_sets</span><span class="p">(</span><span class="s1">'MNIST_data'</span><span class="p">,</span> <span class="n">one_hot</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">mnist</span> <span class="o">=</span> <span class="n">input_data</span><span class="o">.</span><span class="n">read_data_sets</span><span class="p">(</span><span class="s1">'MNIST_data'</span><span class="p">,</span> <span class="n">one_hot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 <p>这里，<code>mnist</code>是一个轻量级的类。它以Numpy数组的形式存储着训练、校验和测试数据集。同时提供了一个函数，用于在迭代中获得minibatch，后面我们将会用到。</p>
 <h3 id="yun-xing-tensorflowde-interactivesession">运行TensorFlow的InteractiveSession</h3>
 <p>Tensorflow依赖于一个高效的C++后端来进行计算。与后端的这个连接叫做session。一般而言，使用TensorFlow程序的流程是先创建一个图，然后在session中启动它。</p>
 <p>这里，我们使用更加方便的InteractiveSession类。通过它，你可以更加灵活地构建你的代码。它能让你在运行图的时候，插入一些计算图，这些计算图是由某些操作(operations)构成的。这对于工作在交互式环境中的人们来说非常便利，比如使用IPython。如果你没有使用InteractiveSession，那么你需要在启动session之前构建整个计算图，然后启动该计算图。</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="kn">as</span> <span class="nn">tf</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="n">sess</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">InteractiveSession</span><span class="p">()</span>
 </pre></div>
 <h3 id="ji-suan-tu">计算图</h3>
@@ -118,12 +118,12 @@
 <p>但遗憾的是，每一个操作切换回Python环境时仍需要不小的开销。如果你想在GPU或者分布式环境中计算时，这一开销更加可怖，这一开销主要可能是用来进行数据迁移。</p>
 <p>TensorFlow也是在Python外部完成其主要工作，但是进行了改进以避免这种开销。其并没有采用在Python外部独立运行某个耗时操作的方式，而是先让我们描述一个交互操作图，然后完全将其运行在Python外部。这与Theano或Torch的做法类似。</p>
 <p>因此Python代码的目的是用来构建这个可以在外部运行的计算图，以及安排计算图的哪一部分应该被运行。详情请查看基本用法中的计算图表一节。</p>
-<h2 id="gou-jian--softmax-hui-gui-mo-xing_1">构建 Softmax 回归模型</h2>
+<h2 id="gou-jian-softmax-hui-gui-mo-xing_1">构建 Softmax 回归模型</h2>
 <p>在这一节中我们将建立一个拥有一个线性层的softmax回归模型。在下一节，我们会将其扩展为一个拥有多层卷积网络的softmax回归模型。</p>
 <h3 id="zhan-wei-fu-placeholders">占位符(placeholders)</h3>
 <p>我们通过为输入图像和目标输出类别创建节点，来构建计算图。</p>
-<div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="s2">"float"</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="mi">784</span><span class="p">])</span>
-<span class="n">y_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="s2">"float"</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="s2">"float"</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">784</span><span class="p">])</span>
+<span class="n">y_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="s2">"float"</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
 </pre></div>
 <p>这里的<code>x</code>和<code>y_</code>并不是特定的值，相反，他们都只是一个<code>占位符</code>，可以在TensorFlow运行某一计算时根据该占位符输入具体的值。</p>
 <p>输入图片<code>x</code>是一个2维的浮点数张量。这里，分配给它的shape为[None, 784]，其中784是一张展平的MNIST图片的维度。None表示其值大小不定，在这里作为第一个维度值，用以指代batch的大小，意即x的数量不定。输出类别值y_也是一个2维张量，其中每一行为一个10维的one-hot向量,用于代表对应某一MNIST图片的类别。</p>
@@ -169,7 +169,7 @@
 <div class="highlight"><pre><span></span><span class="n">accuracy</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">correct_prediction</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span>
 </pre></div>
 <p>最后，我们可以计算出在测试数据上的准确率，大概是92%。</p>
-<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">accuracy</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">feed_dict</span><span class="o">=</span><span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">mnist</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">images</span><span class="p">,</span> <span class="n">y_</span><span class="p">:</span> <span class="n">mnist</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">labels</span><span class="p">}))</span>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">accuracy</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">feed_dict</span><span class="o">=</span><span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">mnist</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">images</span><span class="p">,</span> <span class="n">y_</span><span class="p">:</span> <span class="n">mnist</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">labels</span><span class="p">}))</span>
 </pre></div>
 <h2 id="gou-jian-duo-ceng-juan-ji-wang-luo_1">构建多层卷积网络</h2>
 <p>在MNIST上只有92% 的准确率，实在太糟糕。在这节里，我们用一个稍微复杂的模型：卷积神经网络来改善效果。这会达到大概99.2%的准确率。虽然不是最高，但是还是比较让人满意。</p>
@@ -277,10 +277,10 @@ TensorFlow的<code>tf.nn.dropout</code>操作除了可以屏蔽神经元的输�
     <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
       <span class="n">train_accuracy</span> <span class="o">=</span> <span class="n">accuracy</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">feed_dict</span><span class="o">=</span><span class="p">{</span>
           <span class="n">x</span><span class="p">:</span> <span class="n">batch</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y_</span><span class="p">:</span> <span class="n">batch</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">keep_prob</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">})</span>
-      <span class="k">print</span><span class="p">(</span><span class="s1">'step </span><span class="si">%d</span><span class="s1">, training accuracy </span><span class="si">%g</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">train_accuracy</span><span class="p">))</span>
+      <span class="nb">print</span><span class="p">(</span><span class="s1">'step </span><span class="si">%d</span><span class="s1">, training accuracy </span><span class="si">%g</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">train_accuracy</span><span class="p">))</span>
     <span class="n">train_step</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">feed_dict</span><span class="o">=</span><span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">batch</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y_</span><span class="p">:</span> <span class="n">batch</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">keep_prob</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">})</span>
 
-  <span class="k">print</span><span class="p">(</span><span class="s1">'test accuracy </span><span class="si">%g</span><span class="s1">'</span> <span class="o">%</span> <span class="n">accuracy</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">feed_dict</span><span class="o">=</span><span class="p">{</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s1">'test accuracy </span><span class="si">%g</span><span class="s1">'</span> <span class="o">%</span> <span class="n">accuracy</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">feed_dict</span><span class="o">=</span><span class="p">{</span>
       <span class="n">x</span><span class="p">:</span> <span class="n">mnist</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">images</span><span class="p">,</span> <span class="n">y_</span><span class="p">:</span> <span class="n">mnist</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">labels</span><span class="p">,</span> <span class="n">keep_prob</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">}))</span>
 </pre></div>
 <p>以上代码，在最终测试集上的准确率大概是99.2%。</p>
@@ -296,21 +296,32 @@ TensorFlow的<code>tf.nn.dropout</code>操作除了可以屏蔽神经元的输�
 </div>
   </div><!-- /.entry-content -->
 
-  <div class="comments">
-    <!-- <h2>Comments !</h2> -->
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-      var disqus_shortname = 'freeopen';
-      var disqus_identifier = 'posts/mnist';
-      var disqus_url = 'https://freeopen.github.io/posts/mnist';
-      (function() {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//freeopen.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      })();
-    </script>
-    <noscript>Please enable JavaScript to view the comments.</noscript>
-  </div>
+  <!-- DISQUS 评论系统 -->
+
+  <!-- giteement评论系统 -->
+
+  <!-- Gitalk 评论 start  -->
+  <!-- Link Gitalk 的支持文件  -->
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+
+  <div id="gitalk-container"></div>
+      <script type="text/javascript">
+      var gitalk = new Gitalk({
+
+      // gitalk的主要参数
+          clientID: '8a8232de9043fc407bf4',
+          clientSecret: 'aab87cee1582588743573358e51f4a785ceb49a3',
+          repo: 'blog-discuss',
+          owner: 'freeopen',
+          admin: ['freeopen'],
+          id: 'posts/mnist',
+      
+      });
+      gitalk.render('gitalk-container');
+  </script>
+  <!-- Gitalk end -->
+
 </section>
           </div>
 
@@ -325,7 +336,7 @@ TensorFlow的<code>tf.nn.dropout</code>操作除了可以屏蔽神经元的输�
       <div class="hidden-print hidden-xs hidden-sm hidden-md col-lg" id="post_toc" role="complementary">
         <nav class="sidebar-toc">
 <!-- <section id="main_toc"> -->
-    <ul class="nav" id="toc"><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#guan-yu-ben-jiao-cheng" title="关于本教程">关于本教程</a></li><li class="nav-item"><a class="nav-link" href="#an-zhuang" title="安装">安装</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#jia-zai-mnistshu-ju" title="加载MNIST数据">加载MNIST数据</a></li><li class="nav-item"><a class="nav-link" href="#yun-xing-tensorflowde-interactivesession" title="运行TensorFlow的InteractiveSession">运行TensorFlow的InteractiveSession</a></li><li class="nav-item"><a class="nav-link" href="#ji-suan-tu" title="计算图">计算图</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#gou-jian--softmax-hui-gui-mo-xing_1" title="构建 Softmax 回归模型">构建 Softmax 回归模型</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#zhan-wei-fu-placeholders" title="占位符(placeholders)">占位符(placeholders)</a></li><li class="nav-item"><a class="nav-link" href="#bian-liang" title="变量">变量</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#lei-bie-yu-ce-yu-sun-shi-han-shu_1" title="类别预测与损失函数">类别预测与损失函数</a></li><li class="nav-item"><a class="nav-link" href="#xun-lian-mo-xing" title="训练模型">训练模型</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#ping-gu-mo-xing" title="评估模型">评估模型</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#gou-jian-duo-ceng-juan-ji-wang-luo_1" title="构建多层卷积网络">构建多层卷积网络</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#quan-zhong-chu-shi-hua" title="权重初始化">权重初始化</a></li><li class="nav-item"><a class="nav-link" href="#juan-ji-he-chi-hua" title="卷积和池化">卷积和池化</a></li><li class="nav-item"><a class="nav-link" href="#di-yi-ceng-juan-ji" title="第一层卷积">第一层卷积</a></li><li class="nav-item"><a class="nav-link" href="#di-er-ceng-juan-ji" title="第二层卷积">第二层卷积</a></li><li class="nav-item"><a class="nav-link" href="#quan-lian-jie-ceng" title="全连接层">全连接层</a></li><li class="nav-item"><a class="nav-link" href="#dropout" title="Dropout">Dropout</a></li><li class="nav-item"><a class="nav-link" href="#shu-chu-ceng" title="输出层">输出层</a></li><li class="nav-item"><a class="nav-link" href="#xun-lian-he-ping-gu-mo-xing" title="训练和评估模型">训练和评估模型</a></li></ul></li></ul></ul>
+    <div id="toc"><ul><li><a class="toc-href" href="#guan-yu-ben-jiao-cheng" title="关于本教程">关于本教程</a></li><li><a class="toc-href" href="#an-zhuang" title="安装">安装</a><ul><li><a class="toc-href" href="#jia-zai-mnistshu-ju" title="加载MNIST数据">加载MNIST数据</a></li><li><a class="toc-href" href="#yun-xing-tensorflowde-interactivesession" title="运行TensorFlow的InteractiveSession">运行TensorFlow的InteractiveSession</a></li><li><a class="toc-href" href="#ji-suan-tu" title="计算图">计算图</a></li></ul></li><li><a class="toc-href" href="#gou-jian-softmax-hui-gui-mo-xing_1" title="构建 Softmax 回归模型">构建 Softmax 回归模型</a><ul><li><a class="toc-href" href="#zhan-wei-fu-placeholders" title="占位符(placeholders)">占位符(placeholders)</a></li><li><a class="toc-href" href="#bian-liang" title="变量">变量</a></li></ul></li><li><a class="toc-href" href="#lei-bie-yu-ce-yu-sun-shi-han-shu_1" title="类别预测与损失函数">类别预测与损失函数</a></li><li><a class="toc-href" href="#xun-lian-mo-xing" title="训练模型">训练模型</a><ul><li><a class="toc-href" href="#ping-gu-mo-xing" title="评估模型">评估模型</a></li></ul></li><li><a class="toc-href" href="#gou-jian-duo-ceng-juan-ji-wang-luo_1" title="构建多层卷积网络">构建多层卷积网络</a><ul><li><a class="toc-href" href="#quan-zhong-chu-shi-hua" title="权重初始化">权重初始化</a></li><li><a class="toc-href" href="#juan-ji-he-chi-hua" title="卷积和池化">卷积和池化</a></li><li><a class="toc-href" href="#di-yi-ceng-juan-ji" title="第一层卷积">第一层卷积</a></li><li><a class="toc-href" href="#di-er-ceng-juan-ji" title="第二层卷积">第二层卷积</a></li><li><a class="toc-href" href="#quan-lian-jie-ceng" title="全连接层">全连接层</a></li><li><a class="toc-href" href="#dropout" title="Dropout">Dropout</a></li><li><a class="toc-href" href="#shu-chu-ceng" title="输出层">输出层</a></li><li><a class="toc-href" href="#xun-lian-he-ping-gu-mo-xing" title="训练和评估模型">训练和评估模型</a></li></ul></li></ul></div>
 <!-- </section> -->
 <!-- </section> -->
         </nav>
@@ -334,27 +345,11 @@ TensorFlow的<code>tf.nn.dropout</code>操作除了可以屏蔽神经元的输�
   </div>
 
 
-    <script type="text/javascript">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+<!--  -->
+<!--  -->
 
-    ga('create', 'UA-98793057-1', 'auto');
-    ga('send', 'pageview');
-    </script>
-<script type="text/javascript">
-    var disqus_shortname = 'freeopen';
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
 <script src="https://freeopen.github.io/theme/js/jquery-3.3.1.slim.min.js"></script>
 <script src="https://freeopen.github.io/theme/js/popper.min.js"></script>
 <script src="https://freeopen.github.io/theme/js/bootstrap.min.js"></script>
-
 </body>
 </html>

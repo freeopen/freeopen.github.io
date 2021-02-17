@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <!-- Enable responsiveness on mobile devices-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+        <title>Freeopen - 冠军方案之农作物范围识别</title>
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/css/main.css" />
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/academicons/css/academicons.min.css" />
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/font-awesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/fonts-googleapis/css/googleapi-fonts.css" />
+
+        
+
+
+
+
+
+
+</head>
+
+<body id="index" class="theme-myblue" data-spy="scroll" data-target="#post_toc">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-lg">
+        <nav class="navbar navbar-expand-lg navbar-light sidebar" role="navigation">
+          <a class="sidebar-about" href="https://freeopen.github.io/">Freeopen</a>
+          <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <nav class="collapse navbar-collapse sidebar-nav flex-column" id="navbarNav">
+
+              <a class="nav-link" href="https://freeopen.github.io/pages/guan-yu-zhe-li.html">关于这里</a>
+              <a class="nav-link" href="https://freeopen.github.io/pages/zou-guo-lu-guo.html">走过路过</a>
+
+              <a class="nav-link" href="https://freeopen.github.io/category/bian-cheng-zhi-hui.html">编程智慧</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/shu-xue-za-tan.html">数学杂谈</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/su-cha-shou-ce.html">速查手册</a>
+            <div class="sidebar-icons">
+              <hr>
+                <a href="" title="Atom feed" target="_blank" 
+                    style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;">
+                  <i class="fa fa-rss-square"></i>
+                </a>
+                <a href="https://github.com/freeopen" title="Software I released on Github" 
+                      target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="fa fa-github-square"></i> </a>
+                <a href="Mailto:freeopen@163.com" title="My email" 
+                    target="_blank" style="display: inline; padding: 0px 0px 0px 0;
+                    margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i
+                  class="fa fa-envelope-square"></i> </a>
+
+            </div>
+          </nav>
+
+        </nav>
+
+      </div>
+
+      <div class="col-12 col-lg-7" role="main">
+        <div id="content" class="content">
+          <div class="post">
+<section id="content" class="body">
+  <header>
+    <h1 class="entry-title">冠军方案之农作物范围识别</h2>
+ 
+  </header>
+  <div class="post-info">
+
+    <span>2021-02-13</span>
+
+
+    <span>| By             <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
+    </span>
+
+    <span>
+      | 分类于 <a href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
+    </span>
+
+  </div><!-- /.post-info -->
+  <div class="post content">
+    <blockquote>
+<p>冠军：华南理工黄钦建等（冲啊大黄 团队 ）</p>
+</blockquote>
+<h1>任务说明</h1>
+<p>通过无人机航拍的地面影像，探索像素级农作物分类的算法，具体的分类目标为薏仁米、玉米、烤烟、人造建筑（复赛新增），其余所有位置归为背景类。</p>
+<p>初赛、复赛提供的数据是同一片区域的航拍影像。其中初赛提供数据为农作物生长的早期（大多没长出来），分割难度较大。复赛数据农作物长势良好，并在初赛赛题基础上增加了一类&ldquo;建筑&rdquo;。</p>
+<p>提供的label为与原始图像1:1大小的单通道图像（mask），像素的大小对应不同的标注类别。其中&ldquo;烤烟&rdquo;像素值为1，&ldquo;玉米&rdquo;像素值为2，&ldquo;薏仁米&rdquo;像素值为3，&ldquo;人造建筑&rdquo;像素值为4，背景类像素值为0.</p>
+<p><strong>评估指标</strong></p>
+<p>评估指标为mIoU，榜上排名分数为所有计算所有类别IoU后取平均的结果。</p>
+<h2 id="shu-ju-fen-xi">数据分析</h2>
+<p>图像分辨率超大，背景类占比远高于其它类别，mask无效的区域面积也较大，类别不平衡问题突出。</p>
+<h2 id="shu-ju-qie-ge">数据切割</h2>
+<p>使用gdal库分割遥感影像，采用两种切割策略：</p>
+<ul>
+<li>策略一：以1024x1024的窗口大小，步长900滑窗，当窗口中mask无效区域比例大于7/8则跳过，当滑动窗口中背景类比例小于1/3时，增加采样率，减小步长为512；</li>
+<li>策略二：以1024x1024的窗口大小，步长512滑窗，当滑动窗口中无效mask比例大于1/3则跳过。</li>
+</ul>
+<h2 id="mo-xing-xuan-ze">模型选择</h2>
+<p>DeeplabV3+ （注：决赛5个队伍中3个用了它），backbone为Xception-65和ResNet-101以及DenseNet-121。从 A榜分数看，不加任何trick时，DenseNet分数略高于另外两个，但是显存占用太大以及训练时间太长，在后来的方案里就舍弃了。决赛复现时，使用了两个Xception-65和一个ResNet-101投票，投票的每个模型用不同的数据训练，增加模型差异。</p>
+<p><img alt="157137269012195351571372690503" src="https://freeopen.github.io/images/157137269012195351571372690503.png"/></p>
+<p><img alt="157137272713270821571372727612" src="https://freeopen.github.io/images/157137272713270821571372727612.png"/></p>
+<h2 id="gai-jin-cuo-shi">改进措施</h2>
+<h3 id="peng-zhang-yu-ce">膨胀预测</h3>
+<p><strong>方格效应</strong>：如果直接做不重叠滑窗预测拼接，得到的预测结果拼接痕迹明显。</p>
+<p><strong>原因分析</strong>：网络卷积计算时，为了维持分辨率进行了大量zero-padding，导致网络对边缘预测不准。</p>
+<p><strong>膨胀预测</strong>：预测时，只保留预测结果的中心区域，舍弃预测不准的边缘。</p>
+<p><strong>具体实现</strong>：</p>
+<ol>
+<li>填充右下边界至滑窗预测窗口大小的整数倍（方便切割）；</li>
+<li>填充1/2滑窗步长大小的外边框（考虑边缘数据的膨胀预测）；</li>
+<li>以1024x1024为滑窗，512为步长，每次预测只保留滑窗中心512x512的预测结果（可以调整更大的步长，或保留更大的中心区域，提高效率）。</li>
+</ol>
+<h3 id="ce-shi-zeng-qiang">测试增强</h3>
+<p>测试时，通过对图像水平翻转，垂直翻转，水平垂直翻转等多次预测，再对预测结果取平均可以提高精度，但相对的，推理时间也会大幅度升高。</p>
+<div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">torch</span><span class="p">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">image</span><span class="p">,</span><span class="n">pos_list</span><span class="p">)</span> <span class="k">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">dataloader</span><span class="p">):</span>
+        <span class="o">#</span> <span class="k">forward</span> <span class="c1">--&gt; predict</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="p">.</span><span class="n">cuda</span><span class="p">(</span><span class="n">device</span><span class="p">)</span> <span class="o">#</span> <span class="err">复制</span><span class="n">image到model所在device上</span>
+        <span class="n">predict_1</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+        <span class="o">#</span> <span class="err">水平翻转</span>
+        <span class="n">predict_2</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">flip</span><span class="p">(</span><span class="n">image</span><span class="p">,[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="n">predict_2</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">flip</span><span class="p">(</span><span class="n">predict_2</span><span class="p">,[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="o">#</span> <span class="err">垂直翻转</span>
+        <span class="n">predict_3</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">flip</span><span class="p">(</span><span class="n">image</span><span class="p">,[</span><span class="o">-</span><span class="mi">2</span><span class="p">]))</span>
+        <span class="n">predict_3</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">flip</span><span class="p">(</span><span class="n">predict_3</span><span class="p">,[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+        <span class="o">#</span> <span class="err">水平垂直翻转</span>
+        <span class="n">predict_4</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">flip</span><span class="p">(</span><span class="n">image</span><span class="p">,[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">]))</span>
+        <span class="n">predict_4</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">flip</span><span class="p">(</span><span class="n">predict_4</span><span class="p">,[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+
+        <span class="n">predict_list</span> <span class="o">=</span> <span class="n">predict_1</span> <span class="o">+</span> <span class="n">predict_2</span> <span class="o">+</span> <span class="n">predict_3</span> <span class="o">+</span> <span class="n">predict_4</span>   
+        <span class="n">predict_list</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">predict_list</span><span class="p">.</span><span class="n">cpu</span><span class="p">(),</span><span class="mi">1</span><span class="p">).</span><span class="n">byte</span><span class="p">().</span><span class="n">numpy</span><span class="p">()</span> <span class="o">#</span> <span class="n">n</span> <span class="n">x</span> <span class="n">h</span> <span class="n">x</span> <span class="n">w</span>
+</pre></div>
+<h3 id="snapshot-ensemble">snapshot ensemble</h3>
+<p><strong>snapshot ensemble</strong> 是一个简单通用的提分trick，通过余弦周期退火的学习率调整策略，保存多个收敛到局部最小值的模型，通过模型自融合提升模型效果。详细的实验和实现可以看黄高老师ICLR 2017的这篇<a href="https://arxiv.org/pdf/1704.00109.pdf">论文</a>。</p>
+<p><strong>snapshot ensemble</strong> 另一个作用是作新方案的验证。深度学习训练的结果具有一定的随机性，在做新改进方案验证时，有时难以确定线上分数的小幅度提升是来自于随机性，还是改进方案really work。在比赛提交次数有限的情况下，<strong>snapshot ensemble</strong> 不失为一个稳定新方案验证的方法。</p>
+<h3 id="hou-chu-li">后处理</h3>
+<p>对输出结果做最简单的填充孔洞和去除小连通域。</p>
+<h3 id="biao-qian-ping-hua">标签平滑</h3>
+<p><strong>标签平滑</strong>想法参考了Hinton大神关于的<a href="https://arxiv.org/abs/1503.02531">知识蒸馏</a>和<a href="https://arxiv.org/abs/1906.02629">When does label smoothing help?</a>的工作，标签平滑训练的模型更加稳定和泛化能力更强。</p>
+<p>在知识蒸馏中，用teacher模型输出的soft target训练的student模型，比直接用硬标签（onehot-label）训练的模型具有更强的泛化能力。我对这部分提升理解是：软标签更加合理反映样本的真实分布情况，硬标签只有全概率和0概率，太过绝对。知识蒸馏时teacher模型实现了easy sample 和 hard sample 的&ldquo;分拣&rdquo;（标签平滑），对hard sample输出较低的置信度，对easy sample 输出较高的置信度，使得student模型学到了更加丰富的信息。</p>
+<p>参考相关论文的实验数据可以看出，软标签训练的模型类内更加凝聚，更加可分。</p>
+<p>在图像分割任务中，每个像素的分类结果很大程度依赖于周围像素，基于此，即使不通过teacher模型，我们也可以发掘部分样本中的hard sample。</p>
+<p>图像边缘：卷积时零填充太多，信息缺少，难以正确分类</p>
+<p>不同类间交界处：类间交界难以界定，存在许多标注错误，训练时梯度不稳定；类间交界的点，往往只相差几个像素偏移，对网络来说输入信息高度相似，但训练时label 却不同，也是训练过程的不稳定因素。</p>
+<p>针对性的解决方案是在图像边缘和类间交界设置过渡带，过渡带内的像素视为 hard sample作标签平滑处理，平滑的程度取决于训练时每个batch中 hard sample 像素占总输入像素的比例。而过渡带width的大小为一个超参数，在本次比赛中我们取 <strong>width = 11 个像素点</strong>。</p>
+<p>不加hard sample 的损失函数：</p>
+<div class="math">$$H(y,p)=\sum^{K}_{k=1}-y_klog(p_k)$$</div>
+<p>对hard sample 加入平滑后：</p>
+<div class="math">$$H(y,p)=\sum^{K}_{k=1}-y_k^{easy}log(p_k^{easy}) + \sum^{K}_{k=1}-y_k^{hard}log(p_k^{hard})$$</div>
+<div class="math">$$y_k^{hard} = y_k(1-\alpha)+ \alpha/K$$</div>
+<p>其中，<span class="math">\(\alpha\)</span>用于控制标签的平滑程度，取值为每次输入数据中hard sample像素占输入数据的比例。</p>
+<h3 id="wei-biao-qian-ruan-biao-qian">伪标签 + 软标签</h3>
+<p>伪标签是分类比赛中常用的trick之一，在模型分数已经较高的情况下可以尝试。提分显著，但对A榜过拟合的风险极大。具体实施是：</p>
+<ol>
+<li>利用在测试集表现最好的融合模型结果作伪标签，用多组不同置信度阈值过滤数据，结合训练集训练模型；</li>
+<li>对所有伪标签数据进行标签平滑，缓解伪标签中错误数据对网络训练影响；</li>
+<li>选取多个snapshot的方法对模型进行自融合提高模型的泛化能力；</li>
+<li>利用3的结果，更新伪标签，重复步骤1~3。</li>
+</ol>
+<h2 id="zong-jie_1">总结</h2>
+<ol>
+<li>膨胀预测消除边缘预测不准问题；</li>
+<li>使用测试增强、消除空洞和小连通域等后处理提高精度；</li>
+<li>使用snapshot模型自融合、标签平滑、伪标签等方法提高模型稳定性。</li>
+</ol>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdn.bootcdn.net/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+  </div><!-- /.entry-content -->
+
+  <!-- DISQUS 评论系统 -->
+
+  <!-- giteement评论系统 -->
+
+  <!-- Gitalk 评论 start  -->
+  <!-- Link Gitalk 的支持文件  -->
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+
+  <div id="gitalk-container"></div>
+      <script type="text/javascript">
+      var gitalk = new Gitalk({
+
+      // gitalk的主要参数
+          clientID: '8a8232de9043fc407bf4',
+          clientSecret: 'aab87cee1582588743573358e51f4a785ceb49a3',
+          repo: 'blog-discuss',
+          owner: 'freeopen',
+          admin: ['freeopen'],
+          id: 'posts/crop-detection',
+      
+      });
+      gitalk.render('gitalk-container');
+  </script>
+  <!-- Gitalk end -->
+
+</section>
+          </div>
+
+          <footer id="contentinfo" class="footer">
+            <div class="footer-inner">
+              无节操小广告<a href="https://freeopen.github.io/pages/da-shang.html"> 欢迎打赏 </a>
+            </div>
+          </footer><!-- /#contentinfo -->
+        </div>
+      </div>
+
+      <div class="hidden-print hidden-xs hidden-sm hidden-md col-lg" id="post_toc" role="complementary">
+        <nav class="sidebar-toc">
+<!-- <section id="main_toc"> -->
+    <div id="toc"><ul><li><a class="toc-href" href="#shu-ju-fen-xi" title="数据分析">数据分析</a></li><li><a class="toc-href" href="#shu-ju-qie-ge" title="数据切割">数据切割</a></li><li><a class="toc-href" href="#mo-xing-xuan-ze" title="模型选择">模型选择</a></li><li><a class="toc-href" href="#gai-jin-cuo-shi" title="改进措施">改进措施</a><ul><li><a class="toc-href" href="#peng-zhang-yu-ce" title="膨胀预测">膨胀预测</a></li><li><a class="toc-href" href="#ce-shi-zeng-qiang" title="测试增强">测试增强</a></li><li><a class="toc-href" href="#snapshot-ensemble" title="snapshot ensemble">snapshot ensemble</a></li><li><a class="toc-href" href="#hou-chu-li" title="后处理">后处理</a></li><li><a class="toc-href" href="#biao-qian-ping-hua" title="标签平滑">标签平滑</a></li><li><a class="toc-href" href="#wei-biao-qian-ruan-biao-qian" title="伪标签 + 软标签">伪标签 + 软标签</a></li></ul></li><li><a class="toc-href" href="#zong-jie_1" title="总结">总结</a></li></ul></div>
+<!-- </section> -->
+<!-- </section> -->
+        </nav>
+      </div>
+    </div>
+  </div>
+
+
+<!--  -->
+<!--  -->
+
+<script src="https://freeopen.github.io/theme/js/jquery-3.3.1.slim.min.js"></script>
+<script src="https://freeopen.github.io/theme/js/popper.min.js"></script>
+<script src="https://freeopen.github.io/theme/js/bootstrap.min.js"></script>
+</body>
+</html>

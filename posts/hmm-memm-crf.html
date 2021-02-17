@@ -33,13 +33,13 @@
           </button>
           <nav class="collapse navbar-collapse sidebar-nav flex-column" id="navbarNav">
 
-              <a class="nav-link" href="https://freeopen.github.io/pages/about.html">About</a>
-              <a class="nav-link" href="https://freeopen.github.io/pages/da-shang.html">打赏</a>
+              <a class="nav-link" href="https://freeopen.github.io/pages/guan-yu-zhe-li.html">关于这里</a>
+              <a class="nav-link" href="https://freeopen.github.io/pages/zou-guo-lu-guo.html">走过路过</a>
 
-              <a class="nav-link" href="https://freeopen.github.io/category/bian-cheng.html">编程</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/bian-cheng-zhi-hui.html">编程智慧</a>
               <a class="nav-link" href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
-              <a class="nav-link" href="https://freeopen.github.io/category/shou-ce.html">手册</a>
-              <a class="nav-link" href="https://freeopen.github.io/category/shu-xue.html">数学</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/shu-xue-za-tan.html">数学杂谈</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/su-cha-shou-ce.html">速查手册</a>
             <div class="sidebar-icons">
               <hr>
                 <a href="" title="Atom feed" target="_blank" 
@@ -86,7 +86,7 @@
 <blockquote>
 <p>freeopen: 此文不错，有些小错，顺手改了</p>
 </blockquote>
-<h2 id="yi--preface"><strong>一、Preface</strong></h2>
+<h2 id="yi-preface"><strong>一、Preface</strong></h2>
 <p>之前刚接触NLP时做相关的任务，也必然地涉及到了序列处理任务，然后自然要接触到概率图模型。当时在全网搜中文资料，陆续失望地发现竟然真的没有讲得清楚的博文，发现基本是把李航老师书里或CRF tutorial等资料的文字论述和公式抄来抄去的。当然，没有说别人讲的是错的，只是觉得，要是没有把东西说的让读者看得懂，那也是没意义啊。或者有些吧，就是讲了一大堆的东西，貌似也明白了啥，但还是不能让我很好的理解CRF这些模型究竟是个啥，完了还是有一头雾水散不开的感觉。试想，一堆公式扔过来，没有个感性理解的过渡，怎么可能理解的了。我甚至觉得，如果博客让人看不懂，那说明要么自己没理解透要么就是思维不清晰讲不清楚。所以默想，深水区攻坚还是要靠自己，然后去做调研做research，所以就写了个这个学习记录。</p>
 <p>所以概率图的研究学习思考列入了我的任务清单。不过平时的时间又非常的紧，只能陆陆续续的思考着，所以时间拖得也真是长啊。</p>
 <p>这是个学习笔记。相比其他的学习模型，概率图貌似确实是比较难以理解的。这里我基本全部用自己的理解加上自己的语言习惯表达出来，off the official form，表达尽量接地气。我会尽量将我所有理解过程中的每个关键小细节都详细描述出来，以使对零基础的初学者友好。包括理论的来龙去脉，抽象具象化，模型的构成，模型的训练过程，会注重类比的学习。</p>
@@ -111,11 +111,11 @@ d.再跨理论，查阅经典理论巨作。这时感性理性都有一定高度
 <p>很多beginer，就比如说学CRF模型，然后一上来就摆一套复杂的公式，什么我就问，这能理解的了吗？这是正确的开启姿势吗？当然了，也要怪那些博主，直接整一大堆核心公式，实际上读者的理解门槛可能就是一个过渡性的细枝末节而已。没有上下文的教育肯定是失败的（这一点我又想吐槽国内绝大部分本科的院校教育模式）。所以说带有完整上下文信息以及过程来龙去脉交代清楚才算到位吧。</p>
 <p>而不是一上来就死啃被人推荐的&ldquo;经典资料&rdquo;，这一点相信部分同学会理解。好比以前本科零基础学c++ JAVA，上来就看primr TIJ，结果浪费了时间精力一直在门外兜圈。总结方法吸取教训，应该快速上手代码，才是最高效的。经典最好是用来查阅的工具书，我目前是李航周志华和经典的那3本迭代轮询看了好多轮，经常会反复查询某些model或理论的来龙去脉；有时候要查很多相关的东西，看这些书还是难以贯通，然后发现有些人的博客写的会更容易去理解。所以另外，学习资料渠道也要充分才行。</p>
 <p>最后提示一下，<strong>请务必按照标题层级结构和目录一级一级阅读，防止跟丢。</strong></p>
-<h2 id="er--prerequisite"><strong>二、Prerequisite</strong></h2>
-<h3 id="-gai-lu-tu"><strong>2.1 概率图</strong></h3>
+<h2 id="er-prerequisite"><strong>二、Prerequisite</strong></h2>
+<h3 id="21-gai-lu-tu"><strong>2.1 概率图</strong></h3>
 <p>之前刚接触CRF时，一上来试图越过一堆繁琐的概率图相关概念，不过sad to say, 这是后面的前驱知识，后面还得反过来补这个点。所以若想整体把握，系统地拿下这一块，应该还是要越过这块门槛的。</p>
 <p>当然了，一开始只需略略快速看一篇，后面可再返过来补查。</p>
-<h3 id="-gai-lan"><strong>2.1.1 概览</strong></h3>
+<h3 id="211-gai-lan"><strong>2.1.1 概览</strong></h3>
 <p>在统计概率图（probability graph models）中，参考宗成庆老师的书，是这样的体系结构（个人非常喜欢这种类型的图）：  </p>
 <p><img data-caption="" data-rawheight="336" data-rawwidth="631" data-size="normal" src="https://freeopen.github.io/images/v2.jpg" width="631"/></p>
 <p>在概率图模型中，数据(样本)由公式 <span class="math">\(G=(V,E)\)</span> 建模表示：</p>
@@ -127,7 +127,7 @@ d.再跨理论，查阅经典理论巨作。这时感性理性都有一定高度
 <p><span class="math">\(E\)</span> 表示边，即概率依赖关系。具体咋理解，还是要在后面结合HMM或CRF的graph具体解释。</p>
 </li>
 </ul>
-<h3 id="-you-xiang-tu--vs-wu-xiang-tu"><strong>2.1.2 有向图 vs. 无向图</strong></h3>
+<h3 id="212-you-xiang-tu-vs-wu-xiang-tu"><strong>2.1.2 有向图 vs. 无向图</strong></h3>
 <p>上图可以看到，贝叶斯网络（信念网络）都是有向的，马尔科夫网络无向。所以，贝叶斯网络适合为有单向依赖的数据建模，马尔科夫网络适合实体之间互相依赖的建模。具体地，他们的核心差异表现在如何求 <span class="math">\(P=(Y)\)</span> ，即怎么表示 <span class="math">\(Y=(y_1,\cdots,y_n)\)</span> 这个的联合概率。</p>
 <p><strong>1. 有向图</strong></p>
 <p>对于有向图模型，这么求联合概率： <span class="math">\(P(x_1, \cdots, x_n )=\prod_{i=0}P(x_i | \pi(x_{i}))\)</span></p>
@@ -157,7 +157,7 @@ d.再跨理论，查阅经典理论巨作。这时感性理性都有一定高度
 <p><span class="math">\(P(Y )=\frac{1}{Z(x)} \prod_{c}\psi_{c}(Y_{c} ) = \frac{1}{Z(x)} \prod_{c} e^{\sum_{k}\lambda_{k}f_{k}(c,y|c,x)} = \frac{1}{Z(x)} e^{\sum_{c}\sum_{k}\lambda_{k}f_{k}(y_{i},y_{i-1},x,i)}\)</span></p>
 <p>注意，这里的理解还蛮重要的，注意递推过程，敲黑板，这是CRF的开端！<br/>
 这个由<code>Hammersly-Clifford law</code>保证，具体不展开。</p>
-<h3 id="-ma-er-ke-fu-jia-she-ma-er-ke-fu-xing"><strong>2.1.3 马尔科夫假设&amp;马尔科夫性</strong></h3>
+<h3 id="213-ma-er-ke-fu-jia-she-ma-er-ke-fu-xing"><strong>2.1.3 马尔科夫假设&amp;马尔科夫性</strong></h3>
 <p>这个也属于前馈知识。</p>
 <p><strong>1. 马尔科夫假设</strong></p>
 <p>额应该是齐次马尔科夫假设，这样假设：马尔科夫链 <span class="math">\((x_{1},\cdots,x_{n})\)</span> 里的 <span class="math">\(x_{i}\)</span> 总是只受 <span class="math">\(x_{i-1}\)</span> 一个人的影响。<br/>
@@ -167,7 +167,7 @@ d.再跨理论，查阅经典理论巨作。这时感性理性都有一定高度
 <p>马尔科夫性是是保证或者判断概率图是否为概率无向图的条件。</p>
 <p>三点内容：a. 成对，b. 局部，c. 全局。</p>
 <p>我觉得这个不用展开。</p>
-<h3 id="-pan-bie-shi-discriminativemo-xing--vs-sheng-cheng-shi-generativemo-xing"><strong>2.2 判别式(discriminative)模型 vs. 生成式(generative)模型</strong></h3>
+<h3 id="22-pan-bie-shi-discriminativemo-xing-vs-sheng-cheng-shi-generativemo-xing"><strong>2.2 判别式(discriminative)模型 vs. 生成式(generative)模型</strong></h3>
 <p>在监督学习下，模型可以分为判别式模型与生成式模型。</p>
 <p>重点来了。上面有提到，我理解了HMM、CRF模型的区别是从理解了判别式模型与生成式模型的那刻，并且瞬间对其他的模型有一个恍然大悟。我记得是一年前就开始纠结这两者的区别，但我只能说，栽在了一些烂博客上，大部分都没有自己的insightful理解，也就是一顿官话，也真是难以理解。后来在知乎上一直琢磨别人的答案，然后某日早晨终于豁然开朗，就是这种感觉。</p>
 <p>好了，我要用自己的理解来转述两者的区别了below。</p>
@@ -205,7 +205,7 @@ d.再跨理论，查阅经典理论巨作。这时感性理性都有一定高度
 <img src="https://freeopen.github.io/images/4.jpg" width="80%">
 <br/>
 </img></p>
-<h3 id="-xu-lie-jian-mo"><strong>2.3 序列建模</strong></h3>
+<h3 id="23-xu-lie-jian-mo"><strong>2.3 序列建模</strong></h3>
 <p>为了号召零门槛理解，现在解释如何为序列问题建模。</p>
 <p align="center">
 <img src="https://freeopen.github.io/images/5.jpg" width="80%">
@@ -235,9 +235,9 @@ d.再跨理论，查阅经典理论巨作。这时感性理性都有一定高度
 <p>2. 判断不同序列类别，即分类问题：HMM、CRF、General Classifier（ML models、NN models）</p>
 <p>3. 不同时序对应的状态的分析，即序列标注问题：HMM、CRF、RecurrentNNs</p>
 <p>在本篇文字中，我们只关注在2. &amp; 3.类问题下的建模过程和方法。</p>
-<h2 id="san--hmm_1"><strong>三、HMM</strong></h2>
+<h2 id="san-hmm_1"><strong>三、HMM</strong></h2>
 <p>最早接触的是HMM。较早做过一个项目，关于声波手势识别，跟声音识别的机制一样，使用的正是HMM的一套方法。后来又用到了 <em>kalman filter</em>，之后做序列标注任务接触到了CRF，所以整个概率图模型还是接触的方面还蛮多。</p>
-<h3 id="-li-jie-hmm"><strong>3.1 理解HMM</strong></h3>
+<h3 id="31-li-jie-hmm"><strong>3.1 理解HMM</strong></h3>
 <p>在2.2、2.3中提序列的建模问题时，我们只是讨论了常规的序列数据，e.g., <span class="math">\((X_{1},\cdots,X_{n})\)</span> ,像2.3的图片那样。像这种序列一般用马尔科夫模型就可以胜任。实际上我们碰到的更多的使用HMM的场景是每个节点 <span class="math">\(X_{i}\)</span> 下还附带着另一个节点 <span class="math">\(Y_{i}\)</span> ，正所谓<strong>隐含</strong>马尔科夫模型，那么除了正常的节点，还要将<strong>隐含状态节点</strong>也得建模进去。正儿八经地，将 <span class="math">\(X_{i} 、 Y_{i}\)</span> 换成 <span class="math">\(i_{i} 、o_{i}\)</span> ,并且他们的名称变为状态节点、观测节点。状态节点正是我的隐状态。</p>
 <p>HMM属于典型的生成式模型。对照2.1的讲解，应该是要从训练数据中学到数据的各种分布，那么有哪些分布呢以及是什么呢？直接正面回答的话，正是<strong>HMM的5要素</strong>，其中有3个就是整个数据的不同角度的概率分布：</p>
 <ul>
@@ -266,9 +266,9 @@ d.再跨理论，查阅经典理论巨作。这时感性理性都有一定高度
 <li>并且B中 <span class="math">\(b_{ij} = P(o_{t}|i_{t})\)</span> ，这意味着o对i有依赖性。</li>
 <li>在A中， <span class="math">\(a_{ij} = P(i_{t+1}|i_{t})\)</span> ，也就是说只遵循了一阶马尔科夫假设，1-gram。试想，如果数据的依赖超过1-gram，那肯定HMM肯定是考虑不进去的。这一点限制了HMM的性能。</li>
 </ol>
-<h3 id="-mo-xing-yun-xing-guo-cheng"><strong>3.2 模型运行过程</strong></h3>
+<h3 id="32-mo-xing-yun-xing-guo-cheng"><strong>3.2 模型运行过程</strong></h3>
 <p>模型的运行过程（工作流程）对应了HMM的3个问题。</p>
-<h3 id="-xue-xi-xun-lian-guo-cheng"><strong>3.2.1 学习训练过程</strong></h3>
+<h3 id="321-xue-xi-xun-lian-guo-cheng"><strong>3.2.1 学习训练过程</strong></h3>
 <p>对照2.1的讲解，HMM学习训练的过程，就是找出数据的分布情况，也就是模型参数的确定。</p>
 <p>主要学习算法按照训练数据除了观测状态序列 <span class="math">\((o_{1}, \cdots, o_{i})\)</span> 是否还有隐状态序列 <span class="math">\((i_{1}, \cdots, i_{i})\)</span> 分为：</p>
 <ul>
@@ -305,7 +305,7 @@ d.再跨理论，查阅经典理论巨作。这时感性理性都有一定高度
 <p><strong>2. Baum-Welch(前向后向)</strong></p>
 <p>就是一个EM的过程，如果你对EM的工作流程有经验的话，对这个Baum-Welch一看就懂。EM的过程就是初始化一套值，然后迭代计算，根据结果再调整值，再迭代，最后收敛&hellip;&hellip;好吧，这个理解是没有捷径的，去隔壁钻研EM吧。</p>
 <p>这里只提一下核心。因为我们手里没有隐状态序列 <span class="math">\((i_{1}, \cdots, i_{i})\)</span> 信息，所以我先必须给初值 <span class="math">\(a_{ij}^{0}, b_{j}(k)^{0}, \pi^{0}\)</span> ，初步确定模型，然后再迭代计算出 <span class="math">\(a_{ij}^{n}, b_{j}(k)^{n}, \pi^{n}\)</span> ,中间计算过程会用到给出的观测状态序列 <span class="math">\((o_{1}, \cdots, o_{i})\)</span>。另外，收敛性由EM的XXX定理保证。</p>
-<h3 id="-xu-lie-biao-zhu-jie-ma-guo-cheng"><strong>3.2.2 序列标注（解码）过程</strong></h3>
+<h3 id="322-xu-lie-biao-zhu-jie-ma-guo-cheng"><strong>3.2.2 序列标注（解码）过程</strong></h3>
 <p>好了，学习完了HMM的分布参数，也就确定了一个HMM模型。需要注意的是，这个HMM是对我这一批全部的数据进行训练所得到的参数。</p>
 <p>序列标注问题也就是&ldquo;预测过程&rdquo;，通常称为解码过程。对应了序列建模问题3.。对于序列标注问题，我们只需要学习出一个HMM模型即可，后面所有的新的sample我都用这一个HMM去apply。</p>
 <p>我们的目的是，在学习后已知了 <span class="math">\(P(Q,O)\)</span> ,现在要求出 <span class="math">\(P(Q|O)\)</span> ，进一步</p>
@@ -318,7 +318,7 @@ d.再跨理论，查阅经典理论巨作。这时感性理性都有一定高度
 <br/>
 </p>
 <p>关键是注意，每次工作热点区只涉及到t 与 t-1,这对应了DP的无后效性的条件。如果对某些同学还是很难理解，请参考<a href="https://www.zhihu.com/question/20136144">这个答案</a>下@Kiwee的回答吧。</p>
-<h3 id="-xu-lie-gai-lu-guo-cheng"><strong>3.2.3 序列概率过程</strong></h3>
+<h3 id="323-xu-lie-gai-lu-guo-cheng"><strong>3.2.3 序列概率过程</strong></h3>
 <p>我通过HMM计算出序列的概率又有什么用？针对这个点我把这个问题详细说一下。</p>
 <p>实际上，序列概率过程对应了序列建模问题2.，即序列分类。<br/>
 在3.2.2第一句话我说，在序列标注问题中，我用一批完整的数据训练出了一支HMM模型即可。好，那在序列分类问题就不是训练一个HMM模型了。我应该这么做（结合语音分类识别例子）：</p>
@@ -336,10 +336,10 @@ HMM建模过程：<br/>
 </ul>
 <p>后面两个算法采用了DP思想，减少计算量，即每一次直接引用前一个时刻的计算结果以避免重复计算，跟Viterbi一样的技巧。</p>
 <p>还是那句，因为这篇文档不是专门讲算法细节的，所以不详细展开这些。毕竟，所有的科普HMM、CRF的博客貌似都是在扯这些算法，妥妥的街货，就不搬运了。</p>
-<h2 id="si--memm_1"><strong>四、MEMM</strong></h2>
+<h2 id="si-memm_1"><strong>四、MEMM</strong></h2>
 <p>MEMM，即最大熵马尔科夫模型，这个是在接触了HMM、CRF之后才知道的一个模型。说到MEMM这一节时，得转换思维了，因为现在这MEMM属于判别式模型。</p>
 <p>不过有一点很尴尬，MEMM貌似被使用或者讲解引用的不及HMM、CRF。</p>
-<h3 id="-li-jie-memm"><strong>4.1 理解MEMM</strong></h3>
+<h3 id="41-li-jie-memm"><strong>4.1 理解MEMM</strong></h3>
 <p>这里还是啰嗦强调一下，MEMM正因为是判别模型，所以不废话，我上来就直接为了确定边界而去建模，比如说序列求概率（分类）问题，我直接考虑找出函数分类边界。这一点跟HMM的思维方式发生了很大的变化，如果不对这一点有意识，那么很难理解为什么MEMM、CRF要这么做。</p>
 <p>HMM中，观测节点 <span class="math">\(o_{i}\)</span> 依赖隐藏状态节点 <span class="math">\(i_{i}\)</span> ,也就意味着我的观测节点只依赖当前时刻的隐藏状态。但在更多的实际场景下，观测序列是需要很多的特征来刻画的，比如说，我在做NER时，我的标注 <span class="math">\(i_{i}\)</span> 不仅跟当前状态 <span class="math">\(o_{i}\)</span> 相关，而且还跟前后标注 <span class="math">\(o_{j}(j \neq i)\)</span> 相关，比如字母大小写、词性等等。</p>
 <p>为此，提出来的MEMM模型就是能够直接允许<strong>&ldquo;定义特征&rdquo;</strong>，直接学习条件概率，即 <span class="math">\(P(i_{i}|i_{i-1},o_{i}) (i = 1,\cdots,n)\)</span> , 总体为：</p>
@@ -370,19 +370,19 @@ HMM建模过程：<br/>
 step2. 在给定的数据上，训练模型，确定参数，即确定了MEMM模型<br/>
 step3. 用确定的模型做序列标注问题或者序列求概率问题。</p>
 </blockquote>
-<h3 id="-mo-xing-yun-xing-guo-cheng_1"><strong>4.2 模型运行过程</strong></h3>
+<h3 id="42-mo-xing-yun-xing-guo-cheng"><strong>4.2 模型运行过程</strong></h3>
 <p>MEMM模型的工作流程也包括了学习训练问题、序列标注问题、序列求概率问题。</p>
-<h3 id="-xue-xi-xun-lian-guo-cheng_1"><strong>4.2.1 学习训练过程</strong></h3>
+<h3 id="421-xue-xi-xun-lian-guo-cheng"><strong>4.2.1 学习训练过程</strong></h3>
 <p>一套MEMM由一套参数唯一确定，同样地，我需要通过训练数据学习这些参数。MEMM模型很自然需要学习里面的特征权重&lambda;。</p>
 <p>不过跟HMM不用的是，因为HMM是生成式模型，参数即为各种概率分布元参数，数据量足够可以用最大似然估计。而判别式模型是用函数直接判别，学习边界，MEMM即通过特征函数来界定。但同样，MEMM也有极大似然估计方法、梯度下降、牛顿迭代发、拟牛顿下降、BFGS、L-BFGS等等。各位应该对各种优化方法有所了解的。</p>
 <p>嗯，具体详细求解过程貌似问题不大。</p>
-<h3 id="-xu-lie-biao-zhu-guo-cheng"><strong>4.2.2 序列标注过程</strong></h3>
+<h3 id="422-xu-lie-biao-zhu-guo-cheng"><strong>4.2.2 序列标注过程</strong></h3>
 <p>还是跟HMM一样的，用学习好的MEMM模型，在新的sample（观测序列 <span class="math">\(o_{1}, \cdots, o_{i}\)</span> ）上找出一条概率最大最可能的隐状态序列 <span class="math">\(i_{1}, \cdots, i_{i}\)</span>。</p>
 <p>只是现在的图中的每个隐状态节点的概率求法有一些差异而已,正确将每个节点的概率表示清楚，路径求解过程还是一样，采用viterbi算法。</p>
-<h3 id="-xu-lie-qiu-gai-lu-guo-cheng"><strong>4.2.3 序列求概率过程</strong></h3>
+<h3 id="423-xu-lie-qiu-gai-lu-guo-cheng"><strong>4.2.3 序列求概率过程</strong></h3>
 <p>跟HMM举的例子一样的，也是分别去为每一批数据训练构建特定的MEMM，然后根据序列在每个MEMM模型的不同得分概率，选择最高分数的模型为wanted类别。</p>
 <p>应该可以不用展开，吧&hellip;&hellip;</p>
-<h3 id="-biao-zhu-pian-zhi-?"><strong>4.3 标注偏置？</strong></h3>
+<h3 id="43-biao-zhu-pian-zhi"><strong>4.3 标注偏置？</strong></h3>
 <p>MEMM讨论的最多的是他的labeling bias 问题。</p>
 <p><strong>1. 现象</strong></p>
 <p>是从街货上烤过来的&hellip;&hellip;</p>
@@ -403,9 +403,9 @@ P(1-&gt;1-&gt;2-&gt;2)= 0.4 X 0.55 X 0.3 = 0.066</p>
 <p><span class="math">\(P(I|O) = \prod_{t=1}^{n}\frac{ exp[(\sum_{a})\lambda_{a}f_{a}(o,i)] }{Z(o,i_{i-1})} , i = 1,\cdots,n\)</span></p>
 <p><span class="math">\(&sum;\)</span> 求和的作用在概率中是归一化，但是这里归一化放在了指数内部，管这叫local归一化。 来了，viterbi求解过程，是用dp的状态转移公式（MEMM的没展开，请参考CRF下面的公式），因为是局部归一化，所以MEMM的viterbi的转移公式的第二部分出现了问题，导致dp无法正确的递归到全局的最优。</p>
 <p><span class="math">\(\delta_{i+1} = max_{1 \le j \le m}\lbrace \delta_{i}(I) + \sum_{i}^{T}\sum_{k}^{M}\lambda_{k}f_{k}(O,I_{i-1},I_{i},i) \rbrace\)</span></p>
-<h2 id="wu--crf_1"><strong>五、CRF</strong></h2>
+<h2 id="wu-crf_1"><strong>五、CRF</strong></h2>
 <p>我觉得一旦有了一个清晰的工作流程，那么按部就班地，没有什么很难理解的地方，因为整体框架已经胸有成竹了，剩下了也只有添砖加瓦小修小补了。有了上面的过程基础，CRF也是类似的，只是有方法论上的细微区别。</p>
-<h3 id="-li-jie-crf"><strong>5.1 理解CRF</strong></h3>
+<h3 id="51-li-jie-crf"><strong>5.1 理解CRF</strong></h3>
 <p>请看第一张概率图模型构架图，CRF上面是马尔科夫随机场（马尔科夫网络），而条件随机场是在给定的随机变量 <span class="math">\(X\)</span> （具体，对应观测序列 <span class="math">\(o_{1}, \cdots, o_{i}\)</span> ）条件下，随机变量 <span class="math">\(Y\)</span> （具体，对应隐状态序列 <span class="math">\(i_{1}, \cdots, i_{i}\)</span> ）的马尔科夫随机场。<br/>
 广义的CRF的定义是： 满足 <span class="math">\(P(Y_{v}|X,Y_{w},w \neq v) = P(Y_{v}|X,Y_{w},w \sim v)\)</span> 的马尔科夫随机场叫做条件随机场（CRF）。</p>
 <blockquote>
@@ -487,7 +487,7 @@ from different classes. 就这样。不过待会还会具体介绍特征函数�
 <span class="math">\(P(y|x;\omega) = \frac{ exp(\omega&middot;\phi(x,y)) }{ \sum_{y^{'}\in Y }exp(\omega&middot;\phi(x,y^{&lsquo;})) }\)</span></p>
 </blockquote>
 <p>我觉得对LR或者sotfmax熟悉的对这个应该秒懂。然后CRF完美地满足这个形式，所以又可以归入到了log-linear models之中。</p>
-<h3 id="-mo-xing-yun-xing-guo-cheng_2"><strong>5.2 模型运行过程</strong></h3>
+<h3 id="52-mo-xing-yun-xing-guo-cheng"><strong>5.2 模型运行过程</strong></h3>
 <p>模型的工作流程，跟MEMM是一样的：</p>
 <ul>
 <li>step1. 先预定义特征函数 <span class="math">\(f_{a}(o,i)\)</span> ，</li>
@@ -498,21 +498,21 @@ from different classes. 就这样。不过待会还会具体介绍特征函数�
 <blockquote>
 <p>&hellip;&hellip;</p>
 </blockquote>
-<h3 id="-xue-xi-xun-lian-guo-cheng_2"><strong>5.2.1 学习训练过程</strong></h3>
+<h3 id="521-xue-xi-xun-lian-guo-cheng"><strong>5.2.1 学习训练过程</strong></h3>
 <p>一套CRF由一套参数&lambda;唯一确定（先定义好各种特征函数）。</p>
 <p>同样，CRF用极大似然估计方法、梯度下降、牛顿迭代、拟牛顿下降、IIS、BFGS、L-BFGS等等。各位应该对各种优化方法有所了解的。其实能用在log-linear models上的求参方法都可以用过来。</p>
 <p>嗯，具体详细求解过程貌似问题不大。</p>
-<h3 id="-xu-lie-biao-zhu-guo-cheng_1"><strong>5.2.2 序列标注过程</strong></h3>
+<h3 id="522-xu-lie-biao-zhu-guo-cheng"><strong>5.2.2 序列标注过程</strong></h3>
 <p>还是跟HMM一样的，用学习好的CRF模型，在新的sample（观测序列 <span class="math">\(o_{1}, \cdots, o_{i}\)</span> ）上找出一条概率最大最可能的隐状态序列 <span class="math">\(i_{1}, \cdots, i_{i}\)</span> 。</p>
 <p>只是现在的图中的每个隐状态节点的概率求法有一些差异而已,正确将每个节点的概率表示清楚，路径求解过程还是一样，采用viterbi算法。</p>
 <p>啰嗦一下，我们就定义i处的局部状态为 <span class="math">\(\delta_{i}(I)\)</span> ,表示在位置i处的隐状态的各种取值可能为 <em>I</em> ，然后递推位置i+1处的隐状态，写出来的DP转移公式为：</p>
 <p><span class="math">\(\delta_{i+1} = max_{1 \le j \le m}\lbrace \delta_{i}(I) + \sum_{i}^{T}\sum_{k}^{M}\lambda_{k}f_{k}(O,I_{i-1},I_{i},i) \rbrace\)</span></p>
 <p>这里没写规范因子 <span class="math">\(Z(O)\)</span> 是因为不规范化不会影响取最大值后的比较。</p>
 <p>具体还是不展开为好。</p>
-<h3 id="-xu-lie-qiu-gai-lu-guo-cheng_1"><strong>5.2.3 序列求概率过程</strong></h3>
+<h3 id="523-xu-lie-qiu-gai-lu-guo-cheng"><strong>5.2.3 序列求概率过程</strong></h3>
 <p>跟HMM举的例子一样的，也是分别去为每一批数据训练构建特定的CRF，然后根据序列在每个MEMM模型的不同得分概率，选择最高分数的模型为wanted类别。只是貌似很少看到拿CRF或者MEMM来做分类的，直接用网络模型不就完了不&hellip;&hellip;</p>
 <p>应该可以不用展开，吧&hellip;&hellip;</p>
-<h3 id="-crffen-xi"><strong>5.3 CRF++分析</strong></h3>
+<h3 id="53-crffen-xi"><strong>5.3 CRF++分析</strong></h3>
 <p>本来做task用CRF++跑过baseline,后来在对CRF做调研时，非常想透析CRF++的工作原理，以identify以及verify做的各种假设猜想。当然，也看过其他的CRF实现源码。</p>
 <p>所以干脆写到这里来，结合CRF++实例讲解过程。</p>
 <p>有一批语料数据，并且已经tokenized好了：</p>
@@ -630,7 +630,7 @@ major O<br/>
 efforts O<br/>
 &hellip;&hellip;</p>
 </blockquote>
-<h3 id="-lstmcrf"><strong>5.4 LSTM+CRF</strong></h3>
+<h3 id="54-lstmcrf"><strong>5.4 LSTM+CRF</strong></h3>
 <p>LSTM+CRF这个组合其实我在知乎上答过问题，然后顺便可以整合到这里来。</p>
 <p><strong>1、perspectively</strong></p>
 <p>大家都知道，LSTM已经可以胜任序列标注问题了，为每个token预测一个label（LSTM后面接:分类器）；而CRF也是一样的，为每个token预测一个label。</p>
@@ -647,14 +647,14 @@ efforts O<br/>
 <p>好了，那就把CRF接到LSTM上面，把LSTM在time_step上把每一个hidden_state的tensor输入给CRF，让LSTM负责在CRF的特征限定下，依照新的loss function，学习出一套新的非线性变换空间。</p>
 <p>最后，不用说，结果还真是好多了呢。</p>
 <p><a href="https://link.zhihu.com/?target=https%3A//github.com/scofield7419/sequence-labeling-BiLSTM-CRF">LSTM+CRF codes</a>, here. Go just take it.</p>
-<h2 id="liu--zong-jie_1"><strong>六、总结</strong></h2>
-<h3 id="-zong-ti-dui-bi"><strong>1. 总体对比</strong></h3>
+<h2 id="liu-zong-jie_1"><strong>六、总结</strong></h2>
+<h3 id="1-zong-ti-dui-bi"><strong>1. 总体对比</strong></h3>
 <p>应该看到了熟悉的图了，现在看这个图的话，应该可以很清楚地get到他所表达的含义了。这张图的内容正是按照生成式&amp;判别式来区分的，NB在sequence建模下拓展到了HMM；LR在sequence建模下拓展到了CRF。</p>
 <p align="center">
 <img src="https://freeopen.github.io/images/14.jpg" width="90%"/>
 <br/>
 </p>
-<h3 id="-hmm-vs-memm-vs-crf"><strong>2. HMM vs. MEMM vs. CRF</strong></h3>
+<h3 id="2-hmm-vs-memm-vs-crf"><strong>2. HMM vs. MEMM vs. CRF</strong></h3>
 <p>将三者放在一块做一个总结：</p>
 <ol>
 <li>
@@ -669,98 +669,98 @@ efforts O<br/>
 <li>HMM、MEMM属于有向图，所以考虑了x与y的影响，但没讲x当做整体考虑进去（这点问题应该只有HMM）。
 CRF属于无向图，没有这种依赖性，克服此问题。</li>
 </ol>
-<h3 id="-machine-learning-models-vs-sequential-models"><strong>3. Machine Learning models vs. Sequential models</strong></h3>
+<h3 id="3-machine-learning-models-vs-sequential-models"><strong>3. Machine Learning models vs. Sequential models</strong></h3>
 <p>为了一次将概率图模型理解的深刻到位，我们需要再串一串，更深度与原有的知识体系融合起来。</p>
 <p>机器学习模型，按照学习的范式或方法，以及加上自己的理解，给常见的部分的他们整理分了分类（主流上，都喜欢从训练样本的歧义型分，当然也可以从其他角度来）：</p>
-<div class="highlight"><pre><span></span>一、监督：{
+<div class="highlight"><pre><span></span><span class="err">一、监督：{</span>
 
-1.1 分类算法(线性和非线性)：{
+<span class="mi">1</span><span class="p">.</span><span class="mi">1</span> <span class="err">分类算法</span><span class="p">(</span><span class="err">线性和非线性</span><span class="p">)</span><span class="err">：{</span>
 
-    感知机
+    <span class="err">感知机</span>
 
-    KNN
+    <span class="n">KNN</span>
 
-    概率{
-        朴素贝叶斯（NB）
-        Logistic Regression（LR）
-        最大熵MEM（与LR同属于对数线性分类模型）
-    }
+    <span class="err">概率{</span>
+        <span class="err">朴素贝叶斯（</span><span class="n">NB</span><span class="err">）</span>
+        <span class="n">Logistic</span> <span class="n">Regression</span><span class="err">（</span><span class="n">LR</span><span class="err">）</span>
+        <span class="err">最大熵</span><span class="n">MEM</span><span class="err">（与</span><span class="n">LR同属于对数线性分类模型</span><span class="err">）</span>
+    <span class="err">}</span>
 
-    支持向量机(SVM)
+    <span class="err">支持向量机</span><span class="p">(</span><span class="n">SVM</span><span class="p">)</span>
 
-    决策树(ID3、CART、C4.5)
+    <span class="err">决策树</span><span class="p">(</span><span class="n">ID3</span><span class="err">、</span><span class="n">CART</span><span class="err">、</span><span class="n">C4</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span>
 
-    assembly learning{
-        Boosting{
-            Gradient Boosting{
-                GBDT
-                xgboost（传统GBDT以CART作为基分类器，xgboost还支持线性分类器，这个时候xgboost相当于带L1和L2正则化项的逻辑斯蒂回归（分类问题）或者线性回归（回归问题）；xgboost是Gradient Boosting的一种高效系统实现，并不是一种单一算法。）
-            }
-            AdaBoost
-        }   
-        Bagging{
-            随机森林
-        }
-        Stacking
-    }
+    <span class="n">assembly</span> <span class="n">learning</span><span class="err">{</span>
+        <span class="n">Boosting</span><span class="err">{</span>
+            <span class="n">Gradient</span> <span class="n">Boosting</span><span class="err">{</span>
+                <span class="n">GBDT</span>
+                <span class="n">xgboost</span><span class="err">（传统</span><span class="n">GBDT以CART作为基分类器</span><span class="err">，</span><span class="n">xgboost还支持线性分类器</span><span class="err">，这个时候</span><span class="n">xgboost相当于带L1和L2正则化项的逻辑斯蒂回归</span><span class="err">（分类问题）或者线性回归（回归问题）；</span><span class="n">xgboost是Gradient</span> <span class="n">Boosting的一种高效系统实现</span><span class="err">，并不是一种单一算法。）</span>
+            <span class="err">}</span>
+            <span class="n">AdaBoost</span>
+        <span class="err">}</span>   
+        <span class="n">Bagging</span><span class="err">{</span>
+            <span class="err">随机森林</span>
+        <span class="err">}</span>
+        <span class="n">Stacking</span>
+    <span class="err">}</span>
 
-    &hellip;&hellip;
-}
+    <span class="err">&hellip;&hellip;</span>
+<span class="err">}</span>
 
-1.2 概率图模型：{
-    HMM
-    MEMM（最大熵马尔科夫）
-    CRF
-    &hellip;&hellip;
-}
+<span class="mi">1</span><span class="p">.</span><span class="mi">2</span> <span class="err">概率图模型：{</span>
+    <span class="n">HMM</span>
+    <span class="n">MEMM</span><span class="err">（最大熵马尔科夫）</span>
+    <span class="n">CRF</span>
+    <span class="err">&hellip;&hellip;</span>
+<span class="err">}</span>
 
-1.3 回归预测：{
-    线性回归
-    树回归
-    Ridge岭回归
-    Lasso回归
-    &hellip;&hellip;
-}
+<span class="mi">1</span><span class="p">.</span><span class="mi">3</span> <span class="err">回归预测：{</span>
+    <span class="err">线性回归</span>
+    <span class="err">树回归</span>
+    <span class="n">Ridge岭回归</span>
+    <span class="n">Lasso回归</span>
+    <span class="err">&hellip;&hellip;</span>
+<span class="err">}</span>
 
-&hellip;&hellip;  
-}
+<span class="err">&hellip;&hellip;</span>  
+<span class="err">}</span>
 
-二、非监督：{
-2.1 聚类：{
-    1. 基础聚类
-        K&mdash;mean
-        二分k-mean
-        K中值聚类
-        GMM聚类
-    2. 层次聚类
-    3. 密度聚类
-    4. 谱聚类()
-}
+<span class="err">二、非监督：{</span>
+<span class="mi">2</span><span class="p">.</span><span class="mi">1</span> <span class="err">聚类：{</span>
+    <span class="mi">1</span><span class="p">.</span> <span class="err">基础聚类</span>
+        <span class="n">K</span><span class="err">&mdash;</span><span class="n">mean</span>
+        <span class="err">二分</span><span class="n">k</span><span class="o">-</span><span class="n">mean</span>
+        <span class="n">K中值聚类</span>
+        <span class="n">GMM聚类</span>
+    <span class="mi">2</span><span class="p">.</span> <span class="err">层次聚类</span>
+    <span class="mi">3</span><span class="p">.</span> <span class="err">密度聚类</span>
+    <span class="mi">4</span><span class="p">.</span> <span class="err">谱聚类</span><span class="p">()</span>
+<span class="err">}</span>
 
-2.2 主题模型:{
-    pLSA
-    LDA隐含狄利克雷分析
-}
+<span class="mi">2</span><span class="p">.</span><span class="mi">2</span> <span class="err">主题模型</span><span class="p">:</span><span class="err">{</span>
+    <span class="n">pLSA</span>
+    <span class="n">LDA隐含狄利克雷分析</span>
+<span class="err">}</span>
 
-2.3 关联分析：{
-    Apriori算法
-    FP-growth算法
-}
+<span class="mi">2</span><span class="p">.</span><span class="mi">3</span> <span class="err">关联分析：{</span>
+    <span class="n">Apriori算法</span>
+    <span class="n">FP</span><span class="o">-</span><span class="n">growth算法</span>
+<span class="err">}</span>
 
-2.4 降维：{
-    PCA算法
-    SVD算法
-    LDA线性判别分析
-    LLE局部线性嵌入
-}
+<span class="mi">2</span><span class="p">.</span><span class="mi">4</span> <span class="err">降维：{</span>
+    <span class="n">PCA算法</span>
+    <span class="n">SVD算法</span>
+    <span class="n">LDA线性判别分析</span>
+    <span class="n">LLE局部线性嵌入</span>
+<span class="err">}</span>
 
-2.5 异常检测：
-&hellip;&hellip;
-}
+<span class="mi">2</span><span class="p">.</span><span class="mi">5</span> <span class="err">异常检测：</span>
+<span class="err">&hellip;&hellip;</span>
+<span class="err">}</span>
 
-三、半监督学习
+<span class="err">三、半监督学习</span>
 
-四、迁移学习
+<span class="err">四、迁移学习</span>
 </pre></div>
 <p>（注意到，没有把神经网络体系加进来。因为NNs的范式很灵活，不太适用这套分法，largely, off this framework）</p>
 <p>Generally speaking，机器学习模型，尤其是有监督学习，一般是为一条sample预测出一个label，作为预测结果。 但与典型常见的机器学习模型不太一样，序列模型（概率图模型）是试图为一条sample里面的每个基本元数据分别预测出一个label。这一点，往往是beginner伊始难以理解的。</p>
@@ -770,7 +770,7 @@ CRF属于无向图，没有这种依赖性，克服此问题。</li>
 <p><strong>hope those hlpe!</strong></p>
 <p><strong>欢迎留言！</strong></p>
 <p><strong>有错误之处请多多指正，谢谢！</strong></p>
-<h2 id="referrences:"><strong>Referrences:</strong></h2>
+<h2 id="referrences"><strong>Referrences:</strong></h2>
 <p>《统计学习方法》，李航</p>
 <p>《统计自然语言处理》，宗成庆</p>
 <p>《 An Introduction to Conditional Random Fields for Relational Learning》， Charles Sutton， Andrew McCallum</p>
@@ -806,7 +806,7 @@ CRF属于无向图，没有这种依赖性，克服此问题。</li>
     var mathjaxscript = document.createElement('script');
     mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
     mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript.src = 'https://cdn.bootcdn.net/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
     mathjaxscript[(window.opera ? "innerHTML" : "text")] =
         "MathJax.Hub.Config({" +
         "    config: ['MMLorHTML.js']," +
@@ -849,21 +849,32 @@ CRF属于无向图，没有这种依赖性，克服此问题。</li>
 </script>
   </div><!-- /.entry-content -->
 
-  <div class="comments">
-    <!-- <h2>Comments !</h2> -->
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-      var disqus_shortname = 'freeopen';
-      var disqus_identifier = 'posts/hmm-memm-crf';
-      var disqus_url = 'https://freeopen.github.io/posts/hmm-memm-crf';
-      (function() {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//freeopen.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      })();
-    </script>
-    <noscript>Please enable JavaScript to view the comments.</noscript>
-  </div>
+  <!-- DISQUS 评论系统 -->
+
+  <!-- giteement评论系统 -->
+
+  <!-- Gitalk 评论 start  -->
+  <!-- Link Gitalk 的支持文件  -->
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+
+  <div id="gitalk-container"></div>
+      <script type="text/javascript">
+      var gitalk = new Gitalk({
+
+      // gitalk的主要参数
+          clientID: '8a8232de9043fc407bf4',
+          clientSecret: 'aab87cee1582588743573358e51f4a785ceb49a3',
+          repo: 'blog-discuss',
+          owner: 'freeopen',
+          admin: ['freeopen'],
+          id: 'posts/hmm-memm-crf',
+      
+      });
+      gitalk.render('gitalk-container');
+  </script>
+  <!-- Gitalk end -->
+
 </section>
           </div>
 
@@ -878,7 +889,7 @@ CRF属于无向图，没有这种依赖性，克服此问题。</li>
       <div class="hidden-print hidden-xs hidden-sm hidden-md col-lg" id="post_toc" role="complementary">
         <nav class="sidebar-toc">
 <!-- <section id="main_toc"> -->
-    <ul class="nav" id="toc"><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#yi--preface" title="一、Preface">一、Preface</a></li><li class="nav-item"><a class="nav-link" href="#er--prerequisite" title="二、Prerequisite">二、Prerequisite</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#-gai-lu-tu" title="2.1 概率图">2.1 概率图</a></li><li class="nav-item"><a class="nav-link" href="#-gai-lan" title="2.1.1 概览">2.1.1 概览</a></li><li class="nav-item"><a class="nav-link" href="#-you-xiang-tu--vs-wu-xiang-tu" title="2.1.2 有向图 vs. 无向图">2.1.2 有向图 vs. 无向图</a></li><li class="nav-item"><a class="nav-link" href="#-ma-er-ke-fu-jia-she-ma-er-ke-fu-xing" title="2.1.3 马尔科夫假设&amp;马尔科夫性">2.1.3 马尔科夫假设&amp;马尔科夫性</a></li><li class="nav-item"><a class="nav-link" href="#-pan-bie-shi-discriminativemo-xing--vs-sheng-cheng-shi-generativemo-xing" title="2.2 判别式(discriminative)模型 vs. 生成式(generative)模型">2.2 判别式(discriminative)模型 vs. 生成式(generative)模型</a></li><li class="nav-item"><a class="nav-link" href="#-xu-lie-jian-mo" title="2.3 序列建模">2.3 序列建模</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#san--hmm_1" title="三、HMM">三、HMM</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#-li-jie-hmm" title="3.1 理解HMM">3.1 理解HMM</a></li><li class="nav-item"><a class="nav-link" href="#-mo-xing-yun-xing-guo-cheng" title="3.2 模型运行过程">3.2 模型运行过程</a></li><li class="nav-item"><a class="nav-link" href="#-xue-xi-xun-lian-guo-cheng" title="3.2.1 学习训练过程">3.2.1 学习训练过程</a></li><li class="nav-item"><a class="nav-link" href="#-xu-lie-biao-zhu-jie-ma-guo-cheng" title="3.2.2 序列标注（解码）过程">3.2.2 序列标注（解码）过程</a></li><li class="nav-item"><a class="nav-link" href="#-xu-lie-gai-lu-guo-cheng" title="3.2.3 序列概率过程">3.2.3 序列概率过程</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#si--memm_1" title="四、MEMM">四、MEMM</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#-li-jie-memm" title="4.1 理解MEMM">4.1 理解MEMM</a></li><li class="nav-item"><a class="nav-link" href="#-mo-xing-yun-xing-guo-cheng_1" title="4.2 模型运行过程">4.2 模型运行过程</a></li><li class="nav-item"><a class="nav-link" href="#-xue-xi-xun-lian-guo-cheng_1" title="4.2.1 学习训练过程">4.2.1 学习训练过程</a></li><li class="nav-item"><a class="nav-link" href="#-xu-lie-biao-zhu-guo-cheng" title="4.2.2 序列标注过程">4.2.2 序列标注过程</a></li><li class="nav-item"><a class="nav-link" href="#-xu-lie-qiu-gai-lu-guo-cheng" title="4.2.3 序列求概率过程">4.2.3 序列求概率过程</a></li><li class="nav-item"><a class="nav-link" href="#-biao-zhu-pian-zhi-?" title="4.3 标注偏置？">4.3 标注偏置？</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#wu--crf_1" title="五、CRF">五、CRF</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#-li-jie-crf" title="5.1 理解CRF">5.1 理解CRF</a></li><li class="nav-item"><a class="nav-link" href="#-mo-xing-yun-xing-guo-cheng_2" title="5.2 模型运行过程">5.2 模型运行过程</a></li><li class="nav-item"><a class="nav-link" href="#-xue-xi-xun-lian-guo-cheng_2" title="5.2.1 学习训练过程">5.2.1 学习训练过程</a></li><li class="nav-item"><a class="nav-link" href="#-xu-lie-biao-zhu-guo-cheng_1" title="5.2.2 序列标注过程">5.2.2 序列标注过程</a></li><li class="nav-item"><a class="nav-link" href="#-xu-lie-qiu-gai-lu-guo-cheng_1" title="5.2.3 序列求概率过程">5.2.3 序列求概率过程</a></li><li class="nav-item"><a class="nav-link" href="#-crffen-xi" title="5.3 CRF++分析">5.3 CRF++分析</a></li><li class="nav-item"><a class="nav-link" href="#-lstmcrf" title="5.4 LSTM+CRF">5.4 LSTM+CRF</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#liu--zong-jie_1" title="六、总结">六、总结</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#-zong-ti-dui-bi" title="1. 总体对比">1. 总体对比</a></li><li class="nav-item"><a class="nav-link" href="#-hmm-vs-memm-vs-crf" title="2. HMM vs. MEMM vs. CRF">2. HMM vs. MEMM vs. CRF</a></li><li class="nav-item"><a class="nav-link" href="#-machine-learning-models-vs-sequential-models" title="3. Machine Learning models vs. Sequential models">3. Machine Learning models vs. Sequential models</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#over_1" title="over">over</a></li><li class="nav-item"><a class="nav-link" href="#referrences:" title="Referrences:">Referrences:</a></li></ul></ul>
+    <div id="toc"><ul><li><a class="toc-href" href="#yi-preface" title="一、Preface">一、Preface</a></li><li><a class="toc-href" href="#er-prerequisite" title="二、Prerequisite">二、Prerequisite</a><ul><li><a class="toc-href" href="#21-gai-lu-tu" title="2.1 概率图">2.1 概率图</a></li><li><a class="toc-href" href="#211-gai-lan" title="2.1.1 概览">2.1.1 概览</a></li><li><a class="toc-href" href="#212-you-xiang-tu-vs-wu-xiang-tu" title="2.1.2 有向图 vs. 无向图">2.1.2 有向图 vs. 无向图</a></li><li><a class="toc-href" href="#213-ma-er-ke-fu-jia-she-ma-er-ke-fu-xing" title="2.1.3 马尔科夫假设&amp;马尔科夫性">2.1.3 马尔科夫假设&amp;马尔科夫性</a></li><li><a class="toc-href" href="#22-pan-bie-shi-discriminativemo-xing-vs-sheng-cheng-shi-generativemo-xing" title="2.2 判别式(discriminative)模型 vs. 生成式(generative)模型">2.2 判别式(discriminative)模型 vs. 生成式(generative)模型</a></li><li><a class="toc-href" href="#23-xu-lie-jian-mo" title="2.3 序列建模">2.3 序列建模</a></li></ul></li><li><a class="toc-href" href="#san-hmm_1" title="三、HMM">三、HMM</a><ul><li><a class="toc-href" href="#31-li-jie-hmm" title="3.1 理解HMM">3.1 理解HMM</a></li><li><a class="toc-href" href="#32-mo-xing-yun-xing-guo-cheng" title="3.2 模型运行过程">3.2 模型运行过程</a></li><li><a class="toc-href" href="#321-xue-xi-xun-lian-guo-cheng" title="3.2.1 学习训练过程">3.2.1 学习训练过程</a></li><li><a class="toc-href" href="#322-xu-lie-biao-zhu-jie-ma-guo-cheng" title="3.2.2 序列标注（解码）过程">3.2.2 序列标注（解码）过程</a></li><li><a class="toc-href" href="#323-xu-lie-gai-lu-guo-cheng" title="3.2.3 序列概率过程">3.2.3 序列概率过程</a></li></ul></li><li><a class="toc-href" href="#si-memm_1" title="四、MEMM">四、MEMM</a><ul><li><a class="toc-href" href="#41-li-jie-memm" title="4.1 理解MEMM">4.1 理解MEMM</a></li><li><a class="toc-href" href="#42-mo-xing-yun-xing-guo-cheng" title="4.2 模型运行过程">4.2 模型运行过程</a></li><li><a class="toc-href" href="#421-xue-xi-xun-lian-guo-cheng" title="4.2.1 学习训练过程">4.2.1 学习训练过程</a></li><li><a class="toc-href" href="#422-xu-lie-biao-zhu-guo-cheng" title="4.2.2 序列标注过程">4.2.2 序列标注过程</a></li><li><a class="toc-href" href="#423-xu-lie-qiu-gai-lu-guo-cheng" title="4.2.3 序列求概率过程">4.2.3 序列求概率过程</a></li><li><a class="toc-href" href="#43-biao-zhu-pian-zhi" title="4.3 标注偏置？">4.3 标注偏置？</a></li></ul></li><li><a class="toc-href" href="#wu-crf_1" title="五、CRF">五、CRF</a><ul><li><a class="toc-href" href="#51-li-jie-crf" title="5.1 理解CRF">5.1 理解CRF</a></li><li><a class="toc-href" href="#52-mo-xing-yun-xing-guo-cheng" title="5.2 模型运行过程">5.2 模型运行过程</a></li><li><a class="toc-href" href="#521-xue-xi-xun-lian-guo-cheng" title="5.2.1 学习训练过程">5.2.1 学习训练过程</a></li><li><a class="toc-href" href="#522-xu-lie-biao-zhu-guo-cheng" title="5.2.2 序列标注过程">5.2.2 序列标注过程</a></li><li><a class="toc-href" href="#523-xu-lie-qiu-gai-lu-guo-cheng" title="5.2.3 序列求概率过程">5.2.3 序列求概率过程</a></li><li><a class="toc-href" href="#53-crffen-xi" title="5.3 CRF++分析">5.3 CRF++分析</a></li><li><a class="toc-href" href="#54-lstmcrf" title="5.4 LSTM+CRF">5.4 LSTM+CRF</a></li></ul></li><li><a class="toc-href" href="#liu-zong-jie_1" title="六、总结">六、总结</a><ul><li><a class="toc-href" href="#1-zong-ti-dui-bi" title="1. 总体对比">1. 总体对比</a></li><li><a class="toc-href" href="#2-hmm-vs-memm-vs-crf" title="2. HMM vs. MEMM vs. CRF">2. HMM vs. MEMM vs. CRF</a></li><li><a class="toc-href" href="#3-machine-learning-models-vs-sequential-models" title="3. Machine Learning models vs. Sequential models">3. Machine Learning models vs. Sequential models</a></li></ul></li><li><a class="toc-href" href="#over_1" title="over">over</a></li><li><a class="toc-href" href="#referrences" title="Referrences:">Referrences:</a></li></ul></div>
 <!-- </section> -->
 <!-- </section> -->
         </nav>
@@ -887,27 +898,11 @@ CRF属于无向图，没有这种依赖性，克服此问题。</li>
   </div>
 
 
-    <script type="text/javascript">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+<!--  -->
+<!--  -->
 
-    ga('create', 'UA-98793057-1', 'auto');
-    ga('send', 'pageview');
-    </script>
-<script type="text/javascript">
-    var disqus_shortname = 'freeopen';
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
 <script src="https://freeopen.github.io/theme/js/jquery-3.3.1.slim.min.js"></script>
 <script src="https://freeopen.github.io/theme/js/popper.min.js"></script>
 <script src="https://freeopen.github.io/theme/js/bootstrap.min.js"></script>
-
 </body>
 </html>

@@ -28,13 +28,13 @@
           </button>
           <nav class="collapse navbar-collapse sidebar-nav flex-column" id="navbarNav">
 
-              <a class="nav-link" href="https://freeopen.github.io/pages/about.html">About</a>
-              <a class="nav-link" href="https://freeopen.github.io/pages/da-shang.html">打赏</a>
+              <a class="nav-link" href="https://freeopen.github.io/pages/guan-yu-zhe-li.html">关于这里</a>
+              <a class="nav-link" href="https://freeopen.github.io/pages/zou-guo-lu-guo.html">走过路过</a>
 
-              <a class="nav-link" href="https://freeopen.github.io/category/bian-cheng.html">编程</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/bian-cheng-zhi-hui.html">编程智慧</a>
               <a class="nav-link" href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
-              <a class="nav-link" href="https://freeopen.github.io/category/shou-ce.html">手册</a>
-              <a class="nav-link" href="https://freeopen.github.io/category/shu-xue.html">数学</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/shu-xue-za-tan.html">数学杂谈</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/su-cha-shou-ce.html">速查手册</a>
             <div class="sidebar-icons">
               <hr>
                 <a href="" title="Atom feed" target="_blank" 
@@ -63,230 +63,295 @@
 
 <ol id="post-list">
         <li class="related"><article>
-                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/image-segmentation" rel="bookmark" title="Permalink to 基于深度学习的图像分割算法思路演进">基于深度学习的图像分割算法思路演进</a></h2> </header>
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/cervical-cancer" rel="bookmark" title="Permalink to 冠军方案之 宫颈癌风险智能诊断">冠军方案之 宫颈癌风险智能诊断</a></h2> </header>
                 <footer class="post-info">
-                    <time class="published" datetime="2019-03-05T00:00:00+08:00"> 2019-03-05 </time>
+                    <time class="published" datetime="2021-02-14T00:00:00+08:00"> 2021-02-14 </time>
                     <address class="vcard author">By
                         <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
                     </address>
                 </footer><!-- /.post-info -->
                 <div> <blockquote>
-<p>又是一篇不会写完的文章，和前面那篇《卷积备忘录》一样，
-会跟进技术发展不断更新。读了一系列论文，有必要再次整理自己的思考了，
-好记性不如烂笔头嘛。如有理解错误之处，请读者及时来信告知，如果
-你精通翻墙术，文章末尾可以留言。（已架设 Disqus 评论系统，
-因国内不可名状的原因，翻墙后才能显示。）</p>
-<p>每天写一点，边写边发。</p>
+<p>赛道1冠军：deep-thinker 团队</p>
+<p>赛道2冠军：LLLLC 队</p>
 </blockquote>
-<h2 id="tu-xiang-fen-ge-dao-di-gan-shi-yao">图像分割到底干什么</h2>
-<p>图像分割问题主要流行四类任务，它们分别是目标检测( Object Detection )、语义分割( Semantic Segmentation )、实例分割( Instance Segmentation ) 和全景分割( Panoptic Segmentation )。这四类任务的意义分别为：</p>
-<ol>
-<li>目标检测：计算机看一张图，用矩形框框出我们感兴趣的目标（定位任务），
-   并告诉我们该目标是什么（分类任务）。</li>
-<li>语义分割：把整张图像的每个像素赋予一个类别标签。
-   不过语义分割的任务是只判断类别，不区分个体。 </li>
-<li>实例分割：对我们感兴趣目标的像素赋予类别标签，
-   且对于挨在一起的同种类型的目标，需要区分出个体（即实例 …</li></ol> </div><!-- /.entry-content -->
+<h2 id="ren-wu-shuo-ming">任务说明</h2>
+<p>通过提供大规模经过专业医师标注的宫颈癌液基薄层细胞检测数据，选手能够提出并综合运用目标检测、深度学习等方法对宫颈癌细胞学异常鳞状上皮细胞进行定位以及对宫颈癌细胞学图片分类，提高模型检测的速度和精度，辅助医生进行诊断。</p>
+<p>宫颈癌细胞学图片采用kfb格式，每张数据在20倍数字扫描仪下获取，大小300～400M。</p>
+<h4>初赛环节</h4>
+<p>宫颈癌细胞学图片800张，其中阳性图片500张，阴性图片300张。阳性图片会提供多个ROI区域，在ROI区域里面标注异常鳞状上皮细胞位置，阴性图片不包含异常鳞状上皮细胞，无标注。初赛讨论的异常鳞状上皮细胞主要包括四类：ASC-US(非典型鳞状细胞不能明确意义)，LSIL(上皮内低度病变)，ASC-H(非典型鳞状细胞倾向上皮细胞内高度)，HSIL(上皮内高度病变)。（特别注明：阳性图片ROI区域之外不保证没有异常鳞状上皮细胞）</p>
+<h4>复赛环节</h4>
+<p>通过线上赛的方式，不允许选手下载数据，在线完成模型训练。</p>
+<p>复赛训练集共提供1690张数据，其中1440张包含标注，250张没有标注。1440张有标注数据在ROI区域内标注了6类异常细胞，分别是阳性类别&ldquo;ASC-H&rdquo;、&ldquo;ASC-US&rdquo;、&ldquo;HSIL&rdquo;、&ldquo;LSIL&rdquo;，和阴性类别&ldquo;Candida …</p> </div><!-- /.entry-content -->
         </article></li>
         <li class="related"><article>
-                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/understand-matrix" rel="bookmark" title="Permalink to 理解矩阵">理解矩阵</a></h2> </header>
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/x-cargo" rel="bookmark" title="Permalink to 冠军方案之 X光限制品监测">冠军方案之 X光限制品监测</a></h2> </header>
                 <footer class="post-info">
-                    <time class="published" datetime="2019-02-15T00:00:00+08:00"> 2019-02-15 </time>
-                    <address class="vcard author">By
-                        <a class="url fn" href="https://freeopen.github.io/author/meng-yan.html">孟岩</a>
-                    </address>
-                </footer><!-- /.post-info -->
-                <div> <blockquote>
-<p>为阅读方便，将孟岩的《理解矩阵》一、二、三篇合为一篇，在保证内容完备的前提下删除少量不相干内容。遇到这篇文章是缘分，它是开启线性代数学习的一把钥匙，不管你是初学者还是老手，有幸读到这篇，一定会有茅塞顿开的感觉。</p>
-</blockquote>
-<p><a href="http://blog.csdn.net/myan/article/details/647511">原文</a></p>
-<p>一般工科学生初学线性代数，通常都会感到困难。这种情形在国内外皆然。瑞典数学家 Lars Garding 在其名著 Encounter with Mathematics 中说：&ldquo;如果不熟悉线性代数的概念，要去学习自然科学，现在看来就和文盲差不多。&rdquo;，然而&ldquo;按照现行的国际标准，线性代数是通过公理化来表述的，它是第二代数学模型，...，这就带来了教学上的困难。&rdquo;事实上，当我们开始学习线性代数的时候，不知不觉就进入了&ldquo;第二代数学模型&rdquo;的范畴当中，这意味着数学的表述方式和抽象性有了一次全面的进化，对于从小一直在&ldquo;第一代数学模型&rdquo;，即以实用为导向的、具体的数学模型中学习的我们来说，在没有并明确告知的情况下进行如此剧烈的 paradigm shift，不感到困难才是奇怪的。</p>
-<p>大部分工科学生，往往是在学习了一些后继课程，如数值分析、数学规划 …</p> </div><!-- /.entry-content -->
-        </article></li>
-        <li class="related"><article>
-                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/cnn-notes" rel="bookmark" title="Permalink to 卷积备忘录">卷积备忘录</a></h2> </header>
-                <footer class="post-info">
-                    <time class="published" datetime="2019-01-05T00:00:00+08:00"> 2019-01-05 </time>
+                    <time class="published" datetime="2021-02-14T00:00:00+08:00"> 2021-02-14 </time>
                     <address class="vcard author">By
                         <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
                     </address>
                 </footer><!-- /.post-info -->
                 <div> <blockquote>
-<p>学习了一段时间卷积，到了该整理的时候了。这是一篇不会写完的文章，它将跟进卷积技术的发展和演变，进行增补。</p>
+<p>冠军：YuanXu</p>
 </blockquote>
-<h2 id="juan-ji-de-shu-xue-yuan-li">卷积的数学原理</h2>
-<p>在图像处理中，卷积计算属于二维卷积的离散形式，公式如下：
-</p>
-<div class="math">$$(f*g)[n_1, n_2] = \sum_{m_1 = -\infty}^{+\infty}\sum_{m_2 = -\infty}^{+\infty}f[m_1, m_2]\cdot g[n_1 - m_1, n_2 - m_2]$$</div>
-<p>其中，</p>
+<h2 id="ren-wu-shuo-ming">任务说明</h2>
+<p>包裹X光限制品监测作为日常包裹物流行业及安防行业的重要环节，承担着防止易燃易爆等危险品进入货运渠道，管理刀具等特殊货运物品，监测毒品等国家重点违禁品偷运等工作。随着线上购物的普及和快速发展，线上物流包裹数量已经远超人工可以处理的范围，给物流包裹监管带来了巨大挑战。</p>
+<p>针对给出的限制品种类，利用X光图像及标注数据，研究开发高效的计算机视觉算法，监测图像是否包含危险品及其大致位置。通过自动化监测包裹携带品算法，降低漏检风险及误报率，提升危险品管理效率。</p>
+<p>限制品包括：铁壳打火机、黑钉打火机、刀具、电池电容以及剪刀五类（类别id依次从1到5）。</p>
+<h4>评估指标</h4>
 <ul>
-<li><span class="math">\((f*g)[n_1, n_2]\)</span> 表示 <span class="math">\(g\)</span> 图像位于<span class="math">\((n_1,n_2)\)</span> 坐标对应的值在过滤器 <span class="math">\(f\)</span> 上的卷积</li>
-<li><span class="math">\(f[m_1,m_2]\)</span> 为卷积核，方括号表示序列，
-  例如<span class="math">\(f …</span></li></ul> </div><!-- /.entry-content -->
+<li>
+<p>评测方式采用计算box mAP的方式，对IoU = 0.5:0.05:0.95，分别计算mAP，再做平均得到最后的mAP。</p>
+</li>
+<li>
+<p>单个模型整体大小需不超过600MB（即不超过VGG19大小），模型不得超过2个。</p>
+</li>
+<li>
+<p>响应时间越快越好</p>
+</li>
+</ul>
+<h2 id="wen-ti-fen-xi">问题分析</h2>
+<p>比赛任务是经典的图像语义分割（semantic-segmentation）的问题，简单说就是要在像素级别将前景类别标识出来。研究kaggle上的几个图像语义分割的比赛，发现Unet和Mask-RCNN的成绩最好。</p>
+<p>因为时间原因，最后选择 Unet。因为Unet能直接输出与图像1 …</p> </div><!-- /.entry-content -->
         </article></li>
         <li class="related"><article>
-                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/hmm-memm-crf" rel="bookmark" title="Permalink to 概率图模型 HMM、MEMM、CRF">概率图模型 HMM、MEMM、CRF</a></h2> </header>
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/cloth-cut" rel="bookmark" title="Permalink to 冠军方案之 面料剪裁利用率优化">冠军方案之 面料剪裁利用率优化</a></h2> </header>
                 <footer class="post-info">
-                    <time class="published" datetime="2018-05-08T00:00:00+08:00"> 2018-05-08 </time>
-                    <address class="vcard author">By
-                        <a class="url fn" href="https://freeopen.github.io/author/scofield.html">Scofield</a>
-                    </address>
-                </footer><!-- /.post-info -->
-                <div> <p><a href="https://www.zhihu.com/question/35866596/answer/236886066">转自知乎</a></p>
-<blockquote>
-<p>freeopen: 此文不错，有些小错，顺手改了</p>
-</blockquote>
-<h2 id="yi--preface"><strong>一、Preface</strong></h2>
-<p>之前刚接触NLP时做相关的任务，也必然地涉及到了序列处理任务，然后自然要接触到概率图模型。当时在全网搜中文资料，陆续失望地发现竟然真的没有讲得清楚的博文，发现基本是把李航老师书里或CRF tutorial等资料的文字论述和公式抄来抄去的。当然，没有说别人讲的是错的，只是觉得，要是没有把东西说的让读者看得懂，那也是没意义啊。或者有些吧，就是讲了一大堆的东西，貌似也明白了啥，但还是不能让我很好的理解CRF这些模型究竟是个啥，完了还是有一头雾水散不开的感觉。试想，一堆公式扔过来，没有个感性理解的过渡，怎么可能理解的了。我甚至觉得，如果博客让人看不懂，那说明要么自己没理解透要么就是思维不清晰讲不清楚。所以默想，深水区攻坚还是要靠自己，然后去做调研做research，所以就写了个这个学习记录。</p>
-<p>所以概率图的研究学习思考列入了我的任务清单。不过平时的时间又非常的紧，只能陆陆续续的思考着，所以时间拖得也真是长啊。</p>
-<p>这是个学习笔记。相比其他的学习模型，概率图貌似确实是比较难以理解的。这里我基本全部用自己的理解加上自己的语言习惯表达出来，off the official form，表达尽量接地气。我会尽量将我所有理解过程中的每个关键小细节都详细描述出来，以使对零基础的初学者友好 …</p> </div><!-- /.entry-content -->
-        </article></li>
-        <li class="related"><article>
-                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/estimator" rel="bookmark" title="Permalink to Estimator 编程指南">Estimator 编程指南</a></h2> </header>
-                <footer class="post-info">
-                    <time class="published" datetime="2018-03-04T00:00:00+08:00"> 2018-03-04 </time>
+                    <time class="published" datetime="2021-02-13T00:00:00+08:00"> 2021-02-13 </time>
                     <address class="vcard author">By
                         <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
                     </address>
                 </footer><!-- /.post-info -->
                 <div> <blockquote>
-<p>2018-04-12 第一次修订, 新增"多GPU下的写法"</p>
+<p>冠军：行星防御理事会 团队（乔德平等）</p>
 </blockquote>
-<p>注：代码适用于 TF1.4 ~ TF1.7 。</p>
-<p>为什么要使用Estimator, 仅<a href="https://www.tensorflow.org/programmers_guide/estimators">官方文档</a>里提到的第一条优点就让我不得不重视它。
-大意是不管你在本地环境还是分布式环境，不管你用一个或多个CPU、GPU还是TPU训练模型，你的模型代码不需要做任何改变。</p>
-<p>但看了一些Estimator教程，不怎么满意。因为大部分介绍的方法过于简单，仅适用于实验环境。当你面对大数据、复杂模型和机能限制时，发现那些方法就不灵了。
-所以就自己写了一本，方便自查自检。这篇文章，会随着本人的打怪升级等级进行增补。</p>
-<h2 id="estimator">Estimator</h2>
+<h2 id="ren-wu-shuo-ming">任务说明</h2>
+<p>面料切割利用率的提升是纺织行业长期追求的目标。如何提升面料切割利用率，既是企业生产精益化的难点，也是痛点。在切割之前，需要确定多个零件在面料上的位置和角度，再充分利用零件在形状上的互补特征，对零件排布的方式进行优化。面料切割问题的特性，是零件存在多种尺寸、形状，比如用作衬衫制作的袖子、后背等零件，用来切割的布匹本身存在多类瑕疵，如破洞、折皱、漏纱等，在排版中需要避开。此外，某些订单，对零件存在个性化排版需求，因此在下料环节中，需要依照订单要求进行排版下料。当前纺织行业布匹原材料的成本占到40%左右，价值较高。</p>
+<p>本赛场聚焦面料剪裁利用率优化，要求选手研究开发高效可靠的算法，在较短时间范围内计算获得高质量可执行的排版结果，减少切割中形成的边角废料，提升面料切割利用率，减少计划时间、提高工作效率和避免人工计算的失误，提升价值降低成本。</p>
+<p>在规则面料的情况下，满足零件旋转角度、零件最小间距、最小边距的约束，解决以下两类问题：</p>
+<p>初赛赛题：基于所给零件，进行面料排版加工，耗料长度最短，面料利用率最高；</p>
+<p>复赛赛题 …</p> </div><!-- /.entry-content -->
+        </article></li>
+        <li class="related"><article>
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/crop-detection" rel="bookmark" title="Permalink to 冠军方案之农作物范围识别">冠军方案之农作物范围识别</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2021-02-13T00:00:00+08:00"> 2021-02-13 </time>
+                    <address class="vcard author">By
+                        <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
+                    </address>
+                </footer><!-- /.post-info -->
+                <div> <blockquote>
+<p>冠军：华南理工黄钦建等（冲啊大黄 团队 ）</p>
+</blockquote>
+<h1>任务说明</h1>
+<p>通过无人机航拍的地面影像，探索像素级农作物分类的算法，具体的分类目标为薏仁米、玉米、烤烟、人造建筑（复赛新增），其余所有位置归为背景类。</p>
+<p>初赛、复赛提供的数据是同一片区域的航拍影像。其中初赛提供数据为农作物生长的早期（大多没长出来），分割难度较大。复赛数据农作物长势良好，并在初赛赛题基础上增加了一类&ldquo;建筑&rdquo;。</p>
+<p>提供的label为与原始图像1:1大小的单通道图像（mask），像素的大小对应不同的标注类别。其中&ldquo;烤烟&rdquo;像素值为1，&ldquo;玉米&rdquo;像素值为2，&ldquo;薏仁米&rdquo;像素值为3，&ldquo;人造建筑&rdquo;像素值为4，背景类像素值为0.</p>
+<p><strong>评估指标</strong></p>
+<p>评估指标为mIoU，榜上排名分数为所有计算所有类别IoU后取平均的结果。</p>
+<h2 id="shu-ju-fen-xi">数据分析</h2>
+<p>图像分辨率超大，背景类占比远高于其它类别，mask无效的区域面积也较大，类别不平衡问题突出。</p>
+<h2 id="shu-ju-qie-ge">数据切割</h2>
+<p>使用gdal库分割遥感影像，采用两种切割策略：</p>
+<ul>
+<li>策略一：以1024x1024的窗口大小，步长900滑窗，当窗口中mask无效区域比例大于7 …</li></ul> </div><!-- /.entry-content -->
+        </article></li>
+        <li class="related"><article>
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/guangdong-cloth-defect" rel="bookmark" title="Permalink to 冠军方案之布匹疵点智能检测">冠军方案之布匹疵点智能检测</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2021-02-13T00:00:00+08:00"> 2021-02-13 </time>
+                    <address class="vcard author">By
+                        <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
+                    </address>
+                </footer><!-- /.post-info -->
+                <div> <blockquote>
+<p>冠军：哪儿都是坑啊 团队（徐光福等）</p>
+</blockquote>
+<h2 id="ren-wu-shuo-ming">任务说明</h2>
+<p>在布匹的实际生产过程中，由于各方面因素的影响，会产生污渍、破洞、毛粒等瑕疵，为保证产品质量，需要对布匹进行瑕疵检测。布匹疵点检验是纺织行业生产和质量管理的重要环节，目前人工检测易受主观因素影响，缺乏一致性；并且检测人员在强光下长时间工作对视力影响极大。由于布匹疵点种类繁多、形态变化多样、观察识别难道大，导致布匹疵点智能检测是困扰行业多年的技术瓶颈。</p>
+<p>大赛数据涵盖了纺织业中布匹的各类重要瑕疵，每张图片含一个或多种瑕疵。数据包括包括素色布和花色布两类，其中，素色布数据约8000张，用于初赛；花色布数据约12000张，用于复赛。</p>
+<h4>评估指标</h4>
+<p>赛题分数计算方式: <strong>0.2ACC+0.8mAP</strong></p>
+<p><strong>ACC</strong>：是有瑕疵或无瑕疵的分类指标，考察瑕疵检出能力。
+其中提交结果name字段中出现过的测试图片均认为有瑕疵，未出现的测试图片认为是无瑕疵。</p>
+<p><strong>mAP</strong>：参照PASCALVOC的评估标准计算瑕疵的mAP值。</p>
+<p>本次大赛评分计算过程中，分别在检测框和真实框的交并比(IOU)在阈值0.1，0.3，0.5下计算mAP …</p> </div><!-- /.entry-content -->
+        </article></li>
+        <li class="related"><article>
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/guangdong-defect" rel="bookmark" title="Permalink to 冠军方案之铝型材表面瑕疵识别">冠军方案之铝型材表面瑕疵识别</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2021-02-13T00:00:00+08:00"> 2021-02-13 </time>
+                    <address class="vcard author">By
+                        <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
+                    </address>
+                </footer><!-- /.post-info -->
+                <div> <blockquote>
+<p>冠军：Are you OK 战队（中山大学曾兆阳等）</p>
+</blockquote>
+<h2 id="ren-wu-shuo-ming">任务说明</h2>
+<p>在铝型材的实际生产过程中，由于各方面因素的影响，铝型材表面会产生裂纹、起皮、划伤等瑕疵，这些瑕疵会严重影响铝型材的质量。铝型材的表面自身会含有纹路，与瑕疵的区分度不高。传统人工肉眼检查十分费力，不能及时准确的判断出表面瑕疵，质检的效率难以把控。铝型材制造商迫切希望采用最新的AI技术来革新现有质检流程，自动完成质检任务，减少漏检发生率，提高产品的质量，使铝型材产品的生产管理者彻底摆脱了无法全面掌握产品表面质量的状态。</p>
+<p>初赛数据量3000张图片，复赛数据量5000张图片，包含单瑕疵图片，多瑕疵图片，无瑕疵图片，用于参赛者设计图像识别算法。图片所含瑕疵类型总计10种，分别为：不导电、擦花、角位漏底、桔皮、漏底、喷流、漆泡、起坑、杂色、脏点。</p>
+<p><strong>评价指标</strong></p>
+<p>参照2010年之后PASCALVOC的评估标准，检测框和真实框的交并比(IOU)阈值设定为0.5，同时，采用Interpolating all …</p> </div><!-- /.entry-content -->
+        </article></li>
+        <li class="related"><article>
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/fashion-ai-keypoints" rel="bookmark" title="Permalink to 冠军方案之 FashionAI 服饰关键点定位">冠军方案之 FashionAI 服饰关键点定位</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2021-02-11T00:00:00+08:00"> 2021-02-11 </time>
+                    <address class="vcard author">By
+                        <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
+                    </address>
+                </footer><!-- /.post-info -->
+                <div> <blockquote>
+<p>冠军：李weite 及 bilibili 团队</p>
+</blockquote>
+<h2 id="ren-wu-shuo-ming">任务说明</h2>
+<p>服装的机器分析很容易受到衣服的尺寸和形状，相机拍摄的距离和角度甚至服装的显示方式或模型摆放方式的影响。对图像中服装关键点的检测可以帮助提高应用程序的性能，例如衣服的对齐，衣服局部属性的识别以及服装图像的自动编辑。</p>
+<p>基于服装设计知识，定义了一套服饰的关键点，并梳理了在女装6大专业类别（上衣、外套、裤子、半身裙、连身裙、连身裤）下的具体定义，要求参赛者设计算法进行定位预测。官方提供的数据集含前五个类别（连身裤类别被省略，因为在现实世界中并不常见），包括41个子类别和24种关键点。此数据集中总共有100,000个带批注的图像。</p>
 <p align="center">
-<img src="/images/image2.jpg" width="75%"/>
-<br/>
+<img src="https://freeopen.github.io/images/TB16Z8fXQCWBuNjy0FaXXXUlXXa.png" width="90%"/>
+<figcaption>
+ 女装关键点图例
+ </figcaption>
 </p>
-<p>Estimator 作为高层API，可以让我们写出结构清晰的代码。你有两种方法通过 estimator 来构建模型：</p>
+<h3 id="guan-jian-dian-ding-yi">关键点定义</h3>
 <ul>
-<li>Pre-mode Estimator: 创建指定类型的模型，如上图，它们分别是线性分类和回归模型、深度神经网络分类和回归模型，还有线性和深度混合的分类、回归模型。</li>
-<li>自定义 Estimator: 按传统的方法写模型，然后用 model_fn 函数封装 …</li></ul> </div><!-- /.entry-content -->
+<li>
+<table>
+<thead>
+<tr>
+<th>Keypoints\Category</th>
+<th>Blouse</th>
+<th>Outwear</th>
+<th>Trousers</th>
+<th>Skirt</th>
+<th>Dress</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>neckline_left</td>
+<td>Y</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>neckline_right</td>
+<td>Y</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>center_front …</td></tr></tbody></table></li></ul> </div><!-- /.entry-content -->
         </article></li>
         <li class="related"><article>
-                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/ml-glossary" rel="bookmark" title="Permalink to 机器学习术语表">机器学习术语表</a></h2> </header>
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/fashion-ai-reconition" rel="bookmark" title="Permalink to 冠军方案之 FashionAI 服饰属性标签识别">冠军方案之 FashionAI 服饰属性标签识别</a></h2> </header>
                 <footer class="post-info">
-                    <time class="published" datetime="2018-02-26T00:00:00+08:00"> 2018-02-26 </time>
+                    <time class="published" datetime="2021-02-11T00:00:00+08:00"> 2021-02-11 </time>
                     <address class="vcard author">By
                         <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
                     </address>
                 </footer><!-- /.post-info -->
                 <div> <blockquote>
-<p>为方便读论文时查询术语，只做英文目录，我会不时把新遇到的术语增补到这里。
-<a href="https://developers.google.com/machine-learning/glossary/">初版</a>来自 Google Developers 网站。
-有不准确的地方请来信告知，我会即时更正。</p>
+<p>冠军：西安交大在读博士及硕士组成的&ldquo;禾思众成&rdquo;团队</p>
 </blockquote>
-<p>本术语表定义了一般机器学习术语以及特定于 TensorFlow 的术语。</p>
-<p><font color="red">常用评价指标导航</font></p>
-<ul>
-<li><a href="#accuracy">accuracy</a></li>
-<li><a href="#precision">precision</a></li>
-<li><a href="#recall">recall</a></li>
-<li><a href="#f-score">F1-Score</a></li>
-<li><a href="#ap">AP</a></li>
-<li><a href="#map">mAP</a></li>
-<li><a href="#auc-area-under-the-roc-curve">AUC</a></li>
-<li><a href="#roc-receiver-operating-characteristic-curve">ROC</a></li>
-<li><a href="#bleu">BLEU</a></li>
-<li><a href="#iou">IoU</a></li>
-</ul>
-<h2 id="a">A</h2>
-<h3 id="a-b-testing">A/B testing</h3>
-<p>A statistical way of comparing two (or more) techniques, typically an incumbent against a new rival. A/B testing aims to determine …</p> </div><!-- /.entry-content -->
+<h2 id="ren-wu-shuo-ming">任务说明</h2>
+<p>服装属性是时装领域的基础知识，它既庞大又复杂。 我们构建了一个层次结构的属性树作为结构化的分类目标，以描述服装的认知过程。 邀请您设计算法来识别服装图像的属性。 此任务可能会广泛应用于服装图片搜索，导航标签，混搭推荐等。 </p>
+<p><img alt="女装属性树" src="https://freeopen.github.io/images/cloth-attributes.png"/></p>
+<p>要求检测上图中所有可区分的服装属性标签。 统计下来，训练集的图片约18万张，8个大类（4个设计属性，包括各种领口的款式，4个长度属性，包括衣长、裙长、裤长、袖长），54个小类。 </p>
+<h3 id="biao-qian">标签</h3>
+<p><img alt="模特及标签" src="https://freeopen.github.io/images/cloth-model.png"/></p>
+<p>a）上图的数据由训练有素的注释器标记。 然后，时尚专家会仔细检查这些标签，以确保较高的标签准确性。 带注释的数据中存在一定数量的缺失标签。 例如，图像中可能只有一个颈部设计标签，且颈部设计和袖子长度可见。 不再标记袖子长度以保持每个属性维度的数据均匀性。</p>
+<p>b）为这条赛道选择了八个主要属性尺寸，即领口设计(Neckline)、领子设计(Collar)、高领设计(High Neck)、翻领设计(Lapel)、袖子长度(Sleeves length …</p> </div><!-- /.entry-content -->
         </article></li>
         <li class="related"><article>
-                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/python-numpy" rel="bookmark" title="Permalink to Python Numpy 教程">Python Numpy 教程</a></h2> </header>
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/amap-top1" rel="bookmark" title="Permalink to 冠军方案之 高德算法大赛">冠军方案之 高德算法大赛</a></h2> </header>
                 <footer class="post-info">
-                    <time class="published" datetime="2017-12-11T00:00:00+08:00"> 2017-12-11 </time>
-                    <address class="vcard author">By
-                        <a class="url fn" href="https://freeopen.github.io/author/justin-johnson-du-ke-yi-freeopenbian.html">Justin Johnson, 杜客(译), freeopen(编)</a>
-                    </address>
-                </footer><!-- /.post-info -->
-                <div> <p><a href="http://cs231n.github.io/python-numpy-tutorial/">原文</a> | <a href="https://zhuanlan.zhihu.com/p/20878530?refer=intelligentunit">原译文</a></p>
-<blockquote>
-<p>freeopen: 原译文没有目录导航，阅读起来不方便。补全少量漏翻的地方。虽然内容很基础，但需要时快速查阅一下还是很不错的。</p>
-</blockquote>
-<h2 id="introduction">Introduction</h2>
-<p>Python是一门伟大的通用编程语言，在一些常用库（numpy, scipy, matplotlib）的帮助下，它又会变成一个强大的科学计算环境。</p>
-<p>我们期望你们中大多数人对于Python语言和Numpy库比较熟悉，而对于没有Python经验的同学，这篇教程可以帮助你们快速了解Python编程环境和如何使用Python作为科学计算工具。</p>
-<p>一部分同学对于Matlab有一定经验。对于这部分同学，我们推荐阅读 <a href="https://docs.scipy.org/doc/numpy-dev/user/numpy-for-matlab-users.html">numpy for Matlab users 页面</a>。</p>
-<p>本教程内容涵盖:</p>
-<ul>
-<li>Basic Python: Basic data types (Containers, Lists, Dictionaries, Sets, Tuples), Functions, Classes</li>
-<li>Numpy: Arrays, Array indexing, Datatypes, Array math, Broadcasting</li>
-<li>SciPy: Image …</li></ul> </div><!-- /.entry-content -->
-        </article></li>
-        <li class="related"><article>
-                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/tensorlayer" rel="bookmark" title="Permalink to TensorLayer 教程">TensorLayer 教程</a></h2> </header>
-                <footer class="post-info">
-                    <time class="published" datetime="2017-09-09T00:00:00+08:00"> 2017-09-09 </time>
-                    <address class="vcard author">By
-                        <a class="url fn" href="https://freeopen.github.io/author/xiaoping-fanyi-freeopenxiu-ding.html">Xiaoping Fan(译), freeopen(修订)</a>
-                    </address>
-                </footer><!-- /.post-info -->
-                <div> <p><a href="https://github.com/zsdonghao/tensorlayer/blob/master/docs/user/tutorial.rst">原文</a> | <a href="https://github.com/shorxp/tensorlayer-chinese/blob/master/docs/user/tutorial.rst">原译文</a></p>
-<blockquote>
-<p>freeopen: 为什么研究 TensorLayer ? <br/>
-在TF的编码中，常看到model被封装成class，进一步研究，发现为了简化模型的创建，有各种封装库，包括Keras, Tflearn, TFSlim, tf.contrib.learn(或称skflow) 等。
-其中TFSlim和skflow属TensorFlow自带，考虑到TFSlim中有现成的模型，就修改了一个试试，发现坑不小。我需要首先把数据源转成TFRecord格式，然后用模型训练后报错（out of range), 然后我就首先检查数据源的格式是否有问题，我采用TFSlim的Data
-provider来输出数据，可能我的数据维度太大，程序不报错，但一直死在那里不出结果，而同样我在使用numpy输出数据源数据时，没有任何问题，也没什么延时，瞬间我感觉到TFSlim的封装模式不仅把问题复杂化了，甚至还降低了程序的性能。Keras据说跑TF性能较慢，Tflearn感觉活跃度较低，考虑到TensorLayer是skflow上的再次封装，且不丧失灵活性，加上这篇最主要的教程写得真心不错，所以我发愿要好好研究一番。 <br/></p>
-<p>为什么我总喜欢修订一些长文翻译？<br/>
-技术翻译文章经常在阅读时有不知所云的现象，我总结的原因主要有三：一是译者没有理解作者意图，甚至连文章都没读懂，就开始直译 …</p></blockquote> </div><!-- /.entry-content -->
-        </article></li>
-        <li class="related"><article>
-                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/mnist" rel="bookmark" title="Permalink to TensorFlow 的 MNIST 教程">TensorFlow 的 MNIST 教程</a></h2> </header>
-                <footer class="post-info">
-                    <time class="published" datetime="2017-08-02T00:00:00+08:00"> 2017-08-02 </time>
+                    <time class="published" datetime="2021-02-10T00:00:00+08:00"> 2021-02-10 </time>
                     <address class="vcard author">By
                         <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
                     </address>
                 </footer><!-- /.post-info -->
-                <div> <p><a href="https://www.tensorflow.org/get_started/mnist/pros">原文</a></p>
-<blockquote>
-<p>译者注：这篇文章对初学tensorflow的朋友来说，有很好的参考作用。曾经在网上看过本教程的翻译稿，但版本偏老。本文翻译时，tensorflow的版本为1.3.0-rc1. 新版相较于老版，示例代码有变化，文字说明也有增补。</p>
+                <div> <blockquote>
+<p>冠军：北邮在读博士 朱奕达及团队</p>
 </blockquote>
-<p>TensorFlow是一个非常强大的用来做大规模数值计算的库。其所擅长的任务之一就是实现以及训练深度神经网络。
-在本教程中，我们将学到构建一个TensorFlow模型的基本步骤，并将通过这些步骤为MNIST构建一个深度卷积神经网络。</p>
-<p>这个教程假设你已经熟悉神经网络和MNIST数据集。如果你尚未了解，请查看新手指南.</p>
-<h2 id="guan-yu-ben-jiao-cheng">关于本教程</h2>
-<p>本教程第一部分讲解 <a href="https://www.github.com/tensorflow/tensorflow/blob/r1.2/tensorflow/examples/tutorials/mnist/mnist_softmax.py">mnist_softmax.py</a> 代码, 一个简单的tensorflow模型实现。第二部分介绍一些提高精度的方法。</p>
-<p>你可以从本教程拷贝和粘贴代码块到你的python环境，或者下载完整代码 <a href="https://www.github.com/tensorflow/tensorflow/blob/r1.2/tensorflow/examples/tutorials/mnist/mnist_deep.py">mnist_deep.py</a>.</p>
-<p>我们将完成如下目标：</p>
+<h2 id="bi-sai-ren-wu">比赛任务</h2>
+<h3 id="chu-sai-shu-ju"><strong>初赛数据：</strong></h3>
+<p><strong>输入</strong>：给定一组含有GPS时间的图像序列（包含3-5帧图像），其中一幅图像作为参考帧。</p>
+<p><strong>输出</strong>：以参考帧为准，输出该图像序列对应的路况状态（畅通、缓行和拥堵）。</p>
+<p>图像序列由行车记录仪拍摄，路况真值（ground truth）是对应道路当前时刻真实的路况状态。</p>
+<p><strong>数据信息：</strong></p>
 <ul>
-<li>基于图片像素，创建一个softmax回归函数的模型来识别MNIST数字。</li>
-<li>用tensorflow训练模型识别数字。</li>
-<li>用测试数据检查模型精度</li>
-<li>构建、训练和测试一个多层卷积神经网络来提升模型精度。</li>
+<li>图像序列的参考帧图像名。</li>
+<li>图像序列的路况状态。</li>
+<li>0：畅通，1：缓行，2：拥堵，-1：测试集真值未给出。</li>
+<li>每帧图像采集时刻的GPS时间。</li>
+<li>单位为秒。如GPS时间 1552806926 比 1552806921 滞后5秒钟。</li>
+<li>A榜测试数据集换成高速行车记录仪采集的数据，GPS时间间隔缩短为1-2秒。</li>
 </ul>
-<h2 id="an-zhuang">安装</h2>
-<p>在创建模型之前，我们会先加载MNIST数据集，然后启动一个TensorFlow的session。</p>
-<h3 id="jia-zai-mnistshu-ju">加载MNIST数据</h3>
-<p>为了方便起见，我们已经准备了一个脚本来自动下载和导入MNIST数据集。它会自动创建一个'MNIST_data'的目录来存储数据。</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorflow.examples …</span></pre></div> </div><!-- /.entry-content -->
+<h3 id="fu-sai-shu-ju"><strong>复赛数据：</strong></h3>
+<ul>
+<li>新增<code>封闭</code>的道路路况</li>
+<li>移除了GPS时间信息</li>
+</ul>
+<h2 id="shu-ju-fen-xi_1">数据分析</h2>
+<ul>
+<li>前车遮挡视野内道路情况，从而影响对道路的判断；</li>
+<li>对向车道和路边停靠车辆对行驶车道路况判断的影响；</li>
+<li>数据众包导致相机安装存在角度偏差，从而导致图像角度不一致 …</li></ul> </div><!-- /.entry-content -->
         </article></li>
         <li class="related"><article>
-                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/nmt-cn" rel="bookmark" title="Permalink to Neural Machine Translation (seq2seq) 教程">Neural Machine Translation (seq2seq) 教程</a></h2> </header>
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/apache-flink" rel="bookmark" title="Permalink to 冠军方案之 Apache Flink 极客挑战赛">冠军方案之 Apache Flink 极客挑战赛</a></h2> </header>
                 <footer class="post-info">
-                    <time class="published" datetime="2017-07-18T00:00:00+08:00"> 2017-07-18 </time>
+                    <time class="published" datetime="2021-02-10T00:00:00+08:00"> 2021-02-10 </time>
                     <address class="vcard author">By
                         <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
                     </address>
                 </footer><!-- /.post-info -->
-                <div> <p><a href="https://github.com/tensorflow/nmt">原文</a></p>
-<h2 id="jie-shao">介绍</h2>
-<p>序列到序列(seq2seq)模型 (<a href="https://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf">Sutskever et al., 2014</a>, <a href="http://emnlp2014.org/papers/pdf/EMNLP2014179.pdf">Cho et al., 2014</a>) 在诸如机器翻译、语音识别和文本概括等任务中取得了巨大成功. 本教程为读者提供对 seq2seq 模型的全面理解，并展示如何从头构建一个有竞争力的 seq2seq 模型. 我们专注于神经机器翻译（NMT）任务，这是一个很好的、已获得广泛<a href="https://research.googleblog.com/2016/09/a-neural-network-for-machine.html">成功</a>的 seq2seq 模型的试验台. 所含的代码轻量、高质、实用，并整合了最新的研究思路。我们通过以下方式达成此目标 :</p>
-<ol>
-<li>使用最新的 解码器 / attention wrapper <a href="https://github.com/tensorflow/tensorflow/tree/master/tensorflow/contrib/seq2seq/python/ops">API</a>, TensorFlow 1.2 数据迭代器</li>
-<li>结合我们在建立循环神经网络和序列到序列模型方面的强大专长</li>
-<li>提供一些巧思来构建最好的 NMT 模型，并复制一个谷歌神经机器翻译系统 <a href="https://research.google.com/pubs/pub45610.html">Google …</a></li></ol> </div><!-- /.entry-content -->
+                <div> <blockquote>
+<p>冠军：合肥工大 SkyPeaceLL</p>
+</blockquote>
+<h2 id="bi-sai-ren-wu">比赛任务</h2>
+<h3 id="shu-ju-ji">数据集</h3>
+<p><strong>新冠病例行动数据集</strong></p>
+<ul>
+<li>病例历史行动数据集（训练集1） 1M+</li>
+<li>确诊病例数据 （测试集1） 500+</li>
+<li>实时病例行动数据集（测试集2） 1000+</li>
+<li>人脸特征512维</li>
+</ul>
+<p><strong>天猫精灵行为数据集</strong></p>
+<ul>
+<li>天猫精灵历史行为数据集（训练集2） 1M+</li>
+<li>用户行为数据集（测试集3） 500+</li>
+<li>实时用户行为数据集（测试集4） 1000+</li>
+<li>行为特征700维</li>
+</ul>
+<h3 id="si-ge-ren-wu"><strong>四个任务</strong></h3>
+<ul>
+<li>根据测试集1每条数据的特征向量，在训练集1中找出该病例（人）对应的所有记录。</li>
+<li>对测试集2的每条数据，根据其特征向量进行实时分类（人）。</li>
+<li>根据测试集3每条数据的特征向量，在训练集2中找出该用户行为（领域+意图）对应的所有记录。</li>
+<li>对测试集4的每条数据，根据其特征向量进行实时分类（领域+意图）。</li>
+</ul>
+<h3 id="xing-neng-yao-qiu"><strong>性能要求</strong></h3>
+<ul>
+<li>四个任务总运行时间不能超过3小时。</li>
+<li>
+<p>对每条实时数据完成实时分类的响应时间不能超过500ms。</p>
+</li>
+<li>
+<p><strong>平台和组件</strong></p>
+</li>
+<li>Flink，PyFlink …</li></ul> </div><!-- /.entry-content -->
         </article></li>
 </ol><!-- /#posts-list -->
 <p class="pagination">
-    Page 1 / 2
+    Page 1 / 3
         <a href="https://freeopen.github.io/index2.html">&emsp;&raquo;</a>
 </p>
 </section><!-- /#content -->
@@ -308,27 +373,11 @@ provider来输出数据，可能我的数据维度太大，程序不报错，但
   </div>
 
 
-    <script type="text/javascript">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+<!--  -->
+<!--  -->
 
-    ga('create', 'UA-98793057-1', 'auto');
-    ga('send', 'pageview');
-    </script>
-<script type="text/javascript">
-    var disqus_shortname = 'freeopen';
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
 <script src="https://freeopen.github.io/theme/js/jquery-3.3.1.slim.min.js"></script>
 <script src="https://freeopen.github.io/theme/js/popper.min.js"></script>
 <script src="https://freeopen.github.io/theme/js/bootstrap.min.js"></script>
-
 </body>
 </html>

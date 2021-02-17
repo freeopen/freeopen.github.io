@@ -7,26 +7,27 @@
 /* All levels of nav */
 
 /* Modified by freeopen 
- * on 2019-01-31 
+ * on 2021-2-9
  */ 
 
 #toc {
- border-left: 2px solid #4285f4
+ border-left: 2px solid #4285f4;
+ /* position: -webkit-sticky; */
+ /* position: sticky; */
 }
 
 #toc ul {
   padding: 0px;
+  display: block;
 }
-#toc li {
+
+#toc  ul > li {
   padding: 0px;
   list-style: none;
 }
 
-#toc .nav-child {
-  display: block;
-}
-
-#toc  li > a {
+/* the first level */
+#toc > ul > li > a {
   display: block;
   padding-left: .6rem;
   padding-top:.15rem;
@@ -36,28 +37,27 @@
   color: #666;
 }
 
-#toc  li > .nav-child > li > a {
+/* the second level */
+#toc > ul > li > ul > li > a {
   display: block;
   padding-left: 1.2rem;
-  padding-top:0.0625rem;
+  padding-top: 0.0625rem;
   padding-bottom:0.0625rem;
   font-size: 0.8rem;
   font-weight: blod;
   color: #666;
 }
 
-#toc  a:hover {
-  color: #000;
-}
 
-#toc  li > .nav-child > li > a:hover {
-  color: #000;
-}
-
-#toc  li > .active {
+#toc li > a:hover {
   color: #fc6423;
 }
 
-#toc  li > .nav-child > li > .active {
+#toc li > a:active {
   color: #fc6423;
 }
+
+#toc li > a:visited {
+  color: blue;
+}
+

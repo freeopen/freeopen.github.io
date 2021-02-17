@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <!-- Enable responsiveness on mobile devices-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+        <title>Freeopen - 冠军方案之 FashionAI 服饰关键点定位</title>
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/css/main.css" />
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/academicons/css/academicons.min.css" />
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/font-awesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/fonts-googleapis/css/googleapi-fonts.css" />
+
+        
+
+
+
+
+
+
+</head>
+
+<body id="index" class="theme-myblue" data-spy="scroll" data-target="#post_toc">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-lg">
+        <nav class="navbar navbar-expand-lg navbar-light sidebar" role="navigation">
+          <a class="sidebar-about" href="https://freeopen.github.io/">Freeopen</a>
+          <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <nav class="collapse navbar-collapse sidebar-nav flex-column" id="navbarNav">
+
+              <a class="nav-link" href="https://freeopen.github.io/pages/guan-yu-zhe-li.html">关于这里</a>
+              <a class="nav-link" href="https://freeopen.github.io/pages/zou-guo-lu-guo.html">走过路过</a>
+
+              <a class="nav-link" href="https://freeopen.github.io/category/bian-cheng-zhi-hui.html">编程智慧</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/shu-xue-za-tan.html">数学杂谈</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/su-cha-shou-ce.html">速查手册</a>
+            <div class="sidebar-icons">
+              <hr>
+                <a href="" title="Atom feed" target="_blank" 
+                    style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;">
+                  <i class="fa fa-rss-square"></i>
+                </a>
+                <a href="https://github.com/freeopen" title="Software I released on Github" 
+                      target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="fa fa-github-square"></i> </a>
+                <a href="Mailto:freeopen@163.com" title="My email" 
+                    target="_blank" style="display: inline; padding: 0px 0px 0px 0;
+                    margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i
+                  class="fa fa-envelope-square"></i> </a>
+
+            </div>
+          </nav>
+
+        </nav>
+
+      </div>
+
+      <div class="col-12 col-lg-7" role="main">
+        <div id="content" class="content">
+          <div class="post">
+<section id="content" class="body">
+  <header>
+    <h1 class="entry-title">冠军方案之 FashionAI 服饰关键点定位</h2>
+ 
+  </header>
+  <div class="post-info">
+
+    <span>2021-02-11</span>
+
+
+    <span>| By             <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
+    </span>
+
+    <span>
+      | 分类于 <a href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
+    </span>
+
+  </div><!-- /.post-info -->
+  <div class="post content">
+    <blockquote>
+<p>冠军：李weite 及 bilibili 团队</p>
+</blockquote>
+<h2 id="ren-wu-shuo-ming">任务说明</h2>
+<p>服装的机器分析很容易受到衣服的尺寸和形状，相机拍摄的距离和角度甚至服装的显示方式或模型摆放方式的影响。对图像中服装关键点的检测可以帮助提高应用程序的性能，例如衣服的对齐，衣服局部属性的识别以及服装图像的自动编辑。</p>
+<p>基于服装设计知识，定义了一套服饰的关键点，并梳理了在女装6大专业类别（上衣、外套、裤子、半身裙、连身裙、连身裤）下的具体定义，要求参赛者设计算法进行定位预测。官方提供的数据集含前五个类别（连身裤类别被省略，因为在现实世界中并不常见），包括41个子类别和24种关键点。此数据集中总共有100,000个带批注的图像。</p>
+<p align="center">
+<img src="https://freeopen.github.io/images/TB16Z8fXQCWBuNjy0FaXXXUlXXa.png" width="90%"/>
+<figcaption>
+ 女装关键点图例
+ </figcaption>
+</p>
+<h3 id="guan-jian-dian-ding-yi">关键点定义</h3>
+<ul>
+<li>
+<table>
+<thead>
+<tr>
+<th>Keypoints\Category</th>
+<th>Blouse</th>
+<th>Outwear</th>
+<th>Trousers</th>
+<th>Skirt</th>
+<th>Dress</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>neckline_left</td>
+<td>Y</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>neckline_right</td>
+<td>Y</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>center_front</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>shoulder_left</td>
+<td>Y</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>shoulder_right</td>
+<td>Y</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>armpit_left</td>
+<td>Y</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>armpit_right</td>
+<td>Y</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>waistline_left</td>
+<td>N</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>waistline_right</td>
+<td>N</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>cuff_left_in</td>
+<td>Y</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>cuff_left_out</td>
+<td>Y</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>cuff_right_in</td>
+<td>Y</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>cuff_right_out</td>
+<td>Y</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>top_hem_left</td>
+<td>Y</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+<td>N</td>
+</tr>
+<tr>
+<td>top_hem_right</td>
+<td>Y</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+<td>N</td>
+</tr>
+<tr>
+<td>waistband_left</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+<td>Y</td>
+<td>N</td>
+</tr>
+<tr>
+<td>waistband_right</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+<td>Y</td>
+<td>N</td>
+</tr>
+<tr>
+<td>hemline_left</td>
+<td>N</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>hemline_right</td>
+<td>N</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>crotch</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+</tr>
+<tr>
+<td>bottom_left_in</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+</tr>
+<tr>
+<td>bottom_left_out</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+</tr>
+<tr>
+<td>bottom_right_in</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+</tr>
+<tr>
+<td>bottom_right_out</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+</tr>
+<tr>
+<td>TOTAL</td>
+<td>13</td>
+<td>14</td>
+<td>7</td>
+<td>4</td>
+<td>15</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3 id="zhu-jie-ge-shi">注解格式</h3>
+<p>注释文件保存在csv格式表中，共有26列：第一列（image_id）包含图像文件名，第二列（image_category）表示图像所属的类别，其余24列记录了 上述24个关键点的位置。 仅显示两个图像项的示例表如下所示： </p>
+<div class="highlight"><pre><span></span><span class="err">image_id,image_category,neckline_left,neckline_right,center_front,shoulder_left,shoulder_right,armpit_left,armpit_right,waistline_left,waistline_right,cuff_left_in,cuff_left_out,cuff_right_in,cuff_right_out,top_hem_left,top_hem_right,waistband_left,waistband_right,hemline_left,hemline_right,crotch,bottom_left_in,bottom_left_out,bottom_right_in,bottom_right_out</span>
+<span class="err">Images/blouse/d21eab37ddc74ea5a5f1b4a5d3d9055a.jpg,blouse,241_135_1,301_135_1,259_136_1,216_142_1,319_144_1,212_186_1,307_202_1,-1_-1_-1,-1_-1_-1,203_236_1,195_256_1,278_241_1,283_261_1,206_243_0,292_252_0,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1</span>
+<span class="err">Images/blouse/02b54c183d2dbd2c056db14303064886.jpg,blouse,244_76_1,282_76_1,257_99_1,228_81_0,303_85_1,222_134_1,295_131_1,-1_-1_-1,-1_-1_-1,199_153_1,178_100_0,293_173_1,332_150_1,229_161_1,297_162_0,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1</span>
+</pre></div>
+<p>每个关键点由一个三元组表示，每个元素由下划线连接，表示为&ldquo; x_y_v&rdquo;，其中x和y为坐标，v为可见性。 如果关键点可见，则可见性等于1；如果关键点被遮挡，则可见性等于0；如果类别中不存在或未定义，则可见性等于-1。 </p>
+<h3 id="ping-jie-biao-zhun">评价标准</h3>
+<p><img alt="TB1nI4_FY1YBuNjSszeXXablFXa.tfsprivate" src="https://freeopen.github.io/images/TB1nI4_FY1YBuNjSszeXXablFXa.tfsprivate.png"/></p>
+<p>Normalized Error（NE）用于评估提交的结果。 NE是预测关键点位置和注释位置之间的平均归一化距离。 注意，NE计算仅涉及可见的关键点。</p>
+<p>其中 <span class="math">\(k\)</span> 为关键点 ID，<span class="math">\(d_k\)</span>为预测关键点位置与带注释的关键点位置之间的距离，<span class="math">\(s_k\)</span>为距离归一化参数（对于上衣，外套和衣服，它等于两个腋窝点之间的欧几里得距离;对于裤子和 裙边等于两个腰带点之间的距离），<span class="math">\(v_k\)</span>即关键点的可见性。</p>
+<h2 id="jie-ti-si-lu_1">解题思路</h2>
+<p>第一阶段：使用检测器把女装在图片上的位置检测出来；</p>
+<p>第二阶段：再针对女装位置，做准确关键点的定位。</p>
+<p>通过第一阶段的处理可以给第二阶段输入更干净的数据。</p>
+<p>第一阶段的模型采用 Faster-RCNN，backbone resnet101</p>
+<p>第二阶段的模型为自定义，命名为 asymmetric and dilated stacked hourglass networks 。参考google CVPR 2017年论文拟合两种信息，第一种信息判断每一个像素点是否在关键点的领域范围内，如果是在领悟范围内，则标注为临近点；拟合的第二种信息是临近点和关键点之间的向量偏差，有了这个向量偏差，就可以把预测出的向量点投票到对应偏差的坐标点上，这时就能取得一个准确的关键点定位。</p>
+<h3 id="mo-xing-she-ji">模型设计</h3>
+<p>asymmetric and dilated stacked hourglass networks (SHN)，非对称并带孔的SHN模型。主要特征为：</p>
+<ul>
+<li>有一个非对称的 encoder-decoder 结构；</li>
+<li>设计了一个重量级的encoder（保有更多的空间信息）和一个轻量级的decoder；</li>
+<li>对 encoder-decoder 结构进行叠加，通过多个stage对keypoints进行定位。</li>
+</ul>
+<p>采用非对称结构的理由，设计者认为重量级的encoder可以用来迁移学习，须保有更多空间信息，而decoder如果参数太多，就享受不到encoder初始化参数带来的好处。</p>
+<p>当空间信息的重要性高于语义信息时的模型设计：</p>
+<ul>
+<li>图片尺寸的减少比例，从传统的 64 =&gt; 32 =&gt; 16 =&gt; 8 改为 64 =&gt; 32 =&gt; 32 =&gt; 32</li>
+<li>采用空洞卷积</li>
+<li>因为增大了空间尺度，通过减少通道数量(channel numbers)使模型的计算量不增加，即512(128) =&gt; 1024(256) =&gt; 2048(512) 改为 256(128) =&gt; 512(128) =&gt; 512(128)</li>
+<li>不增加计算量的前提下，堆叠网络，即 256(128) =&gt; 512(128) =&gt; 512(128)改为两个  256(64) =&gt; 512(64) =&gt; 512(64) </li>
+</ul>
+<h3 id="mo-xing-yan-bian-tu">模型演变图</h3>
+<table>
+<thead>
+<tr>
+<th align="left">Model</th>
+<th align="center">Param Size</th>
+<th align="center">FLOPs</th>
+<th align="center">Scores</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">ResNet50 backbone + 1 stage</td>
+<td align="center">49M</td>
+<td align="center">7.86G</td>
+<td align="center">4.11</td>
+</tr>
+<tr>
+<td align="left">+ 2 stage + more encoder layers</td>
+<td align="center">91M</td>
+<td align="center">18.52G</td>
+<td align="center">-0.4x</td>
+</tr>
+<tr>
+<td align="left">+ pre-trained</td>
+<td align="center">91M</td>
+<td align="center">18.52G</td>
+<td align="center">-0.1x</td>
+</tr>
+<tr>
+<td align="left">+ more data</td>
+<td align="center">91M</td>
+<td align="center">18.52G</td>
+<td align="center">-0.1x</td>
+</tr>
+<tr>
+<td align="left">+ ResNet101 + large input(352) + more channles</td>
+<td align="center">402M</td>
+<td align="center">&gt;100G</td>
+<td align="center">-0.1x</td>
+</tr>
+<tr>
+<td align="left">+ increase the number of boxes(more-crops)</td>
+<td align="center">402M</td>
+<td align="center">&gt;100G</td>
+<td align="center">-0.0x</td>
+</tr>
+<tr>
+<td align="left"><strong>Final Submission</strong></td>
+<td align="center"><strong>402M</strong></td>
+<td align="center">&gt;<strong>100G</strong></td>
+<td align="center">3.30</td>
+</tr>
+</tbody>
+</table>
+<h2 id="qi-ta-ji-qiao_1">其他技巧</h2>
+<p>观察到难样本分布不均，采取在线难样本挖掘，使得训练聚集到难样本。难样本搜寻不是按照传统的在一张图中查找，而是在一个batch中搜寻。</p>
+<p>最终提交模型时给了两个模型版本，一个高速版本一个低速版本，两个版本的分数差异不大，以证明模型的实用性很强。</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdn.bootcdn.net/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+  </div><!-- /.entry-content -->
+
+  <!-- DISQUS 评论系统 -->
+
+  <!-- giteement评论系统 -->
+
+  <!-- Gitalk 评论 start  -->
+  <!-- Link Gitalk 的支持文件  -->
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+
+  <div id="gitalk-container"></div>
+      <script type="text/javascript">
+      var gitalk = new Gitalk({
+
+      // gitalk的主要参数
+          clientID: '8a8232de9043fc407bf4',
+          clientSecret: 'aab87cee1582588743573358e51f4a785ceb49a3',
+          repo: 'blog-discuss',
+          owner: 'freeopen',
+          admin: ['freeopen'],
+          id: 'posts/fashion-ai-keypoints',
+      
+      });
+      gitalk.render('gitalk-container');
+  </script>
+  <!-- Gitalk end -->
+
+</section>
+          </div>
+
+          <footer id="contentinfo" class="footer">
+            <div class="footer-inner">
+              无节操小广告<a href="https://freeopen.github.io/pages/da-shang.html"> 欢迎打赏 </a>
+            </div>
+          </footer><!-- /#contentinfo -->
+        </div>
+      </div>
+
+      <div class="hidden-print hidden-xs hidden-sm hidden-md col-lg" id="post_toc" role="complementary">
+        <nav class="sidebar-toc">
+<!-- <section id="main_toc"> -->
+    <div id="toc"><ul><li><a class="toc-href" href="#ren-wu-shuo-ming" title="任务说明">任务说明</a><ul><li><a class="toc-href" href="#guan-jian-dian-ding-yi" title="关键点定义">关键点定义</a></li><li><a class="toc-href" href="#zhu-jie-ge-shi" title="注解格式">注解格式</a></li><li><a class="toc-href" href="#ping-jie-biao-zhun" title="评价标准">评价标准</a></li></ul></li><li><a class="toc-href" href="#jie-ti-si-lu_1" title="解题思路">解题思路</a><ul><li><a class="toc-href" href="#mo-xing-she-ji" title="模型设计">模型设计</a></li><li><a class="toc-href" href="#mo-xing-yan-bian-tu" title="模型演变图">模型演变图</a></li></ul></li><li><a class="toc-href" href="#qi-ta-ji-qiao_1" title="其他技巧">其他技巧</a></li></ul></div>
+<!-- </section> -->
+<!-- </section> -->
+        </nav>
+      </div>
+    </div>
+  </div>
+
+
+<!--  -->
+<!--  -->
+
+<script src="https://freeopen.github.io/theme/js/jquery-3.3.1.slim.min.js"></script>
+<script src="https://freeopen.github.io/theme/js/popper.min.js"></script>
+<script src="https://freeopen.github.io/theme/js/bootstrap.min.js"></script>
+</body>
+</html>

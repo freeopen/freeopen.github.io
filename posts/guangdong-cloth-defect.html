@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <!-- Enable responsiveness on mobile devices-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+        <title>Freeopen - 冠军方案之布匹疵点智能检测</title>
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/css/main.css" />
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/academicons/css/academicons.min.css" />
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/font-awesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/fonts-googleapis/css/googleapi-fonts.css" />
+
+        
+
+
+
+
+
+
+</head>
+
+<body id="index" class="theme-myblue" data-spy="scroll" data-target="#post_toc">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-lg">
+        <nav class="navbar navbar-expand-lg navbar-light sidebar" role="navigation">
+          <a class="sidebar-about" href="https://freeopen.github.io/">Freeopen</a>
+          <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <nav class="collapse navbar-collapse sidebar-nav flex-column" id="navbarNav">
+
+              <a class="nav-link" href="https://freeopen.github.io/pages/guan-yu-zhe-li.html">关于这里</a>
+              <a class="nav-link" href="https://freeopen.github.io/pages/zou-guo-lu-guo.html">走过路过</a>
+
+              <a class="nav-link" href="https://freeopen.github.io/category/bian-cheng-zhi-hui.html">编程智慧</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/shu-xue-za-tan.html">数学杂谈</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/su-cha-shou-ce.html">速查手册</a>
+            <div class="sidebar-icons">
+              <hr>
+                <a href="" title="Atom feed" target="_blank" 
+                    style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;">
+                  <i class="fa fa-rss-square"></i>
+                </a>
+                <a href="https://github.com/freeopen" title="Software I released on Github" 
+                      target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="fa fa-github-square"></i> </a>
+                <a href="Mailto:freeopen@163.com" title="My email" 
+                    target="_blank" style="display: inline; padding: 0px 0px 0px 0;
+                    margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i
+                  class="fa fa-envelope-square"></i> </a>
+
+            </div>
+          </nav>
+
+        </nav>
+
+      </div>
+
+      <div class="col-12 col-lg-7" role="main">
+        <div id="content" class="content">
+          <div class="post">
+<section id="content" class="body">
+  <header>
+    <h1 class="entry-title">冠军方案之布匹疵点智能检测</h2>
+ 
+  </header>
+  <div class="post-info">
+
+    <span>2021-02-13</span>
+
+
+    <span>| By             <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
+    </span>
+
+    <span>
+      | 分类于 <a href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
+    </span>
+
+  </div><!-- /.post-info -->
+  <div class="post content">
+    <blockquote>
+<p>冠军：哪儿都是坑啊 团队（徐光福等）</p>
+</blockquote>
+<h2 id="ren-wu-shuo-ming">任务说明</h2>
+<p>在布匹的实际生产过程中，由于各方面因素的影响，会产生污渍、破洞、毛粒等瑕疵，为保证产品质量，需要对布匹进行瑕疵检测。布匹疵点检验是纺织行业生产和质量管理的重要环节，目前人工检测易受主观因素影响，缺乏一致性；并且检测人员在强光下长时间工作对视力影响极大。由于布匹疵点种类繁多、形态变化多样、观察识别难道大，导致布匹疵点智能检测是困扰行业多年的技术瓶颈。</p>
+<p>大赛数据涵盖了纺织业中布匹的各类重要瑕疵，每张图片含一个或多种瑕疵。数据包括包括素色布和花色布两类，其中，素色布数据约8000张，用于初赛；花色布数据约12000张，用于复赛。</p>
+<h4>评估指标</h4>
+<p>赛题分数计算方式: <strong>0.2ACC+0.8mAP</strong></p>
+<p><strong>ACC</strong>：是有瑕疵或无瑕疵的分类指标，考察瑕疵检出能力。
+其中提交结果name字段中出现过的测试图片均认为有瑕疵，未出现的测试图片认为是无瑕疵。</p>
+<p><strong>mAP</strong>：参照PASCALVOC的评估标准计算瑕疵的mAP值。</p>
+<p>本次大赛评分计算过程中，分别在检测框和真实框的交并比(IOU)在阈值0.1，0.3，0.5下计算mAP，最终mAP取三个值的平均值。</p>
+<h2 id="shu-ju-fen-xi-ji-yu-chu-li">数据分析及预处理</h2>
+<p>本次赛题主要难点是小目标占比较大，尺度差异性大（长宽比），类别不均衡很严重，布匹花色信息容易和瑕疵点混淆。</p>
+<p>官方提供了布匹的模板图片，该图片包含布匹的花色信息，有效利用模版，能提高泛化性。</p>
+<h3 id="zu-he-san-tong-dao">组合三通道</h3>
+<p>第一层用原图，第三层用模版，中间层用原图和模版的差异值。另外，为减轻模板的不对齐情况，对模板图片进行上下左右随机10个像素点左右的抖动。</p>
+<h2 id="mo-xing-she-ji_1">模型设计</h2>
+<p>目标检测问题的框架： Cascade rcnn + big backbone，由于比赛的评估指标map为0.1，0.3，0.5，须对cascade rcnn的RPN和三个串联的RCNN结构的阈值进行调整。</p>
+<p>相关参数：</p>
+<ul>
+<li>
+<p>backbone: ResNeXt + FPN + DCN + SE</p>
+</li>
+<li>
+<p>pos_iou_thr: 0.5</p>
+</li>
+<li>
+<p>net_iou_thr: 0.3</p>
+</li>
+<li>
+<p>三个串联rcnn阈值分别为 0.3 、0.4、0.5</p>
+</li>
+</ul>
+<h4>anchor设计</h4>
+<p>对瑕疵进行聚类分析，针对不同的长宽比，精细设计anchor参数。</p>
+<h4>其他</h4>
+<p>探索CenterNet、FCOS、REPPOINTS等基于anchor free的新方法。尝试改进版的BiFPN, 该结构在coco表现上非常好。</p>
+  </div><!-- /.entry-content -->
+
+  <!-- DISQUS 评论系统 -->
+
+  <!-- giteement评论系统 -->
+
+  <!-- Gitalk 评论 start  -->
+  <!-- Link Gitalk 的支持文件  -->
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+
+  <div id="gitalk-container"></div>
+      <script type="text/javascript">
+      var gitalk = new Gitalk({
+
+      // gitalk的主要参数
+          clientID: '8a8232de9043fc407bf4',
+          clientSecret: 'aab87cee1582588743573358e51f4a785ceb49a3',
+          repo: 'blog-discuss',
+          owner: 'freeopen',
+          admin: ['freeopen'],
+          id: 'posts/guangdong-cloth-defect',
+      
+      });
+      gitalk.render('gitalk-container');
+  </script>
+  <!-- Gitalk end -->
+
+</section>
+          </div>
+
+          <footer id="contentinfo" class="footer">
+            <div class="footer-inner">
+              无节操小广告<a href="https://freeopen.github.io/pages/da-shang.html"> 欢迎打赏 </a>
+            </div>
+          </footer><!-- /#contentinfo -->
+        </div>
+      </div>
+
+      <div class="hidden-print hidden-xs hidden-sm hidden-md col-lg" id="post_toc" role="complementary">
+        <nav class="sidebar-toc">
+<!-- <section id="main_toc"> -->
+    <div id="toc"><ul><li><a class="toc-href" href="#ren-wu-shuo-ming" title="任务说明">任务说明</a></li><li><a class="toc-href" href="#shu-ju-fen-xi-ji-yu-chu-li" title="数据分析及预处理">数据分析及预处理</a><ul><li><a class="toc-href" href="#zu-he-san-tong-dao" title="组合三通道">组合三通道</a></li></ul></li><li><a class="toc-href" href="#mo-xing-she-ji_1" title="模型设计">模型设计</a></li></ul></div>
+<!-- </section> -->
+<!-- </section> -->
+        </nav>
+      </div>
+    </div>
+  </div>
+
+
+<!--  -->
+<!--  -->
+
+<script src="https://freeopen.github.io/theme/js/jquery-3.3.1.slim.min.js"></script>
+<script src="https://freeopen.github.io/theme/js/popper.min.js"></script>
+<script src="https://freeopen.github.io/theme/js/bootstrap.min.js"></script>
+</body>
+</html>

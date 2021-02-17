@@ -33,13 +33,13 @@
           </button>
           <nav class="collapse navbar-collapse sidebar-nav flex-column" id="navbarNav">
 
-              <a class="nav-link" href="https://freeopen.github.io/pages/about.html">About</a>
-              <a class="nav-link" href="https://freeopen.github.io/pages/da-shang.html">打赏</a>
+              <a class="nav-link" href="https://freeopen.github.io/pages/guan-yu-zhe-li.html">关于这里</a>
+              <a class="nav-link" href="https://freeopen.github.io/pages/zou-guo-lu-guo.html">走过路过</a>
 
-              <a class="nav-link" href="https://freeopen.github.io/category/bian-cheng.html">编程</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/bian-cheng-zhi-hui.html">编程智慧</a>
               <a class="nav-link" href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
-              <a class="nav-link" href="https://freeopen.github.io/category/shou-ce.html">手册</a>
-              <a class="nav-link" href="https://freeopen.github.io/category/shu-xue.html">数学</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/shu-xue-za-tan.html">数学杂谈</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/su-cha-shou-ce.html">速查手册</a>
             <div class="sidebar-icons">
               <hr>
                 <a href="" title="Atom feed" target="_blank" 
@@ -72,7 +72,7 @@
 
     <span>2019-01-05</span>
 
-    <span>| 更新于 2019-03-02</span>
+    <span>| 更新于 2021-02-17</span>
 
     <span>| By             <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
     </span>
@@ -124,34 +124,37 @@ size);</li>
 <p>假如我们有一张&nbsp;<code>32x32x3</code>&nbsp;的输入图像，我们使用&nbsp;10&nbsp;个尺寸为&nbsp;<code>3x3x3</code>&nbsp;的过滤器，单步幅和零填充。根据上式的符号约定，
 <span class="math">\(W=32，K=3，P=0，S=1\)</span>， 输出深度等于过滤器的数量 10， 输出尺寸大小为&nbsp;<span class="math">\(((32 - 3 + 0)/1) + 1&nbsp;=&nbsp;30\)</span>, 因此输出尺寸是&nbsp;<code>30x30x10</code>。</p>
 <h2 id="juan-ji-wang-luo-de-gan-shou-ye">卷积网络的感受野</h2>
-<p>感受野( Receptive Field )表示经过卷积网络输出的一个点能看到原始输入的范围大小。对仅有一层的卷积网络来说，感受野的大小就是卷积核的大小，但对于层叠网络来说，感受野的计算就会稍微复杂些。习惯上，我们把层叠模型中靠近原始输入端的叫做低层，把靠近最终结果的层称为高层，计算感受野的公式为：
-</p>
-<div class="math">$$F(i, j-1) = K_j + (F(i,j) - 1) \times (S_j - D_j(K_j-1))$$</div>
+<p>感受野( Receptive Field )表示经过卷积网络输出的一个点能看到原始输入的范围大小。对仅有一层的卷积网络来说，感受野的大小就是卷积核的大小，但对于层叠网络来说，感受野的计算就会稍微复杂些。习惯上，我们把层叠模型中靠近原始输入端的叫做低层，把靠近最终结果的层称为高层，计算感受野的公式为：</p>
+<div class="math">$$r^{(l)} = r^{(l-1)} + (k^{(l)}-1)*j^{(l-1)} = r^{(l-1)} + (k^{(l)}-1)*\prod_{i=1}^{l-1}s^{(i)}$$</div>
 <p>其中,</p>
 <ul>
-<li><span class="math">\(i\)</span> 表示高层，<span class="math">\(j\)</span> 表示低层；</li>
-<li><span class="math">\(F(i, j)\)</span> 表示第 <span class="math">\(i\)</span> 层对第 <span class="math">\(j\)</span> 层的感受野，当 <span class="math">\(i = j\)</span> 时， <span class="math">\(F(i,j) = 1\)</span>；</li>
-<li><span class="math">\(K_j\)</span> 表示第 <span class="math">\(j\)</span> 层的核大小；</li>
-<li><span class="math">\(S_j\)</span> 表示第 <span class="math">\(j\)</span> 层的步幅长度;</li>
-<li><span class="math">\(D_j\)</span> 表示第 <span class="math">\(j\)</span>
-    层卷积核中间隔的空洞数量, 该参数仅用于空洞卷积，非空洞卷积时，该值取
-    0(举例，设1表示卷积核有效元素的值，0表示空洞，则一维卷积核&ldquo;1001001&rdquo;其间隔的空洞数为2)。</li>
+<li><span class="math">\(k\)</span>: kernel size 卷积核尺寸</li>
+<li><span class="math">\(p\)</span>: padding size</li>
+<li><span class="math">\(s\)</span>: stride size 步长</li>
+<li><span class="math">\(n\)</span>: feature map size 特征图尺寸</li>
+<li><span class="math">\(r\)</span>: receptive field size 感受野尺寸</li>
+<li><span class="math">\(j\)</span>: feature map 上相邻元素间在原始图上的像素距离</li>
+<li><span class="math">\(Layer\)</span>: 用<span class="math">\(Layer\)</span>表示feature map，特别地 <span class="math">\(Layer^{(0)}\)</span>为输入图像</li>
+<li><span class="math">\(l\)</span>: 表示层，卷积层 <span class="math">\(Conv^{(l)}\)</span> ，其输入feature map 为 <span class="math">\(Layer^{(l-1)}\)</span>, 输出为<span class="math">\(Layer^{(l)}\)</span> </li>
+<li><span class="math">\(d\)</span>: dilation rate, 等于1时表示正常卷积，当dilation rate 大于1时，成为空洞卷积。比如，设1表示卷积核有效元素的值，0表示空洞，则一维卷积核&ldquo;1001001&rdquo;其间隔的空洞数为2，这时dilation rate = 3。所以空洞卷积相当于改变了卷积核的尺寸，只需将 <span class="math">\(k\)</span> 值替换为 <span class="math">\(d*(k-1)+1\)</span> 即可</li>
+<li><span class="math">\(start\)</span>: feature map 左上角元素在输入图像上的感受野中心坐标<span class="math">\((start, start)\)</span>, 即视野的中心坐标，相邻的 <span class="math">\(Layer\)</span> 间，感受野中心的关系为：<span class="math">\(start^{(l)} = start^{(l-1)} + ({k^{(l)}-1 \over 2}-p^{(l)})*j^{(l-1)}\)</span>,  将<code>padding size</code>设置为<code>kernel</code>的半径，即<span class="math">\(p={k&minus;1\over2}\)</span>，可得<span class="math">\(start^{(l)}=start^{(l-1)}\)</span></li>
 </ul>
-<p>按上述公式递归计算后，顶层对底层的感受野就能算出了。</p>
 <h2 id="juan-ji-de-jin-hua">卷积的进化</h2>
 <p>卷积形式经过各种排列组合，诞生了不少经典神经网络结构，我想要探索的不仅仅是这些结构本身，更想要搞明白这些结构设计的初衷，以及带来的好处是什么。</p>
 <p>这里讨论的卷积结构，我分为两类，一类叫<strong>卷积单元</strong>，表示单个卷积，一类叫<strong>卷积结构</strong>，表示多个卷积的组合。</p>
 <hr/>
 <p><font color="red">分类一：卷积单元</font></p>
-<h3 id="kong-dong-juan-ji">空洞卷积</h3>
+<h3 id="chang-gui-juan-ji-convolution">常规卷积(Convolution)</h3>
+<p>如前所述的基本原理，即为常规卷积。简而言之，即矩阵和卷积核进行对应元素的相乘并求和，一次卷积的结果输出一个数，然后卷积核在矩阵上边滑动边计算，当遍历完矩阵时，会输出一个结果矩阵。</p>
+<h3 id="kong-dong-juan-ji-dilated-conv">空洞卷积(Dilated Conv)</h3>
 <p>空洞卷积 (Dilated Convolution) 又叫膨胀卷积 ( Atrous Convolution)， 它的想法是在卷积核中增加&ldquo;空洞&rdquo;， 从而在不增加参数量的情况下捕捉到更远的距离。换种说法就是空洞卷积能增加感受野。</p>
 <p>空洞卷积核的设计很简单，其实就是对卷积核的插 0 操作， 比如由&ldquo;111&rdquo;变为&ldquo;10101&rdquo;这样。空洞卷积常用于一维卷积的场景，比如 NLP  的语义分割、文本抽取等任务，语音合成等任务。</p>
-<p>空洞卷积在不增加参数的前提下增加感受野，我们举个例子算一下。设有4层网络，第1层为一维序列，第2层为普通卷积(核尺寸,步幅数,空洞数) = (K,S,D) = (3,2,0)，第3层为空洞卷积(3,4,1)，第4层为空洞卷积(3,8,3)，那么第4层到第1层的感受野为15，计算步骤如下：</p>
-<div class="math">$$F(1,1) = 1$$</div>
-<div class="math">$$F(2,1) = 3$$</div>
-<div class="math">$$F(3,1) = 3 + (3-1)\times(4-2\times 1) = 7$$</div>
-<div class="math">$$F(4,1) = 3 + (7-1)\times(8-2\times 3) = 15$$</div>
-<h3 id="fan-juan-ji">反卷积</h3>
+<p>空洞卷积在不增加参数的前提下增加感受野，我们举个例子算一下。设有4层网络，第0层为一维序列，第1层为普通卷积(核尺寸,步幅数,空洞数) = <span class="math">\((k,s,d)\)</span> = <span class="math">\((3,1,1)\)</span>，第2层为普通卷积<span class="math">\((3,2,1)\)</span>，第3层为空洞卷积<span class="math">\((3,1,3)\)</span>，那么第3层的感受野为 <span class="math">\(13\)</span>，计算步骤如下：</p>
+<div class="math">$$r^{(0)} = 1$$</div>
+<div class="math">$$r^{(1)} = r^{(0)} + (k^{(1)}-1)*j^{(0)}=1 + (3-1)*1 = 3$$</div>
+<div class="math">$$r^{(2)} =r^{(1)} + (k^{(2)}-1)*j^{(1)}= 3 + (3-1)*1 = 5$$</div>
+<div class="math">$$r^{(3)} =r^{(2)} + d^{(3)}*(k^{(3)}-1)*j^{(2)}=5 + 2*(3-1)*2= 13$$</div>
+<h3 id="fan-juan-ji-deconvolution-conv">反卷积(Deconvolution Conv)</h3>
 <p>反卷积的英文名为 Deconvolution 或 Transposed Convolution 或 Fractional-strided Convolutions， 它将特征图从低分辨率映射到大分辨率，用于扩大图像尺寸。</p>
 <p>反卷积是一种特殊的正向卷积，而不是卷积的反过程。那么反卷积如何增加尺寸呢？方法和空洞卷积类似，只是
 反卷积是在输入端填入空洞，来增加输入的尺寸，而空洞卷积是在卷积核填入空洞，来减少参数数量。</p>
@@ -164,7 +167,7 @@ size);</li>
 </li>
 </ul>
 <p>求得该反卷积的输出尺寸为 5x5。</p>
-<h3 id="ping-jing-juan-ji">瓶颈卷积</h3>
+<h3 id="ping-jing-juan-ji-pointwise-conv">瓶颈卷积(Pointwise Conv)</h3>
 <p>常被称为瓶颈层( Bottleneck Layer)，用来缩减参数量，瓶颈层的叫法很形象，就像漏斗一样。瓶颈层的计算方式也常被称为 Pointwise 操作，所以瓶颈卷积也叫做 Pointwise Convolution。</p>
 <p>举例解释一下参数如何被降低的。</p>
 <div class="math">$$input\;256d \to 1\times 1\times 64 \to 3\times 3\times 64 \to 1\times1\times 256 \to output\; 256d$$</div>
@@ -175,7 +178,7 @@ size);</li>
 <div class="math">$$input\; 256d \to 3\times 3\times 256 \to output\; 256d$$</div>
 <p>其参数量为：<span class="math">\(256\times 3\times 3\times 256 = 589,824\)</span>, 瓶颈卷积的参数较传统方案降低了约 8.5 倍。</p>
 <p>仔细想一想，发现瓶颈层在计算上的效果和全连接层一样，通过一个权重变换达到降维目的。</p>
-<h3 id="shen-du-juan-ji">深度卷积</h3>
+<h3 id="shen-du-juan-ji-depthwise-conv">深度卷积(Depthwise Conv)</h3>
 <p>深度卷积( Depthwise Convolution
 )的想法是一个卷积核仅对一个通道进行计算，且输入通道数等于输出通道数，这种计算方式又被叫做 depthwise
 操作。之所以叫做深度卷积，是因为通道这个维度常被称为深度，比如一个RGB图像，我们可以用高x宽x深度(或通道数)来标定它的尺寸。
@@ -194,7 +197,7 @@ X_{(i+j-\lceil{k+1\over 2}\rceil),c}$$</div>
     个元素为中心，以 <span class="math">\(\lceil{k+1\over 2}\rceil\)</span> 为半径范围内的所有元素，<span class="math">\(\lceil
     \cdot \rceil\)</span> 表示向上取整; <span class="math">\(W_{c,j}\)</span> 表示第 c 个卷积核中第 j 个元素。</li>
 </ul>
-<h3 id="qing-quan-zhong-juan-ji">轻权重卷积</h3>
+<h3 id="qing-quan-zhong-juan-ji-lightweight-conv">轻权重卷积(Lightweight Conv)</h3>
 <p>轻权重卷积(Lightweight Convolution) 由 Depthwise
 卷积进化而来，如果你理解了深度卷积的公式，那么你就能根据轻权重卷积的公式立即明白它改进了什么。</p>
 <div class="math">$$LightConv(X, W_{\lceil{cH\over d}\rceil, :}, i, c) = DepthwiseConv(X,
@@ -209,7 +212,7 @@ softmax 函数的公式为：
 <div class="math">$$ softmax(W)_{h,j} = {exp W_{h,j}\over \sum_{j'=1}^k exp W_{h,j'}} $$</div>
 <p>对比深度可分离卷积，如果不考虑 Pointwise 部分，在一个感受野下，轻权重卷积的参数量由
 Depthwise 卷积的 <span class="math">\(k\cdot c\)</span> 降低到 <span class="math">\(k\cdot H\)</span>。</p>
-<h3 id="dong-tai-juan-ji">动态卷积</h3>
+<h3 id="dong-tai-juan-ji-dynamic-conv">动态卷积(Dynamic Conv)</h3>
 <p>动态卷积 ( Dynamic Convolution )
 继续在卷积核上做文章，前面的卷积核仅仅是个可训练的权重，动态卷积把它发展为一个随输入
 X 中元素变化的线性函数。
@@ -224,28 +227,31 @@ X 中元素变化的线性函数。
 \cdot d\)</span>。</p>
 <p>观察轻权重卷积和动态卷积的构成，我认为都属于 depthwise
 卷积家族，它们的不同点仅在于对卷积核上施加了不同的函数。对于轻权重卷积而已，它通过减少卷积核数量，同时兼顾卷积核中其他元素的相关性，进一步降低了参数量；对于动态卷积而言，它在轻权重卷积基础上，又多兼顾了通道间的相关性，但参数量有所增加。</p>
-<h3 id="ke-bian-xing-juan-ji">可变形卷积</h3>
+<h3 id="ke-bian-xing-juan-ji-deformable-conv">可变形卷积(Deformable Conv)</h3>
 <p>可变形卷积 (Deformable Convolution) 的想法是在卷积核上做文章。卷积核一般的形状为正方形或长方形，由于图像中我们感兴趣的区域往往是不规则图形，如果让卷积核的形状能根据关注区域的形状发生形变，那么是否会获得更好的性能呢？比如针对缩放的物体，就训练出能缩放的卷积核，对于旋转的物体，就训练出能旋转的卷积核，这样抽取出的特征将有更好的泛化性。</p>
 <p>该想法的提出来自微软亚洲研究院。它的方法是在原来的卷积核前面再加一层过滤器（记为偏移过滤器），这层过滤器学习的是下一层卷积核的位置偏移量。假设输入的形状为 [H，W，C]，经过偏移过滤器后输出的形状为 [H, W, 2 x C]，这里的通道变为原来的两倍。因为我们需要在这个偏移区域( offset field  )里面取一组卷积核的偏移坐标(记为 offsets )，而一个offset肯定不能一个值就表示的，最少也要用两个值（x 方向上的偏移和 y 方向上的偏移）。取完了这些值，就可以顺利使卷积核形变，后面再按常规卷积操作即可。</p>
 <p>该卷积网络在自动驾驶的图像语义分割任务上获得了 5 个点的提升。</p>
 <hr/>
 <p><font color="red">分类二：卷积结构</font></p>
-<h3 id="zu-juan-ji">组卷积</h3>
+<h3 id="zu-juan-ji-grouped-conv">组卷积(Grouped Conv)</h3>
 <p>组卷积(Grouped Convolution)曾被用于 AlexNet 中，将模型分布在两个 GPU 上以解决内存处理问题。用一个 32 通道的例子来解释一下组卷积：把 32 个输入通道平均分为 4 组，每组拥有 8 个通道，并分别对 4 组单独做卷积运算。这样的好处是参数较少可以提升计算速度，但是同时，由于每组卷积之间不存在交互，不同组的输出通道与输入通道并不相关。</p>
 <h3 id="hun-he-juan-ji">混合卷积</h3>
 <p>传统的层叠式网络，基本上都是一个个卷积层的堆叠，每层只用一个尺寸的卷积核。于是有人想，如果每层用多个尺寸的卷积核，是否能提炼到更好的特征呢？</p>
 <p>Google的研究员首次在 Inception
 家族的结构中采用了这种想法，把上层的输入分别同时经过 1x1、3x3、5x5
 的卷积核进行处理，得出的特征再组合起来，传到下一层。这种方法确实令模型的性能有所提高，但紧接而来的副作用是，由于卷积核的数量增多，参数量暴增。</p>
-<h3 id="shen-du-ke-fen-chi-juan-ji">深度可分离卷积</h3>
+<h3 id="shen-du-ke-fen-chi-juan-ji-depthwise-separable-conv">深度可分离卷积(Depthwise separable Conv)</h3>
 <p>深度可分离卷积 (Depthwise Separable Convolution) 的流行来自谷歌 Xception 结构的流行。这种卷积的思想是把过去一个卷积核对多通道的计算变为一个卷积核仅针对一个通道，被称为 Depthwise 操作，然后再用1x1卷积将每个通道输出的特征图( Feature map) <sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup>进行融合，这被称为 Pointwise 操作，也即是前面提到的瓶颈卷积。
 因此，深度可分离卷积实质上是 Depthwise Convolution 和 Pointwise Convolution
 的组合。</p>
-<p>深度可分离卷积可以看成是交错组卷积的特例，显著降低了参数量，从而增加了神经网络性能。假设卷积核的尺寸为 k，输入的通道和卷积核的数量均为 c ，则对于一个感受野来说，所需的参数量为 <span class="math">\(k\cdot c + c^2\)</span>，而传统卷积的参数量为 <span class="math">\(k\cdot c^2\)</span>。</p>
-<h3 id="jiao-cuo-zu-juan-ji">交错组卷积</h3>
+<p>深度可分离卷积可以看成是交错组卷积的特例，相较于常规卷积操作，显著降低了参数量和运算成本，从而增加了神经网络性能。假设卷积核的尺寸为 k，输入的通道和卷积核的数量均为 c ，则对于一个感受野来说，所需的参数量为 <span class="math">\(k\cdot c + c^2\)</span>，而传统卷积的参数量为 <span class="math">\(k\cdot c^2\)</span>。</p>
+<p>举例说明：</p>
+<p>假设有一个3&times;3大小的卷积层，其输入通道为16、输出通道为32。常规卷积的做法是，32个3&times;3大小的卷积核会遍历16个通道中的每个数据，从而产生16&times;32=512个特征图谱，进而通过叠加每个输入通道对应的特征图谱后融合得到1个特征图谱， 最后得到32个输出通道。涉及的参数有16&times;32&times;3&times;3=4608个。</p>
+<p>深度可分离卷积的方式为，用16个3&times;3大小的卷积核分别遍历16通道的数据，得到了16个特征图谱。接着用32个1&times;1大小的卷积核遍历这16个特征图谱，进行相加融合。这个过程使用了16&times;3&times;3+16&times;32&times;1&times;1=656个参数， 远少于上面的参数个数。</p>
+<h3 id="jiao-cuo-zu-juan-ji-interleaved-group-conv">交错组卷积(Interleaved Group Conv)</h3>
 <p>交错组卷积( Interleaved Group Convolution ) 的思路由微软研究院提出。前面提到，组卷积中不同组的输出与输入通道之间缺乏相关性，要增加这种相关性，只需要把其他组的输出通道叠加进来，再次进行卷积运算即可。</p>
 <p>具体方法为，做两次组卷积，第一次还是和一般组卷积一样，然后把所有组卷积的输出交错排列后，作为第二次组卷积的输入，以达到交错互补的目的。交错组卷积增加了网络的宽度，同时增加了通道间的相关性，自然模型性能会提升。</p>
-<h3 id="duo-tou-zi-zhu-yi-li">多头自注意力</h3>
+<h3 id="duo-tou-zi-zhu-yi-li-multi-head-self-attention">多头自注意力(Multi-Head Self-Attention)</h3>
 <p>没错，你没看错，如果你参悟透了多头自注意力结构，它实质仍然是卷积计算。
 多头自注意力(Multi-Head Self-Attention，以下简称"MHSA") 来自 Google Brain
 的大作。2018年底，在这个基础上又诞生了 Bert 模型，当时拿下 11
@@ -267,7 +273,7 @@ Q、K、V，它们其实都是单词的语义表达，降低参数量是我们�
 <p>在公式 (2) 中，将 (1) 式重复做 h
 次，再把结果拼接起来，乘以一个权重得到一个维度为 <span class="math">\(d_{model}\)</span>
 的向量。这里的重复次数就好比一个卷积核的多个通道，它算出当前词向量表达的不同方面的特征。观察动态卷积的设计，发现和多头自注意力的设计似有借鉴之处。</p>
-<h3 id="can-chai-wang-luo">残差网络</h3>
+<h3 id="can-chai-wang-luo-residual-net">残差网络(Residual Net)</h3>
 <p>当卷积的层数加深时，网络的表现会越来越差，很大程度上的原因是因为当层数加深时，梯度消散得越来越严重，以至于反向传播很难训练到浅层的网络（靠近输入层的网络）。残差网络 ( Resnet ) 思想是在原来层叠网络的基础上增加跳线连接，在跳线的末端那层同时接入上层输入和跳线过来的输入（即前面某层的输出）。</p>
 <p>下面解释一下残差结构为什么能解决梯度消散问题。</p>
 <div class="math">$$ a^{l+2} = g(z^{l+2} + a^l) = g(W^{l+2} a^{l+1} + b^{l+2} + a^l)$$</div>
@@ -284,7 +290,7 @@ Q、K、V，它们其实都是单词的语义表达，降低参数量是我们�
 <li>将 <span class="math">\(W_s\)</span> 作为学习参数训练得到；</li>
 <li>固定 <span class="math">\(W_s\)</span> 值( 类似单位矩阵 ) ，<span class="math">\({W_s} \cdot {a^l}\)</span> 仅使 <span class="math">\(a^l\)</span> 截断或补零。</li>
 </ol>
-<h3 id="te-zheng-zhong-biao-ding-juan-ji">特征重标定卷积</h3>
+<h3 id="te-zheng-zhong-biao-ding-juan-ji-se-conv">特征重标定卷积(SE Conv)</h3>
 <p>图像的特征通过卷积核抽取出来，形成一个个特征通道，那么每个特征通道的作用都同等重要么？显然不是。如果有办法通过学习的方式自动获取每个特征通道的重要程度，然后依照计算出来的重要程度去提升有用的特征，抑制用处不大的特征，这就是特征重标定卷积思想的由来。该思路构建的模型结构叫做Squeeze-and-Excitation Network，简称 SENet，曾是 ImageNet 2017 竞赛的冠军模型。</p>
 <p>SENet 结构为：首先做普通卷积，输出一个特征图，它的形状为[C，H，W]，再分两条路线，第一条直接通过( 类似残差结构的跳线 )，第二条首先进行<strong>压缩( Squeeze )</strong>操作（ 全局平均池化 Global Average Pooling ），把每个通道 2 维的特征压缩成 1 维，得到长度为 C 的特征通道向量（每个数字代表对应通道的特征）；然后进行<strong>激发( Excitation )</strong>操作，即对特征通道向量加两个全连接层( FC Layer )，和非线性映射( Sigmoid )，建模出特征通道间的相关性，得到的输出其实就是每个通道对应的权重，
 把这些权重加权到原来的特征上（第一条路），这样就完成了特征通道的权重分配。最后是<strong>赋权操作</strong>，论文里叫做
@@ -356,7 +362,7 @@ scale 操作，把特征通道的权重先归一化，然后加权到每个通�
     var mathjaxscript = document.createElement('script');
     mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
     mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript.src = 'https://cdn.bootcdn.net/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
     mathjaxscript[(window.opera ? "innerHTML" : "text")] =
         "MathJax.Hub.Config({" +
         "    config: ['MMLorHTML.js']," +
@@ -399,21 +405,32 @@ scale 操作，把特征通道的权重先归一化，然后加权到每个通�
 </script>
   </div><!-- /.entry-content -->
 
-  <div class="comments">
-    <!-- <h2>Comments !</h2> -->
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-      var disqus_shortname = 'freeopen';
-      var disqus_identifier = 'posts/cnn-notes';
-      var disqus_url = 'https://freeopen.github.io/posts/cnn-notes';
-      (function() {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//freeopen.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      })();
-    </script>
-    <noscript>Please enable JavaScript to view the comments.</noscript>
-  </div>
+  <!-- DISQUS 评论系统 -->
+
+  <!-- giteement评论系统 -->
+
+  <!-- Gitalk 评论 start  -->
+  <!-- Link Gitalk 的支持文件  -->
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+
+  <div id="gitalk-container"></div>
+      <script type="text/javascript">
+      var gitalk = new Gitalk({
+
+      // gitalk的主要参数
+          clientID: '8a8232de9043fc407bf4',
+          clientSecret: 'aab87cee1582588743573358e51f4a785ceb49a3',
+          repo: 'blog-discuss',
+          owner: 'freeopen',
+          admin: ['freeopen'],
+          id: 'posts/cnn-notes',
+      
+      });
+      gitalk.render('gitalk-container');
+  </script>
+  <!-- Gitalk end -->
+
 </section>
           </div>
 
@@ -428,7 +445,7 @@ scale 操作，把特征通道的权重先归一化，然后加权到每个通�
       <div class="hidden-print hidden-xs hidden-sm hidden-md col-lg" id="post_toc" role="complementary">
         <nav class="sidebar-toc">
 <!-- <section id="main_toc"> -->
-    <ul class="nav" id="toc"><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#juan-ji-de-shu-xue-yuan-li" title="卷积的数学原理">卷积的数学原理</a></li><li class="nav-item"><a class="nav-link" href="#juan-ji-de-biao-shi" title="卷积的表示">卷积的表示</a></li><li class="nav-item"><a class="nav-link" href="#juan-ji-de-shu-chu-chi-cun" title="卷积的输出尺寸">卷积的输出尺寸</a></li><li class="nav-item"><a class="nav-link" href="#juan-ji-wang-luo-de-gan-shou-ye" title="卷积网络的感受野">卷积网络的感受野</a></li><li class="nav-item"><a class="nav-link" href="#juan-ji-de-jin-hua" title="卷积的进化">卷积的进化</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#kong-dong-juan-ji" title="空洞卷积">空洞卷积</a></li><li class="nav-item"><a class="nav-link" href="#fan-juan-ji" title="反卷积">反卷积</a></li><li class="nav-item"><a class="nav-link" href="#ping-jing-juan-ji" title="瓶颈卷积">瓶颈卷积</a></li><li class="nav-item"><a class="nav-link" href="#shen-du-juan-ji" title="深度卷积">深度卷积</a></li><li class="nav-item"><a class="nav-link" href="#qing-quan-zhong-juan-ji" title="轻权重卷积">轻权重卷积</a></li><li class="nav-item"><a class="nav-link" href="#dong-tai-juan-ji" title="动态卷积">动态卷积</a></li><li class="nav-item"><a class="nav-link" href="#ke-bian-xing-juan-ji" title="可变形卷积">可变形卷积</a></li><li class="nav-item"><a class="nav-link" href="#zu-juan-ji" title="组卷积">组卷积</a></li><li class="nav-item"><a class="nav-link" href="#hun-he-juan-ji" title="混合卷积">混合卷积</a></li><li class="nav-item"><a class="nav-link" href="#shen-du-ke-fen-chi-juan-ji" title="深度可分离卷积">深度可分离卷积</a></li><li class="nav-item"><a class="nav-link" href="#jiao-cuo-zu-juan-ji" title="交错组卷积">交错组卷积</a></li><li class="nav-item"><a class="nav-link" href="#duo-tou-zi-zhu-yi-li" title="多头自注意力">多头自注意力</a></li><li class="nav-item"><a class="nav-link" href="#can-chai-wang-luo" title="残差网络">残差网络</a></li><li class="nav-item"><a class="nav-link" href="#te-zheng-zhong-biao-ding-juan-ji" title="特征重标定卷积">特征重标定卷积</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#bu-wan-quan-xiao-jie_1" title="不完全小结">不完全小结</a></li><li class="nav-item"><a class="nav-link" href="#can-kao-wen-xian" title="参考文献">参考文献</a></li></ul></ul>
+    <div id="toc"><ul><li><a class="toc-href" href="#juan-ji-de-shu-xue-yuan-li" title="卷积的数学原理">卷积的数学原理</a></li><li><a class="toc-href" href="#juan-ji-de-biao-shi" title="卷积的表示">卷积的表示</a></li><li><a class="toc-href" href="#juan-ji-de-shu-chu-chi-cun" title="卷积的输出尺寸">卷积的输出尺寸</a></li><li><a class="toc-href" href="#juan-ji-wang-luo-de-gan-shou-ye" title="卷积网络的感受野">卷积网络的感受野</a></li><li><a class="toc-href" href="#juan-ji-de-jin-hua" title="卷积的进化">卷积的进化</a><ul><li><a class="toc-href" href="#chang-gui-juan-ji-convolution" title="常规卷积(Convolution)">常规卷积(Convolution)</a></li><li><a class="toc-href" href="#kong-dong-juan-ji-dilated-conv" title="空洞卷积(Dilated Conv)">空洞卷积(Dilated Conv)</a></li><li><a class="toc-href" href="#fan-juan-ji-deconvolution-conv" title="反卷积(Deconvolution Conv)">反卷积(Deconvolution Conv)</a></li><li><a class="toc-href" href="#ping-jing-juan-ji-pointwise-conv" title="瓶颈卷积(Pointwise Conv)">瓶颈卷积(Pointwise Conv)</a></li><li><a class="toc-href" href="#shen-du-juan-ji-depthwise-conv" title="深度卷积(Depthwise Conv)">深度卷积(Depthwise Conv)</a></li><li><a class="toc-href" href="#qing-quan-zhong-juan-ji-lightweight-conv" title="轻权重卷积(Lightweight Conv)">轻权重卷积(Lightweight Conv)</a></li><li><a class="toc-href" href="#dong-tai-juan-ji-dynamic-conv" title="动态卷积(Dynamic Conv)">动态卷积(Dynamic Conv)</a></li><li><a class="toc-href" href="#ke-bian-xing-juan-ji-deformable-conv" title="可变形卷积(Deformable Conv)">可变形卷积(Deformable Conv)</a></li><li><a class="toc-href" href="#zu-juan-ji-grouped-conv" title="组卷积(Grouped Conv)">组卷积(Grouped Conv)</a></li><li><a class="toc-href" href="#hun-he-juan-ji" title="混合卷积">混合卷积</a></li><li><a class="toc-href" href="#shen-du-ke-fen-chi-juan-ji-depthwise-separable-conv" title="深度可分离卷积(Depthwise separable Conv)">深度可分离卷积(Depthwise separable Conv)</a></li><li><a class="toc-href" href="#jiao-cuo-zu-juan-ji-interleaved-group-conv" title="交错组卷积(Interleaved Group Conv)">交错组卷积(Interleaved Group Conv)</a></li><li><a class="toc-href" href="#duo-tou-zi-zhu-yi-li-multi-head-self-attention" title="多头自注意力(Multi-Head Self-Attention)">多头自注意力(Multi-Head Self-Attention)</a></li><li><a class="toc-href" href="#can-chai-wang-luo-residual-net" title="残差网络(Residual Net)">残差网络(Residual Net)</a></li><li><a class="toc-href" href="#te-zheng-zhong-biao-ding-juan-ji-se-conv" title="特征重标定卷积(SE Conv)">特征重标定卷积(SE Conv)</a></li></ul></li><li><a class="toc-href" href="#bu-wan-quan-xiao-jie_1" title="不完全小结">不完全小结</a></li><li><a class="toc-href" href="#can-kao-wen-xian" title="参考文献">参考文献</a></li></ul></div>
 <!-- </section> -->
 <!-- </section> -->
         </nav>
@@ -437,27 +454,11 @@ scale 操作，把特征通道的权重先归一化，然后加权到每个通�
   </div>
 
 
-    <script type="text/javascript">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+<!--  -->
+<!--  -->
 
-    ga('create', 'UA-98793057-1', 'auto');
-    ga('send', 'pageview');
-    </script>
-<script type="text/javascript">
-    var disqus_shortname = 'freeopen';
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
 <script src="https://freeopen.github.io/theme/js/jquery-3.3.1.slim.min.js"></script>
 <script src="https://freeopen.github.io/theme/js/popper.min.js"></script>
 <script src="https://freeopen.github.io/theme/js/bootstrap.min.js"></script>
-
 </body>
 </html>

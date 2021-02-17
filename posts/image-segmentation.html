@@ -33,13 +33,13 @@
           </button>
           <nav class="collapse navbar-collapse sidebar-nav flex-column" id="navbarNav">
 
-              <a class="nav-link" href="https://freeopen.github.io/pages/about.html">About</a>
-              <a class="nav-link" href="https://freeopen.github.io/pages/da-shang.html">打赏</a>
+              <a class="nav-link" href="https://freeopen.github.io/pages/guan-yu-zhe-li.html">关于这里</a>
+              <a class="nav-link" href="https://freeopen.github.io/pages/zou-guo-lu-guo.html">走过路过</a>
 
-              <a class="nav-link" href="https://freeopen.github.io/category/bian-cheng.html">编程</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/bian-cheng-zhi-hui.html">编程智慧</a>
               <a class="nav-link" href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
-              <a class="nav-link" href="https://freeopen.github.io/category/shou-ce.html">手册</a>
-              <a class="nav-link" href="https://freeopen.github.io/category/shu-xue.html">数学</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/shu-xue-za-tan.html">数学杂谈</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/su-cha-shou-ce.html">速查手册</a>
             <div class="sidebar-icons">
               <hr>
                 <a href="" title="Atom feed" target="_blank" 
@@ -398,7 +398,7 @@ R-CNN 的进化版, 论文第一作者何凯明，首发于2014年6月，
 <p>而R-CNN输入的是每个候选框，然后在进入CNN，因为SPP-Net只需要一次对整张图片进行特征提取，
 因为R-CNN就相当于遍历一个CNN两千次，而SPP-Net只需要遍历1次,
 光这一个改进，就有百倍加速的效果。</p>
-<h3 id="ru-he-zai-cnnzui-hou-yi-ceng-te-zheng-tu-zhong-zhao-dao-yuan-shi-tu-pian-zhong-hou-xuan-kuang-de-dui-ying-qu-yu-?">如何在CNN最后一层特征图中找到原始图片中候选框的对应区域？</h3>
+<h3 id="ru-he-zai-cnnzui-hou-yi-ceng-te-zheng-tu-zhong-zhao-dao-yuan-shi-tu-pian-zhong-hou-xuan-kuang-de-dui-ying-qu-yu">如何在CNN最后一层特征图中找到原始图片中候选框的对应区域？</h3>
 <p>办法只有一条，算出来，前面提过，一旦卷积网络结构选定，从输入端到输出端的
 缩小比例就能算出来，影响这个比例的包括每层的卷积方式和池化方式。</p>
 <p>论文提出，为简化计算，在卷积时，填充<span class="math">\(\lfloor p/2 \rfloor\)</span>,
@@ -560,8 +560,8 @@ RoI 池化的思路来自空间金字塔池化，只取空间金字塔中的一�
 <p>对边界框进行回归训练时，选择少量图片多个候选区域。
 假设每批仍然为128，可同时选择2个不同图片，每个图片选出64个候选框，
 这时，能较好共享参数，反向传播时具备较好相关性。
-另外，RoI池化也使感受野范围变小，使得需要更新的参数也变少，从而全部提升训练速度。</p>
-<h3 id="duo-ren-wu-sun-shi-han-shu--multi-task-loss">多任务损失函数 (Multi-task loss)</h3>
+另外，RoI池化也使感受野范围变小，使得需要更新的参数也变少，从而全面提升训练速度。</p>
+<h3 id="duo-ren-wu-sun-shi-han-shu-multi-task-loss">多任务损失函数 (Multi-task loss)</h3>
 <p>Fast R-CNN 把分类任务和边界框的回归任务分别对应的两个损失函数合二为一，
 让它们共享参数，一起训练。这个调整很小，但训练起来更方便，且共同训练还
 起到互相促进的作用。</p>
@@ -602,25 +602,20 @@ Regions Proposals Networks)来提取这些候选框。</p>
 <p>Faster R-CNN 主要包括4个关键模块，
 特征提取网络、生成候选框(ROI)、候选框(ROI)分类、候选框(ROI)回归。</p>
 <ul>
-<li>
-<p>特征提取网络：它用来从大量的图片中提取出一些不同目标的重要特征，
+<li>特征提取网络：它用来从大量的图片中提取出一些不同目标的重要特征，
   通常由conv+relu+pool层构成，常用一些预训练好的网络（VGG、Inception、Resnet等），
-  获得的结果叫做特征图；</p>
-</li>
-<li>
-<p>生成候选框：在获得的特征图的每一个点上做多个候选框；</p>
-</li>
-<li>
-<p>候选框分类：在 RPN 阶段(<a href="#faster-r-cnn-xun-lian-ce-lue">图12</a>第1步)，用来区分前景（与标定边界框的重叠区域大于0.5）
+  获得的结果叫做特征图；</li>
+<li>生成候选框：在获得的特征图的每一个点上做多个候选框；</li>
+<li>候选框分类：在 RPN 阶段(<a href="#faster-r-cnn-xun-lian-ce-lue">图12</a>第1步)，用来区分前景（与标定边界框的重叠区域大于0.5）
   和背景（不与任何标定边界框重叠或者其重叠区域小于0.1）；
-  在 Fast R-CNN 阶段(<a href="#faster-r-cnn-xun-lian-ce-lue">图12</a>第4步)，用于区分不同种类的目标（猫、狗、人等）；</p>
-</li>
+  在 Fast R-CNN 阶段(<a href="#faster-r-cnn-xun-lian-ce-lue">图12</a>第4步)，用于区分不同种类的目标（猫、狗、人等）;
+-&nbsp;候选框回归：在 RPN 阶段(<a href="#faster-r-cnn-xun-lian-ce-lue">图12</a>第1步)，进行初步调整；
+  在Fast R-CNN 阶段(<a href="#faster-r-cnn-xun-lian-ce-lue">图12</a>第4步)进行精确调整。</li>
 </ul>
-<p>-&nbsp;候选框回归：在 RPN 阶段(<a href="#faster-r-cnn-xun-lian-ce-lue">图12</a>第1步)，进行初步调整；
-  在Fast R-CNN 阶段(<a href="#faster-r-cnn-xun-lian-ce-lue">图12</a>第4步)进行精确调整；</p>
 <p>其整体流程如下：</p>
 <ul>
-<li>首先对输入的图片进行裁剪操作，并将裁剪后的图片送入预训练好的分类网络中获取该图像对应的特征图；</li>
+<li>首先把输入的图片处理成固定尺寸(伸缩、裁剪、填充等)，
+  并将处理后的图片送入预训练好的分类网络中获取该图像对应的特征图；</li>
 <li>然后在特征图上的每一个锚点上取9个候选框（3个不同尺度，3个不同长宽比），
   并根据相应的比例将其映射到原始图像中；</li>
 <li>接着将这些候选框输入到 RPN 网络中，RPN 网络对这些候选框进行分类
@@ -741,7 +736,7 @@ $$</div>
   即网络内部预测边界框并实现检测的功能。</li>
 </ul>
 <p>即进行交替训练，迭代2次的原因是作者发现多次的迭代并没有显著的改善性能。</p>
-<h3 id="que-xian-:roichi-hua-de-er-ci-liang-hua-pian-chai-wen-ti">缺陷：ROI池化的二次量化偏差问题</h3>
+<h3 id="que-xian-roichi-hua-de-er-ci-liang-hua-pian-chai-wen-ti">缺陷：ROI池化的二次量化偏差问题</h3>
 <p>由于候选框的位置由模型回归得到，一般来说是浮点数，而池化后的特征图要求尺度固定，
 因此候选区域(ROI)池化这个操作存在两次数据量化的过程。</p>
 <ol>
@@ -1057,8 +1052,7 @@ $$</div>
 <li>测试图像采用0值填充方式得到指定大小作为网络的输入，而不是采用resize，另外同时测试图像的水平翻转图并融合二者的结果。</li>
 <li>最后通过<a href="#ru-he-xuan-ze-zui-hao-de-bian-jie-kuang">soft-NMS</a>(NMS缺陷的思路就是soft-NMS)操作去除冗余框，只保留前100个预测框。</li>
 </ol>
-<h2 id="refinedet_1">RefineDet</h2>
-<h2 id="can-kao-wen-xian">参考文献</h2>
+<h2 id="can-kao-wen-xian_1">参考文献</h2>
 <ul>
 <li>R. Girshick, J. Donahue, T. Darrell, and J. Malik. Rich feature hierarchies for 
   accurate object detection and semantic segmentation Tech report (v5). arXiv:1311.2524v5, 2014.</li>
@@ -1108,7 +1102,7 @@ $$</div>
     var mathjaxscript = document.createElement('script');
     mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
     mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript.src = 'https://cdn.bootcdn.net/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
     mathjaxscript[(window.opera ? "innerHTML" : "text")] =
         "MathJax.Hub.Config({" +
         "    config: ['MMLorHTML.js']," +
@@ -1151,21 +1145,32 @@ $$</div>
 </script>
   </div><!-- /.entry-content -->
 
-  <div class="comments">
-    <!-- <h2>Comments !</h2> -->
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-      var disqus_shortname = 'freeopen';
-      var disqus_identifier = 'posts/image-segmentation';
-      var disqus_url = 'https://freeopen.github.io/posts/image-segmentation';
-      (function() {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//freeopen.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      })();
-    </script>
-    <noscript>Please enable JavaScript to view the comments.</noscript>
-  </div>
+  <!-- DISQUS 评论系统 -->
+
+  <!-- giteement评论系统 -->
+
+  <!-- Gitalk 评论 start  -->
+  <!-- Link Gitalk 的支持文件  -->
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+
+  <div id="gitalk-container"></div>
+      <script type="text/javascript">
+      var gitalk = new Gitalk({
+
+      // gitalk的主要参数
+          clientID: '8a8232de9043fc407bf4',
+          clientSecret: 'aab87cee1582588743573358e51f4a785ceb49a3',
+          repo: 'blog-discuss',
+          owner: 'freeopen',
+          admin: ['freeopen'],
+          id: 'posts/image-segmentation',
+      
+      });
+      gitalk.render('gitalk-container');
+  </script>
+  <!-- Gitalk end -->
+
 </section>
           </div>
 
@@ -1180,7 +1185,7 @@ $$</div>
       <div class="hidden-print hidden-xs hidden-sm hidden-md col-lg" id="post_toc" role="complementary">
         <nav class="sidebar-toc">
 <!-- <section id="main_toc"> -->
-    <ul class="nav" id="toc"><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#tu-xiang-fen-ge-dao-di-gan-shi-yao" title="图像分割到底干什么">图像分割到底干什么</a></li><li class="nav-item"><a class="nav-link" href="#tu-xiang-fen-ge-de-suan-fa-si-lu" title="图像分割的算法思路">图像分割的算法思路</a></li><li class="nav-item"><a class="nav-link" href="#jing-dian-suan-fa-de-yan-jin" title="经典算法的演进">经典算法的演进</a></li><li class="nav-item"><a class="nav-link" href="#r-cnn" title="R-CNN">R-CNN</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#ru-he-zhao-chu-hou-xuan-qu-yu" title="如何找出候选区域">如何找出候选区域</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-cong-bu-tong-da-xiao-de-hou-xuan-kuang-ti-qu-kong-jian-te-zheng" title="如何从不同大小的候选框提取空间特征">如何从不同大小的候选框提取空间特征</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-xuan-ze-zui-hao-de-bian-jie-kuang" title="如何选择最好的边界框">如何选择最好的边界框</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-diao-zheng-bian-jie-kuang" title="如何调整边界框">如何调整边界框</a></li><li class="nav-item"><a class="nav-link" href="#xun-lian-pei-zhi" title="训练配置">训练配置</a></li><li class="nav-item"><a class="nav-link" href="#r-cnn-de-que-xian" title="R-CNN 的缺陷">R-CNN 的缺陷</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#overfeat_1" title="OverFeat">OverFeat</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#yu-ce-shi-de-duo-chi-du-fen-lei" title="预测时的多尺度分类">预测时的多尺度分类</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-zhao-chu-hou-xuan-qu-yu_1" title="如何找出候选区域">如何找出候选区域</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-zhao-chu-bian-jie-kuang" title="如何找出边界框">如何找出边界框</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#spp-net_1" title="SPP-Net">SPP-Net</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#kong-jian-jin-zi-ta-chi-hua-ceng" title="空间金字塔池化层">空间金字塔池化层</a></li><li class="nav-item"><a class="nav-link" href="#te-zheng-ti-qu-jia-su" title="特征提取加速">特征提取加速</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-zai-cnnzui-hou-yi-ceng-te-zheng-tu-zhong-zhao-dao-yuan-shi-tu-pian-zhong-hou-xuan-kuang-de-dui-ying-qu-yu-?" title="如何在CNN最后一层特征图中找到原始图片中候选框的对应区域？">如何在CNN最后一层特征图中找到原始图片中候选框的对应区域？</a></li><li class="nav-item"><a class="nav-link" href="#xiao-jie" title="小结">小结</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#fcn_1" title="FCN">FCN</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#cnnzuo-jing-que-fen-ge-nan-zai-na-li" title="CNN做精确分割难在哪里">CNN做精确分割难在哪里</a></li><li class="nav-item"><a class="nav-link" href="#chuan-tong-de-ji-yu-cnnde-fen-ge-fang-fa" title="传统的基于CNN的分割方法">传统的基于CNN的分割方法</a></li><li class="nav-item"><a class="nav-link" href="#quan-lian-jie-ceng-zhuan-cheng-juan-ji-ceng-de-yuan-li" title="全连接层转成卷积层的原理">全连接层转成卷积层的原理</a></li><li class="nav-item"><a class="nav-link" href="#ru-he-jiang-te-zheng-tu-fang-da-dao-yuan-tu-chi-cun" title="如何将特征图放大到原图尺寸">如何将特征图放大到原图尺寸</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#fast-r-cnn_1" title="Fast R-CNN">Fast R-CNN</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#roi-chi-hua" title="RoI 池化">RoI 池化</a></li><li class="nav-item"><a class="nav-link" href="#xun-lian-wei-diao" title="训练微调">训练微调</a></li><li class="nav-item"><a class="nav-link" href="#duo-ren-wu-sun-shi-han-shu--multi-task-loss" title="多任务损失函数 (Multi-task loss)">多任务损失函数 (Multi-task loss)</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#faster-r-cnn_1" title="Faster R-CNN">Faster R-CNN</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#mao-dian-de-gai-nian" title="锚点的概念">锚点的概念</a></li><li class="nav-item"><a class="nav-link" href="#zheng-fu-yang-ben-de-hua-fen" title="正负样本的划分">正负样本的划分</a></li><li class="nav-item"><a class="nav-link" href="#rpn-wang-luo-jie-gou" title="RPN 网络结构">RPN 网络结构</a></li><li class="nav-item"><a class="nav-link" href="#sun-shi-han-shu" title="损失函数">损失函数</a></li><li class="nav-item"><a class="nav-link" href="#faster-r-cnn-xun-lian-ce-lue" title="Faster R-CNN 训练策略">Faster R-CNN 训练策略</a></li><li class="nav-item"><a class="nav-link" href="#que-xian-:roichi-hua-de-er-ci-liang-hua-pian-chai-wen-ti" title="缺陷：ROI池化的二次量化偏差问题">缺陷：ROI池化的二次量化偏差问题</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#fpn_1" title="FPN">FPN</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#fpnte-zheng-jin-zi-ta-wang-luo-jie-gou" title="FPN(特征金字塔网络)结构">FPN(特征金字塔网络)结构</a></li><li class="nav-item"><a class="nav-link" href="#fpndui-rpnde-gai-zao" title="FPN对RPN的改造">FPN对RPN的改造</a></li><li class="nav-item"><a class="nav-link" href="#fpndui-roichi-hua-ceng-de-gai-zao" title="FPN对ROI池化层的改造">FPN对ROI池化层的改造</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#mask-r-cnn_1" title="Mask R-CNN">Mask R-CNN</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#mask-r-cnn-suan-fa-bu-zou" title="Mask R-CNN 算法步骤">Mask R-CNN 算法步骤</a></li><li class="nav-item"><a class="nav-link" href="#roialign" title="ROIAlign">ROIAlign</a></li><li class="nav-item"><a class="nav-link" href="#tou-bu-jie-gou-fen-xi" title="头部结构分析">头部结构分析</a></li><li class="nav-item"><a class="nav-link" href="#sun-shi-han-shu_1" title="损失函数">损失函数</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#snip_1" title="SNIP">SNIP</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#domain-shift" title="Domain-shift">Domain-shift</a></li><li class="nav-item"><a class="nav-link" href="#snip-suan-fa" title="SNIP 算法">SNIP 算法</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#cornernet_1" title="CornerNet">CornerNet</a><ul class="nav-child"><li class="nav-item"><a class="nav-link" href="#sun-shi-han-shu_2" title="损失函数">损失函数</a></li><li class="nav-item"><a class="nav-link" href="#corner-pooling" title="corner pooling">corner pooling</a></li><li class="nav-item"><a class="nav-link" href="#yu-ce-shi-de-ji-ge-xi-jie" title="预测时的几个细节">预测时的几个细节</a></li></ul></li><li class="nav-item"><a class="nav-link" href="#refinedet_1" title="RefineDet">RefineDet</a></li><li class="nav-item"><a class="nav-link" href="#can-kao-wen-xian" title="参考文献">参考文献</a></li></ul></ul>
+    <div id="toc"><ul><li><a class="toc-href" href="#tu-xiang-fen-ge-dao-di-gan-shi-yao" title="图像分割到底干什么">图像分割到底干什么</a></li><li><a class="toc-href" href="#tu-xiang-fen-ge-de-suan-fa-si-lu" title="图像分割的算法思路">图像分割的算法思路</a></li><li><a class="toc-href" href="#jing-dian-suan-fa-de-yan-jin" title="经典算法的演进">经典算法的演进</a></li><li><a class="toc-href" href="#r-cnn" title="R-CNN">R-CNN</a><ul><li><a class="toc-href" href="#ru-he-zhao-chu-hou-xuan-qu-yu" title="如何找出候选区域">如何找出候选区域</a></li><li><a class="toc-href" href="#ru-he-cong-bu-tong-da-xiao-de-hou-xuan-kuang-ti-qu-kong-jian-te-zheng" title="如何从不同大小的候选框提取空间特征">如何从不同大小的候选框提取空间特征</a></li><li><a class="toc-href" href="#ru-he-xuan-ze-zui-hao-de-bian-jie-kuang" title="如何选择最好的边界框">如何选择最好的边界框</a></li><li><a class="toc-href" href="#ru-he-diao-zheng-bian-jie-kuang" title="如何调整边界框">如何调整边界框</a></li><li><a class="toc-href" href="#xun-lian-pei-zhi" title="训练配置">训练配置</a></li><li><a class="toc-href" href="#r-cnn-de-que-xian" title="R-CNN 的缺陷">R-CNN 的缺陷</a></li></ul></li><li><a class="toc-href" href="#overfeat_1" title="OverFeat">OverFeat</a><ul><li><a class="toc-href" href="#yu-ce-shi-de-duo-chi-du-fen-lei" title="预测时的多尺度分类">预测时的多尺度分类</a></li><li><a class="toc-href" href="#ru-he-zhao-chu-hou-xuan-qu-yu_1" title="如何找出候选区域">如何找出候选区域</a></li><li><a class="toc-href" href="#ru-he-zhao-chu-bian-jie-kuang" title="如何找出边界框">如何找出边界框</a></li></ul></li><li><a class="toc-href" href="#spp-net_1" title="SPP-Net">SPP-Net</a><ul><li><a class="toc-href" href="#kong-jian-jin-zi-ta-chi-hua-ceng" title="空间金字塔池化层">空间金字塔池化层</a></li><li><a class="toc-href" href="#te-zheng-ti-qu-jia-su" title="特征提取加速">特征提取加速</a></li><li><a class="toc-href" href="#ru-he-zai-cnnzui-hou-yi-ceng-te-zheng-tu-zhong-zhao-dao-yuan-shi-tu-pian-zhong-hou-xuan-kuang-de-dui-ying-qu-yu" title="如何在CNN最后一层特征图中找到原始图片中候选框的对应区域？">如何在CNN最后一层特征图中找到原始图片中候选框的对应区域？</a></li><li><a class="toc-href" href="#xiao-jie" title="小结">小结</a></li></ul></li><li><a class="toc-href" href="#fcn_1" title="FCN">FCN</a><ul><li><a class="toc-href" href="#cnnzuo-jing-que-fen-ge-nan-zai-na-li" title="CNN做精确分割难在哪里">CNN做精确分割难在哪里</a></li><li><a class="toc-href" href="#chuan-tong-de-ji-yu-cnnde-fen-ge-fang-fa" title="传统的基于CNN的分割方法">传统的基于CNN的分割方法</a></li><li><a class="toc-href" href="#quan-lian-jie-ceng-zhuan-cheng-juan-ji-ceng-de-yuan-li" title="全连接层转成卷积层的原理">全连接层转成卷积层的原理</a></li><li><a class="toc-href" href="#ru-he-jiang-te-zheng-tu-fang-da-dao-yuan-tu-chi-cun" title="如何将特征图放大到原图尺寸">如何将特征图放大到原图尺寸</a></li></ul></li><li><a class="toc-href" href="#fast-r-cnn_1" title="Fast R-CNN">Fast R-CNN</a><ul><li><a class="toc-href" href="#roi-chi-hua" title="RoI 池化">RoI 池化</a></li><li><a class="toc-href" href="#xun-lian-wei-diao" title="训练微调">训练微调</a></li><li><a class="toc-href" href="#duo-ren-wu-sun-shi-han-shu-multi-task-loss" title="多任务损失函数 (Multi-task loss)">多任务损失函数 (Multi-task loss)</a></li></ul></li><li><a class="toc-href" href="#faster-r-cnn_1" title="Faster R-CNN">Faster R-CNN</a><ul><li><a class="toc-href" href="#mao-dian-de-gai-nian" title="锚点的概念">锚点的概念</a></li><li><a class="toc-href" href="#zheng-fu-yang-ben-de-hua-fen" title="正负样本的划分">正负样本的划分</a></li><li><a class="toc-href" href="#rpn-wang-luo-jie-gou" title="RPN 网络结构">RPN 网络结构</a></li><li><a class="toc-href" href="#sun-shi-han-shu" title="损失函数">损失函数</a></li><li><a class="toc-href" href="#faster-r-cnn-xun-lian-ce-lue" title="Faster R-CNN 训练策略">Faster R-CNN 训练策略</a></li><li><a class="toc-href" href="#que-xian-roichi-hua-de-er-ci-liang-hua-pian-chai-wen-ti" title="缺陷：ROI池化的二次量化偏差问题">缺陷：ROI池化的二次量化偏差问题</a></li></ul></li><li><a class="toc-href" href="#fpn_1" title="FPN">FPN</a><ul><li><a class="toc-href" href="#fpnte-zheng-jin-zi-ta-wang-luo-jie-gou" title="FPN(特征金字塔网络)结构">FPN(特征金字塔网络)结构</a></li><li><a class="toc-href" href="#fpndui-rpnde-gai-zao" title="FPN对RPN的改造">FPN对RPN的改造</a></li><li><a class="toc-href" href="#fpndui-roichi-hua-ceng-de-gai-zao" title="FPN对ROI池化层的改造">FPN对ROI池化层的改造</a></li></ul></li><li><a class="toc-href" href="#mask-r-cnn_1" title="Mask R-CNN">Mask R-CNN</a><ul><li><a class="toc-href" href="#mask-r-cnn-suan-fa-bu-zou" title="Mask R-CNN 算法步骤">Mask R-CNN 算法步骤</a></li><li><a class="toc-href" href="#roialign" title="ROIAlign">ROIAlign</a></li><li><a class="toc-href" href="#tou-bu-jie-gou-fen-xi" title="头部结构分析">头部结构分析</a></li><li><a class="toc-href" href="#sun-shi-han-shu_1" title="损失函数">损失函数</a></li></ul></li><li><a class="toc-href" href="#snip_1" title="SNIP">SNIP</a><ul><li><a class="toc-href" href="#domain-shift" title="Domain-shift">Domain-shift</a></li><li><a class="toc-href" href="#snip-suan-fa" title="SNIP 算法">SNIP 算法</a></li></ul></li><li><a class="toc-href" href="#cornernet_1" title="CornerNet">CornerNet</a><ul><li><a class="toc-href" href="#sun-shi-han-shu_2" title="损失函数">损失函数</a></li><li><a class="toc-href" href="#corner-pooling" title="corner pooling">corner pooling</a></li><li><a class="toc-href" href="#yu-ce-shi-de-ji-ge-xi-jie" title="预测时的几个细节">预测时的几个细节</a></li></ul></li><li><a class="toc-href" href="#can-kao-wen-xian_1" title="参考文献">参考文献</a></li></ul></div>
 <!-- </section> -->
 <!-- </section> -->
         </nav>
@@ -1189,27 +1194,11 @@ $$</div>
   </div>
 
 
-    <script type="text/javascript">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+<!--  -->
+<!--  -->
 
-    ga('create', 'UA-98793057-1', 'auto');
-    ga('send', 'pageview');
-    </script>
-<script type="text/javascript">
-    var disqus_shortname = 'freeopen';
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
 <script src="https://freeopen.github.io/theme/js/jquery-3.3.1.slim.min.js"></script>
 <script src="https://freeopen.github.io/theme/js/popper.min.js"></script>
 <script src="https://freeopen.github.io/theme/js/bootstrap.min.js"></script>
-
 </body>
 </html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <!-- Enable responsiveness on mobile devices-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+        <title>Freeopen - 冠军方案之 X光限制品监测</title>
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/css/main.css" />
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/academicons/css/academicons.min.css" />
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/font-awesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="https://freeopen.github.io/theme/assets/fonts-googleapis/css/googleapi-fonts.css" />
+
+        
+
+
+
+
+
+
+</head>
+
+<body id="index" class="theme-myblue" data-spy="scroll" data-target="#post_toc">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-lg">
+        <nav class="navbar navbar-expand-lg navbar-light sidebar" role="navigation">
+          <a class="sidebar-about" href="https://freeopen.github.io/">Freeopen</a>
+          <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <nav class="collapse navbar-collapse sidebar-nav flex-column" id="navbarNav">
+
+              <a class="nav-link" href="https://freeopen.github.io/pages/guan-yu-zhe-li.html">关于这里</a>
+              <a class="nav-link" href="https://freeopen.github.io/pages/zou-guo-lu-guo.html">走过路过</a>
+
+              <a class="nav-link" href="https://freeopen.github.io/category/bian-cheng-zhi-hui.html">编程智慧</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/shu-xue-za-tan.html">数学杂谈</a>
+              <a class="nav-link" href="https://freeopen.github.io/category/su-cha-shou-ce.html">速查手册</a>
+            <div class="sidebar-icons">
+              <hr>
+                <a href="" title="Atom feed" target="_blank" 
+                    style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;">
+                  <i class="fa fa-rss-square"></i>
+                </a>
+                <a href="https://github.com/freeopen" title="Software I released on Github" 
+                      target="_blank" style="display: inline; padding: 0px 0px 0px 0; margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i class="fa fa-github-square"></i> </a>
+                <a href="Mailto:freeopen@163.com" title="My email" 
+                    target="_blank" style="display: inline; padding: 0px 0px 0px 0;
+                    margin: 3px 4px 0 0; white-space: nowrap; font-size:2.5em;"><i
+                  class="fa fa-envelope-square"></i> </a>
+
+            </div>
+          </nav>
+
+        </nav>
+
+      </div>
+
+      <div class="col-12 col-lg-7" role="main">
+        <div id="content" class="content">
+          <div class="post">
+<section id="content" class="body">
+  <header>
+    <h1 class="entry-title">冠军方案之 X光限制品监测</h2>
+ 
+  </header>
+  <div class="post-info">
+
+    <span>2021-02-14</span>
+
+
+    <span>| By             <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
+    </span>
+
+    <span>
+      | 分类于 <a href="https://freeopen.github.io/category/ji-qi-xue-xi.html">机器学习</a>
+    </span>
+
+  </div><!-- /.post-info -->
+  <div class="post content">
+    <blockquote>
+<p>冠军：YuanXu</p>
+</blockquote>
+<h2 id="ren-wu-shuo-ming">任务说明</h2>
+<p>包裹X光限制品监测作为日常包裹物流行业及安防行业的重要环节，承担着防止易燃易爆等危险品进入货运渠道，管理刀具等特殊货运物品，监测毒品等国家重点违禁品偷运等工作。随着线上购物的普及和快速发展，线上物流包裹数量已经远超人工可以处理的范围，给物流包裹监管带来了巨大挑战。</p>
+<p>针对给出的限制品种类，利用X光图像及标注数据，研究开发高效的计算机视觉算法，监测图像是否包含危险品及其大致位置。通过自动化监测包裹携带品算法，降低漏检风险及误报率，提升危险品管理效率。</p>
+<p>限制品包括：铁壳打火机、黑钉打火机、刀具、电池电容以及剪刀五类（类别id依次从1到5）。</p>
+<h4>评估指标</h4>
+<ul>
+<li>
+<p>评测方式采用计算box mAP的方式，对IoU = 0.5:0.05:0.95，分别计算mAP，再做平均得到最后的mAP。</p>
+</li>
+<li>
+<p>单个模型整体大小需不超过600MB（即不超过VGG19大小），模型不得超过2个。</p>
+</li>
+<li>
+<p>响应时间越快越好</p>
+</li>
+</ul>
+<h2 id="wen-ti-fen-xi">问题分析</h2>
+<p>比赛任务是经典的图像语义分割（semantic-segmentation）的问题，简单说就是要在像素级别将前景类别标识出来。研究kaggle上的几个图像语义分割的比赛，发现Unet和Mask-RCNN的成绩最好。</p>
+<p>因为时间原因，最后选择 Unet。因为Unet能直接输出与图像1: 1的mask，且超参数少，属于端到端网络。</p>
+<h2 id="mo-xing-she-ji">模型设计</h2>
+<p>采样经典Unet模型。</p>
+<ul>
+<li>resnet 做 encoder</li>
+<li>将各个decoder的输出cat在一起，作为最终的输出特征</li>
+<li>除了输出前景物体的mask， 还单独输出物体的边沿。</li>
+</ul>
+<h2 id="zhang-fen-dian">涨分点</h2>
+<h3 id="shu-ju-zeng-qiang">数据增强</h3>
+<ul>
+<li>常用的图像数据增强，包括旋转、翻转、颜色、噪声、形变等。</li>
+<li>考虑到X光的穿透性，将没有危险品的图片和有危险品的图片进行合成（blend操作）。</li>
+</ul>
+<h3 id="kuai-su-xun-lian">快速训练</h3>
+<p>训练速度直接决定了开发的迭代速度和实验的总次数。</p>
+<p>在训练的初期使用比较小的图像作为输入，然后再使用较大的图像作为输入。这个过程就像人学习一样，先从简单的、粗略的开始学起，然后在学习复杂的、精细的，这样最后网络收敛会更快、更好。具体为先训练128p的图像，再在原模型上训练256p的图像。</p>
+<h3 id="rong-he-ce-lue">融合策略</h3>
+<p>因为数据集比较小，即使使用了各种数据增强技术，训练使用以rsenet154作为encoder这样大网络，选取一个snapshot作为最终模型的参数还是会有过拟合的风险，选取多个snapshot使用参数均值的方法对模型参数进行融合可以提高模型的泛化能力。</p>
+<p>但是传统的方法是对一个模型进行多次训练来取得多个snapshot，这会需要很多的计算时间。根据不同评价标准选择融合的候选参数的方法，也就是选择最小验证loss，最大mIoU，和最小训练loss的三个模型参数进行融合。</p>
+<h3 id="ban-jian-du-xue-xi">半监督学习</h3>
+<p>使用已训练的模型在测试数据上的结果作为训练数据，来达到增加数据集、进而提高模型精度的方法。</p>
+<h3 id="ce-shi-zeng-qiang">测试增强</h3>
+<p>在推理时，通过对图像的旋转和翻转，并对结果取平均也能提高精度。但是这样推理测试的速度慢了8倍，考虑到数据中有很多图片没有危险品，而测试增强对于这些图片没有改进，所以避免对这些图片多次测试可大幅提高测试速度。代码改动也很少。</p>
+<h2 id="zong-jie_1">总结</h2>
+<ul>
+<li>端到端的一体化网络设计,方便使用不同大小的预训练网络</li>
+<li>使用逐步增加训练图像大小等方法,提高训练速度和精度</li>
+<li>使用数据增强、模型参数均值、半监督学习的方法提高模型泛化能力</li>
+<li>使用测试增强提高结果精度(并优化)</li>
+<li>一些实验结果
+  <img alt="20210214174954" src="https://freeopen.github.io/images/20210214174954.jpg"/></li>
+</ul>
+  </div><!-- /.entry-content -->
+
+  <!-- DISQUS 评论系统 -->
+
+  <!-- giteement评论系统 -->
+
+  <!-- Gitalk 评论 start  -->
+  <!-- Link Gitalk 的支持文件  -->
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+
+  <div id="gitalk-container"></div>
+      <script type="text/javascript">
+      var gitalk = new Gitalk({
+
+      // gitalk的主要参数
+          clientID: '8a8232de9043fc407bf4',
+          clientSecret: 'aab87cee1582588743573358e51f4a785ceb49a3',
+          repo: 'blog-discuss',
+          owner: 'freeopen',
+          admin: ['freeopen'],
+          id: 'posts/x-cargo',
+      
+      });
+      gitalk.render('gitalk-container');
+  </script>
+  <!-- Gitalk end -->
+
+</section>
+          </div>
+
+          <footer id="contentinfo" class="footer">
+            <div class="footer-inner">
+              无节操小广告<a href="https://freeopen.github.io/pages/da-shang.html"> 欢迎打赏 </a>
+            </div>
+          </footer><!-- /#contentinfo -->
+        </div>
+      </div>
+
+      <div class="hidden-print hidden-xs hidden-sm hidden-md col-lg" id="post_toc" role="complementary">
+        <nav class="sidebar-toc">
+<!-- <section id="main_toc"> -->
+    <div id="toc"><ul><li><a class="toc-href" href="#ren-wu-shuo-ming" title="任务说明">任务说明</a></li><li><a class="toc-href" href="#wen-ti-fen-xi" title="问题分析">问题分析</a></li><li><a class="toc-href" href="#mo-xing-she-ji" title="模型设计">模型设计</a></li><li><a class="toc-href" href="#zhang-fen-dian" title="涨分点">涨分点</a><ul><li><a class="toc-href" href="#shu-ju-zeng-qiang" title="数据增强">数据增强</a></li><li><a class="toc-href" href="#kuai-su-xun-lian" title="快速训练">快速训练</a></li><li><a class="toc-href" href="#rong-he-ce-lue" title="融合策略">融合策略</a></li><li><a class="toc-href" href="#ban-jian-du-xue-xi" title="半监督学习">半监督学习</a></li><li><a class="toc-href" href="#ce-shi-zeng-qiang" title="测试增强">测试增强</a></li></ul></li><li><a class="toc-href" href="#zong-jie_1" title="总结">总结</a></li></ul></div>
+<!-- </section> -->
+<!-- </section> -->
+        </nav>
+      </div>
+    </div>
+  </div>
+
+
+<!--  -->
+<!--  -->
+
+<script src="https://freeopen.github.io/theme/js/jquery-3.3.1.slim.min.js"></script>
+<script src="https://freeopen.github.io/theme/js/popper.min.js"></script>
+<script src="https://freeopen.github.io/theme/js/bootstrap.min.js"></script>
+</body>
+</html>
