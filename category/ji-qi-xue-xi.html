@@ -100,19 +100,11 @@
 <p>限制品包括：铁壳打火机、黑钉打火机、刀具、电池电容以及剪刀五类（类别id依次从1到5）。</p>
 <h4>评估指标</h4>
 <ul>
-<li>
-<p>评测方式采用计算box mAP的方式，对IoU = 0.5:0.05:0.95，分别计算mAP，再做平均得到最后的mAP。</p>
-</li>
-<li>
-<p>单个模型整体大小需不超过600MB（即不超过VGG19大小），模型不得超过2个。</p>
-</li>
-<li>
-<p>响应时间越快越好</p>
-</li>
+<li>评测方式采用计算 <code>box mAP</code>的方式，对 <code>IoU = 0.5:0.05:0.95</code>，分别计算<code>mAP</code>，再做平均得到最后的<code>mAP</code>。</li>
+<li>单个模型整体大小需不超过<code>600MB</code>（即不超过<code>VGG19</code>大小），模型不得超过<code>2</code>个。</li>
+<li>响应时间越快越好</li>
 </ul>
-<h2 id="wen-ti-fen-xi">问题分析</h2>
-<p>比赛任务是经典的图像语义分割（semantic-segmentation）的问题，简单说就是要在像素级别将前景类别标识出来。研究kaggle上的几个图像语义分割的比赛，发现Unet和Mask-RCNN的成绩最好。</p>
-<p>因为时间原因，最后选择 Unet。因为Unet能直接输出与图像1 …</p> </div><!-- /.entry-content -->
+<h2 id="wen-ti-fen-xi">问题分析 …</h2> </div><!-- /.entry-content -->
         </article></li>
         <li class="related"><article>
                 <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/cloth-cut" rel="bookmark" title="Permalink to 冠军方案之 面料剪裁利用率优化">冠军方案之 面料剪裁利用率优化</a></h2> </header>
