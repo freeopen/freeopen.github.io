@@ -125,7 +125,7 @@
 是因为程序所做的几乎一切事情，都是信息的传递和分支。你可以把代码看成是一个电路，
 电流经过导线，分流或者汇合。如果你是这样思考的，你的代码里就会比较少出现只有一个
 分支的 if 语句，它看起来就会像这个样子：</p>
-<div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(...)</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="p">(...)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(...)</span> <span class="p">{</span>
         <span class="p">...</span>
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
@@ -136,7 +136,7 @@
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="p">...</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>注意到了吗？在我的代码里面，if 语句几乎总是有两个分支。它们有可能嵌套，有多层的缩进，
 而且else分支里面有可能出现少量重复的代码。然而这样的结构，逻辑却非常严密和清晰。
 在后面我会告诉你为什么 if 语句最好有两个分支。</p>
@@ -179,7 +179,7 @@
 <li>
 <p>每个函数只做一件简单的事情。有些人喜欢制造一些&ldquo;通用&rdquo;的函数，既可以做这个又可以做那个，
   它的内部依据某些变量和条件，来&ldquo;选择&rdquo;这个函数所要做的事情。比如，你也许写出这样的函数：</p>
-<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">getOS</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="s">"MacOS"</span><span class="p">))</span> <span class="p">{</span>
         <span class="n">a</span><span class="p">();</span>
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
@@ -192,26 +192,26 @@
         <span class="n">e</span><span class="p">();</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>写这个函数的人，根据系统是否为&ldquo;MacOS&rdquo;来做不同的事情。你可以看出这个函数里，
 其实只有<code>c()</code>是两种系统共有的，而其它的<code>a(), b(), d(), e()</code>都属于不同的分支。</p>
 <p>这种&ldquo;复用&rdquo;其实是有害的。如果一个函数可能做两种事情，它们之间共同点少于它们的不同点，
 那你最好就写两个不同的函数，否则这个函数的逻辑就不会很清晰，容易出现错误。其实，上面这个函数可以改写成两个函数：</p>
-<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">fooMacOS</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span> <span class="nf">fooMacOS</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">a</span><span class="p">();</span>
     <span class="n">c</span><span class="p">();</span>
     <span class="n">d</span><span class="p">();</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>和</p>
-<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">fooOther</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span> <span class="nf">fooOther</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">b</span><span class="p">();</span>
     <span class="n">c</span><span class="p">();</span>
     <span class="n">e</span><span class="p">();</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>如果你发现两件事情大部分内容相同，只有少数不同，多半时候你可以把相同的部分提取出去，做成一个辅助函数。比如，如果你有个函数是这样：</p>
-<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">a</span><span class="p">();</span>
     <span class="n">b</span><span class="p">();</span>
     <span class="n">c</span><span class="p">();</span>
@@ -221,31 +221,31 @@
         <span class="n">e</span><span class="p">();</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>其中<code>a()，b()，c()</code>都是一样的，只有<code>d()</code>和<code>e()</code>根据系统有所不同。那么你可以把<code>a()，b()，c()</code>提取出去：</p>
-<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">preFoo</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span> <span class="nf">preFoo</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">a</span><span class="p">();</span>
     <span class="n">b</span><span class="p">();</span>
     <span class="n">c</span><span class="p">();</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>然后制造两个函数：</p>
-<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">fooMacOS</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span> <span class="nf">fooMacOS</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">preFoo</span><span class="p">();</span>
     <span class="n">d</span><span class="p">();</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>和</p>
-<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">fooOther</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span> <span class="nf">fooOther</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">preFoo</span><span class="p">();</span>
     <span class="n">e</span><span class="p">();</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>这样一来，我们既共享了代码，又做到了每个函数只做一件简单的事情。这样的代码，逻辑就更加清晰。</p>
 </li>
 <li>
 <p>避免使用全局变量和类成员（class member）来传递信息，尽量使用局部变量和参数。有些人写代码，经常用类成员来传递信息，就像这样：</p>
-<div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">A</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">A</span> <span class="p">{</span>
     <span class="n">String</span> <span class="n">x</span><span class="p">;</span>
 
     <span class="kt">void</span> <span class="nf">findX</span><span class="p">()</span> <span class="p">{</span>
@@ -259,7 +259,7 @@
         <span class="n">print</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>首先，他使用<code>findX()</code>，把一个值写入成员<code>x</code>。然后，使用<code>x</code>的值。这样，<code>x</code>就变
 成了<code>findX</code>和<code>print</code>之间的数据通道。由于<code>x</code>属于<code>class A</code>，这样程序就失去了模块化的结构。
 由于这两个函数依赖于成员<code>x</code>，它们不再有明确的输入和输出，而是依赖全局的数据。
@@ -267,7 +267,7 @@
 变，代码变得难以理解，难以确保正确性。</p>
 <p>如果你使用局部变量而不是类成员来传递信息，那么这两个函数就不需要依赖于某一个
 <code>class</code>，而且更加容易理解，不易出错：</p>
-<div class="highlight"><pre><span></span><span class="n">String</span> <span class="nf">findX</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="n">String</span> <span class="nf">findX</span><span class="p">()</span> <span class="p">{</span>
     <span class="p">...</span>
     <span class="n">x</span> <span class="o">=</span> <span class="p">...;</span>
     <span class="k">return</span> <span class="n">x</span><span class="p">;</span>
@@ -276,7 +276,7 @@
     <span class="n">String</span> <span class="n">x</span> <span class="o">=</span> <span class="n">findX</span><span class="p">();</span>
     <span class="n">print</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 </li>
 </ul>
 <h2 id="xie-ke-du-de-dai-ma">写可读的代码</h2>
@@ -298,32 +298,32 @@
 <li>
 <p>使用有意义的函数和变量名字。如果你的函数和变量的名字，能够切实的描述它们的逻
   辑，那么你就不需要写注释来解释它在干什么。比如：</p>
-<div class="highlight"><pre><span></span><span class="c1">// put elephant1 into fridge2</span>
+<div class="highlight"><pre><span></span><code><span class="c1">// put elephant1 into fridge2</span>
 <span class="n">put</span><span class="p">(</span><span class="n">elephant1</span><span class="p">,</span> <span class="n">fridge2</span><span class="p">);</span>
-</pre></div>
+</code></pre></div>
 <p>由于我的函数名<code>put</code>，加上两个有意义的变量名<code>elephant1</code>和<code>fridge2</code>，
 已经说明了这是在干什么（把大象放进冰箱），所以上面那句注释完全没有必要。</p>
 </li>
 <li>
 <p>局部变量应该尽量接近使用它的地方。有些人喜欢在函数最开头定义很多局部变量，然
   后在下面很远的地方使用它，就像这个样子：</p>
-<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="p">...;</span>
     <span class="p">...</span>
     <span class="p">...</span>
     <span class="n">bar</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
     <span class="p">...</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>由于这中间都没有使用过<code>index</code>，也没有改变过它所依赖的数据，所以这个变量定义，其实可以挪到接近使用它的地方：</p>
-<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
     <span class="p">...</span>
     <span class="p">...</span>
     <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="p">...;</span>
     <span class="n">bar</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
     <span class="p">...</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>如果你看透了局部变量的本质&mdash;&mdash;它们就是电路里的导线，那你就能更好的理解近距离的好处。
 变量定义离用的地方越近，导线的长度就越短。你不需要摸着一根导线，绕来绕去找很远，就能发现接收它的端口，这样的电路就更容易理解。</p>
 </li>
@@ -332,30 +332,30 @@
   里说的是局部变量，因为它们处于局部，再加上第2点已经把它放到离使用位置尽量近的地方，所
   以根据上下文你就会容易知道它的意思：</p>
 <p>比如，你有一个局部变量，表示一个操作是否成功：</p>
-<div class="highlight"><pre><span></span><span class="kt">boolean</span> <span class="n">successInDeleteFile</span> <span class="o">=</span> <span class="n">deleteFile</span><span class="p">(</span><span class="s">"foo.txt"</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span> <span class="n">successInDeleteFile</span> <span class="o">=</span> <span class="n">deleteFile</span><span class="p">(</span><span class="s">"foo.txt"</span><span class="p">);</span>
 <span class="k">if</span> <span class="p">(</span><span class="n">successInDeleteFile</span><span class="p">)</span> <span class="p">{</span>
     <span class="p">...</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="p">...</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>这个局部变量<code>successInDeleteFile</code>大可不必这么啰嗦。因为它只用过一次，而且用它的地方就
 在下面一行，所以读者可以轻松发现它是<code>deleteFile</code>返回的结果。如果你把它改名为<code>success</code>，
 其实读者根据一点上下文，也知道它表示"success in deleteFile"。所以你可以把它改成这样：</p>
-<div class="highlight"><pre><span></span><span class="kt">boolean</span> <span class="n">success</span> <span class="o">=</span> <span class="n">deleteFile</span><span class="p">(</span><span class="s">"foo.txt"</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span> <span class="n">success</span> <span class="o">=</span> <span class="n">deleteFile</span><span class="p">(</span><span class="s">"foo.txt"</span><span class="p">);</span>
 <span class="k">if</span> <span class="p">(</span><span class="n">success</span><span class="p">)</span> <span class="p">{</span>
     <span class="p">...</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="p">...</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>这样的写法不但没漏掉任何有用的语义信息，而且更加易读。<code>successInDeleteFile</code>这种
 &ldquo;camelCase&rdquo;，如果超过了三个单词连在一起，其实是很碍眼的东西。所以如果你能用一个单词表示同样的意义，那当然更好。</p>
 </li>
 <li>
 <p>不要重用局部变量。很多人写代码不喜欢定义新的局部变量，而喜欢&ldquo;重用&rdquo;同一个局部变量，
   通过反复对它们进行赋值，来表示完全不同意思。比如这样写：</p>
-<div class="highlight"><pre><span></span><span class="n">String</span> <span class="n">msg</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="n">String</span> <span class="n">msg</span><span class="p">;</span>
 <span class="k">if</span> <span class="p">(...)</span> <span class="p">{</span>
     <span class="n">msg</span> <span class="o">=</span> <span class="s">"succeed"</span><span class="p">;</span>
     <span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="n">msg</span><span class="p">);</span>
@@ -363,26 +363,26 @@
     <span class="n">msg</span> <span class="o">=</span> <span class="s">"failed"</span><span class="p">;</span>
     <span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="n">msg</span><span class="p">);</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>虽然这样在逻辑上是没有问题的，然而却不易理解，容易混淆。变量<code>msg</code>两次被赋值，
 表示完全不同的两个值。它们立即被<code>log.info</code>使用，没有传递到其它地方去。这种赋值的做法，
 把局部变量的作用域不必要的增大，让人以为它可能在将来改变，也许会在其它地方被使用。
 更好的做法，其实是定义两个变量：</p>
-<div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(...)</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="p">(...)</span> <span class="p">{</span>
     <span class="n">String</span> <span class="n">msg</span> <span class="o">=</span> <span class="s">"succeed"</span><span class="p">;</span>
     <span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="n">msg</span><span class="p">);</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="n">String</span> <span class="n">msg</span> <span class="o">=</span> <span class="s">"failed"</span><span class="p">;</span>
     <span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="n">msg</span><span class="p">);</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>由于这两个<code>msg</code>变量的作用域仅限于它们所处的<code>if</code>语句分支，你可以很清楚的看到这两个<code>msg</code>被使用的范围，而且知道它们之间没有任何关系。</p>
 </li>
 <li>
 <p>把复杂的逻辑提取出去，做成&ldquo;帮助函数&rdquo;。有些人写的函数很长，以至于看不清楚里面的语句在干什么，
   所以他们误以为需要写注释。如果你仔细观察这些代码，就会发现不清晰的那片代码，往往可以被提取出去，
   做成一个函数，然后在原来的地方调用。由于函数有一个名字，这样你就可以使用有意义的函数名来代替注释。举一个例子：</p>
-<div class="highlight"><pre><span></span><span class="p">...</span>
+<div class="highlight"><pre><span></span><code><span class="p">...</span>
 <span class="c1">// put elephant1 into fridge2</span>
 <span class="n">openDoor</span><span class="p">(</span><span class="n">fridge2</span><span class="p">);</span>
 <span class="k">if</span> <span class="p">(</span> <span class="n">elephant1</span><span class="p">.</span><span class="na">alive</span><span class="p">())</span> <span class="p">{</span>
@@ -392,9 +392,9 @@
 <span class="p">}</span>
 <span class="n">closeDoor</span><span class="p">(</span><span class="n">fridge2</span><span class="p">);</span>
 <span class="p">...</span>
-</pre></div>
+</code></pre></div>
 <p>如果你把这片代码提出去定义成一个函数：</p>
-<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">put</span><span class="p">(</span><span class="n">Elephant</span> <span class="n">elephant</span><span class="p">,</span> <span class="n">Fridge</span> <span class="n">fridge</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span> <span class="nf">put</span><span class="p">(</span><span class="n">Elephant</span> <span class="n">elephant</span><span class="p">,</span> <span class="n">Fridge</span> <span class="n">fridge</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">openDoor</span><span class="p">(</span><span class="n">fridge</span><span class="p">);</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">elephant</span><span class="p">.</span><span class="na">alive</span><span class="p">())</span> <span class="p">{</span>
         <span class="p">...</span>
@@ -403,26 +403,26 @@
     <span class="p">}</span>
     <span class="n">closeDoor</span><span class="p">(</span><span class="n">fridge</span><span class="p">);</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>这样原来的代码就可以改成：</p>
-<div class="highlight"><pre><span></span><span class="p">...</span>
+<div class="highlight"><pre><span></span><code><span class="p">...</span>
 <span class="n">put</span><span class="p">(</span><span class="n">elephant1</span><span class="p">,</span> <span class="n">fridge2</span><span class="p">);</span>
 <span class="p">...</span>
-</pre></div>
+</code></pre></div>
 <p>更加清晰，而且注释也没必要了。</p>
 </li>
 <li>
 <p>把复杂的表达式提取出去，做成中间变量。有些人听说&ldquo;函数式编程&rdquo;是个好东西，
   也不理解它的真正含义，就在代码里大量使用嵌套的函数。像这样：</p>
-<div class="highlight"><pre><span></span><span class="n">Pizza</span> <span class="n">pizza</span> <span class="o">=</span> <span class="n">makePizza</span><span class="p">(</span><span class="n">crust</span><span class="p">(</span><span class="n">salt</span><span class="p">(),</span> <span class="n">butter</span><span class="p">()),</span>
+<div class="highlight"><pre><span></span><code><span class="n">Pizza</span> <span class="n">pizza</span> <span class="o">=</span> <span class="n">makePizza</span><span class="p">(</span><span class="n">crust</span><span class="p">(</span><span class="n">salt</span><span class="p">(),</span> <span class="n">butter</span><span class="p">()),</span>
         <span class="n">topping</span><span class="p">(</span><span class="n">onion</span><span class="p">(),</span> <span class="n">tomato</span><span class="p">(),</span> <span class="n">sausage</span><span class="p">()));</span>
-</pre></div>
+</code></pre></div>
 <p>这样的代码一行太长，而且嵌套太多，不容易看清楚。其实训练有素的函数式程序员，
 都知道中间变量的好处，不会盲目的使用嵌套的函数。他们会把这代码变成这样：</p>
-<div class="highlight"><pre><span></span><span class="n">Crust</span> <span class="n">crust</span> <span class="o">=</span> <span class="n">crust</span><span class="p">(</span><span class="n">salt</span><span class="p">(),</span> <span class="n">butter</span><span class="p">());</span>
+<div class="highlight"><pre><span></span><code><span class="n">Crust</span> <span class="n">crust</span> <span class="o">=</span> <span class="n">crust</span><span class="p">(</span><span class="n">salt</span><span class="p">(),</span> <span class="n">butter</span><span class="p">());</span>
 <span class="n">Topping</span> <span class="n">topping</span> <span class="o">=</span> <span class="n">topping</span><span class="p">(</span><span class="n">onion</span><span class="p">(),</span> <span class="n">tomato</span><span class="p">(),</span> <span class="n">sausage</span><span class="p">());</span>
 <span class="n">Pizza</span> <span class="n">pizza</span> <span class="o">=</span> <span class="n">makePizza</span><span class="p">(</span><span class="n">crust</span><span class="p">,</span> <span class="n">topping</span><span class="p">);</span>
-</pre></div>
+</code></pre></div>
 <p>这样写，不但有效地控制了单行代码的长度，而且由于引入的中间变量具有&ldquo;意义&rdquo;，步骤清晰，变得很容易理解。</p>
 </li>
 <li>
@@ -432,41 +432,41 @@
 <p>有些人喜欢利用IDE的自动换行机制，编辑之后用一个热键把整个代码重新格式化一遍，
 IDE就会把超过行宽限制的代码自动折行。可是这种自动这行，往往没有根据代码的逻辑来进行，
 不能帮助理解代码。自动换行之后可能产生这样的代码：</p>
-<div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">someLongCondition1</span><span class="p">()</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="n">someLongCondition2</span><span class="p">()</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="n">someLongCondition3</span><span class="p">()</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="p">(</span><span class="n">someLongCondition1</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">someLongCondition2</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">someLongCondition3</span><span class="p">()</span> <span class="o">&amp;&amp;</span>
     <span class="n">someLongCondition4</span><span class="p">())</span> <span class="p">{</span>
     <span class="p">...</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>由于<code>someLongCondition4()</code>超过了行宽限制，被编辑器自动换到了下面一行。虽然满足了行宽限制，
 换行的位置却是相当任意的，它并不能帮助人理解这代码的逻辑。这几个<code>boolean</code>表达式，全都用
 <code>&amp;&amp;</code>连接，所以它们其实处于平等的地位。为了表达这一点，当需要折行的时候，你应该把每一个表
 达式都放到新的一行，就像这个样子：</p>
-<div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">someLongCondition1</span><span class="p">()</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span>
-    <span class="n">someLongCondition2</span><span class="p">()</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span>
-    <span class="n">someLongCondition3</span><span class="p">()</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="p">(</span><span class="n">someLongCondition1</span><span class="p">()</span> <span class="o">&amp;&amp;</span>
+    <span class="n">someLongCondition2</span><span class="p">()</span> <span class="o">&amp;&amp;</span>
+    <span class="n">someLongCondition3</span><span class="p">()</span> <span class="o">&amp;&amp;</span>
     <span class="n">someLongCondition4</span><span class="p">())</span> <span class="p">{</span>
     <span class="p">...</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>这样每一个条件都对齐，里面的逻辑就很清楚了。再举个例子：</p>
-<div class="highlight"><pre><span></span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">"failed to find file {} for command {}, with exception {}"</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">"failed to find file {} for command {}, with exception {}"</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span>
         <span class="n">exception</span><span class="p">);</span>
-</pre></div>
+</code></pre></div>
 <p>这行因为太长，被自动折行成这个样子。<code>file，command</code>和<code>exception</code>本来是同一类东西，
 却有两个留在了第一行，最后一个被折到第二行。它就不如手动换行成这个样子：</p>
-<div class="highlight"><pre><span></span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">"failed to find file {} for command {}, with exception {}"</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">"failed to find file {} for command {}, with exception {}"</span><span class="p">,</span>
         <span class="n">file</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">exception</span><span class="p">);</span>
-</pre></div>
+</code></pre></div>
 <p>把格式字符串单独放在一行，而把它的参数一并放在另外一行，这样逻辑就更加清晰。</p>
 <p>为了避免IDE把这些手动调整好的换行弄乱，很多IDE（比如IntelliJ）的自动格式化设定里都有
 &ldquo;保留原来的换行符&rdquo;的设定。如果你发现IDE的换行不符合逻辑，你可以修改这些设定，然后在某些地方保留你自己的手动换行。</p>
 <p>说到这里，我必须警告你，这里所说的&ldquo;不需注释，让代码自己解释自己&rdquo;，并不是说要让代码看起来像某种自然语言。
 有个叫 Chai 的 JavaScript 测试工具，可以让你这样写代码：</p>
-<div class="highlight"><pre><span></span><span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">(</span><span class="s1">'string'</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">(</span><span class="s1">'string'</span><span class="p">);</span>
 <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="s1">'bar'</span><span class="p">);</span>
-<span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">have</span><span class="p">.</span><span class="nx">length</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
-<span class="nx">expect</span><span class="p">(</span><span class="nx">tea</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">have</span><span class="p">.</span><span class="nx">property</span><span class="p">(</span><span class="s1">'flavors'</span><span class="p">).</span><span class="kd">with</span><span class="p">.</span><span class="nx">length</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
-</pre></div>
+<span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">have</span><span class="p">.</span><span class="nx">length</span><span class="p">(</span><span class="mf">3</span><span class="p">);</span>
+<span class="nx">expect</span><span class="p">(</span><span class="nx">tea</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">have</span><span class="p">.</span><span class="nx">property</span><span class="p">(</span><span class="s1">'flavors'</span><span class="p">).</span><span class="kd">with</span><span class="p">.</span><span class="nx">length</span><span class="p">(</span><span class="mf">3</span><span class="p">);</span>
+</code></pre></div>
 <p>这种做法是极其错误的。程序语言本来就比自然语言简单清晰，这种写法让它看起来像自然语言的样子，反而变得复杂难懂了。</p>
 </li>
 </ol>
@@ -488,14 +488,14 @@ IDE就会把超过行宽限制的代码自动折行。可是这种自动这行�
 <p>其实这两个表达式完全可以分解成两步，把读和写分开：一步更新i的值，另外一步使用i的值。比如，如果你想写<code>foo(i++)</code>，你完全可以把它拆成<code>int t = i; i += 1; foo(t);</code>。如果你想写<code>foo(++i)</code>，可以拆成<code>i += 1; foo(i)</code>; 拆开之后的代码，含义完全一致，却清晰很多。到底更新是在取值之前还是之后，一目了然。</p>
 <p>有人也许以为<code>i++</code>或者<code>++i</code>的效率比拆开之后要高，这只是一种错觉。这些代码经过基本的编译器优化之后，生成的机器代码是完全没有区别的。自增减表达式只有在两种情况下才可以安全的使用。一种是在for循环的update部分，比如<code>for(int i = 0; i &lt; 5; i++)</code>。另一种情况是写成单独的一行，比如<code>i++;</code>。这两种情况是完全没有歧义的。你需要避免其它的情况，比如用在复杂的表达式里面，比如<code>foo(i++)，foo(++i) + foo(i)，&hellip;&hellip;</code> 没有人应该知道，或者去追究这些是什么意思。</p>
 <p>永远不要省略花括号。很多语言允许你在某种情况下省略掉花括号，比如 C，Java 都允许你在if语句里面只有一句话的时候省略掉花括号：</p>
-<div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(...)</span>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="p">(...)</span>
     <span class="n">action1</span><span class="p">();</span>
-</pre></div>
+</code></pre></div>
 <p>咋一看少打了两个字，多好。可是这其实经常引起奇怪的问题。比如，你后来想要加一句话<code>action2()</code>到这个if里面，于是你就把代码改成：</p>
-<div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(...)</span>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="p">(...)</span>
     <span class="n">action1</span><span class="p">();</span>
     <span class="n">action2</span><span class="p">();</span>
-</pre></div>
+</code></pre></div>
 <p>为了美观，你很小心的使用了<code>action1()</code>的缩进。咋一看它们是在一起的，所以你下意识里以为它们只会在if的条件为真的时候执行，然而<code>action2()</code>却其实在if外面，它会被无条件的执行。我把这种现象叫做&ldquo;光学幻觉&rdquo;（optical illusion），理论上每个程序员都应该发现这个错误，然而实际上却容易被忽视。</p>
 <p>那么你问，谁会这么傻，我在加入<code>action2()</code>的时候加上花括号不就行了？可是从设计的角度来看，这样其实并不是合理的作法。
 首先，也许你以后又想把<code>action2()</code>去掉，这样你为了样式一致，又得把花括号拿掉，烦不烦啊？其次，这使得代码样式不一致，
@@ -517,7 +517,7 @@ IDE就会把超过行宽限制的代码自动折行。可是这种自动这行�
 如果以上都失败了，你也许可以把循环里面复杂的部分提取出来，做成函数调用，之后<code>continue</code>或者<code>break</code>就可以去掉了。
 下面我对这些情况举一些例子。</p>
 <p>情况1：下面这段代码里面有一个<code>continue</code>：</p>
-<div class="highlight"><pre><span></span><span class="n">List</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">String</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">goodNames</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;();</span>
+<div class="highlight"><pre><span></span><code><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">goodNames</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 <span class="k">for</span> <span class="p">(</span><span class="n">String</span> <span class="n">name</span><span class="p">:</span> <span class="n">names</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">name</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="s">"bad"</span><span class="p">))</span> <span class="p">{</span>
         <span class="k">continue</span><span class="p">;</span>
@@ -525,36 +525,36 @@ IDE就会把超过行宽限制的代码自动折行。可是这种自动这行�
     <span class="n">goodNames</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
     <span class="p">...</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>它说：&ldquo;如果name含有&rsquo;bad&rsquo;这个词，跳过后面的循环代码&hellip;&hellip;&rdquo; 注意，这是一种&ldquo;负面&rdquo;的描述，它不是在告诉你什么时候&ldquo;做&rdquo;一件事，而是在告诉你什么时候&ldquo;不做&rdquo;一件事。为了知道它到底在干什么，你必须搞清楚<code>continue</code>会导致哪些语句被跳过了，然后脑子里把逻辑反个向，你才能知道它到底想做什么。这就是为什么含有<code>continue</code>和<code>break</code>的循环不容易理解，它们依靠&ldquo;控制流&rdquo;来描述&ldquo;不做什么&rdquo;，&ldquo;跳过什么&rdquo;，结果到最后你也没搞清楚它到底&ldquo;要做什么&rdquo;。</p>
 <p>其实，我们只需要把<code>continue</code>的条件反向，这段代码就可以很容易的被转换成等价的，不含<code>continue</code>的代码：</p>
-<div class="highlight"><pre><span></span><span class="n">List</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">String</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">goodNames</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;();</span>
+<div class="highlight"><pre><span></span><code><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">goodNames</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 <span class="k">for</span> <span class="p">(</span><span class="n">String</span> <span class="n">name</span><span class="p">:</span> <span class="n">names</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">name</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="s">"bad"</span><span class="p">))</span> <span class="p">{</span>
         <span class="n">goodNames</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
         <span class="p">...</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p><code>goodNames.add(name);</code>和它之后的代码全部被放到了<code>if</code>里面，多了一层缩进，然而<code>continue</code>却没有了。你再读这段代码，就会发现更加清晰。
 因为它是一种更加&ldquo;正面&rdquo;地描述。它说：&ldquo;在name不含有&rsquo;bad&rsquo;这个词的时候，把它加到<code>goodNames</code>的链表里面&hellip;&hellip;&rdquo;</p>
 <p>情况2：<code>for</code>和<code>while</code>头部都有一个循环的&ldquo;终止条件&rdquo;，那本来应该是这个循环唯一的退出条件。如果你在循环中间有<code>break</code>，它其实给这个循环增加了一个退出条件。你往往只需要把这个条件合并到循环头部，就可以去掉<code>break</code>。</p>
 <p>比如下面这段代码：</p>
-<div class="highlight"><pre><span></span><span class="k">while</span> <span class="p">(</span><span class="n">condition1</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="k">while</span> <span class="p">(</span><span class="n">condition1</span><span class="p">)</span> <span class="p">{</span>
     <span class="p">...</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">condition2</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">break</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>当<code>condition</code>成立的时候，<code>break</code>会退出循环。其实你只需要把<code>condition2</code>反转之后，放到<code>while</code>头部的终止条件，就可以去掉这种<code>break</code>语句。改写后的代码如下：</p>
-<div class="highlight"><pre><span></span><span class="k">while</span> <span class="p">(</span><span class="n">condition1</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="o">!</span><span class="n">condition2</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="k">while</span> <span class="p">(</span><span class="n">condition1</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">condition2</span><span class="p">)</span> <span class="p">{</span>
     <span class="p">...</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>这种情况表面上貌似只适用于<code>break</code>出现在循环开头或者末尾的时候，然而其实大部分时候，<code>break</code>都可以通过某种方式，移动到循环的开头或者末尾。具体的例子我暂时没有，等出现的时候再加进来。</p>
 <p>情况3：很多<code>break</code>退出循环之后，其实接下来就是一个<code>return</code>。这种<code>break</code>往往可以直接换成<code>return</code>。比如下面这个例子：</p>
-<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasBadName</span><span class="p">(</span><span class="n">List</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">String</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">names</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasBadName</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">names</span><span class="p">)</span> <span class="p">{</span>
     <span class="kt">boolean</span> <span class="n">result</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
 
     <span class="k">for</span> <span class="p">(</span><span class="n">String</span> <span class="n">name</span><span class="p">:</span> <span class="n">names</span><span class="p">)</span> <span class="p">{</span>
@@ -565,9 +565,9 @@ IDE就会把超过行宽限制的代码自动折行。可是这种自动这行�
     <span class="p">}</span>
     <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>这个函数检查<code>names</code>链表里是否存在一个名字，包含<code>&ldquo;bad&rdquo;</code>这个词。它的循环里包含一个<code>break</code>语句。这个函数可以被改写成：</p>
-<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasBadName</span><span class="p">(</span><span class="n">List</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">String</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">names</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasBadName</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">names</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">for</span> <span class="p">(</span><span class="n">String</span> <span class="n">name</span><span class="p">:</span> <span class="n">names</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">name</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="s">"bad"</span><span class="p">))</span> <span class="p">{</span>
             <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
@@ -575,7 +575,7 @@ IDE就会把超过行宽限制的代码自动折行。可是这种自动这行�
     <span class="p">}</span>
     <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>改进后的代码，在<code>name</code>里面含有<code>&ldquo;bad&rdquo;</code>的时候，直接用<code>return true</code>返回，而不是对<code>result</code>变量赋值，<code>break</code>出去，最后才返回。
 如果循环结束了还没有<code>return</code>，那就返回<code>false</code>，表示没有找到这样的名字。使用<code>return</code>来代替<code>break</code>，这样<code>break</code>语句和<code>result</code>这个变量，都一并被消除掉了。
 我曾经见过很多其他使用<code>continue</code>和<code>break</code>的例子，几乎无一例外的可以被消除掉，变换后的代码变得清晰很多。我的经验是，99%的<code>break</code>和<code>continue</code>，都可以通过替换成<code>return语句</code>，或者翻转if条件的方式来消除掉。剩下的1%含有复杂的逻辑，但也可以通过提取一个帮助函数来消除掉。修改之后的代码变得容易理解，容易确保正确。</p></li></ul>
@@ -583,30 +583,30 @@ IDE就会把超过行宽限制的代码自动折行。可是这种自动这行�
 
 <h2 id="xie-zhi-guan-de-dai-ma">写直观的代码</h2>
 <p>我写代码有一条重要的原则：如果有更加直接，更加清晰的写法，就选择它，即使它看起来更长，更笨，也一样选择它。比如，Unix命令行有一种&ldquo;巧妙&rdquo;的写法是这样：</p>
-<div class="highlight"><pre><span></span>command1 <span class="p">&amp;</span>amp<span class="p">;&amp;</span>amp<span class="p">;</span> command2 <span class="p">&amp;</span>amp<span class="p">;&amp;</span>amp<span class="p">;</span> command3
-</pre></div>
+<div class="highlight"><pre><span></span><code>command1 <span class="o">&amp;&amp;</span> command2 <span class="o">&amp;&amp;</span> command3
+</code></pre></div>
 <p>由于Shell语言的逻辑操作<code>a &amp;&amp; b</code>具有&ldquo;短路&rdquo;的特性，如果<code>a</code>等于<code>false</code>，那么<code>b</code>就没必要执行了。这就是为什么当<code>command1</code>成功，才会执行<code>command2</code>，当<code>command2</code>成功，才会执行<code>command3</code>。同样，</p>
-<div class="highlight"><pre><span></span>command1 <span class="o">||</span> command2 <span class="o">||</span> command3
-</pre></div>
+<div class="highlight"><pre><span></span><code>command1 <span class="o">||</span> command2 <span class="o">||</span> command3
+</code></pre></div>
 <p>操作符<code>||</code>也有类似的特性。上面这个命令行，如果<code>command1</code>成功，那么<code>command2</code>和<code>command3</code>都不会被执行。如果<code>command1</code>失败，<code>command2</code>成功，那么<code>command3</code>就不会被执行。</p>
 <p>这比起用<code>if</code>语句来判断失败，似乎更加巧妙和简洁，所以有人就借鉴了这种方式，在程序的代码里也使用这种方式。比如他们可能会写这样的代码：</p>
-<div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">action1</span><span class="p">()</span> <span class="o">||</span> <span class="n">action2</span><span class="p">()</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="n">action3</span><span class="p">())</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="p">(</span><span class="n">action1</span><span class="p">()</span> <span class="o">||</span> <span class="n">action2</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">action3</span><span class="p">())</span> <span class="p">{</span>
     <span class="p">...</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>你看得出来这代码是想干什么吗？<code>action2</code>和<code>action3</code>什么条件下执行，什么条件下不执行？也许稍微想一下，你知道它在干什么：&ldquo;如果<code>action1</code>失败了，执行<code>action2</code>，如果<code>action2</code>成功了，执行<code>action3</code>&rdquo;。然而那种语义，并不是直接的&ldquo;映射&rdquo;在这代码上面的。比如&ldquo;失败&rdquo;这个词，对应了代码里的哪一个字呢？你找不出来，因为它包含在了<code>||</code>的语义里面，你需要知道<code>||</code>的短路特性，以及逻辑或的语义才能知道这里面在说&ldquo;如果<code>action1</code>失败&hellip;&hellip;&rdquo;。每一次看到这行代码，你都需要思考一下，这样积累起来的负荷，就会让人很累。</p>
 <p>其实，这种写法是滥用了逻辑操作<code>&amp;&amp;</code>和<code>||</code>的短路特性。这两个操作符可能不执行右边的表达式，原因是为了机器的执行效率，而不是为了给人提供这种&ldquo;巧妙&rdquo;的用法。这两个操作符的本意，只是作为逻辑操作，它们并不是拿来给你代替 <code>if</code> 语句的。也就是说，它们只是碰巧可以达到某些 <code>if</code> 语句的效果，但你不应该因此就用它来代替 <code>if</code> 语句。如果你这样做了，就会让代码晦涩难懂。</p>
 <p>上面的代码写成笨一点的办法，就会清晰很多：</p>
-<div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">action1</span><span class="p">())</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">action1</span><span class="p">())</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">action2</span><span class="p">())</span> <span class="p">{</span>
         <span class="n">action3</span><span class="p">();</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>这里我很明显的看出这代码在说什么，想都不用想：如果<code>action1()</code>失败了，那么执行<code>action2()</code>，如果<code>action2()</code>成功了，执行<code>action3()</code>。你发现这里面的一一对应关系吗？<code>if</code>=如果，<code>!</code>=失败，&hellip;&hellip; 你不需要利用逻辑学知识，就知道它在说什么。</p>
 <h2 id="xie-wu-xie-ke-ji-de-dai-ma">写无懈可击的代码</h2>
 <p>在之前一节里，我提到了自己写的代码里面很少出现只有一个分支的<code>if</code>语句。我写出的<code>if</code>语句，大部分都有两个分支，所以我的代码很多看起来是这个样子：</p>
-<div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(...)</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="p">(...)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(...)</span> <span class="p">{</span>
         <span class="p">...</span>
         <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
@@ -619,10 +619,10 @@ IDE就会把超过行宽限制的代码自动折行。可是这种自动这行�
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>使用这种方式，其实是为了无懈可击的处理所有可能出现的情况，避免漏掉corner case。每个if语句都有两个分支的理由是：如果<code>if</code>的条件成立，你做某件事情；但是如果<code>if</code>的条件不成立，你应该知道要做什么另外的事情。不管你的<code>if</code>有没有<code>else</code>，你终究是逃不掉，必须得思考这个问题的。</p>
 <p>很多人写<code>if</code>语句喜欢省略<code>else</code>的分支，因为他们觉得有些<code>else分支</code>的代码重复了。比如我的代码里，两个<code>else分支</code>都是<code>return true</code>。为了避免重复，他们省略掉那两个<code>else分支</code>，只在最后使用一个<code>return true</code>。这样，缺了<code>else分支</code>的<code>if</code>语句，控制流自动&ldquo;掉下去&rdquo;，到达最后的<code>return true</code>。他们的代码看起来像这个样子：</p>
-<div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(...)</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="p">(...)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(...)</span> <span class="p">{</span>
         <span class="p">...</span>
         <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
@@ -632,74 +632,74 @@ IDE就会把超过行宽限制的代码自动折行。可是这种自动这行�
     <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
-</pre></div>
+</code></pre></div>
 <p>这种写法看似更加简洁，避免了重复，然而却很容易出现疏忽和漏洞。嵌套的if语句省略了一些<code>else</code>，依靠语句的&ldquo;控制流&rdquo;来处理<code>else</code>的情况，是很难正确的分析和推理的。如果你的<code>if条件</code>里使用了<code>&amp;&amp;</code>和<code>||</code>之类的逻辑运算，就更难看出是否涵盖了所有的情况。</p>
 <p>由于疏忽而漏掉的分支，全都会自动&ldquo;掉下去&rdquo;，最后返回意想不到的结果。即使你看一遍之后确信是正确的，每次读这段代码，你都不能确信它照顾了所有的情况，又得重新推理一遍。这简洁的写法，带来的是反复的，沉重的头脑开销。这就是所谓&ldquo;面条代码&rdquo;，因为程序的逻辑分支，不是像一棵枝叶分明的树，而是像面条一样绕来绕去。</p>
 <p>另外一种省略<code>else分支</code>的情况是这样：</p>
-<div class="highlight"><pre><span></span><span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">""</span><span class="p">;</span>
-<span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">""</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">s</span> <span class="o">=</span> <span class="s">"ok"</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>写这段代码的人，脑子里喜欢使用一种&ldquo;缺省值&rdquo;的做法。<code>s</code>缺省为<code>null</code>，如果<code>x&lt;5</code>，那么把它改变（mutate）成&ldquo;ok&rdquo;。这种写法的缺点是，当<code>x&lt;5</code>不成立的时候，你需要往上面看，才能知道<code>s</code>的值是什么。这还是你运气好的时候，因为s就在上面不远。很多人写这种代码的时候，<code>s</code>的初始值离判断语句有一定的距离，中间还有可能插入一些其它的逻辑和赋值操作。这样的代码，把变量改来改去的，看得人眼花，就容易出错。</p>
 <p>现在比较一下我的写法：</p>
-<div class="highlight"><pre><span></span><span class="n">String</span> <span class="n">s</span><span class="p">;</span>
-<span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="n">String</span> <span class="n">s</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">s</span> <span class="o">=</span> <span class="s">"ok"</span><span class="p">;</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="n">s</span> <span class="o">=</span> <span class="s">""</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>这种写法貌似多打了一两个字，然而它却更加清晰。这是因为我们明确的指出了<code>x&lt;5</code>不成立的时候，<code>s</code>的值是什么。它就摆在那里，它是<code>""</code>（空字符串）。注意，虽然我也使用了赋值操作，然而我并没有&ldquo;改变&rdquo;<code>s</code>的值。<code>s</code>一开始的时候没有值，被赋值之后就再也没有变过。我的这种写法，通常被叫做更加&ldquo;函数式&rdquo;，因为我只赋值一次。</p>
 <p>如果我漏写了<code>else</code>分支，Java 编译器是不会放过我的。它会抱怨：&ldquo;在某个分支，<code>s</code>没有被初始化。&rdquo;这就强迫我清清楚楚的设定各种条件下<code>s</code>的值，不漏掉任何一种情况。</p>
 <p>当然，由于这个情况比较简单，你还可以把它写成这样：</p>
-<div class="highlight"><pre><span></span><span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="mi">5</span> <span class="o">?</span> <span class="s">"ok"</span> <span class="p">:</span> <span class="s">""</span><span class="p">;</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="o">?</span> <span class="s">"ok"</span> <span class="p">:</span> <span class="s">""</span><span class="p">;</span>
+</code></pre></div>
 <p>对于更加复杂的情况，我建议还是写成<code>if</code>语句为好。</p>
 <h2 id="zheng-que-chu-li-cuo-wu">正确处理错误</h2>
 <p>使用有两个分支的if语句，只是我的代码可以达到无懈可击的其中一个原因。这样写if语句的思路，其实包含了使代码可靠的一种通用思想：穷举所有的情况，不漏掉任何一个。</p>
 <p>程序的绝大部分功能，是进行信息处理。从一堆纷繁复杂，模棱两可的信息中，排除掉绝大部分&ldquo;干扰信息&rdquo;，找到自己需要的那一个。正确地对所有的&ldquo;可能性&rdquo;进行推理，就是写出无懈可击代码的核心思想。这一节我来讲一讲，如何把这种思想用在错误处理上。</p>
 <p>错误处理是一个古老的问题，可是经过了几十年，还是很多人没搞明白。Unix的系统API手册，一般都会告诉你可能出现的返回值和错误信息。比如，Linux的<code>read</code>系统调用手册里面有如下内容：</p>
-<div class="highlight"><pre><span></span><span class="k">RETURN</span> <span class="n">VALUE</span> 
-<span class="k">On</span> <span class="n">success</span><span class="p">,</span> <span class="n">the</span> <span class="nb">number</span> <span class="k">of</span> <span class="n">bytes</span> <span class="k">read</span> <span class="k">is</span> <span class="n">returned</span><span class="p">...</span>
+<div class="highlight"><pre><span></span><code><span class="k">RETURN</span> <span class="nv">VALUE</span> 
+<span class="nv">On</span> <span class="nv">success</span>, <span class="nv">the</span> <span class="nv">number</span> <span class="nv">of</span> <span class="nv">bytes</span> <span class="nv">read</span> <span class="nv">is</span> <span class="nv">returned</span>...
 
-<span class="k">On</span> <span class="n">error</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span> <span class="k">is</span> <span class="n">returned</span><span class="p">,</span> <span class="k">and</span> <span class="n">errno</span> <span class="k">is</span> <span class="k">set</span> <span class="n">appropriately</span><span class="p">.</span>
+<span class="nv">On</span> <span class="nv">error</span>, <span class="o">-</span><span class="mi">1</span> <span class="nv">is</span> <span class="nv">returned</span>, <span class="nv">and</span> <span class="nv">errno</span> <span class="nv">is</span> <span class="nv">set</span> <span class="nv">appropriately</span>.
 
-<span class="n">ERRORS</span>
+<span class="nv">ERRORS</span>
 
-<span class="n">EAGAIN</span><span class="p">,</span> <span class="n">EBADF</span><span class="p">,</span> <span class="n">EFAULT</span><span class="p">,</span> <span class="n">EINTR</span><span class="p">,</span> <span class="n">EINVAL</span><span class="p">,</span> <span class="p">...</span>
-</pre></div>
+<span class="nv">EAGAIN</span>, <span class="nv">EBADF</span>, <span class="nv">EFAULT</span>, <span class="nv">EINTR</span>, <span class="nv">EINVAL</span>, ...
+</code></pre></div>
 <p>很多初学者，都会忘记检查<code>read</code>的返回值是否为<code>-1</code>，觉得每次调用<code>read</code>都得检查返回值真繁琐，不检查貌似也相安无事。这种想法其实是很危险的。如果函数的返回值告诉你，要么返回一个正数，表示读到的数据长度，要么返回<code>-1</code>，那么你就必须要对这个<code>-1</code>作出相应的，有意义的处理。千万不要以为你可以忽视这个特殊的返回值，因为它是一种&ldquo;可能性&rdquo;。代码漏掉任何一种可能出现的情况，都可能产生意想不到的灾难性结果。</p>
 <p>对于 Java 来说，这相对方便一些。Java 的函数如果出现问题，一般通过异常（exception）来表示。你可以把异常加上函数本来的返回值，看成是一个&ldquo;<code>union类型</code>&rdquo;。比如：</p>
-<div class="highlight"><pre><span></span><span class="n">String</span> <span class="nf">foo</span><span class="p">()</span> <span class="kd">throws</span> <span class="n">MyException</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="n">String</span> <span class="nf">foo</span><span class="p">()</span> <span class="kd">throws</span> <span class="n">MyException</span> <span class="p">{</span>
     <span class="p">...</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>这里<code>MyException</code>是一个错误返回。你可以认为这个函数返回一个<code>union类型</code>：<code>{String, MyException}</code>。任何调用<code>foo</code>的代码，必须对<code>MyException</code>作出合理的处理，才有可能确保程序的正确运行。<code>Union类型</code>是一种相当先进的类型，目前只有极少数语言（比如Typed Racket）具有这种类型，我在这里提到它，只是为了方便解释概念。掌握了概念之后，你其实可以在头脑里实现一个<code>union类型</code>系统，这样使用普通的语言也能写出可靠的代码。</p>
 <p>由于 Java 的类型系统强制要求函数在类型里面声明可能出现的异常，而且强制调用者处理可能出现的异常，所以基本上不可能出现由于疏忽而漏掉的情况。但有些 Java 程序员有一种恶习，使得这种安全机制几乎完全失效。每当编译器报错，说&ldquo;你没有<code>catch</code>这个<code>foo</code>函数可能出现的异常&rdquo;时，有些人想都不想，直接把代码改成这样：</p>
-<div class="highlight"><pre><span></span><span class="k">try</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="k">try</span> <span class="p">{</span>
     <span class="n">foo</span><span class="p">();</span>
 <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">e</span><span class="p">)</span> <span class="p">{}</span>
-</pre></div>
+</code></pre></div>
 <p>或者最多在里面放个<code>log</code>，或者干脆把自己的函数类型上加上<code>throws Exception</code>，这样编译器就不再抱怨。这些做法貌似很省事，然而都是错误的，你终究会为此付出代价。</p>
 <p>如果你把异常<code>catch</code>了，忽略掉，那么你就不知道<code>foo</code>其实失败了。这就像开车时看到路口写着&ldquo;前方施工，道路关闭&rdquo;，还继续往前开。这当然迟早会出问题，因为你根本不知道自己在干什么。</p>
 <p><code>catch</code>异常的时候，你不应该使用<code>Exception</code>这么宽泛的类型。你应该正好<code>catch</code>可能发生的那种异常A。使用宽泛的异常类型有很大的问题，因为它会不经意的  <code>catch</code>住另外的异常（比如B）。你的代码逻辑是基于判断A是否出现，可你却<code>catch</code>所有的异常（Exception类），所以当其它的异常B出现的时候，你的代码就会出现莫名其妙的问题，因为你以为A出现了，而其实它没有。这种bug，有时候甚至使用debugger都难以发现。</p>
 <p>如果你在自己函数的类型加上<code>throws Exception</code>，那么你就不可避免的需要在调用它的地方处理这个异常，如果调用它的函数也写着<code>throws Exception</code>，这毛病就传得更远。我的经验是，尽量在异常出现的当时就作出处理。否则如果你把它返回给你的调用者，它也许根本不知道该怎么办了。</p>
 <p>另外，<code>try { &hellip; } catch</code>里面，应该包含尽量少的代码。比如，如果<code>foo</code>和<code>bar</code>都可能产生异常A，你的代码应该尽可能写成：</p>
-<div class="highlight"><pre><span></span><span class="k">try</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="k">try</span> <span class="p">{</span>
     <span class="n">foo</span><span class="p">();</span>
 <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">A</span> <span class="n">e</span><span class="p">)</span> <span class="p">{...}</span>
 
 <span class="k">try</span> <span class="p">{</span>
     <span class="n">bar</span><span class="p">();</span>
 <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">A</span> <span class="n">e</span><span class="p">)</span> <span class="p">{...}</span>
-</pre></div>
+</code></pre></div>
 <p>而不是</p>
-<div class="highlight"><pre><span></span><span class="k">try</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="k">try</span> <span class="p">{</span>
     <span class="n">foo</span><span class="p">();</span>
     <span class="n">bar</span><span class="p">();</span>
 <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">A</span> <span class="n">e</span><span class="p">)</span> <span class="p">{...}</span>
-</pre></div>
+</code></pre></div>
 <p>第一种写法能明确的分辨是哪一个函数出了问题，而第二种写法全都混在一起。明确的分辨是哪一个函数出了问题，有很多的好处。比如，如果你的<code>catch</code>代码里面包含<code>log</code>，它可以提供给你更加精确的错误信息，这样会大大地加速你的调试过程。</p>
 <h2 id="zheng-que-chu-li-null-zhi-zhen">正确处理 null 指针</h2>
 <p>穷举的思想是如此的有用，依据这个原理，我们可以推出一些基本原则，它们可以让你无懈可击的处理<code>null指针</code>。</p>
@@ -709,14 +709,14 @@ IDE就会把超过行宽限制的代码自动折行。可是这种自动这行�
 <li>
 <p>尽量不要产生<code>null指针</code>。尽量不要用<code>null</code>来初始化变量，函数尽量不要返回<code>null</code>。如果你的函数要返回&ldquo;没有&rdquo;，&ldquo;出错了&rdquo;之类的结果，尽量使用 Java 的异常机制。虽然写法上有点别扭，然而 Java 的异常，和函数的返回值合并在一起，基本上可以当成<code>union</code>类型来用。</p>
 <p>比如，如果你有一个函数<code>find</code>，可以帮你找到一个<code>String</code>，也有可能什么也找不到，你可以这样写：</p>
-<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">String</span> <span class="nf">find</span><span class="p">()</span> <span class="kd">throws</span> <span class="n">NotFoundException</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="n">String</span> <span class="nf">find</span><span class="p">()</span> <span class="kd">throws</span> <span class="n">NotFoundException</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(...)</span> <span class="p">{</span>
         <span class="k">return</span> <span class="p">...;</span>
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
         <span class="k">throw</span> <span class="k">new</span> <span class="n">NotFoundException</span><span class="p">();</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>Java的类型系统会强制你<code>catch</code>这个<code>NotFoundException</code>，所以你不可能像漏掉检查<code>null</code>一样，漏掉这种情况。</p>
 <p>Java 的异常也是一个比较容易滥用的东西，不过我已经在上一节告诉你如何正确的使用异常。    </p>
 <p>Java 的<code>try&hellip;catch</code>语法相当的繁琐和蹩脚，所以如果你足够小心的话，像<code>find</code>这类函数，也可以返回<code>null</code>来表示&ldquo;没找到&rdquo;。
@@ -724,22 +724,22 @@ IDE就会把超过行宽限制的代码自动折行。可是这种自动这行�
 </li>
 <li>
 <p>不要<code>catch NullPointerException</code>。有些人写代码很nice，他们喜欢&ldquo;容错&rdquo;。首先他们写一些函数，这些函数里面不大小心，没检查<code>null</code>指针：</p>
-<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">String</span> <span class="n">found</span> <span class="o">=</span> <span class="n">find</span><span class="p">();</span>
     <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">found</span><span class="p">.</span><span class="na">length</span><span class="p">();</span>
     <span class="p">...</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>当<code>foo</code>调用产生了异常，他们不管三七二十一，就把调用的地方改成这样：</p>
-<div class="highlight"><pre><span></span><span class="k">try</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="k">try</span> <span class="p">{</span>
     <span class="n">foo</span><span class="p">();</span>
 <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
     <span class="p">...</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>这样当<code>found</code>是<code>null</code>的时候，<code>NullPointerException</code>就会被捕获并且得到处理。这其实是很错误的作法。首先，上一节已经提到了，<code>catch (Exception e)</code>这种写法是要绝对避免的，因为它捕获所有的异常，包括<code>NullPointerException</code>。这会让你意外地捕获<code>try</code>语句里面出现的<code>NullPointerException</code>，从而把代码的逻辑搅得一塌糊涂。</p>
 <p>另外就算你写成<code>catch (NullPointerException e)</code>也是不可以的。由于<code>foo</code>的内部缺少了<code>null</code>检查，才出现了<code>NullPointerException</code>。现在你不对症下药，倒把每个调用它的地方加上<code>catch</code>，以后你的生活就会越来越苦。正确的做法应该是改动<code>foo</code>，而不改调用它的代码。<code>foo</code>应该被改成这样：</p>
-<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">String</span> <span class="n">found</span> <span class="o">=</span> <span class="n">find</span><span class="p">();</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">found</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
         <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">found</span><span class="p">.</span><span class="na">length</span><span class="p">();</span>
@@ -748,53 +748,53 @@ IDE就会把超过行宽限制的代码自动折行。可是这种自动这行�
         <span class="p">...</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>在<code>null</code>可能出现的当时就检查它是否是<code>null</code>，然后进行相应的处理。</p>
 </li>
 <li>
 <p>不要把<code>null</code>放进&ldquo;容器数据结构&rdquo;里面。所谓容器（collection），是指一些对象以某种方式集合在一起，所以<code>null</code>不应该被放进<code>Array，List，Set</code>等结构，不应该出现在<code>Map</code>的<code>key</code>或者<code>value</code>里面。把<code>null</code>放进容器里面，是一些莫名其妙错误的来源。因为对象在容器里的位置一般是动态决定的，所以一旦<code>null</code>从某个入口跑进去了，你就很难再搞明白它去了哪里，你就得被迫在所有从这个容器里取值的位置检查<code>null</code>。你也很难知道到底是谁把它放进去的，代码多了就导致调试极其困难。</p>
 <p>解决方案是：如果你真要表示&ldquo;没有&rdquo;，那你就干脆不要把它放进去（<code>Array，List，Set</code>没有元素，<code>Map</code>根本没那个<code>entry</code>），或者你可以指定一个特殊的，真正合法的对象，用来表示&ldquo;没有&rdquo;。</p>
 <p>需要指出的是，类对象并不属于容器。所以<code>null</code>在必要的时候，可以作为对象成员的值，表示它不存在。比如：</p>
-<div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">A</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">A</span> <span class="p">{</span>
     <span class="n">String</span> <span class="n">name</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
     <span class="p">...</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>之所以可以这样，是因为<code>null</code>只可能在<code>A对象</code>的<code>name成员</code>里出现，你不用怀疑其它的成员因此成为<code>null</code>。所以你每次访问<code>name成员</code>时，检查它是否是<code>null</code>就可以了，不需要对其他成员也做同样的检查。</p>
 </li>
 <li>
 <p>函数调用者：明确理解<code>null</code>所表示的意义，尽早检查和处理<code>null</code>返回值，减少它的传播。<code>null</code>很讨厌的一个地方，在于它在不同的地方可能表示不同的意义。有时候它表示&ldquo;没有&rdquo;，&ldquo;没找到&rdquo;。有时候它表示&ldquo;出错了&rdquo;，&ldquo;失败了&rdquo;。有时候它甚至可以表示&ldquo;成功了&rdquo;，&hellip;&hellip; 这其中有很多误用之处，不过无论如何，你必须理解每一个<code>null</code>的意义，不能给混淆起来。</p>
 <p>如果你调用的函数有可能返回<code>null</code>，那么你应该在第一时间对<code>null</code>做出&ldquo;有意义&rdquo;的处理。比如，上述的函数<code>find</code>，返回<code>null</code>表示&ldquo;没找到&rdquo;，那么调用<code>find</code>的代码就应该在它返回的第一时间，检查返回值是否是<code>null</code>，并且对&ldquo;没找到&rdquo;这种情况，作出有意义的处理。</p>
 <p>&ldquo;有意义&rdquo;是什么意思呢？我的意思是，使用这函数的人，应该明确的知道在拿到<code>null</code>的情况下该怎么做，承担起责任来。他不应该只是&ldquo;向上级汇报&rdquo;，把责任踢给自己的调用者。如果你违反了这一点，就有可能采用一种不负责任，危险的写法：</p>
-<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">String</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="n">String</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">String</span> <span class="n">found</span> <span class="o">=</span> <span class="n">find</span><span class="p">();</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">found</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>当看到<code>find()</code>返回了<code>null</code>，<code>foo</code>自己也返回<code>null</code>。这样<code>null</code>就从一个地方，游走到了另一个地方，而且它表示另外一个意思。如果你不假思索就写出这样的代码，最后的结果就是代码里面随时随地都可能出现<code>null</code>。到后来为了保护自己，你的每个函数都会写成这样：</p>
-<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">foo</span><span class="p">(</span><span class="n">A</span> <span class="n">a</span><span class="p">,</span> <span class="n">B</span> <span class="n">b</span><span class="p">,</span> <span class="n">C</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">foo</span><span class="p">(</span><span class="n">A</span> <span class="n">a</span><span class="p">,</span> <span class="n">B</span> <span class="n">b</span><span class="p">,</span> <span class="n">C</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">b</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
     <span class="p">...</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 </li>
 <li>
 <p>函数作者：明确声明不接受<code>null</code>参数，当参数是<code>null</code>时立即崩溃。不要试图对<code>null</code>进行&ldquo;容错&rdquo;，不要让程序继续往下执行。如果调用者使用了<code>null</code>作为参数，那么调用者（而不是函数作者）应该对程序的崩溃负全责。</p>
 <p>上面的例子之所以成为问题，就在于人们对于<code>null</code>的&ldquo;容忍态度&rdquo;。这种&ldquo;保护式&rdquo;的写法，试图&ldquo;容错&rdquo;，试图&ldquo;优雅的处理<code>null</code>&rdquo;，其结果是让调用者更加肆无忌惮的传递<code>null</code>给你的函数。到后来，你的代码里出现一堆堆<code>nonsense</code>的情况，<code>null</code>可以在任何地方出现，都不知道到底是哪里产生出来的。谁也不知道出现了<code>null</code>是什么意思，该做什么，所有人都把<code>null</code>踢给其他人。最后这<code>null</code>像瘟疫一样蔓延开来，到处都是，成为一场噩梦。</p>
 <p>正确的做法，其实是强硬的态度。你要告诉函数的使用者，我的参数全都不能是<code>null</code>，如果你给我<code>null</code>，程序崩溃了该你自己负责。至于调用者代码里有<code>null</code>怎么办，他自己该知道怎么处理（参考以上几条），不应该由函数作者来操心。</p>
 <p>采用强硬态度一个很简单的做法是使用<code>Objects.requireNonNull()</code>。它的定义很简单：</p>
-<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">T</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">T</span> <span class="nf">requireNonNull</span><span class="p">(</span><span class="n">T</span> <span class="n">obj</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">T</span> <span class="nf">requireNonNull</span><span class="p">(</span><span class="n">T</span> <span class="n">obj</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">obj</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">throw</span> <span class="k">new</span> <span class="n">NullPointerException</span><span class="p">();</span>
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
         <span class="k">return</span> <span class="n">obj</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>你可以用这个函数来检查不想接受<code>null</code>的每一个参数，只要传进来的参数是<code>null</code>，就会立即触发<code>NullPointerException</code>崩溃掉，这样你就可以有效地防止<code>null</code>指针不知不觉传递到其它地方去。</p>
 </li>
 <li>
@@ -804,20 +804,20 @@ IDE就会把超过行宽限制的代码自动折行。可是这种自动这行�
 <p>使用<code>Optional</code>类型。Java 8 和 Swift 之类的语言，提供了一种叫<code>Optional</code>的类型。正确的使用这种类型，可以在很大程度上避免<code>null</code>的问题。<code>null</code>指针的问题之所以存在，是因为你可以在没有&ldquo;检查&rdquo;<code>null</code>的情况下，&ldquo;访问&rdquo;对象的成员。
     <code>Optional</code>类型的设计原理，就是把&ldquo;检查&rdquo;和&ldquo;访问&rdquo;这两个操作合二为一，成为一个&ldquo;原子操作&rdquo;。这样你没法只访问，而不进行检查。这种做法其实是ML，Haskell等语言里的模式匹配（pattern matching）的一个特例。模式匹配使得类型判断和访问成员这两种操作合二为一，所以你没法犯错。</p>
 <p>比如，在Swift里面，你可以这样写：</p>
-<div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nv">found</span> <span class="p">=</span> <span class="bp">find</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span> <span class="nv">found</span> <span class="p">=</span> <span class="bp">find</span><span class="p">()</span>
 <span class="k">if</span> <span class="kd">let</span> <span class="nv">content</span> <span class="p">=</span> <span class="n">found</span> <span class="p">{</span>
     <span class="bp">print</span><span class="p">(</span><span class="s">"found: "</span> <span class="o">+</span> <span class="n">content</span><span class="p">)</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>你从<code>find()</code>函数得到一个<code>Optional</code>类型的值<code>found</code>。假设它的类型是<code>String?</code>，那个问号表示它可能包含一个<code>String</code>，也可能是<code>nil</code>。然后你就可以用一种特殊的<code>if</code>语句，同时进行<code>null</code>检查和访问其中的内容。这个if语句跟普通的<code>if</code>语句不一样，它的条件不是一个<code>Bool</code>，而是一个变量绑定<code>let content = found</code>。</p>
 <p>我不是很喜欢这语法，不过这整个语句的含义是：如果<code>found</code>是<code>nil</code>，那么整个<code>if</code>语句被略过。如果它不是<code>nil</code>，那么变量<code>content</code>被绑定到<code>found</code>里面的值（unwrap操作），然后执行<code>print("found: " + content)</code>。由于这种写法把检查和访问合并在了一起，你没法只进行访问而不检查。</p>
 <p>Java 8 的做法比较蹩脚一些。如果你得到一个<code>Optional</code>类型的值<code>found</code>，你必须使用&ldquo;函数式编程&rdquo;的方式，来写这之后的代码：</p>
-<div class="highlight"><pre><span></span><span class="n">Optional</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">String</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">found</span> <span class="o">=</span> <span class="n">find</span><span class="p">();</span>
-<span class="n">found</span><span class="p">.</span><span class="na">ifPresent</span><span class="p">(</span><span class="n">content</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"found: "</span> <span class="o">+</span> <span class="n">content</span><span class="p">));</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">found</span> <span class="o">=</span> <span class="n">find</span><span class="p">();</span>
+<span class="n">found</span><span class="p">.</span><span class="na">ifPresent</span><span class="p">(</span><span class="n">content</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"found: "</span> <span class="o">+</span> <span class="n">content</span><span class="p">));</span>
+</code></pre></div>
 <p>这段Java代码跟上面的Swift代码等价，它包含一个&ldquo;判断&rdquo;和一个&ldquo;取值&rdquo;操作。<code>ifPresent</code>先判断<code>found</code>是否有值（相当于判断是不是<code>null</code>）。如果有，那么将其内容&ldquo;绑定&rdquo;到<code>lambda</code>表达式的 <code>content</code> 参数（unwrap操作），然后执行<code>lambda</code>里面的内容，否则如果<code>found</code>没有内容，那么<code>ifPresent</code>里面的<code>lambda</code>不执行。</p>
 <p>Java的这种设计有个问题。判断<code>null</code>之后分支里的内容，全都得写在<code>lambda</code>里面。在函数式编程里，这个<code>lambda</code>叫做&ldquo;continuation&rdquo;，Java把它叫做 &ldquo;Consumer&rdquo;，它表示&ldquo;如果<code>found</code>不是<code>null</code>，拿到它的值，然后应该做什么&rdquo;。由于<code>lambda</code>是个函数，你不能在里面写<code>return</code>语句返回出外层的函数。比如，如果你要改写下面这个函数（含有<code>null</code>）：</p>
-<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">String</span> <span class="n">found</span> <span class="o">=</span> <span class="n">find</span><span class="p">();</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">found</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span> <span class="n">found</span><span class="p">;</span>
@@ -825,34 +825,34 @@ IDE就会把超过行宽限制的代码自动折行。可是这种自动这行�
         <span class="k">return</span> <span class="s">""</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>就会比较麻烦。因为如果你写成这样：</p>
-<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">Optional</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">String</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">found</span> <span class="o">=</span> <span class="n">find</span><span class="p">();</span>
-    <span class="n">found</span><span class="p">.</span><span class="na">ifPresent</span><span class="p">(</span><span class="n">content</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">found</span> <span class="o">=</span> <span class="n">find</span><span class="p">();</span>
+    <span class="n">found</span><span class="p">.</span><span class="na">ifPresent</span><span class="p">(</span><span class="n">content</span> <span class="o">-&gt;</span> <span class="p">{</span>
             <span class="k">return</span> <span class="n">content</span><span class="p">;</span>    <span class="c1">// can't return from foo here</span>
             <span class="p">});</span>
     <span class="k">return</span> <span class="s">""</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>里面的<code>return content</code>，并不能从函数<code>foo</code>返回出去。它只会从<code>lambda</code>返回，而且由于那个<code>lambda（Consumer.accept）</code>的返回类型必须是<code>void</code>，编译器会报错，说你返回了<code>String</code>。由于Java里<code>closure</code>的自由变量是只读的，你没法对<code>lambda</code>外面的变量进行赋值，所以你也不能采用这种写法：</p>
-<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">Optional</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">String</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">found</span> <span class="o">=</span> <span class="n">find</span><span class="p">();</span>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">found</span> <span class="o">=</span> <span class="n">find</span><span class="p">();</span>
     <span class="n">String</span> <span class="n">result</span> <span class="o">=</span> <span class="s">""</span><span class="p">;</span>
-    <span class="n">found</span><span class="p">.</span><span class="na">ifPresent</span><span class="p">(</span><span class="n">content</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="p">{</span>
+    <span class="n">found</span><span class="p">.</span><span class="na">ifPresent</span><span class="p">(</span><span class="n">content</span> <span class="o">-&gt;</span> <span class="p">{</span>
             <span class="n">result</span> <span class="o">=</span> <span class="n">content</span><span class="p">;</span>    <span class="c1">// can't assign to result</span>
             <span class="p">});</span>
     <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>所以，虽然你在<code>lambda</code>里面得到了<code>found</code>的内容，如何使用这个值，如何返回一个值，却让人摸不着头脑。
 你平时的那些Java编程手法，在这里几乎完全废掉了。
 实际上，判断<code>null</code>之后，你必须使用 Java 8 提供的一系列古怪的函数式编程操作：<code>map</code>, <code>flatMap</code>, <code>orElse</code>之类，想法把它们组合起来，才能表达出原来代码的意思。比如之前的代码，只能改写成这样：</p>
-<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">Optional</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">String</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">found</span> <span class="o">=</span> <span class="n">find</span><span class="p">();</span>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">found</span> <span class="o">=</span> <span class="n">find</span><span class="p">();</span>
     <span class="k">return</span> <span class="n">found</span><span class="p">.</span><span class="na">orElse</span><span class="p">(</span><span class="s">""</span><span class="p">);</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>这简单的情况还好。复杂一点的代码，我还真不知道怎么表达，我怀疑Java 8
 的<code>Optional</code>类型的方法，到底有没有提供足够的表达力。那里面少数几个东西表达能力不咋的，
 论工作原理，却可以扯到<code>functor</code>，<code>continuation</code>，甚至<code>monad</code>等高深的理论&hellip;&hellip; 
@@ -865,11 +865,11 @@ Swift的设计更加简单直观，接近普通的过程式编程。你只需要
 还是有可能犯错误。比如在 Java 8 里面，你可以使用<code>found.get()</code>这样的方式直接访问<code>found</code>
 里面的内容。在Swift里你也可以使用<code>found!</code>来直接访问而不进行检查。</p>
 <p>你可以写这样的Java代码来使用Optional类型：</p>
-<div class="highlight"><pre><span></span><span class="n">Option</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">String</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">found</span> <span class="o">=</span> <span class="n">find</span><span class="p">();</span>
+<div class="highlight"><pre><span></span><code><span class="n">Option</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">found</span> <span class="o">=</span> <span class="n">find</span><span class="p">();</span>
 <span class="k">if</span> <span class="p">(</span><span class="n">found</span><span class="p">.</span><span class="na">isPresent</span><span class="p">())</span> <span class="p">{</span>
     <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"found: "</span> <span class="o">+</span> <span class="n">found</span><span class="p">.</span><span class="na">get</span><span class="p">());</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 <p>如果你使用这种方式，把检查和取值分成两步做，就可能会出现运行时错误。<code>if (found.isPresent())</code>本质上跟普通的<code>null</code>检查，
 其实没什么两样。如果你忘记判断<code>found.isPresent()</code>，直接进行<code>found.get()</code>，就会出现<code>NoSuchElementException</code>。
 这跟<code>NullPointerException</code>本质上是一回事。所以这种写法，比起普通的<code>null</code>的用法，
@@ -908,8 +908,8 @@ Swift的设计更加简单直观，接近普通的过程式编程。你只需要
 
   <!-- Gitalk 评论 start  -->
   <!-- Link Gitalk 的支持文件  -->
-  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-  <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 
   <div id="gitalk-container"></div>
       <script type="text/javascript">

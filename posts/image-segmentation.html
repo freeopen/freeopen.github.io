@@ -188,7 +188,7 @@ Ross Girshick 于2013年11月发表的一篇论文，
 并选出得分最高的2000个。</p>
 <p><strong>选择性搜索( Selective Search )算法</strong></p>
 <ol>
-<li>生成原始的候选框集合 R（利用<strong>felzenszwalb算法</strong><sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup>）;</li>
+<li>生成原始的候选框集合 R（利用<strong>felzenszwalb算法</strong><sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>）;</li>
 <li>计算候选框集 R 里每个相邻区域的相似度 S={s1,s2,&hellip;},
    这里考虑了四种类型的相似度，包括纹理、颜色、尺寸及交叠;</li>
 <li>找出相似度最高的两个区域，将其合并为新集，添加进 R&nbsp;;</li>
@@ -318,9 +318,9 @@ multi-view裁剪，也就是从图片的四个角进行裁剪，还有就是一�
 <p>以一维情况来说明，设x轴上有20个神经元，以poolling size=3做非重叠池化,
 而20除以3除不尽，为保证池化信息完备性，将20个神经元分为三组：</p>
 <ol>
-<li>△=0分组：[1,2,3]，[4,5,6]，&hellip;&hellip;，[16,17,18]；</li>
-<li>△=1分组：[2,3,4]，[5,6,7]，&hellip;&hellip;，[17,18,19]；</li>
-<li>△=2分组：[3,4,5]，[6,7,8]，&hellip;&hellip;，[18,19,20]；</li>
+<li>&xutri;=0分组：[1,2,3]，[4,5,6]，&hellip;&hellip;，[16,17,18]；</li>
+<li>&xutri;=1分组：[2,3,4]，[5,6,7]，&hellip;&hellip;，[17,18,19]；</li>
+<li>&xutri;=2分组：[3,4,5]，[6,7,8]，&hellip;&hellip;，[18,19,20]；</li>
 </ol>
 <p>对应图片如下：</p>
 <p align="center">
@@ -329,7 +329,7 @@ multi-view裁剪，也就是从图片的四个角进行裁剪，还有就是一�
 图5  分三组的一维池化，覆盖所有神经元
 </figcaption>
 </p>
-<p>把上面的△=0、△=1、△=2的三种组合方式的池化结果，分别送入网络的下一层。
+<p>把上面的&xutri;=0、&xutri;=1、&xutri;=2的三种组合方式的池化结果，分别送入网络的下一层。
 这样的话，我们网络在最后输出的时候，就会出现3种预测结果了。</p>
 <p>如果是2维图片的话，那么就会有 9 种池化结果, 
 最后我们的图片分类输出结果就可以得到9个预测结果(每个类别都可以得到9种概率值), 然后我们对每个类别的9种概率，取其最大值，做为此类别的预测概率值。</p>
@@ -824,11 +824,11 @@ Mask R-CNN 比 Faster R-CNN 复杂，但和原始的 Faster R-CNN 的速度相�
 加上 FCN 精准的像素掩膜(Mask)，使得其可以获得高准确率。</p>
 <p>所以，Mask R-CNN 的结构如下图，即Faster R-CNN + FCN, 
 更细致的是 RPN + ROIAlign + Fast-rcnn + FCN。</p>
-<p><img src="/images/mask-rcnn.jpeg" width="90%"/>
+<p><img src="/images/mask-rcnn.jpeg" width="90%"/></p>
 <figcaption>
-图15  Mask R-CNN结构<br/>
+图15  Mask R-CNN结构  
 </figcaption>
-</p>
+
 <h3 id="mask-r-cnn-suan-fa-bu-zou">Mask R-CNN 算法步骤</h3>
 <ol>
 <li>输入一幅你想处理的图片，然后进行对应的预处理操作，或者预处理后的图片；</li>
@@ -1084,7 +1084,7 @@ $$</div>
 要检查它们的区域间间距(即所有分别属于两个区域且有边连接的点对中，寻找权重最小的那对,若两个区域内的点没有边相连，则定义间距为正无穷大)和区域内间距(即区域对应最小生成树中权重最大的边的权重值)的值。
 如果两个区域的区域间间距明显大于其中任意一个区域的区域内间距，
 那么就认为这两个区域之间存在明显的界限（即不能合并）。(freeopen:
-只能写个大概，详述篇幅太长)&nbsp;<a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text">↩</a></p>
+只能写个大概，详述篇幅太长)&nbsp;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&larrhk;</a></p>
 </li>
 </ol>
 </div>
@@ -1151,8 +1151,8 @@ $$</div>
 
   <!-- Gitalk 评论 start  -->
   <!-- Link Gitalk 的支持文件  -->
-  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-  <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 
   <div id="gitalk-container"></div>
       <script type="text/javascript">

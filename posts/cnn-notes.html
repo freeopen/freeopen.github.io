@@ -241,7 +241,7 @@ X 中元素变化的线性函数。
 家族的结构中采用了这种想法，把上层的输入分别同时经过 1x1、3x3、5x5
 的卷积核进行处理，得出的特征再组合起来，传到下一层。这种方法确实令模型的性能有所提高，但紧接而来的副作用是，由于卷积核的数量增多，参数量暴增。</p>
 <h3 id="shen-du-ke-fen-chi-juan-ji-depthwise-separable-conv">深度可分离卷积(Depthwise separable Conv)</h3>
-<p>深度可分离卷积 (Depthwise Separable Convolution) 的流行来自谷歌 Xception 结构的流行。这种卷积的思想是把过去一个卷积核对多通道的计算变为一个卷积核仅针对一个通道，被称为 Depthwise 操作，然后再用1x1卷积将每个通道输出的特征图( Feature map) <sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup>进行融合，这被称为 Pointwise 操作，也即是前面提到的瓶颈卷积。
+<p>深度可分离卷积 (Depthwise Separable Convolution) 的流行来自谷歌 Xception 结构的流行。这种卷积的思想是把过去一个卷积核对多通道的计算变为一个卷积核仅针对一个通道，被称为 Depthwise 操作，然后再用1x1卷积将每个通道输出的特征图( Feature map) <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>进行融合，这被称为 Pointwise 操作，也即是前面提到的瓶颈卷积。
 因此，深度可分离卷积实质上是 Depthwise Convolution 和 Pointwise Convolution
 的组合。</p>
 <p>深度可分离卷积可以看成是交错组卷积的特例，相较于常规卷积操作，显著降低了参数量和运算成本，从而增加了神经网络性能。假设卷积核的尺寸为 k，输入的通道和卷积核的数量均为 c ，则对于一个感受野来说，所需的参数量为 <span class="math">\(k\cdot c + c^2\)</span>，而传统卷积的参数量为 <span class="math">\(k\cdot c^2\)</span>。</p>
@@ -336,7 +336,7 @@ scale 操作，把特征通道的权重先归一化，然后加权到每个通�
 <li><a href="https://arxiv.org/pdf/1709.01507.pdf">J. Hu, L. Shen, S. Albanie, G. Sun, and E. Wu. Squeeze-and-Excitation Networks. 2017.</a></li>
 <li><a href="https://arxiv.org/pdf/1707.02725.pdf">T. Zhang, G. Qi, B. Xiao, and J. Wang. Interleaved Group Convolutions for Deep Neural Networks. 2017.</a></li>
 <li><a href="https://arxiv.org/abs/1706.03762.pdf">A. Vaswani, N. Shazeer, N. Parmar, J. Uszkoreit, L. Jones, A. N. Gomez, L. Kaiser, and I. Polosukhin. Attention Is All You Need. 2017.</a></li>
-<li><a href="https://arxiv.org/pdf/1706.03059.pdf">Ł. Kaiser, A. N. Gomez, and F. Chollet. Depthwise Separable Convolutions for Neural Machine Translation. 2017.</a></li>
+<li><a href="https://arxiv.org/pdf/1706.03059.pdf">&Lstrok;. Kaiser, A. N. Gomez, and F. Chollet. Depthwise Separable Convolutions for Neural Machine Translation. 2017.</a></li>
 <li><a href="https://arxiv.org/pdf/1703.06211.pdf">J. Dai, H. Qi,Y. Xiong, Y. Li, G. Zhang, H. Hu, and Y. Wei. Deformable Convolutional Networks. 2017.</a></li>
 <li><a href="https://arxiv.org/pdf/1512.03385.pdf">K. He, X. Zhang, S. Ren, and J. Sun. Deep residual learning for image recognition. 2015.</a></li>
 </ul>
@@ -344,7 +344,7 @@ scale 操作，把特征通道的权重先归一化，然后加权到每个通�
 <hr/>
 <ol>
 <li id="fn:1">
-<p>特征图( Feature map)是卷积过滤器的输出结果，也叫通道(Channel) ，表示之前输入上某个特征分布的数据。&nbsp;<a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text">↩</a></p>
+<p>特征图( Feature map)是卷积过滤器的输出结果，也叫通道(Channel) ，表示之前输入上某个特征分布的数据。&nbsp;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&larrhk;</a></p>
 </li>
 </ol>
 </div>
@@ -411,8 +411,8 @@ scale 操作，把特征通道的权重先归一化，然后加权到每个通�
 
   <!-- Gitalk 评论 start  -->
   <!-- Link Gitalk 的支持文件  -->
-  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-  <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 
   <div id="gitalk-container"></div>
       <script type="text/javascript">

@@ -96,13 +96,13 @@
 <p>复赛训练集共提供1690张数据，其中1440张包含标注，250张没有标注。1440张有标注数据在ROI区域内标注了6类异常细胞，分别是阳性类别&ldquo;ASC-H&rdquo;、&ldquo;ASC-US&rdquo;、&ldquo;HSIL&rdquo;、&ldquo;LSIL&rdquo;，和阴性类别&ldquo;Candida&rdquo;、&ldquo;Trichomonas&rdquo;。250张没有标注数据表示未见上皮内细胞病变（NILM，可以理解为整图中不含任何前述六类细胞）。复赛测试集提供350张数据，给出ROI区域内6类异常细胞的<strong>位置、类别和概率</strong>。</p>
 <h4>标注数据</h4>
 <p>一张宫颈癌细胞学图片kfb文件和对应一个标注json文件。标注json文件内容是一个list文件，里面记录了每个ROI区域的位置和异常鳞状上皮细胞的位置坐标（细胞所在矩形框的左上角坐标和矩形宽高）。类别roi表示感兴趣区域，pos表示异常鳞状上皮细胞。json标注文件示例如下：</p>
-<div class="highlight"><pre><span></span><span class="err">[{"x": 33842, "y": 31905, "w": 101, "h": 106, "class": "pos"},</span>
-<span class="err">{"x": 31755, "y": 31016, "w": 4728, "h": 3696, "class": "roi"},</span>
-<span class="err">{"x": 32770, "y": 34121, "w": 84, "h": 71, "class": "pos"},</span>
-<span class="err">{"x": 13991, "y": 38929, "w": 131, "h": 115, "class": "pos"},</span>
-<span class="err">{"x": 9598, "y": 35063, "w": 5247, "h": 5407, "class": "roi"},</span>
-<span class="err">{"x": 25030, "y": 40115, "w": 250, "h": 173, "class": "pos"}]</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code>[{"x": 33842, "y": 31905, "w": 101, "h": 106, "class": "pos"},
+{"x": 31755, "y": 31016, "w": 4728, "h": 3696, "class": "roi"},
+{"x": 32770, "y": 34121, "w": 84, "h": 71, "class": "pos"},
+{"x": 13991, "y": 38929, "w": 131, "h": 115, "class": "pos"},
+{"x": 9598, "y": 35063, "w": 5247, "h": 5407, "class": "roi"},
+{"x": 25030, "y": 40115, "w": 250, "h": 173, "class": "pos"}]
+</code></pre></div>
 <h4>赛道一: 算法赛道</h4>
 <p>用常规机器学习算法得出结果。</p>
 <h4>赛道二: VNNI模型量化</h4>
@@ -196,8 +196,8 @@
 
   <!-- Gitalk 评论 start  -->
   <!-- Link Gitalk 的支持文件  -->
-  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-  <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 
   <div id="gitalk-container"></div>
       <script type="text/javascript">

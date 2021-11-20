@@ -73,11 +73,7 @@
                 <div> <p><a href="https://github.com/zsdonghao/tensorlayer/blob/master/docs/user/tutorial.rst">原文</a> | <a href="https://github.com/shorxp/tensorlayer-chinese/blob/master/docs/user/tutorial.rst">原译文</a></p>
 <blockquote>
 <p>freeopen: 为什么研究 TensorLayer ? <br/>
-在TF的编码中，常看到model被封装成class，进一步研究，发现为了简化模型的创建，有各种封装库，包括Keras, Tflearn, TFSlim, tf.contrib.learn(或称skflow) 等。
-其中TFSlim和skflow属TensorFlow自带，考虑到TFSlim中有现成的模型，就修改了一个试试，发现坑不小。我需要首先把数据源转成TFRecord格式，然后用模型训练后报错（out of range), 然后我就首先检查数据源的格式是否有问题，我采用TFSlim的Data
-provider来输出数据，可能我的数据维度太大，程序不报错，但一直死在那里不出结果，而同样我在使用numpy输出数据源数据时，没有任何问题，也没什么延时，瞬间我感觉到TFSlim的封装模式不仅把问题复杂化了，甚至还降低了程序的性能。Keras据说跑TF性能较慢，Tflearn感觉活跃度较低，考虑到TensorLayer是skflow上的再次封装，且不丧失灵活性，加上这篇最主要的教程写得真心不错，所以我发愿要好好研究一番。 <br/></p>
-<p>为什么我总喜欢修订一些长文翻译？<br/>
-技术翻译文章经常在阅读时有不知所云的现象，我总结的原因主要有三：一是译者没有理解作者意图，甚至连文章都没读懂，就开始直译 …</p></blockquote> </div><!-- /.entry-content -->
+在TF的编码中，常看到model被封装成class，进一步研究，发现为了简化模型的创建，有各种封装库，包 …</p></blockquote> </div><!-- /.entry-content -->
         </article></li>
 </ol><!-- /#posts-list -->
 </section><!-- /#content -->

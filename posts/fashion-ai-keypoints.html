@@ -315,10 +315,10 @@
 </ul>
 <h3 id="zhu-jie-ge-shi">注解格式</h3>
 <p>注释文件保存在csv格式表中，共有26列：第一列（image_id）包含图像文件名，第二列（image_category）表示图像所属的类别，其余24列记录了 上述24个关键点的位置。 仅显示两个图像项的示例表如下所示： </p>
-<div class="highlight"><pre><span></span><span class="err">image_id,image_category,neckline_left,neckline_right,center_front,shoulder_left,shoulder_right,armpit_left,armpit_right,waistline_left,waistline_right,cuff_left_in,cuff_left_out,cuff_right_in,cuff_right_out,top_hem_left,top_hem_right,waistband_left,waistband_right,hemline_left,hemline_right,crotch,bottom_left_in,bottom_left_out,bottom_right_in,bottom_right_out</span>
-<span class="err">Images/blouse/d21eab37ddc74ea5a5f1b4a5d3d9055a.jpg,blouse,241_135_1,301_135_1,259_136_1,216_142_1,319_144_1,212_186_1,307_202_1,-1_-1_-1,-1_-1_-1,203_236_1,195_256_1,278_241_1,283_261_1,206_243_0,292_252_0,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1</span>
-<span class="err">Images/blouse/02b54c183d2dbd2c056db14303064886.jpg,blouse,244_76_1,282_76_1,257_99_1,228_81_0,303_85_1,222_134_1,295_131_1,-1_-1_-1,-1_-1_-1,199_153_1,178_100_0,293_173_1,332_150_1,229_161_1,297_162_0,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code>image_id,image_category,neckline_left,neckline_right,center_front,shoulder_left,shoulder_right,armpit_left,armpit_right,waistline_left,waistline_right,cuff_left_in,cuff_left_out,cuff_right_in,cuff_right_out,top_hem_left,top_hem_right,waistband_left,waistband_right,hemline_left,hemline_right,crotch,bottom_left_in,bottom_left_out,bottom_right_in,bottom_right_out
+Images/blouse/d21eab37ddc74ea5a5f1b4a5d3d9055a.jpg,blouse,241_135_1,301_135_1,259_136_1,216_142_1,319_144_1,212_186_1,307_202_1,-1_-1_-1,-1_-1_-1,203_236_1,195_256_1,278_241_1,283_261_1,206_243_0,292_252_0,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1
+Images/blouse/02b54c183d2dbd2c056db14303064886.jpg,blouse,244_76_1,282_76_1,257_99_1,228_81_0,303_85_1,222_134_1,295_131_1,-1_-1_-1,-1_-1_-1,199_153_1,178_100_0,293_173_1,332_150_1,229_161_1,297_162_0,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1
+</code></pre></div>
 <p>每个关键点由一个三元组表示，每个元素由下划线连接，表示为&ldquo; x_y_v&rdquo;，其中x和y为坐标，v为可见性。 如果关键点可见，则可见性等于1；如果关键点被遮挡，则可见性等于0；如果类别中不存在或未定义，则可见性等于-1。 </p>
 <h3 id="ping-jie-biao-zhun">评价标准</h3>
 <p><img alt="TB1nI4_FY1YBuNjSszeXXablFXa.tfsprivate" src="https://freeopen.github.io/images/TB1nI4_FY1YBuNjSszeXXablFXa.tfsprivate.png"/></p>
@@ -466,8 +466,8 @@
 
   <!-- Gitalk 评论 start  -->
   <!-- Link Gitalk 的支持文件  -->
-  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-  <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 
   <div id="gitalk-container"></div>
       <script type="text/javascript">

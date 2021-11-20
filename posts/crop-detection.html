@@ -116,25 +116,25 @@
 </ol>
 <h3 id="ce-shi-zeng-qiang">测试增强</h3>
 <p>测试时，通过对图像水平翻转，垂直翻转，水平垂直翻转等多次预测，再对预测结果取平均可以提高精度，但相对的，推理时间也会大幅度升高。</p>
-<div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">torch</span><span class="p">.</span><span class="n">no_grad</span><span class="p">():</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">image</span><span class="p">,</span><span class="n">pos_list</span><span class="p">)</span> <span class="k">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">dataloader</span><span class="p">):</span>
-        <span class="o">#</span> <span class="k">forward</span> <span class="c1">--&gt; predict</span>
-        <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="p">.</span><span class="n">cuda</span><span class="p">(</span><span class="n">device</span><span class="p">)</span> <span class="o">#</span> <span class="err">复制</span><span class="n">image到model所在device上</span>
+<div class="highlight"><pre><span></span><code><span class="n">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">image</span><span class="p">,</span><span class="n">pos_list</span><span class="p">)</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">dataloader</span><span class="p">):</span>
+        <span class="c1"># forward --&gt; predict</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">cuda</span><span class="p">(</span><span class="n">device</span><span class="p">)</span> <span class="c1"># 复制image到model所在device上</span>
         <span class="n">predict_1</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
 
-        <span class="o">#</span> <span class="err">水平翻转</span>
-        <span class="n">predict_2</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">flip</span><span class="p">(</span><span class="n">image</span><span class="p">,[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
-        <span class="n">predict_2</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">flip</span><span class="p">(</span><span class="n">predict_2</span><span class="p">,[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-        <span class="o">#</span> <span class="err">垂直翻转</span>
-        <span class="n">predict_3</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">flip</span><span class="p">(</span><span class="n">image</span><span class="p">,[</span><span class="o">-</span><span class="mi">2</span><span class="p">]))</span>
-        <span class="n">predict_3</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">flip</span><span class="p">(</span><span class="n">predict_3</span><span class="p">,[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
-        <span class="o">#</span> <span class="err">水平垂直翻转</span>
-        <span class="n">predict_4</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">flip</span><span class="p">(</span><span class="n">image</span><span class="p">,[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">]))</span>
-        <span class="n">predict_4</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">flip</span><span class="p">(</span><span class="n">predict_4</span><span class="p">,[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+        <span class="c1"># 水平翻转</span>
+        <span class="n">predict_2</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">image</span><span class="p">,[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="n">predict_2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">predict_2</span><span class="p">,[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="c1"># 垂直翻转</span>
+        <span class="n">predict_3</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">image</span><span class="p">,[</span><span class="o">-</span><span class="mi">2</span><span class="p">]))</span>
+        <span class="n">predict_3</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">predict_3</span><span class="p">,[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+        <span class="c1"># 水平垂直翻转</span>
+        <span class="n">predict_4</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">image</span><span class="p">,[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">]))</span>
+        <span class="n">predict_4</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">predict_4</span><span class="p">,[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
 
         <span class="n">predict_list</span> <span class="o">=</span> <span class="n">predict_1</span> <span class="o">+</span> <span class="n">predict_2</span> <span class="o">+</span> <span class="n">predict_3</span> <span class="o">+</span> <span class="n">predict_4</span>   
-        <span class="n">predict_list</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">predict_list</span><span class="p">.</span><span class="n">cpu</span><span class="p">(),</span><span class="mi">1</span><span class="p">).</span><span class="n">byte</span><span class="p">().</span><span class="n">numpy</span><span class="p">()</span> <span class="o">#</span> <span class="n">n</span> <span class="n">x</span> <span class="n">h</span> <span class="n">x</span> <span class="n">w</span>
-</pre></div>
+        <span class="n">predict_list</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">predict_list</span><span class="o">.</span><span class="n">cpu</span><span class="p">(),</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">byte</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span> <span class="c1"># n x h x w</span>
+</code></pre></div>
 <h3 id="snapshot-ensemble">snapshot ensemble</h3>
 <p><strong>snapshot ensemble</strong> 是一个简单通用的提分trick，通过余弦周期退火的学习率调整策略，保存多个收敛到局部最小值的模型，通过模型自融合提升模型效果。详细的实验和实现可以看黄高老师ICLR 2017的这篇<a href="https://arxiv.org/pdf/1704.00109.pdf">论文</a>。</p>
 <p><strong>snapshot ensemble</strong> 另一个作用是作新方案的验证。深度学习训练的结果具有一定的随机性，在做新改进方案验证时，有时难以确定线上分数的小幅度提升是来自于随机性，还是改进方案really work。在比赛提交次数有限的情况下，<strong>snapshot ensemble</strong> 不失为一个稳定新方案验证的方法。</p>
@@ -231,8 +231,8 @@
 
   <!-- Gitalk 评论 start  -->
   <!-- Link Gitalk 的支持文件  -->
-  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-  <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 
   <div id="gitalk-container"></div>
       <script type="text/javascript">

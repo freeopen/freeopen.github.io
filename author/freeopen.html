@@ -63,6 +63,25 @@
 
 <ol id="post-list">
         <li class="related"><article>
+                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/strongswan" rel="bookmark" title="Permalink to 一支红杏出墙来">一支红杏出墙来</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2021-04-04T00:00:00+08:00"> 2021-04-04 </time>
+                    <address class="vcard author">By
+                        <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
+                    </address>
+                </footer><!-- /.post-info -->
+                <div> <ul>
+<li>1CPU,512M</li>
+<li>CentOS 8.2 aliyun</li>
+<li>StrongSwan 5.8.2 </li>
+</ul>
+<h2 id="yi-zhun-bei-jie-duan">一、准备阶段</h2>
+<p>新建服务器时，不选择 <code>安全加固</code></p>
+<p>首先卸载阿里云安骑士</p>
+<div class="highlight"><pre><span></span><code>wget http://update.aegis.aliyun.com/download/uninstall.sh
+<span class="nb">source</span> ./uninstall.sh …</code></pre></div> </div><!-- /.entry-content -->
+        </article></li>
+        <li class="related"><article>
                 <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/cervical-cancer" rel="bookmark" title="Permalink to 冠军方案之 宫颈癌风险智能诊断">冠军方案之 宫颈癌风险智能诊断</a></h2> </header>
                 <footer class="post-info">
                     <time class="published" datetime="2021-02-14T00:00:00+08:00"> 2021-02-14 </time>
@@ -75,13 +94,7 @@
 <p>赛道2冠军：LLLLC 队</p>
 </blockquote>
 <h2 id="ren-wu-shuo-ming">任务说明</h2>
-<p>通过提供大规模经过专业医师标注的宫颈癌液基薄层细胞检测数据，选手能够提出并综合运用目标检测、深度学习等方法对宫颈癌细胞学异常鳞状上皮细胞进行定位以及对宫颈癌细胞学图片分类，提高模型检测的速度和精度，辅助医生进行诊断。</p>
-<p>宫颈癌细胞学图片采用kfb格式，每张数据在20倍数字扫描仪下获取，大小300～400M。</p>
-<h4>初赛环节</h4>
-<p>宫颈癌细胞学图片800张，其中阳性图片500张，阴性图片300张。阳性图片会提供多个ROI区域，在ROI区域里面标注异常鳞状上皮细胞位置，阴性图片不包含异常鳞状上皮细胞，无标注。初赛讨论的异常鳞状上皮细胞主要包括四类：ASC-US(非典型鳞状细胞不能明确意义)，LSIL(上皮内低度病变)，ASC-H(非典型鳞状细胞倾向上皮细胞内高度)，HSIL(上皮内高度病变)。（特别注明：阳性图片ROI区域之外不保证没有异常鳞状上皮细胞）</p>
-<h4>复赛环节</h4>
-<p>通过线上赛的方式，不允许选手下载数据，在线完成模型训练。</p>
-<p>复赛训练集共提供1690张数据，其中1440张包含标注，250张没有标注。1440张有标注数据在ROI区域内标注了6类异常细胞，分别是阳性类别&ldquo;ASC-H&rdquo;、&ldquo;ASC-US&rdquo;、&ldquo;HSIL&rdquo;、&ldquo;LSIL&rdquo;，和阴性类别&ldquo;Candida …</p> </div><!-- /.entry-content -->
+<p>通过提供大规模经过专业医师标注的宫颈癌液基薄层细胞检测数据，选手 …</p> </div><!-- /.entry-content -->
         </article></li>
         <li class="related"><article>
                 <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/x-cargo" rel="bookmark" title="Permalink to 冠军方案之 X光限制品监测">冠军方案之 X光限制品监测</a></h2> </header>
@@ -95,16 +108,7 @@
 <p>冠军：YuanXu</p>
 </blockquote>
 <h2 id="ren-wu-shuo-ming">任务说明</h2>
-<p>包裹X光限制品监测作为日常包裹物流行业及安防行业的重要环节，承担着防止易燃易爆等危险品进入货运渠道，管理刀具等特殊货运物品，监测毒品等国家重点违禁品偷运等工作。随着线上购物的普及和快速发展，线上物流包裹数量已经远超人工可以处理的范围，给物流包裹监管带来了巨大挑战。</p>
-<p>针对给出的限制品种类，利用X光图像及标注数据，研究开发高效的计算机视觉算法，监测图像是否包含危险品及其大致位置。通过自动化监测包裹携带品算法，降低漏检风险及误报率，提升危险品管理效率。</p>
-<p>限制品包括：铁壳打火机、黑钉打火机、刀具、电池电容以及剪刀五类（类别id依次从1到5）。</p>
-<h4>评估指标</h4>
-<ul>
-<li>评测方式采用计算 <code>box mAP</code>的方式，对 <code>IoU = 0.5:0.05:0.95</code>，分别计算<code>mAP</code>，再做平均得到最后的<code>mAP</code>。</li>
-<li>单个模型整体大小需不超过<code>600MB</code>（即不超过<code>VGG19</code>大小），模型不得超过<code>2</code>个。</li>
-<li>响应时间越快越好</li>
-</ul>
-<h2 id="wen-ti-fen-xi">问题分析 …</h2> </div><!-- /.entry-content -->
+<p>包裹X光限制品监测作为日常包裹物流行业及安防行业的重要环节，承担着防止易燃易爆等危险品进 …</p> </div><!-- /.entry-content -->
         </article></li>
         <li class="related"><article>
                 <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/cloth-cut" rel="bookmark" title="Permalink to 冠军方案之 面料剪裁利用率优化">冠军方案之 面料剪裁利用率优化</a></h2> </header>
@@ -118,11 +122,7 @@
 <p>冠军：行星防御理事会 团队（乔德平等）</p>
 </blockquote>
 <h2 id="ren-wu-shuo-ming">任务说明</h2>
-<p>面料切割利用率的提升是纺织行业长期追求的目标。如何提升面料切割利用率，既是企业生产精益化的难点，也是痛点。在切割之前，需要确定多个零件在面料上的位置和角度，再充分利用零件在形状上的互补特征，对零件排布的方式进行优化。面料切割问题的特性，是零件存在多种尺寸、形状，比如用作衬衫制作的袖子、后背等零件，用来切割的布匹本身存在多类瑕疵，如破洞、折皱、漏纱等，在排版中需要避开。此外，某些订单，对零件存在个性化排版需求，因此在下料环节中，需要依照订单要求进行排版下料。当前纺织行业布匹原材料的成本占到40%左右，价值较高。</p>
-<p>本赛场聚焦面料剪裁利用率优化，要求选手研究开发高效可靠的算法，在较短时间范围内计算获得高质量可执行的排版结果，减少切割中形成的边角废料，提升面料切割利用率，减少计划时间、提高工作效率和避免人工计算的失误，提升价值降低成本。</p>
-<p>在规则面料的情况下，满足零件旋转角度、零件最小间距、最小边距的约束，解决以下两类问题：</p>
-<p>初赛赛题：基于所给零件，进行面料排版加工，耗料长度最短，面料利用率最高；</p>
-<p>复赛赛题 …</p> </div><!-- /.entry-content -->
+<p>面料切割利用率的提升是纺织行业长期追求的目标。如何提升面料切割利 …</p> </div><!-- /.entry-content -->
         </article></li>
         <li class="related"><article>
                 <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/crop-detection" rel="bookmark" title="Permalink to 冠军方案之农作物范围识别">冠军方案之农作物范围识别</a></h2> </header>
@@ -136,17 +136,7 @@
 <p>冠军：华南理工黄钦建等（冲啊大黄 团队 ）</p>
 </blockquote>
 <h1>任务说明</h1>
-<p>通过无人机航拍的地面影像，探索像素级农作物分类的算法，具体的分类目标为薏仁米、玉米、烤烟、人造建筑（复赛新增），其余所有位置归为背景类。</p>
-<p>初赛、复赛提供的数据是同一片区域的航拍影像。其中初赛提供数据为农作物生长的早期（大多没长出来），分割难度较大。复赛数据农作物长势良好，并在初赛赛题基础上增加了一类&ldquo;建筑&rdquo;。</p>
-<p>提供的label为与原始图像1:1大小的单通道图像（mask），像素的大小对应不同的标注类别。其中&ldquo;烤烟&rdquo;像素值为1，&ldquo;玉米&rdquo;像素值为2，&ldquo;薏仁米&rdquo;像素值为3，&ldquo;人造建筑&rdquo;像素值为4，背景类像素值为0.</p>
-<p><strong>评估指标</strong></p>
-<p>评估指标为mIoU，榜上排名分数为所有计算所有类别IoU后取平均的结果。</p>
-<h2 id="shu-ju-fen-xi">数据分析</h2>
-<p>图像分辨率超大，背景类占比远高于其它类别，mask无效的区域面积也较大，类别不平衡问题突出。</p>
-<h2 id="shu-ju-qie-ge">数据切割</h2>
-<p>使用gdal库分割遥感影像，采用两种切割策略：</p>
-<ul>
-<li>策略一：以1024x1024的窗口大小，步长900滑窗，当窗口中mask无效区域比例大于7 …</li></ul> </div><!-- /.entry-content -->
+<p>通过无人机航拍的地面影像，探索像素级农作物分类的算法，具体的分类 …</p> </div><!-- /.entry-content -->
         </article></li>
         <li class="related"><article>
                 <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/guangdong-cloth-defect" rel="bookmark" title="Permalink to 冠军方案之布匹疵点智能检测">冠军方案之布匹疵点智能检测</a></h2> </header>
@@ -160,14 +150,7 @@
 <p>冠军：哪儿都是坑啊 团队（徐光福等）</p>
 </blockquote>
 <h2 id="ren-wu-shuo-ming">任务说明</h2>
-<p>在布匹的实际生产过程中，由于各方面因素的影响，会产生污渍、破洞、毛粒等瑕疵，为保证产品质量，需要对布匹进行瑕疵检测。布匹疵点检验是纺织行业生产和质量管理的重要环节，目前人工检测易受主观因素影响，缺乏一致性；并且检测人员在强光下长时间工作对视力影响极大。由于布匹疵点种类繁多、形态变化多样、观察识别难道大，导致布匹疵点智能检测是困扰行业多年的技术瓶颈。</p>
-<p>大赛数据涵盖了纺织业中布匹的各类重要瑕疵，每张图片含一个或多种瑕疵。数据包括包括素色布和花色布两类，其中，素色布数据约8000张，用于初赛；花色布数据约12000张，用于复赛。</p>
-<h4>评估指标</h4>
-<p>赛题分数计算方式: <strong>0.2ACC+0.8mAP</strong></p>
-<p><strong>ACC</strong>：是有瑕疵或无瑕疵的分类指标，考察瑕疵检出能力。
-其中提交结果name字段中出现过的测试图片均认为有瑕疵，未出现的测试图片认为是无瑕疵。</p>
-<p><strong>mAP</strong>：参照PASCALVOC的评估标准计算瑕疵的mAP值。</p>
-<p>本次大赛评分计算过程中，分别在检测框和真实框的交并比(IOU)在阈值0.1，0.3，0.5下计算mAP …</p> </div><!-- /.entry-content -->
+<p>在布匹的实际生产过程中，由于各方面因素的影响，会产生污渍、破洞、毛粒等瑕 …</p> </div><!-- /.entry-content -->
         </article></li>
         <li class="related"><article>
                 <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/guangdong-defect" rel="bookmark" title="Permalink to 冠军方案之铝型材表面瑕疵识别">冠军方案之铝型材表面瑕疵识别</a></h2> </header>
@@ -181,10 +164,7 @@
 <p>冠军：Are you OK 战队（中山大学曾兆阳等）</p>
 </blockquote>
 <h2 id="ren-wu-shuo-ming">任务说明</h2>
-<p>在铝型材的实际生产过程中，由于各方面因素的影响，铝型材表面会产生裂纹、起皮、划伤等瑕疵，这些瑕疵会严重影响铝型材的质量。铝型材的表面自身会含有纹路，与瑕疵的区分度不高。传统人工肉眼检查十分费力，不能及时准确的判断出表面瑕疵，质检的效率难以把控。铝型材制造商迫切希望采用最新的AI技术来革新现有质检流程，自动完成质检任务，减少漏检发生率，提高产品的质量，使铝型材产品的生产管理者彻底摆脱了无法全面掌握产品表面质量的状态。</p>
-<p>初赛数据量3000张图片，复赛数据量5000张图片，包含单瑕疵图片，多瑕疵图片，无瑕疵图片，用于参赛者设计图像识别算法。图片所含瑕疵类型总计10种，分别为：不导电、擦花、角位漏底、桔皮、漏底、喷流、漆泡、起坑、杂色、脏点。</p>
-<p><strong>评价指标</strong></p>
-<p>参照2010年之后PASCALVOC的评估标准，检测框和真实框的交并比(IOU)阈值设定为0.5，同时，采用Interpolating all …</p> </div><!-- /.entry-content -->
+<p>在铝型材的实际生产过程中，由于各方面因素的影响，铝型材表面会产生裂 …</p> </div><!-- /.entry-content -->
         </article></li>
         <li class="related"><article>
                 <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/fashion-ai-keypoints" rel="bookmark" title="Permalink to 冠军方案之 FashionAI 服饰关键点定位">冠军方案之 FashionAI 服饰关键点定位</a></h2> </header>
@@ -198,47 +178,7 @@
 <p>冠军：李weite 及 bilibili 团队</p>
 </blockquote>
 <h2 id="ren-wu-shuo-ming">任务说明</h2>
-<p>服装的机器分析很容易受到衣服的尺寸和形状，相机拍摄的距离和角度甚至服装的显示方式或模型摆放方式的影响。对图像中服装关键点的检测可以帮助提高应用程序的性能，例如衣服的对齐，衣服局部属性的识别以及服装图像的自动编辑。</p>
-<p>基于服装设计知识，定义了一套服饰的关键点，并梳理了在女装6大专业类别（上衣、外套、裤子、半身裙、连身裙、连身裤）下的具体定义，要求参赛者设计算法进行定位预测。官方提供的数据集含前五个类别（连身裤类别被省略，因为在现实世界中并不常见），包括41个子类别和24种关键点。此数据集中总共有100,000个带批注的图像。</p>
-<p align="center">
-<img src="https://freeopen.github.io/images/TB16Z8fXQCWBuNjy0FaXXXUlXXa.png" width="90%"/>
-<figcaption>
- 女装关键点图例
- </figcaption>
-</p>
-<h3 id="guan-jian-dian-ding-yi">关键点定义</h3>
-<ul>
-<li>
-<table>
-<thead>
-<tr>
-<th>Keypoints\Category</th>
-<th>Blouse</th>
-<th>Outwear</th>
-<th>Trousers</th>
-<th>Skirt</th>
-<th>Dress</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>neckline_left</td>
-<td>Y</td>
-<td>Y</td>
-<td>N</td>
-<td>N</td>
-<td>Y</td>
-</tr>
-<tr>
-<td>neckline_right</td>
-<td>Y</td>
-<td>Y</td>
-<td>N</td>
-<td>N</td>
-<td>Y</td>
-</tr>
-<tr>
-<td>center_front …</td></tr></tbody></table></li></ul> </div><!-- /.entry-content -->
+<p>服装的机器分析很容易受到衣服的尺寸和形状，相机拍摄的距离和角度甚至服装的显示方 …</p> </div><!-- /.entry-content -->
         </article></li>
         <li class="related"><article>
                 <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/fashion-ai-reconition" rel="bookmark" title="Permalink to 冠军方案之 FashionAI 服饰属性标签识别">冠军方案之 FashionAI 服饰属性标签识别</a></h2> </header>
@@ -252,13 +192,7 @@
 <p>冠军：西安交大在读博士及硕士组成的&ldquo;禾思众成&rdquo;团队</p>
 </blockquote>
 <h2 id="ren-wu-shuo-ming">任务说明</h2>
-<p>服装属性是时装领域的基础知识，它既庞大又复杂。 我们构建了一个层次结构的属性树作为结构化的分类目标，以描述服装的认知过程。 邀请您设计算法来识别服装图像的属性。 此任务可能会广泛应用于服装图片搜索，导航标签，混搭推荐等。 </p>
-<p><img alt="女装属性树" src="https://freeopen.github.io/images/cloth-attributes.png"/></p>
-<p>要求检测上图中所有可区分的服装属性标签。 统计下来，训练集的图片约18万张，8个大类（4个设计属性，包括各种领口的款式，4个长度属性，包括衣长、裙长、裤长、袖长），54个小类。 </p>
-<h3 id="biao-qian">标签</h3>
-<p><img alt="模特及标签" src="https://freeopen.github.io/images/cloth-model.png"/></p>
-<p>a）上图的数据由训练有素的注释器标记。 然后，时尚专家会仔细检查这些标签，以确保较高的标签准确性。 带注释的数据中存在一定数量的缺失标签。 例如，图像中可能只有一个颈部设计标签，且颈部设计和袖子长度可见。 不再标记袖子长度以保持每个属性维度的数据均匀性。</p>
-<p>b）为这条赛道选择了八个主要属性尺寸，即领口设计(Neckline)、领子设计(Collar)、高领设计(High Neck)、翻领设计(Lapel)、袖子长度(Sleeves length …</p> </div><!-- /.entry-content -->
+<p>服装属性是时装领域的基础知识，它既庞大又复杂。 我们构 …</p> </div><!-- /.entry-content -->
         </article></li>
         <li class="related"><article>
                 <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/amap-top1" rel="bookmark" title="Permalink to 冠军方案之 高德算法大赛">冠军方案之 高德算法大赛</a></h2> </header>
@@ -273,73 +207,7 @@
 </blockquote>
 <h2 id="bi-sai-ren-wu">比赛任务</h2>
 <h3 id="chu-sai-shu-ju"><strong>初赛数据：</strong></h3>
-<p><strong>输入</strong>：给定一组含有GPS时间的图像序列（包含3-5帧图像），其中一幅图像作为参考帧。</p>
-<p><strong>输出</strong>：以参考帧为准，输出该图像序列对应的路况状态（畅通、缓行和拥堵）。</p>
-<p>图像序列由行车记录仪拍摄，路况真值（ground truth）是对应道路当前时刻真实的路况状态。</p>
-<p><strong>数据信息：</strong></p>
-<ul>
-<li>图像序列的参考帧图像名。</li>
-<li>图像序列的路况状态。</li>
-<li>0：畅通，1：缓行，2：拥堵，-1：测试集真值未给出。</li>
-<li>每帧图像采集时刻的GPS时间。</li>
-<li>单位为秒。如GPS时间 1552806926 比 1552806921 滞后5秒钟。</li>
-<li>A榜测试数据集换成高速行车记录仪采集的数据，GPS时间间隔缩短为1-2秒。</li>
-</ul>
-<h3 id="fu-sai-shu-ju"><strong>复赛数据：</strong></h3>
-<ul>
-<li>新增<code>封闭</code>的道路路况</li>
-<li>移除了GPS时间信息</li>
-</ul>
-<h2 id="shu-ju-fen-xi_1">数据分析</h2>
-<ul>
-<li>前车遮挡视野内道路情况，从而影响对道路的判断；</li>
-<li>对向车道和路边停靠车辆对行驶车道路况判断的影响；</li>
-<li>数据众包导致相机安装存在角度偏差，从而导致图像角度不一致 …</li></ul> </div><!-- /.entry-content -->
-        </article></li>
-        <li class="related"><article>
-                <header> <h2 class="entry-title"><a href="https://freeopen.github.io/posts/apache-flink" rel="bookmark" title="Permalink to 冠军方案之 Apache Flink 极客挑战赛">冠军方案之 Apache Flink 极客挑战赛</a></h2> </header>
-                <footer class="post-info">
-                    <time class="published" datetime="2021-02-10T00:00:00+08:00"> 2021-02-10 </time>
-                    <address class="vcard author">By
-                        <a class="url fn" href="https://freeopen.github.io/author/freeopen.html">freeopen</a>
-                    </address>
-                </footer><!-- /.post-info -->
-                <div> <blockquote>
-<p>冠军：合肥工大 SkyPeaceLL</p>
-</blockquote>
-<h2 id="bi-sai-ren-wu">比赛任务</h2>
-<h3 id="shu-ju-ji">数据集</h3>
-<p><strong>新冠病例行动数据集</strong></p>
-<ul>
-<li>病例历史行动数据集（训练集1） 1M+</li>
-<li>确诊病例数据 （测试集1） 500+</li>
-<li>实时病例行动数据集（测试集2） 1000+</li>
-<li>人脸特征512维</li>
-</ul>
-<p><strong>天猫精灵行为数据集</strong></p>
-<ul>
-<li>天猫精灵历史行为数据集（训练集2） 1M+</li>
-<li>用户行为数据集（测试集3） 500+</li>
-<li>实时用户行为数据集（测试集4） 1000+</li>
-<li>行为特征700维</li>
-</ul>
-<h3 id="si-ge-ren-wu"><strong>四个任务</strong></h3>
-<ul>
-<li>根据测试集1每条数据的特征向量，在训练集1中找出该病例（人）对应的所有记录。</li>
-<li>对测试集2的每条数据，根据其特征向量进行实时分类（人）。</li>
-<li>根据测试集3每条数据的特征向量，在训练集2中找出该用户行为（领域+意图）对应的所有记录。</li>
-<li>对测试集4的每条数据，根据其特征向量进行实时分类（领域+意图）。</li>
-</ul>
-<h3 id="xing-neng-yao-qiu"><strong>性能要求</strong></h3>
-<ul>
-<li>四个任务总运行时间不能超过3小时。</li>
-<li>
-<p>对每条实时数据完成实时分类的响应时间不能超过500ms。</p>
-</li>
-<li>
-<p><strong>平台和组件</strong></p>
-</li>
-<li>Flink，PyFlink …</li></ul> </div><!-- /.entry-content -->
+<p><strong>输入</strong>：给定一组含有GPS时间的图像序列（包含3-5帧图像），其中一幅图像 …</p> </div><!-- /.entry-content -->
         </article></li>
 </ol><!-- /#posts-list -->
 <p class="pagination">

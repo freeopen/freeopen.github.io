@@ -101,7 +101,7 @@
 <li>Pre-mode Estimator: 创建指定类型的模型，如上图，它们分别是线性分类和回归模型、深度神经网络分类和回归模型，还有线性和深度混合的分类、回归模型。</li>
 <li>自定义 Estimator: 按传统的方法写模型，然后用 model_fn 函数封装</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="c1"># 指定类型模型的估计器举例</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># 指定类型模型的估计器举例</span>
 <span class="n">classifier</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">DNNClassifier</span><span class="p">(</span>
    <span class="n">feature_columns</span><span class="o">=</span><span class="n">feature_columns</span><span class="p">,</span> <span class="c1"># 定义好的特征列 </span>
    <span class="n">hidden_units</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>           <span class="c1"># 两个隐藏层, 每层10个神经元</span>
@@ -113,8 +113,8 @@
         <span class="n">file_path</span> <span class="o">=</span> <span class="n">FILE_TRAIN</span><span class="p">,</span>     <span class="c1"># 训练数据文件路径</span>
         <span class="n">perform_shuffle</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>     <span class="c1"># 打乱数据</span>
         <span class="n">repeat_count</span> <span class="o">=</span> <span class="mi">8</span><span class="p">))</span>          <span class="c1"># 重复8次</span>
-</pre></div>
-<div class="highlight"><pre><span></span><span class="c1"># 自定义模型的估计器举例</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># 自定义模型的估计器举例</span>
 <span class="k">def</span> <span class="nf">model_fn</span><span class="p">(</span>
    <span class="n">features</span><span class="p">,</span>                       <span class="c1"># batch数量的特征，是input_fn 函数的输出</span>
    <span class="n">labels</span><span class="p">,</span>                         <span class="c1"># batch数量的标签，是input_fn 函数的输出</span>
@@ -138,7 +138,7 @@
 
 <span class="n">classifier</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
   <span class="n">input_fn</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">input_fn</span><span class="p">(</span><span class="n">FILE_TRAIN</span><span class="p">,</span> <span class="n">repeat_count</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">shuffle_count</span><span class="o">=</span><span class="mi">256</span><span class="p">))</span>
-</pre></div>
+</code></pre></div>
 <p>仔细研究上面两段最简代码，Estimator的编程结构就呼之欲出了，看下图：</p>
 <p align="center">
 <img src="/images/Unknown.jpg" width="60%"/>
@@ -160,7 +160,7 @@
 <h3 id="xiao-shu-ju-de-qing-kuang">小数据的情况</h3>
 <p>通常实验性的项目采用小规模的数据，这时只需要简单把数据载入内存作训练即可, 我们可以用numpy、pandas等通用工具来处理数据。
 假如原始数据是csv文件，选用pandas读入并作预处理：</p>
-<div class="highlight"><pre><span></span><span class="c1"># 定义列名</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># 定义列名</span>
 <span class="n">names</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s1">'symboling'</span><span class="p">,</span> 
     <span class="s1">'normalized-losses'</span><span class="p">,</span> 
@@ -193,27 +193,27 @@
 <span class="c1"># 构建字符串列，如果方向空值(NaN)就填充''(空串).</span>
 <span class="n">string_columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">dtypes</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="o">==</span> <span class="nb">str</span><span class="p">]</span>
 <span class="n">df</span><span class="p">[</span><span class="n">string_columns</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">string_columns</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">'columns'</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 <p>这样，数据变得比较工整了。假设最后一项price是label，前面的都是特征，按照习惯，数据被分割成训练和评估数据, 
 它们分别被叫做 training_data、training_label 和 eval_data、eval_label, 它们的类型都是dataframe.</p>
 <p>定义训练和评估的input_fn</p>
-<div class="highlight"><pre><span></span><span class="c1"># num_epochs=None -&gt; 数据无限循环</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># num_epochs=None -&gt; 数据无限循环</span>
 <span class="c1"># shuffle   =True -&gt; 打乱数据</span>
 <span class="n">training_input_fn</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">pandas_input_fn</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">training_data</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">training_label</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">num_epochs</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
 <span class="c1"># 评估时，数据不需要被打乱，所以shuffle=False </span>
 <span class="n">eval_input_fn</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">pandas_input_fn</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">eval_data</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">eval_label</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 <p>这样，input_fn就快速的写好了。</p>
 <h3 id="da-shu-ju-de-qing-kuang">大数据的情况</h3>
 <p>pandas一次性把数据载入内存中，不适合大数据量的情形。
 面对大规模数据时，需要给数据和模型之间接上管道，然后打开水龙头，按照你想要的流量把数据传入模型。
 这时，TF提供的 dataset api 就派上用场了。</p>
 <h4>Dataset API 的结构</h4>
-<p><p align="center">
+<p align="center">
 <img src="/images/image7.jpg" width="70%"/>
 <br/>
-</p></p>
+</p>
 <ul>
 <li>TextLineDataset: 从文本文件每次读一行.</li>
 <li>TFRecordDataset: 从 TFRecord 文件读取记录.</li>
@@ -224,7 +224,7 @@
 <p>假设我们手上有一堆人口普查数据，其中年收入是字符串类型，形如&ldquo;&gt;50k&rdquo;, 我们的目标是预测人们的年收入是大于5万还是小于等于5万。
 input_fn函数的写法如下：</p>
 <p>首先定义CSV文件中每行数据的列名和缺省值，字典格式.</p>
-<div class="highlight"><pre><span></span><span class="n">csv_defaults</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">([</span>
+<div class="highlight"><pre><span></span><code><span class="n">csv_defaults</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">([</span>
   <span class="p">(</span><span class="s1">'age'</span><span class="p">,[</span><span class="mi">0</span><span class="p">]),</span>
   <span class="p">(</span><span class="s1">'workclass'</span><span class="p">,[</span><span class="s1">''</span><span class="p">]),</span>
   <span class="p">(</span><span class="s1">'fnlwgt'</span><span class="p">,[</span><span class="mi">0</span><span class="p">]),</span>
@@ -241,9 +241,9 @@ input_fn函数的写法如下：</p>
   <span class="p">(</span><span class="s1">'native-country'</span><span class="p">,[</span><span class="s1">''</span><span class="p">]),</span>
   <span class="p">(</span><span class="s1">'income'</span><span class="p">,[</span><span class="s1">''</span><span class="p">]),</span>
 <span class="p">])</span>
-</pre></div>
+</code></pre></div>
 <p>接下来是一段通用代码, 具体见代码注释.</p>
-<div class="highlight"><pre><span></span><span class="c1"># 按行解码 CSV 文件.</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># 按行解码 CSV 文件.</span>
 <span class="c1"># 读入一行数据，对于每列如果有数据就用原值，如果没数据就用缺省值;</span>
 <span class="c1"># 返回字典格式的键值对</span>
 <span class="k">def</span> <span class="nf">csv_decoder</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
@@ -298,19 +298,19 @@ input_fn函数的写法如下：</p>
     <span class="n">features</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">next_batch</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">features</span><span class="p">[</span><span class="s1">'education'</span><span class="p">])</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 <p>上面的代码为什么 create_train_input_fn() 套 input_fn() 呢？
 回忆这句：</p>
-<div class="highlight"><pre><span></span><span class="n">classifier</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="n">classifier</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
   <span class="n">input_fn</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">input_fn</span><span class="p">(</span><span class="n">FILE_TRAIN</span><span class="p">,</span> <span class="n">repeat_count</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">shuffle_count</span><span class="o">=</span><span class="mi">256</span><span class="p">))</span>
-</pre></div>
+</code></pre></div>
 <p>因为calssifier.train()中，input_fn要求接的是一个函数，而input_fn() 返回的是特征和标签，所以前面要接上<code>lambda:</code>.
 如果采用现在函数套函数的结构, 那么这句前面的lambda就可以去掉, 走个例子：</p>
-<div class="highlight"><pre><span></span><span class="n">train_input_fn</span> <span class="o">=</span> <span class="n">create_train_input_fn</span><span class="p">(</span><span class="n">FILE_TRAIN</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">train_input_fn</span> <span class="o">=</span> <span class="n">create_train_input_fn</span><span class="p">(</span><span class="n">FILE_TRAIN</span><span class="p">)</span>
 
 <span class="n">classifier</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
   <span class="n">input_fn</span><span class="o">=</span><span class="n">train_input_fn</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 <h2 id="te-zheng-lie_1">特征列</h2>
 <p>特征列实质上是对input_fn()输出的数据做的二次封装，它是做特征工程的强力工具之一。
 特征列好比一种约定，它规定了estimator使用input_fn传入的数据具备什么样的形式, 
@@ -336,27 +336,27 @@ input_fn函数的写法如下：</p>
 </ul>
 <h3 id="shu-zhi-lie">数值列</h3>
 <p>以鸢尾花分类问题举例，其输入特征 SepalLength, SepalWidth, PetalLength, PetalWidth （萼片的长宽、花瓣的长宽）就是数值类型。用法：</p>
-<div class="highlight"><pre><span></span><span class="c1"># 缺省为tf.float32的标量.</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># 缺省为tf.float32的标量.</span>
 <span class="n">numeric_feature_column</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">numeric_column</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">"SepalLength"</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 <p>数值列的缺省类型为 tf.float32, 如果想指定类型，则：</p>
-<div class="highlight"><pre><span></span><span class="c1"># 用tf.float64的标量表示.</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># 用tf.float64的标量表示.</span>
 <span class="n">numeric_feature_column</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">numeric_column</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">"SepalLength"</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 <p>缺省情况下，numeric_column 返回一个单值数据，如果要返回向量数据，则需指定shape值：</p>
-<div class="highlight"><pre><span></span><span class="c1"># 用10维向量来表示，其中每个元素的类型为 tf.float32.</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># 用10维向量来表示，其中每个元素的类型为 tf.float32.</span>
 <span class="n">vector_feature_column</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">numeric_column</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">"Bowling"</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
 <span class="c1"># 用10x5的矩阵来表示.</span>
 <span class="n">matrix_feature_column</span>
    <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">numeric_column</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">"MyMatrix"</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span> 
-</pre></div>
+</code></pre></div>
 <h3 id="fen-qu-lie">分区列</h3>
-<p>如果要把一个数值分成不同区间，比如按年份划分：
+<p>如果要把一个数值分成不同区间，比如按年份划分：</p>
 <p align="center">
 <img src="/images/4_.jpg" width="60%"/>
 <br/>
-</p></p>
+</p>
 <p>划分后的结果为one-hot向量形式。</p>
 <table>
 <thead>
@@ -384,20 +384,20 @@ input_fn函数的写法如下：</p>
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre><span></span><span class="c1"># 原始输入是一个名为Year的数值列.</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># 原始输入是一个名为Year的数值列.</span>
 <span class="n">numeric_feature_column</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">numeric_column</span><span class="p">(</span><span class="s2">"Year"</span><span class="p">)</span>
 
 <span class="c1"># 以1960、1980、2000年来划分区间</span>
 <span class="n">bucketized_feature_column</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">bucketized_column</span><span class="p">(</span>
     <span class="n">source_column</span> <span class="o">=</span> <span class="n">numeric_feature_column</span><span class="p">,</span>
     <span class="n">boundaries</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1960</span><span class="p">,</span> <span class="mi">1980</span><span class="p">,</span> <span class="mi">2000</span><span class="p">])</span>
-</pre></div>
+</code></pre></div>
 <h3 id="lei-bie-idlie">类别Id列</h3>
-<p>如图，所谓类别Id列是指把左边的单值数据转换为右边的one-hot矢量形式。
+<p>如图，所谓类别Id列是指把左边的单值数据转换为右边的one-hot矢量形式。</p>
 <p align="center">
 <img src="/images/5_.jpg" width="40%"/>
 <br/>
-</p></p>
+</p>
 <p>比如我们用0、1、2、3分别表示童装、数码、运动和食品四类商品：</p>
 <ul>
 <li>0=&ldquo;kitchenware&rdquo;</li>
@@ -405,7 +405,7 @@ input_fn函数的写法如下：</p>
 <li>2="sport"</li>
 <li>3="food"</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="c1"># key后跟的列名与input_fn()中的列名一致，</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># key后跟的列名与input_fn()中的列名一致，</span>
 <span class="c1"># 其值域为[0, num_buckets)间的整数。</span>
 <span class="n">identity_feature_column</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">categorical_column_with_identity</span><span class="p">(</span>
     <span class="n">key</span><span class="o">=</span><span class="s1">'procduct_class'</span><span class="p">,</span> 
@@ -416,21 +416,21 @@ input_fn函数的写法如下：</p>
     <span class="o">...&lt;</span><span class="n">code</span><span class="o">&gt;...</span>
     <span class="k">return</span> <span class="p">({</span> <span class="s1">'Integer_1'</span><span class="p">:[</span><span class="n">values</span><span class="p">],</span> <span class="o">..&lt;</span><span class="n">etc</span><span class="o">&gt;..</span><span class="p">,</span> <span class="s1">'Integer_2'</span><span class="p">:[</span><span class="n">values</span><span class="p">]</span> <span class="p">},</span>
             <span class="p">[</span><span class="n">Label_values</span><span class="p">])</span>
-</pre></div>
+</code></pre></div>
 <h3 id="lei-bie-ci-biao-lie">类别词表列</h3>
-<p>在NLP任务中，我们不会把词条直接输入模型，而是首先把它转换成数值或向量。类别词表列可以把词条转换为one-hot向量形式，如下图：
+<p>在NLP任务中，我们不会把词条直接输入模型，而是首先把它转换成数值或向量。类别词表列可以把词条转换为one-hot向量形式，如下图：</p>
 <p align="center">
 <img src="/images/6_.jpg" width="50%"/>
 <br/>
-</p></p>
+</p>
 <p>从列表创建一个词表列：</p>
-<div class="highlight"><pre><span></span><span class="n">vocabulary_feature_column</span> <span class="o">=</span>
+<div class="highlight"><pre><span></span><code><span class="n">vocabulary_feature_column</span> <span class="o">=</span>
     <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">categorical_column_with_vocabulary_list</span><span class="p">(</span>
         <span class="n">key</span><span class="o">=</span><span class="s2">"feature_name_from_input_fn"</span><span class="p">,</span>
         <span class="n">vocabulary_list</span><span class="o">=</span><span class="p">[</span><span class="s2">"kitchenware"</span><span class="p">,</span> <span class="s2">"electronics"</span><span class="p">,</span> <span class="s2">"sports"</span><span class="p">])</span> 
-</pre></div>
+</code></pre></div>
 <p>从文件创建一个词表列：</p>
-<div class="highlight"><pre><span></span><span class="n">vocabulary_feature_column</span> <span class="o">=</span>
+<div class="highlight"><pre><span></span><code><span class="n">vocabulary_feature_column</span> <span class="o">=</span>
     <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">categorical_column_with_vocabulary_file</span><span class="p">(</span>
         <span class="n">key</span><span class="o">=</span><span class="s2">"feature_name_from_input_fn"</span><span class="p">,</span>
         <span class="n">vocabulary_file</span><span class="o">=</span><span class="s2">"product_class.txt"</span><span class="p">,</span>
@@ -440,14 +440,14 @@ input_fn函数的写法如下：</p>
 <span class="n">kitchenware</span>
 <span class="n">electronics</span>
 <span class="n">sports</span>
-</pre></div>
+</code></pre></div>
 <h3 id="lei-bie-ha-xi-lie">类别哈希列</h3>
 <p>如果待分类的数据量很大，势必会消耗很大内存。tensorflow提供一种用哈希表分类的方法。</p>
-<div class="highlight"><pre><span></span><span class="n">hashed_feature_column</span> <span class="o">=</span>
+<div class="highlight"><pre><span></span><code><span class="n">hashed_feature_column</span> <span class="o">=</span>
     <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">categorical_column_with_hash_bucket</span><span class="p">(</span>
         <span class="n">key</span> <span class="o">=</span> <span class="s2">"feature_name_from_input_fn"</span><span class="p">,</span>
         <span class="n">hash_buckets_size</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span> <span class="c1"># 把特征值哈希分布到100个位置</span>
-</pre></div>
+</code></pre></div>
 <p align="center">
 <img src="/images/7_.jpg" width="75%"/>
 <br/>
@@ -455,7 +455,7 @@ input_fn函数的写法如下：</p>
 <p>当分类数量大于哈希分布尺寸的时候，必然会有几个特征指向同一个哈希位置。如图所示，<code>kitchenware</code>和<code>sports</code>的哈希值同为12，这没有关系，模型可以通过你提供的其他特征进一步区分到底是<code>kitchenware</code>还是<code>sports</code>。</p>
 <h3 id="he-cheng-lie">合成列</h3>
 <p>有时我们需要组合多个特征为一个特征，这种特征叫合成特征。组合方式通常采用相乘或求笛卡尔积，特征组合有助于表示非线性关系。举个例子，假设我们的模型要计算北京的房产价格，而房产价格与它所处的位置密切相关，而对于位置而言，我们需要用经纬度两个数据同时标定，因此这个经纬度就构成了合成特征。假设我们把北京均匀的纵横切100x100刀，这样就会产生10000个可区分的矩形区域。</p>
-<div class="highlight"><pre><span></span><span class="c1"># 将经纬度转换为[0, 100)范围内的整型值</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># 将经纬度转换为[0, 100)范围内的整型值</span>
 <span class="k">def</span> <span class="nf">input_fn</span><span class="p">():</span>
     <span class="c1"># 从数据集读入经纬度</span>
     <span class="n">latitude</span> <span class="o">=</span> <span class="o">...</span>   <span class="c1"># A tf.float32 value</span>
@@ -479,35 +479,35 @@ input_fn函数的写法如下：</p>
 <span class="n">fc_beijing_boxed</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">crossed_column</span><span class="p">(</span>
     <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="n">latitude_fc</span><span class="p">,</span> <span class="n">longitude_fc</span><span class="p">],</span>
     <span class="n">hash_bucket_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span> <span class="c1"># 把10000个分区哈希分布到1000个位置</span>
-</pre></div>
+</code></pre></div>
 <p>创建合成特征的方法为：</p>
 <ul>
 <li>从input_fn的返回值中取得待组合的特征名，本例中为<code>latitude</code>和<code>longitude</code></li>
 <li>做组合的这些特征必须先转换成one-hot形式</li>
 </ul>
 <p>由<code>latitude_fc</code>和<code>longitude_fc</code>组成的合成列的形式如下：</p>
-<div class="highlight"><pre><span></span><span class="err">(0,0),(0,1)...  (0,99)</span>
-<span class="err">(1,0),(1,1)...  (1,99)</span>
-<span class="err">&hellip;, &hellip;,          ...</span>
-<span class="err">(99,0),(99,1)...(99, 99)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code>(0,0),(0,1)...  (0,99)
+(1,0),(1,1)...  (1,99)
+&hellip;, &hellip;,          ...
+(99,0),(99,1)...(99, 99)
+</code></pre></div>
 <p>注意，使用合成列后，仍需在模型中包含你用来合成特征列的原始特征列，它们负责在哈希冲突时，作为附加特征来进一步做类别区分。</p>
 <h3 id="zhi-shi-lie">指示列</h3>
 <p>指示列和后面要说的嵌入列均不能直接作为特征给模型使用，它的数据来源于类别特征列，即类别特征列是它的输入。
 为什么要作这样的设计？因为estimator执行深度神经网络的任务时，只能使用密集特征列，而类别特征列为稀疏列，需要用指示列或嵌入列作下变换才能被使用。
 至于指示列封装后，数据变成什么样子，我在官方文档中没找到，以后知道了再补充。</p>
-<div class="highlight"><pre><span></span><span class="n">categorical_column</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># 创建某种类型的类别特征列</span>
+<div class="highlight"><pre><span></span><code><span class="n">categorical_column</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># 创建某种类型的类别特征列</span>
 
 <span class="c1"># 定义一个指示列，该列中的每个元素为one-hot向量. </span>
 <span class="n">indicator_column</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">indicator_column</span><span class="p">(</span><span class="n">categorical_column</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 <h3 id="qian-ru-lie">嵌入列</h3>
 <p>如果类别数据量很大，比如上百万、上亿等，这时采用one-hot来表示就不经济了。记得词嵌入模型中的词向量吗，用一组浮点数来代替one-hot形式来表示一个词条，这种形式在这里被叫做嵌入列，这种方法明显的好处就是令向量维度变得很小。</p>
-<p>如下图，假设我们有81个不同的单词，采用one-hot形式需要81维的向量，而采用嵌入列则仅需要3维向量就能表达。
+<p>如下图，假设我们有81个不同的单词，采用one-hot形式需要81维的向量，而采用嵌入列则仅需要3维向量就能表达。</p>
 <p align="center">
 <img src="/images/image9.jpg" width="75%"/>
 <br/>
-</p></p>
+</p>
 <p>那么，在嵌入列产生的向量中的浮点数是如何确定的呢？通常，由训练数据学得。嵌入列可以提升模型的表达能力，一定程度描述类别间的关系。</p>
 <p>如何确定表示81个类别只需要3维呢？有个简单的公式来算出：
 </p>
@@ -516,7 +516,7 @@ input_fn函数的写法如下：</p>
 <mj></mj></p>
 <div class="math">$$n^{0.25}  \tag {等价公式}$$</div>
 <p></p>
-<div class="highlight"><pre><span></span><span class="c1"># 类别数的0.25次方</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># 类别数的0.25次方</span>
 <span class="n">embedding_dimensions</span> <span class="o">=</span>  <span class="n">number_of_categories</span><span class="o">**</span><span class="mf">0.25</span>
 
 <span class="n">categorical_column</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># 创建一个类别列.</span>
@@ -526,42 +526,42 @@ input_fn函数的写法如下：</p>
 <span class="n">embedding_column</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">embedding_column</span><span class="p">(</span>
     <span class="n">categorical_column</span><span class="o">=</span><span class="n">categorical_column</span><span class="p">,</span>
     <span class="n">dimension</span><span class="o">=</span><span class="n">embedding_dimensions</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 <p>注意，这仅仅是个一般规则，你也可以自行设定你希望的维度数。</p>
 <h3 id="quan-zhong-lei-bie-lie">权重类别列</h3>
 <p>有时会遇到一种配对特征，特征一是本体，特征二是本体对应的权重（或出现频率）。
 这就是权重类别列的使用场景。
 下面是从Tensorflow源码里抠出例子，话说有个<code>tf.Example</code>对象，它的proto形式如下：</p>
-<div class="highlight"><pre><span></span><span class="err"># proto </span>
-<span class="err">[</span>
-<span class="err">  features {</span>
-<span class="err">    feature {</span>
-<span class="err">      key: "terms"</span>
-<span class="err">      value {bytes_list {value: "very" value: "model"}}</span>
-<span class="err">    }</span>
-<span class="err">    feature {</span>
-<span class="err">      key: "frequencies"</span>
-<span class="err">      value {float_list {value: 0.3 value: 0.1}}</span>
-<span class="err">    }</span>
-<span class="err">  },</span>
-<span class="err">  features {</span>
-<span class="err">    feature {</span>
-<span class="err">      key: "terms"</span>
-<span class="err">      value {bytes_list {value: "when" value: "course" value: "human"}}</span>
-<span class="err">    }</span>
-<span class="err">    feature {</span>
-<span class="err">      key: "frequencies"</span>
-<span class="err">      value {float_list {value: 0.4 value: 0.1 value: 0.2}}</span>
-<span class="err">    }</span>
-<span class="err">  }</span>
-<span class="err">]</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code># proto 
+[
+  features {
+    feature {
+      key: "terms"
+      value {bytes_list {value: "very" value: "model"}}
+    }
+    feature {
+      key: "frequencies"
+      value {float_list {value: 0.3 value: 0.1}}
+    }
+  },
+  features {
+    feature {
+      key: "terms"
+      value {bytes_list {value: "when" value: "course" value: "human"}}
+    }
+    feature {
+      key: "frequencies"
+      value {float_list {value: 0.4 value: 0.1 value: 0.2}}
+    }
+  }
+]
+</code></pre></div>
 <p>考虑到proto格式熟悉的人不多，我们把上面的内容简化一下：</p>
-<div class="highlight"><pre><span></span><span class="err">terms      : ["very", "model"]</span>
-<span class="c">frequencies: [  0.3 ,    0.1 ]</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code>terms      : ["very", "model"]
+frequencies: [  0.3 ,    0.1 ]
+</code></pre></div>
 <p>容易看出，这两组数据有伴生关系，下面的代码通过权重类别列函数把该特征组合在一起.</p>
-<div class="highlight"><pre><span></span><span class="n">categorical_column</span> <span class="o">=</span> <span class="n">categorical_column_with_hash_bucket</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="n">categorical_column</span> <span class="o">=</span> <span class="n">categorical_column_with_hash_bucket</span><span class="p">(</span>
   <span class="n">column_name</span><span class="o">=</span><span class="s1">'terms'</span><span class="p">,</span> <span class="n">hash_bucket_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 
 <span class="n">weighted_column</span> <span class="o">=</span> <span class="n">weighted_categorical_column</span><span class="p">(</span>
@@ -570,7 +570,7 @@ input_fn函数的写法如下：</p>
 <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">weighted_column</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
 <span class="n">features</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">parse_example</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="n">make_parse_example_spec</span><span class="p">(</span><span class="n">columns</span><span class="p">))</span>
 <span class="n">linear_prediction</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">linear_model</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">columns</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 <h3 id="shi-yong-te-zheng-lie">使用特征列</h3>
 <p>我们须把多个特征列封装成一个列表，才能作为参数拿给估计器(estimator)用。
 在使用特征列时，要注意区分特征列类型和模型类型。特征列只有两种类型，类别列和密集列；
@@ -591,12 +591,12 @@ input_fn函数的写法如下：</p>
 </li>
 </ul>
 <p><code>DNNLinearCombinedClassifier</code>的代码举例：</p>
-<div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">DNNLinearCombinedClassifier</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">DNNLinearCombinedClassifier</span><span class="p">(</span>
     <span class="n">model_dir</span><span class="o">=</span><span class="s1">'/tmp/census_model'</span><span class="p">,</span>
     <span class="n">linear_feature_columns</span><span class="o">=</span><span class="n">base_columns</span> <span class="o">+</span> <span class="n">crossed_columns</span><span class="p">,</span>
     <span class="n">dnn_feature_columns</span><span class="o">=</span><span class="n">deep_columns</span><span class="p">,</span>
     <span class="n">dnn_hidden_units</span><span class="o">=</span><span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">])</span>
-</pre></div>
+</code></pre></div>
 <h2 id="mo-xing-ding-yi_1">模型定义</h2>
 <h3 id="yu-ding-yi">预定义</h3>
 <p align="center">
@@ -604,20 +604,20 @@ input_fn函数的写法如下：</p>
 <br/>
 </p>
 <p>预定义模型没什么好讲，看看文档就能秒懂，如下面的例子：</p>
-<div class="highlight"><pre><span></span><span class="c1"># 含2个隐藏层的深度神经网络</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># 含2个隐藏层的深度神经网络</span>
 <span class="n">classifier</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">DNNClassifier</span><span class="p">(</span>
    <span class="n">feature_columns</span><span class="o">=</span><span class="n">feature_columns</span><span class="p">,</span> <span class="c1"># 定义好的特征列 </span>
    <span class="n">hidden_units</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>           <span class="c1"># 两个隐藏层, 每层10个神经元</span>
    <span class="n">n_classes</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>                     <span class="c1"># 输出3个类别</span>
    <span class="n">model_dir</span><span class="o">=</span><span class="n">PATH</span><span class="p">)</span>                  <span class="c1"># 存 checkpoints 的路径</span>
-</pre></div>
+</code></pre></div>
 <h3 id="zi-ding-yi">自定义</h3>
 <p>写自定义模型时，其实和传统的写法差不多，只是有些小地方要注意一下。</p>
 <p>基本思路是，定义模型函数，它接收从input_fn()传来的特征和标签，输出由tf.estimator.EstimatorSpec封装后的结果, 
 函数体主要做两件事情，一件是定义模型，一件是通过分支语句分别实现训练、评估和预测。</p>
 <p>我喜欢的结构是把模型单独定义成一个类，然后再用mode_fn()来调用它, 
 mode_fn()的返回用tf.estimator.EstimatorSpec封装，详见下面的例子：</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Sample_model</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Sample_model</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
   <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="o">...</span><span class="p">):</span>
     <span class="o">...</span> <span class="o">&lt;</span> <span class="n">code</span> <span class="o">&gt;</span> <span class="o">...</span>
   <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">training</span><span class="p">):</span>
@@ -664,7 +664,7 @@ mode_fn()的返回用tf.estimator.EstimatorSpec封装，详见下面的例子：
         <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">EstimatorSpec</span><span class="p">(</span>
             <span class="n">mode</span><span class="p">,</span>
             <span class="n">loss</span><span class="o">=</span><span class="n">loss</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 <p>你可能发现，我好像没用到特征列。
 如果在自定义的模型中想用特征列这个工具（再次强调，不是必须），只需在模型的输入层调用下面这个函数即可：</p>
 <ul>
@@ -672,7 +672,7 @@ mode_fn()的返回用tf.estimator.EstimatorSpec封装，详见下面的例子：
 <li><code>tf.feature_column.input_layer(features, feature_columns, ...)</code>：深度模型用这个.</li>
 </ul>
 <p>其中features 来自input_fn 的输出， feature_columns 是由多个特征列组成的列表。</p>
-<div class="highlight"><pre><span></span><span class="c1"># 自定义一个超简单的模型</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># 自定义一个超简单的模型</span>
 <span class="c1"># 输入层</span>
 <span class="n">input_layer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">feature_column</span><span class="o">.</span><span class="n">input_layer</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">feature_columns</span><span class="p">)</span>
 <span class="c1"># 隐藏层: h1，h2</span>
@@ -681,10 +681,10 @@ mode_fn()的返回用tf.estimator.EstimatorSpec封装，详见下面的例子：
 <span class="n">h2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">relu</span><span class="p">)(</span><span class="n">h1</span><span class="p">)</span>
 <span class="c1"># 输出层，3个输出</span>
 <span class="n">logits</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">3</span><span class="p">)(</span><span class="n">h2</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 <h4>合并写法</h4>
 <p>这是tensorflow 官网给出的一种写法, 只用了一个return, 返回内容的判断放在了前面的 if 分支，你可以根据自己的喜好选择不同写法。</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">model_fn</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">model_fn</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
   <span class="k">if</span> <span class="p">(</span><span class="n">mode</span> <span class="o">==</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">TRAIN</span> <span class="ow">or</span>
       <span class="n">mode</span> <span class="o">==</span> <span class="n">tf</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">ModeKeys</span><span class="o">.</span><span class="n">EVAL</span><span class="p">):</span>
     <span class="n">loss</span> <span class="o">=</span> <span class="o">...</span>
@@ -704,13 +704,13 @@ mode_fn()的返回用tf.estimator.EstimatorSpec封装，详见下面的例子：
       <span class="n">predictions</span><span class="o">=</span><span class="n">predictions</span><span class="p">,</span>
       <span class="n">loss</span><span class="o">=</span><span class="n">loss</span><span class="p">,</span>
       <span class="n">train_op</span><span class="o">=</span><span class="n">train_op</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 <h2 id="zu-zhuang_1">组装</h2>
 <p>准备好上面的内容后，就可以把model_fn()和input_fn组装在一起了。方法是用estimator实例化
 估计器对象，然后用这个对象分别进行训练、评估、预测即可。</p>
 <p>在组装时，我们还要加入一些常规的东西。比如设置checkpoint的保存规则，定义一些观测变量，
 方便在训练时用TensorBoard观察，还有超参数等等。具体请看示例注释：</p>
-<div class="highlight"><pre><span></span><span class="c1"># 设置tf输出哪种类别的日志，不同类别详细程度不同</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># 设置tf输出哪种类别的日志，不同类别详细程度不同</span>
 <span class="c1"># tf.logging.后的可选值为DEBUG, INFO, WARN, ERROR, or FATAL.</span>
 <span class="n">tf</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">set_verbosity</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
 
@@ -762,26 +762,26 @@ mode_fn()的返回用tf.estimator.EstimatorSpec封装，详见下面的例子：
 
     <span class="n">eval_results</span> <span class="o">=</span> <span class="n">classifier</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">input_fn</span><span class="o">=</span><span class="n">input_fn_eval</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">eval_results</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 <h2 id="duo-gpuxia-de-xie-fa">多GPU下的写法</h2>
 <p>在多GPU的情况下，代码需要做几点小变化。</p>
 <p>首先, 检查batch_size的数量，它必须能被GPU的数量整除。其目的是让每批的输入数量被平均分配到各个GPU上。</p>
 <p>其次，在model_fn函数中的训练部分封装优化器。</p>
-<div class="highlight"><pre><span></span>    <span class="n">optimizer</span> <span class="o">=</span> <span class="o">...</span>          <span class="c1"># 原优化器的定义不变</span>
+<div class="highlight"><pre><span></span><code>    <span class="n">optimizer</span> <span class="o">=</span> <span class="o">...</span>          <span class="c1"># 原优化器的定义不变</span>
     <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'multi_gpu'</span><span class="p">):</span>
       <span class="n">optimizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">TowerOptimizer</span><span class="p">(</span><span class="n">optimizer</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 <p>最后，在main函数部分封装模型函数(model_fn).</p>
-<div class="highlight"><pre><span></span>  <span class="k">if</span> <span class="n">flags</span><span class="o">.</span><span class="n">multi_gpu</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code>  <span class="k">if</span> <span class="n">flags</span><span class="o">.</span><span class="n">multi_gpu</span><span class="p">:</span>
     <span class="n">model_function</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">replicate_model_fn</span><span class="p">(</span>
         <span class="n">model_fn</span><span class="p">,</span> <span class="n">loss_reduction</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">Reduction</span><span class="o">.</span><span class="n">MEAN</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 <h2 id="qi-ta">其他</h2>
 <h3 id="san-ge-import">三个import</h3>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
-</pre></div>
+</code></pre></div>
 <p>常看到这三个置于顶上的import 语句，一直没有深究它们有什么用，今天查了下资料，发现这三句都是针对python 2.X版本的情况，分别作用如下：</p>
 <ul>
 <li>print_function: print语句必须使用函数形式，而 print &lsquo;test&rsquo;这句在这种条件下就会报错。</li>
@@ -790,7 +790,7 @@ mode_fn()的返回用tf.estimator.EstimatorSpec封装，详见下面的例子：
 </ul>
 <h3 id="guan-yu-chao-can-shu">关于超参数</h3>
 <p>既然训练始终要调参，不如把参数提前定义好，比如下面这个参数类。</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">argparse</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">argparse</span>
 <span class="k">class</span> <span class="nc">MymodelArgParser</span><span class="p">(</span><span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">):</span>
 
   <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -806,9 +806,9 @@ mode_fn()的返回用tf.estimator.EstimatorSpec封装，详见下面的例子：
         <span class="n">help</span><span class="o">=</span><span class="s1">'Number of images to process in a batch'</span><span class="p">)</span>
 
     <span class="o">...</span> <span class="o">&lt;</span><span class="n">code</span><span class="o">&gt;</span> <span class="o">...</span>
-</pre></div>
+</code></pre></div>
 <p>还有一种方法也比较优雅，它把参数存成json文件，运行时载入参数即可，见下面的几个功能函数：</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">codecs</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">codecs</span>
 
 <span class="c1"># 从指定目录载入参数</span>
 <span class="k">def</span> <span class="nf">load_hparams</span><span class="p">(</span><span class="n">model_dir</span><span class="p">):</span>
@@ -846,9 +846,9 @@ mode_fn()的返回用tf.estimator.EstimatorSpec封装，详见下面的例子：
       <span class="n">hparams</span><span class="o">.</span><span class="n">parse_json</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 
   <span class="k">return</span> <span class="n">hparams</span>
-</pre></div>
+</code></pre></div>
 <h3 id="zhu-cheng-xu-ru-kou">主程序入口</h3>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">FLAGS</span><span class="p">,</span> <span class="n">model_function</span><span class="p">,</span> <span class="n">input_function</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">FLAGS</span><span class="p">,</span> <span class="n">model_function</span><span class="p">,</span> <span class="n">input_function</span><span class="p">):</span>
   <span class="o">...</span> <span class="o">&lt;</span><span class="n">code</span><span class="o">&gt;</span> <span class="o">...</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
@@ -856,7 +856,7 @@ mode_fn()的返回用tf.estimator.EstimatorSpec封装，详见下面的例子：
   <span class="n">tf</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">set_verbosity</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
   <span class="n">FLAGS</span><span class="p">,</span> <span class="n">unparsed</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_known_args</span><span class="p">()</span>
   <span class="n">tf</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="o">=</span><span class="n">main</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+</span> <span class="n">unparsed</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var align = "center",
         indent = "0em",
@@ -920,8 +920,8 @@ mode_fn()的返回用tf.estimator.EstimatorSpec封装，详见下面的例子：
 
   <!-- Gitalk 评论 start  -->
   <!-- Link Gitalk 的支持文件  -->
-  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-  <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 
   <div id="gitalk-container"></div>
       <script type="text/javascript">
