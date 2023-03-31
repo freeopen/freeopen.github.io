@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
     <title>Freeopen - 机器学习</title>
     <subtitle>Freeopen 的个人兴趣研究所.</subtitle>
-    <link href="https://www.freeopen.tech/categories/ji-qi-xue-xi/atom.xml" rel="self" type="application/atom+xml"/>
-    <link href="https://www.freeopen.tech"/>
+    <link href="https://freeopen.github.io/categories/ji-qi-xue-xi/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://freeopen.github.io"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
     <updated>2021-02-17T00:00:00+00:00</updated>
-    <id>https://www.freeopen.tech/categories/ji-qi-xue-xi/atom.xml</id>
+    <id>https://freeopen.github.io/categories/ji-qi-xue-xi/atom.xml</id>
     <entry xml:lang="en">
         <title>冠军方案之 宫颈癌风险智能诊断</title>
         <published>2021-02-14T00:00:00+00:00</published>
@@ -14,8 +14,8 @@
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/cervical/" type="text/html"/>
-        <id>https://www.freeopen.tech/cervical/</id>
+        <link rel="alternate" href="https://freeopen.github.io/cervical/" type="text/html"/>
+        <id>https://freeopen.github.io/cervical/</id>
         
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;赛道1冠军：deep-thinker 团队&lt;&#x2F;p&gt;
@@ -54,7 +54,7 @@
 &lt;h2 id=&quot;sai-dao-yi-fang-an&quot;&gt;赛道一方案&lt;&#x2F;h2&gt;
 &lt;p&gt;没有采用常用的anchor-based模型，而是选择了非常契合本次赛题特点的anchor-free模型RepPoints。&lt;&#x2F;p&gt;
 &lt;p&gt;RepPoints(ResNeXt101 + FPN + SE + DCN)&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;cervical&#x2F;.&#x2F;20210214113701.jpg&quot; alt=&quot;20210214113701&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;cervical&#x2F;.&#x2F;20210214113701.jpg&quot; alt=&quot;20210214113701&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;h3 id=&quot;zai-xian-sui-ji-cai-jian&quot;&gt;在线随机裁剪&lt;&#x2F;h3&gt;
 &lt;p&gt;随机选择输入图片中的一个目标，围绕目标随机切出边长在768~2048范围内的子图，然后缩放至边长为1024后，再送进网络。若目标边长超过了范围，则将目标与少量背景直接切出，再进行缩放。&lt;&#x2F;p&gt;
 &lt;h3 id=&quot;reppoints-mo-xing&quot;&gt;RepPoints 模型&lt;&#x2F;h3&gt;
@@ -68,8 +68,8 @@
 &lt;li&gt;通过两次预测偏移量，对目标表示中各点位置进行优化，最终获得精确定位&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
 &lt;h3 id=&quot;shi-yan-jie-guo-ji-mo-xing-rong-he&quot;&gt;实验结果及模型融合&lt;&#x2F;h3&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;cervical&#x2F;.&#x2F;20210214120840.jpg&quot; alt=&quot;20210214120840&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;cervical&#x2F;.&#x2F;20210214120902.jpg&quot; alt=&quot;20210214120902&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;cervical&#x2F;.&#x2F;20210214120840.jpg&quot; alt=&quot;20210214120840&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;cervical&#x2F;.&#x2F;20210214120902.jpg&quot; alt=&quot;20210214120902&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;sai-dao-er-fang-an&quot;&gt;赛道二方案&lt;&#x2F;h2&gt;
 &lt;h3 id=&quot;shu-ju-zeng-qiang&quot;&gt;数据增强&lt;&#x2F;h3&gt;
 &lt;ul&gt;
@@ -82,7 +82,7 @@
 &lt;&#x2F;ul&gt;
 &lt;h3 id=&quot;zheng-ti-jia-gou&quot;&gt;整体架构&lt;&#x2F;h3&gt;
 &lt;h4 id=&quot;ji-yu-openvinode-liang-hua-tui-li-jia-gou&quot;&gt;基于OpenVINO的量化推理架构&lt;&#x2F;h4&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;cervical&#x2F;.&#x2F;openvino.png&quot; alt=&quot;openvino&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;cervical&#x2F;.&#x2F;openvino.png&quot; alt=&quot;openvino&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;模型结构：&lt;&#x2F;p&gt;
 &lt;p&gt;主模型为RetinaNet ， 用开源的 imageNet 预训练模型初始化。&lt;&#x2F;p&gt;
 &lt;p&gt;比较两种类型的backbone:&lt;&#x2F;p&gt;
@@ -119,7 +119,7 @@
 &lt;li&gt;发起执行请求好，控制权交还回主程序，分摊数据读取和后处理的时间。其中子进程负责图片的读取、裁剪、缩放、拼batch 等数据操作，处理完的数据存放到共享队列中；&lt;&#x2F;li&gt;
 &lt;li&gt;执行完成后，通过回调函数通知主程序。主进程从共享队列读取数据，负责模型推理、后处理操作。（使用 “生产者-消费者”模式，采用共享队列实现数据的通信）&lt;&#x2F;li&gt;
 &lt;li&gt;可并发多个 infer request 
-&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;cervical&#x2F;20210214165514.jpg&quot; alt=&quot;20210214165514&quot; &#x2F;&gt;&lt;&#x2F;li&gt;
+&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;cervical&#x2F;20210214165514.jpg&quot; alt=&quot;20210214165514&quot; &#x2F;&gt;&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
 &lt;h4 id=&quot;shi-yan-jie-guo&quot;&gt;实验结果&lt;&#x2F;h4&gt;
 &lt;p&gt;map0.5: 33.54%, 推理总时长：24s。&lt;&#x2F;p&gt;
@@ -133,8 +133,8 @@
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/x-cargo/" type="text/html"/>
-        <id>https://www.freeopen.tech/x-cargo/</id>
+        <link rel="alternate" href="https://freeopen.github.io/x-cargo/" type="text/html"/>
+        <id>https://freeopen.github.io/x-cargo/</id>
         
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;冠军：YuanXu&lt;&#x2F;p&gt;
@@ -182,7 +182,7 @@
 &lt;li&gt;使用数据增强、模型参数均值、半监督学习的方法提高模型泛化能力&lt;&#x2F;li&gt;
 &lt;li&gt;使用测试增强提高结果精度(并优化)&lt;&#x2F;li&gt;
 &lt;li&gt;一些实验结果
-&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;x-cargo&#x2F;.&#x2F;20210214174954.jpg&quot; alt=&quot;20210214174954&quot; &#x2F;&gt;&lt;&#x2F;li&gt;
+&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;x-cargo&#x2F;.&#x2F;20210214174954.jpg&quot; alt=&quot;20210214174954&quot; &#x2F;&gt;&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
 </content>
         
@@ -194,8 +194,8 @@
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/cloth-cut/" type="text/html"/>
-        <id>https://www.freeopen.tech/cloth-cut/</id>
+        <link rel="alternate" href="https://freeopen.github.io/cloth-cut/" type="text/html"/>
+        <id>https://freeopen.github.io/cloth-cut/</id>
         
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;冠军：行星防御理事会 团队（乔德平等）&lt;&#x2F;p&gt;
@@ -382,8 +382,8 @@
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/crop/" type="text/html"/>
-        <id>https://www.freeopen.tech/crop/</id>
+        <link rel="alternate" href="https://freeopen.github.io/crop/" type="text/html"/>
+        <id>https://freeopen.github.io/crop/</id>
         
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;冠军：华南理工黄钦建等（冲啊大黄 团队 ）&lt;&#x2F;p&gt;
@@ -404,8 +404,8 @@
 &lt;&#x2F;ul&gt;
 &lt;h2 id=&quot;mo-xing-xuan-ze&quot;&gt;模型选择&lt;&#x2F;h2&gt;
 &lt;p&gt;DeeplabV3+ （注：决赛5个队伍中3个用了它），backbone为Xception-65和ResNet-101以及DenseNet-121。从 A榜分数看，不加任何trick时，DenseNet分数略高于另外两个，但是显存占用太大以及训练时间太长，在后来的方案里就舍弃了。决赛复现时，使用了两个Xception-65和一个ResNet-101投票，投票的每个模型用不同的数据训练，增加模型差异。&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;crop&#x2F;.&#x2F;157137269012195351571372690503.png&quot; alt=&quot;157137269012195351571372690503&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;crop&#x2F;.&#x2F;157137272713270821571372727612.png&quot; alt=&quot;157137272713270821571372727612&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;crop&#x2F;.&#x2F;157137269012195351571372690503.png&quot; alt=&quot;157137269012195351571372690503&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;crop&#x2F;.&#x2F;157137272713270821571372727612.png&quot; alt=&quot;157137272713270821571372727612&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;gai-jin-cuo-shi&quot;&gt;改进措施&lt;&#x2F;h2&gt;
 &lt;h3 id=&quot;peng-zhang-yu-ce&quot;&gt;膨胀预测&lt;&#x2F;h3&gt;
 &lt;p&gt;&lt;strong&gt;方格效应&lt;&#x2F;strong&gt;：如果直接做不重叠滑窗预测拼接，得到的预测结果拼接痕迹明显。&lt;&#x2F;p&gt;
@@ -481,8 +481,8 @@
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/gd-defect/" type="text/html"/>
-        <id>https://www.freeopen.tech/gd-defect/</id>
+        <link rel="alternate" href="https://freeopen.github.io/gd-defect/" type="text/html"/>
+        <id>https://freeopen.github.io/gd-defect/</id>
         
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;冠军：Are you OK 战队（中山大学曾兆阳等）&lt;&#x2F;p&gt;
@@ -510,10 +510,10 @@
 &lt;p&gt;我们采用的第二个改进方案是Deformable Convolutoin可变形卷积。我们发现在数据集中，铝材的瑕疵有很多是这种条状的，传统正规的正方形结构的卷积对这种形状的缺陷处理能力还不够强。因此我们采用了可变形的卷积， 在卷积计算的过程中能够自动地计算每个点的偏移，从而从最合适的地方取特征进行卷积。右边的示意图大致描述 了可变形卷积的过程，它能够让卷积的区域尽可能地集中在缺陷上。&lt;&#x2F;p&gt;
 &lt;p&gt;具体实现上，将原本resent结构的最后一个block改成了可变卷积，原因是在可变卷积的实现中，需要基于前面 的特征来学习一个偏移，前面的特征得足够强才能保证这个偏移不会乱学，因此我们只改动了最后一个block。总体 的框架还是跟前面FPN的一样。&lt;&#x2F;p&gt;
 &lt;h4 id=&quot;contextual-roi-pooling&quot;&gt;Contextual ROI Pooling&lt;&#x2F;h4&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;gd-defect&#x2F;.&#x2F;20210213120121.jpg&quot; alt=&quot;20210213120121&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;gd-defect&#x2F;.&#x2F;20210213120121.jpg&quot; alt=&quot;20210213120121&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;我们的第三个改进方案，是在提取ROI特征的时候，引入了context上下文信息，我们把这个操作叫做contextual roi pooling。我们用上面两个例子来说明上下文信息的好处。Faster R-CNN是一个先生成候选框，然后精调候选框的过程，那么第一步生成的候选框势必会有偏大或者偏小的情况。之前的方法可以理解成用框内部的信息来推断框的 位置，左边这个例子是框偏大的情况，根据内部信息是可以知道框应该往里调的，但是右边这个例子框偏小了， 我们能知道该往外调整，但是该调多少呢这个是无从知晓的。因此一个显而易见的想法，就是把整张图片的信息也 送给这个候选框当特征，这样相当于让每个候选框以整张图片作为参考，这样呢每个框就知道该往哪调了。&lt;&#x2F;p&gt;
 &lt;p&gt;具体的实现是这样，我们把整张图片也作为一个roi，用同样的ROI Pooling提取全局的特征，然后跟每一个候选框 的特征相加，再进行后面的分类和回归操作。这样的实现只多进行了一个roi的特征提取和一个特征相加的操作， 却能大大地提升准确率。&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;gd-defect&#x2F;.&#x2F;20210213120731.jpg&quot; alt=&quot;20210213120731&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;gd-defect&#x2F;.&#x2F;20210213120731.jpg&quot; alt=&quot;20210213120731&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;xun-lian-ji-qiao&quot;&gt;训练技巧&lt;&#x2F;h2&gt;
 &lt;p&gt;数据集里面是有提供无缺陷样本的，我们也对这些图片进行了使用。 在检测器的训练过程中，有一步是正负样本的选择。我们在训练的时候使用了一个策略，每次会随机选择一张缺陷样本和一张无缺陷样本，然后训练的正样本会在缺陷图片中选择，负样本会在两张图片中都选择，两张图片的所有 正负样本合起来做一个OHEM（Online hard example mining），再进行后面的训练操作。这样的好处是，充分利用了无缺陷样本，&lt;strong&gt;增大了模型判别背景信息的能力&lt;&#x2F;strong&gt;。&lt;&#x2F;p&gt;
 &lt;p&gt;铝材的缺陷是具有翻转不变性的，将一张图片水平和竖直翻转之后，他的瑕疵信 息是不会变的，也就是说，我们将图片进行翻转之后，再将框做一个变换到对应的位置，这样可以构建出一批新的数据来。通过这样的数据扩增方式，我们把训练数据扩增了四倍，也因此&lt;strong&gt;提升了模型的鲁棒性&lt;&#x2F;strong&gt;。&lt;&#x2F;p&gt;
@@ -529,8 +529,8 @@
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/guangdong-cloth/" type="text/html"/>
-        <id>https://www.freeopen.tech/guangdong-cloth/</id>
+        <link rel="alternate" href="https://freeopen.github.io/guangdong-cloth/" type="text/html"/>
+        <id>https://freeopen.github.io/guangdong-cloth/</id>
         
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;冠军：哪儿都是坑啊 团队（徐光福等）&lt;&#x2F;p&gt;
@@ -580,8 +580,8 @@
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/ai-keypoints/" type="text/html"/>
-        <id>https://www.freeopen.tech/ai-keypoints/</id>
+        <link rel="alternate" href="https://freeopen.github.io/ai-keypoints/" type="text/html"/>
+        <id>https://freeopen.github.io/ai-keypoints/</id>
         
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;冠军：李weite 及 bilibili 团队&lt;&#x2F;p&gt;
@@ -634,7 +634,7 @@ Images&#x2F;blouse&#x2F;02b54c183d2dbd2c056db14303064886.jpg,blouse,244_76_1,282
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;每个关键点由一个三元组表示，每个元素由下划线连接，表示为“ x_y_v”，其中x和y为坐标，v为可见性。 如果关键点可见，则可见性等于1；如果关键点被遮挡，则可见性等于0；如果类别中不存在或未定义，则可见性等于-1。 &lt;&#x2F;p&gt;
 &lt;h3 id=&quot;ping-jie-biao-zhun&quot;&gt;评价标准&lt;&#x2F;h3&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;ai-keypoints&#x2F;.&#x2F;TB1nI4_FY1YBuNjSszeXXablFXa.tfsprivate.png&quot; alt=&quot;TB1nI4_FY1YBuNjSszeXXablFXa.tfsprivate&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;ai-keypoints&#x2F;.&#x2F;TB1nI4_FY1YBuNjSszeXXablFXa.tfsprivate.png&quot; alt=&quot;TB1nI4_FY1YBuNjSszeXXablFXa.tfsprivate&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;Normalized Error（NE）用于评估提交的结果。 NE是预测关键点位置和注释位置之间的平均归一化距离。 注意，NE计算仅涉及可见的关键点。&lt;&#x2F;p&gt;
 &lt;p&gt;其中 $k$ 为关键点 ID，$d_k$为预测关键点位置与带注释的关键点位置之间的距离，$s_k$为距离归一化参数（对于上衣，外套和衣服，它等于两个腋窝点之间的欧几里得距离;对于裤子和 裙边等于两个腰带点之间的距离），$v_k$即关键点的可见性。&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;jie-ti-si-lu&quot;&gt;解题思路&lt;&#x2F;h2&gt;
@@ -681,18 +681,18 @@ Images&#x2F;blouse&#x2F;02b54c183d2dbd2c056db14303064886.jpg,blouse,244_76_1,282
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/ai-reconition/" type="text/html"/>
-        <id>https://www.freeopen.tech/ai-reconition/</id>
+        <link rel="alternate" href="https://freeopen.github.io/ai-reconition/" type="text/html"/>
+        <id>https://freeopen.github.io/ai-reconition/</id>
         
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;冠军：西安交大在读博士及硕士组成的“禾思众成”团队&lt;&#x2F;p&gt;
 &lt;&#x2F;blockquote&gt;
 &lt;h2 id=&quot;ren-wu-shuo-ming&quot;&gt;任务说明&lt;&#x2F;h2&gt;
 &lt;p&gt;服装属性是时装领域的基础知识，它既庞大又复杂。 我们构建了一个层次结构的属性树作为结构化的分类目标，以描述服装的认知过程。 邀请您设计算法来识别服装图像的属性。 此任务可能会广泛应用于服装图片搜索，导航标签，混搭推荐等。 &lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;ai-reconition&#x2F;.&#x2F;cloth-attributes.png&quot; alt=&quot;女装属性树&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;ai-reconition&#x2F;.&#x2F;cloth-attributes.png&quot; alt=&quot;女装属性树&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;要求检测上图中所有可区分的服装属性标签。 统计下来，训练集的图片约18万张，8个大类（4个设计属性，包括各种领口的款式，4个长度属性，包括衣长、裙长、裤长、袖长），54个小类。 &lt;&#x2F;p&gt;
 &lt;h3 id=&quot;biao-qian&quot;&gt;标签&lt;&#x2F;h3&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;ai-reconition&#x2F;.&#x2F;cloth-model.png&quot; alt=&quot;模特及标签&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;ai-reconition&#x2F;.&#x2F;cloth-model.png&quot; alt=&quot;模特及标签&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;a）上图的数据由训练有素的注释器标记。 然后，时尚专家会仔细检查这些标签，以确保较高的标签准确性。 带注释的数据中存在一定数量的缺失标签。 例如，图像中可能只有一个颈部设计标签，且颈部设计和袖子长度可见。 不再标记袖子长度以保持每个属性维度的数据均匀性。&lt;&#x2F;p&gt;
 &lt;p&gt;b）为这条赛道选择了八个主要属性尺寸，即领口设计(Neckline)、领子设计(Collar)、高领设计(High Neck)、翻领设计(Lapel)、袖子长度(Sleeves length)、上衣长度(Length of top)、裙长(Length of skirt)和裤子长度(Length of trousers)。&lt;&#x2F;p&gt;
 &lt;h3 id=&quot;shu-ju-te-zheng&quot;&gt;数据特征&lt;&#x2F;h3&gt;
@@ -722,7 +722,7 @@ Images&#x2F;blouse&#x2F;02b54c183d2dbd2c056db14303064886.jpg,blouse,244_76_1,282
 &lt;p&gt;Net2Net模型（将一个神经网络中的知识快速转移到另一个神经网络中），把原模型直接转成更高分辨率，兼顾感受野保同性和函数保同性，计算量远小于把图片分辨率提高所增加的计算量。&lt;&#x2F;p&gt;
 &lt;h4 id=&quot;gan-shou-ye-bao-tong-xing&quot;&gt;感受野保同性&lt;&#x2F;h4&gt;
 &lt;p&gt;降采样层增加后续卷积层的感受野，极大减少模型计算量，但是免不了会丢失一些信息。而dilated卷积不会丢失信息，因此用空洞卷积替换掉降采样层。 下面是换算公式，替换stage3和stage4的降采样层，在保持感受野增加的前提下，最后输出的分辨率提高了4倍。&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;ai-reconition&#x2F;.&#x2F;20210211175358.jpg&quot; alt=&quot;20210211175358&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;ai-reconition&#x2F;.&#x2F;20210211175358.jpg&quot; alt=&quot;20210211175358&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;优点：Net2Net 在不同计算能力的设备上转换模型，不需要重新训练。&lt;&#x2F;p&gt;
 &lt;h4 id=&quot;han-shu-bao-tong-xing&quot;&gt;函数保同性&lt;&#x2F;h4&gt;
 &lt;p&gt;基本原理为多出来的参数维度，随机拷贝原来参数的数据，再将多出来的数值求平均，来保证原始模型的知识保有。&lt;&#x2F;p&gt;
@@ -743,8 +743,8 @@ Images&#x2F;blouse&#x2F;02b54c183d2dbd2c056db14303064886.jpg,blouse,244_76_1,282
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/amap/" type="text/html"/>
-        <id>https://www.freeopen.tech/amap/</id>
+        <link rel="alternate" href="https://freeopen.github.io/amap/" type="text/html"/>
+        <id>https://freeopen.github.io/amap/</id>
         
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;冠军：北邮在读博士 朱奕达及团队&lt;&#x2F;p&gt;
@@ -831,8 +831,8 @@ Images&#x2F;blouse&#x2F;02b54c183d2dbd2c056db14303064886.jpg,blouse,244_76_1,282
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/flink/" type="text/html"/>
-        <id>https://www.freeopen.tech/flink/</id>
+        <link rel="alternate" href="https://freeopen.github.io/flink/" type="text/html"/>
+        <id>https://freeopen.github.io/flink/</id>
         
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;冠军：合肥工大 SkyPeaceLL&lt;&#x2F;p&gt;
@@ -876,7 +876,7 @@ Images&#x2F;blouse&#x2F;02b54c183d2dbd2c056db14303064886.jpg,blouse,244_76_1,282
 &lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
 &lt;h2 id=&quot;gong-zuo-liu&quot;&gt;工作流&lt;&#x2F;h2&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;flink&#x2F;flink-workflow.png&quot; alt=&quot;flink-workflow&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;flink&#x2F;flink-workflow.png&quot; alt=&quot;flink-workflow&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;官方提供一套docker环境及baseline代码，由于新冠病例和天猫精灵在算法任务上的相似性，编写两个 workflow 配置文件(yaml)，使得一套python代码运行两个算法。&lt;&#x2F;p&gt;
 &lt;p&gt;基本思路：&lt;&#x2F;p&gt;
 &lt;ol&gt;
@@ -967,8 +967,8 @@ Images&#x2F;blouse&#x2F;02b54c183d2dbd2c056db14303064886.jpg,blouse,244_76_1,282
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/segment/" type="text/html"/>
-        <id>https://www.freeopen.tech/segment/</id>
+        <link rel="alternate" href="https://freeopen.github.io/segment/" type="text/html"/>
+        <id>https://freeopen.github.io/segment/</id>
         
         <content type="html">&lt;h2 id=&quot;tu-xiang-fen-ge-dao-di-gan-shi-yao&quot;&gt;图像分割到底干什么&lt;&#x2F;h2&gt;
 &lt;p&gt;图像分割问题主要流行四类任务，它们分别是目标检测( Object Detection )、语义分割( Semantic Segmentation )、实例分割( Instance Segmentation ) 和全景分割( Panoptic Segmentation )。这四类任务的意义分别为：&lt;&#x2F;p&gt;
@@ -1422,7 +1422,7 @@ C1=4, P1=2, p2=2, p5=2, 乘起来等于32倍。这时最后一层就要
 这将导致这些网格对应的感受野过大，从而使反向传播时涉及的参数量也过多，
 这也将降低反向传播的效率。&lt;&#x2F;li&gt;
 &lt;&#x2F;ol&gt;
-&lt;p&gt;作者针对这些问题改进后，训练速度提高约 64 倍。(详见&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;segment&#x2F;#xun-lian-wei-diao&quot;&gt;训练微调&lt;&#x2F;a&gt;)&lt;&#x2F;p&gt;
+&lt;p&gt;作者针对这些问题改进后，训练速度提高约 64 倍。(详见&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;segment&#x2F;#xun-lian-wei-diao&quot;&gt;训练微调&lt;&#x2F;a&gt;)&lt;&#x2F;p&gt;
 &lt;p&gt;然后在 R-CNN 和 SPP-Net 基础上提出了新的模型 Fast R-CNN。&lt;&#x2F;p&gt;
 &lt;p align=&quot;center&quot;&gt;
 &lt;img width=&quot;80%&quot; src=&quot;.&#x2F;fast.r-cnn.png&quot; &#x2F;&gt;
@@ -1501,11 +1501,11 @@ Regions Proposals Networks)来提取这些候选框。&lt;&#x2F;p&gt;
 通常由conv+relu+pool层构成，常用一些预训练好的网络（VGG、Inception、Resnet等），
 获得的结果叫做特征图；&lt;&#x2F;li&gt;
 &lt;li&gt;生成候选框：在获得的特征图的每一个点上做多个候选框；&lt;&#x2F;li&gt;
-&lt;li&gt;候选框分类：在 RPN 阶段(&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;segment&#x2F;#faster-r-cnn-xun-lian-ce-lue&quot;&gt;图12&lt;&#x2F;a&gt;第1步)，用来区分前景（与标定边界框的重叠区域大于0.5）
+&lt;li&gt;候选框分类：在 RPN 阶段(&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;segment&#x2F;#faster-r-cnn-xun-lian-ce-lue&quot;&gt;图12&lt;&#x2F;a&gt;第1步)，用来区分前景（与标定边界框的重叠区域大于0.5）
 和背景（不与任何标定边界框重叠或者其重叠区域小于0.1）；
-在 Fast R-CNN 阶段(&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;segment&#x2F;#faster-r-cnn-xun-lian-ce-lue&quot;&gt;图12&lt;&#x2F;a&gt;第4步)，用于区分不同种类的目标（猫、狗、人等）;
-- 候选框回归：在 RPN 阶段(&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;segment&#x2F;#faster-r-cnn-xun-lian-ce-lue&quot;&gt;图12&lt;&#x2F;a&gt;第1步)，进行初步调整；
-在Fast R-CNN 阶段(&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;segment&#x2F;#faster-r-cnn-xun-lian-ce-lue&quot;&gt;图12&lt;&#x2F;a&gt;第4步)进行精确调整。&lt;&#x2F;li&gt;
+在 Fast R-CNN 阶段(&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;segment&#x2F;#faster-r-cnn-xun-lian-ce-lue&quot;&gt;图12&lt;&#x2F;a&gt;第4步)，用于区分不同种类的目标（猫、狗、人等）;
+- 候选框回归：在 RPN 阶段(&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;segment&#x2F;#faster-r-cnn-xun-lian-ce-lue&quot;&gt;图12&lt;&#x2F;a&gt;第1步)，进行初步调整；
+在Fast R-CNN 阶段(&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;segment&#x2F;#faster-r-cnn-xun-lian-ce-lue&quot;&gt;图12&lt;&#x2F;a&gt;第4步)进行精确调整。&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
 &lt;p&gt;其整体流程如下：&lt;&#x2F;p&gt;
 &lt;ul&gt;
@@ -1615,7 +1615,7 @@ $$&lt;&#x2F;p&gt;
 (2)式中，$x, x_a, x^*$分别对应预测边界框、锚点候选框、标定边界框的 x 坐标,
 (y、w、h 的情形与 x 类似)&lt;&#x2F;li&gt;
 &lt;li&gt;$L_{reg}(t_i, t_i^* ) = R(t_i − t_i^*)$, 
-这里的$R$函数是 &lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;segment&#x2F;#duo-ren-wu-sun-shi-han-shu-multi-task-loss&quot;&gt;smooth L1 损失函数&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+这里的$R$函数是 &lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;segment&#x2F;#duo-ren-wu-sun-shi-han-shu-multi-task-loss&quot;&gt;smooth L1 损失函数&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
 &lt;li&gt;$L_{cls}(p_i, p_i^*)$是对数损失函数，与Fast R-CNN定义一致&lt;&#x2F;li&gt;
 &lt;li&gt;$N_{cls}$, $N_{reg}$ 是求和后的正则化因子(即求平均值)，其中 $N_{cls} = batchsize $ , 
 $N_{reg}$等于参与损失函数计算的锚点候选框的数量。&lt;&#x2F;li&gt;
@@ -1722,9 +1722,9 @@ w 和 h 是ROI区域(候选框)的长和宽。
 除此之外，我们可以更换不同的主干结构(Backbone Architecture)和
 头部结构(Head Architecture)来获得不同性能的结果。&lt;&#x2F;p&gt;
 &lt;p&gt;Mask R-CNN是以往经典算法的集大成之作，算法思路并不复杂，
-即在原始&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;segment&#x2F;#faster-r-cnn&quot;&gt;Faster R-CNN&lt;&#x2F;a&gt;算法的基础上面增加了&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;segment&#x2F;#fcn&quot;&gt;FCN&lt;&#x2F;a&gt;算法来产生对应的MASK分支。 
+即在原始&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;segment&#x2F;#faster-r-cnn&quot;&gt;Faster R-CNN&lt;&#x2F;a&gt;算法的基础上面增加了&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;segment&#x2F;#fcn&quot;&gt;FCN&lt;&#x2F;a&gt;算法来产生对应的MASK分支。 
 Mask R-CNN 比 Faster R-CNN 复杂，但和原始的 Faster R-CNN 的速度相当。
-由于发现了ROI Pooling中所存在的&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;segment&#x2F;#que-xian-roichi-hua-de-er-ci-liang-hua-pian-chai-wen-ti&quot;&gt;像素偏差问题&lt;&#x2F;a&gt;，提出了对应的 ROIAlign 策略，
+由于发现了ROI Pooling中所存在的&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;segment&#x2F;#que-xian-roichi-hua-de-er-ci-liang-hua-pian-chai-wen-ti&quot;&gt;像素偏差问题&lt;&#x2F;a&gt;，提出了对应的 ROIAlign 策略，
 加上 FCN 精准的像素掩膜(Mask)，使得其可以获得高准确率。&lt;&#x2F;p&gt;
 &lt;p&gt;所以，Mask R-CNN 的结构如下图，即Faster R-CNN + FCN, 
 更细致的是 RPN + ROIAlign + Fast-rcnn + FCN。&lt;&#x2F;p&gt;
@@ -1785,7 +1785,7 @@ ROIAlign 算法没有使用量化操作，保留计算中的小数位。
 然后有两个分支，上面的分支负责分类和回归，下面的分支负责生成对应的mask。
 由于前面进行了多次卷积和池化，减小了对应的分辨率，mask分支开始利用反卷积进行分辨率的提升，
 同时减少通道的个数，变为14x14x256，最后输出了14x14x80的mask模板。&lt;&#x2F;p&gt;
-&lt;p&gt;而右边使用到的主干是&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;segment&#x2F;#fpn&quot;&gt;FPN&lt;&#x2F;a&gt;，由于FPN的特征图包含了多层特征，
+&lt;p&gt;而右边使用到的主干是&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;segment&#x2F;#fpn&quot;&gt;FPN&lt;&#x2F;a&gt;，由于FPN的特征图包含了多层特征，
 因此这里使用了较少的filters。该架构也分为两个分支，作用于前者相同，
 而mask分支中进行了多次卷积操作，首先将ROI变化为14x14x256的feature，然后进行了 5 次相同的操作，
 然后进行反卷积操作，最后输出28x28x80的mask。
@@ -1793,7 +1793,7 @@ ROIAlign 算法没有使用量化操作，保留计算中的小数位。
 &lt;p&gt;实验表明，右边的架构在速度和精度上都有提升。&lt;&#x2F;p&gt;
 &lt;h3 id=&quot;sun-shi-han-shu-1&quot;&gt;损失函数&lt;&#x2F;h3&gt;
 &lt;p&gt;$$ L = L_{cls} + L_{box} + L_{mask} $$&lt;&#x2F;p&gt;
-&lt;p&gt;其中$L_{cls}$和$L_{box}$和Faster R-CNN 中&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;segment&#x2F;#sun-shi-han-shu&quot;&gt;定义&lt;&#x2F;a&gt; 的相同。对于每一个ROI，
+&lt;p&gt;其中$L_{cls}$和$L_{box}$和Faster R-CNN 中&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;segment&#x2F;#sun-shi-han-shu&quot;&gt;定义&lt;&#x2F;a&gt; 的相同。对于每一个ROI，
 mask分支有$K \cdot m^2$ 维度的输出，其对 K 个大小为 mxm 的 mask 进行编码，
 每一个 mask 有 K 个类别。
 这里对每个像素用sigmoid分类，并且将$L_{mask}$定义为二分类的交叉熵损失函数 。
@@ -1910,7 +1910,7 @@ truth 角点的高斯分布计算得到($\sigma={1 \over 3}$)&lt;&#x2F;li&gt;
 $$L_{off} = {1 \over N}\sum_{k=1}^N SmoothL1Loss(o_k, \hat{o}_k)  \tag{3}$$&lt;&#x2F;p&gt;
 &lt;p&gt;这里的 offsets 表示取整计算时丢失的误差信息, 
 其中，(2)式中$n$表示原始图像到特征图的缩小倍数，$x,y$表示原始图像上的坐标位置，
-如果除不尽就向下取整。(3)式是在 Fast R-CNN 中提过的&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;segment&#x2F;#duo-ren-wu-sun-shi-han-shu-multi-task-loss&quot;&gt;smooth L1 损失函数&lt;&#x2F;a&gt;。&lt;&#x2F;p&gt;
+如果除不尽就向下取整。(3)式是在 Fast R-CNN 中提过的&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;segment&#x2F;#duo-ren-wu-sun-shi-han-shu-multi-task-loss&quot;&gt;smooth L1 损失函数&lt;&#x2F;a&gt;。&lt;&#x2F;p&gt;
 &lt;p&gt;&lt;strong&gt;embeddings 的损失函数&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;由于对每个角点的预测都是独立的，但我们的目标是要找到一对左上和右下的角点对，
 需要找到一种办法来为角点配对，这个配对的红娘就是为每个角点生成的嵌入向量(embedding vector)。
@@ -1950,11 +1950,11 @@ $e_{b_k}$ 表示第k类目标的右下角点的嵌入向量&lt;&#x2F;li&gt;
 &lt;&#x2F;p&gt;
 &lt;h3 id=&quot;yu-ce-shi-de-ji-ge-xi-jie&quot;&gt;预测时的几个细节&lt;&#x2F;h3&gt;
 &lt;ol&gt;
-&lt;li&gt;在得到预测角点后，会对这些角点做&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;segment&#x2F;#ru-he-xuan-ze-zui-hao-de-bian-jie-kuang&quot;&gt;NMS&lt;&#x2F;a&gt;操作，
+&lt;li&gt;在得到预测角点后，会对这些角点做&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;segment&#x2F;#ru-he-xuan-ze-zui-hao-de-bian-jie-kuang&quot;&gt;NMS&lt;&#x2F;a&gt;操作，
 选择前100个左上角角点和100个右下角角点。&lt;&#x2F;li&gt;
 &lt;li&gt;计算左上和右下角点的嵌入向量的距离时采用L1范数，距离大于0.5或者两个点来自不同类别的目标的都不能构成一对。&lt;&#x2F;li&gt;
 &lt;li&gt;测试图像采用0值填充方式得到指定大小作为网络的输入，而不是采用resize，另外同时测试图像的水平翻转图并融合二者的结果。&lt;&#x2F;li&gt;
-&lt;li&gt;最后通过&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;segment&#x2F;#ru-he-xuan-ze-zui-hao-de-bian-jie-kuang&quot;&gt;soft-NMS&lt;&#x2F;a&gt;(NMS缺陷的思路就是soft-NMS)操作去除冗余框，只保留前100个预测框。&lt;&#x2F;li&gt;
+&lt;li&gt;最后通过&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;segment&#x2F;#ru-he-xuan-ze-zui-hao-de-bian-jie-kuang&quot;&gt;soft-NMS&lt;&#x2F;a&gt;(NMS缺陷的思路就是soft-NMS)操作去除冗余框，只保留前100个预测框。&lt;&#x2F;li&gt;
 &lt;&#x2F;ol&gt;
 &lt;h2 id=&quot;can-kao-wen-xian&quot;&gt;参考文献&lt;&#x2F;h2&gt;
 &lt;ul&gt;
@@ -1988,8 +1988,8 @@ SNIP. arXiv:1711.08189v2, 2018.&lt;&#x2F;li&gt;
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/convolution/" type="text/html"/>
-        <id>https://www.freeopen.tech/convolution/</id>
+        <link rel="alternate" href="https://freeopen.github.io/convolution/" type="text/html"/>
+        <id>https://freeopen.github.io/convolution/</id>
         
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;学习了一段时间卷积，到了该整理的时候了。这是一篇不会写完的文章，它将跟进卷积技术的发展和演变，进行增补。&lt;&#x2F;p&gt;
@@ -2015,7 +2015,7 @@ size);&lt;&#x2F;li&gt;
 &lt;li&gt;卷积核平移的步幅 $S$ (stride);&lt;&#x2F;li&gt;
 &lt;li&gt;以及被卷积对象边缘填充零的数量 $P$ (padding)。&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
-&lt;p&gt;如果要表示&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;convolution&#x2F;#kong-dong-juan-ji-dilated-conv&quot;&gt;空洞卷积&lt;&#x2F;a&gt;，还需要一个表示空洞数量的超参数，我喜欢把它记为 $D$。&lt;&#x2F;p&gt;
+&lt;p&gt;如果要表示&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;convolution&#x2F;#kong-dong-juan-ji-dilated-conv&quot;&gt;空洞卷积&lt;&#x2F;a&gt;，还需要一个表示空洞数量的超参数，我喜欢把它记为 $D$。&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;juan-ji-de-shu-chu-chi-cun&quot;&gt;卷积的输出尺寸&lt;&#x2F;h2&gt;
 &lt;p&gt;卷积输出的空间尺寸的公式为:&lt;&#x2F;p&gt;
 &lt;p&gt;$$ O = \lfloor {I - K + 2P \over S} + 1 \rfloor$$ &lt;&#x2F;p&gt;
@@ -2246,8 +2246,8 @@ scale 操作，把特征通道的权重先归一化，然后加权到每个通�
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/crf/" type="text/html"/>
-        <id>https://www.freeopen.tech/crf/</id>
+        <link rel="alternate" href="https://freeopen.github.io/crf/" type="text/html"/>
+        <id>https://freeopen.github.io/crf/</id>
         
         <content type="html">&lt;p&gt;&lt;a rel=&quot;noopener nofollow noreferrer&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.zhihu.com&#x2F;question&#x2F;35866596&#x2F;answer&#x2F;236886066&quot;&gt;转自知乎&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;blockquote&gt;
@@ -2965,8 +2965,8 @@ CRF属于无向图，没有这种依赖性，克服此问题。&lt;&#x2F;li&gt;
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/estimator/" type="text/html"/>
-        <id>https://www.freeopen.tech/estimator/</id>
+        <link rel="alternate" href="https://freeopen.github.io/estimator/" type="text/html"/>
+        <id>https://freeopen.github.io/estimator/</id>
         
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;2018-04-12 第一次修订, 新增“多GPU下的写法“&lt;&#x2F;p&gt;
@@ -3737,8 +3737,8 @@ mode_fn()的返回用tf.estimator.EstimatorSpec封装，详见下面的例子：
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/tensorlayer/" type="text/html"/>
-        <id>https://www.freeopen.tech/tensorlayer/</id>
+        <link rel="alternate" href="https://freeopen.github.io/tensorlayer/" type="text/html"/>
+        <id>https://freeopen.github.io/tensorlayer/</id>
         
         <content type="html">&lt;p&gt;&lt;a rel=&quot;noopener nofollow noreferrer&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;zsdonghao&#x2F;tensorlayer&#x2F;blob&#x2F;master&#x2F;docs&#x2F;user&#x2F;tutorial.rst&quot;&gt;原文&lt;&#x2F;a&gt; | &lt;a rel=&quot;noopener nofollow noreferrer&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;shorxp&#x2F;tensorlayer-chinese&#x2F;blob&#x2F;master&#x2F;docs&#x2F;user&#x2F;tutorial.rst&quot;&gt;原译文&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;blockquote&gt;
@@ -5143,8 +5143,8 @@ Softmax 抽样在这篇论文的第三小节中描述:&lt;&#x2F;p&gt;
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/mnist/" type="text/html"/>
-        <id>https://www.freeopen.tech/mnist/</id>
+        <link rel="alternate" href="https://freeopen.github.io/mnist/" type="text/html"/>
+        <id>https://freeopen.github.io/mnist/</id>
         
         <content type="html">&lt;p&gt;&lt;a rel=&quot;noopener nofollow noreferrer&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.tensorflow.org&#x2F;get_started&#x2F;mnist&#x2F;pros&quot;&gt;原文&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;blockquote&gt;
@@ -5362,8 +5362,8 @@ TensorFlow的&lt;code&gt;tf.nn.dropout&lt;&#x2F;code&gt;操作除了可以屏蔽
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/nmt/" type="text/html"/>
-        <id>https://www.freeopen.tech/nmt/</id>
+        <link rel="alternate" href="https://freeopen.github.io/nmt/" type="text/html"/>
+        <id>https://freeopen.github.io/nmt/</id>
         
         <content type="html">&lt;p&gt;&lt;a rel=&quot;noopener nofollow noreferrer&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;tensorflow&#x2F;nmt&quot;&gt;原文&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;jie-shao&quot;&gt;介绍&lt;&#x2F;h2&gt;
@@ -5498,7 +5498,7 @@ RNN 简单的吃进输入文字，不做任何预测;
 &lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;update_step&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;span class=&quot;z-keyword z-operator z-assignment z-python&quot;&gt;=&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-function-call z-python&quot;&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;optimizer&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-accessor z-dot z-python&quot;&gt;.&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-variable z-function z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;apply_gradients&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-arguments z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-arguments z-begin z-python&quot;&gt;(&lt;&#x2F;span&gt;
     &lt;span class=&quot;z-meta z-function-call z-python&quot;&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-variable z-function z-python&quot;&gt;&lt;span class=&quot;z-support z-function z-builtin z-python&quot;&gt;zip&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-arguments z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-arguments z-begin z-python&quot;&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;clipped_gradients&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-separator z-arguments z-python&quot;&gt;,&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;params&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-section z-arguments z-end z-python&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-section z-arguments z-end z-python&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-&lt;p&gt;在我们自己的实验中，我们采用可自动降低学习率的标准 SGD 优化器（tf.train.GradientDescentOptimizer），从而产生更好的性能。参见 &lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;nmt&#x2F;#ping-ce&quot;&gt;评测&lt;&#x2F;a&gt;. &lt;&#x2F;p&gt;
+&lt;p&gt;在我们自己的实验中，我们采用可自动降低学习率的标准 SGD 优化器（tf.train.GradientDescentOptimizer），从而产生更好的性能。参见 &lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;nmt&#x2F;#ping-ce&quot;&gt;评测&lt;&#x2F;a&gt;. &lt;&#x2F;p&gt;
 &lt;h3 id=&quot;dong-shou-rang-wo-men-xun-lian-yi-ge-nmtmo-xing&quot;&gt;动手 - 让我们训练一个NMT模型&lt;&#x2F;h3&gt;
 &lt;p&gt;让我们训练我们的第一个 NMT 模型，把越南语翻译成英语！我们代码的入口是
 &lt;a rel=&quot;noopener nofollow noreferrer&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;tensorflow&#x2F;nmt&#x2F;blob&#x2F;master&#x2F;nmt&#x2F;nmt.py&quot;&gt;&lt;em&gt;nmt.py&lt;&#x2F;em&gt;&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
@@ -5626,7 +5626,7 @@ examples) 进行此练习. 所有数据可在:
 &lt;&#x2F;p&gt;
 &lt;p&gt;attention mechanisms 的各种实现可以在 &lt;a rel=&quot;noopener nofollow noreferrer&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;tensorflow&#x2F;tensorflow&#x2F;blob&#x2F;master&#x2F;tensorflow&#x2F;contrib&#x2F;seq2seq&#x2F;python&#x2F;ops&#x2F;attention_wrapper.py&quot;&gt;attention_wrapper.py&lt;&#x2F;a&gt; 中找到.&lt;&#x2F;p&gt;
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;注意力机制有多重要?&lt;&#x2F;strong&gt;&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
-&lt;p&gt;如上述方程式所示，有许多不同的 attention 变体。这些变体取决于 score 函数和 attention 函数的形式，以及在 score 函数中是否使用上一个时间步的状态 $h_{t-1}$ 而不是 $h_t$ （源自 Bahdanau et al.,2015 的建议）。经验上，我们发现只有某些选择很重要。首先，是  attention 的基本形式，即目标语言和源语言之间的直接联系。第二，重要的是把 attention vector 送到下一个时间步，以通报网络关于过去的 attention 决定（源自Luong et al., 2015 中的示范）。最后，score 函数的选择常常会导致不同的表现。更多内容请看&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;nmt&#x2F;#ping-ce&quot;&gt;评测结果&lt;&#x2F;a&gt;部分。&lt;&#x2F;p&gt;
+&lt;p&gt;如上述方程式所示，有许多不同的 attention 变体。这些变体取决于 score 函数和 attention 函数的形式，以及在 score 函数中是否使用上一个时间步的状态 $h_{t-1}$ 而不是 $h_t$ （源自 Bahdanau et al.,2015 的建议）。经验上，我们发现只有某些选择很重要。首先，是  attention 的基本形式，即目标语言和源语言之间的直接联系。第二，重要的是把 attention vector 送到下一个时间步，以通报网络关于过去的 attention 决定（源自Luong et al., 2015 中的示范）。最后，score 函数的选择常常会导致不同的表现。更多内容请看&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;nmt&#x2F;#ping-ce&quot;&gt;评测结果&lt;&#x2F;a&gt;部分。&lt;&#x2F;p&gt;
 &lt;h3 id=&quot;attention-wrapper-api&quot;&gt;Attention Wrapper API&lt;&#x2F;h3&gt;
 &lt;p&gt;在实现 &lt;a rel=&quot;noopener nofollow noreferrer&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;tensorflow&#x2F;tensorflow&#x2F;blob&#x2F;master&#x2F;tensorflow&#x2F;contrib&#x2F;seq2seq&#x2F;python&#x2F;ops&#x2F;attention_wrapper.py&quot;&gt;AttentionWrapper&lt;&#x2F;a&gt; 时，我们借鉴了 &lt;a rel=&quot;noopener nofollow noreferrer&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;1409.0473&quot;&gt;(Weston et al., 2015)&lt;&#x2F;a&gt; 在 &lt;em&gt;memory networks&lt;&#x2F;em&gt; 方面的一些术语。本教程介绍的 attention mechanism 是只读 memory，而不是可读写的 memory。具体来说，一组源语隐藏状态（或其转换版本，如：Luong 的评分中的  $W\overline{h}_s$，或 Bahong 的评分中的 $W_2\overline{h}_s$）被作为 &lt;em&gt;“memory”&lt;&#x2F;em&gt; 。在每个时间步骤中，我们使用当前的目标隐藏状态作为 &lt;em&gt;“query”&lt;&#x2F;em&gt; 来决定要读取 memory 的哪个部分。通常，查询需要与对应于各个 memory 插槽的键值进行比较。在上述 attention mechanism 的介绍中，我们恰好将源语隐藏状态（或其转换版本，例如，Bahdanau 的评分中的 $W_1h_t$）作为“键”值。可以通过这种记忆网络术语来启发其他形式的  attention！&lt;&#x2F;p&gt;
 &lt;p&gt;多亏了对 attention 的封装，使得我们扩展原始 seq2seq 代码时很方便。这部分文件参见 &lt;a rel=&quot;noopener nofollow noreferrer&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;tensorflow&#x2F;nmt&#x2F;blob&#x2F;master&#x2F;nmt&#x2F;attention_model.py&quot;&gt;&lt;em&gt;attention_model.py&lt;&#x2F;em&gt;&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
@@ -5639,13 +5639,13 @@ examples) 进行此练习. 所有数据可在:
     &lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;num_units&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-separator z-arguments z-python&quot;&gt;,&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;attention_states&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-separator z-arguments z-python&quot;&gt;,&lt;&#x2F;span&gt;
     &lt;span class=&quot;z-variable z-parameter z-python&quot;&gt;memory_sequence_length&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword z-operator z-assignment z-python&quot;&gt;=&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;source_sequence_length&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-section z-arguments z-end z-python&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-&lt;p&gt;在前面的&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;nmt&#x2F;#bian-ma-qi&quot;&gt;编码器&lt;&#x2F;a&gt; 部分，&lt;em&gt;encoder_outputs&lt;&#x2F;em&gt; 是顶层所有源语隐藏状态的集合，其形状为 &lt;em&gt;[max_time，batch_size，num_units]&lt;&#x2F;em&gt; （因为我们使用 &lt;em&gt;dynamic_rnn&lt;&#x2F;em&gt;，&lt;em&gt;time_major&lt;&#x2F;em&gt; 设置为 &lt;em&gt;True&lt;&#x2F;em&gt; 以获得效率）。对于 attention mechanism，我们需要确保传递的“memory”是批处理的，所以我们需要转置 &lt;em&gt;attention_states&lt;&#x2F;em&gt;。我们将 &lt;em&gt;source_sequence_length&lt;&#x2F;em&gt; 传递给 attention machanism，以确保 attention weight 适当归一化（仅在非填充位置上）。&lt;&#x2F;p&gt;
+&lt;p&gt;在前面的&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;nmt&#x2F;#bian-ma-qi&quot;&gt;编码器&lt;&#x2F;a&gt; 部分，&lt;em&gt;encoder_outputs&lt;&#x2F;em&gt; 是顶层所有源语隐藏状态的集合，其形状为 &lt;em&gt;[max_time，batch_size，num_units]&lt;&#x2F;em&gt; （因为我们使用 &lt;em&gt;dynamic_rnn&lt;&#x2F;em&gt;，&lt;em&gt;time_major&lt;&#x2F;em&gt; 设置为 &lt;em&gt;True&lt;&#x2F;em&gt; 以获得效率）。对于 attention mechanism，我们需要确保传递的“memory”是批处理的，所以我们需要转置 &lt;em&gt;attention_states&lt;&#x2F;em&gt;。我们将 &lt;em&gt;source_sequence_length&lt;&#x2F;em&gt; 传递给 attention machanism，以确保 attention weight 适当归一化（仅在非填充位置上）。&lt;&#x2F;p&gt;
 &lt;p&gt;定义了 attention mechanism 后，我们使用 &lt;em&gt;AttentionWrapper&lt;&#x2F;em&gt; 来包装 decoding_cell：&lt;&#x2F;p&gt;
 &lt;pre data-lang=&quot;python&quot; class=&quot;language-python z-code&quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;z-source z-python&quot;&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;decoder_cell&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;span class=&quot;z-keyword z-operator z-assignment z-python&quot;&gt;=&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-function-call z-python&quot;&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;tf&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-accessor z-dot z-python&quot;&gt;.&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;contrib&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-accessor z-dot z-python&quot;&gt;.&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;seq2seq&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-accessor z-dot z-python&quot;&gt;.&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-variable z-function z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;AttentionWrapper&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-arguments z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-arguments z-begin z-python&quot;&gt;(&lt;&#x2F;span&gt;
     &lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;decoder_cell&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-separator z-arguments z-python&quot;&gt;,&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;attention_mechanism&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-separator z-arguments z-python&quot;&gt;,&lt;&#x2F;span&gt;
     &lt;span class=&quot;z-variable z-parameter z-python&quot;&gt;attention_layer_size&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword z-operator z-assignment z-python&quot;&gt;=&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;num_units&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-section z-arguments z-end z-python&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-&lt;p&gt;代码的其余部分与&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;nmt&#x2F;#bian-ma-qi&quot;&gt;解码器&lt;&#x2F;a&gt;部分几乎相同！&lt;&#x2F;p&gt;
+&lt;p&gt;代码的其余部分与&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;nmt&#x2F;#bian-ma-qi&quot;&gt;解码器&lt;&#x2F;a&gt;部分几乎相同！&lt;&#x2F;p&gt;
 &lt;h3 id=&quot;dong-shou-jian-li-ji-yu-attention-de-nmt-mo-xing&quot;&gt;动手 – 建立基于 attention 的 NMT 模型&lt;&#x2F;h3&gt;
 &lt;p&gt;要启用的 attention ，在训练时我们需要使用 &lt;code&gt;luong&lt;&#x2F;code&gt;、&lt;code&gt;scaled_luong&lt;&#x2F;code&gt;、&lt;code&gt;bahdanau&lt;&#x2F;code&gt;  或 &lt;code&gt;normed_bahdanau&lt;&#x2F;code&gt; 中的一个作为 &lt;code&gt;attention&lt;&#x2F;code&gt; 标志的值。该标志指定了我们将要使用的 attention mechanism。此外，我们需要为 attention 模型创建一个新的目录，所以我们不能重复使用前面训练过的简单 NMT 模型。&lt;&#x2F;p&gt;
 &lt;p&gt;运行以下命令开始训练:&lt;&#x2F;p&gt;
@@ -5890,7 +5890,7 @@ examples) 进行此练习. 所有数据可在:
 &lt;span class=&quot;z-comment z-line z-number-sign z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-definition z-comment z-python&quot;&gt;#&lt;&#x2F;span&gt; Dynamic decoding
 &lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;outputs&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;, &lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-variable z-language z-python&quot;&gt;_&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;span class=&quot;z-keyword z-operator z-assignment z-python&quot;&gt;=&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-function-call z-python&quot;&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;tf&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-accessor z-dot z-python&quot;&gt;.&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;contrib&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-accessor z-dot z-python&quot;&gt;.&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;seq2seq&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-accessor z-dot z-python&quot;&gt;.&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-variable z-function z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;dynamic_decode&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-arguments z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-arguments z-begin z-python&quot;&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;decoder&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-separator z-arguments z-python&quot;&gt;,&lt;&#x2F;span&gt; &lt;span class=&quot;z-constant z-language z-python&quot;&gt;...&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-section z-arguments z-end z-python&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-&lt;p&gt;注意这里对 &lt;em&gt;dynamic_decode()&lt;&#x2F;em&gt; API 的调用和&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;nmt&#x2F;#jie-ma-qi&quot;&gt;解码器&lt;&#x2F;a&gt;那节一样。解码后，我们就能向下面那样获取翻译结果了：&lt;&#x2F;p&gt;
+&lt;p&gt;注意这里对 &lt;em&gt;dynamic_decode()&lt;&#x2F;em&gt; API 的调用和&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;nmt&#x2F;#jie-ma-qi&quot;&gt;解码器&lt;&#x2F;a&gt;那节一样。解码后，我们就能向下面那样获取翻译结果了：&lt;&#x2F;p&gt;
 &lt;pre data-lang=&quot;python&quot; class=&quot;language-python z-code&quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;z-source z-python&quot;&gt;&lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;translations&lt;&#x2F;span&gt;&lt;&#x2F;span&gt; &lt;span class=&quot;z-keyword z-operator z-assignment z-python&quot;&gt;=&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;outputs&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-accessor z-dot z-python&quot;&gt;.&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;predicted_ids&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
 &lt;span class=&quot;z-comment z-line z-number-sign z-python&quot;&gt;&lt;span class=&quot;z-punctuation z-definition z-comment z-python&quot;&gt;#&lt;&#x2F;span&gt; Make sure translations shape is [batch_size, beam_width, time]
 &lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-statement z-conditional z-if z-python&quot;&gt;&lt;span class=&quot;z-keyword z-control z-conditional z-if z-python&quot;&gt;if&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-qualified-name z-python&quot;&gt;&lt;span class=&quot;z-variable z-language z-python&quot;&gt;self&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-accessor z-dot z-python&quot;&gt;.&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-generic-name z-python&quot;&gt;time_major&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-section z-block z-conditional z-if z-python&quot;&gt;:&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
@@ -5945,7 +5945,7 @@ TODO(rzhao): 添加英语-越南语模型的 URL。&lt;&#x2F;p&gt;
 这里，每步时间指运行一个小批量（128个）所需的时间。对于字每秒，我们统计的是源和目标上的单词。&lt;&#x2F;p&gt;
 &lt;h3 id=&quot;wmt-de-yu-ying-yu&quot;&gt;WMT 德语-英语&lt;&#x2F;h3&gt;
 &lt;p&gt;样本集: 4.5M examples, 训练集=newstest2013, 测试集=newstest2015
-&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;nmt&#x2F;nmt&#x2F;scripts&#x2F;wmt16_en_de.sh&quot;&gt;下载脚本&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;nmt&#x2F;nmt&#x2F;scripts&#x2F;wmt16_en_de.sh&quot;&gt;下载脚本&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;训练细节&lt;&#x2F;strong&gt;&lt;&#x2F;em&gt;. 我们训练的超参数与英语-越南语的实验类似，除了以下细节. 采用 &lt;a rel=&quot;noopener nofollow noreferrer&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;rsennrich&#x2F;subword-nmt&quot;&gt;BPE&lt;&#x2F;a&gt;(32K 操作)将数据分成子字单元. 我们用双向编码器 1024（编码器有2个双向层）训练 1024 单元的 4 层 LSTM , embedding 维度为 1024. 我们训练了 359K 步 (10轮); 170K 步后, 我们开始每 17K 步减半学习率.&lt;&#x2F;p&gt;
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;结果&lt;&#x2F;strong&gt;&lt;&#x2F;em&gt;.
 TODO(rzhao): 添加德语-英语模型的 URL.&lt;&#x2F;p&gt;

@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
     <title>Freeopen - handbook</title>
     <subtitle>Freeopen 的个人兴趣研究所.</subtitle>
-    <link href="https://www.freeopen.tech/tags/handbook/atom.xml" rel="self" type="application/atom+xml"/>
-    <link href="https://www.freeopen.tech"/>
+    <link href="https://freeopen.github.io/tags/handbook/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://freeopen.github.io"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
     <updated>2017-12-11T00:00:00+00:00</updated>
-    <id>https://www.freeopen.tech/tags/handbook/atom.xml</id>
+    <id>https://freeopen.github.io/tags/handbook/atom.xml</id>
     <entry xml:lang="en">
         <title>Python Numpy 教程</title>
         <published>2017-12-11T00:00:00+00:00</published>
@@ -14,8 +14,8 @@
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/python/" type="text/html"/>
-        <id>https://www.freeopen.tech/python/</id>
+        <link rel="alternate" href="https://freeopen.github.io/python/" type="text/html"/>
+        <id>https://freeopen.github.io/python/</id>
         
         <content type="html">&lt;p&gt;&lt;a rel=&quot;noopener nofollow noreferrer&quot; target=&quot;_blank&quot; href=&quot;http:&#x2F;&#x2F;cs231n.github.io&#x2F;python-numpy-tutorial&#x2F;&quot;&gt;原文&lt;&#x2F;a&gt; | &lt;a rel=&quot;noopener nofollow noreferrer&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;20878530?refer=intelligentunit&quot;&gt;原译文&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;blockquote&gt;

@@ -1,4 +1,4 @@
-Sitemap: https://www.freeopen.tech/sitemap.xml
+Sitemap: https://freeopen.github.io/sitemap.xml
 User-Agent: *
 Allow: /
-Host: https://www.freeopen.tech
+Host: https://freeopen.github.io

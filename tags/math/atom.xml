@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
     <title>Freeopen - math</title>
     <subtitle>Freeopen 的个人兴趣研究所.</subtitle>
-    <link href="https://www.freeopen.tech/tags/math/atom.xml" rel="self" type="application/atom+xml"/>
-    <link href="https://www.freeopen.tech"/>
+    <link href="https://freeopen.github.io/tags/math/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://freeopen.github.io"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
     <updated>2017-06-11T00:00:00+00:00</updated>
-    <id>https://www.freeopen.tech/tags/math/atom.xml</id>
+    <id>https://freeopen.github.io/tags/math/atom.xml</id>
     <entry xml:lang="en">
         <title>艾波寧捎信</title>
         <published>2017-06-11T00:00:00+00:00</published>
@@ -14,8 +14,8 @@
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/eponine/" type="text/html"/>
-        <id>https://www.freeopen.tech/eponine/</id>
+        <link rel="alternate" href="https://freeopen.github.io/eponine/" type="text/html"/>
+        <id>https://freeopen.github.io/eponine/</id>
         
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;由台大葉丙成老師的学生创作的概率问题，文章本身比问题更有趣。&lt;&#x2F;p&gt;

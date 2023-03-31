@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
     <title>Freeopen - mathjax</title>
     <subtitle>Freeopen 的个人兴趣研究所.</subtitle>
-    <link href="https://www.freeopen.tech/tags/mathjax/atom.xml" rel="self" type="application/atom+xml"/>
-    <link href="https://www.freeopen.tech"/>
+    <link href="https://freeopen.github.io/tags/mathjax/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://freeopen.github.io"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
     <updated>2023-03-23T00:00:00+00:00</updated>
-    <id>https://www.freeopen.tech/tags/mathjax/atom.xml</id>
+    <id>https://freeopen.github.io/tags/mathjax/atom.xml</id>
     <entry xml:lang="en">
         <title>Markdown 数学公式指导手册</title>
         <published>2017-05-11T00:00:00+00:00</published>
@@ -14,8 +14,8 @@
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/mathjax/" type="text/html"/>
-        <id>https://www.freeopen.tech/mathjax/</id>
+        <link rel="alternate" href="https://freeopen.github.io/mathjax/" type="text/html"/>
+        <id>https://freeopen.github.io/mathjax/</id>
         
         <content type="html">&lt;p&gt;本手册的主要内容来自 &lt;a rel=&quot;noopener nofollow noreferrer&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;math.meta.stackexchange.com&#x2F;questions&#x2F;5020&#x2F;mathjax-basic-tutorial-and-quick-reference&quot;&gt;mathjax-basic-tutorial-and-quick-reference&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 &lt;blockquote&gt;
@@ -29,7 +29,7 @@
 &lt;ul&gt;
 &lt;li&gt;自动编号的公式可以用如下方法表示：&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
-&lt;p&gt;若需要手动编号，参见 &lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;mathjax&#x2F;#14-da-gua-hao-he-xing-biao-de-shi-yong&quot;&gt;大括号和行标的使用&lt;&#x2F;a&gt; 。&lt;&#x2F;p&gt;
+&lt;p&gt;若需要手动编号，参见 &lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;mathjax&#x2F;#14-da-gua-hao-he-xing-biao-de-shi-yong&quot;&gt;大括号和行标的使用&lt;&#x2F;a&gt; 。&lt;&#x2F;p&gt;
 &lt;pre data-lang=&quot;tex&quot; class=&quot;language-tex z-code&quot;&gt;&lt;code class=&quot;language-tex&quot; data-lang=&quot;tex&quot;&gt;&lt;span class=&quot;z-text z-tex z-latex&quot;&gt;&lt;span class=&quot;z-meta z-environment z-math z-block z-dollar z-latex&quot;&gt;&lt;span class=&quot;z-string z-other z-math z-latex&quot;&gt;&lt;span class=&quot;z-punctuation z-definition z-string z-begin z-latex&quot;&gt;$$&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
 &lt;span class=&quot;z-support z-function z-begin z-latex&quot;&gt;&lt;span class=&quot;z-keyword z-control z-flow z-begin z-latex&quot;&gt;&lt;span class=&quot;z-punctuation z-definition z-backslash z-latex&quot;&gt;\&lt;&#x2F;span&gt;begin&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-group z-brace z-begin z-latex&quot;&gt;{&lt;&#x2F;span&gt;&lt;span class=&quot;z-variable z-parameter z-function z-latex&quot;&gt;equation&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-group z-brace z-end z-latex&quot;&gt;}&lt;&#x2F;span&gt;
 数学公式
@@ -263,7 +263,7 @@ $$ \sideset{^1_2}{^3_4}\bigotimes $$ --&gt;
 \end{array}
 $$&lt;&#x2F;p&gt;
 &lt;p&gt;注意比较两个式子间 &lt;code&gt;dx&lt;&#x2F;code&gt; 的不同。 
-使用 &lt;code&gt;\operatorname&lt;&#x2F;code&gt; 命令也可以达到相同的效果，详见 &lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;mathjax&#x2F;#15-qi-ta-ming-ling&quot;&gt;定义新的符号 &lt;code&gt;\operatorname&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; 。&lt;&#x2F;p&gt;
+使用 &lt;code&gt;\operatorname&lt;&#x2F;code&gt; 命令也可以达到相同的效果，详见 &lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;mathjax&#x2F;#15-qi-ta-ming-ling&quot;&gt;定义新的符号 &lt;code&gt;\operatorname&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; 。&lt;&#x2F;p&gt;
 &lt;h3 id=&quot;14-da-gua-hao-he-xing-biao-de-shi-yong&quot;&gt;14．大括号和行标的使用&lt;&#x2F;h3&gt;
 &lt;p&gt;使用 &lt;code&gt;\left&lt;&#x2F;code&gt; 和 &lt;code&gt;\right&lt;&#x2F;code&gt; 来创建自动匹配高度的 (圆括号)，[方括号] 和 {花括号} 。 
 在每个公式末尾前使用 &lt;code&gt;\tag{行标}&lt;&#x2F;code&gt; 来实现行标。&lt;&#x2F;p&gt;

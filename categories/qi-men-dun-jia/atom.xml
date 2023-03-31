@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
     <title>Freeopen - 奇门遁甲</title>
     <subtitle>Freeopen 的个人兴趣研究所.</subtitle>
-    <link href="https://www.freeopen.tech/categories/qi-men-dun-jia/atom.xml" rel="self" type="application/atom+xml"/>
-    <link href="https://www.freeopen.tech"/>
+    <link href="https://freeopen.github.io/categories/qi-men-dun-jia/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://freeopen.github.io"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
     <updated>2021-04-04T00:00:00+00:00</updated>
-    <id>https://www.freeopen.tech/categories/qi-men-dun-jia/atom.xml</id>
+    <id>https://freeopen.github.io/categories/qi-men-dun-jia/atom.xml</id>
     <entry xml:lang="en">
         <title>一支红杏出墙来</title>
         <published>2021-04-04T00:00:00+00:00</published>
@@ -14,8 +14,8 @@
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/centos-vpn/" type="text/html"/>
-        <id>https://www.freeopen.tech/centos-vpn/</id>
+        <link rel="alternate" href="https://freeopen.github.io/centos-vpn/" type="text/html"/>
+        <id>https://freeopen.github.io/centos-vpn/</id>
         
         <content type="html">&lt;ul&gt;
 &lt;li&gt;1CPU,512M&lt;&#x2F;li&gt;
@@ -278,8 +278,8 @@ systemctl enable strongswan
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/matrix/" type="text/html"/>
-        <id>https://www.freeopen.tech/matrix/</id>
+        <link rel="alternate" href="https://freeopen.github.io/matrix/" type="text/html"/>
+        <id>https://freeopen.github.io/matrix/</id>
         
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;为阅读方便，将孟岩的《理解矩阵》一、二、三篇合为一篇，在保证内容完备的前提下删除少量不相干内容。遇到这篇文章是缘分，它是开启线性代数学习的一把钥匙，不管你是初学者还是老手，有幸读到这篇，一定会有茅塞顿开的感觉。&lt;&#x2F;p&gt;
@@ -479,8 +479,8 @@ $$Ib$$
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/eponine/" type="text/html"/>
-        <id>https://www.freeopen.tech/eponine/</id>
+        <link rel="alternate" href="https://freeopen.github.io/eponine/" type="text/html"/>
+        <id>https://freeopen.github.io/eponine/</id>
         
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;由台大葉丙成老師的学生创作的概率问题，文章本身比问题更有趣。&lt;&#x2F;p&gt;

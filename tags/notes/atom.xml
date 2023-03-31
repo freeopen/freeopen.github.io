@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
     <title>Freeopen - notes</title>
     <subtitle>Freeopen 的个人兴趣研究所.</subtitle>
-    <link href="https://www.freeopen.tech/tags/notes/atom.xml" rel="self" type="application/atom+xml"/>
-    <link href="https://www.freeopen.tech"/>
+    <link href="https://freeopen.github.io/tags/notes/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://freeopen.github.io"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
     <updated>2021-02-17T00:00:00+00:00</updated>
-    <id>https://www.freeopen.tech/tags/notes/atom.xml</id>
+    <id>https://freeopen.github.io/tags/notes/atom.xml</id>
     <entry xml:lang="en">
         <title>卷积备忘录</title>
         <published>2019-01-05T00:00:00+00:00</published>
@@ -14,8 +14,8 @@
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/convolution/" type="text/html"/>
-        <id>https://www.freeopen.tech/convolution/</id>
+        <link rel="alternate" href="https://freeopen.github.io/convolution/" type="text/html"/>
+        <id>https://freeopen.github.io/convolution/</id>
         
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;学习了一段时间卷积，到了该整理的时候了。这是一篇不会写完的文章，它将跟进卷积技术的发展和演变，进行增补。&lt;&#x2F;p&gt;
@@ -41,7 +41,7 @@ size);&lt;&#x2F;li&gt;
 &lt;li&gt;卷积核平移的步幅 $S$ (stride);&lt;&#x2F;li&gt;
 &lt;li&gt;以及被卷积对象边缘填充零的数量 $P$ (padding)。&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
-&lt;p&gt;如果要表示&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;convolution&#x2F;#kong-dong-juan-ji-dilated-conv&quot;&gt;空洞卷积&lt;&#x2F;a&gt;，还需要一个表示空洞数量的超参数，我喜欢把它记为 $D$。&lt;&#x2F;p&gt;
+&lt;p&gt;如果要表示&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;convolution&#x2F;#kong-dong-juan-ji-dilated-conv&quot;&gt;空洞卷积&lt;&#x2F;a&gt;，还需要一个表示空洞数量的超参数，我喜欢把它记为 $D$。&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;juan-ji-de-shu-chu-chi-cun&quot;&gt;卷积的输出尺寸&lt;&#x2F;h2&gt;
 &lt;p&gt;卷积输出的空间尺寸的公式为:&lt;&#x2F;p&gt;
 &lt;p&gt;$$ O = \lfloor {I - K + 2P \over S} + 1 \rfloor$$ &lt;&#x2F;p&gt;
@@ -272,8 +272,8 @@ scale 操作，把特征通道的权重先归一化，然后加权到每个通�
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/crf/" type="text/html"/>
-        <id>https://www.freeopen.tech/crf/</id>
+        <link rel="alternate" href="https://freeopen.github.io/crf/" type="text/html"/>
+        <id>https://freeopen.github.io/crf/</id>
         
         <content type="html">&lt;p&gt;&lt;a rel=&quot;noopener nofollow noreferrer&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.zhihu.com&#x2F;question&#x2F;35866596&#x2F;answer&#x2F;236886066&quot;&gt;转自知乎&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;blockquote&gt;
@@ -991,8 +991,8 @@ CRF属于无向图，没有这种依赖性，克服此问题。&lt;&#x2F;li&gt;
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/tensorlayer/" type="text/html"/>
-        <id>https://www.freeopen.tech/tensorlayer/</id>
+        <link rel="alternate" href="https://freeopen.github.io/tensorlayer/" type="text/html"/>
+        <id>https://freeopen.github.io/tensorlayer/</id>
         
         <content type="html">&lt;p&gt;&lt;a rel=&quot;noopener nofollow noreferrer&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;zsdonghao&#x2F;tensorlayer&#x2F;blob&#x2F;master&#x2F;docs&#x2F;user&#x2F;tutorial.rst&quot;&gt;原文&lt;&#x2F;a&gt; | &lt;a rel=&quot;noopener nofollow noreferrer&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;shorxp&#x2F;tensorlayer-chinese&#x2F;blob&#x2F;master&#x2F;docs&#x2F;user&#x2F;tutorial.rst&quot;&gt;原译文&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;blockquote&gt;

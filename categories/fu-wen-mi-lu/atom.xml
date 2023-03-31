@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
     <title>Freeopen - 符文秘录</title>
     <subtitle>Freeopen 的个人兴趣研究所.</subtitle>
-    <link href="https://www.freeopen.tech/categories/fu-wen-mi-lu/atom.xml" rel="self" type="application/atom+xml"/>
-    <link href="https://www.freeopen.tech"/>
+    <link href="https://freeopen.github.io/categories/fu-wen-mi-lu/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://freeopen.github.io"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
     <updated>2017-05-16T01:36:56+08:00</updated>
-    <id>https://www.freeopen.tech/categories/fu-wen-mi-lu/atom.xml</id>
+    <id>https://freeopen.github.io/categories/fu-wen-mi-lu/atom.xml</id>
     <entry xml:lang="en">
         <title>编程的智慧</title>
         <published>2017-05-16T01:36:56+08:00</published>
@@ -14,8 +14,8 @@
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/programming/" type="text/html"/>
-        <id>https://www.freeopen.tech/programming/</id>
+        <link rel="alternate" href="https://freeopen.github.io/programming/" type="text/html"/>
+        <id>https://freeopen.github.io/programming/</id>
         
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;转自&lt;a rel=&quot;noopener nofollow noreferrer&quot; target=&quot;_blank&quot; href=&quot;http:&#x2F;&#x2F;www.yinwang.org&#x2F;blog-cn&#x2F;2015&#x2F;11&#x2F;21&#x2F;programming-philosophy&quot;&gt;王垠博客&lt;&#x2F;a&gt; 2015-11-21 的旧文，作为程序语言专家，此君的建议很值得借鉴和参考。&lt;&#x2F;p&gt;

@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
     <title>Freeopen - image</title>
     <subtitle>Freeopen 的个人兴趣研究所.</subtitle>
-    <link href="https://www.freeopen.tech/tags/image/atom.xml" rel="self" type="application/atom+xml"/>
-    <link href="https://www.freeopen.tech"/>
+    <link href="https://freeopen.github.io/tags/image/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://freeopen.github.io"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
     <updated>2019-03-22T00:00:00+00:00</updated>
-    <id>https://www.freeopen.tech/tags/image/atom.xml</id>
+    <id>https://freeopen.github.io/tags/image/atom.xml</id>
     <entry xml:lang="en">
         <title>基于深度学习的图像分割算法思路演进</title>
         <published>2019-03-05T00:00:00+00:00</published>
@@ -14,8 +14,8 @@
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/segment/" type="text/html"/>
-        <id>https://www.freeopen.tech/segment/</id>
+        <link rel="alternate" href="https://freeopen.github.io/segment/" type="text/html"/>
+        <id>https://freeopen.github.io/segment/</id>
         
         <content type="html">&lt;h2 id=&quot;tu-xiang-fen-ge-dao-di-gan-shi-yao&quot;&gt;图像分割到底干什么&lt;&#x2F;h2&gt;
 &lt;p&gt;图像分割问题主要流行四类任务，它们分别是目标检测( Object Detection )、语义分割( Semantic Segmentation )、实例分割( Instance Segmentation ) 和全景分割( Panoptic Segmentation )。这四类任务的意义分别为：&lt;&#x2F;p&gt;
@@ -469,7 +469,7 @@ C1=4, P1=2, p2=2, p5=2, 乘起来等于32倍。这时最后一层就要
 这将导致这些网格对应的感受野过大，从而使反向传播时涉及的参数量也过多，
 这也将降低反向传播的效率。&lt;&#x2F;li&gt;
 &lt;&#x2F;ol&gt;
-&lt;p&gt;作者针对这些问题改进后，训练速度提高约 64 倍。(详见&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;segment&#x2F;#xun-lian-wei-diao&quot;&gt;训练微调&lt;&#x2F;a&gt;)&lt;&#x2F;p&gt;
+&lt;p&gt;作者针对这些问题改进后，训练速度提高约 64 倍。(详见&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;segment&#x2F;#xun-lian-wei-diao&quot;&gt;训练微调&lt;&#x2F;a&gt;)&lt;&#x2F;p&gt;
 &lt;p&gt;然后在 R-CNN 和 SPP-Net 基础上提出了新的模型 Fast R-CNN。&lt;&#x2F;p&gt;
 &lt;p align=&quot;center&quot;&gt;
 &lt;img width=&quot;80%&quot; src=&quot;.&#x2F;fast.r-cnn.png&quot; &#x2F;&gt;
@@ -548,11 +548,11 @@ Regions Proposals Networks)来提取这些候选框。&lt;&#x2F;p&gt;
 通常由conv+relu+pool层构成，常用一些预训练好的网络（VGG、Inception、Resnet等），
 获得的结果叫做特征图；&lt;&#x2F;li&gt;
 &lt;li&gt;生成候选框：在获得的特征图的每一个点上做多个候选框；&lt;&#x2F;li&gt;
-&lt;li&gt;候选框分类：在 RPN 阶段(&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;segment&#x2F;#faster-r-cnn-xun-lian-ce-lue&quot;&gt;图12&lt;&#x2F;a&gt;第1步)，用来区分前景（与标定边界框的重叠区域大于0.5）
+&lt;li&gt;候选框分类：在 RPN 阶段(&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;segment&#x2F;#faster-r-cnn-xun-lian-ce-lue&quot;&gt;图12&lt;&#x2F;a&gt;第1步)，用来区分前景（与标定边界框的重叠区域大于0.5）
 和背景（不与任何标定边界框重叠或者其重叠区域小于0.1）；
-在 Fast R-CNN 阶段(&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;segment&#x2F;#faster-r-cnn-xun-lian-ce-lue&quot;&gt;图12&lt;&#x2F;a&gt;第4步)，用于区分不同种类的目标（猫、狗、人等）;
-- 候选框回归：在 RPN 阶段(&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;segment&#x2F;#faster-r-cnn-xun-lian-ce-lue&quot;&gt;图12&lt;&#x2F;a&gt;第1步)，进行初步调整；
-在Fast R-CNN 阶段(&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;segment&#x2F;#faster-r-cnn-xun-lian-ce-lue&quot;&gt;图12&lt;&#x2F;a&gt;第4步)进行精确调整。&lt;&#x2F;li&gt;
+在 Fast R-CNN 阶段(&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;segment&#x2F;#faster-r-cnn-xun-lian-ce-lue&quot;&gt;图12&lt;&#x2F;a&gt;第4步)，用于区分不同种类的目标（猫、狗、人等）;
+- 候选框回归：在 RPN 阶段(&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;segment&#x2F;#faster-r-cnn-xun-lian-ce-lue&quot;&gt;图12&lt;&#x2F;a&gt;第1步)，进行初步调整；
+在Fast R-CNN 阶段(&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;segment&#x2F;#faster-r-cnn-xun-lian-ce-lue&quot;&gt;图12&lt;&#x2F;a&gt;第4步)进行精确调整。&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
 &lt;p&gt;其整体流程如下：&lt;&#x2F;p&gt;
 &lt;ul&gt;
@@ -662,7 +662,7 @@ $$&lt;&#x2F;p&gt;
 (2)式中，$x, x_a, x^*$分别对应预测边界框、锚点候选框、标定边界框的 x 坐标,
 (y、w、h 的情形与 x 类似)&lt;&#x2F;li&gt;
 &lt;li&gt;$L_{reg}(t_i, t_i^* ) = R(t_i − t_i^*)$, 
-这里的$R$函数是 &lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;segment&#x2F;#duo-ren-wu-sun-shi-han-shu-multi-task-loss&quot;&gt;smooth L1 损失函数&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+这里的$R$函数是 &lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;segment&#x2F;#duo-ren-wu-sun-shi-han-shu-multi-task-loss&quot;&gt;smooth L1 损失函数&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
 &lt;li&gt;$L_{cls}(p_i, p_i^*)$是对数损失函数，与Fast R-CNN定义一致&lt;&#x2F;li&gt;
 &lt;li&gt;$N_{cls}$, $N_{reg}$ 是求和后的正则化因子(即求平均值)，其中 $N_{cls} = batchsize $ , 
 $N_{reg}$等于参与损失函数计算的锚点候选框的数量。&lt;&#x2F;li&gt;
@@ -769,9 +769,9 @@ w 和 h 是ROI区域(候选框)的长和宽。
 除此之外，我们可以更换不同的主干结构(Backbone Architecture)和
 头部结构(Head Architecture)来获得不同性能的结果。&lt;&#x2F;p&gt;
 &lt;p&gt;Mask R-CNN是以往经典算法的集大成之作，算法思路并不复杂，
-即在原始&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;segment&#x2F;#faster-r-cnn&quot;&gt;Faster R-CNN&lt;&#x2F;a&gt;算法的基础上面增加了&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;segment&#x2F;#fcn&quot;&gt;FCN&lt;&#x2F;a&gt;算法来产生对应的MASK分支。 
+即在原始&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;segment&#x2F;#faster-r-cnn&quot;&gt;Faster R-CNN&lt;&#x2F;a&gt;算法的基础上面增加了&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;segment&#x2F;#fcn&quot;&gt;FCN&lt;&#x2F;a&gt;算法来产生对应的MASK分支。 
 Mask R-CNN 比 Faster R-CNN 复杂，但和原始的 Faster R-CNN 的速度相当。
-由于发现了ROI Pooling中所存在的&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;segment&#x2F;#que-xian-roichi-hua-de-er-ci-liang-hua-pian-chai-wen-ti&quot;&gt;像素偏差问题&lt;&#x2F;a&gt;，提出了对应的 ROIAlign 策略，
+由于发现了ROI Pooling中所存在的&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;segment&#x2F;#que-xian-roichi-hua-de-er-ci-liang-hua-pian-chai-wen-ti&quot;&gt;像素偏差问题&lt;&#x2F;a&gt;，提出了对应的 ROIAlign 策略，
 加上 FCN 精准的像素掩膜(Mask)，使得其可以获得高准确率。&lt;&#x2F;p&gt;
 &lt;p&gt;所以，Mask R-CNN 的结构如下图，即Faster R-CNN + FCN, 
 更细致的是 RPN + ROIAlign + Fast-rcnn + FCN。&lt;&#x2F;p&gt;
@@ -832,7 +832,7 @@ ROIAlign 算法没有使用量化操作，保留计算中的小数位。
 然后有两个分支，上面的分支负责分类和回归，下面的分支负责生成对应的mask。
 由于前面进行了多次卷积和池化，减小了对应的分辨率，mask分支开始利用反卷积进行分辨率的提升，
 同时减少通道的个数，变为14x14x256，最后输出了14x14x80的mask模板。&lt;&#x2F;p&gt;
-&lt;p&gt;而右边使用到的主干是&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;segment&#x2F;#fpn&quot;&gt;FPN&lt;&#x2F;a&gt;，由于FPN的特征图包含了多层特征，
+&lt;p&gt;而右边使用到的主干是&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;segment&#x2F;#fpn&quot;&gt;FPN&lt;&#x2F;a&gt;，由于FPN的特征图包含了多层特征，
 因此这里使用了较少的filters。该架构也分为两个分支，作用于前者相同，
 而mask分支中进行了多次卷积操作，首先将ROI变化为14x14x256的feature，然后进行了 5 次相同的操作，
 然后进行反卷积操作，最后输出28x28x80的mask。
@@ -840,7 +840,7 @@ ROIAlign 算法没有使用量化操作，保留计算中的小数位。
 &lt;p&gt;实验表明，右边的架构在速度和精度上都有提升。&lt;&#x2F;p&gt;
 &lt;h3 id=&quot;sun-shi-han-shu-1&quot;&gt;损失函数&lt;&#x2F;h3&gt;
 &lt;p&gt;$$ L = L_{cls} + L_{box} + L_{mask} $$&lt;&#x2F;p&gt;
-&lt;p&gt;其中$L_{cls}$和$L_{box}$和Faster R-CNN 中&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;segment&#x2F;#sun-shi-han-shu&quot;&gt;定义&lt;&#x2F;a&gt; 的相同。对于每一个ROI，
+&lt;p&gt;其中$L_{cls}$和$L_{box}$和Faster R-CNN 中&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;segment&#x2F;#sun-shi-han-shu&quot;&gt;定义&lt;&#x2F;a&gt; 的相同。对于每一个ROI，
 mask分支有$K \cdot m^2$ 维度的输出，其对 K 个大小为 mxm 的 mask 进行编码，
 每一个 mask 有 K 个类别。
 这里对每个像素用sigmoid分类，并且将$L_{mask}$定义为二分类的交叉熵损失函数 。
@@ -957,7 +957,7 @@ truth 角点的高斯分布计算得到($\sigma={1 \over 3}$)&lt;&#x2F;li&gt;
 $$L_{off} = {1 \over N}\sum_{k=1}^N SmoothL1Loss(o_k, \hat{o}_k)  \tag{3}$$&lt;&#x2F;p&gt;
 &lt;p&gt;这里的 offsets 表示取整计算时丢失的误差信息, 
 其中，(2)式中$n$表示原始图像到特征图的缩小倍数，$x,y$表示原始图像上的坐标位置，
-如果除不尽就向下取整。(3)式是在 Fast R-CNN 中提过的&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;segment&#x2F;#duo-ren-wu-sun-shi-han-shu-multi-task-loss&quot;&gt;smooth L1 损失函数&lt;&#x2F;a&gt;。&lt;&#x2F;p&gt;
+如果除不尽就向下取整。(3)式是在 Fast R-CNN 中提过的&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;segment&#x2F;#duo-ren-wu-sun-shi-han-shu-multi-task-loss&quot;&gt;smooth L1 损失函数&lt;&#x2F;a&gt;。&lt;&#x2F;p&gt;
 &lt;p&gt;&lt;strong&gt;embeddings 的损失函数&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;由于对每个角点的预测都是独立的，但我们的目标是要找到一对左上和右下的角点对，
 需要找到一种办法来为角点配对，这个配对的红娘就是为每个角点生成的嵌入向量(embedding vector)。
@@ -997,11 +997,11 @@ $e_{b_k}$ 表示第k类目标的右下角点的嵌入向量&lt;&#x2F;li&gt;
 &lt;&#x2F;p&gt;
 &lt;h3 id=&quot;yu-ce-shi-de-ji-ge-xi-jie&quot;&gt;预测时的几个细节&lt;&#x2F;h3&gt;
 &lt;ol&gt;
-&lt;li&gt;在得到预测角点后，会对这些角点做&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;segment&#x2F;#ru-he-xuan-ze-zui-hao-de-bian-jie-kuang&quot;&gt;NMS&lt;&#x2F;a&gt;操作，
+&lt;li&gt;在得到预测角点后，会对这些角点做&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;segment&#x2F;#ru-he-xuan-ze-zui-hao-de-bian-jie-kuang&quot;&gt;NMS&lt;&#x2F;a&gt;操作，
 选择前100个左上角角点和100个右下角角点。&lt;&#x2F;li&gt;
 &lt;li&gt;计算左上和右下角点的嵌入向量的距离时采用L1范数，距离大于0.5或者两个点来自不同类别的目标的都不能构成一对。&lt;&#x2F;li&gt;
 &lt;li&gt;测试图像采用0值填充方式得到指定大小作为网络的输入，而不是采用resize，另外同时测试图像的水平翻转图并融合二者的结果。&lt;&#x2F;li&gt;
-&lt;li&gt;最后通过&lt;a href=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;segment&#x2F;#ru-he-xuan-ze-zui-hao-de-bian-jie-kuang&quot;&gt;soft-NMS&lt;&#x2F;a&gt;(NMS缺陷的思路就是soft-NMS)操作去除冗余框，只保留前100个预测框。&lt;&#x2F;li&gt;
+&lt;li&gt;最后通过&lt;a href=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;segment&#x2F;#ru-he-xuan-ze-zui-hao-de-bian-jie-kuang&quot;&gt;soft-NMS&lt;&#x2F;a&gt;(NMS缺陷的思路就是soft-NMS)操作去除冗余框，只保留前100个预测框。&lt;&#x2F;li&gt;
 &lt;&#x2F;ol&gt;
 &lt;h2 id=&quot;can-kao-wen-xian&quot;&gt;参考文献&lt;&#x2F;h2&gt;
 &lt;ul&gt;

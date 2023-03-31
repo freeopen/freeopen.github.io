@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
     <title>Freeopen - top1</title>
     <subtitle>Freeopen 的个人兴趣研究所.</subtitle>
-    <link href="https://www.freeopen.tech/tags/top1/atom.xml" rel="self" type="application/atom+xml"/>
-    <link href="https://www.freeopen.tech"/>
+    <link href="https://freeopen.github.io/tags/top1/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://freeopen.github.io"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
     <updated>2021-02-14T00:00:00+00:00</updated>
-    <id>https://www.freeopen.tech/tags/top1/atom.xml</id>
+    <id>https://freeopen.github.io/tags/top1/atom.xml</id>
     <entry xml:lang="en">
         <title>冠军方案之 宫颈癌风险智能诊断</title>
         <published>2021-02-14T00:00:00+00:00</published>
@@ -14,8 +14,8 @@
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/cervical/" type="text/html"/>
-        <id>https://www.freeopen.tech/cervical/</id>
+        <link rel="alternate" href="https://freeopen.github.io/cervical/" type="text/html"/>
+        <id>https://freeopen.github.io/cervical/</id>
         
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;赛道1冠军：deep-thinker 团队&lt;&#x2F;p&gt;
@@ -54,7 +54,7 @@
 &lt;h2 id=&quot;sai-dao-yi-fang-an&quot;&gt;赛道一方案&lt;&#x2F;h2&gt;
 &lt;p&gt;没有采用常用的anchor-based模型，而是选择了非常契合本次赛题特点的anchor-free模型RepPoints。&lt;&#x2F;p&gt;
 &lt;p&gt;RepPoints(ResNeXt101 + FPN + SE + DCN)&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;cervical&#x2F;.&#x2F;20210214113701.jpg&quot; alt=&quot;20210214113701&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;cervical&#x2F;.&#x2F;20210214113701.jpg&quot; alt=&quot;20210214113701&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;h3 id=&quot;zai-xian-sui-ji-cai-jian&quot;&gt;在线随机裁剪&lt;&#x2F;h3&gt;
 &lt;p&gt;随机选择输入图片中的一个目标，围绕目标随机切出边长在768~2048范围内的子图，然后缩放至边长为1024后，再送进网络。若目标边长超过了范围，则将目标与少量背景直接切出，再进行缩放。&lt;&#x2F;p&gt;
 &lt;h3 id=&quot;reppoints-mo-xing&quot;&gt;RepPoints 模型&lt;&#x2F;h3&gt;
@@ -68,8 +68,8 @@
 &lt;li&gt;通过两次预测偏移量，对目标表示中各点位置进行优化，最终获得精确定位&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
 &lt;h3 id=&quot;shi-yan-jie-guo-ji-mo-xing-rong-he&quot;&gt;实验结果及模型融合&lt;&#x2F;h3&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;cervical&#x2F;.&#x2F;20210214120840.jpg&quot; alt=&quot;20210214120840&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;cervical&#x2F;.&#x2F;20210214120902.jpg&quot; alt=&quot;20210214120902&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;cervical&#x2F;.&#x2F;20210214120840.jpg&quot; alt=&quot;20210214120840&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;cervical&#x2F;.&#x2F;20210214120902.jpg&quot; alt=&quot;20210214120902&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;sai-dao-er-fang-an&quot;&gt;赛道二方案&lt;&#x2F;h2&gt;
 &lt;h3 id=&quot;shu-ju-zeng-qiang&quot;&gt;数据增强&lt;&#x2F;h3&gt;
 &lt;ul&gt;
@@ -82,7 +82,7 @@
 &lt;&#x2F;ul&gt;
 &lt;h3 id=&quot;zheng-ti-jia-gou&quot;&gt;整体架构&lt;&#x2F;h3&gt;
 &lt;h4 id=&quot;ji-yu-openvinode-liang-hua-tui-li-jia-gou&quot;&gt;基于OpenVINO的量化推理架构&lt;&#x2F;h4&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;cervical&#x2F;.&#x2F;openvino.png&quot; alt=&quot;openvino&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;cervical&#x2F;.&#x2F;openvino.png&quot; alt=&quot;openvino&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;模型结构：&lt;&#x2F;p&gt;
 &lt;p&gt;主模型为RetinaNet ， 用开源的 imageNet 预训练模型初始化。&lt;&#x2F;p&gt;
 &lt;p&gt;比较两种类型的backbone:&lt;&#x2F;p&gt;
@@ -119,7 +119,7 @@
 &lt;li&gt;发起执行请求好，控制权交还回主程序，分摊数据读取和后处理的时间。其中子进程负责图片的读取、裁剪、缩放、拼batch 等数据操作，处理完的数据存放到共享队列中；&lt;&#x2F;li&gt;
 &lt;li&gt;执行完成后，通过回调函数通知主程序。主进程从共享队列读取数据，负责模型推理、后处理操作。（使用 “生产者-消费者”模式，采用共享队列实现数据的通信）&lt;&#x2F;li&gt;
 &lt;li&gt;可并发多个 infer request 
-&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;cervical&#x2F;20210214165514.jpg&quot; alt=&quot;20210214165514&quot; &#x2F;&gt;&lt;&#x2F;li&gt;
+&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;cervical&#x2F;20210214165514.jpg&quot; alt=&quot;20210214165514&quot; &#x2F;&gt;&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
 &lt;h4 id=&quot;shi-yan-jie-guo&quot;&gt;实验结果&lt;&#x2F;h4&gt;
 &lt;p&gt;map0.5: 33.54%, 推理总时长：24s。&lt;&#x2F;p&gt;
@@ -133,8 +133,8 @@
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/x-cargo/" type="text/html"/>
-        <id>https://www.freeopen.tech/x-cargo/</id>
+        <link rel="alternate" href="https://freeopen.github.io/x-cargo/" type="text/html"/>
+        <id>https://freeopen.github.io/x-cargo/</id>
         
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;冠军：YuanXu&lt;&#x2F;p&gt;
@@ -182,7 +182,7 @@
 &lt;li&gt;使用数据增强、模型参数均值、半监督学习的方法提高模型泛化能力&lt;&#x2F;li&gt;
 &lt;li&gt;使用测试增强提高结果精度(并优化)&lt;&#x2F;li&gt;
 &lt;li&gt;一些实验结果
-&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;x-cargo&#x2F;.&#x2F;20210214174954.jpg&quot; alt=&quot;20210214174954&quot; &#x2F;&gt;&lt;&#x2F;li&gt;
+&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;x-cargo&#x2F;.&#x2F;20210214174954.jpg&quot; alt=&quot;20210214174954&quot; &#x2F;&gt;&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
 </content>
         
@@ -194,8 +194,8 @@
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/cloth-cut/" type="text/html"/>
-        <id>https://www.freeopen.tech/cloth-cut/</id>
+        <link rel="alternate" href="https://freeopen.github.io/cloth-cut/" type="text/html"/>
+        <id>https://freeopen.github.io/cloth-cut/</id>
         
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;冠军：行星防御理事会 团队（乔德平等）&lt;&#x2F;p&gt;
@@ -382,8 +382,8 @@
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/crop/" type="text/html"/>
-        <id>https://www.freeopen.tech/crop/</id>
+        <link rel="alternate" href="https://freeopen.github.io/crop/" type="text/html"/>
+        <id>https://freeopen.github.io/crop/</id>
         
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;冠军：华南理工黄钦建等（冲啊大黄 团队 ）&lt;&#x2F;p&gt;
@@ -404,8 +404,8 @@
 &lt;&#x2F;ul&gt;
 &lt;h2 id=&quot;mo-xing-xuan-ze&quot;&gt;模型选择&lt;&#x2F;h2&gt;
 &lt;p&gt;DeeplabV3+ （注：决赛5个队伍中3个用了它），backbone为Xception-65和ResNet-101以及DenseNet-121。从 A榜分数看，不加任何trick时，DenseNet分数略高于另外两个，但是显存占用太大以及训练时间太长，在后来的方案里就舍弃了。决赛复现时，使用了两个Xception-65和一个ResNet-101投票，投票的每个模型用不同的数据训练，增加模型差异。&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;crop&#x2F;.&#x2F;157137269012195351571372690503.png&quot; alt=&quot;157137269012195351571372690503&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;crop&#x2F;.&#x2F;157137272713270821571372727612.png&quot; alt=&quot;157137272713270821571372727612&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;crop&#x2F;.&#x2F;157137269012195351571372690503.png&quot; alt=&quot;157137269012195351571372690503&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;crop&#x2F;.&#x2F;157137272713270821571372727612.png&quot; alt=&quot;157137272713270821571372727612&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;gai-jin-cuo-shi&quot;&gt;改进措施&lt;&#x2F;h2&gt;
 &lt;h3 id=&quot;peng-zhang-yu-ce&quot;&gt;膨胀预测&lt;&#x2F;h3&gt;
 &lt;p&gt;&lt;strong&gt;方格效应&lt;&#x2F;strong&gt;：如果直接做不重叠滑窗预测拼接，得到的预测结果拼接痕迹明显。&lt;&#x2F;p&gt;
@@ -481,8 +481,8 @@
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/gd-defect/" type="text/html"/>
-        <id>https://www.freeopen.tech/gd-defect/</id>
+        <link rel="alternate" href="https://freeopen.github.io/gd-defect/" type="text/html"/>
+        <id>https://freeopen.github.io/gd-defect/</id>
         
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;冠军：Are you OK 战队（中山大学曾兆阳等）&lt;&#x2F;p&gt;
@@ -510,10 +510,10 @@
 &lt;p&gt;我们采用的第二个改进方案是Deformable Convolutoin可变形卷积。我们发现在数据集中，铝材的瑕疵有很多是这种条状的，传统正规的正方形结构的卷积对这种形状的缺陷处理能力还不够强。因此我们采用了可变形的卷积， 在卷积计算的过程中能够自动地计算每个点的偏移，从而从最合适的地方取特征进行卷积。右边的示意图大致描述 了可变形卷积的过程，它能够让卷积的区域尽可能地集中在缺陷上。&lt;&#x2F;p&gt;
 &lt;p&gt;具体实现上，将原本resent结构的最后一个block改成了可变卷积，原因是在可变卷积的实现中，需要基于前面 的特征来学习一个偏移，前面的特征得足够强才能保证这个偏移不会乱学，因此我们只改动了最后一个block。总体 的框架还是跟前面FPN的一样。&lt;&#x2F;p&gt;
 &lt;h4 id=&quot;contextual-roi-pooling&quot;&gt;Contextual ROI Pooling&lt;&#x2F;h4&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;gd-defect&#x2F;.&#x2F;20210213120121.jpg&quot; alt=&quot;20210213120121&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;gd-defect&#x2F;.&#x2F;20210213120121.jpg&quot; alt=&quot;20210213120121&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;我们的第三个改进方案，是在提取ROI特征的时候，引入了context上下文信息，我们把这个操作叫做contextual roi pooling。我们用上面两个例子来说明上下文信息的好处。Faster R-CNN是一个先生成候选框，然后精调候选框的过程，那么第一步生成的候选框势必会有偏大或者偏小的情况。之前的方法可以理解成用框内部的信息来推断框的 位置，左边这个例子是框偏大的情况，根据内部信息是可以知道框应该往里调的，但是右边这个例子框偏小了， 我们能知道该往外调整，但是该调多少呢这个是无从知晓的。因此一个显而易见的想法，就是把整张图片的信息也 送给这个候选框当特征，这样相当于让每个候选框以整张图片作为参考，这样呢每个框就知道该往哪调了。&lt;&#x2F;p&gt;
 &lt;p&gt;具体的实现是这样，我们把整张图片也作为一个roi，用同样的ROI Pooling提取全局的特征，然后跟每一个候选框 的特征相加，再进行后面的分类和回归操作。这样的实现只多进行了一个roi的特征提取和一个特征相加的操作， 却能大大地提升准确率。&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;gd-defect&#x2F;.&#x2F;20210213120731.jpg&quot; alt=&quot;20210213120731&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;gd-defect&#x2F;.&#x2F;20210213120731.jpg&quot; alt=&quot;20210213120731&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;xun-lian-ji-qiao&quot;&gt;训练技巧&lt;&#x2F;h2&gt;
 &lt;p&gt;数据集里面是有提供无缺陷样本的，我们也对这些图片进行了使用。 在检测器的训练过程中，有一步是正负样本的选择。我们在训练的时候使用了一个策略，每次会随机选择一张缺陷样本和一张无缺陷样本，然后训练的正样本会在缺陷图片中选择，负样本会在两张图片中都选择，两张图片的所有 正负样本合起来做一个OHEM（Online hard example mining），再进行后面的训练操作。这样的好处是，充分利用了无缺陷样本，&lt;strong&gt;增大了模型判别背景信息的能力&lt;&#x2F;strong&gt;。&lt;&#x2F;p&gt;
 &lt;p&gt;铝材的缺陷是具有翻转不变性的，将一张图片水平和竖直翻转之后，他的瑕疵信 息是不会变的，也就是说，我们将图片进行翻转之后，再将框做一个变换到对应的位置，这样可以构建出一批新的数据来。通过这样的数据扩增方式，我们把训练数据扩增了四倍，也因此&lt;strong&gt;提升了模型的鲁棒性&lt;&#x2F;strong&gt;。&lt;&#x2F;p&gt;
@@ -529,8 +529,8 @@
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/guangdong-cloth/" type="text/html"/>
-        <id>https://www.freeopen.tech/guangdong-cloth/</id>
+        <link rel="alternate" href="https://freeopen.github.io/guangdong-cloth/" type="text/html"/>
+        <id>https://freeopen.github.io/guangdong-cloth/</id>
         
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;冠军：哪儿都是坑啊 团队（徐光福等）&lt;&#x2F;p&gt;
@@ -580,8 +580,8 @@
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/ai-keypoints/" type="text/html"/>
-        <id>https://www.freeopen.tech/ai-keypoints/</id>
+        <link rel="alternate" href="https://freeopen.github.io/ai-keypoints/" type="text/html"/>
+        <id>https://freeopen.github.io/ai-keypoints/</id>
         
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;冠军：李weite 及 bilibili 团队&lt;&#x2F;p&gt;
@@ -634,7 +634,7 @@ Images&#x2F;blouse&#x2F;02b54c183d2dbd2c056db14303064886.jpg,blouse,244_76_1,282
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;每个关键点由一个三元组表示，每个元素由下划线连接，表示为“ x_y_v”，其中x和y为坐标，v为可见性。 如果关键点可见，则可见性等于1；如果关键点被遮挡，则可见性等于0；如果类别中不存在或未定义，则可见性等于-1。 &lt;&#x2F;p&gt;
 &lt;h3 id=&quot;ping-jie-biao-zhun&quot;&gt;评价标准&lt;&#x2F;h3&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;ai-keypoints&#x2F;.&#x2F;TB1nI4_FY1YBuNjSszeXXablFXa.tfsprivate.png&quot; alt=&quot;TB1nI4_FY1YBuNjSszeXXablFXa.tfsprivate&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;ai-keypoints&#x2F;.&#x2F;TB1nI4_FY1YBuNjSszeXXablFXa.tfsprivate.png&quot; alt=&quot;TB1nI4_FY1YBuNjSszeXXablFXa.tfsprivate&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;Normalized Error（NE）用于评估提交的结果。 NE是预测关键点位置和注释位置之间的平均归一化距离。 注意，NE计算仅涉及可见的关键点。&lt;&#x2F;p&gt;
 &lt;p&gt;其中 $k$ 为关键点 ID，$d_k$为预测关键点位置与带注释的关键点位置之间的距离，$s_k$为距离归一化参数（对于上衣，外套和衣服，它等于两个腋窝点之间的欧几里得距离;对于裤子和 裙边等于两个腰带点之间的距离），$v_k$即关键点的可见性。&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;jie-ti-si-lu&quot;&gt;解题思路&lt;&#x2F;h2&gt;
@@ -681,18 +681,18 @@ Images&#x2F;blouse&#x2F;02b54c183d2dbd2c056db14303064886.jpg,blouse,244_76_1,282
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/ai-reconition/" type="text/html"/>
-        <id>https://www.freeopen.tech/ai-reconition/</id>
+        <link rel="alternate" href="https://freeopen.github.io/ai-reconition/" type="text/html"/>
+        <id>https://freeopen.github.io/ai-reconition/</id>
         
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;冠军：西安交大在读博士及硕士组成的“禾思众成”团队&lt;&#x2F;p&gt;
 &lt;&#x2F;blockquote&gt;
 &lt;h2 id=&quot;ren-wu-shuo-ming&quot;&gt;任务说明&lt;&#x2F;h2&gt;
 &lt;p&gt;服装属性是时装领域的基础知识，它既庞大又复杂。 我们构建了一个层次结构的属性树作为结构化的分类目标，以描述服装的认知过程。 邀请您设计算法来识别服装图像的属性。 此任务可能会广泛应用于服装图片搜索，导航标签，混搭推荐等。 &lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;ai-reconition&#x2F;.&#x2F;cloth-attributes.png&quot; alt=&quot;女装属性树&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;ai-reconition&#x2F;.&#x2F;cloth-attributes.png&quot; alt=&quot;女装属性树&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;要求检测上图中所有可区分的服装属性标签。 统计下来，训练集的图片约18万张，8个大类（4个设计属性，包括各种领口的款式，4个长度属性，包括衣长、裙长、裤长、袖长），54个小类。 &lt;&#x2F;p&gt;
 &lt;h3 id=&quot;biao-qian&quot;&gt;标签&lt;&#x2F;h3&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;ai-reconition&#x2F;.&#x2F;cloth-model.png&quot; alt=&quot;模特及标签&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;ai-reconition&#x2F;.&#x2F;cloth-model.png&quot; alt=&quot;模特及标签&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;a）上图的数据由训练有素的注释器标记。 然后，时尚专家会仔细检查这些标签，以确保较高的标签准确性。 带注释的数据中存在一定数量的缺失标签。 例如，图像中可能只有一个颈部设计标签，且颈部设计和袖子长度可见。 不再标记袖子长度以保持每个属性维度的数据均匀性。&lt;&#x2F;p&gt;
 &lt;p&gt;b）为这条赛道选择了八个主要属性尺寸，即领口设计(Neckline)、领子设计(Collar)、高领设计(High Neck)、翻领设计(Lapel)、袖子长度(Sleeves length)、上衣长度(Length of top)、裙长(Length of skirt)和裤子长度(Length of trousers)。&lt;&#x2F;p&gt;
 &lt;h3 id=&quot;shu-ju-te-zheng&quot;&gt;数据特征&lt;&#x2F;h3&gt;
@@ -722,7 +722,7 @@ Images&#x2F;blouse&#x2F;02b54c183d2dbd2c056db14303064886.jpg,blouse,244_76_1,282
 &lt;p&gt;Net2Net模型（将一个神经网络中的知识快速转移到另一个神经网络中），把原模型直接转成更高分辨率，兼顾感受野保同性和函数保同性，计算量远小于把图片分辨率提高所增加的计算量。&lt;&#x2F;p&gt;
 &lt;h4 id=&quot;gan-shou-ye-bao-tong-xing&quot;&gt;感受野保同性&lt;&#x2F;h4&gt;
 &lt;p&gt;降采样层增加后续卷积层的感受野，极大减少模型计算量，但是免不了会丢失一些信息。而dilated卷积不会丢失信息，因此用空洞卷积替换掉降采样层。 下面是换算公式，替换stage3和stage4的降采样层，在保持感受野增加的前提下，最后输出的分辨率提高了4倍。&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;ai-reconition&#x2F;.&#x2F;20210211175358.jpg&quot; alt=&quot;20210211175358&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;ai-reconition&#x2F;.&#x2F;20210211175358.jpg&quot; alt=&quot;20210211175358&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;优点：Net2Net 在不同计算能力的设备上转换模型，不需要重新训练。&lt;&#x2F;p&gt;
 &lt;h4 id=&quot;han-shu-bao-tong-xing&quot;&gt;函数保同性&lt;&#x2F;h4&gt;
 &lt;p&gt;基本原理为多出来的参数维度，随机拷贝原来参数的数据，再将多出来的数值求平均，来保证原始模型的知识保有。&lt;&#x2F;p&gt;
@@ -743,8 +743,8 @@ Images&#x2F;blouse&#x2F;02b54c183d2dbd2c056db14303064886.jpg,blouse,244_76_1,282
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/amap/" type="text/html"/>
-        <id>https://www.freeopen.tech/amap/</id>
+        <link rel="alternate" href="https://freeopen.github.io/amap/" type="text/html"/>
+        <id>https://freeopen.github.io/amap/</id>
         
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;冠军：北邮在读博士 朱奕达及团队&lt;&#x2F;p&gt;
@@ -831,8 +831,8 @@ Images&#x2F;blouse&#x2F;02b54c183d2dbd2c056db14303064886.jpg,blouse,244_76_1,282
         <author>
           <name>Unknown</name>
         </author>
-        <link rel="alternate" href="https://www.freeopen.tech/flink/" type="text/html"/>
-        <id>https://www.freeopen.tech/flink/</id>
+        <link rel="alternate" href="https://freeopen.github.io/flink/" type="text/html"/>
+        <id>https://freeopen.github.io/flink/</id>
         
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;冠军：合肥工大 SkyPeaceLL&lt;&#x2F;p&gt;
@@ -876,7 +876,7 @@ Images&#x2F;blouse&#x2F;02b54c183d2dbd2c056db14303064886.jpg,blouse,244_76_1,282
 &lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
 &lt;h2 id=&quot;gong-zuo-liu&quot;&gt;工作流&lt;&#x2F;h2&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;www.freeopen.tech&#x2F;flink&#x2F;flink-workflow.png&quot; alt=&quot;flink-workflow&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;freeopen.github.io&#x2F;flink&#x2F;flink-workflow.png&quot; alt=&quot;flink-workflow&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;官方提供一套docker环境及baseline代码，由于新冠病例和天猫精灵在算法任务上的相似性，编写两个 workflow 配置文件(yaml)，使得一套python代码运行两个算法。&lt;&#x2F;p&gt;
 &lt;p&gt;基本思路：&lt;&#x2F;p&gt;
 &lt;ol&gt;
