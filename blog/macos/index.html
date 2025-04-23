@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mac OS 自用手册 | Freeopen</title>
+  <meta name="title" content="Mac OS 自用手册">
+<meta name="description" content="7 labo.">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+  <link href="/main.css" rel="stylesheet">
+</head>
+<body>
+  <header>
+  <a href="/" class="title">
+    <h1>Freeopen</h1>
+  </a>
+  <nav aria-label="site">
+      <a href="/">Home</a>
+      <a href="/blog/">Blog</a>
+      <a href="/shorttips/">Tips</a>
+      <a href="/about/">About</a>
+  </nav>
+</header>
+
+
+  <div>
+      
+<aside id="toc-aside" class="right-to-left">
+        <h2>Table of contents</h2>
+    <ol>
+        <li>
+            <a href="#insomniax-fang-zhi-mac-os-xiu-mian">InsomniaX 防止 mac OS 休眠</a>
+            
+        </li><li>
+            <a href="#zi-qi-dong-fu-wu">自启动服务</a>
+            <ol>
+                <li>
+                    <a href="#yuan-sheng-zi-qi-dong">原生自启动</a>
+                </li><li>
+                    <a href="#brew-an-zhuang-de-zi-qi-dong">brew 安装的自启动</a>
+                </li>
+            </ol>
+        </li><li>
+            <a href="#start-and-stop-redis">start and stop redis</a>
+            
+        </li><li>
+            <a href="#vscode-ti-shi-bu-neng-zai-zhi-du-juan-shang-sheng-ji-wen-ti">vscode 提示不能在只读卷上升级问题</a>
+            
+        </li><li>
+            <a href="#pei-zhi-zhong-duan-yan-se-ji-ti-shi-zshrc">配置终端颜色及提示（.zshrc）</a>
+            
+        </li><li>
+            <a href="#sou-chu-suo-you-bao-han-frpc-de-wen-jian">搜出所有包含 frpc 的文件</a>
+            
+        </li><li>
+            <a href="#unicode-to-utf8">unicode to utf8</a>
+            
+        </li><li>
+            <a href="#vscode-vim-chang-an-jian-guang-biao-yi-dong-wen-ti">vscode vim 长按键光标移动问题</a>
+            
+        </li><li>
+            <a href="#kai-qi-ren-he-lai-yuan-dai-ma">开启任何来源代码</a>
+            
+        </li><li>
+            <a href="#yi-chu-quarantineshu-xing-dai-ma">移除quarantine属性代码</a>
+            
+        </li><li>
+            <a href="#zhi-zuo-usbqi-dong-pan">制作usb启动盘</a>
+            
+        </li>
+    </ol>
+</aside>
+
+      <h1>Mac OS 自用手册</h1>
+      <time datetime="2023-06-01" class="post-date">
+          2023-06-01
+          
+            (updated on 2023-06-01)
+          
+      </time>
+  <main>
+    <p>整理一些苹果电脑的实用小技巧, 包括曾经踩过的坑。</p>
+<span id="continue-reading"></span><h2 id="insomniax-fang-zhi-mac-os-xiu-mian">InsomniaX 防止 mac OS 休眠</h2>
+<p>Disable lid sleep 禁止合盖睡眠</p>
+<p>Disable idle sleep 禁止闲置睡眠</p>
+<p>disable lid sleep when on ac  使用交流电时禁止合盖睡眠</p>
+<h2 id="zi-qi-dong-fu-wu">自启动服务</h2>
+<h3 id="yuan-sheng-zi-qi-dong">原生自启动</h3>
+<ol>
+<li>
+<p>如果需要 root，并且是需要用户登陆后才能运行，把 plist 放在 /Library/LaunchAgents/</p>
+</li>
+<li>
+<p>如果需要 root，并且不需要用户登陆后都能运行，把 plist 放在 /Library/LaunchDaemons/</p>
+</li>
+</ol>
+<p><strong>显示当前的启动脚本</strong></p>
+<pre><code>launchctl list
+</code></pre>
+<p><strong>开机时自动启动Apache服务器</strong></p>
+<pre><code>sudo launchctl load -w &#x2F;System&#x2F;Library&#x2F;LaunchDaemons&#x2F;org.apache.httpd.plist
+
+sudo launchctl load -w &#x2F;Library&#x2F;LaunchDaemons&#x2F;frpc.plist
+</code></pre>
+<p><strong>设置开机启动并立即启动服务</strong></p>
+<pre><code>launchctl load -w **.pist
+</code></pre>
+<p><strong>设置开机启动但不立即启动服务</strong></p>
+<pre><code>launchctl load **.pist
+</code></pre>
+<p><strong>停止正在运行的启动脚本</strong></p>
+<pre><code>sudo launchctl unload [path&#x2F;to&#x2F;script]
+</code></pre>
+<p><strong>再加上-w选项即可去除开机启动</strong></p>
+<pre><code>sudo launchctl unload -w [path&#x2F;to&#x2F;script]
+</code></pre>
+<h3 id="brew-an-zhuang-de-zi-qi-dong">brew 安装的自启动</h3>
+<pre><code>brew services start redis
+
+必须先安装
+brew tap gapple&#x2F;services
+
+brew services cleanup service-name
+brew services list
+</code></pre>
+<h2 id="start-and-stop-redis">start and stop redis</h2>
+<p>location: /opt/homebrew/etc/redis.conf</p>
+<pre><code>redis-server
+redis-cli shutdown
+</code></pre>
+<h2 id="vscode-ti-shi-bu-neng-zai-zhi-du-juan-shang-sheng-ji-wen-ti">vscode 提示不能在只读卷上升级问题</h2>
+<pre><code>sudo chown -R $USER ~&#x2F;Library&#x2F;Caches&#x2F;com.microsoft.VSCode.ShipIt
+xattr -dr com.apple.quarantine &#x2F;Applications&#x2F;Visual\ Studio\ Code.app
+</code></pre>
+<h2 id="pei-zhi-zhong-duan-yan-se-ji-ti-shi-zshrc">配置终端颜色及提示（.zshrc）</h2>
+<pre><code>export CLICOLOR=&#x27;Yes&#x27;
+autoload -U colors &amp;&amp; colors
+PROMPT=&quot;%{$fg[green]%}%n@%m%{$reset_color%} %{$fg[blue]%}%1~%{$reset_color%} %# &quot;
+</code></pre>
+<h2 id="sou-chu-suo-you-bao-han-frpc-de-wen-jian">搜出所有包含 frpc 的文件</h2>
+<pre><code>mdfind -name “frpc”
+</code></pre>
+<h2 id="unicode-to-utf8">unicode to utf8</h2>
+<pre><code>iconv -f GBK -t UTF-8 qyn.txt&gt;&gt; qyn2.txt
+</code></pre>
+<h2 id="vscode-vim-chang-an-jian-guang-biao-yi-dong-wen-ti">vscode vim 长按键光标移动问题</h2>
+<pre><code>defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+or
+defaults write -g ApplePressAndHoldEnabled -bool false
+</code></pre>
+<h2 id="kai-qi-ren-he-lai-yuan-dai-ma">开启任何来源代码</h2>
+<pre><code>sudo spctl --master-disable
+</code></pre>
+<h2 id="yi-chu-quarantineshu-xing-dai-ma">移除quarantine属性代码</h2>
+<pre><code>sudo xattr -r -d com.apple.quarantine xxx.dmg
+</code></pre>
+<h2 id="zhi-zuo-usbqi-dong-pan">制作usb启动盘</h2>
+<p><strong>方案1: 已安装的可视化工具</strong></p>
+<p>balenaetcher</p>
+<p><strong>方案2</strong></p>
+<p>1、制作mac格式的镜像</p>
+<pre><code>hdiutil convert -format UDRW -o ubuntu.iso ubuntu-14.04.5-desktop-amd64.iso
+</code></pre>
+<p>2、卸载U盘</p>
+<pre><code>diskutil list  查看u盘盘符
+diskutil unmountDisk &#x2F;dev&#x2F;disk2
+</code></pre>
+<p>3、镜像拷贝</p>
+<pre><code>mv ubuntu.iso.dmg ubuntu.iso
+sudo dd if=.&#x2F;ubuntu.iso of=&#x2F;dev&#x2F;disk2 bs=1m&gt;
+＃这行命令必须使用root权限， if:输入的文件名 of:输出的文件名* bs:是块大小，这里使用1m的块大小。
+</code></pre>
+<p>4、退u盘</p>
+<pre><code>sudo eject &#x2F;dev&#x2F;disk2
+</code></pre>
+<p>5、销毁数据，随机数填充
+sudo dd if=/dev/urandom of=/dev/rdisk2</p>
+
+  </main>
+  <p>
+        Tags:
+          <a href="/tags/mac-os/">#Mac OS</a>
+        Categories:
+          <a href="/categories/su-cha-shou-ce/">#速查手册</a>
+  </p>
+
+  </div><footer class="footer">
+    <hr>
+    <small>
+        &copy; <time id="dynamic-year" datetime="2017">2017</time>. All rights reserved.
+    </small>
+</footer>
+<script>
+    const currentYear = new Date().getFullYear();
+
+    const timeElement = document.getElementById('dynamic-year');
+    timeElement.textContent = `2017 - ${currentYear}`;
+    timeElement.setAttribute('datetime', `2017/${currentYear}`);
+</script>
+</body>
+</html>

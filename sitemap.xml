@@ -1,184 +1,235 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://freeopen.github.io/</loc>
+        <loc>/</loc>
     </url>
     <url>
-        <loc>https://freeopen.github.io/about/</loc>
+        <loc>/about/</loc>
     </url>
     <url>
-        <loc>https://freeopen.github.io/ai-keypoints/</loc>
+        <loc>/bear/</loc>
+    </url>
+    <url>
+        <loc>/blog/</loc>
+    </url>
+    <url>
+        <loc>/blog/ai-keypoints/</loc>
         <lastmod>2021-02-11</lastmod>
     </url>
     <url>
-        <loc>https://freeopen.github.io/ai-reconition/</loc>
+        <loc>/blog/ai-reconition/</loc>
         <lastmod>2021-02-11</lastmod>
     </url>
     <url>
-        <loc>https://freeopen.github.io/amap/</loc>
+        <loc>/blog/amap/</loc>
         <lastmod>2021-02-10</lastmod>
     </url>
     <url>
-        <loc>https://freeopen.github.io/categories/</loc>
+        <loc>/blog/centos-vpn/</loc>
+        <lastmod>2023-09-04</lastmod>
     </url>
     <url>
-        <loc>https://freeopen.github.io/categories/fu-wen-mi-lu/</loc>
-    </url>
-    <url>
-        <loc>https://freeopen.github.io/categories/ji-qi-xue-xi/</loc>
-    </url>
-    <url>
-        <loc>https://freeopen.github.io/categories/qi-men-dun-jia/</loc>
-    </url>
-    <url>
-        <loc>https://freeopen.github.io/categories/su-cha-shou-ce/</loc>
-    </url>
-    <url>
-        <loc>https://freeopen.github.io/centos-vpn/</loc>
-        <lastmod>2021-04-04</lastmod>
-    </url>
-    <url>
-        <loc>https://freeopen.github.io/cervical/</loc>
+        <loc>/blog/cervical/</loc>
         <lastmod>2021-02-14</lastmod>
     </url>
     <url>
-        <loc>https://freeopen.github.io/cloth-cut/</loc>
+        <loc>/blog/cloth-cut/</loc>
         <lastmod>2021-02-13</lastmod>
     </url>
     <url>
-        <loc>https://freeopen.github.io/contact/</loc>
-    </url>
-    <url>
-        <loc>https://freeopen.github.io/convolution/</loc>
+        <loc>/blog/convolution/</loc>
         <lastmod>2021-02-17</lastmod>
     </url>
     <url>
-        <loc>https://freeopen.github.io/crf/</loc>
+        <loc>/blog/crf/</loc>
         <lastmod>2018-05-08</lastmod>
     </url>
     <url>
-        <loc>https://freeopen.github.io/crop/</loc>
+        <loc>/blog/crop/</loc>
         <lastmod>2021-02-13</lastmod>
     </url>
     <url>
-        <loc>https://freeopen.github.io/eponine/</loc>
+        <loc>/blog/eponine/</loc>
         <lastmod>2017-06-11</lastmod>
     </url>
     <url>
-        <loc>https://freeopen.github.io/estimator/</loc>
+        <loc>/blog/estimator/</loc>
         <lastmod>2018-04-12</lastmod>
     </url>
     <url>
-        <loc>https://freeopen.github.io/flink/</loc>
+        <loc>/blog/flink/</loc>
         <lastmod>2021-02-10</lastmod>
     </url>
     <url>
-        <loc>https://freeopen.github.io/gd-defect/</loc>
+        <loc>/blog/gd-defect/</loc>
         <lastmod>2021-02-13</lastmod>
     </url>
     <url>
-        <loc>https://freeopen.github.io/glossary/</loc>
+        <loc>/blog/gitremark/</loc>
+        <lastmod>2023-11-09</lastmod>
+    </url>
+    <url>
+        <loc>/blog/glossary/</loc>
         <lastmod>2018-02-26</lastmod>
     </url>
     <url>
-        <loc>https://freeopen.github.io/guangdong-cloth/</loc>
+        <loc>/blog/guangdong-cloth/</loc>
         <lastmod>2021-02-13</lastmod>
     </url>
     <url>
-        <loc>https://freeopen.github.io/mathjax/</loc>
+        <loc>/blog/linux/</loc>
+        <lastmod>2023-07-13</lastmod>
+    </url>
+    <url>
+        <loc>/blog/lvm/</loc>
+        <lastmod>2023-06-01</lastmod>
+    </url>
+    <url>
+        <loc>/blog/macos/</loc>
+        <lastmod>2023-06-01</lastmod>
+    </url>
+    <url>
+        <loc>/blog/mathjax/</loc>
         <lastmod>2023-03-23</lastmod>
     </url>
     <url>
-        <loc>https://freeopen.github.io/matrix/</loc>
+        <loc>/blog/matrix/</loc>
         <lastmod>2019-02-15</lastmod>
     </url>
     <url>
-        <loc>https://freeopen.github.io/mnist/</loc>
+        <loc>/blog/mnist/</loc>
         <lastmod>2017-08-02</lastmod>
     </url>
     <url>
-        <loc>https://freeopen.github.io/nmt/</loc>
+        <loc>/blog/mycloud/</loc>
+        <lastmod>2023-07-20</lastmod>
+    </url>
+    <url>
+        <loc>/blog/nmt/</loc>
         <lastmod>2018-01-31</lastmod>
     </url>
     <url>
-        <loc>https://freeopen.github.io/page/1/</loc>
-    </url>
-    <url>
-        <loc>https://freeopen.github.io/page/2/</loc>
-    </url>
-    <url>
-        <loc>https://freeopen.github.io/page/3/</loc>
-    </url>
-    <url>
-        <loc>https://freeopen.github.io/page/4/</loc>
-    </url>
-    <url>
-        <loc>https://freeopen.github.io/page/5/</loc>
-    </url>
-    <url>
-        <loc>https://freeopen.github.io/pandoc/</loc>
+        <loc>/blog/pandoc/</loc>
         <lastmod>2017-05-11</lastmod>
     </url>
     <url>
-        <loc>https://freeopen.github.io/posts/</loc>
-    </url>
-    <url>
-        <loc>https://freeopen.github.io/privacy/</loc>
-    </url>
-    <url>
-        <loc>https://freeopen.github.io/programming/</loc>
+        <loc>/blog/programming/</loc>
         <lastmod>2017-05-16T01:36:56+08:00</lastmod>
     </url>
     <url>
-        <loc>https://freeopen.github.io/python/</loc>
+        <loc>/blog/python/</loc>
         <lastmod>2017-12-11</lastmod>
     </url>
     <url>
-        <loc>https://freeopen.github.io/segment/</loc>
+        <loc>/blog/segment/</loc>
         <lastmod>2019-03-22</lastmod>
     </url>
     <url>
-        <loc>https://freeopen.github.io/tags/</loc>
+        <loc>/blog/vim-tips/</loc>
+        <lastmod>2023-06-02</lastmod>
     </url>
     <url>
-        <loc>https://freeopen.github.io/tags/handbook/</loc>
+        <loc>/blog/webmention/</loc>
+        <lastmod>2023-04-18</lastmod>
     </url>
     <url>
-        <loc>https://freeopen.github.io/tags/image/</loc>
-    </url>
-    <url>
-        <loc>https://freeopen.github.io/tags/markdown/</loc>
-    </url>
-    <url>
-        <loc>https://freeopen.github.io/tags/math/</loc>
-    </url>
-    <url>
-        <loc>https://freeopen.github.io/tags/mathjax/</loc>
-    </url>
-    <url>
-        <loc>https://freeopen.github.io/tags/matrix/</loc>
-    </url>
-    <url>
-        <loc>https://freeopen.github.io/tags/ml/</loc>
-    </url>
-    <url>
-        <loc>https://freeopen.github.io/tags/notes/</loc>
-    </url>
-    <url>
-        <loc>https://freeopen.github.io/tags/tensorflow/</loc>
-    </url>
-    <url>
-        <loc>https://freeopen.github.io/tags/top1/</loc>
-    </url>
-    <url>
-        <loc>https://freeopen.github.io/tags/vpn/</loc>
-    </url>
-    <url>
-        <loc>https://freeopen.github.io/tensorlayer/</loc>
-        <lastmod>2017-09-09</lastmod>
-    </url>
-    <url>
-        <loc>https://freeopen.github.io/x-cargo/</loc>
+        <loc>/blog/x-cargo/</loc>
         <lastmod>2021-02-14</lastmod>
+    </url>
+    <url>
+        <loc>/categories/</loc>
+    </url>
+    <url>
+        <loc>/categories/fu-wen-mi-lu/</loc>
+    </url>
+    <url>
+        <loc>/categories/ji-qi-xue-xi/</loc>
+    </url>
+    <url>
+        <loc>/categories/qi-men-dun-jia/</loc>
+    </url>
+    <url>
+        <loc>/categories/su-cha-shou-ce/</loc>
+    </url>
+    <url>
+        <loc>/cn/</loc>
+    </url>
+    <url>
+        <loc>/cn/about/</loc>
+    </url>
+    <url>
+        <loc>/cn/bear/</loc>
+    </url>
+    <url>
+        <loc>/cn/blog/</loc>
+    </url>
+    <url>
+        <loc>/cn/categories/</loc>
+    </url>
+    <url>
+        <loc>/cn/shorttips/</loc>
+    </url>
+    <url>
+        <loc>/cn/tags/</loc>
+    </url>
+    <url>
+        <loc>/cn/zola/</loc>
+    </url>
+    <url>
+        <loc>/shorttips/</loc>
+    </url>
+    <url>
+        <loc>/tags/</loc>
+    </url>
+    <url>
+        <loc>/tags/handbook/</loc>
+    </url>
+    <url>
+        <loc>/tags/image/</loc>
+    </url>
+    <url>
+        <loc>/tags/linux/</loc>
+    </url>
+    <url>
+        <loc>/tags/lvm/</loc>
+    </url>
+    <url>
+        <loc>/tags/mac-os/</loc>
+    </url>
+    <url>
+        <loc>/tags/markdown/</loc>
+    </url>
+    <url>
+        <loc>/tags/math/</loc>
+    </url>
+    <url>
+        <loc>/tags/mathjax/</loc>
+    </url>
+    <url>
+        <loc>/tags/matrix/</loc>
+    </url>
+    <url>
+        <loc>/tags/ml/</loc>
+    </url>
+    <url>
+        <loc>/tags/notes/</loc>
+    </url>
+    <url>
+        <loc>/tags/tensorflow/</loc>
+    </url>
+    <url>
+        <loc>/tags/top1/</loc>
+    </url>
+    <url>
+        <loc>/tags/vim/</loc>
+    </url>
+    <url>
+        <loc>/tags/vpn/</loc>
+    </url>
+    <url>
+        <loc>/tags/webmention/</loc>
+    </url>
+    <url>
+        <loc>/zola/</loc>
     </url>
 </urlset>

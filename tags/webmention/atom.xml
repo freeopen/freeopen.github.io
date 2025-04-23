@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Freeopen - webmention</title>
+    <subtitle>7 labo.</subtitle>
+    <link rel="self" type="application/atom+xml" href="/tags/webmention/atom.xml"/>
+    <link rel="alternate" type="text/html" href="/"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2023-04-18T12:42:38+00:00</updated>
+    <id>/tags/webmention/atom.xml</id>
+    <entry xml:lang="en">
+        <title>webmention 历险记</title>
+        <published>2023-04-18T12:42:38+00:00</published>
+        <updated>2023-04-18T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="/blog/webmention/"/>
+        <id>/blog/webmention/</id>
+        
+        <content type="html" xml:base="/blog/webmention/">&lt;h2 id=&quot;shen-me-shi-webmention&quot;&gt;什么是Webmention&lt;&#x2F;h2&gt;
+&lt;p&gt;Webmention.io 是建立在 IndieWeb 原则之上的运动，旨在使个人能够拥有和控制他们的在线内容。该运动旨在授权个人拥有和控制其在线内容。&lt;&#x2F;p&gt;
+&lt;p&gt;IndieWeb (独立网络) 的核心精神是：&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我们都应该拥有我们正在创建的内容，而不仅仅是发布到第三方内容孤岛。在您自己的域上发布，并联合发布到孤岛。&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;一个静态博客通常会加个评论系统，用于作者与读者的互动。但传统的评论系统往往基于各种账号系统，比如 github, disqus, 如果你没有账号，就不能参与评论。
+于是有人想出一个新点子，就是利用广泛使用的社交平台，比如 twitter，将互动内容直接聚合到你的博客系统, 这就是 webmention.io 一个典型应用场景。&lt;&#x2F;p&gt;
+&lt;p&gt;Webmention 是一种在您在网站上提及任何 URL 时通知它的简单方法。从接收者的角度来看，这是一种在其他站点提及时请求通知的方式。换句话说，这就像看到论文之间的相互引用或推文之间的相互提及。通过利用 Webmention.io，您可以享受以下好处：&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;无需托管和维护评论系统&lt;&#x2F;strong&gt;：Webmention.io 负责聚合和显示交互，让您免于维护专用评论系统的麻烦。&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;提高知名度和影响力&lt;&#x2F;strong&gt;：Webmention.io 鼓励公开讨论，允许任何人通过他们喜欢的社交媒体平台参与对话。通过直接在博客上显示社交媒体互动，您可以吸引更多读者并增加内容的曝光率。&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;zhong-xin-hua-de-bi-duan&quot;&gt;中心化的弊端&lt;&#x2F;h2&gt;
+&lt;p&gt;最初看到 webmention 这个概念时，引起我极高的兴趣，立即找了些使用这个思路的网站，它的效果是这个样子的(如下图), 是不是很有意思？&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;blog&#x2F;webmention&#x2F;web1.png&quot; alt=&quot;twitter 的提及举例&quot; &#x2F;&gt;
+&lt;img src=&quot;&#x2F;blog&#x2F;webmention&#x2F;web2.png&quot; alt=&quot;twitter 的回复举例&quot; &#x2F;&gt;
+&lt;img src=&quot;&#x2F;blog&#x2F;webmention&#x2F;web3.png&quot; alt=&quot;twitter 的回复例二&quot; &#x2F;&gt;
+&lt;img src=&quot;&#x2F;blog&#x2F;webmention&#x2F;web4.png&quot; alt=&quot;twitter 的喜欢与转发&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;我当时的第一想法，就是这种方案是否能应用于国内的微信朋友圈，如果能把微信朋友圈的留言、点赞等聚合在博客文章的下方，是相当有趣的。然后就是漫长的寻找和资料查询，发现腾讯公司的微信并不对外开放个人朋友圈的查询接口，无法实现这个想法。好吧，那么我就退一步，模仿人家的博客，实现基于 twitter 的评论聚合，总该可以了吧。&lt;&#x2F;p&gt;
+&lt;p&gt;等我按照所有的教程，完成了上述步骤后，然后自己在twitter发了篇文章，注册另一个twitter账号对其文章进行评论后，发现完全没有效果。开始，我以为是自己的配置问题，一直在查错，然后错不在我，这次的事故原因是 twitter，号称要学习 微信 的社交网络公司，对第三方应用突然关闭的访问授权，导致 Webmention.io 方案不再成立。不得不说，这就是中心化的恶果，这些建立社交系统的公司确实可以擅自处理和使用用户的数据，而用户自身，本质上无法拥有自己的数据。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;yi-dian-xiang-fa&quot;&gt;一点想法&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;完全抛弃中心化的社交软件（微信、微博、twitter ...）？不现实；&lt;&#x2F;li&gt;
+&lt;li&gt;等待现有社交软件突发善心，允许可读取个人数据的接口被拥有者授权访问？ 不理智；&lt;&#x2F;li&gt;
+&lt;li&gt;基于公开协议，寻找或者创建一个去中心化的社交平台，也就是 区块链化 社交系统，这是我期待的；&lt;&#x2F;li&gt;
+&lt;li&gt;对中心化系统的失望，我准备开始从云端（百度云，苹果的icloud，谷歌云等）逐渐迁移个人数据，包括但不限于 一些笔记、网络密码、照片等，将其本地化，可离线化，这是我觉得很有必要立即开始做的。&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;tu-pian-lai-zi&quot;&gt;图片来自&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;geekplux.com&#x2F;posts&#x2F;new-to-us&quot;&gt;来美国之后，如何快速安顿下来&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.owenyoung.com&#x2F;blog&#x2F;cronbin&#x2F;&quot;&gt;在 Cloudflare Workers 部署一个带有 Dashboard 的 Cron 服务&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+</feed>

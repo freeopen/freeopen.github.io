@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Freeopen - vim</title>
+    <subtitle>7 labo.</subtitle>
+    <link rel="self" type="application/atom+xml" href="/tags/vim/atom.xml"/>
+    <link rel="alternate" type="text/html" href="/"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2023-06-02T00:00:00+00:00</updated>
+    <id>/tags/vim/atom.xml</id>
+    <entry xml:lang="en">
+        <title>VIM 小技巧</title>
+        <published>2023-06-01T17:37:26+00:00</published>
+        <updated>2023-06-02T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="/blog/vim-tips/"/>
+        <id>/blog/vim-tips/</id>
+        
+        <content type="html" xml:base="/blog/vim-tips/">&lt;h2 id=&quot;nian-tie&quot;&gt;粘贴&lt;&#x2F;h2&gt;
+&lt;p&gt;查看剪贴板寄存器&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;:reg
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;选择第3个寄存器内容粘贴&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;quot;3p
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;xiao-chu-gao-liang&quot;&gt;消除高亮&lt;&#x2F;h2&gt;
+&lt;pre&gt;&lt;code&gt;:noh
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;pi-liang-shu-zi-di-zeng&quot;&gt;批量数字递增&lt;&#x2F;h2&gt;
+&lt;pre&gt;&lt;code&gt;#圆括号内 被 summatch引用
+:%s&amp;#x2F;\(\d\{5}\)&amp;#x2F;\=submatch(1)+10000
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;pi-liang-ti-huan&quot;&gt;批量替换&lt;&#x2F;h2&gt;
+&lt;pre&gt;&lt;code&gt;:%s&amp;#x2F;from&amp;#x2F;to&amp;#x2F;g
+e.g. :%s&amp;#x2F;,&amp;#x2F;\r&amp;#x2F;g
+:args **&amp;#x2F;*.java
+:argdo %s&amp;#x2F;old&amp;#x2F;new&amp;#x2F;egc | update
+
+e:正则  g:全局  c:替换提醒
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;cha-kan-bian-liang&quot;&gt;查看变量&lt;&#x2F;h2&gt;
+&lt;p&gt;“$”——访问环境变量；
+“&amp;amp;”——访问 Vim 选项；
+“@”——访问寄存器。&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;:echo &amp;amp;tabstop
+:echo $VIMRUNTIME
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;cha-kan-vim-tabstop-de-zui-hou-she-zhi-wei-zhi&quot;&gt;查看vim tabstop 的最后设置位置&lt;&#x2F;h2&gt;
+&lt;pre&gt;&lt;code&gt;:verbose setlocal ts? et?
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;xian-shi-kan-bu-jian-de-zi-fu&quot;&gt;显示看不见的字符&lt;&#x2F;h2&gt;
+&lt;pre&gt;&lt;code&gt;set listchars=eol:$,tab:&amp;gt;-,trail:~,extends:&amp;gt;,precedes:&amp;lt;
+set list
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;config-for-chinese&quot;&gt;config for chinese&lt;&#x2F;h2&gt;
+&lt;pre&gt;&lt;code&gt;language messages zh_CN.UTF-8
+set fencs=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+set fenc=utf-8
+set encoding=utf-8
+set termencoding=utf-8
+set gcr=a:block-blinkon0
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;zi-ding-yi-kuai-jie-jian&quot;&gt;自定义快捷键&lt;&#x2F;h2&gt;
+&lt;p&gt;背景: linux 环境下已安装 sdcv 命令行的英文字典&lt;&#x2F;p&gt;
+&lt;p&gt;目的: 配置 快捷键 (ctrl + k) 自动翻译 当前光标位置的 单词&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;nmap &amp;lt;C-k&amp;gt; : !sdcv -0 &amp;lt;C-R&amp;gt;=expand(&amp;quot;&amp;lt;cword&amp;gt;&amp;quot;)&amp;lt;CR&amp;gt;&amp;lt;CR&amp;gt;
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;C-R&gt;后再输入&lt;C-W&gt;就是当前光标下单词的意思，&lt;C-R&gt;&lt;C-W&gt;与&lt;C-R&gt;=expand(&quot;&lt;cword&gt;&quot;)应该是等效的&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;nmap &amp;lt;C-k&amp;gt; : !sdcv -0 &amp;lt;C-R&amp;gt;&amp;lt;C-W&amp;gt;&amp;lt;CR&amp;gt;
+
+# &amp;lt;C-R&amp;gt;: 插入某个寄存器值
+# expand(&amp;quot;&amp;lt;cword&amp;gt;&amp;quot;): 当前光标位置的 单词
+# &amp;lt;CR&amp;gt;: Enter
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;noremap 表示非递归，因为 map 默认是递归映射的&lt;&#x2F;p&gt;
+&lt;p&gt;nmap 表示在普通模式下生效&lt;&#x2F;p&gt;
+&lt;p&gt;vmap 表示在可视模式下生效&lt;&#x2F;p&gt;
+&lt;p&gt;imap 表示在插入模式下生效&lt;&#x2F;p&gt;
+&lt;p&gt;cmap 表示在命令行模式下生效&lt;&#x2F;p&gt;
+&lt;p&gt;un  后面跟按键组合，表示删除这个映射&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;e.g. unvmap &amp;lt;C-c&amp;gt;
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;clear 表示清除快捷键映射&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;e.g. mapclear、nmapclear、nnoremapclear
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;strong&gt;键表&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;k0&amp;gt; - &amp;lt;k9&amp;gt; 小键盘 0 到 9
+&amp;lt;S-...&amp;gt; Shift＋键
+&amp;lt;C-...&amp;gt; Control＋键
+&amp;lt;M-...&amp;gt; Alt＋键 或 meta＋键
+&amp;lt;A-...&amp;gt; 同 &amp;lt;M-...&amp;gt;
+&amp;lt;Esc&amp;gt; Escape 键
+&amp;lt;Up&amp;gt; 光标上移键
+&amp;lt;Space&amp;gt; 插入空格
+&amp;lt;Tab&amp;gt; 插入Tab
+&amp;lt;CR&amp;gt; 等于&amp;lt;Enter&amp;gt;
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;duo-ge-tags&quot;&gt;多个tags&lt;&#x2F;h2&gt;
+&lt;pre&gt;&lt;code&gt;:set tags+=~&amp;#x2F;vimfiles&amp;#x2F;tags&amp;#x2F;XLib&amp;#x2F;Inc&amp;#x2F;XLib.tags
+:set tags+=&amp;#x2F;Users&amp;#x2F;linxinhao&amp;#x2F;proj&amp;#x2F;mmcv&amp;#x2F;mmcv&amp;#x2F;tags
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;tab-4-bian-tab-2&quot;&gt;Tab 4 变 tab 2&lt;&#x2F;h2&gt;
+&lt;pre&gt;&lt;code&gt;:set ts=4   “ tab 设为 4 空格
+:set noexpandtab  “ 把4空格转tab
+:%retab!
+:set ts=2  “ tab 设为 2 空格
+:set expandtab  “ 把tab转2空格
+:%retab!
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;zhe-die&quot;&gt;折叠&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;strong&gt;关闭折叠&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;set nofoldenable
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;strong&gt;普通模式下时&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;zc	关闭当前打开的折叠
+zo	打开当前的折叠
+zm	关闭所有折叠
+zM	关闭所有折叠及其嵌套的折叠
+zr	打开所有折叠
+zR	打开所有折叠及其嵌套的折叠
+zd	删除当前折叠
+zE	删除所有折叠
+zj	移动至下一个折叠
+zk	移动至上一个折叠
+zn	禁用折叠
+zN	启用折叠
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+        
+    </entry>
+</feed>

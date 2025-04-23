@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>linux 服务器自用手册 | Freeopen</title>
+  <meta name="title" content="linux 服务器自用手册">
+<meta name="description" content="7 labo.">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+  <link href="/main.css" rel="stylesheet">
+</head>
+<body>
+  <header>
+  <a href="/" class="title">
+    <h1>Freeopen</h1>
+  </a>
+  <nav aria-label="site">
+      <a href="/">Home</a>
+      <a href="/blog/">Blog</a>
+      <a href="/shorttips/">Tips</a>
+      <a href="/about/">About</a>
+  </nav>
+</header>
+
+
+  <div>
+      
+<aside id="toc-aside" class="right-to-left">
+        <h2>Table of contents</h2>
+    <ol>
+        <li>
+            <a href="#ruan-jian-an-zhuang">软件安装</a>
+            <ol>
+                <li>
+                    <a href="#rpmfusion-jing-xiang">RPMFusion 镜像</a>
+                </li><li>
+                    <a href="#an-zhuang-gao-ban-ben-ruan-jian-bao">安装高版本软件包</a>
+                </li><li>
+                    <a href="#ben-di-an-zhuang">本地安装</a>
+                </li><li>
+                    <a href="#xin-zeng-an-zhuang-yuan">新增安装源</a>
+                </li><li>
+                    <a href="#xiu-gai-mo-ren-an-zhuang-yuan">修改默认安装源</a>
+                </li>
+            </ol>
+        </li><li>
+            <a href="#xi-tong-fu-wu">系统服务</a>
+            <ol>
+                <li>
+                    <a href="#fu-wu-cha-kan">服务查看</a>
+                </li><li>
+                    <a href="#fu-wu-xin-zeng-jia-zai">服务新增加载</a>
+                </li><li>
+                    <a href="#zi-ding-yi-zi-dong-zhong-qi">自定义自动重启</a>
+                </li><li>
+                    <a href="#fu-wu-kai-ji-zi-qi-zhong-qi-deng">服务开机自启、重启等</a>
+                </li>
+            </ol>
+        </li><li>
+            <a href="#jing-tai-ip-di-zhi-pei-zhi">静态 ip 地址配置</a>
+            <ol>
+                <li>
+                    <a href="#centos-stream-8">centos stream 8</a>
+                </li><li>
+                    <a href="#centos-stream-9">centos stream 9</a>
+                </li><li>
+                    <a href="#jia-zai-wang-luo-pei-zhi">加载网络配置</a>
+                </li>
+            </ol>
+        </li><li>
+            <a href="#qi-ta-wang-luo-xiang-guan">其他网络相关</a>
+            <ol>
+                <li>
+                    <a href="#lu-you">路由</a>
+                </li><li>
+                    <a href="#wang-guan">网关</a>
+                </li><li>
+                    <a href="#zhua-bao">抓包</a>
+                </li><li>
+                    <a href="#guo-nei-dns-ji-jian-kong-ip">国内 DNS 及 监控 ip</a>
+                </li>
+            </ol>
+        </li><li>
+            <a href="#fang-huo-qiang">防火墙</a>
+            <ol>
+                <li>
+                    <a href="#ipset">ipset</a>
+                </li>
+            </ol>
+        </li><li>
+            <a href="#qian-hou-tai-ren-wu">前后台任务</a>
+            
+        </li><li>
+            <a href="#ge-chong-cha-kan">各种查看</a>
+            
+        </li><li>
+            <a href="#wen-jian-ji-quan-xian">文件及权限</a>
+            <ol>
+                <li>
+                    <a href="#te-shu-de-wen-jian-quan-xian">特殊的文件权限</a>
+                </li><li>
+                    <a href="#wen-jian-hui-fu-bu-yi-ding-you-xiao">文件恢复 (不一定有效)</a>
+                </li><li>
+                    <a href="#from-ext4-to-xfs">from ext4 to xfs</a>
+                </li><li>
+                    <a href="#an-quan-shang-xia-wen">安全上下文</a>
+                </li><li>
+                    <a href="#acl-quan-xian">ACL 权限</a>
+                </li><li>
+                    <a href="#shi-jian-xiu-gai-ji-chao-duo-shu-liang-kao-bei">时间修改及超多数量拷贝</a>
+                </li>
+            </ol>
+        </li><li>
+            <a href="#add-sudo-user">add sudo user</a>
+            
+        </li><li>
+            <a href="#chuang-jian-bu-ke-deng-lu-de-wu-homemu-lu-de-yong-hu-ming">创建不可登陆的，无HOME目录的 用户名</a>
+            
+        </li><li>
+            <a href="#sui-ji-mi-ma-sheng-cheng">随机密码生成</a>
+            
+        </li><li>
+            <a href="#ya-suo-yu-jie-ya">压缩与解压</a>
+            <ol>
+                <li>
+                    <a href="#ya-suo">压缩</a>
+                </li><li>
+                    <a href="#jie-ya">解压</a>
+                </li><li>
+                    <a href="#jie-ya-xiao-jie">解压小结</a>
+                </li><li>
+                    <a href="#jia-mi-ya-suo-jie-mi-jie-ya">加密压缩/解密解压</a>
+                </li>
+            </ol>
+        </li><li>
+            <a href="#qing-chu-hen-ji">清除痕迹</a>
+            
+        </li><li>
+            <a href="#u-pan-cao-zuo">U 盘操作</a>
+            
+        </li>
+    </ol>
+</aside>
+
+      <h1>linux 服务器自用手册</h1>
+      <time datetime="2023-05-31" class="post-date">
+          2023-05-31
+          
+            (updated on 2023-07-13)
+          
+      </time>
+  <main>
+    <p>以 centos 系统为主，兼容大部分 linux 系统的管理手册。</p>
+<span id="continue-reading"></span><h2 id="ruan-jian-an-zhuang">软件安装</h2>
+<h3 id="rpmfusion-jing-xiang">RPMFusion 镜像</h3>
+<p><strong>安装基础包</strong></p>
+<p>tsinghua mirror:</p>
+<pre><code>yum localinstall --nogpgcheck https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;rpmfusion&#x2F;free&#x2F;el&#x2F;rpmfusion-free-release-9.noarch.rpm https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;rpmfusion&#x2F;nonfree&#x2F;el&#x2F;rpmfusion-nonfree-release-9.noarch.rpm
+</code></pre>
+<p>aliyun miiror:</p>
+<pre><code>dnf install https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;rpmfusion&#x2F;free&#x2F;fedora&#x2F;rpmfusion-free-release-stable.noarch.rpm https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;rpmfusion&#x2F;nonfree&#x2F;fedora&#x2F;rpmfusion-nonfree-release-stable.noarch.rpm --skip-broken
+</code></pre>
+<p><strong>修改链接指向镜像站</strong></p>
+<p>修改 /etc/yum.repos.d/ 目录下以 rpmfusion 开头，以 .repo 结尾的文件</p>
+<p>具体而言，需要将文件中的 baseurl= 开头的行等号后面链接中的 <code>http://download1.rpmfusion.org/</code> 替换为 <code>https://mirrors.tuna.tsinghua.edu.cn/rpmfusion/</code></p>
+<h3 id="an-zhuang-gao-ban-ben-ruan-jian-bao">安装高版本软件包</h3>
+<pre><code>yum install -y http:&#x2F;&#x2F;rpms.famillecollet.com&#x2F;enterprise&#x2F;remi-release-7.rpm
+yum --enablerepo=remi list redis --showduplicates | sort -r  # version search
+yum --enablerepo=remi install redis-6.2.5 -y                 # select version installed
+</code></pre>
+<h3 id="ben-di-an-zhuang">本地安装</h3>
+<pre><code>yum localinstall *.rpm --disablerepo=*
+</code></pre>
+<h3 id="xin-zeng-an-zhuang-yuan">新增安装源</h3>
+<ol>
+<li>Add EPEL that Fedora project provides packages which are specially built for RHEL</li>
+</ol>
+<pre><code>    dnf -y install epel-release
+    e.g.  dnf —enablerepo=epel install [package]
+</code></pre>
+<ol start="2">
+<li>Add ELRepo that provides mainly drivers for RHEL</li>
+</ol>
+<pre><code>    dnf -y install elrepo-release
+</code></pre>
+<ol start="3">
+<li>Add Remi's RPM repository that provides useful packages like latest PHP and so on</li>
+</ol>
+<pre><code>    dnf -y install https:&#x2F;&#x2F;rpms.remirepo.net&#x2F;enterprise&#x2F;remi-release-8.rpm
+</code></pre>
+<h3 id="xiu-gai-mo-ren-an-zhuang-yuan">修改默认安装源</h3>
+<pre><code>cd &#x2F;etc&#x2F;yum.repos.d&#x2F;
+wget http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;repo&#x2F;Centos-7.repo
+wget -O &#x2F;etc&#x2F;yum.repos.d&#x2F;epel-7.repo http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;repo&#x2F;epel-7.repo
+
+yum clean all
+yum makecache
+
+yum repolist enabled
+yum repolist all
+</code></pre>
+<p>批量文本换源</p>
+<pre><code> sed -e &#x27;s|^mirrorlist=|#mirrorlist=|g&#x27; \
+         -e &#x27;s|^#baseurl=http:&#x2F;&#x2F;mirror.centos.org&#x2F;$contentdir|baseurl=https:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;centos|g&#x27; \
+         -i.bak \
+         &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Stream-AppStream.repo \
+         &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Stream-BaseOS.repo \
+         &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Stream-Debuginfo.repo \
+         &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Stream-Extras.repo \
+         &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Stream-HighAvailability.repo \
+         &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Stream-Media.repo \
+         &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Stream-PowerTools.repo \
+         &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Stream-RealTime.repo
+</code></pre>
+<h2 id="xi-tong-fu-wu">系统服务</h2>
+<h3 id="fu-wu-cha-kan">服务查看</h3>
+<p>列出所有已经加载的systemd units</p>
+<pre><code>systemctl
+</code></pre>
+<p>列出所有service</p>
+<pre><code>systemctl list-units --type=service
+</code></pre>
+<p>列出所有enabled状态的服务</p>
+<pre><code>systemctl list-unit-files --state=enabled
+</code></pre>
+<p>列出所有正在运行或failed状态的服务</p>
+<pre><code>systemctl list-units --type service --state running,failed
+</code></pre>
+<p>列出所有active状态（运行或退出）的服务</p>
+<pre><code>systemctl list-units --type=service --state=active
+</code></pre>
+<h3 id="fu-wu-xin-zeng-jia-zai">服务新增加载</h3>
+<pre><code>systemctl daemon-reload
+</code></pre>
+<h3 id="zi-ding-yi-zi-dong-zhong-qi">自定义自动重启</h3>
+<pre><code>chmod +x &#x2F;opt&#x2F;script&#x2F;autostart.sh
+added  &#x2F;opt&#x2F;script&#x2F;autostart.sh to  rc.lcoal
+chmod +x &#x2F;etc&#x2F;rc.d&#x2F;rc.local
+
+# systemctl 服务主体存储目录
+&#x2F;usr&#x2F;lib&#x2F;systemd&#x2F;system&#x2F;
+# systemctl 执行时产生的脚本位置
+&#x2F;run&#x2F;systemd&#x2F;system&#x2F;
+# systemctl 开机启动链接存储目录
+&#x2F;etc&#x2F;systemed&#x2F;system&#x2F;basic.target.wants&#x2F;
+</code></pre>
+<h3 id="fu-wu-kai-ji-zi-qi-zhong-qi-deng">服务开机自启、重启等</h3>
+<pre><code>systemctl enable frpc  # 开机自启
+systemctl disable frpc # 关闭开机自启
+systemctl restart frpc
+systemctl stop frpc
+</code></pre>
+<h2 id="jing-tai-ip-di-zhi-pei-zhi">静态 ip 地址配置</h2>
+<h3 id="centos-stream-8">centos stream 8</h3>
+<blockquote>
+<p>/etc/sysconfig/network-scripts</p>
+</blockquote>
+<pre><code>BOOTPROTO=static
+IPADDR=192.168.3.165
+PREFIX=24
+GATEWAY=192.168.3.1
+DNS1=192.168.1.1
+DNS2=61.128.128.68
+</code></pre>
+<blockquote>
+<p>命令行设置 静态 ip 的方法</p>
+</blockquote>
+<pre><code>nmcli con mod ens18 ipv4.addresses 192.168.1.91&#x2F;24;
+nmcli con mod ens18 ipv4.gateway 192.168.1.1;
+nmcli con mod ens18 ipv4.method manual;
+nmcli con mod ens18 ipv4.dns &quot;8.8.8.8&quot;;
+</code></pre>
+<p>其中： con = connection, mod = modify</p>
+<h3 id="centos-stream-9">centos stream 9</h3>
+<blockquote>
+<p>/etc/NetworkManager/system-connections/</p>
+</blockquote>
+<pre><code>[ipv4]
+address1=192.168.64.170&#x2F;24,192.168.64.2     # static ip&#x2F;24, gateway ip addr
+dns=114.114.114.114
+method=manual
+</code></pre>
+<h3 id="jia-zai-wang-luo-pei-zhi">加载网络配置</h3>
+<pre><code>nmcli c reload                         # 重新加载配置文件
+nmcli c up ens33                       # 重启ens33网卡
+</code></pre>
+<h2 id="qi-ta-wang-luo-xiang-guan">其他网络相关</h2>
+<h3 id="lu-you">路由</h3>
+<p>查看双网卡路由优先级</p>
+<pre><code>ip route show  # 值越小优先级越高
+</code></pre>
+<p>路由配置修改</p>
+<blockquote>
+<p>/etc/sysconfig/network-scripts/ifcfg-ens37</p>
+</blockquote>
+<pre><code>IPV4_ROUTE_METRIC=90        # 新增, 修改路由优先级
+DEFROUTE=no                 # 关闭内网的默认路由(可能 centos 9 不兼容)：
+</code></pre>
+<h3 id="wang-guan">网关</h3>
+<p>查看网关信息</p>
+<pre><code>route -n  或者 netstat -rn
+</code></pre>
+<p>临时删除默认网关</p>
+<pre><code>route del default gw 192.168.100.1
+</code></pre>
+<h3 id="zhua-bao">抓包</h3>
+<pre><code>tcpdump -i eth1 -nnn
+</code></pre>
+<h3 id="guo-nei-dns-ji-jian-kong-ip">国内 DNS 及 监控 ip</h3>
+<p><strong>DNS</strong></p>
+<pre><code>114.114.114.114；114.114.114.115
+233.5.5.5；233.6.6.6  # 阿里 AliDNS
+</code></pre>
+<p><strong>阿里云盾监控ip</strong></p>
+<pre><code>140.205.201.0&#x2F;28,140.205.201.16&#x2F;29,140.205.201.32&#x2F;28,140.205.225.192&#x2F;29,140.205.225.200&#x2F;30,140.205.225.184&#x2F;29,140.205.225.183&#x2F;32,140.205.225.206&#x2F;32,140.205.225.205&#x2F;32,140.205.225.195&#x2F;32,140.205.225.204&#x2F;32,106.11.224.0&#x2F;26,106.11.224.64&#x2F;26,106.11.224.128&#x2F;26,106.11.224.192&#x2F;26,106.11.222.64&#x2F;26,106.11.222.128&#x2F;26,106.11.222.192&#x2F;26,106.11.223.0&#x2F;26,140.205.201.0&#x2F;24,140.205.225.0&#x2F;24
+</code></pre>
+<p><strong>阿里云监测IP</strong></p>
+<pre><code>112.124.127.224,112.124.127.44,112.124.127.64,112.124.127.53,120.26.216.168,120.26.64.126,121.43.107.174,121.43.105.176,121.41.117.242,121.40.130.38,121.41.112.148,115.29.112.222,115.28.203.70,42.96.189.63,115.29.113.101,120.27.40.113,115.28.171.22,115.28.189.208,121.42.196.232,115.28.26.13,120.27.47.144,120.27.47.33,112.126.74.55,182.92.148.207,182.92.1.233,112.126.73.56,123.56.138.37,123.57.10.133,112.126.75.174,182.92.157.118,112.126.75.221,182.92.69.212,10.153.174.11,10.153.175.147,10.153.175.146,110.75.0.0&#x2F;16,42.120.0.0&#x2F;16
+</code></pre>
+<h2 id="fang-huo-qiang">防火墙</h2>
+<p><strong>start firewall</strong></p>
+<pre><code>systemctl start firewalld.service
+</code></pre>
+<p><strong>open service</strong></p>
+<pre><code>firewall-cmd --add-service=samba --zone=public --permanent
+firewall-cmd --reload
+</code></pre>
+<p><strong>open port</strong></p>
+<pre><code>firewall-cmd --permanent --add-port=8080&#x2F;tcp  # --permanent 表示永久生效，必须 reload
+</code></pre>
+<p><strong>使mysql服务的3306端口只允许192.168.1.1/24网段的服务器能访问</strong></p>
+<pre><code>firewall-cmd --permanent --add-rich-rule=&quot;rule family=&quot;ipv4&quot; source address=&quot;192.168.1.1&#x2F;24&quot; port protocol=&quot;tcp&quot; port=&quot;3306&quot; accept&quot;
+</code></pre>
+<p><strong>open docker network</strong></p>
+<pre><code>firewall-cmd --zone=trusted --change-interface=docker0 --permanent
+firewall-cmd --reload
+</code></pre>
+<p><strong>zone查看及设置</strong></p>
+<pre><code>firewall-cmd --get-default-zone
+firewall-cmd --set-default-zone=public
+</code></pre>
+<p><strong>remove rich rules</strong></p>
+<pre><code>firewall-cmd --list-rich-rules
+firewall-cmd --permanent --remove-rich-rule &#x27;规则列表&#x27;
+</code></pre>
+<p><strong>切换网卡到其他zone，即激活该zone</strong></p>
+<pre><code>firewall-cmd --permanent --zone=internal --change-interface=xxx
+</code></pre>
+<p><strong>zone 不信任 --&gt; 信任</strong></p>
+<p>丢弃 drop</p>
+<p>任何流入网络的包都被丢弃，不作出任何响应。只允许流出的网络连接。</p>
+<p>阻塞 block</p>
+<p>任何进入的网络连接都被拒绝，并返回 IPv4 的 icmp-host-prohibited 报文或者 IPv6 的 icmp6-adm-prohibited 报文。只允许由该系统初始化的网络连接。</p>
+<p>公开 public</p>
+<p>用以可以公开的部分。你认为网络中其他的计算机不可信并且可能伤害你的计算机。只允许选中的连接接入。</p>
+<p>外部 external</p>
+<p>用在路由器等启用伪装的外部网络。你认为网络中其他的计算机不可信并且可能伤害你的计算机。只允许选中的连接接入。</p>
+<p>隔离区dmz</p>
+<p>用以允许隔离区（dmz）中的电脑有限地被外界网络访问。只接受被选中的连接。</p>
+<p>工作 work</p>
+<p>用在工作网络。你信任网络中的大多数计算机不会影响你的计算机。只接受被选中的连接。</p>
+<p>家庭 home</p>
+<p>用在家庭网络。你信任网络中的大多数计算机不会影响你的计算机。只接受被选中的连接。</p>
+<p>内部 internal</p>
+<p>用在内部网络。你信任网络中的大多数计算机不会影响你的计算机。只接受被选中的连接。</p>
+<p>受信任的 trusted</p>
+<p>允许所有网络连接。</p>
+<p><strong>配置文件说明</strong></p>
+<p>firewalld 存放配置文件有两个目录，/usr/lib/firewalld 和 /etc/firewalld，前者存放了一些默认的文件，后者主要是存放用户自定义的数据，所以我们添加的service或者rule都在后者下面进行。</p>
+<p>server 文件夹存储服务数据，就是一组定义好的规则。</p>
+<p>zones 存储区域规则</p>
+<p>firewalld.conf 默认配置文件，可以设置默认使用的区域，默认区域为 public，对应 zones目录下的 public.xml</p>
+<p>1.重载防火墙配置</p>
+<pre><code>firewall-cmd --reload
+</code></pre>
+<p>2.查看防火墙运行状态</p>
+<pre><code>firewall-cmd --state
+</code></pre>
+<p>3.查看默认区域的设置</p>
+<pre><code>firewall-cmd --list-all
+</code></pre>
+<p>4.应急命令</p>
+<pre><code>firewall-cmd --panic-on  # 拒绝所有流量，远程连接会立即断开，只有本地能登陆
+firewall-cmd --panic-off  # 取消应急模式，但需要重启firewalld后才可以远程ssh
+firewall-cmd --query-panic  # 查看是否为应急模式
+</code></pre>
+<p>5.服务</p>
+<pre><code>firewall-cmd --add-service=&lt;service name&gt; #添加服务
+firewall-cmd --remove-service=&lt;service name&gt; #移除服务
+</code></pre>
+<p>6.端口</p>
+<pre><code>firewall-cmd --add-port=&lt;port&gt;&#x2F;&lt;protocol&gt; #添加端口&#x2F;协议（TCP&#x2F;UDP）
+firewall-cmd --remove-port=&lt;port&gt;&#x2F;&lt;protocol&gt; #移除端口&#x2F;协议（TCP&#x2F;UDP）
+firewall-cmd --list-ports #查看开放的端口
+</code></pre>
+<p>7.协议</p>
+<pre><code>firewall-cmd --add-protocol=&lt;protocol&gt; # 允许协议 (例：icmp，即允许ping)
+firewall-cmd --remove-protocol=&lt;protocol&gt; # 取消协议
+firewall-cmd --list-protocols # 查看允许的协议
+</code></pre>
+<p>8.允许指定ip的所有流量</p>
+<pre><code>firewall-cmd --add-rich-rule=&quot;rule family=&quot;ipv4&quot; source address=&quot;&lt;ip&gt;&quot; accept&quot;
+</code></pre>
+<p>e.g.</p>
+<pre><code>firewall-cmd --add-rich-rule=&quot;rule family=&quot;ipv4&quot; source address=&quot;192.168.2.1&quot; accept&quot; # 表示允许来自192.168.2.1的所有流量
+</code></pre>
+<p>9.允许指定ip的指定协议</p>
+<pre><code>firewall-cmd --add-rich-rule=&quot;rule family=&quot;ipv4&quot; source address=&quot;&lt;ip&gt;&quot; protocol value=&quot;&lt;protocol&gt;&quot; accept&quot;
+</code></pre>
+<p>例：</p>
+<pre><code>firewall-cmd --add-rich-rule=&quot;rule family=&quot;ipv4&quot; source address=&quot;192.168.2.208&quot; protocol value=&quot;icmp&quot; accept&quot; # 允许192.168.2.208主机的icmp协议，即允许192.168.2.208主机ping
+</code></pre>
+<p>10.允许指定ip访问指定服务</p>
+<pre><code>firewall-cmd --add-rich-rule=&quot;rule family=&quot;ipv4&quot; source address=&quot;&lt;ip&gt;&quot; service name=&quot;&lt;service name&gt;&quot; accept&quot;
+</code></pre>
+<p>例：</p>
+<pre><code>firewall-cmd --add-rich-rule=&quot;rule family=&quot;ipv4&quot; source address=&quot;192.168.2.208&quot; service name=&quot;ssh&quot; accept&quot; # 允许192.168.2.208主机访问ssh服务
+</code></pre>
+<p>11.允许指定ip访问指定端口</p>
+<pre><code>firewall-cmd --add-rich-rule=&quot;rule family=&quot;ipv4&quot; source address=&quot;&lt;ip&gt;&quot; port protocol=&quot;&lt;port protocol&gt;&quot; port=&quot;&lt;port&gt;&quot; accept&quot;
+</code></pre>
+<p>例：</p>
+<pre><code>firewall-cmd --add-rich-rule=&quot;rule family=&quot;ipv4&quot; source address=&quot;192.168.2.1&quot; port protocol=&quot;tcp&quot; port=&quot;22&quot; accept&quot; # 允许192.168.2.1主机访问22端口
+</code></pre>
+<p>12.将指定ip改为网段</p>
+<p>8-11 的各个命令都支持 source address 设置为网段，即这个网段的ip都是适配这个规则：</p>
+<p>例如：</p>
+<pre><code>firewall-cmd --zone=drop --add-rich-rule=&quot;rule family=&quot;ipv4&quot; source address=&quot;192.168.2.0&#x2F;24&quot; port protocol=&quot;tcp&quot; port=&quot;22&quot; accept&quot;
+</code></pre>
+<p>表示允许192.168.2.0/24网段的主机访问22端口 。</p>
+<p>13.禁止指定ip/网段</p>
+<p>8-12 各个命令中，将 accept 设置为 reject 表示拒绝，设置为 drop表示直接丢弃（会返回timeout连接超时）</p>
+<p>例如：</p>
+<pre><code>firewall-cmd --zone=drop --add-rich-rule=&quot;rule family=&quot;ipv4&quot; source address=&quot;192.168.2.0&#x2F;24&quot; port protocol=&quot;tcp&quot; port=&quot;22&quot; reject&quot;
+</code></pre>
+<p>表示禁止192.168.2.0/24网段的主机访问22端口 。</p>
+<h3 id="ipset">ipset</h3>
+<p>firewalld 默认一条规则处理一个ip地址, 而ipset可以在一条规则中处理多个ip地址</p>
+<p>位置： /etc/firewalld/ipsets/</p>
+<p><strong>新建与删除 ipset</strong></p>
+<p>hash:ip 仅ip, 不允许重复</p>
+<p>hash:net ip 或 ip段，不允许重复</p>
+<pre><code>firewall-cmd --permanent --new-ipset=sshblock --type=hash:ip
+firewall-cmd --permanent --delete-ipset=sshblock
+</code></pre>
+<p><strong>在set中增删ip</strong></p>
+<pre><code>firewall-cmd --permanent --ipset=sshblock --add-entry=121.122.123.105
+firewall-cmd --permanent --ipset=sshblock --remove-entry=121.122.123.105
+
+firewall-cmd --permanent --ipset=test --add-entries-from-file=iplist.txt # 导入ip文件列表
+
+# iplist.txt
+192.168.0.2
+192.168.0.3
+192.168.1.0&#x2F;24
+192.168.2.254
+</code></pre>
+<p><strong>打印一个set的内容</strong></p>
+<pre><code>firewall-cmd --permanent --info-ipset=sshblock
+firewall-cmd --permanent --ipset=sshblock --get-entries
+</code></pre>
+<p><strong>把一个ipset加入到禁止的规则</strong></p>
+<pre><code>firewall-cmd --permanent --add-rich-rule &#x27;rule family=&quot;ipv4&quot; source ipset=&quot;sshblock&quot; drop&#x27;
+</code></pre>
+<h2 id="qian-hou-tai-ren-wu">前后台任务</h2>
+<pre><code>nohup command args &amp;
+</code></pre>
+<p><strong>查看后台任务（任务编号, 状态）</strong></p>
+<pre><code>jobs
+</code></pre>
+<p><strong>调后台任务到前台</strong></p>
+<pre><code>fg job_id
+</code></pre>
+<p><strong>把前台任务切到后台</strong></p>
+<pre><code>ctrl + z  # 注意，切换后，任务暂停，要运行暂停后台任务
+</code></pre>
+<p><strong>任务重新开始运行</strong></p>
+<pre><code>jobs
+bg  job_id
+</code></pre>
+<h2 id="ge-chong-cha-kan">各种查看</h2>
+<p><strong>查看分区的uuid</strong></p>
+<pre><code>blkid
+</code></pre>
+<p><strong>操作系统版本</strong></p>
+<pre><code>cat &#x2F;proc&#x2F;version
+uname -r
+uname -a
+lsb_release -a
+cat &#x2F;etc&#x2F;issue
+</code></pre>
+<p><strong>查内存占用</strong></p>
+<pre><code>cat &#x2F;proc&#x2F;meminfo
+</code></pre>
+<blockquote>
+<p>CPU总核数 = 物理CPU个数 * 每颗物理CPU的核数</p>
+</blockquote>
+<p><strong>查看cpu信息</strong></p>
+<pre><code>cat &#x2F;proc&#x2F;cpuinfo | grep name | cut -f2 -d: | uniq -c
+</code></pre>
+<p><strong>查看物理CPU个数</strong></p>
+<pre><code>cat &#x2F;proc&#x2F;cpuinfo| grep &quot;physical id&quot;| sort| uniq| wc -l
+</code></pre>
+<p><strong>查看每个物理CPU中core的个数(即核数)</strong></p>
+<pre><code>cat &#x2F;proc&#x2F;cpuinfo| grep &quot;cpu cores&quot;| uniq
+</code></pre>
+<p><strong>总逻辑CPU数 = 物理CPU个数 * 每颗物理CPU的核数 * 超线程数</strong></p>
+<pre><code>cat &#x2F;proc&#x2F;cpuinfo| grep &quot;processor&quot;| wc -l
+</code></pre>
+<p><strong>查看硬件</strong></p>
+<pre><code>lshw -short
+</code></pre>
+<p><strong>查看网卡</strong></p>
+<pre><code>lshw -c network
+</code></pre>
+<p><strong>查看分区</strong></p>
+<pre><code>cat &#x2F;proc&#x2F;partitions
+</code></pre>
+<p><strong>查看软件详细信息</strong></p>
+<pre><code>dpkg -s nano
+</code></pre>
+<p><strong>查看某个文件的归宿包</strong></p>
+<pre><code>dpkg -S nano
+</code></pre>
+<p><strong>查看属于某软件包的文件</strong></p>
+<pre><code>dpkg-query -L nano
+</code></pre>
+<p><strong>查看当前目录大小</strong></p>
+<pre><code>du -sh
+</code></pre>
+<p><strong>查看当前和子文件夹大小</strong></p>
+<pre><code>du -sh *
+</code></pre>
+<p><strong>查看该目录下所有文件夹所占空间的大小</strong></p>
+<pre><code>du -hl
+</code></pre>
+<p><strong>查看文件数量</strong></p>
+<pre><code>ls -l | grep &#x27;^-&#x27; | wc -l
+</code></pre>
+<p><strong>查看文件数量, 含子目录</strong></p>
+<pre><code>ls -lR | grep &#x27;^-&#x27; | wc -l
+</code></pre>
+<p><strong>端口查看</strong></p>
+<pre><code>netstat -lnpt
+lsof -i
+</code></pre>
+<p><strong>查看可登录的用户名</strong></p>
+<pre><code>cat &#x2F;etc&#x2F;passwd | grep -v &#x2F;sbin&#x2F;nologin | cut -d : -f 1
+</code></pre>
+<p><strong>查看进程</strong></p>
+<pre><code>ps auxZ | grep -v grep | grep nginx
+
+e.g. system_u:system_r:httpd_t:s0 root 7997 0.0 0.0 122784 2156 ? Ss 14:31 0:00 nginx: master process &#x2F;usr&#x2F;sbin&#x2F;nginx
+e.g. system_u:system_r:httpd_t:s0 nginx 7998 0.0 0.0 125332 7560 ? S 14:31 0:00 nginx: worker process
+</code></pre>
+<p>带标题的查看</p>
+<pre><code>ps aux | head -1; ps aux | grep nginx
+ps aux | grep -E &quot;USER|nginx&quot;
+</code></pre>
+<p><strong>查看某进程详细内存占用</strong></p>
+<pre><code>    more &#x2F;proc&#x2F;PID&#x2F;smaps
+
+    e.g.  output ---&gt;
+
+    08048000-080bc000 r-xp 00000000 03:02 13130      &#x2F;bin&#x2F;bash
+
+    Size:               1084 kB
+    Rss:                 892 kB
+    Pss:                 374 kB
+    Shared_Clean:        892 kB
+    Shared_Dirty:          0 kB
+    Private_Clean:         0 kB
+    Private_Dirty:         0 kB
+    Referenced:          892 kB
+    Anonymous:             0 kB
+    ShmemPmdMapped:        0 kB
+    Shared_Hugetlb:        0 kB
+    Private_Hugetlb:       0 kB
+    Swap:                  0 kB
+    SwapPss:               0 kB
+    KernelPageSize:        4 kB
+    MMUPageSize:           4 kB
+    Locked:                0 kB
+    THPeligible:           0
+    VmFlags: rd ex mr mw me dw
+</code></pre>
+<p>输出字段的含义</p>
+<ul>
+<li>08048000-080bc000 是该虚拟内存段的开始和结束位置</li>
+<li>r-xp 内存段的权限，分别是可读、可写、可运行、私有或共享，最后一位p代表私有，s代表共享</li>
+<li>00000000 该虚拟内存段起始地址在对应的映射文件中以页为单位的偏移量，对匿名映射，它等于0或者vm_start/PAGE_SIZE</li>
+<li>03:02 文件的主设备号和次设备号。对匿名映射来说，因为没有文件在磁盘上，所以没有设备号，始终为00:00。对有名映射来说，是映射的文件所在设备的设备号</li>
+<li>/bin/bash 被映射到虚拟内存的文件名称。后面带(deleted)的是内存数据，可以被销毁。对有名来说，是映射的文件名。对匿名映射来说，是此段虚拟内存在进程中的角色。[stack]表示在进程中作为栈使用，[heap]表示堆。其余情况则无显示</li>
+<li>Size 虚拟内存空间大小. 但是这个内存值不一定是物理内存实际分配的大小，因为在用户态上，虚拟内存总是延迟分配的。这个值计算也非常简单，就是该VMA的开始位置减结束位置</li>
+<li>Rss 实际分配的内存, Rss=Shared_Clean+Shared_Dirty+Private_Clean+Private_Dirty, share/private：该页面是共享还是私有。
+dirty/clean：该页面是否被修改过，如果修改过（dirty），在页面被淘汰的时候，就会把该脏页面回写到交换分区（换出，swap out）。有一个标志位用于表示页面是否dirty</li>
+<li>Pss 是平摊计算后的实际物理使用内存 Pss=(Private_Clean+Private_Dirty) + 按比例均分的(Shared_Clean+Shared_Dirty)</li>
+<li>Referenced The amount of memory currently marked as referenced or a mapping associated with a file may contain anonymous pages</li>
+<li>Anonymous 匿名映射的物理内存</li>
+<li>ShmemPmdMapped PMD页面已经被映射的共享（shmem / tmpfs）内存量</li>
+<li>Shared/Private_Hugetlb 由hugetlbfs页面支持的内存使用量，由于历史原因，该页面未计入“ RSS”或“ PSS”字段中。 并且这些没有包含在Shared/Private_Clean/Dirty 字段中</li>
+<li>Swap 存在于交换分区的数据大小(如果物理内存有限，可能存在一部分在主存一部分在交换分区)</li>
+<li>SwapPss 针对的是交换分区 Pss</li>
+<li>KernelPageSize 内核一页的大小</li>
+<li>MMUPageSize MMU页大小</li>
+<li>Locked 常驻物理内存的大小，这些页不会被换出</li>
+<li>THPeligible 映射是否符合分配THP的条件。如果为true，则为1，否则为0。 它仅显示当前状态.THP，透明大页（Transparent Huge Pages），RHEL 6 开始引入，目的是使用更大的内存页面（memory page size） 以适应越来越大的系统内存，让操作系统可以支持现代硬件架构的大页面容量功能。与标准大页的区别在于分配机制，标准大页管理是预分配的方式，而透明大页管理则是动态分配的方式。</li>
+<li>VmFlags 表示与特定虚拟内存区域关联的内核标志</li>
+</ul>
+<pre><code>rd  - readable
+wr  - writeable
+ex  - executable
+sh  - shared
+mr  - may read
+mw  - may write
+me  - may execute
+ms  - may share
+gd  - stack segment growns down
+pf  - pure PFN range
+dw  - disabled write to the mapped file
+lo  - pages are locked in memory
+io  - memory mapped I&#x2F;O area
+sr  - sequential read advise provided
+rr  - random read advise provided
+dc  - do not copy area on fork
+de  - do not expand area on remapping
+ac  - area is accountable
+nr  - swap space is not reserved for the area
+ht  - area uses huge tlb pages
+ar  - architecture specific flag
+dd  - do not include area into core dump
+sd  - soft-dirty flag
+mm  - mixed map area
+hg  - huge page advise flag
+nh  - no-huge page advise flag
+mg  - mergable advise flag
+</code></pre>
+<h2 id="wen-jian-ji-quan-xian">文件及权限</h2>
+<h3 id="te-shu-de-wen-jian-quan-xian">特殊的文件权限</h3>
+<p>i: 不可修改权限</p>
+<pre><code>e.g. 如果对&#x2F;etc&#x2F;shadow添加了i权限，那么就没有办法添加删除和修改linux账号了，可以作为安全加固的一个小方法
+</code></pre>
+<p>a: 只可追加权限</p>
+<pre><code>e.g. 这个权限让日志文件只能追加，不能删除，而且不能通过编辑器追加
+</code></pre>
+<p>t: 除了自己，别人无法删除权限</p>
+<p><strong>查看文件权限， 如果存在 ia， root也不能修改</strong></p>
+<pre><code>lsattr filename
+</code></pre>
+<p><strong>锁定文件权限</strong></p>
+<pre><code>chattr  +ia filename
+</code></pre>
+<p><strong>解锁</strong></p>
+<pre><code>chattr -ia filename
+</code></pre>
+<h3 id="wen-jian-hui-fu-bu-yi-ding-you-xiao">文件恢复 (不一定有效)</h3>
+<pre><code>debugfs
+open &#x2F;dev&#x2F;sda1
+ls -d &#x2F;someDir
+logdump -i &lt;someNo&gt;
+</code></pre>
+<p>显示</p>
+<pre><code>Inode 399405 is at group 48, block 1573089, offset 1536
+Inode 138815 is at group 16, block 524561, offset 3840
+block 2621985, offset 2432
+
+dd if=&#x2F;dev&#x2F;vda1 of=&#x2F;opt&#x2F;logs&#x2F;fi-business&#x2F;2022-11-15.0.log.gz bs=4096 count=1 skip=1573089
+</code></pre>
+<h3 id="from-ext4-to-xfs">from ext4 to xfs</h3>
+<pre><code>sudo fstransform &#x2F;dev&#x2F;mapper&#x2F;vg0-lv0 xfs
+</code></pre>
+<h3 id="an-quan-shang-xia-wen">安全上下文</h3>
+<p>一个「进程安全上下文」一般对应多个「文件安全上下文」, 只有两者的安全上下文对应上了，进程才能访问文件。</p>
+<p>文件安全上下文由文件创建的位置和创建文件的进程所决定。需要注意的是，单纯的移动文件操作并不会改变文件的安全上下文。</p>
+<p>安全上下文有四个字段，分别用冒号隔开。形如：</p>
+<pre><code>system_u:object_r:admin_home_t:s0
+viz. user:role:type:range
+</code></pre>
+<p><strong>查看文件的安全上下文</strong></p>
+<pre><code>ls -Z
+e.g.  -rw-r--r--. root root system_u:object_r:net_conf_t:s0 &#x2F;etc&#x2F;hosts
+</code></pre>
+<p><strong>启用</strong></p>
+<pre><code>vim &#x2F;etc&#x2F;sysconfig&#x2F;selinux
+
+SELINUX=enforcing        # options: permissive, disabled
+</code></pre>
+<ol>
+<li>
+<p>enforcing：强制模式。违反 SELinux 规则的行为将被阻止并记录到日志中。</p>
+</li>
+<li>
+<p>permissive：宽容模式。违反 SELinux 规则的行为只会记录到日志中。一般为调试用。</p>
+</li>
+<li>
+<p>disabled：关闭 SELinux。</p>
+</li>
+</ol>
+<p><strong>修改文件或目录的安全上下文</strong></p>
+<pre><code>chcon -u aaa_u -r bbb_r -t ccc_t test
+</code></pre>
+<ul>
+<li>-u 修改安全上下文的用户字段</li>
+<li>-r 修改安全上下文的角色字段</li>
+<li>-t 修改安全上下文的类型字段</li>
+<li>-l 修改安全上下文的级别字段</li>
+<li>--reference 修改与指定文件或目录相一致的安全上下文</li>
+<li>-R递归操作-h修改软链接的安全上下文（不加此选项则修改软链接对应文件）</li>
+</ul>
+<pre><code>e.g. chcon -t samba_share_t -P &#x2F;mldata
+     chown -R sherlock:samba &#x2F;mldata
+</code></pre>
+<p><strong>恢复文件或目录默认的安全上下文</strong></p>
+<pre><code>restorecon -rv &#x2F;usr&#x2F;local&#x2F;bin&#x2F;
+</code></pre>
+<p><strong>添加目录的默认安全上下文</strong></p>
+<p>e.g. 为 Nginx 新增一个网站目录 /usr/share/nginx/html2 之后，需要为其设置与原目录相同的默认安全上下文</p>
+<pre><code>semanage fcontext -a -t httpd_sys_content_t &quot;&#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html2(&#x2F;.*)?&quot;
+</code></pre>
+<p><strong>添加某类进程允许访问的端口</strong></p>
+<p>e.g. 为 Nginx 需要使用 10080 的端口用于 HTTP 服务</p>
+<pre><code>semanage port -a -t http_port_t -p tcp 10080
+</code></pre>
+<p><strong>查询某个命令或进程的布尔型规则及其状态</strong></p>
+<pre><code>getsebool -a | grep httpd
+
+e.g. httpd_anon_write --&gt; off
+    httpd_builtin_scripting --&gt; on
+    httpd_can_check_spam --&gt; off
+    httpd_can_connect_ftp --&gt; off
+</code></pre>
+<p><strong>开关一个布尔型规则</strong></p>
+<pre><code>setsebool -P httpd_anon_write on
+</code></pre>
+<p><strong>违规日志分析</strong></p>
+<p>SELinux 违规日志保存在 /var/log/audit/audit.log</p>
+<pre><code>sealert -a &#x2F;var&#x2F;log&#x2F;audit&#x2F;audit.log
+</code></pre>
+<h3 id="acl-quan-xian">ACL 权限</h3>
+<p>以用户和用户组为主体给用户和用户组加权限让他们去有访问文件的权限</p>
+<p>目录后有+号 表示 ACL 权限管理</p>
+<p><strong>查看权限</strong></p>
+<pre><code>sudo getfacl dir
+</code></pre>
+<p><strong>修改权限</strong></p>
+<pre><code>sudo setfacl -m u:username:rwx dir
+sudo setfacl -m g:grpname:rwx dir
+</code></pre>
+<p><strong>移除用户</strong></p>
+<pre><code>sudo setfacl -x u:username dir
+</code></pre>
+<p><strong>擦除所有</strong></p>
+<pre><code>sudo setfacl -b dir
+</code></pre>
+<h3 id="shi-jian-xiu-gai-ji-chao-duo-shu-liang-kao-bei">时间修改及超多数量拷贝</h3>
+<p><strong>修改文件时间</strong></p>
+<pre><code>zc ubuntugege.txt
+</code></pre>
+<p><strong>拷贝超多文件</strong></p>
+<p>可以把当前目录下的所有文件移到 "../matchres"下</p>
+<pre><code>ls | xargs -t -I {} mv {} ..&#x2F;matchres&#x2F;
+</code></pre>
+<h2 id="add-sudo-user">add sudo user</h2>
+<pre><code>visudo
+</code></pre>
+<h2 id="chuang-jian-bu-ke-deng-lu-de-wu-homemu-lu-de-yong-hu-ming">创建不可登陆的，无HOME目录的 用户名</h2>
+<pre><code>useradd -s &#x2F;bin&#x2F;false -M nginx
+</code></pre>
+<p>默认会创建一个与用户名一样的用户组</p>
+<h2 id="sui-ji-mi-ma-sheng-cheng">随机密码生成</h2>
+<pre><code>LC_ALL=C &lt;&#x2F;dev&#x2F;urandom tr -dc A-Za-z0-9 | head -c 64 &amp;&amp; echo
+
+strings &#x2F;dev&#x2F;urandom |tr -dc A-Za-z0-9 | head -c20; echo
+
+openssl rand -base64 10
+
+dd if=&#x2F;dev&#x2F;urandom bs=1 count=15 2&gt;&#x2F;dev&#x2F;null|base64 -w 0
+</code></pre>
+<h2 id="ya-suo-yu-jie-ya">压缩与解压</h2>
+<p>下面的参数-f是必须的
+-f: 使用档案名字，切记，这个参数是最后一个参数，后面只能接档案名。</p>
+<h3 id="ya-suo">压缩</h3>
+<pre><code>tar -cJf my_archieve.tar.xz  &#x2F;some_dir    # 压缩率最高
+
+tar –cvf jpg.tar *.jpg &#x2F;&#x2F;将目录里所有jpg文件打包成jpg.tar
+
+tar –czf jpg.tar.gz *.jpg   &#x2F;&#x2F;将目录里所有jpg文件打包成jpg.tar后，并且将其用gzip压缩，生成一个gzip压缩过的包，命名为jpg.tar.gz
+
+tar –cjf jpg.tar.bz2 *.jpg &#x2F;&#x2F;将目录里所有jpg文件打包成jpg.tar后，并且将其用bzip2压缩，生成一个bzip2压缩过的包，命名为jpg.tar.bz2
+
+tar –cZf jpg.tar.Z *.jpg   &#x2F;&#x2F;将目录里所有jpg文件打包成jpg.tar后，并且将其用compress压缩，生成一个umcompress压缩过的包，命名为jpg.tar.Z
+
+rar a jpg.rar *.jpg &#x2F;&#x2F;rar格式的压缩，需要先下载rar for linux
+
+zip jpg.zip *.jpg &#x2F;&#x2F;zip格式的压缩，需要先下载zip for linux
+</code></pre>
+<h3 id="jie-ya">解压</h3>
+<pre><code>tar –xvf file.tar
+
+tar -xJf archieve.tar.xz
+
+tar -xzvf file.tar.gz
+
+tar -xjvf file.tar.bz2  
+
+tar –xZvf file.tar.Z  
+
+unrar e file.rar
+
+unzip file.zip
+</code></pre>
+<h3 id="jie-ya-xiao-jie">解压小结</h3>
+<ol>
+<li>*.tar 用 tar –xvf 解压</li>
+<li>*.gz 用 gzip -d或者gunzip 解压</li>
+<li><em>.tar.gz和</em>.tgz 用 tar –xzf 解压</li>
+<li>*.bz2 用 bzip2 -d或者用bunzip2 解压</li>
+<li>*.tar.bz2用tar –xjf 解压</li>
+<li>*.Z 用 uncompress 解压</li>
+<li>*.tar.Z 用tar –xZf 解压</li>
+<li>*.rar 用 unrar e解压</li>
+<li>*.zip 用 unzip 解压</li>
+</ol>
+<h3 id="jia-mi-ya-suo-jie-mi-jie-ya">加密压缩/解密解压</h3>
+<pre><code>tar cvf - src_file_or_dir | openssl des3 -salt -k password -out target_file.tar
+openssl des3 -d -k password -salt -in src.tar | tar xvf -
+</code></pre>
+<h2 id="qing-chu-hen-ji">清除痕迹</h2>
+<pre><code>history -w
+history -c
+
+echo &gt; &#x2F;var&#x2F;log&#x2F;wtmp    &#x2F;&#x2F;清除用户登录记录
+echo &gt; &#x2F;var&#x2F;log&#x2F;btmp    &#x2F;&#x2F;清除尝试登录记录
+echo &gt; &#x2F;var&#x2F;log&#x2F;lastlog &#x2F;&#x2F;清除最近登录信息
+echo &gt; &#x2F;var&#x2F;log&#x2F;secure  &#x2F;&#x2F;登录信息
+echo &gt; &#x2F;var&#x2F;log&#x2F;syslog  &#x2F;&#x2F;记录系统日志的服务
+
+echo &gt; &#x2F;var&#x2F;log&#x2F;messages
+echo &gt; &#x2F;var&#x2F;log&#x2F;xferlog
+echo &gt; &#x2F;var&#x2F;log&#x2F;auth.log
+echo &gt; &#x2F;var&#x2F;log&#x2F;user.log
+cat &#x2F;dev&#x2F;null &gt; &#x2F;var&#x2F;adm&#x2F;sylog
+cat &#x2F;dev&#x2F;null &gt; &#x2F;var&#x2F;log&#x2F;maillog
+cat &#x2F;dev&#x2F;null &gt; &#x2F;var&#x2F;log&#x2F;openwebmail.log
+cat &#x2F;dev&#x2F;null &gt; &#x2F;var&#x2F;log&#x2F;mail.info
+echo&gt;&#x2F;var&#x2F;run&#x2F;utmp
+
+echo &gt; .bash_history &#x2F;&#x2F;清除保存的用户操作历史记录
+history -cw &#x2F;&#x2F;清除所有历史
+</code></pre>
+<h2 id="u-pan-cao-zuo">U 盘操作</h2>
+<p><strong>U 盘格式化</strong></p>
+<pre><code>sudo fdisk -l
+sudo mkfs.exfat -n LABEL &#x2F;dev&#x2F;sdx
+sudo fsck.exfat &#x2F;dev&#x2F;sdx
+</code></pre>
+<p><strong>U 盘初始化</strong></p>
+<p>U 盘做了引导盘后，有时不能重新格式化时，需要重做初始化</p>
+<pre><code>sudo fdisk -l     查看U盘是哪个设备，假设是&#x2F;def&#x2F;sda1
+sudo umount &#x2F;dev&#x2F;sda1
+sudo mkfs.vfat -F 32 &#x2F;dev&#x2F;sda1
+</code></pre>
+<p>这时，初始化已经完成，但U盘容量仍然为引导盘时的容量
+需要再进行一次格式化后，即可恢复原状</p>
+
+  </main>
+  <p>
+        Categories:
+          <a href="/categories/su-cha-shou-ce/">#速查手册</a>
+        Tags:
+          <a href="/tags/linux/">#linux</a>
+          <a href="/tags/handbook/">#handbook</a>
+  </p>
+
+  </div><footer class="footer">
+    <hr>
+    <small>
+        &copy; <time id="dynamic-year" datetime="2017">2017</time>. All rights reserved.
+    </small>
+</footer>
+<script>
+    const currentYear = new Date().getFullYear();
+
+    const timeElement = document.getElementById('dynamic-year');
+    timeElement.textContent = `2017 - ${currentYear}`;
+    timeElement.setAttribute('datetime', `2017/${currentYear}`);
+</script>
+</body>
+</html>

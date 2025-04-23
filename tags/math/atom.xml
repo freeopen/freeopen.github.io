@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
     <title>Freeopen - math</title>
-    <subtitle>Freeopen 的个人兴趣研究所.</subtitle>
-    <link href="https://freeopen.github.io/tags/math/atom.xml" rel="self" type="application/atom+xml"/>
-    <link href="https://freeopen.github.io"/>
+    <subtitle>7 labo.</subtitle>
+    <link rel="self" type="application/atom+xml" href="/tags/math/atom.xml"/>
+    <link rel="alternate" type="text/html" href="/"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
     <updated>2017-06-11T00:00:00+00:00</updated>
-    <id>https://freeopen.github.io/tags/math/atom.xml</id>
+    <id>/tags/math/atom.xml</id>
     <entry xml:lang="en">
         <title>艾波寧捎信</title>
         <published>2017-06-11T00:00:00+00:00</published>
         <updated>2017-06-11T00:00:00+00:00</updated>
-        <author>
-          <name>Unknown</name>
-        </author>
-        <link rel="alternate" href="https://freeopen.github.io/eponine/" type="text/html"/>
-        <id>https://freeopen.github.io/eponine/</id>
         
-        <content type="html">&lt;blockquote&gt;
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="/blog/eponine/"/>
+        <id>/blog/eponine/</id>
+        
+        <content type="html" xml:base="/blog/eponine/">&lt;blockquote&gt;
 &lt;p&gt;由台大葉丙成老師的学生创作的概率问题，文章本身比问题更有趣。&lt;&#x2F;p&gt;
 &lt;&#x2F;blockquote&gt;
 &lt;p&gt;巴黎, 1832 年 6 月, 一個飄著毛雨的濕熱夜晚。&lt;&#x2F;p&gt;
@@ -36,15 +42,15 @@
 「維克托! 」他喊道。&lt;&#x2F;p&gt;
 &lt;p&gt;「大數學家西米翁.泊松(Siméon Poisson)駕到啦! 」雨果調侃道。
 「幾年沒見了? 怎麼氣喘吁吁的? 」&lt;&#x2F;p&gt;
-&lt;p&gt;「呼…呼…都半百年紀了,一把老骨頭了。」泊松說道, 揉了揉背。&lt;&#x2F;p&gt;
+&lt;p&gt;「呼...呼...都半百年紀了,一把老骨頭了。」泊松說道, 揉了揉背。&lt;&#x2F;p&gt;
 &lt;p&gt;「下禮拜就是你 51 歲生日了吧? 順便慶祝一下? 」雨果真是那壺不開提那壺。&lt;&#x2F;p&gt;
-&lt;p&gt;「別提了….」泊松說。「咦? 我剛才要說什麼? 對了, 警察把學生叛軍逼到絕路,
-剩下一個據點了。附近的街道都封起來, 說經過的格殺勿論! 大家要小心。」 &lt;&#x2F;p&gt;
+&lt;p&gt;「別提了....」泊松說。「咦? 我剛才要說什麼? 對了, 警察把學生叛軍逼到絕路,
+剩下一個據點了。附近的街道都封起來, 說經過的格殺勿論! 大家要小心。」&lt;&#x2F;p&gt;
 &lt;p&gt;「學生就是這樣, 因為一點小事動不動抗議。」雨果說。「哎,這個社會最近真的
 很亂。聽說有個逃犯叫尚萬強(Jean-Valjean), 非常危險, 本以為被抓了, 原來是弄錯人。」&lt;&#x2F;p&gt;
 &lt;p&gt;「這種人最好關到死。」泊松道。「大革命之後已經亂了三十幾年了, 不用嚴刑峻法怎麼治國? 」他舉杯。「乾啦! 」&lt;&#x2F;p&gt;
 &lt;p&gt;門外的街道上,一個棕髮女子戴著毛氈帽,穿土黃色大衣,正快步經過。
-「如果我 們之間從來都不可能,」她喃喃自語道,「告白只會讓他困擾吧? 
+「如果我 們之間從來都不可能,」她喃喃自語道,「告白只會讓他困擾吧?
 我想著他,跟他想著 她,有什麼不同? 也許我只是個好人,」她踢了踢年久失修的鋪路的石版。
 「那就讓我 再作一次好人吧。假如我是他——寬宏大量的革命領袖,馬里歐斯(Marius) ——」
 她呼了一口氣,不知是因為喘還是憤怒。
@@ -66,13 +72,13 @@
 她以 4 m&#x2F;s 的初速出發, 而且一出巷子就不會被擊中, 好嗎? 」 雨果點頭。&lt;&#x2F;p&gt;
 &lt;p&gt;「你有沒有在聽啊? 」泊松問詩人, 後者一直低頭查字典。&lt;&#x2F;p&gt;
 &lt;p&gt;「感謝那個狙擊手! 我又有靈感了。」詩人抬起頭說,「你們要聽聽嗎? 」他等不及兩人回應, 便拿出羽毛筆, 順手沾了咖啡, 拿起泛黃的報紙,邊寫邊念。他秀麗的字 跡活像中世紀手稿。&lt;&#x2F;p&gt;
-&lt;pre class=&quot;z-code&quot;&gt;&lt;code&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;Neath lamplights as ‘Ponine roved, on her own        當艾波宁形單影隻地漫步,沿著街燈
+&lt;pre&gt;&lt;code&gt;Neath lamplights as ‘Ponine roved, on her own        當艾波宁形單影隻地漫步,沿著街燈
 
 Professing to thin air (her absent crush)            向空氣(她不 在場的心上人)吐露
 
 What each heart-broken maid, e’en lad, had known,    所有心碎女孩(甚至男孩)都懂的心聲,
 
-The rain her tears wiped; Seine, weeping a gush,     雨水拭去她眼泪;塞納河洪流如注, 
+The rain her tears wiped; Seine, weeping a gush,     雨水拭去她眼泪;塞納河洪流如注,
 
 Too called the freedom fighter who did fix           一起哭著呼喚自由鬥士: 他鎖定目光,
 
@@ -82,7 +88,7 @@ He led — of blonde Cosette with rosy cheeks          而非戰爭。弟兄的�
 
 Bloodier than brethren’s gore ignored and sores.     血紅色比不上金髮女粉紅雙頰。
 
-O singing swan! Whose speed, once shot, would halve; 歌唱的天鵝! (一被擊中速度就減半) 
+O singing swan! Whose speed, once shot, would halve; 歌唱的天鵝! (一被擊中速度就減半)
 
 Must you this letter send to Hades black?            為何定要送這信到黑暗的冥府?
 
@@ -90,12 +96,12 @@ With Poisson bein’ the butcher’s PMF,                助紂為虐的子彈�
 
 Abetting bullets take no blade aback!                因為泊松分布是屠夫的機率質量函数 !
 
-Cruel witnesses! Ask Probability,                    無情的目擊者! 去請求“機率” 
+Cruel witnesses! Ask Probability,                    無情的目擊者! 去請求“機率”
 
 Still speechless, to relate the tragedy.             (他仍啞口無言)訴说這場悲劇。
-&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;「講法文啦,我聽不懂。」泊松還在低頭計算。&lt;&#x2F;p&gt;
-&lt;p&gt;「寫的真好! 」雨果言不由衷地附和著。「我知道! 這是…」他說, 想要裝懂。 
+&lt;p&gt;「寫的真好! 」雨果言不由衷地附和著。「我知道! 這是...」他說, 想要裝懂。
 「義大利八行體(octave)? 法國十九行體(villanelle)? 」&lt;&#x2F;p&gt;
 &lt;p&gt;「你連幾行都數不出來嗎? 你根本沒在聽吧? 」詩人激動地站起來,把咖啡弄倒 了。&lt;&#x2F;p&gt;
 &lt;p&gt;「你如果真的關心社會,」雨果說, 生氣了。「為什麼不像拜倫(Byron)一樣參與希臘革命, 卻在這裡大放厥詞? 」&lt;&#x2F;p&gt;
@@ -103,14 +109,14 @@ Still speechless, to relate the tragedy.             (他仍啞口無言)訴说�
 &lt;p&gt;「誰跟你社會寫實了? 」雨果說,「只要把情節弄聳動一點,能賣錢就好啦! 」他趁老闆娘不注意, 別過頭,啐了一口煙草到地上。&lt;&#x2F;p&gt;
 &lt;p&gt;「我算出來了! 」泊松趕緊轉移話題。「我跟你講,先算恰中 n 槍的機率,再遞迴 地算中第 n + 1 槍的機率。我真是天才! 哈哈哈!」&lt;&#x2F;p&gt;
 &lt;p&gt;「可是這個積分好難算喔。」雨果湊過去看。&lt;&#x2F;p&gt;
-&lt;p&gt;「你笨耶! 先作個變數變換,然後這樣…這樣…」他指著紙上潦草的鬼畫符說。 
-「嗯…嗯…」詩人應道,但是根本沒在看。
+&lt;p&gt;「你笨耶! 先作個變數變換,然後這樣...這樣...」他指著紙上潦草的鬼畫符說。
+「嗯...嗯...」詩人應道,但是根本沒在看。
 「這個肉乾到底是貓肉還是馬肉呀? 我突然覺得肚子不太舒服,先去休息了。」
 看到兩位朋友對他的詩興趣索然,詩人有點不悅,找了藉口。&lt;&#x2F;p&gt;
 &lt;p&gt;「老鼠肉。」老闆娘低聲道, 小聲到三人沒有聽見。她早已恢復平靜,繼續撿地上的碎片。&lt;&#x2F;p&gt;
 &lt;p&gt;「其實我也覺得胃有點痛。」泊松道,看起來不像是裝的。瞪著天花板沈思許久的雨果起身。
 「都多虧你的詩,」他說,「又讓我有一個長篇 小說的題材了! 我得趁忘記以前熬夜把大綱寫下來。」
-他起身。「明天見囉! 到時再帶 你去參觀奧賽美術館(Musée d’Orsay)。」
+他起身。「明天見囉! 到時再帶 你去參觀奧賽美術館(Musée d&#x27;Orsay)。」
 他跟詩人說。「只是要繞過抗議的學生就是。」&lt;&#x2F;p&gt;
 &lt;p&gt;「他們真的很煩。」泊松附和道。&lt;&#x2F;p&gt;
 &lt;p&gt;「對呀。」雨果說。「我們的詩人朋友難得來拜訪, 當然要帶他好好參觀這個古都呀! 偏偏碰到這種事。」&lt;&#x2F;p&gt;

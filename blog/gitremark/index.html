@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>git 用法助记 | Freeopen</title>
+  <meta name="title" content="git 用法助记">
+<meta name="description" content="7 labo.">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+  <link href="/main.css" rel="stylesheet">
+</head>
+<body>
+  <header>
+  <a href="/" class="title">
+    <h1>Freeopen</h1>
+  </a>
+  <nav aria-label="site">
+      <a href="/">Home</a>
+      <a href="/blog/">Blog</a>
+      <a href="/shorttips/">Tips</a>
+      <a href="/about/">About</a>
+  </nav>
+</header>
+
+
+  <div>
+      
+<aside id="toc-aside" class="right-to-left">
+        <h2>Table of contents</h2>
+    <ol>
+        <li>
+            <a href="#git-duan-dian-xu-chuan">git 断点续传</a>
+            
+        </li><li>
+            <a href="#github-tong-bu-fork-xiang-mu-de-geng-xin">github 同步 fork 项目的更新</a>
+            
+        </li><li>
+            <a href="#dang-an-zan-cun">档案暂存</a>
+            
+        </li><li>
+            <a href="#chuang-jian-bing-qie-huan-dao-xin-fen-zhi">创建并切换到新分支</a>
+            
+        </li><li>
+            <a href="#la-qu-yuan-cheng-fen-zhi">拉取远程分支</a>
+            
+        </li><li>
+            <a href="#clone-suo-you-fen-zhi">clone 所有分支</a>
+            
+        </li><li>
+            <a href="#git-submodule">git submodule</a>
+            
+        </li>
+    </ol>
+</aside>
+
+      <h1>git 用法助记</h1>
+      <time datetime="2023-03-31" class="post-date">
+          2023-03-31
+          
+            (updated on 2023-11-09)
+          
+      </time>
+  <main>
+    <h2 id="git-duan-dian-xu-chuan">git 断点续传</h2>
+<p>适用于 git clone 时，报错或大项目总是网络中断的情况</p>
+<ol>
+<li>新建目录，命令行进入目录，执行 git init</li>
+<li>命令行执行： git fetch 项目地址</li>
+<li>若步骤 2 失败，重复执行步骤 2， 直到完成下载</li>
+<li>执行 git checkout FETCH_HEAD</li>
+<li>执行 git remote add origin 项目地址</li>
+<li>执行 git pull origin master（根据项目分支实际情况，也可能不是 master）</li>
+<li>执行 git checkout master（根据项目分支实际情况，也可能不是 master）</li>
+</ol>
+<h2 id="github-tong-bu-fork-xiang-mu-de-geng-xin">github 同步 fork 项目的更新</h2>
+<p>首先要先确定一下是否建立了主repo的远程源：</p>
+<pre><code>git remote -v
+</code></pre>
+<p>如果里面只能看到你自己的两个源(fetch 和 push)，那就需要添加主repo的源：</p>
+<pre><code>git remote add upstream URL
+git remote -v
+</code></pre>
+<p>然后你就能看到upstream了。
+如果想与主repo合并：git fetch upstream</p>
+<pre><code>git merge upstream&#x2F;master
+</code></pre>
+<h2 id="dang-an-zan-cun">档案暂存</h2>
+<p>(git add . 之后，git commit 之前) 当修改到一半，需要更新代码时使用</p>
+<pre><code>git stash
+git stash list
+</code></pre>
+<p>拉取新的代码</p>
+<pre><code>git pull
+</code></pre>
+<p>取出修改一半的代码</p>
+<pre><code>git stash pop
+git stash clear: 清空Git栈
+</code></pre>
+<h2 id="chuang-jian-bing-qie-huan-dao-xin-fen-zhi">创建并切换到新分支</h2>
+<pre><code>git checkout -b new_branch
+</code></pre>
+<p>推送新的分支到远程</p>
+<pre><code>git push -u origin new_branch
+git checkout -b 本地分支名 origin&#x2F;远程分支名
+</code></pre>
+<h2 id="la-qu-yuan-cheng-fen-zhi">拉取远程分支</h2>
+<pre><code>git pull &lt;远程主机名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt;
+git fetch 相当于是从远程获取最新到本地，不会自动merge
+git fetch orgin master &#x2F;&#x2F;将远程仓库的master分支下载到本地当前branch中
+git clone -b &lt;指定分支名&gt; &lt;远程仓库地址&gt;
+git fetch后，查看其他人员的修改记录 git difftool origin
+</code></pre>
+<h2 id="clone-suo-you-fen-zhi">clone 所有分支</h2>
+<pre><code>mkdir repo #创建一个空文件夹
+cd repo
+</code></pre>
+<p>使用bare方式clone代码。并把下载后的文件夹重命名为 .git</p>
+<pre><code>git clone --bare path&#x2F;to&#x2F;repo.git .git
+</code></pre>
+<p>使用该命令(不用担心core.bare是否存在) 或 git config --bool core.bare false</p>
+<pre><code>git config --unset core.bare
+</code></pre>
+<p>上面的命令执行完,再执行该命令,就可以看到仓库里面的内容了</p>
+<pre><code>git reset --hard
+</code></pre>
+<h2 id="git-submodule">git submodule</h2>
+<p>第一次添加子模块</p>
+<pre><code>git submodule add https:&#x2F;&#x2F;github.com&#x2F;jieiku&#x2F;abridge.git themes&#x2F;abridge
+</code></pre>
+<p>pull 时拉取子模块</p>
+<pre><code>git pull --recurse-submodules
+</code></pre>
+<p>copy the new URL to your local config</p>
+<pre><code>git submodule sync --recursive
+</code></pre>
+<p>update the submodule from the new URL</p>
+<pre><code>git submodule update --init --recursive
+</code></pre>
+
+  </main>
+  <p>
+        Categories:
+          <a href="/categories/fu-wen-mi-lu/">#符文秘录</a>
+  </p>
+
+  </div><footer class="footer">
+    <hr>
+    <small>
+        &copy; <time id="dynamic-year" datetime="2017">2017</time>. All rights reserved.
+    </small>
+</footer>
+<script>
+    const currentYear = new Date().getFullYear();
+
+    const timeElement = document.getElementById('dynamic-year');
+    timeElement.textContent = `2017 - ${currentYear}`;
+    timeElement.setAttribute('datetime', `2017/${currentYear}`);
+</script>
+</body>
+</html>

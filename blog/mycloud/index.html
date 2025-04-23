@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>集群配置备忘 | Freeopen</title>
+  <meta name="title" content="集群配置备忘">
+<meta name="description" content="7 labo.">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+  <link href="/main.css" rel="stylesheet">
+</head>
+<body>
+  <header>
+  <a href="/" class="title">
+    <h1>Freeopen</h1>
+  </a>
+  <nav aria-label="site">
+      <a href="/">Home</a>
+      <a href="/blog/">Blog</a>
+      <a href="/shorttips/">Tips</a>
+      <a href="/about/">About</a>
+  </nav>
+</header>
+
+
+  <div>
+      
+<aside id="toc-aside" class="right-to-left">
+        <h2>Table of contents</h2>
+    <ol>
+        <li>
+            <a href="#redis-ji-qun">redis 集群</a>
+            <ol>
+                <li>
+                    <a href="#redis-conf-pei-zhi">redis.conf 配置</a>
+                </li><li>
+                    <a href="#jie-dian-qi-dong">节点启动</a>
+                </li><li>
+                    <a href="#qi-dong-ji-qun">启动集群</a>
+                </li>
+            </ol>
+        </li><li>
+            <a href="#nacos-ji-qun">nacos 集群</a>
+            <ol>
+                <li>
+                    <a href="#application-properties">application.properties</a>
+                </li><li>
+                    <a href="#cluster-conf">cluster.conf</a>
+                </li><li>
+                    <a href="#nacos-logback-xml">nacos-logback.xml</a>
+                </li><li>
+                    <a href="#startup-sh">startup.sh</a>
+                </li>
+            </ol>
+        </li><li>
+            <a href="#minio-ji-qun">minio 集群</a>
+            <ol>
+                <li>
+                    <a href="#zhun-bei-gong-zuo-mu-lu-he-jiao-ben">准备工作目录和脚本</a>
+                </li><li>
+                    <a href="#xiu-gai-host-wen-jian">修改 host 文件</a>
+                </li><li>
+                    <a href="#xiu-gai-run-jiao-ben">修改 run 脚本</a>
+                </li><li>
+                    <a href="#zi-ding-yi-systemctlfu-wu">自定义systemctl服务</a>
+                </li>
+            </ol>
+        </li><li>
+            <a href="#rabbitmq-ji-qun">rabbitMQ 集群</a>
+            <ol>
+                <li>
+                    <a href="#an-zhuang">安装</a>
+                </li><li>
+                    <a href="#fang-huo-qiang-pei-zhi">防火墙配置</a>
+                </li><li>
+                    <a href="#she-zhi-zi-dong-qi-dong">设置自动启动</a>
+                </li><li>
+                    <a href="#qi-yong-web-guan-li-jie-mian">启用 Web 管理界面</a>
+                </li><li>
+                    <a href="#xiu-gai-host-wen-jian-1">修改 host 文件</a>
+                </li><li>
+                    <a href="#she-zhi-erlang">设置erlang</a>
+                </li><li>
+                    <a href="#du-li-qi-dong-bing-zu-qun">独立启动并组群</a>
+                </li><li>
+                    <a href="#she-zhi-jing-xiang-dui-lie-ce-lue">设置镜像队列策略</a>
+                </li>
+            </ol>
+        </li><li>
+            <a href="#kafka-ji-qun">kafka 集群</a>
+            <ol>
+                <li>
+                    <a href="#dan-ji-pei-zhi">单机配置</a>
+                </li><li>
+                    <a href="#ji-qun-pei-zhi">集群配置</a>
+                </li><li>
+                    <a href="#sheng-cheng-ji-qun-id">生成集群 ID</a>
+                </li><li>
+                    <a href="#ge-shi-hua-cun-chu-mu-lu">格式化存储目录</a>
+                </li><li>
+                    <a href="#qi-gong-jie-dian-fu-wu">启功节点服务</a>
+                </li><li>
+                    <a href="#guan-bi-jie-dian">关闭节点</a>
+                </li>
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+      <h1>集群配置备忘</h1>
+      <time datetime="2023-06-12" class="post-date">
+          2023-06-12
+          
+            (updated on 2023-07-20)
+          
+      </time>
+  <main>
+    <p>linux 服务器在部署生产环境时，各种中间件的集群配置精华记录。包括 redis、nacos、minio、rabbitMq、kafka 等。
+友情提醒，任何用 java 或 类java 语言实现的中间件，尽量不要部署成集群，因为太占内存了，有替代品优先使用替代品。</p>
+<span id="continue-reading"></span><h2 id="redis-ji-qun">redis 集群</h2>
+<p>准备6个节点, 主从一对，共3组</p>
+<p>每个节点配置好后，单独启动, 然后再启动集群</p>
+<h3 id="redis-conf-pei-zhi">redis.conf 配置</h3>
+<pre><code># 我认为的关键配置项如下
+$ cp &#x2F;etc&#x2F;redis&#x2F;redis.conf &#x2F;etc&#x2F;redis&#x2F;nodes-6372.conf
+$ vim &#x2F;etc&#x2F;redis&#x2F;nodes-6372.conf
+bind 192.168.0.90
+port 6372
+daemonize yes
+pidfile &#x2F;var&#x2F;run&#x2F;redis_6372.pid
+logfile &#x2F;var&#x2F;log&#x2F;redis&#x2F;redis-6372.log
+dbfilename dump-6372.rdb
+masterauth password
+requirepass password
+appendonly yes
+appendfilename &quot;appendonly-6372.aof&quot;
+cluster-enabled yes
+cluster-config-file nodes-6372.conf
+</code></pre>
+<h3 id="jie-dian-qi-dong">节点启动</h3>
+<pre><code>redis-server nodes-6372.conf
+</code></pre>
+<h3 id="qi-dong-ji-qun">启动集群</h3>
+<pre><code>redis-cli --cluster create 121.36.24.105:6370 121.36.24.105:6371 121.36.24.105:6372 121.36.24.105:6373 121.36.24.105:6374 121.36.24.105:6375 --cluster-replicas 1 -a password
+</code></pre>
+<p>注：上述命令用于第一次启动, 后面可以单独启动或停止节点, 如果需要重新初始化集群，必须先删除掉 .rdb 和 .aof 文件</p>
+<h2 id="nacos-ji-qun">nacos 集群</h2>
+<h3 id="application-properties">application.properties</h3>
+<pre><code>spring.datasource.platform=mysql
+nacos.core.auth.enabled=true
+server.tomcat.accesslog.enabled=false
+</code></pre>
+<h3 id="cluster-conf">cluster.conf</h3>
+<pre><code>192.168.0.1:8848
+192.168.0.2:8848
+192.168.0.3:8848
+</code></pre>
+<h3 id="nacos-logback-xml">nacos-logback.xml</h3>
+<p>因为日志很占空间，建议修改位置，并将日志输出修改到指定位置</p>
+<pre><code>&lt;property name=&quot;LOG_HOME&quot; value=&quot;&#x2F;data&#x2F;nacos-logs&quot;&#x2F;&gt;
+</code></pre>
+<h3 id="startup-sh">startup.sh</h3>
+<p>默认启动占2G内存，可以改小点</p>
+<pre><code> # JAVA_OPT=&quot;${JAVA_OPT} -server -Xms2g -Xmx2g -Xmn1g -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=320m&quot;
+ JAVA_OPT=&quot;${JAVA_OPT} -server -Xms1g -Xmx1g -Xmn512m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=320m&quot;
+</code></pre>
+<p>然后依次启动每个节点即可</p>
+<h2 id="minio-ji-qun">minio 集群</h2>
+<p>至少4个节点, 准备好 minio (server) 和 mc (client) 文件</p>
+<h3 id="zhun-bei-gong-zuo-mu-lu-he-jiao-ben">准备工作目录和脚本</h3>
+<pre><code>mkdir -p &#x2F;data&#x2F;minio&#x2F;run &#x2F;data&#x2F;minio&#x2F;data
+cp minio &#x2F;data&#x2F;minio&#x2F;run&#x2F;
+touch &#x2F;data&#x2F;minio&#x2F;run&#x2F;run.sh
+</code></pre>
+<h3 id="xiu-gai-host-wen-jian">修改 host 文件</h3>
+<pre><code>$ vim &#x2F;etc&#x2F;hosts
+
+192.168.0.1 mio1
+192.168.0.2 mio2
+192.168.0.3 mio3
+192.168.0.4 mio4
+</code></pre>
+<h3 id="xiu-gai-run-jiao-ben">修改 run 脚本</h3>
+<pre><code>$ vim run.sh
+
+#!&#x2F;bin&#x2F;bash
+
+export MINIO_ROOT_USER=user_name
+export MINIO_ROOT_PASSWORD=password
+
+&#x2F;data&#x2F;minio&#x2F;run&#x2F;minio server --config-dir &#x2F;etc&#x2F;minio --address &quot;mio1:9001&quot; --console-address &quot;:50000&quot; http:&#x2F;&#x2F;mio{1..4}:9001&#x2F;data&#x2F;minio&#x2F;data &gt;&gt; &#x2F;var&#x2F;log&#x2F;minio.log 2&gt;&amp;1
+</code></pre>
+<h3 id="zi-ding-yi-systemctlfu-wu">自定义systemctl服务</h3>
+<p><a href="https://github.com/minio/minio-service/blob/master/linux-systemd/README.md">参考官方配置</a></p>
+<p>先定义minio 用户名</p>
+<pre><code>useradd -s &#x2F;bin&#x2F;false -M minio-user
+</code></pre>
+<p>将数据目录授权给 minio-user</p>
+<p>定义配置文件 touch /etc/default/minio</p>
+<pre><code>MINIO_VOLUMES=&quot;&#x2F;home&#x2F;dev&#x2F;workspace&#x2F;data&#x2F;minio&quot;
+MINIO_OPTS=&quot;--address :35555 --console-address :50000&quot;
+MINIO_ROOT_USER=admin
+MINIO_ROOT_PASSWORD=password
+MINIO_CONFIG_ENV_FILE=&#x2F;etc&#x2F;default&#x2F;minio
+</code></pre>
+<p>touch /usr/lib/systemd/system/minio.service</p>
+<p>注释部分是与 centos 不兼容的部分</p>
+<pre><code>[Unit]
+Description=MinIO
+Documentation=https:&#x2F;&#x2F;docs.minio.io&#x2F;
+Wants=network-online.target
+After=network-online.target
+AssertFileIsExecutable=&#x2F;usr&#x2F;local&#x2F;bin&#x2F;minio
+AssertFileNotEmpty=&#x2F;etc&#x2F;default&#x2F;minio
+
+[Service]
+# Type=notify
+User=minio-user
+Group=minio-user
+# ProtectProc=invisible
+EnvironmentFile=&#x2F;etc&#x2F;default&#x2F;minio
+ExecStartPre=&#x2F;bin&#x2F;bash -c &quot;if [ -z \&quot;${MINIO_VOLUMES}\&quot; ]; then echo \&quot;Variable MINIO_VOLUMES not set in &#x2F;etc&#x2F;default&#x2F;minio\&quot;; exit 1; fi&quot;
+ExecStart=&#x2F;usr&#x2F;local&#x2F;bin&#x2F;minio server $MINIO_OPTS $MINIO_VOLUMES
+
+Restart=always
+LimitNOFILE=1048576
+TasksMax=infinity
+TimeoutStopSec=infinity
+SendSIGKILL=no
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+<h2 id="rabbitmq-ji-qun">rabbitMQ 集群</h2>
+<p>三节点, 镜像集群模式</p>
+<p>无论元数据还是queue里的消息都会存在于多个实例上，然后每次你写消息到queue的时候，都会自动把消息到多个实例的queue里进行消息同步。
+任何一个机器宕机了，别的机器都可以用。</p>
+<h3 id="an-zhuang">安装</h3>
+<p>Erlang 与 RabbitMQ 存在版本对应关系</p>
+<p><a href="https://packagecloud.io/rabbitmq/rabbitmq-server">RabbitMQ 选择版本</a></p>
+<p>根据提示安装即可</p>
+<h3 id="fang-huo-qiang-pei-zhi">防火墙配置</h3>
+<pre><code>firewall-cmd --zone=public --permanent --add-port=4369&#x2F;tcp
+firewall-cmd --zone=public --permanent --add-port=25672&#x2F;tcp
+firewall-cmd --zone=public --permanent --add-port=5671-5672&#x2F;tcp
+firewall-cmd --zone=public --permanent --add-port=15672&#x2F;tcp
+firewall-cmd --zone=public --permanent --add-port=61613-61614&#x2F;tcp
+firewall-cmd --zone=public --permanent --add-port=1883&#x2F;tcp
+firewall-cmd --zone=public --permanent --add-port=8883&#x2F;tcp
+
+firewall-cmd --reload
+</code></pre>
+<p>如果你的服务器还启用了 SELinux 的话，你还需要执行下面的命令来让让 RabbitMQ 服务器能够接收发送网络数据：</p>
+<pre><code>setsebool -P nis_enabled 1
+</code></pre>
+<h3 id="she-zhi-zi-dong-qi-dong">设置自动启动</h3>
+<pre><code>systemctl enable rabbitmq-server
+</code></pre>
+<h3 id="qi-yong-web-guan-li-jie-mian">启用 Web 管理界面</h3>
+<pre><code>rabbitmq-plugins enable rabbitmq_management
+chown -R rabbitmq:rabbitmq &#x2F;var&#x2F;lib&#x2F;rabbitmq&#x2F;
+rabbitmqctl add_user admin StrongPassword
+rabbitmqctl set_user_tags admin administrator
+rabbitmqctl set_permissions -p &#x2F; admin &quot;.*&quot; &quot;.*&quot; &quot;.*&quot;
+</code></pre>
+<p>访问地址为: http://Your_Server_IP:15672/</p>
+<h3 id="xiu-gai-host-wen-jian-1">修改 host 文件</h3>
+<pre><code>$ vim &#x2F;etc&#x2F;hosts
+172.16.10.62 rabbit-1
+172.16.10.63 rabbit-2
+172.16.10.66 rabbit-3
+</code></pre>
+<h3 id="she-zhi-erlang">设置erlang</h3>
+<p>每个节点的 .erlang.cookie 必须保持一致，才能正常通信</p>
+<p>使用解压缩方式安装部署的rabbitmq, 位置在 $home/.erlang.cookie</p>
+<p>使用rpm等安装包方式进行安装的, 位置在 /var/lib/rabbitmq/.erlang.cookie</p>
+<p>scp 拷贝，文件权限 400.</p>
+<h3 id="du-li-qi-dong-bing-zu-qun">独立启动并组群</h3>
+<pre><code># on rabbit1
+rabbitmq-server -detached
+# on rabbit2
+rabbitmq-server -detached
+# on rabbit3
+rabbitmq-server -detached
+</code></pre>
+<p>组群</p>
+<pre><code># on rabbit2
+rabbitmqctl stop_app
+# =&gt; Stopping node rabbit@rabbit2 ...done.
+
+rabbitmqctl reset
+# =&gt; Resetting node rabbit@rabbit2 ...
+
+rabbitmqctl join_cluster rabbit@rabbit1
+# =&gt; Clustering node rabbit@rabbit2 with [rabbit@rabbit1] ...done.
+
+rabbitmqctl start_app
+# =&gt; Starting node rabbit@rabbit2 ...done.
+</code></pre>
+<p>任意节点查看状态</p>
+<pre><code># on rabbit1
+rabbitmqctl cluster_status
+# =&gt; Cluster status of node rabbit@rabbit1 ...
+# =&gt; [{nodes,[{disc,[rabbit@rabbit1,rabbit@rabbit2]}]},
+# =&gt;  {running_nodes,[rabbit@rabbit2,rabbit@rabbit1]}]
+# =&gt; ...done.
+</code></pre>
+<h3 id="she-zhi-jing-xiang-dui-lie-ce-lue">设置镜像队列策略</h3>
+<ol>
+<li>
+<p>在任意一个节点上执行如下操作（这里在node1上执行）
+首先，在web界面，登陆后，点击“Admin--Virtual Hosts（页面右侧）”，在打开的页面上的下方的“Add a new virtual host”处增加一个虚拟主机，同时给用户“admin”和“guest”均加上权限（在页面直接设置、点点点即可）；</p>
+</li>
+<li>
+<p>在linux中执行如下命令</p>
+</li>
+</ol>
+<pre><code>rabbitmqctl set_policy ha-all &quot;^&quot; &#x27;{&quot;ha-mode&quot;:&quot;all&quot;}&#x27;
+</code></pre>
+<p>命令详解:</p>
+<p>rabbitmqctl set_policy [-p Vhost] Name Pattern Definition [Priority]</p>
+<pre><code>-p Vhost: 可选参数，针对指定vhost下的queue进行设置
+Name: policy的名称
+Pattern: queue的匹配模式(正则表达式)
+Definition: 镜像定义，包括三个部分ha-mode, ha-params, ha-sync-mode
+    ha-mode: 指明镜像队列的模式，有效值为 all&#x2F;exactly&#x2F;nodes
+        all: 表示在集群中所有的节点上进行镜像
+        exactly: 表示在指定个数的节点上进行镜像，节点的个数由ha-params指定
+        nodes: 表示在指定的节点上进行镜像，节点名称通过ha-params指定
+    ha-params: ha-mode模式需要用到的参数
+    ha-sync-mode: 进行队列中消息的同步方式，有效值为automatic和manual
+priority: 可选参数，policy的优先级
+</code></pre>
+<h2 id="kafka-ji-qun">kafka 集群</h2>
+<h3 id="dan-ji-pei-zhi">单机配置</h3>
+<pre><code>$ vim config&#x2F;kraft&#x2F;server.properties
+listeners=PLAINTEXT:&#x2F;&#x2F;:9092,CONTROLLER:&#x2F;&#x2F;:9093
+inter.broker.listener.name=PLAINTEXT
+advertised.listeners=PLAINTEXT:&#x2F;&#x2F;192.168.31.61:9092  # 此处要更改为实际ip，否则只能在本机访问
+</code></pre>
+<h3 id="ji-qun-pei-zhi">集群配置</h3>
+<pre><code>$ vim config&#x2F;kraft&#x2F;server.properties
+process.roles=broker,controller
+node.id=1 # 每节点不同编号
+# 配置多个投票候选者
+controller.quorum.voters=1@192.168.56.107:9093,2@192.168.56.108:9093,3@192.168.56.109:9093
+
+listeners=PLAINTEXT:&#x2F;&#x2F;192.168.56.107:9092,CONTROLLER:&#x2F;&#x2F;192.168.56.107:9093
+inter.broker.listener.name=PLAINTEXT
+advertised.listeners=PLAINTEXT:&#x2F;&#x2F;192.168.56.107:9092  # 此处要更改为实际ip，否则只能在本机访问
+</code></pre>
+<h3 id="sheng-cheng-ji-qun-id">生成集群 ID</h3>
+<pre><code>$ bin&#x2F;kafka-storage.sh random-uuid
+1kwB-zWkQfmc7Lc9wMuiLQ
+</code></pre>
+<h3 id="ge-shi-hua-cun-chu-mu-lu">格式化存储目录</h3>
+<pre><code>$ bin&#x2F;kafka-storage.sh format -t 1kwB-zWkQfmc7Lc9wMuiLQ -c config&#x2F;kraft&#x2F;server.properties
+Formatting &#x2F;tmp&#x2F;kraft-combined-logs
+</code></pre>
+<h3 id="qi-gong-jie-dian-fu-wu">启功节点服务</h3>
+<pre><code>$ bin&#x2F;kafka-server-start.sh  -daemon config&#x2F;kraft&#x2F;server.properties
+</code></pre>
+<h3 id="guan-bi-jie-dian">关闭节点</h3>
+<pre><code>$ bin&#x2F;kafka-server-stop.sh stop
+</code></pre>
+
+  </main>
+  <p>
+        Categories:
+          <a href="/categories/su-cha-shou-ce/">#速查手册</a>
+        Tags:
+          <a href="/tags/linux/">#linux</a>
+          <a href="/tags/handbook/">#handbook</a>
+  </p>
+
+  </div><footer class="footer">
+    <hr>
+    <small>
+        &copy; <time id="dynamic-year" datetime="2017">2017</time>. All rights reserved.
+    </small>
+</footer>
+<script>
+    const currentYear = new Date().getFullYear();
+
+    const timeElement = document.getElementById('dynamic-year');
+    timeElement.textContent = `2017 - ${currentYear}`;
+    timeElement.setAttribute('datetime', `2017/${currentYear}`);
+</script>
+</body>
+</html>

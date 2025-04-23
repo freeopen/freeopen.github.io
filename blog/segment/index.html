@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="preload" as="style" class="preStyle" href="/katex.min.css" integrity="sha384-ZPe7yZ91iWxYumsBEOn7ieg8q/o+qh/hQpSaPow8T6BwALcXSCS6C6fSRPIAnTQs" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>基于深度学习的图像分割算法思路演进 | Freeopen</title>
+  <meta name="title" content="基于深度学习的图像分割算法思路演进">
+<meta name="description" content="7 labo.">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+  <link href="/main.css" rel="stylesheet">
+  <script defer src="/js/prestyle.js?h=146f911a5e713e197057" integrity="sha384-6wbmVXuN+uOE0IR/CuCv4Xb2OtZHsboBoVmCp7ZrwOY6Z0NBOighQOCn+aWykf3n"></script>
+  <script defer src="/js/katexbundle.min.js?h=56b2761149aaa1d81994" integrity="sha384-UR0Li9YQWtf8BWhMEkmcKrcYY/Km3tAPQ8+768VhubM14b1z/WljMs8woKF34r2E"></script>
+</head>
+<body>
+  <header>
+  <a href="/" class="title">
+    <h1>Freeopen</h1>
+  </a>
+  <nav aria-label="site">
+      <a href="/">Home</a>
+      <a href="/blog/">Blog</a>
+      <a href="/shorttips/">Tips</a>
+      <a href="/about/">About</a>
+  </nav>
+</header>
+
+
+  <div>
+      
+<aside id="toc-aside" class="right-to-left">
+        <h2>Table of contents</h2>
+    <ol>
+        <li>
+            <a href="#tu-xiang-fen-ge-de-suan-fa-si-lu">图像分割的算法思路</a>
+            
+        </li><li>
+            <a href="#jing-dian-suan-fa-de-yan-jin">经典算法的演进</a>
+            
+        </li><li>
+            <a href="#r-cnn">R-CNN</a>
+            <ol>
+                <li>
+                    <a href="#ru-he-zhao-chu-hou-xuan-qu-yu">如何找出候选区域</a>
+                </li><li>
+                    <a href="#ru-he-cong-bu-tong-da-xiao-de-hou-xuan-kuang-ti-qu-kong-jian-te-zheng">如何从不同大小的候选框提取空间特征</a>
+                </li><li>
+                    <a href="#ru-he-xuan-ze-zui-hao-de-bian-jie-kuang">如何选择最好的边界框</a>
+                </li><li>
+                    <a href="#ru-he-diao-zheng-bian-jie-kuang">如何调整边界框</a>
+                </li><li>
+                    <a href="#xun-lian-pei-zhi">训练配置</a>
+                </li><li>
+                    <a href="#r-cnn-de-que-xian">R-CNN 的缺陷</a>
+                </li>
+            </ol>
+        </li><li>
+            <a href="#overfeat">OverFeat</a>
+            <ol>
+                <li>
+                    <a href="#yu-ce-shi-de-duo-chi-du-fen-lei">预测时的多尺度分类</a>
+                </li><li>
+                    <a href="#ru-he-zhao-chu-hou-xuan-qu-yu-1">如何找出候选区域</a>
+                </li><li>
+                    <a href="#ru-he-zhao-chu-bian-jie-kuang">如何找出边界框</a>
+                </li>
+            </ol>
+        </li><li>
+            <a href="#spp-net">SPP-Net</a>
+            <ol>
+                <li>
+                    <a href="#kong-jian-jin-zi-ta-chi-hua-ceng">空间金字塔池化层</a>
+                </li><li>
+                    <a href="#te-zheng-ti-qu-jia-su">特征提取加速</a>
+                </li><li>
+                    <a href="#ru-he-zai-cnnzui-hou-yi-ceng-te-zheng-tu-zhong-zhao-dao-yuan-shi-tu-pian-zhong-hou-xuan-kuang-de-dui-ying-qu-yu">如何在CNN最后一层特征图中找到原始图片中候选框的对应区域？</a>
+                </li><li>
+                    <a href="#xiao-jie">小结</a>
+                </li>
+            </ol>
+        </li><li>
+            <a href="#fcn">FCN</a>
+            <ol>
+                <li>
+                    <a href="#cnnzuo-jing-que-fen-ge-nan-zai-na-li">CNN做精确分割难在哪里</a>
+                </li><li>
+                    <a href="#chuan-tong-de-ji-yu-cnnde-fen-ge-fang-fa">传统的基于CNN的分割方法</a>
+                </li><li>
+                    <a href="#quan-lian-jie-ceng-zhuan-cheng-juan-ji-ceng-de-yuan-li">全连接层转成卷积层的原理</a>
+                </li><li>
+                    <a href="#ru-he-jiang-te-zheng-tu-fang-da-dao-yuan-tu-chi-cun">如何将特征图放大到原图尺寸</a>
+                </li>
+            </ol>
+        </li><li>
+            <a href="#fast-r-cnn">Fast R-CNN</a>
+            <ol>
+                <li>
+                    <a href="#roi-chi-hua">RoI 池化</a>
+                </li><li>
+                    <a href="#xun-lian-wei-diao">训练微调</a>
+                </li><li>
+                    <a href="#duo-ren-wu-sun-shi-han-shu-multi-task-loss">多任务损失函数 (Multi-task loss)</a>
+                </li>
+            </ol>
+        </li><li>
+            <a href="#faster-r-cnn">Faster R-CNN</a>
+            <ol>
+                <li>
+                    <a href="#mao-dian-de-gai-nian">锚点的概念</a>
+                </li><li>
+                    <a href="#zheng-fu-yang-ben-de-hua-fen">正负样本的划分</a>
+                </li><li>
+                    <a href="#rpn-wang-luo-jie-gou">RPN 网络结构</a>
+                </li><li>
+                    <a href="#sun-shi-han-shu">损失函数</a>
+                </li><li>
+                    <a href="#faster-r-cnn-xun-lian-ce-lue">Faster R-CNN 训练策略</a>
+                </li><li>
+                    <a href="#que-xian-roichi-hua-de-er-ci-liang-hua-pian-chai-wen-ti">缺陷：ROI池化的二次量化偏差问题</a>
+                </li>
+            </ol>
+        </li><li>
+            <a href="#fpn">FPN</a>
+            <ol>
+                <li>
+                    <a href="#fpn-te-zheng-jin-zi-ta-wang-luo-jie-gou">FPN(特征金字塔网络)结构</a>
+                </li><li>
+                    <a href="#fpndui-rpnde-gai-zao">FPN对RPN的改造</a>
+                </li><li>
+                    <a href="#fpndui-roichi-hua-ceng-de-gai-zao">FPN对ROI池化层的改造</a>
+                </li>
+            </ol>
+        </li><li>
+            <a href="#mask-r-cnn">Mask R-CNN</a>
+            <ol>
+                <li>
+                    <a href="#mask-r-cnn-suan-fa-bu-zou">Mask R-CNN 算法步骤</a>
+                </li><li>
+                    <a href="#roialign">ROIAlign</a>
+                </li><li>
+                    <a href="#tou-bu-jie-gou-fen-xi">头部结构分析</a>
+                </li><li>
+                    <a href="#sun-shi-han-shu-1">损失函数</a>
+                </li>
+            </ol>
+        </li><li>
+            <a href="#snip">SNIP</a>
+            <ol>
+                <li>
+                    <a href="#domain-shift">Domain-shift</a>
+                </li><li>
+                    <a href="#snip-suan-fa">SNIP 算法</a>
+                </li>
+            </ol>
+        </li><li>
+            <a href="#cornernet">CornerNet</a>
+            <ol>
+                <li>
+                    <a href="#sun-shi-han-shu-2">损失函数</a>
+                </li><li>
+                    <a href="#corner-pooling">corner pooling</a>
+                </li><li>
+                    <a href="#yu-ce-shi-de-ji-ge-xi-jie">预测时的几个细节</a>
+                </li>
+            </ol>
+        </li><li>
+            <a href="#can-kao-wen-xian">参考文献</a>
+            
+        </li>
+    </ol>
+</aside>
+
+      <h1>基于深度学习的图像分割算法思路演进</h1>
+      <time datetime="2019-03-05" class="post-date">
+          2019-03-05
+          
+            (updated on 2019-03-22)
+          
+      </time>
+  <main>
+    <p>图像分割问题主要流行四类任务，它们分别是目标检测( Object Detection )、语义分割( Semantic Segmentation )、实例分割( Instance Segmentation ) 和全景分割( Panoptic Segmentation )。这四类任务的意义分别为：</p>
+<span id="continue-reading"></span>
+<ol>
+<li>目标检测：计算机看一张图，用矩形框框出我们感兴趣的目标（定位任务），
+并告诉我们该目标是什么（分类任务）。</li>
+<li>语义分割：把整张图像的每个像素赋予一个类别标签。
+不过语义分割的任务是只判断类别，不区分个体。</li>
+<li>实例分割：对我们感兴趣目标的像素赋予类别标签，
+且对于挨在一起的同种类型的目标，需要区分出个体（即实例），
+比如几个人相互重叠的站在一起，实例分割时要用不同颜色的色块(论文中称为“掩膜”, mask)覆盖住每个人。</li>
+<li>全景分割：是语义分割和实体分割的结合，每个像素都被分为一类，
+如果一种类别里有多个实例，会用不同的颜色进行区分，
+我们可以知道哪个像素属于哪个类中的哪个实例。</li>
+</ol>
+<p>上面四类任务我把它统称为图像分割任务，它实质上由两个子任务构成，一个是定位任务，一个是分类任务。
+其中，目标检测和实例分割只分割出感兴趣区域，不关心其他区域；语义分割和全景分割对图片的所有区域进行分割，
+但语义分割不区分连在一起的同类个体。</p>
+<h2 id="tu-xiang-fen-ge-de-suan-fa-si-lu">图像分割的算法思路</h2>
+<p>如果你同意图像分割问题均由定位任务和分类任务组成，那么上面的四类任务的算法应该能互相借鉴，
+并最终会统一在一起（即一个模型能同时干完所有的活 -- 四类任务）。</p>
+<p>我先按照人类直觉来思考图像分割问题, 步骤为：</p>
+<ol>
+<li>看一眼图，找到哪些位置有东西；</li>
+<li>再看看有东西的位置都是些什么东西；</li>
+<li>把我们关心的那类东西标记出来。</li>
+</ol>
+<p>再按计算机直觉来细化上面的步骤。计算机看图实质上看到的是密密麻麻的像素点，这些点在计算机眼里没有大小，没有颜色，只是一堆数字而已。计算机识别一张图片是什么内容，根据一块区域的一堆数字分布规律来做出判断，
+所以，机器判断一张图哪些位置有东西时，只能用各种大小的矩形框从图中抽取出像素点，再来判断这些像素点们到底是不是东西，进而再判断它是什么东西。故根据计算机看图的特点，算法进一步描述为：</p>
+<ol>
+<li>扫描图片，找到一堆可能有东西的候选区域；</li>
+<li>取得候选区域对应的视觉特征，对其进行识别，判断有东西还是没东西；</li>
+<li>如果有东西，判断它是什么东西，并标记出它的位置。</li>
+</ol>
+<p><strong>算法面临的挑战：</strong></p>
+<ul>
+<li>
+<p>在第 1 步中，由于目标的大小、轮廓千变万化，要找出候选区域，有多种方案。</p>
+<ul>
+<li>方法1: 把图片均匀分成细小的网格，再根据网格的特征相似度拼接网格，
+拼接后的网格即为候选区域。</li>
+<li>方法2: 用不同大小，不同长宽比的矩形框作为滑动窗口，
+在图片上从左到右、由上至下滑动，被框住的区域即为候选区域。</li>
+<li>方法3: 利用图片的几何特征(比如物体的轮廓位置的颜色梯度会较大)，用算法找出候选区域。</li>
+</ul>
+<p>对于方法1, 优点是候选区域不会重叠，难点在于网格的拼接策略。</p>
+<p>对于方法2，会产生相互重叠的候选区域，
+且候选区域不一定贴合目标的轮廓，需要有办法调整候选区域大小，
+让它最接近目标物体的轮廓。</p>
+<p>对于方法3, 只要效率高，个人认为是最优策略，但目前这类算法的性能还需要提高。</p>
+<p>思考：方法 1 和方法 2 本质上都可以看成滑动窗口扫描图片，找出候选区。
+但，如果我们用卷积网络抽取图片特征，则较低的卷积层反映图片较细节
+的特征(如纹理、边缘
+等)，较高的卷积层反映图片较宏观的特征（如物体的轮廓等），所以
+候选区域在较高的卷积层输出的特征图上取得，
+理论上效果会比直接从原图上取得的要好, 且所需参数也较少。</p>
+</li>
+<li>
+<p>在第 2 步中，相当于一个二分类问题，判断候选区域框住的东西是
+前景还是背景。
+面临的难题是候选区域输出的特征图大小不一，
+这些特征图在进行分类前，须调成固定尺寸的向量。</p>
+</li>
+<li>
+<p>在第 3 步中，有两个分支，一个判断目标类型的分类器和一个标记目标位置
+的定位器。难点在于定位任务，因为这时看到的特征图尺寸小于原图，
+需要找到一个办法把特征图的坐标还原成原图的坐标。</p>
+</li>
+</ul>
+<p>上述的这些难题被解决的越好，那么图像分割的效果也就越好。
+下面看看研究者们都有些什么巧思，来跨越这些鸿沟。</p>
+<h2 id="jing-dian-suan-fa-de-yan-jin">经典算法的演进</h2>
+<h2 id="r-cnn">R-CNN</h2>
+<p>R-CNN( Regions with Convolutional Neural Network Features )
+模型可称为深度学习用于目标检测的开山之作，来自
+Ross Girshick 于2013年11月发表的一篇论文，
+论文名为《Rich feature hierarchies for Accurate Object Detection and Segmentation》。</p>
+<p>模型结构如下：</p>
+<p align="center">
+<img width="75%" src="./r-cnn.png" />
+<figcaption>
+图1 R-CNN 概览：输入一张图片，定位出2000个物体候选框，
+然后采用CNN提取每个候选框中图片的特征向量，
+特征向量的维度为4096维，接着采用svm算法对各个候选框中的物体进行分类识别。
+</figcaption>
+</p>
+<p>上图仅为模型概要，算法实质上分为三步：</p>
+<ol>
+<li>找出候选区域(regions proposals), 将其作为边界框(Bounding Box)；</li>
+<li>用预训练好的卷积网络(如 AlexNet)提取特征向量, 并用 SVM
+算法判断边界框中对应的物体类型；</li>
+<li>对已分类物体的边界框进行线性回归，输出其对应的贴近物体轮廓的紧身边界框(tighter bounding boxes)。</li>
+</ol>
+<h3 id="ru-he-zhao-chu-hou-xuan-qu-yu">如何找出候选区域</h3>
+<p>R-CNN 用选择性搜索( Selective Search )算法从原始图片上找出一堆候选框，
+并选出得分最高的2000个。</p>
+<p><strong>选择性搜索( Selective Search )算法</strong></p>
+<ol>
+<li>生成原始的候选框集合 R（利用<strong>felzenszwalb算法</strong><sup class="footnote-reference"><a href="#1">1</a></sup>）;</li>
+<li>计算候选框集 R 里每个相邻区域的相似度 S={s1,s2,…},
+这里考虑了四种类型的相似度，包括纹理、颜色、尺寸及交叠;</li>
+<li>找出相似度最高的两个区域，将其合并为新集，添加进 R ;</li>
+<li>从 S 中移除所有与第 3 步中有关的子集; </li>
+<li>计算新集与所有子集的相似度; </li>
+<li>跳至第三步，不断循环，合并，直至 S 为空（到不能再合并时为止）。</li>
+</ol>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>基于图论进行图像分割的算法，把图像中的像素点看做是一个个节点，
+像素点之间的不相似度作为边的权重，通过将相似的像素聚合到一起，
+产生同一区域(表现为最小生成树)。像素聚合成区域后，判断两个相邻区域是否应该合并，
+要检查它们的区域间间距(即所有分别属于两个区域且有边连接的点对中，寻找权重最小的那对,若两个区域内的点没有边相连，则定义间距为正无穷大)和区域内间距(即区域对应最小生成树中权重最大的边的权重值)的值。
+如果两个区域的区域间间距明显大于其中任意一个区域的区域内间距，
+那么就认为这两个区域之间存在明显的界限（即不能合并）。(freeopen:
+只能写个大概，详述篇幅太长)</p>
+</div>
+<h3 id="ru-he-cong-bu-tong-da-xiao-de-hou-xuan-kuang-ti-qu-kong-jian-te-zheng">如何从不同大小的候选框提取空间特征</h3>
+<p>直接缩放成固定大小的正方形（论文采用227×227）, 送进
+卷积网络( 修改版的 AlexNet )抽取空间特征。</p>
+<h3 id="ru-he-xuan-ze-zui-hao-de-bian-jie-kuang">如何选择最好的边界框</h3>
+<p>比如定位一个物体，算法可能会找出一堆边界框，我们需要选出最好的边界框。
+这里用到了**非极大值抑制(Non-maximum suppression, NMS)**算法，该算法
+其本质是搜索局部极大值，抑制非极大值元素, 具体如下：</p>
+<p>假设有 6 个矩形框都是目标车辆的边界框，用 SVM 分类器对它们打分并排序，
+从小到大属于车辆的概率分别为A、B、C、D、E、F。</p>
+<ol>
+<li>从最大概率矩形框F开始，分别判断A~E与F的重叠度<a href="/glossary/#iou">IOU</a>是否
+大于某个设定的阈值;</li>
+<li>假设B、D与F的重叠度超过阈值，那么就扔掉B、D；并标记第一个矩形框F，是我们保留下来的。</li>
+<li>从剩下的矩形框A、C、E中，选择概率最大的E，然后判断E与A、C的重叠度，
+重叠度大于一定的阈值，那么就扔掉；并标记E是我们保留下来的第二个矩形框。</li>
+</ol>
+<p>就这样一直重复，找到所有被保留下来的矩形框。</p>
+<p><strong><font color="red">NMS的缺陷</font></strong></p>
+<p align="center">
+<img width="65%" src="./nms.jpeg" />
+<figcaption>
+</figcaption>
+</p>
+<p>红色框和绿色框是当前的检测结果，二者的得分分别是0.95和0.80。
+如果按照NMS进行处理，首先选中得分最高的红色框，
+然后绿色框就会因为与之重叠面积过大而被删掉。</p>
+<p>调整思路容易想出来，须修改上面的第3步，不能仅判断重叠度就简单删掉，
+还应同时判断得分，当得分较高时，候选框要保留下来。
+但光靠设置阈值来选择最优候选框，感觉总是比较生硬，
+这个方向的问题未来应该有更高明的想法被思考出来。</p>
+<h3 id="ru-he-diao-zheng-bian-jie-kuang">如何调整边界框</h3>
+<p>找到边界框中的目标物体后，进一步调整边界框，使其更贴近物体周围。
+这里的创新点为，用线性回归代替过去的DPM算法
+(依赖图像几何特征训练出物体边界框的方法), 训练出更贴身的边界框</p>
+<p>其思路为:</p>
+<p>令$P = (P_x, P_y, P_w, P_h)$ 表示由选择性搜索算法找出，
+并被SVM分类器打过分的边界框，简称“预测框”，
+其中$P_x, P_y$ 表示边界框的中心点坐标，
+$P_w, P_h$ 表示边界框的宽、高；</p>
+<p>$G = (G_x, G_y, G_w, G_h)$ 表示训练集边界框标准答案，简称“目标框”，
+括号内的值与预测框一一对应。</p>
+<p>欲得到调整后的预测框，即是训练四个函数$d_x(P),d_y(P),d_w(P),d_h(P)$，
+这几个函数满足：</p>
+<p>$$\hat{G}_x = P_wd_x(P)+P_x  \tag{1}$$
+$$\hat{G}_y = P_hd_y(P)+P_y  \tag{2}$$
+$$\hat{G}_w = P_w exp(d_w(P))  \tag{3}$$
+$$\hat{G}_h = P_h exp(d_h(P))  \tag{4}$$</p>
+<p>函数 $d_*(P)$ ( $*$ 号代表 $x,y,h,w$ 中的一个)是候选框对应的
+特征图(记为$\phi_5(P)$, 下标5表示是第5层池化层输出的特征图)的线性函数，
+代表从预测框到调整后的预测框的变换关系，所以有：</p>
+<p>$$d_*(P) = w_*^T\phi_5(P)$$</p>
+<p>训练的目标函数为岭回归（ridge regression）：</p>
+<!-- $$
+w_\* = \underset{\hat{w}_\*}{\operatorname{argmin}}
+\sum_i^N(t_\*^i-\hat{w}_\*\phi_5(P^i))^2+\lambda\lVert\hat{w}_\*\rVert^2 \tag{5}
+$$ -->
+<!-- $$
+w_\ast = \argmin_{\hat{w}} \sum_{i}^{N}(t_\ast^i-\hat{w}\phi_5(P^i))^2 + \lambda\lVert \hat{w} \rVert ^2  \tag{5}
+$$ -->
+<p>$$
+w_\ast = \argmin_{\hat{w_*}} \sum_{i}^{N}(t_\ast^i-\hat{w_*}\phi_5(P^i))^2 + \lambda\lVert \hat{w_*} \rVert ^2  \tag{5}
+$$</p>
+<p>(5)式中回归目标 $t_*$ 分别定义如下：</p>
+<p>$$t_x = (G_x-P_x)/P_w$$
+$$t_y = (G_y-P_y)/P_h$$
+$$t_w = log(G_w/P_w)$$
+$$t_h = log(G_h/P_h )$$</p>
+<h3 id="xun-lian-pei-zhi">训练配置</h3>
+<p>空间特征提取时，学习率设为0.001, 候选框与目标框重叠率大于等于0.5
+的设为正例，否则设为负例; batch_size 设为128， 正负例比例为1:3。</p>
+<p>SVM分类时，分类数量为物体类别数加一，增加的一个分类表示“背景”类型。
+这里有个特殊设置，即但候选框部分包含物体时，如果区分正例还是负例呢？
+论文在这种情况下选择 IoU 小于0.3时，就标记为负例。</p>
+<p>回归训练时，其目的是调整边界框大小，很显然当预测框与目标框差得很远时，
+回归训练是无效的，所以回归训练只训练靠近目标框的预测框，
+即选择 IoU 阈值设为大于等于 0.6 的预测框。</p>
+<h3 id="r-cnn-de-que-xian">R-CNN 的缺陷</h3>
+<ul>
+<li>选择性搜索算法不能 GPU 加速，降低模型速度；</li>
+<li>对每张图做2000次前向CNN, 效率过低；</li>
+<li>把提取的图片特征写进磁盘，既废空间又拖慢速度；</li>
+<li>CNN提取图像特征、分类器预测类别、回归模型提取紧身边界框，
+但在算法上它们是分开训练的，训练起来较麻烦。</li>
+</ul>
+<h2 id="overfeat">OverFeat</h2>
+<p>OverFeat 的论文首发于2013年12月份，OverFeat 模型分为前后两部分，
+前面部分可叫做特征提取层，后面部分可叫做任务层，
+只需要改变网络的最后几层，就可以实现分类、定位、检测等任务。
+任务层共享特征提取层的参数，基本采用同一网络结构。</p>
+<p>R-CNN 论文的修订版有一小节专门提到OverFeat模型，认为该模型的方法
+虽然在预测效果上不如R-CNN, 但做一定改进后，训练速度能9倍于R-CNN。
+所以，对于OverFeat，只分析它最值得借鉴的闪光点。</p>
+<p align="center">
+<img src="./overfeat.png" />
+<figcaption>
+图2 OverFeat模型分为快速版和精确版, 此为精确版结构
+</figcaption>
+</p>
+<h3 id="yu-ce-shi-de-duo-chi-du-fen-lei">预测时的多尺度分类</h3>
+<p>OverFeat在训练时，将每张256x256原图片随机裁剪为221x221的大小, 作为CNN输入。
+但预测时，不再是用一张221x221大小的图片作为网络的输入，
+而是用任意大小都不相同的图片，也就是所谓的多尺度输入预测，如下表格所示：</p>
+<p align="center">
+<img width="90%" src="./multi_scale.png" />
+<figcaption>
+图3 多尺度方法的空间维度, 列举 6 种尺寸图片作为输入
+</figcaption>
+</p>
+<p>在AlexNet的文献中，他们预测的方法是输入一张图片256x256，然后进行
+multi-view裁剪，也就是从图片的四个角进行裁剪，还有就是一图片的中心进行裁剪，这样可以裁剪到5张
+224x224的图片。然后把原图片水平翻转一下，再用同样的方式进行裁剪，又可以裁剪到5张图片。
+把这10张图片作为输入，分别进行预测分类，在后在softmax的最后一层，求取个各类的总概率，求取平均值。</p>
+<p>这种方法的弊端在于：</p>
+<ol>
+<li>这种裁剪方式，可能把图片的某些区域都给忽略掉；</li>
+<li>裁剪窗口的重叠部分存在冗余计算。</li>
+</ol>
+<p>要解决的问题是，输入不同尺寸的图片，经过特征提取层后，
+会输出不同尺寸的特征图(如图3第3列)，再进行下采样时，如果保证不同尺寸情况下，
+信息不丢失呢？ 论文介绍了一种<strong>offset池化</strong>方法，说明如下：</p>
+<p align="center">
+<img width="70%" src="./offset_poolling_1.png" />
+<figcaption>
+图4  一维池化
+</figcaption>
+</p>
+<p>以一维情况来说明，设x轴上有20个神经元，以poolling size=3做非重叠池化,
+而20除以3除不尽，为保证池化信息完备性，将20个神经元分为三组：</p>
+<ol>
+<li>△=0分组：[1,2,3]，[4,5,6]，……，[16,17,18]；</li>
+<li>△=1分组：[2,3,4]，[5,6,7]，……，[17,18,19]；</li>
+<li>△=2分组：[3,4,5]，[6,7,8]，……，[18,19,20]；</li>
+</ol>
+<p>对应图片如下：</p>
+<p align="center">
+<img src="./offset_poolling_2.png" />
+<figcaption>
+图5  分三组的一维池化，覆盖所有神经元
+</figcaption>
+</p>
+<p>把上面的△=0、△=1、△=2的三种组合方式的池化结果，分别送入网络的下一层。
+这样的话，我们网络在最后输出的时候，就会出现3种预测结果了。</p>
+<p>如果是2维图片的话，那么就会有 9 种池化结果,
+最后我们的图片分类输出结果就可以得到9个预测结果(每个类别都可以得到9种概率值), 然后我们对每个类别的9种概率，取其最大值，做为此类别的预测概率值。</p>
+<p>用大小为3x3的滑动窗口、按步幅3做offset池化后，就形成图3第4列的空间维度;
+再用大小为5x5的核、按步幅1做卷积后，就形成图3第5列的空间维度(参考图2第7层)。
+论文里把这种方法称为全卷积网络，我没把这种结构归类到<a href="/convolution">《卷积备忘录》</a>中,
+因为它仅仅有一个固定大小的卷积核，再把输出接上一个<a href="/convolution/#ping-jing-juan-ji-pointwise-conv">瓶颈卷积层</a>,
+使最后输出一个 C 维向量, 其中 C 表示分类数量(个人觉得没什么特别)。
+而这个C维分类向量的形状就是图3最后一列的样子。
+写到这里，多尺度图片的分类预测方法就说完了。</p>
+<h3 id="ru-he-zhao-chu-hou-xuan-qu-yu-1">如何找出候选区域</h3>
+<p>在R-CNN论文的修订版本中, 有一节专门提到受OverFeat模型的启发，
+如果对图片的特征提取只做一次，再
+用不同尺寸的滑动窗口在提取后的特征图上来选出候选区域，
+R-CNN的性能至少提高9倍。所以，用多尺寸滑动窗口选出候选区，相对
+于选择性搜索算法在原图上选出很多个候选框，是一大进步。</p>
+<p>多说一句，滑动窗口方式为什么不在原图上圈出候选区呢？没有必要，
+因为卷积网络结构一旦确定，对于图片来说就有固定的缩放比，而对候选区而言，
+用来分析的是抽取出来的特征图，所以在特征图上圈出候选区域，简单直接靠谱。</p>
+<h3 id="ru-he-zhao-chu-bian-jie-kuang">如何找出边界框</h3>
+<p>即OverFeat的定位任务，把用图片分类学习的特征提取层的参数固定下来，
+然后继续训练后面的回归层的参数，网络包含了4个输出，
+对应于边界框的上左上角点和右下角点的纵横坐标，
+然后损失函数采用欧式距离L2损失函数。</p>
+<p>OverFeat 用到的回归方法不如R-CNN, 略过不提。</p>
+<h2 id="spp-net">SPP-Net</h2>
+<p>SPP-Net( Spatial Pyramid Pooling in Deep Convolutional Networks )模型算是
+R-CNN 的进化版, 论文第一作者何凯明，首发于2014年6月，
+当时他还在微软中国研究院。</p>
+<p>该模型对 R-CNN 进行了针对性的改进。首先，R-CNN中对候选区图片统一缩放为
+固定尺寸进行训练，这样对于图片内的物体来说，会遭到切割和缩放，将导致图片
+信息的丢失和变形, 限制了识别精度。</p>
+<p>那么，为什么要固定输入图片的大小呢？</p>
+<p>卷积层的参数和输入大小无关，它仅仅是一个卷积核在图像上滑动，
+不管输入图像多大都没关系，只是对不同大小的图片卷积出不同大小的特征图，</p>
+<p>池化对图片大小会有要求吗？比如池化大小为2x2, 输入一张30x40的图片，
+那么经过池化后可以得到15x20的图片; 输入一张53x22大小的图片，经过池化后，
+可以得到26x11大小的图片。因此池化这一步也没对图片大小有要求。</p>
+<p>但是全连接层的参数就和输入图像大小有关，因为它要把输入的所有像素点连接起来,需要指定输入层神经元个数和输出层神经元个数，所以需要规定输入的特征图的大小。
+因此，固定长度的约束仅限于全连接层。</p>
+<p>SPP-Net 的思路是在特征提取层和全连接层之间，增加一个层，
+使得从特征提取层输出的特征图, 经过这层后，得到一个固定维度的表达。
+该模型的结构如下：</p>
+<p align="center">
+<img width="80%" src="./spp-net.png" />
+<figcaption>
+图6  SPP-Net 模型结构, 中间层称为空间金字塔池化层
+</figcaption>
+</p>
+<h3 id="kong-jian-jin-zi-ta-chi-hua-ceng">空间金字塔池化层</h3>
+<p>该池化层的作用为把不同尺寸的卷积网络最后一层输出变成固定维度的特征表达。
+图6中黑色图片代表卷积之后的特征图, 它被4x4，2x2，1x1
+大小的网格划分，每个块提取出一个特征, 得到 16 + 4 + 1 = 21 个的特征块,
+把它们拼接在一起就得到长度为21，深度为256维的空间特征表达。</p>
+<p>空间金字塔池化的思想是不固定滑动窗口的大小，而根据输入特征图的尺寸计算出
+滑动窗口尺寸，令输入特征图的宽高分别为 w 和 h, 对于 nxn 的网格而言，滑动窗口的宽高分别为
+$\lceil w/n \rceil$ 和 $\lceil h/n \rceil$($\lceil \cdot \rceil$
+表示向上取整，不足部分用 pad 补齐),
+滑动步幅分别为$\lfloor w/n \rfloor$和$\lfloor h/n \rfloor$($\lfloor \cdot
+\rfloor$ 表示向下取整)。</p>
+<h3 id="te-zheng-ti-qu-jia-su">特征提取加速</h3>
+<p>SPP-Net 相对于 R-CNN 来说，特征提取的速度有了质的提高。具体操作如下：</p>
+<p>把整张待检测的图片，输入卷积网络中，进行一次性特征提取，得到
+特征图， 然后在特征图中找到各个候选框的区域，
+再对各个候选框采用空间金字塔池化，提取出固定长度的特征向量。</p>
+<p>而R-CNN输入的是每个候选框，然后在进入CNN，因为SPP-Net只需要一次对整张图片进行特征提取，
+因为R-CNN就相当于遍历一个CNN两千次，而SPP-Net只需要遍历1次,
+光这一个改进，就有百倍加速的效果。</p>
+<h3 id="ru-he-zai-cnnzui-hou-yi-ceng-te-zheng-tu-zhong-zhao-dao-yuan-shi-tu-pian-zhong-hou-xuan-kuang-de-dui-ying-qu-yu">如何在CNN最后一层特征图中找到原始图片中候选框的对应区域？</h3>
+<p>办法只有一条，算出来，前面提过，一旦卷积网络结构选定，从输入端到输出端的
+缩小比例就能算出来，影响这个比例的包括每层的卷积方式和池化方式。</p>
+<p>论文提出，为简化计算，在卷积时，填充$\lfloor p/2 \rfloor$,
+其中$p$表示卷积核的尺寸，
+令$S$表示卷积层的缩小比例，$(x,y)$表示原图片上候选框的中心坐标,
+则与特征图上对应候选框的中心坐标$( x^′, y^′)$之间的关系为:</p>
+<p>$$(x,y)=(S x^{′},S y^{′})$$</p>
+<p>给定原图片上候选框左上角坐标$(x_0, y_0)$和右下角坐标$(x_1, y_1)$，
+对应的特征图坐标分别为：</p>
+<p>$$x_0^′ = \lfloor x_0/S \rfloor + 1$$
+$$y_0^′ = \lfloor y_0/S \rfloor + 1$$
+$$x_1^′ = \lceil x_1/S \rceil - 1$$
+$$y_1^′ = \lceil y_1/S \rceil - 1$$</p>
+<h3 id="xiao-jie">小结</h3>
+<p>SPP-Net 相对于 R-CNN 最大改进有两点：</p>
+<ol>
+<li>由于找到图片坐标到特征图坐标的换算关系，
+故对图片特征提取只做一次，也能取出候选框对应的特征图；</li>
+<li>采用空间金字塔池化方法，把不同尺寸的候选框特征图输出为固定大小的特征表达</li>
+</ol>
+<h2 id="fcn">FCN</h2>
+<p>2014年11月，在深度学习搞图像语义分割领域，
+加利福尼亚大学伯克利分校的Jonathan Lona 等人
+出了篇经典论文《Fully Convolutional Networks for Semantic Segmentation》,
+从此, 江湖上经常会听到全卷积网络(FCN)的传说。</p>
+<p>FCN对图像进行像素级的分类，从而解决了语义级别的图像分割（semantic segmentation）问题。与经典的CNN在卷积层之后使用全连接层得到固定长度的特征向量进行分类
+（全连接层＋softmax输出）不同，FCN可以接受任意尺寸的输入图像，
+采用反卷积层对最后一个卷积层的特征图进行上采样, 使它恢复到输入图像相同的尺寸，
+从而可以对每个像素都产生了一个预测, 同时保留了原始输入图像中的空间信息,
+最后在上采样的特征图上进行逐像素分类。</p>
+<p>其模型结构如下图所示：</p>
+<p align="center">
+<img width="80%" src="./fcn.png" />
+<figcaption>
+图7 全卷积网络结构示意图
+</figcaption>
+</p>
+<p>简单的来说，FCN与CNN的区别在把于CNN最后的全连接层换成卷积层，输出的是一张已经Label好的图片。</p>
+<h3 id="cnnzuo-jing-que-fen-ge-nan-zai-na-li">CNN做精确分割难在哪里</h3>
+<p>CNN的强大之处在于它的多层结构能自动学习特征，并且可以学习到多个层次的特征：
+较浅的卷积层感知域较小，学习到一些局部区域的特征；较深的卷积层具有较大的感知域，
+能够学习到更加抽象一些的特征。这些抽象特征对物体的大小、位置和方向等敏感性更低，
+从而有助于识别性能的提高。</p>
+<p>这些抽象的特征对分类很有帮助，可以很好地判断出一幅图像中包含什么类别的物体，
+但是因为丢失了一些物体的细节，不能很好地给出物体的具体轮廓、指出每个像素具体属于哪个物体，
+因此做到精确的分割就很有难度。</p>
+<h3 id="chuan-tong-de-ji-yu-cnnde-fen-ge-fang-fa">传统的基于CNN的分割方法</h3>
+<p>为了对一个像素分类，使用该像素周围的一个图像块作为CNN的输入用于训练和预测。
+这种方法有几个缺点：<font color="red">一是存储开销很大。</font>
+例如对每个像素使用的图像块的大小为15x15，然后不断滑动窗口，每次滑动的窗口给CNN进行判别分类，
+因此则所需的存储空间根据滑动窗口的次数和大小急剧上升。
+<font color="red">二是计算效率低下。</font>
+相邻的像素块基本上是重复的，针对每个像素块逐个计算卷积，这种计算也有很大程度上的重复。
+<font color="red">三是像素块大小的限制了感知区域的大小。</font>
+通常像素块的大小比整幅图像的大小小很多，
+只能提取一些局部的特征，从而导致分类的性能受到限制。</p>
+<p>而全卷积网络(FCN)则是从抽象的特征中恢复出每个像素所属的类别。
+即从图像级别的分类进一步延伸到像素级别的分类。</p>
+<h3 id="quan-lian-jie-ceng-zhuan-cheng-juan-ji-ceng-de-yuan-li">全连接层转成卷积层的原理</h3>
+<p>全连接层和卷积层之间唯一的不同就是卷积层中的神经元只与输入数据中的一个局部区域连接，
+并且在卷积列中的神经元共享参数。然而在两类层中，神经元都是计算点积，
+所以它们的函数形式是一样的。因此，将此两者相互转化是可能的:</p>
+<ul>
+<li>
+<p>对于任一个卷积层，都存在一个能实现和它一样的前向传播函数的全连接层。
+权重矩阵是一个巨大的矩阵，除了某些特定块，其余部分都是零。
+而在其中大部分块中，元素都是相等的。</p>
+</li>
+<li>
+<p>相反，任何全连接层都可以被转化为卷积层。比如，一个 K=4096 的全连接层，
+输入数据体的尺寸是 7x7x512，这个全连接层可以被等效地看做一个 F=7,P=0,S=1,K=4096 的卷积层。
+换句话说，就是将滤波器的尺寸设置为和输入数据体的尺寸一致了。
+因为只有一个单独的深度列覆盖并滑过输入数据体，所以输出将变成 1x1x4096，
+这个结果就和使用初始的那个全连接层一样了。</p>
+</li>
+</ul>
+<p>假设一个卷积神经网络的输入是 224x224x3 的图像，一系列的卷积层和下采样层将图像数据变为尺寸为 7x7x512 的激活数据体。
+AlexNet使用了两个尺寸为4096的全连接层，最后一个有1000个神经元的全连接层用于计算分类评分。
+我们可以将这3个全连接层中的任意一个转化为卷积层：</p>
+<ul>
+<li>针对第一个连接区域是[7x7x512]的全连接层，令其滤波器尺寸为F=7，这样输出数据体就为[1x1x4096]了。</li>
+<li>针对第二个全连接层，令其滤波器尺寸为F=1，这样输出数据体为[1x1x4096]。</li>
+<li>对最后一个全连接层也做类似的，令其F=1，最终输出为[1x1x1000]</li>
+</ul>
+<p>每次这样的变换都需要把全连接层的权重 W 重塑成卷积层的滤波器。</p>
+<p><strong>那么这样的转化有什么作用呢？</strong></p>
+<p>它在下面的情况下可以更高效：
+<font color="red">让卷积网络在一张更大的输入图片上滑动，得到多个输出，
+这样的转化让我们在一次向前传播时就能完成。</font></p>
+<p>经这样转化过的网络所有层都是卷积层，所以这种结构被命名为<strong>全卷积网络</strong>。</p>
+<h3 id="ru-he-jiang-te-zheng-tu-fang-da-dao-yuan-tu-chi-cun">如何将特征图放大到原图尺寸</h3>
+<p>把特征图放大回去的手段就是上采样(upsampling),
+有三种常见方法：
+<a href="/convolution/#fan-juan-ji-deconvolution-conv">反卷积(Deconvolution)</a>,
+双线性插值(Bilinear), <a href="/glossary/#unpooling">反池化(Unpooling)</a>。
+论文采用的是双线性插值算法初始化的反卷积方法。</p>
+<p>比如使用AlexNet, 前向传导刚好缩小32倍，AlexNet的stride：
+C1=4, P1=2, p2=2, p5=2, 乘起来等于32倍。这时最后一层就要
+上采样32倍给放大回去。</p>
+<p>但这样直接放大32倍回去，精度较低，分割的结果很粗糙，论文又提出精度稍高些的
+混合放大结构。如下图：</p>
+<p align="center">
+<img src="./multi-upsampling.png" />
+<figcaption>
+图8 多尺度的上采样
+</figcaption>
+</p>
+<p>只解释最复杂的FCN-8S，先把p5的2倍结果与p4的预测相加，相加的结果再放大2倍，
+然后与p3的预测相加，相加的结果再放大8倍。这样的安排，就使得预测结果兼顾了
+底层的信息，进而使语义分割的精度得以提高。</p>
+<h2 id="fast-r-cnn">Fast R-CNN</h2>
+<p>2015年4月，R-CNN 的第一作者 Ross Girshick 又发了一篇论文《Fast R-CNN》，论文开篇
+就列举 R-CNN 各种明显缺点，同时也提出SPP-Net存在的两个缺陷：</p>
+<ol>
+<li>和R-CNN一样，也把提取的特征写进磁盘；</li>
+<li>边界框微调算法不能更新空间金字塔池化层前的卷积网络，这限制了目标定位的准确性。</li>
+</ol>
+<p>为什么SPP-Net不能更新空间金字塔池化层前的卷积网络呢？</p>
+<p>准确说，不是不能更新，而是效率低下。</p>
+<ol>
+<li>因为SPP-Net在训练时，假设batch_size=128,
+就是从128张不同图片中随机抽样一个候选区域，所以对于边界框微调算法来说，
+不同图像对应不同特征图，它们之间的参数不具备共享特性，所以梯度反向传播时
+的参数更新不具有相关性，这是效率低下的原因之一。</li>
+<li>空间金字塔池化方法一般至少有三层，常常最高层只一个网格，第二层四个网格，
+这将导致这些网格对应的感受野过大，从而使反向传播时涉及的参数量也过多，
+这也将降低反向传播的效率。</li>
+</ol>
+<p>作者针对这些问题改进后，训练速度提高约 64 倍。(详见<a href="/blog/segment/#xun-lian-wei-diao">训练微调</a>)</p>
+<p>然后在 R-CNN 和 SPP-Net 基础上提出了新的模型 Fast R-CNN。</p>
+<p align="center">
+<img width="80%" src="./fast.r-cnn.png" />
+<figcaption>
+图9  Fast R-CNN 结构.
+一个图像和多个 RoI (regions of interest)
+输入到全卷积网络中。
+每个 RoI 被池化为固定大小的特征图，然后通过全连接层(FC)映射到特征向量。
+网络对于每个RoI有两个输出向量：一个为Softmax的分类概率,
+一个为每类边界框的回归偏移量。该架构采用多任务损失函数端到端训练的。
+</figcaption>
+</p>
+<p>Fast R-CNN 网络将整个图像和一组候选框作为输入。
+候选框仍采用选择性搜索算法找出。
+网络首先使用几个卷积层和最大池化层来处理整个图像，以产生卷积特征图。
+然后，对于每个候选框，RoI 池化层从特征图中提取固定长度的特征向量。
+每个特征向量被送入一系列全连接层中，最终分支成两个同级输出层 ：
+一个输出K个类别加上1个背景类别的Softmax概率估计，
+另一个为K个类别的每一个类别输出四个实数值。
+每组4个值对K类之一的精细边界框位置进行编码。</p>
+<h3 id="roi-chi-hua">RoI 池化</h3>
+<p>RoI(regions of interest)直译出来是感兴趣区域，我觉得很拗口，
+由于它本质上和前面提到的候选区域(regions proposals)是一回事,
+所以我不管人家怎么叫，在我的文章里我统称为候选区域。</p>
+<p>这里的 RoI 是一个的矩形窗口, 每个RoI由其左上角坐标及其高度和宽度的四元组(r,c,h,w)定义。
+RoI 池化的思路来自空间金字塔池化，只取空间金字塔中的一层，
+把一个候选区域分为 H×W 个网格， 每个网格大小约为h/H × w/W，
+然后对网格最大池化，从而输出固定大小的向量。</p>
+<h3 id="xun-lian-wei-diao">训练微调</h3>
+<p>对边界框进行回归训练时，选择少量图片多个候选区域。
+假设每批仍然为128，可同时选择2个不同图片，每个图片选出64个候选框，
+这时，能较好共享参数，反向传播时具备较好相关性。
+另外，RoI池化也使感受野范围变小，使得需要更新的参数也变少，从而全面提升训练速度。</p>
+<h3 id="duo-ren-wu-sun-shi-han-shu-multi-task-loss">多任务损失函数 (Multi-task loss)</h3>
+<p>Fast R-CNN 把分类任务和边界框的回归任务分别对应的两个损失函数合二为一，
+让它们共享参数，一起训练。这个调整很小，但训练起来更方便，且共同训练还
+起到互相促进的作用。</p>
+<p>$$L(p, u, t^u, v) = L_{cls}(p, u) + λ[u ≥ 1]L_{loc}(t^u, v) \tag{1}$$</p>
+<p>(1)式中，</p>
+<ul>
+<li>$p=(p_0,...,p_K)$, softmax算出的K+1个分类概率, $u$是真实分类</li>
+<li>$L_{cls}(p, u) = −\log p_u$, 表示在第u类上的对数损失</li>
+<li>$[u ≥ 1]$ 表示当$u ≥ 1$时取值为1， 否则为0</li>
+<li>$v = (v_x, v_y, v_w, v_h)$ 表示标定边界框的中心坐标和宽高</li>
+<li>$t^u = (t_x^u, t_y^u, t_w^u, t_h^u)$ 表示预测边界框的中心坐标和宽高</li>
+<li>$λ$ 在所有实验中取值为1</li>
+</ul>
+<p>$$L_{loc}(t^u ,v)= \sum_{i \in {x,y,w,h}}smooth_{L1}(t_i^u −v_i) \tag{2}$$</p>
+<p>$$smooth_{L1}(x) =
+\begin{cases}
+0.5x^2  &amp; \text{if $|x|&lt;1$} \\
+|x|-0.5 &amp; \text{otherwise} \\
+\tag{3}
+\end{cases}$$</p>
+<p>(2)式是边界框损失函数, 注意，当预测的分类u为背景时，由于对背景没有标定边界框，
+这时(2)式被忽略。</p>
+<h2 id="faster-r-cnn">Faster R-CNN</h2>
+<p>Faster R-CNN 的论文发表于2015年6月，相对于Fast R-CNN，
+这个版本是真正的端到端模型。
+过去的版本，图片上候选区域都是用选择性搜索算法(selective search)、
+或者边缘框算法(edge bbox)来得到的，
+这个步骤和模型训练是分阶段的，所以不算真正的端到端版本。
+从Faster R-CNN 开始，首次使用神经网络--候选区域网络(RPN,
+Regions Proposals Networks)来提取这些候选框。</p>
+<p align="center">
+<img width="60%" src="./faster.r-cnn.png" />
+<figcaption>
+图10  Faster R-CNN 是用于目标检测的单个统一网络，
+而 RPN 模块相当于这个网络的"注意力机制"。
+</figcaption>
+</p>
+<p>Faster R-CNN 主要包括4个关键模块，
+特征提取网络、生成候选框(ROI)、候选框(ROI)分类、候选框(ROI)回归。</p>
+<ul>
+<li>特征提取网络：它用来从大量的图片中提取出一些不同目标的重要特征，
+通常由conv+relu+pool层构成，常用一些预训练好的网络（VGG、Inception、Resnet等），
+获得的结果叫做特征图；</li>
+<li>生成候选框：在获得的特征图的每一个点上做多个候选框；</li>
+<li>候选框分类：在 RPN 阶段(<a href="/blog/segment/#faster-r-cnn-xun-lian-ce-lue">图12</a>第1步)，用来区分前景（与标定边界框的重叠区域大于0.5）
+和背景（不与任何标定边界框重叠或者其重叠区域小于0.1）；
+在 Fast R-CNN 阶段(<a href="/blog/segment/#faster-r-cnn-xun-lian-ce-lue">图12</a>第4步)，用于区分不同种类的目标（猫、狗、人等）;
+- 候选框回归：在 RPN 阶段(<a href="/blog/segment/#faster-r-cnn-xun-lian-ce-lue">图12</a>第1步)，进行初步调整；
+在Fast R-CNN 阶段(<a href="/blog/segment/#faster-r-cnn-xun-lian-ce-lue">图12</a>第4步)进行精确调整。</li>
+</ul>
+<p>其整体流程如下：</p>
+<ul>
+<li>首先把输入的图片处理成固定尺寸(伸缩、裁剪、填充等)，
+并将处理后的图片送入预训练好的分类网络中获取该图像对应的特征图；</li>
+<li>然后在特征图上的每一个锚点上取9个候选框（3个不同尺度，3个不同长宽比），
+并根据相应的比例将其映射到原始图像中；</li>
+<li>接着将这些候选框输入到 RPN 网络中，RPN 网络对这些候选框进行分类
+（即确定这些候选框是前景还是背景）, 同时对其进行初步回归
+（即计算这些前景候选框与标定边界框之间的偏差值，包括Δx、Δy、Δw、Δh）,
+然后做NMS（非极大值抑制，即根据分类的得分对这些候选框进行排序，
+然后选择其中的前N个候选框）；</li>
+<li>接着对这些不同大小的候选框进行ROI Pooling操作
+（即将其映射为特定大小的网格, 文中是7x7），输出固定大小的特征图；</li>
+<li>最后将其输入简单的检测网络中，然后利用1x1的卷积进行分类
+（区分不同的类别，N+1类，
+多余的一类是背景，用于删除不准确的候选框），
+同时进行边界框回归，输出更精准的一个边界框集合。 </li>
+</ul>
+<h3 id="mao-dian-de-gai-nian">锚点的概念</h3>
+<p>即特征图上的最小单位点，比如原始图像的大小是256x256,
+特征提取网络中含有 4 个池化层，
+然后最终获得的特征图的大小为 256/16 x 256/16，
+即获得一个 16x16 的特征图，该图中的最小单位即是锚点，
+由于特征图和原始图像之间存在比例关系，
+在特征图上面密集的点对应到原始图像上面就有16个像素的间隔。</p>
+<p>一个锚点对应一套候选框，它们是在原图上以锚点为中心，
+根据不同尺度(128、256、512), 不同长宽比(1:1, 1:2: 2:1)产生
+的9个候选框。比如16x16的特征图，将产生16x16x9=2304个候选框。</p>
+<p>一个候选框表达为(x,y,w,h), 对应原始图片上的锚点横纵坐标和宽高。</p>
+<h3 id="zheng-fu-yang-ben-de-hua-fen">正负样本的划分</h3>
+<p>上面那些候选框，在训练和测试时将被进一步筛选。规则如下：</p>
+<ol>
+<li>与每个标定边界框(ground true box)的重叠率(IoU)最高锚点候选框，记为正样本；</li>
+<li>与某个标定边界框重叠率(IoU)大于0.7的锚点候选框，记为正样本。</li>
+</ol>
+<p>注意，一个标定边界框可以为多个锚点分配正样本，且通常第2个条件就足以确定正样本，
+但在少数情况下须用第1个条件来确定正样本。</p>
+<ol start="3">
+<li>与任意一个标定边界框的重叠率(IoU)都小于0.3的，记为负样本。</li>
+<li>既不是正样本，也不是负样本的锚点候选框，对训练目标没有贡献，抛弃不用。</li>
+</ol>
+<p>在训练阶段，如果锚点候选框超过了原始图片的边界，则忽略这个候选框;
+在测试阶段，如果锚点候选框超过了原始图片的边界, 则把候选框裁剪到图片边界。</p>
+<h3 id="rpn-wang-luo-jie-gou">RPN 网络结构</h3>
+<p align="center">
+<img width="70%" src="./rpn.png"/>
+<figcaption>
+图11  RPN 网络结构
+</figcaption>
+</p>
+<ul>
+<li>第一层，3x3的卷积核，输出特征图的数量为256；</li>
+<li>第二层，有两个分支，每个分支都用1x1的卷积核，
+第一个分支过滤器的shape=(1,1,256,9x2),
+得到的特征图shape=(h,w,9x2)；第二个分支过滤器的
+shape=(1,1,256,9x4), 得到特征图的shape=(h,w,9x4)。
+这样特征图的每个像素点就有一个9x6维向量，对应到原始图片的9个
+候选框，每个候选框有一个6维向量，前两个维度用于判断候选框中
+是否有物体，后四个维度用于判断候选框中物体的坐标。</li>
+</ul>
+<p><strong><font color="red">RPN 的缺陷</font></strong></p>
+<ul>
+<li>训练阶段，RPN 提出约2000个候选框，这些候选框被送入到Fast R-CNN结构中，
+在Fast R-CNN结构中，首先计算每个候选框和标定边界框(GT)之间的IoU，
+通过人为的设定一个IoU阈值（通常为0.5），
+把这些候选框分为正样本（前景）和负样本（背景），
+并对这些正负样本采样，使得他们之间的比例尽量满足（1:3，二者总数量等于batch
+size），
+之后这些候选框被送入到RoI Pooling，最后进行类别分类和边界框回归。</li>
+<li>预测阶段，RPN 提出约300个候选框，这些候选框被送入到Fast R-CNN结构中，
+和训练阶段不同的是，预测阶段没有办法对这些候选框采样
+（因为该阶段不知道GT，也就没法计算IoU），
+所以他们被直接送入RoI Pooling，之后进行类别分类和边界框回归。</li>
+</ul>
+<p>问题来了，训练阶段和预测阶段输入的候选框的分布一定是不一样的，
+训练阶段输入的质量较高，预测阶段输入的质量较差，
+这种情况下会影响后面回归器的性能。</p>
+<h3 id="sun-shi-han-shu">损失函数</h3>
+<p>几乎和Fast R-CNN的损失函数一样，表达上更精炼。</p>
+<p>$$L({p_i}, {t_i})= {1\over N_{cls}}\sum_i L_{cls}(p_i, p_i^*) +
+\lambda{1\over N_{reg}}\sum_i p_i^*L_{reg}(t_i, t_i^*) \tag{1}$$</p>
+<!-- $$
+\begin{array}{c \qquad c}
+t_x = (x−x_a)/w_a,      & t_y =(y−y_a)/h_a, \\\\
+t_w = log(w/w_a),       & t_h = log(h/h_a),  \\\\
+t_x^\* = (x^\* − x_a)/w_a,& t_y^\* = (y^\* − y_a)/h_a, \\\\
+t_w^\* = log(w^\*/w_a),   & t_h^\* = log(h^\*/h_a), \\\\
+\tag{2}
+\end{array}
+$$ -->
+<p>$$
+\begin{array} {c   c}
+t_x = (x−x_a)/w_a,      &amp; t_y =(y−y_a)/h_a, \\
+t_w = log(w/w_a),       &amp; t_h = log(h/h_a),  \\
+t_x^* = (x^* − x_a)/w_a,&amp; t_y^* = (y^* − y_a)/h_a, \\
+t_w^* = log(w^*/w_a),   &amp; t_h^* = log(h^*/h_a), \\
+\tag{2}
+\end{array}
+$$</p>
+<p>其中，下标$i$表示每批锚点候选框（下称“锚点”）的索引编号，</p>
+<ul>
+<li>$p_i$ 表示第i个锚点是否是目标的概率, $p_i^*$ 是第i个锚点标定值，1表示正样本，0表示负样本；</li>
+<li>$t_i$是预测边界框的定位信息，$t_i^*$是标定边界框的定位信息, 定义见(2)式，
+这里与Fast R-CNN 不同。
+对每个矩形框，(x,y,w,h)分别对应矩形框的中心点坐标和宽高，
+(2)式中，$x, x_a, x^*$分别对应预测边界框、锚点候选框、标定边界框的 x 坐标,
+(y、w、h 的情形与 x 类似)</li>
+<li>$L_{reg}(t_i, t_i^* ) = R(t_i − t_i^*)$,
+这里的$R$函数是 <a href="/blog/segment/#duo-ren-wu-sun-shi-han-shu-multi-task-loss">smooth L1 损失函数</a></li>
+<li>$L_{cls}(p_i, p_i^*)$是对数损失函数，与Fast R-CNN定义一致</li>
+<li>$N_{cls}$, $N_{reg}$ 是求和后的正则化因子(即求平均值)，其中 $N_{cls} = batchsize $ ,
+$N_{reg}$等于参与损失函数计算的锚点候选框的数量。</li>
+<li>$\lambda$在所有实验中取值为10</li>
+</ul>
+<h3 id="faster-r-cnn-xun-lian-ce-lue">Faster R-CNN 训练策略</h3>
+<p align="center">
+<img width="90%" src="./faster-rcnn.training.jpeg"/>
+<figcaption>
+图12  Faster R-CNN 训练策略
+</figcaption>
+</p>
+<ul>
+<li>用ImageNet模型初始化，独立训练一个RPN网络；</li>
+<li>仍然用ImageNet模型初始化，但是使用上一步 RPN 网络产生的候选框作为输入，
+训练一个Fast-RCNN网络，至此，两个网络每一层的参数完全不共享；</li>
+<li>使用第二步的Fast-RCNN网络参数初始化一个新的RPN网络，但是把RPN、
+Fast-RCNN共享的那些卷积层的learning rate设置为0，也就是不更新，
+仅仅更新RPN特有的那些网络层，重新训练，此时，两个网络已经共享了所有公共的卷积层；</li>
+<li>仍然固定共享的那些网络层，把Fast-RCNN的非共享网络层也加入进来，形成一个统一网络，继续训练，
+微调 Fast-RCNN 非共享网络层，此时，该网络已经实现我们设想的目标，
+即网络内部预测边界框并实现检测的功能。</li>
+</ul>
+<p>即进行交替训练，迭代2次的原因是作者发现多次的迭代并没有显著的改善性能。</p>
+<h3 id="que-xian-roichi-hua-de-er-ci-liang-hua-pian-chai-wen-ti">缺陷：ROI池化的二次量化偏差问题</h3>
+<p>由于候选框的位置由模型回归得到，一般来说是浮点数，而池化后的特征图要求尺度固定，
+因此候选区域(ROI)池化这个操作存在两次数据量化的过程。</p>
+<ol>
+<li>将候选框的图像坐标量化为特征图坐标；</li>
+<li>将候选框的特征图坐标量化为 ROI 特征(即网格)坐标。</li>
+</ol>
+<p>事实上，经过上面的两次量化操作，此时的ROI已经和最开始的ROI之间存在一定的偏差，
+这个偏差会影响检测的精确度。</p>
+<p>举例说明：</p>
+<ul>
+<li>输入一张800x800的图片，图片中有一个665x665的边界框。
+图片经过特征提取网络之后，整个图片的特征图变为800/32 x 800/32, 即25x25，
+但是665/32=20.87，带有小数，
+ROI Pooling直接将它量化为20。在这里引入了一次偏差。</li>
+<li>由于最终的特征映射的大小为7x7，即需要将20x20的区域映射成7x7,
+矩形区域的边长为2.86，又一次将其量化为2。这里再次引入了一次量化误差。</li>
+</ul>
+<p>经过这两次的量化，候选ROI已经出现了严重的偏差。
+更重要的是，在特征图上差0.1个像素，对应到原图上就是3.2个像素。</p>
+<h2 id="fpn">FPN</h2>
+<p>R-CNN系列是在最后一层特征图上进行特征提取，从而进行目标识别的。
+对于卷积神经网络而言，不同深度对应着不同层次的语义特征，浅层网络分辨率高，
+学的更多是细节特征，深层网络分辨率低，学的更多是语义特征。
+因此这样做的弊端在于，顶层(即深层)特征中忽略了小物体的一些信息，
+因此只根据顶层特征进行目标识别，不能完整地反映小目标物体的信息。
+如果可以结合多层级的特征，就可以大大提高多尺度检测的准确性。</p>
+<h3 id="fpn-te-zheng-jin-zi-ta-wang-luo-jie-gou">FPN(特征金字塔网络)结构</h3>
+<p align="center">
+<img width="60%" src="./fpn.png"/>
+<figcaption>
+图13  特征金字塔网络
+</figcaption>
+</p>
+<p>如图13结构分为三部分：</p>
+<ol>
+<li>自下而上的卷积神经网络（上图左）;</li>
+<li>自上而下过程（上图右）;</li>
+<li>和特征与特征之间的侧边连接。</li>
+</ol>
+<p>自上而下的过程采用上采样进行。上采样几乎都是采用内插值方法，
+即在原有图像像素的基础上在像素点之间采用合适的插值算法插入新的元素，从而扩大原图像的大小。
+通过对特征图进行上采样，使得上采样后的特征图具有和下一层的特征图相同的大小。</p>
+<p align="center">
+<img width="60%" src="./fpn_add.png"/>
+<figcaption>
+图14 横向连接和自上而下的特征融合
+</figcaption>
+</p>
+<p>侧边之间的横向连接的过程在如图14所示。根本上来说，
+是将上采样的结果和自下而上生成的特征图进行融合。
+我们将卷积神经网络中生成的对应层的特征图进行1×1的卷积操作，
+将之与经过上采样的特征图融合，得到一个新的特征图，
+这个特征图融合了不同层的特征，具有更丰富的信息。
+这里1×1的卷积操作目的是改变通道数，要求和后一层的通道数相同。
+在融合之后还会再采用3x3的卷积核对每个融合结果进行卷积，目的是消除上采样的混叠效应，
+如此就得到了一个新的特征图。这样一层一层地迭代下去，就可以得到多个新的特征图。
+假设生成的特征图结果是P2，P3，P4，P5，它们和原来自底向上的卷积结果C2，C3，C4，C5一一对应。
+金字塔结构中所有层级共享分类层（回归层）。</p>
+<h3 id="fpndui-rpnde-gai-zao">FPN对RPN的改造</h3>
+<p>RPN是 Faster R-CNN 用于候选框选择的子网络。RPN在特征图上应用9种不同尺度的
+锚点候选框，然后进行二分类和边界框回归。考虑到越是低层的特征图包含的信息越精细，
+于是没必要在所有特征图上都应用9种不同尺寸的候选框，可以在低层特征图中应用尺度较小的候选框，
+在高层特征图中应用尺度较大的候选框。</p>
+<p>比如P2, P3, P4, P5 层特征图分别对应的候选框尺度为32, 64, 128, 256, 而候选框的
+长宽比依然采用1:1, 1:2, 2:1。</p>
+<h3 id="fpndui-roichi-hua-ceng-de-gai-zao">FPN对ROI池化层的改造</h3>
+<p>考虑到不同层次的特征图包含的物体大小不一样，故大尺度的ROI用在较深层的特征图上，
+小尺度的ROI用在较浅层的特征图上。论文给了一个参考公式，用来计算多大尺寸的候选框
+适用于哪一层特征图。</p>
+<p>$$k = \lfloor k_0+log_2(\sqrt{wh}/224) \rfloor$$</p>
+<p>其中，224是原始图片的输入尺寸，$k_0$是基准值，设置为5，代表P5层的输出，
+w 和 h 是ROI区域(候选框)的长和宽。
+假设ROI是 112x112 的大小，那么$k = k_0-1 = 5-1 = 4$，
+意味着该ROI应该使用P4的特征层。</p>
+<h2 id="mask-r-cnn">Mask R-CNN</h2>
+<p>2017年3月，已加盟facebook AI 研究院的何凯明携团队发表重磅论文《Mask R-CNN》,
+该模型非常灵活，可以用来完成多种任务，
+包括目标分类、目标检测、语义分割、实例分割、人体姿态识别等。
+除此之外，我们可以更换不同的主干结构(Backbone Architecture)和
+头部结构(Head Architecture)来获得不同性能的结果。</p>
+<p>Mask R-CNN是以往经典算法的集大成之作，算法思路并不复杂，
+即在原始<a href="/blog/segment/#faster-r-cnn">Faster R-CNN</a>算法的基础上面增加了<a href="/blog/segment/#fcn">FCN</a>算法来产生对应的MASK分支。
+Mask R-CNN 比 Faster R-CNN 复杂，但和原始的 Faster R-CNN 的速度相当。
+由于发现了ROI Pooling中所存在的<a href="/blog/segment/#que-xian-roichi-hua-de-er-ci-liang-hua-pian-chai-wen-ti">像素偏差问题</a>，提出了对应的 ROIAlign 策略，
+加上 FCN 精准的像素掩膜(Mask)，使得其可以获得高准确率。</p>
+<p>所以，Mask R-CNN 的结构如下图，即Faster R-CNN + FCN,
+更细致的是 RPN + ROIAlign + Fast-rcnn + FCN。</p>
+<img width="90%" src="./mask-rcnn.jpeg"/>
+<figcaption>
+图15  Mask R-CNN结构
+</figcaption>
+</p>
+<h3 id="mask-r-cnn-suan-fa-bu-zou">Mask R-CNN 算法步骤</h3>
+<ol>
+<li>输入一幅你想处理的图片，然后进行对应的预处理操作，或者预处理后的图片；</li>
+<li>将其输入到一个预训练好的神经网络中（ResNet等）获得对应的feature map；</li>
+<li>对这个feature map中的每一点设定预定个的ROI(候选区域)，从而获得多个候选ROI；</li>
+<li>将这些候选的 ROI 送入 RPN 网络进行二值分类（前景或背景）和边界框(BBox)回归，过滤掉一部分候选的ROI；</li>
+<li>对这些剩下的 ROI 进行 ROIAlign 操作；</li>
+<li>对这些 ROI 进行分类（N类别分类）、边界框(BBox)回归和MASK生成（在每一个 ROI 里面进行 FCN 操作）。</li>
+</ol>
+<h3 id="roialign">ROIAlign</h3>
+<p align="center">
+<img width="90%" src="./roialign.png"/>
+<figcaption>
+图16 ROIAlign 算法示例
+</figcaption>
+</p>
+<p>如图 16 所示，为了得到为了得到固定大小（7X7）的特征图，
+ROIAlign 算法没有使用量化操作，保留计算中的小数位。
+比如 665/32 = 20.78，我们就用20.78，不用20来替代它；
+比如 20.78/7 = 2.97，我们就用2.97，不用2来替代它。</p>
+<p align="center">
+<img width="80%" src="./bilinear.jpeg"/>
+<figcaption>
+图17 双线性插值. 蓝色虚线框表示特征图，
+黑色实线框表示浮点数长宽的ROI区域，蓝点表示虚拟像素点，
+虚线框单元格的四个角表示实际像素点.
+左上角蓝点的值由最接近它的4个实际像素点按双线性插值算法计算出来。
+</figcaption>
+</p>
+<p>假设要得到宽高均为2.97范围内的特征图，
+这个矩形区域相当于图17中黑色实线框里的一个网格，
+在该网格中定义4个采样点(虚拟点)，每个采样点的值由其周围4个实际点的值确定，
+计算方法采用双线性插值算法。然后在每一个橘色区域里进行最大池化操作，
+获得最终 2x2 的输出结果。</p>
+<p>论文指出，采样点的个数和位置不会对性能产生很大的影响。
+算法在整个过程中没有用到量化操作，没有引入误差，
+即原图中的像素和特征图中的像素是完全对齐的，没有偏差，
+这不仅会提高检测的精度，同时也会有利于实例分割。</p>
+<h3 id="tou-bu-jie-gou-fen-xi">头部结构分析</h3>
+<p align="center">
+<img width="100%" src="./head-arch.jpeg"/>
+<figcaption>
+图18  两种头部结构
+</figcaption>
+</p>
+<p>如图所示，为了产生对应的Mask，Mask R-CNN 扩展了Faster R-CNN的头部结构，
+它给出左右两种方案，即左边的Faster R-CNN/ResNet和右边的Faster R-CNN/FPN。</p>
+<p>对于左边的架构，主干使用的是预训练好的ResNet，使用了ResNet倒数第4层的网络。
+输入的ROI首先获得7x7x1024的ROI feature，然后将其升维到2048个通道，
+然后有两个分支，上面的分支负责分类和回归，下面的分支负责生成对应的mask。
+由于前面进行了多次卷积和池化，减小了对应的分辨率，mask分支开始利用反卷积进行分辨率的提升，
+同时减少通道的个数，变为14x14x256，最后输出了14x14x80的mask模板。</p>
+<p>而右边使用到的主干是<a href="/blog/segment/#fpn">FPN</a>，由于FPN的特征图包含了多层特征，
+因此这里使用了较少的filters。该架构也分为两个分支，作用于前者相同，
+而mask分支中进行了多次卷积操作，首先将ROI变化为14x14x256的feature，然后进行了 5 次相同的操作，
+然后进行反卷积操作，最后输出28x28x80的mask。
+即输出了更大的mask，与前者相比可以获得更细致的mask。</p>
+<p>实验表明，右边的架构在速度和精度上都有提升。</p>
+<h3 id="sun-shi-han-shu-1">损失函数</h3>
+<p>$$ L = L_{cls} + L_{box} + L_{mask} $$</p>
+<p>其中$L_{cls}$和$L_{box}$和Faster R-CNN 中<a href="/blog/segment/#sun-shi-han-shu">定义</a> 的相同。对于每一个ROI，
+mask分支有$K \cdot m^2$ 维度的输出，其对 K 个大小为 mxm 的 mask 进行编码，
+每一个 mask 有 K 个类别。
+这里对每个像素用sigmoid分类，并且将$L_{mask}$定义为二分类的交叉熵损失函数 。
+对应一个属于标定集(Ground Truth)中的第 k 类的ROI，$L_{mask}$仅仅在第k个mask上面有定义
+（其它的k-1个mask输出对整个Loss没有贡献）。$L_{mask}$允许网络为每一类生成一个mask，
+而不用和其它类进行竞争；并且依赖于分类分支所预测的类别标签来选择输出的mask。
+这样将分类和mask生成分解开来。
+这与利用 FCN 进行语义分割的有所不同，
+它对每个像素使用softmax归一化，在将结果放入一个多分类的交叉熵损失函数 ，
+在这种情况下mask之间存在竞争关系。
+实验表明，这样的方法可以提高实例分割的效果。</p>
+<h2 id="snip">SNIP</h2>
+<p>图像金字塔的尺度标准化 SNIP(Scale Normalization for Image Pyramids)
+是个好算法，论文发表于2017年11月，
+名字叫做《An Analysis of Scale Invariance in Object Detection – SNIP》。
+这个算法引起我的注意是因为在COCO数据集上的效果十分惊艳，
+我想得分高一定有得分高的道理，仔细一看，
+它的思路确实是目标检测任务的优化大法。</p>
+<h3 id="domain-shift">Domain-shift</h3>
+<p>这个词我想不出怎样翻译比较好，只能意会。
+它表示训练集和测试集的分布存在较大差异时，
+训练出来的模型在测试集上就不会有好的性能。</p>
+<p>文献用大量实验证明了下面的结论：</p>
+<ol>
+<li>如果验证数据的分辨率和训练数据的分辨率差别越大，则实验结果越差；
+当训练数据的分辨率和验证数据的分辨率相同时，效果要好很多。</li>
+<li>基于高分辨率图像训练的模型同样能有效提取放大的低分辨率图像的特征。</li>
+</ol>
+<h3 id="snip-suan-fa">SNIP 算法</h3>
+<p>为了降低Domain-shift带来的影响，SNIP的思路是：</p>
+<ol>
+<li>在梯度回传时只将和预训练模型中训练数据尺寸相似的ROI的梯度进行回传。</li>
+<li>借鉴了multi-scale training的思想，引入图像金字塔来处理数据集中不同尺寸的数据。</li>
+</ol>
+<p align="center">
+<img width="100%" src="./snip.png"/>
+<figcaption>
+图19  SNIP 训练和测试示意图
+</figcaption>
+</p>
+<p>在训练阶段，基于标定边界框(groud truth)来定义候选框,
+图19中叫做anchor，再根据anchor和标定框的IoU的值分为
+valid anchor 和 invalid anchor.</p>
+<p>训练时只训练约定尺度范围的valid anchor.
+首先把原始图片用图像金字塔算法缩放成几个不同尺度，
+如图所示，最大的图中选择最小的anchor, 中等图中选择中等大小的anchor,
+最小的图中选择最大的anchor来训练，这种情况下，参与训练的
+候选框被规定在某个尺度范围内，也即参与训练的目标不会特别大也不会特别小。</p>
+<p>在预测阶段，将预测的边界框缩放成原图尺寸，再合并输出。</p>
+<p>再贴个图，感觉一下SNIP的强大。</p>
+<p align="center">
+<img width="100%" src="./snip_compare.png"/>
+<figcaption>
+图20  最先进的目标检测算法比较
+</figcaption>
+</p>
+<h2 id="cornernet">CornerNet</h2>
+<p>CornerNet 发表于2018年8月，整个算法的想法比较清奇，
+受人体姿态估计任务的启发，将目标检测问题当作关键点检测问题来解决，
+也就是通过检测目标框的左上角和右下角两个点得到预测框。
+这种选择预测框的方式，比用锚点方式选择预测框的方式更简洁，
+因为锚点确定预测框不仅需要锚点的坐标位置，还需要矩形框的
+尺寸大小和宽高比。</p>
+<p align="center">
+<img width="90%" src="./cornernet.png"/>
+<figcaption>
+图21  CornerNet 结构. 主干网采用Hourglass网络(人体姿态估计的经典网络结构),
+左上角点和右下角点分别训练，每个角点的输出有三个，分别为
+Headmaps, Embeddings, Offsets.
+</figcaption>
+</p>
+<p>首先1个7×7的卷积层将输入图像尺寸缩小为原来的1/4
+（论文中输入图像大小是 511×511，缩小后得到 128×128 大小的输出）。
+然后经过特征提取网络（backbone network）提取特征，该网络采用 hourglass network，
+该网络通过串联多个 hourglass module 组成，
+每个 hourglass module 都是先通过一系列的降采样操作缩小输入的大小，
+然后通过上采样恢复到输入图像大小，因此该部分的输出特征图大小还是128×128，
+整个hourglass network的深度是104层。
+hourglass module 后会有两个输出分支模块，分别表示左上角点预测分支和右下角点预测分支，
+每个分支模块包含一个corner pooling 层和3个输出：heatmaps、embeddings和offsets。</p>
+<ul>
+<li>heatmaps: 输出预测角点，可以用维度为 CxHxW 的特征图表示，
+其中 C 表示目标的类别（注：没有背景类），这个特征图的每个通道都是一个mask，
+mask 的每个值表示该点是角点的分数；</li>
+<li>offsets: 用来对预测框做微调，这是因为从输入图像中的点映射到特征图时有量化误差，
+offsets 就是用来输出这些误差信息, 它具体表示为取整计算时丢失的误差信息；</li>
+<li>embeddings: 类似词向量的概念，为每个角点生成一个向量表达，
+该向量作为每对左上和右下角点配对的依据。</li>
+</ul>
+<h3 id="sun-shi-han-shu-2">损失函数</h3>
+<p><strong>heatmaps 的损失函数</strong></p>
+<p>一般层叠卷积网络的最后一层输出被称为 heatmaps,
+这里的heatmaps用来预测角点的位置，必然存在样本不均衡问题，
+因此 focus loss 是自然的选择。下面的式子中，相对于原始 focus loss
+多出一个参数 $\beta$, 用来控制$(1-y_{cij})$的变化速率。</p>
+<p>$$L_{det}={-1 \over N}\sum_{c=1}^C \sum_{i=1}^H \sum_{j=1}^W
+\begin{cases}
+(1-p_{cij})^{\alpha}\log(p_{cij}) &amp; \text{if $y_{cij}=1$} \\
+(1-y_{cij})^{\beta}(p_{cij})^{\alpha}\log(1-p_{cij}) &amp; \text{otherwise} \\
+\tag{1}
+\end{cases}
+$$</p>
+<p>其中，</p>
+<ul>
+<li>$p_{cij}$表示headmaps在第 c 个通道(类别c)第(i,j)位置的预测值</li>
+<li>$y_{cij}=1$时, 表示对应位置的 ground truth; $y_{cij}$为其他值时,
+表示(i,j)点不是类别 c 的目标角点, 这时$y_{cij}$ 的取值基于ground
+truth 角点的高斯分布计算得到($\sigma={1 \over 3}$)</li>
+<li>$N$ 表示一张图片中目标的数量</li>
+<li>$\alpha, \beta$ 均用来控制难以分类样本的损失权重, 论文中$\alpha=2, \beta=4$</li>
+</ul>
+<p><strong>offsets 的损失函数</strong></p>
+<p>$$O_k = ({x_k \over n} - \lfloor{x_k \over n}\rfloor, {y_k \over n} - \lfloor{y_k \over n}\rfloor) \tag{2}$$
+$$L_{off} = {1 \over N}\sum_{k=1}^N SmoothL1Loss(o_k, \hat{o}_k)  \tag{3}$$</p>
+<p>这里的 offsets 表示取整计算时丢失的误差信息,
+其中，(2)式中$n$表示原始图像到特征图的缩小倍数，$x,y$表示原始图像上的坐标位置，
+如果除不尽就向下取整。(3)式是在 Fast R-CNN 中提过的<a href="/blog/segment/#duo-ren-wu-sun-shi-han-shu-multi-task-loss">smooth L1 损失函数</a>。</p>
+<p><strong>embeddings 的损失函数</strong></p>
+<p>由于对每个角点的预测都是独立的，但我们的目标是要找到一对左上和右下的角点对，
+需要找到一种办法来为角点配对，这个配对的红娘就是为每个角点生成的嵌入向量(embedding vector)。
+嵌入向量的概念来自 NLP 中的词向量，它是一个被学出来的高维向量，
+在这里可以理解为对每个角点附近图像特征的抽象表达，
+而一对角点它们对应的嵌入向量一定存在相似性，
+即如果一个左上角点和一个右下角点属于同一个目标，那么它们对应的嵌入向量之间的距离应该很小。</p>
+<p>$$L_{pull}={1 \over N}\sum_{k=1}^N[(e_{t_k} - e_k)^2 + (e_{b_k} - e_k)^2] \tag{4}$$
+$$L_{push}={1 \over N(N-1)}\sum_{k=1}^N\sum_{j=1 \ j\neq k}^N max(0, \Delta - |e_k - e_j|) \tag{5}$$</p>
+<p>其中，</p>
+<ul>
+<li>$e_{t_k}$ 表示第k类目标的左上角点的嵌入向量,
+$e_{b_k}$ 表示第k类目标的右下角点的嵌入向量</li>
+<li>$e_k$表示$e_{t_k}$和$e_{b_k}$的均值, $e_j$表示第j类目标两个角点的均值</li>
+<li>$\Delta$ 表示阈值，论文中取值为 1</li>
+</ul>
+<p>(4)式用来缩小属于同一个目标的两个角点对应嵌入向量的距离，
+(5)式用来扩大不属于同一个目标的两个角点对应嵌入向量的距离。</p>
+<h3 id="corner-pooling">corner pooling</h3>
+<p>这是针对角点专门设计的池化方式，对于左上角点，它池化的目标是该点右边和下边的信息，
+对于右下角点，它池化的目标是该点左边和上边的信息。池化是什么，除了起到降维作用外，
+也是对池化区域显著特征的抽取。下面看一下这种池化方法的示意图：</p>
+<p align="center">
+<img width="70%" src="./corner_pooling.png"/>
+<figcaption>
+图22  corner pooling. 左上角点的 corner pooling 示意图,
+中间图片的红线表示把左上角点下面和右面的最大值传递到该点位置，
+最后输出到蓝点，该点是两个红点的求和运算。
+</figcaption>
+</p>
+<p align="center">
+<img width="70%" src="./corner_pooling_2.png"/>
+<figcaption>
+图23  corner pooling 的计算方法, 箭头表示最大值的传递方向，
+该图仍以左上角点进行举例。
+</figcaption>
+</p>
+<h3 id="yu-ce-shi-de-ji-ge-xi-jie">预测时的几个细节</h3>
+<ol>
+<li>在得到预测角点后，会对这些角点做<a href="/blog/segment/#ru-he-xuan-ze-zui-hao-de-bian-jie-kuang">NMS</a>操作，
+选择前100个左上角角点和100个右下角角点。</li>
+<li>计算左上和右下角点的嵌入向量的距离时采用L1范数，距离大于0.5或者两个点来自不同类别的目标的都不能构成一对。</li>
+<li>测试图像采用0值填充方式得到指定大小作为网络的输入，而不是采用resize，另外同时测试图像的水平翻转图并融合二者的结果。</li>
+<li>最后通过<a href="/blog/segment/#ru-he-xuan-ze-zui-hao-de-bian-jie-kuang">soft-NMS</a>(NMS缺陷的思路就是soft-NMS)操作去除冗余框，只保留前100个预测框。</li>
+</ol>
+<h2 id="can-kao-wen-xian">参考文献</h2>
+<ul>
+<li>R. Girshick, J. Donahue, T. Darrell, and J. Malik. Rich feature hierarchies for
+accurate object detection and semantic segmentation Tech report (v5). arXiv:1311.2524v5, 2014.</li>
+<li>P. Sermanet, D. Eigen, X. Zhang, M. Mathieu,  R. Fergus, and Y. LeCun. OverFeat:
+Integrated Recognition, Localization and Detection using Convolutional Networks. arXiv:1312.6229v4, 2014.</li>
+<li>K. He, X. Zhang, S. Ren, and J. Sun. Spatial pyramid pooling
+in deep convolutional networks for visual recognition. arXiv:1406.4729v4,
+2015.</li>
+<li>J. Long, E. Shelhamer, and T. Darrell. Fully Convolutional Networks for Semantic Segmentation.
+arXiv:1411.4038v2, 2015.</li>
+<li>R. Girshick. Fast R-CNN. arXiv:1504.08083v2, 2015.</li>
+<li>S. Ren, K. He, R. Girshick, and J. Sun. Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks.
+arXiv:1506.01497v3, 2016.</li>
+<li>T. Lin, P. Dolla ́r, R. Girshick, K. He, B. Hariharan, and S. Belongie. Feature Pyramid Networks for Object Detection.
+arXiv:1612.03144v2, 2017.</li>
+<li>Kaiming He Georgia Gkioxari Piotr Dolla ́r Ross Girshick. Mask R-CNN.
+arXiv:1703.06870v3, 2018.</li>
+<li>B. Singh, L. Davis. An Analysis of Scale Invariance in Object Detection –
+SNIP. arXiv:1711.08189v2, 2018.</li>
+<li>H. Law, J. Deng. CornerNet: Detecting Objects as Paired Keypoints. arXiv:1808.01244v1, 2018.</li>
+</ul>
+
+  </main>
+  <p>
+        Tags:
+          <a href="/tags/image/">#image</a>
+        Categories:
+          <a href="/categories/ji-qi-xue-xi/">#机器学习</a>
+  </p>
+
+  </div><footer class="footer">
+    <hr>
+    <small>
+        &copy; <time id="dynamic-year" datetime="2017">2017</time>. All rights reserved.
+    </small>
+</footer>
+<script>
+    const currentYear = new Date().getFullYear();
+
+    const timeElement = document.getElementById('dynamic-year');
+    timeElement.textContent = `2017 - ${currentYear}`;
+    timeElement.setAttribute('datetime', `2017/${currentYear}`);
+</script>
+</body>
+</html>

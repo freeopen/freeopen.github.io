@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>短经验 | Freeopen</title>
+  <meta name="title" content="短经验">
+<meta name="description" content="7 labo.">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+  <link href="/main.css" rel="stylesheet">
+</head>
+<body>
+  <header>
+  <a href="/cn/" class="title">
+    <h1>Freeopen</h1>
+  </a>
+  <nav aria-label="站点">
+      <a href="/cn/">首页</a>
+      <a href="/cn/blog/">博客</a>
+      <a href="/cn/shorttips/">短经验</a>
+      <a href="/cn/about/">关于</a>
+  </nav>
+</header>
+
+
+  <div>
+      
+
+      <h1>短经验</h1>
+  <main>
+    <p>StrongSwan 不支持 ECC 证书，支持 RSA 证书，而 acme.sh 默认生成 ECC 证书， 须手动指定成 RSA 才能兼容。  -- 2023.11.2</p>
+<p>gogs ssh 连接时，当客户端机器同时存在RSA、ECC 等多版本证书时，只能自动连接一个，如果自动连接的证书不是你正在配置的那个，永远连接失效，没配置的情况下，看不到错误日志输出，只能盲猜; 重要信息在 gogs/log/hooks/serv.log 中，注意在 app.ini 的日志配置部分选择 file 模式; 不要启用内置ssh服务，用服务器默认的 sshd 即可，记得把配置文件 sshd_config 指向到 /home/git/.ssh/authorized_keys, 否则 gogs 没有权限写入, 打开 <code>PubkeyAuthentication yes</code> 。  -- 2023.11.7</p>
+<p>git clone 时，遇到 <code>error: failed to encode 'src/System/ZSplash.ZC' from UTF-8 to cp437</code> 时，新建 <code>.git/info/attributes</code> 文件， 增加 <code>*.ZC text working-tree-encoding=UTF-8</code>, 注意自己初始化目录并fetch。  -- 2023.11.9</p>
+<p>google.com 搜索 <code>soft_name 94FBR</code> 可找到破解版或激活码。  -- 2023.11.30</p>
+<p>不同类型 cpu ( x86 / arm ) 的非对称密钥生成的证书是不兼容的，即使采用的是同样的公钥和私钥。  -- 2023.12.14</p>
+
+  </main>
+  <p>
+  </p>
+
+  </div><footer class="footer">
+    <hr>
+    <small>
+        &copy; <time id="dynamic-year" datetime="2017">2017</time>. All rights reserved.
+    </small>
+</footer>
+<script>
+    const currentYear = new Date().getFullYear();
+
+    const timeElement = document.getElementById('dynamic-year');
+    timeElement.textContent = `2017 - ${currentYear}`;
+    timeElement.setAttribute('datetime', `2017/${currentYear}`);
+</script>
+</body>
+</html>

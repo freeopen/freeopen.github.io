@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>冠军方案之布匹疵点智能检测 | Freeopen</title>
+  <meta name="title" content="冠军方案之布匹疵点智能检测">
+<meta name="description" content="7 labo.">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+  <link href="/main.css" rel="stylesheet">
+</head>
+<body>
+  <header>
+  <a href="/" class="title">
+    <h1>Freeopen</h1>
+  </a>
+  <nav aria-label="site">
+      <a href="/">Home</a>
+      <a href="/blog/">Blog</a>
+      <a href="/shorttips/">Tips</a>
+      <a href="/about/">About</a>
+  </nav>
+</header>
+
+
+  <div>
+      
+
+      <h1>冠军方案之布匹疵点智能检测</h1>
+      <time datetime="2021-02-13" class="post-date">
+          2021-02-13
+          
+            (updated on 2021-02-13)
+          
+      </time>
+  <main>
+    <blockquote>
+<p>冠军：哪儿都是坑啊 团队（徐光福等）</p>
+</blockquote>
+<h2 id="ren-wu-shuo-ming">任务说明</h2>
+<p>在布匹的实际生产过程中，由于各方面因素的影响，会产生污渍、破洞、毛粒等瑕疵，为保证产品质量，需要对布匹进行瑕疵检测。布匹疵点检验是纺织行业生产和质量管理的重要环节，目前人工检测易受主观因素影响，缺乏一致性；并且检测人员在强光下长时间工作对视力影响极大。由于布匹疵点种类繁多、形态变化多样、观察识别难道大，导致布匹疵点智能检测是困扰行业多年的技术瓶颈。</p>
+<p>大赛数据涵盖了纺织业中布匹的各类重要瑕疵，每张图片含一个或多种瑕疵。数据包括包括素色布和花色布两类，其中，素色布数据约8000张，用于初赛；花色布数据约12000张，用于复赛。</p>
+<h4 id="ping-gu-zhi-biao">评估指标</h4>
+<p>赛题分数计算方式: <strong>0.2ACC+0.8mAP</strong></p>
+<p><strong>ACC</strong>：是有瑕疵或无瑕疵的分类指标，考察瑕疵检出能力。
+其中提交结果name字段中出现过的测试图片均认为有瑕疵，未出现的测试图片认为是无瑕疵。</p>
+<p><strong>mAP</strong>：参照PASCALVOC的评估标准计算瑕疵的mAP值。</p>
+<p>本次大赛评分计算过程中，分别在检测框和真实框的交并比(IOU)在阈值0.1，0.3，0.5下计算mAP，最终mAP取三个值的平均值。</p>
+<h2 id="shu-ju-fen-xi-ji-yu-chu-li">数据分析及预处理</h2>
+<p>本次赛题主要难点是小目标占比较大，尺度差异性大（长宽比），类别不均衡很严重，布匹花色信息容易和瑕疵点混淆。</p>
+<p>官方提供了布匹的模板图片，该图片包含布匹的花色信息，有效利用模版，能提高泛化性。</p>
+<h3 id="zu-he-san-tong-dao">组合三通道</h3>
+<p>第一层用原图，第三层用模版，中间层用原图和模版的差异值。另外，为减轻模板的不对齐情况，对模板图片进行上下左右随机10个像素点左右的抖动。</p>
+<h2 id="mo-xing-she-ji">模型设计</h2>
+<p>目标检测问题的框架： Cascade rcnn + big backbone，由于比赛的评估指标map为0.1，0.3，0.5，须对cascade rcnn的RPN和三个串联的RCNN结构的阈值进行调整。</p>
+<p>相关参数：</p>
+<ul>
+<li>
+<p>backbone: ResNeXt + FPN + DCN + SE</p>
+</li>
+<li>
+<p>pos_iou_thr: 0.5</p>
+</li>
+<li>
+<p>net_iou_thr: 0.3</p>
+</li>
+<li>
+<p>三个串联rcnn阈值分别为 0.3 、0.4、0.5</p>
+</li>
+</ul>
+<h4 id="anchorshe-ji">anchor设计</h4>
+<p>对瑕疵进行聚类分析，针对不同的长宽比，精细设计anchor参数。</p>
+<h4 id="qi-ta">其他</h4>
+<p>探索CenterNet、FCOS、REPPOINTS等基于anchor free的新方法。尝试改进版的BiFPN, 该结构在coco表现上非常好。</p>
+
+  </main>
+  <p>
+        Tags:
+          <a href="/tags/top1/">#top1</a>
+        Categories:
+          <a href="/categories/ji-qi-xue-xi/">#机器学习</a>
+  </p>
+
+  </div><footer class="footer">
+    <hr>
+    <small>
+        &copy; <time id="dynamic-year" datetime="2017">2017</time>. All rights reserved.
+    </small>
+</footer>
+<script>
+    const currentYear = new Date().getFullYear();
+
+    const timeElement = document.getElementById('dynamic-year');
+    timeElement.textContent = `2017 - ${currentYear}`;
+    timeElement.setAttribute('datetime', `2017/${currentYear}`);
+</script>
+</body>
+</html>

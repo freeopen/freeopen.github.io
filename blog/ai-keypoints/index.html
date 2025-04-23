@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="preload" as="style" class="preStyle" href="/katex.min.css" integrity="sha384-ZPe7yZ91iWxYumsBEOn7ieg8q/o+qh/hQpSaPow8T6BwALcXSCS6C6fSRPIAnTQs" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>冠军方案之 FashionAI 服饰关键点定位 | Freeopen</title>
+  <meta name="title" content="冠军方案之 FashionAI 服饰关键点定位">
+<meta name="description" content="7 labo.">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+  <link href="/main.css" rel="stylesheet">
+  <script defer src="/js/prestyle.js?h=146f911a5e713e197057" integrity="sha384-6wbmVXuN+uOE0IR/CuCv4Xb2OtZHsboBoVmCp7ZrwOY6Z0NBOighQOCn+aWykf3n"></script>
+  <script defer src="/js/katexbundle.min.js?h=56b2761149aaa1d81994" integrity="sha384-UR0Li9YQWtf8BWhMEkmcKrcYY/Km3tAPQ8+768VhubM14b1z/WljMs8woKF34r2E"></script>
+</head>
+<body>
+  <header>
+  <a href="/" class="title">
+    <h1>Freeopen</h1>
+  </a>
+  <nav aria-label="site">
+      <a href="/">Home</a>
+      <a href="/blog/">Blog</a>
+      <a href="/shorttips/">Tips</a>
+      <a href="/about/">About</a>
+  </nav>
+</header>
+
+
+  <div>
+      
+
+      <h1>冠军方案之 FashionAI 服饰关键点定位</h1>
+      <time datetime="2021-02-11" class="post-date">
+          2021-02-11
+          
+            (updated on 2021-02-11)
+          
+      </time>
+  <main>
+    <blockquote>
+<p>冠军：李weite 及 bilibili 团队</p>
+</blockquote>
+<h2 id="ren-wu-shuo-ming">任务说明</h2>
+<p>服装的机器分析很容易受到衣服的尺寸和形状，相机拍摄的距离和角度甚至服装的显示方式或模型摆放方式的影响。对图像中服装关键点的检测可以帮助提高应用程序的性能，例如衣服的对齐，衣服局部属性的识别以及服装图像的自动编辑。</p>
+<p>基于服装设计知识，定义了一套服饰的关键点，并梳理了在女装6大专业类别（上衣、外套、裤子、半身裙、连身裙、连身裤）下的具体定义，要求参赛者设计算法进行定位预测。官方提供的数据集含前五个类别（连身裤类别被省略，因为在现实世界中并不常见），包括41个子类别和24种关键点。此数据集中总共有100,000个带批注的图像。</p>
+<p align="center">
+ <img width="90%" src="./TB16Z8fXQCWBuNjy0FaXXXUlXXa.png" />
+ <figcaption>
+ 女装关键点图例
+ </figcaption>
+ </p>
+<h3 id="guan-jian-dian-ding-yi">关键点定义</h3>
+<ul>
+<li><table><thead><tr><th>Keypoints\Category</th><th>Blouse</th><th>Outwear</th><th>Trousers</th><th>Skirt</th><th>Dress</th></tr></thead><tbody>
+<tr><td>neckline_left</td><td>Y</td><td>Y</td><td>N</td><td>N</td><td>Y</td></tr>
+<tr><td>neckline_right</td><td>Y</td><td>Y</td><td>N</td><td>N</td><td>Y</td></tr>
+<tr><td>center_front</td><td>Y</td><td>N</td><td>N</td><td>N</td><td>Y</td></tr>
+<tr><td>shoulder_left</td><td>Y</td><td>Y</td><td>N</td><td>N</td><td>Y</td></tr>
+<tr><td>shoulder_right</td><td>Y</td><td>Y</td><td>N</td><td>N</td><td>Y</td></tr>
+<tr><td>armpit_left</td><td>Y</td><td>Y</td><td>N</td><td>N</td><td>Y</td></tr>
+<tr><td>armpit_right</td><td>Y</td><td>Y</td><td>N</td><td>N</td><td>Y</td></tr>
+<tr><td>waistline_left</td><td>N</td><td>Y</td><td>N</td><td>N</td><td>Y</td></tr>
+<tr><td>waistline_right</td><td>N</td><td>Y</td><td>N</td><td>N</td><td>Y</td></tr>
+<tr><td>cuff_left_in</td><td>Y</td><td>Y</td><td>N</td><td>N</td><td>Y</td></tr>
+<tr><td>cuff_left_out</td><td>Y</td><td>Y</td><td>N</td><td>N</td><td>Y</td></tr>
+<tr><td>cuff_right_in</td><td>Y</td><td>Y</td><td>N</td><td>N</td><td>Y</td></tr>
+<tr><td>cuff_right_out</td><td>Y</td><td>Y</td><td>N</td><td>N</td><td>Y</td></tr>
+<tr><td>top_hem_left</td><td>Y</td><td>Y</td><td>N</td><td>N</td><td>N</td></tr>
+<tr><td>top_hem_right</td><td>Y</td><td>Y</td><td>N</td><td>N</td><td>N</td></tr>
+<tr><td>waistband_left</td><td>N</td><td>N</td><td>Y</td><td>Y</td><td>N</td></tr>
+<tr><td>waistband_right</td><td>N</td><td>N</td><td>Y</td><td>Y</td><td>N</td></tr>
+<tr><td>hemline_left</td><td>N</td><td>N</td><td>N</td><td>Y</td><td>Y</td></tr>
+<tr><td>hemline_right</td><td>N</td><td>N</td><td>N</td><td>Y</td><td>Y</td></tr>
+<tr><td>crotch</td><td>N</td><td>N</td><td>Y</td><td>N</td><td>N</td></tr>
+<tr><td>bottom_left_in</td><td>N</td><td>N</td><td>Y</td><td>N</td><td>N</td></tr>
+<tr><td>bottom_left_out</td><td>N</td><td>N</td><td>Y</td><td>N</td><td>N</td></tr>
+<tr><td>bottom_right_in</td><td>N</td><td>N</td><td>Y</td><td>N</td><td>N</td></tr>
+<tr><td>bottom_right_out</td><td>N</td><td>N</td><td>Y</td><td>N</td><td>N</td></tr>
+<tr><td>TOTAL</td><td>13</td><td>14</td><td>7</td><td>4</td><td>15</td></tr>
+</tbody></table>
+</li>
+</ul>
+<h3 id="zhu-jie-ge-shi">注解格式</h3>
+<p>注释文件保存在csv格式表中，共有26列：第一列（image_id）包含图像文件名，第二列（image_category）表示图像所属的类别，其余24列记录了 上述24个关键点的位置。 仅显示两个图像项的示例表如下所示：</p>
+<pre><code>image_id,image_category,neckline_left,neckline_right,center_front,shoulder_left,shoulder_right,armpit_left,armpit_right,waistline_left,waistline_right,cuff_left_in,cuff_left_out,cuff_right_in,cuff_right_out,top_hem_left,top_hem_right,waistband_left,waistband_right,hemline_left,hemline_right,crotch,bottom_left_in,bottom_left_out,bottom_right_in,bottom_right_out
+Images&#x2F;blouse&#x2F;d21eab37ddc74ea5a5f1b4a5d3d9055a.jpg,blouse,241_135_1,301_135_1,259_136_1,216_142_1,319_144_1,212_186_1,307_202_1,-1_-1_-1,-1_-1_-1,203_236_1,195_256_1,278_241_1,283_261_1,206_243_0,292_252_0,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1
+Images&#x2F;blouse&#x2F;02b54c183d2dbd2c056db14303064886.jpg,blouse,244_76_1,282_76_1,257_99_1,228_81_0,303_85_1,222_134_1,295_131_1,-1_-1_-1,-1_-1_-1,199_153_1,178_100_0,293_173_1,332_150_1,229_161_1,297_162_0,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1,-1_-1_-1
+</code></pre>
+<p>每个关键点由一个三元组表示，每个元素由下划线连接，表示为“ x_y_v”，其中x和y为坐标，v为可见性。 如果关键点可见，则可见性等于1；如果关键点被遮挡，则可见性等于0；如果类别中不存在或未定义，则可见性等于-1。</p>
+<h3 id="ping-jia-biao-zhun">评价标准</h3>
+<p><img src="/blog/ai-keypoints/./TB1nI4_FY1YBuNjSszeXXablFXa.tfsprivate.png" alt="TB1nI4_FY1YBuNjSszeXXablFXa.tfsprivate" /></p>
+<p>Normalized Error（NE）用于评估提交的结果。 NE是预测关键点位置和注释位置之间的平均归一化距离。 注意，NE计算仅涉及可见的关键点。</p>
+<p>其中 $k$ 为关键点 ID，$d_k$为预测关键点位置与带注释的关键点位置之间的距离，$s_k$为距离归一化参数（对于上衣，外套和衣服，它等于两个腋窝点之间的欧几里得距离;对于裤子和 裙边等于两个腰带点之间的距离），$v_k$即关键点的可见性。</p>
+<h2 id="jie-ti-si-lu">解题思路</h2>
+<p>第一阶段：使用检测器把女装在图片上的位置检测出来；</p>
+<p>第二阶段：再针对女装位置，做准确关键点的定位。</p>
+<p>通过第一阶段的处理可以给第二阶段输入更干净的数据。</p>
+<p>第一阶段的模型采用 Faster-RCNN，backbone resnet101</p>
+<p>第二阶段的模型为自定义，命名为 asymmetric and dilated stacked hourglass networks 。参考google CVPR 2017年论文拟合两种信息，第一种信息判断每一个像素点是否在关键点的领域范围内，如果是在领悟范围内，则标注为临近点；拟合的第二种信息是临近点和关键点之间的向量偏差，有了这个向量偏差，就可以把预测出的向量点投票到对应偏差的坐标点上，这时就能取得一个准确的关键点定位。</p>
+<h3 id="mo-xing-she-ji">模型设计</h3>
+<p>asymmetric and dilated stacked hourglass networks (SHN)，非对称并带孔的SHN模型。主要特征为：</p>
+<ul>
+<li>有一个非对称的 encoder-decoder 结构；</li>
+<li>设计了一个重量级的encoder（保有更多的空间信息）和一个轻量级的decoder；</li>
+<li>对 encoder-decoder 结构进行叠加，通过多个stage对keypoints进行定位。</li>
+</ul>
+<p>采用非对称结构的理由，设计者认为重量级的encoder可以用来迁移学习，须保有更多空间信息，而decoder如果参数太多，就享受不到encoder初始化参数带来的好处。</p>
+<p>当空间信息的重要性高于语义信息时的模型设计：</p>
+<ul>
+<li>图片尺寸的减少比例，从传统的 64 =&gt; 32 =&gt; 16 =&gt; 8 改为 64 =&gt; 32 =&gt; 32 =&gt; 32</li>
+<li>采用空洞卷积</li>
+<li>因为增大了空间尺度，通过减少通道数量(channel numbers)使模型的计算量不增加，即512(128) =&gt; 1024(256) =&gt; 2048(512) 改为 256(128) =&gt; 512(128) =&gt; 512(128)</li>
+<li>不增加计算量的前提下，堆叠网络，即 256(128) =&gt; 512(128) =&gt; 512(128)改为两个  256(64) =&gt; 512(64) =&gt; 512(64)</li>
+</ul>
+<h3 id="mo-xing-yan-bian-tu">模型演变图</h3>
+<table><thead><tr><th style="text-align: left">Model</th><th style="text-align: center">Param Size</th><th style="text-align: center">FLOPs</th><th style="text-align: center">Scores</th></tr></thead><tbody>
+<tr><td style="text-align: left">ResNet50 backbone + 1 stage</td><td style="text-align: center">49M</td><td style="text-align: center">7.86G</td><td style="text-align: center">4.11</td></tr>
+<tr><td style="text-align: left">+ 2 stage + more encoder layers</td><td style="text-align: center">91M</td><td style="text-align: center">18.52G</td><td style="text-align: center">-0.4x</td></tr>
+<tr><td style="text-align: left">+ pre-trained</td><td style="text-align: center">91M</td><td style="text-align: center">18.52G</td><td style="text-align: center">-0.1x</td></tr>
+<tr><td style="text-align: left">+ more data</td><td style="text-align: center">91M</td><td style="text-align: center">18.52G</td><td style="text-align: center">-0.1x</td></tr>
+<tr><td style="text-align: left">+ ResNet101 + large input(352) + more channles</td><td style="text-align: center">402M</td><td style="text-align: center">&gt;100G</td><td style="text-align: center">-0.1x</td></tr>
+<tr><td style="text-align: left">+ increase the number of boxes(more-crops)</td><td style="text-align: center">402M</td><td style="text-align: center">&gt;100G</td><td style="text-align: center">-0.0x</td></tr>
+<tr><td style="text-align: left"><strong>Final Submission</strong></td><td style="text-align: center"><strong>402M</strong></td><td style="text-align: center">&gt;<strong>100G</strong></td><td style="text-align: center">3.30</td></tr>
+</tbody></table>
+<h2 id="qi-ta-ji-qiao">其他技巧</h2>
+<p>观察到难样本分布不均，采取在线难样本挖掘，使得训练聚集到难样本。难样本搜寻不是按照传统的在一张图中查找，而是在一个batch中搜寻。</p>
+<p>最终提交模型时给了两个模型版本，一个高速版本一个低速版本，两个版本的分数差异不大，以证明模型的实用性很强。</p>
+
+  </main>
+  <p>
+        Categories:
+          <a href="/categories/ji-qi-xue-xi/">#机器学习</a>
+        Tags:
+          <a href="/tags/top1/">#top1</a>
+  </p>
+
+  </div><footer class="footer">
+    <hr>
+    <small>
+        &copy; <time id="dynamic-year" datetime="2017">2017</time>. All rights reserved.
+    </small>
+</footer>
+<script>
+    const currentYear = new Date().getFullYear();
+
+    const timeElement = document.getElementById('dynamic-year');
+    timeElement.textContent = `2017 - ${currentYear}`;
+    timeElement.setAttribute('datetime', `2017/${currentYear}`);
+</script>
+</body>
+</html>

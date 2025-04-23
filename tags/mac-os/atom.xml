@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Freeopen - Mac OS</title>
+    <subtitle>7 labo.</subtitle>
+    <link rel="self" type="application/atom+xml" href="/tags/mac-os/atom.xml"/>
+    <link rel="alternate" type="text/html" href="/"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2023-06-01T16:46:20+00:00</updated>
+    <id>/tags/mac-os/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Mac OS 自用手册</title>
+        <published>2023-06-01T16:46:20+00:00</published>
+        <updated>2023-06-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="/blog/macos/"/>
+        <id>/blog/macos/</id>
+        
+        <summary type="html">&lt;p&gt;整理一些苹果电脑的实用小技巧, 包括曾经踩过的坑。&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+</feed>

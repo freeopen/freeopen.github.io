@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freeopen</title>
+  <meta name="title" content="Freeopen">
+<meta name="description" content="7 labo.">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+  <link href="/main.css" rel="stylesheet">
+</head>
+<body>
+  <header>
+  <a href="/" class="title">
+    <h1>Freeopen</h1>
+  </a>
+  <nav aria-label="site">
+      <a href="/">Home</a>
+      <a href="/blog/">Blog</a>
+      <a href="/shorttips/">Tips</a>
+      <a href="/about/">About</a>
+  </nav>
+</header>
+
+
+  <div>
+      
+      <main>
+      <h3 class="filter">Filtering for "webmention"</h3>
+      <small>
+        <a href="/blog/">Remove filter</a>
+      </small>
+    <ul class="blog-posts">
+        <li>
+          <span>
+            <i>
+              <time datetime="2023-04-18T12:42:38+00:00" pubdate>
+                2023-04-18
+              </time>
+            </i>
+          </span>
+          <a href="&#x2F;blog&#x2F;webmention&#x2F;">webmention 历险记</a>
+        </li>
+    </ul>
+  </main>
+  </div><footer class="footer">
+    <hr>
+    <small>
+        &copy; <time id="dynamic-year" datetime="2017">2017</time>. All rights reserved.
+    </small>
+</footer>
+<script>
+    const currentYear = new Date().getFullYear();
+
+    const timeElement = document.getElementById('dynamic-year');
+    timeElement.textContent = `2017 - ${currentYear}`;
+    timeElement.setAttribute('datetime', `2017/${currentYear}`);
+</script>
+</body>
+</html>

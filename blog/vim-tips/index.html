@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VIM 小技巧 | Freeopen</title>
+  <meta name="title" content="VIM 小技巧">
+<meta name="description" content="7 labo.">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+  <link href="/main.css" rel="stylesheet">
+</head>
+<body>
+  <header>
+  <a href="/" class="title">
+    <h1>Freeopen</h1>
+  </a>
+  <nav aria-label="site">
+      <a href="/">Home</a>
+      <a href="/blog/">Blog</a>
+      <a href="/shorttips/">Tips</a>
+      <a href="/about/">About</a>
+  </nav>
+</header>
+
+
+  <div>
+      
+<aside id="toc-aside" class="right-to-left">
+        <h2>Table of contents</h2>
+    <ol>
+        <li>
+            <a href="#nian-tie">粘贴</a>
+            
+        </li><li>
+            <a href="#xiao-chu-gao-liang">消除高亮</a>
+            
+        </li><li>
+            <a href="#pi-liang-shu-zi-di-zeng">批量数字递增</a>
+            
+        </li><li>
+            <a href="#pi-liang-ti-huan">批量替换</a>
+            
+        </li><li>
+            <a href="#cha-kan-bian-liang">查看变量</a>
+            
+        </li><li>
+            <a href="#cha-kan-vim-tabstop-de-zui-hou-she-zhi-wei-zhi">查看vim tabstop 的最后设置位置</a>
+            
+        </li><li>
+            <a href="#xian-shi-kan-bu-jian-de-zi-fu">显示看不见的字符</a>
+            
+        </li><li>
+            <a href="#config-for-chinese">config for chinese</a>
+            
+        </li><li>
+            <a href="#zi-ding-yi-kuai-jie-jian">自定义快捷键</a>
+            
+        </li><li>
+            <a href="#duo-ge-tags">多个tags</a>
+            
+        </li><li>
+            <a href="#tab-4-bian-tab-2">Tab 4 变 tab 2</a>
+            
+        </li><li>
+            <a href="#zhe-die">折叠</a>
+            
+        </li>
+    </ol>
+</aside>
+
+      <h1>VIM 小技巧</h1>
+      <time datetime="2023-06-01" class="post-date">
+          2023-06-01
+          
+            (updated on 2023-06-02)
+          
+      </time>
+  <main>
+    <h2 id="nian-tie">粘贴</h2>
+<p>查看剪贴板寄存器</p>
+<pre><code>:reg
+</code></pre>
+<p>选择第3个寄存器内容粘贴</p>
+<pre><code>&quot;3p
+</code></pre>
+<h2 id="xiao-chu-gao-liang">消除高亮</h2>
+<pre><code>:noh
+</code></pre>
+<h2 id="pi-liang-shu-zi-di-zeng">批量数字递增</h2>
+<pre><code>#圆括号内 被 summatch引用
+:%s&#x2F;\(\d\{5}\)&#x2F;\=submatch(1)+10000
+</code></pre>
+<h2 id="pi-liang-ti-huan">批量替换</h2>
+<pre><code>:%s&#x2F;from&#x2F;to&#x2F;g
+e.g. :%s&#x2F;,&#x2F;\r&#x2F;g
+:args **&#x2F;*.java
+:argdo %s&#x2F;old&#x2F;new&#x2F;egc | update
+
+e:正则  g:全局  c:替换提醒
+</code></pre>
+<h2 id="cha-kan-bian-liang">查看变量</h2>
+<p>“$”——访问环境变量；
+“&amp;”——访问 Vim 选项；
+“@”——访问寄存器。</p>
+<pre><code>:echo &amp;tabstop
+:echo $VIMRUNTIME
+</code></pre>
+<h2 id="cha-kan-vim-tabstop-de-zui-hou-she-zhi-wei-zhi">查看vim tabstop 的最后设置位置</h2>
+<pre><code>:verbose setlocal ts? et?
+</code></pre>
+<h2 id="xian-shi-kan-bu-jian-de-zi-fu">显示看不见的字符</h2>
+<pre><code>set listchars=eol:$,tab:&gt;-,trail:~,extends:&gt;,precedes:&lt;
+set list
+</code></pre>
+<h2 id="config-for-chinese">config for chinese</h2>
+<pre><code>language messages zh_CN.UTF-8
+set fencs=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+set fenc=utf-8
+set encoding=utf-8
+set termencoding=utf-8
+set gcr=a:block-blinkon0
+</code></pre>
+<h2 id="zi-ding-yi-kuai-jie-jian">自定义快捷键</h2>
+<p>背景: linux 环境下已安装 sdcv 命令行的英文字典</p>
+<p>目的: 配置 快捷键 (ctrl + k) 自动翻译 当前光标位置的 单词</p>
+<pre><code>nmap &lt;C-k&gt; : !sdcv -0 &lt;C-R&gt;=expand(&quot;&lt;cword&gt;&quot;)&lt;CR&gt;&lt;CR&gt;
+</code></pre>
+<p><C-R>后再输入<C-W>就是当前光标下单词的意思，<C-R><C-W>与<C-R>=expand("<cword>")应该是等效的</p>
+<pre><code>nmap &lt;C-k&gt; : !sdcv -0 &lt;C-R&gt;&lt;C-W&gt;&lt;CR&gt;
+
+# &lt;C-R&gt;: 插入某个寄存器值
+# expand(&quot;&lt;cword&gt;&quot;): 当前光标位置的 单词
+# &lt;CR&gt;: Enter
+</code></pre>
+<p>noremap 表示非递归，因为 map 默认是递归映射的</p>
+<p>nmap 表示在普通模式下生效</p>
+<p>vmap 表示在可视模式下生效</p>
+<p>imap 表示在插入模式下生效</p>
+<p>cmap 表示在命令行模式下生效</p>
+<p>un  后面跟按键组合，表示删除这个映射</p>
+<pre><code>e.g. unvmap &lt;C-c&gt;
+</code></pre>
+<p>clear 表示清除快捷键映射</p>
+<pre><code>e.g. mapclear、nmapclear、nnoremapclear
+</code></pre>
+<p><strong>键表</strong></p>
+<pre><code>&lt;k0&gt; - &lt;k9&gt; 小键盘 0 到 9
+&lt;S-...&gt; Shift＋键
+&lt;C-...&gt; Control＋键
+&lt;M-...&gt; Alt＋键 或 meta＋键
+&lt;A-...&gt; 同 &lt;M-...&gt;
+&lt;Esc&gt; Escape 键
+&lt;Up&gt; 光标上移键
+&lt;Space&gt; 插入空格
+&lt;Tab&gt; 插入Tab
+&lt;CR&gt; 等于&lt;Enter&gt;
+</code></pre>
+<h2 id="duo-ge-tags">多个tags</h2>
+<pre><code>:set tags+=~&#x2F;vimfiles&#x2F;tags&#x2F;XLib&#x2F;Inc&#x2F;XLib.tags
+:set tags+=&#x2F;Users&#x2F;linxinhao&#x2F;proj&#x2F;mmcv&#x2F;mmcv&#x2F;tags
+</code></pre>
+<h2 id="tab-4-bian-tab-2">Tab 4 变 tab 2</h2>
+<pre><code>:set ts=4   “ tab 设为 4 空格
+:set noexpandtab  “ 把4空格转tab
+:%retab!
+:set ts=2  “ tab 设为 2 空格
+:set expandtab  “ 把tab转2空格
+:%retab!
+</code></pre>
+<h2 id="zhe-die">折叠</h2>
+<p><strong>关闭折叠</strong></p>
+<pre><code>set nofoldenable
+</code></pre>
+<p><strong>普通模式下时</strong></p>
+<pre><code>zc	关闭当前打开的折叠
+zo	打开当前的折叠
+zm	关闭所有折叠
+zM	关闭所有折叠及其嵌套的折叠
+zr	打开所有折叠
+zR	打开所有折叠及其嵌套的折叠
+zd	删除当前折叠
+zE	删除所有折叠
+zj	移动至下一个折叠
+zk	移动至上一个折叠
+zn	禁用折叠
+zN	启用折叠
+</code></pre>
+
+  </main>
+  <p>
+        Tags:
+          <a href="/tags/vim/">#vim</a>
+        Categories:
+          <a href="/categories/fu-wen-mi-lu/">#符文秘录</a>
+  </p>
+
+  </div><footer class="footer">
+    <hr>
+    <small>
+        &copy; <time id="dynamic-year" datetime="2017">2017</time>. All rights reserved.
+    </small>
+</footer>
+<script>
+    const currentYear = new Date().getFullYear();
+
+    const timeElement = document.getElementById('dynamic-year');
+    timeElement.textContent = `2017 - ${currentYear}`;
+    timeElement.setAttribute('datetime', `2017/${currentYear}`);
+</script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Freeopen - lvm</title>
+    <subtitle>7 labo.</subtitle>
+    <link rel="self" type="application/atom+xml" href="/tags/lvm/atom.xml"/>
+    <link rel="alternate" type="text/html" href="/"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2023-06-01T17:25:31+00:00</updated>
+    <id>/tags/lvm/atom.xml</id>
+    <entry xml:lang="en">
+        <title>LVM 管理</title>
+        <published>2023-06-01T17:25:31+00:00</published>
+        <updated>2023-06-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="/blog/lvm/"/>
+        <id>/blog/lvm/</id>
+        
+        <content type="html" xml:base="/blog/lvm/">&lt;h2 id=&quot;yi-guan-xi&quot;&gt;一、关系&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;strong&gt;物理卷 physical volumes（PV）&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;物理卷处于逻辑卷管理器中的底层，任何的逻辑卷和卷组都必需依靠物理卷来建立；物理卷可以是一个完整的硬盘，也可以是硬盘中的一个分区，并有一个名字 ( 如 hdisk0)。&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;逻辑卷 logical volumes （LV）&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;逻辑卷建立在卷组之上，卷组中的空间可以建立多个逻辑卷，并且逻辑卷可以随意在卷组的空闲空间中增减，逻辑卷可以属于一个卷组，也可以属于不同的多个卷组。LV 是位于 PV 上的信息的组合，在 LV 上的数据可以连续或者不连续地出现在 PV。&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;卷组 logical volume group（VG）&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;卷组是建立在物理卷之上，一个卷组中可以包含一个物理卷组或者多个物理卷。所有的物理卷属于一个称作 rootvg 的卷组。&lt;&#x2F;p&gt;
+&lt;p&gt;pv (物理卷) 对应 硬盘的分区 或 整个硬盘;
+vg (卷组) 由一到多个pv组成，相当于等待分区的硬盘抽象层，这样就能跨越多块硬盘;
+lv (逻辑卷）在vg上的分区;&lt;&#x2F;p&gt;
+&lt;p&gt;pe（Physical Extents） lvm中的最小存储单元，默认4M, 创建vg时可以改变pe大小，vgcreate -s 8M …
+le (logical extents) 逻辑卷的最小存储单元&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;er-cha-kan&quot;&gt;二、查看&lt;&#x2F;h2&gt;
+&lt;p&gt;＊ ：指代 pv vg lv&lt;&#x2F;p&gt;
+&lt;p&gt;*s, *scan, *display , 显示由简到繁&lt;&#x2F;p&gt;
+&lt;p&gt;df -Th 查看挂载、容量等&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;san-xin-jian-suo-you&quot;&gt;三、新建所有&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;strong&gt;新盘创建lvm分区&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;(注， parted 可以做2T以上的分区, fdisk 则仅2T内)&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;parted &amp;#x2F;dev&amp;#x2F;sdc
+mklabel gpt
+mkpart  part_name filesye_type(ext4) 0G  500G(whole disk: -0G)
+set 1 lvm on
+quit
+
+partprobe # 重读系统中全部设备的分区表信息, 立即生效
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;ol&gt;
+&lt;li&gt;修改分区类型为lvm&lt;&#x2F;li&gt;
+&lt;li&gt;pvcreate &#x2F;dev&#x2F;sda1  (or pvcreate &#x2F;dev&#x2F;sdb{1,2,3})&lt;&#x2F;li&gt;
+&lt;li&gt;vgcreate vg_name &#x2F;dev&#x2F;sda1  &#x2F;dev&#x2F;sda2  (or  vgcreate vg1 &#x2F;dev&#x2F;sdb{5,6,7,8})&lt;&#x2F;li&gt;
+&lt;li&gt;lvcreate -L 50G -n lv_name vg_name  (-l pe_num)&lt;&#x2F;li&gt;
+&lt;li&gt;mkfs.ext4 &#x2F;dev&#x2F;vg_name&#x2F;lv_name&lt;&#x2F;li&gt;
+&lt;li&gt;mount &#x2F;dev&#x2F;vg_name&#x2F;lv_name &#x2F;mnt  ( or vim &#x2F;etc&#x2F;fstab)&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;lvcreate -l 100%VG  [100%FREE]&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;si-lv-zeng-jian-rong-liang&quot;&gt;四、lv 增减容量&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;lv-kuo-rong&quot;&gt;lv 扩容&lt;&#x2F;h3&gt;
+&lt;p&gt;如果vg不够，需要为vg增加pv，否则直接从第3步开始
+可以在线进行。&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;为新分区创建物理卷&lt;&#x2F;li&gt;
+&lt;li&gt;加入卷组  vgextend vg_name &#x2F;dev&#x2F;sdb5&lt;&#x2F;li&gt;
+&lt;li&gt;lvresize -l +100 &#x2F;dev&#x2F;vg_name&#x2F;lv_name  (推荐用pe，更准确)&lt;&#x2F;li&gt;
+&lt;li&gt;resize2fs &#x2F;dev&#x2F;vg_name&#x2F;lv_name      (调整文件系统大小，缺少这一步，df查看容量未变)&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h3 id=&quot;lv-suo-rong&quot;&gt;lv 缩容&lt;&#x2F;h3&gt;
+&lt;p&gt;注意，必须离线，即先卸载lv&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;umount  lv的挂载点&lt;&#x2F;li&gt;
+&lt;li&gt;回缩文件系统大小 resize2fs &#x2F;dev&#x2F;vg_name&#x2F;lv_name  5000M （用m更准确，因为PE、LE的单位为M)&lt;&#x2F;li&gt;
+&lt;li&gt;缩小lv大小 lvresize -l -1000 &#x2F;dev&#x2F;vg_name&#x2F;lv_name&lt;&#x2F;li&gt;
+&lt;li&gt;挂载并验证  mount …    and    df -Th&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h2 id=&quot;wu-cong-vgyi-chu-pv&quot;&gt;五、从vg移除pv&lt;&#x2F;h2&gt;
+&lt;p&gt;移除pv前，被移除pv不能划分lv&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;vgreduce vg_name &amp;#x2F;dev&amp;#x2F;sdb1
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;但：vg 还剩最后一个 pv时，vgreduce 不能成功，
+如果目的是要移除硬盘，且该硬盘的vg仅有一个pv，
+必须先移除vg, 才能移除pv, 用命令：&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;vgremove vg_name
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;liu-yi-chu-lv&quot;&gt;六、移除lv&lt;&#x2F;h2&gt;
+&lt;pre&gt;&lt;code&gt;lvremove &amp;#x2F;dev&amp;#x2F;vg1&amp;#x2F;lv1
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;qi-yi-chu-ying-pan&quot;&gt;七、移除硬盘&lt;&#x2F;h2&gt;
+&lt;ol&gt;
+&lt;li&gt;从vg移除pv&lt;&#x2F;li&gt;
+&lt;li&gt;移除pv   pvremove &#x2F;dev&#x2F;sdb1&lt;&#x2F;li&gt;
+&lt;li&gt;删除分区&lt;&#x2F;li&gt;
+&lt;li&gt;重启&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h2 id=&quot;ba-kuai-zhao-juan&quot;&gt;八、快照卷&lt;&#x2F;h2&gt;
+&lt;p&gt;快照原理&lt;&#x2F;p&gt;
+&lt;p&gt;LVM中snapshot通过“写时复制”(copy on write) 来实现，即当一个snapshot创建的时候，仅拷贝原始卷里数据的元数据(meta-data)，并不会有数据的物理拷贝，因此snapshot的创建几乎是实时的，当原始卷上有写操作时，snapshot跟踪原始卷块的改变，这时原始卷上被改变之前的数据先拷贝到snapshot里，然后再在原始卷上写入数据。&lt;&#x2F;p&gt;
+&lt;p&gt;snapshot的大小并不需要和原始卷一样大，其大小仅仅只需要考虑两个方面：从shapshot创建到释放这段时间内，估计块的改变量有多大;数据更新的频率。一旦 snapshot的空间记录满了原始卷块变换的信息，那么这个snapshot立刻被释放，从而无法使用，从而导致这个snapshot无效。&lt;&#x2F;p&gt;
+&lt;p&gt;用处：可以用于大大减少备份期间服务&#x2F;数据库关闭的时间，因为快照通常会在几分之一秒内创建。 创建快照后，您可以在服务和数据库正常运行时备份快照。&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;lvcreate -l pe_num -s -n lv_snap  &#x2F;dev&#x2F;vg1&#x2F;lv1 [-p rw]  （－p 选项为权限）&lt;&#x2F;li&gt;
+&lt;li&gt;挂载快照&lt;&#x2F;li&gt;
+&lt;li&gt;备份快照, 用dd复制快照内容&lt;&#x2F;li&gt;
+&lt;li&gt;删除快照&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h2 id=&quot;jiu-jian-cha-xiu-fu-sun-pi-de-luo-ji-juan&quot;&gt;九、检查修复损坏的逻辑卷&lt;&#x2F;h2&gt;
+&lt;p&gt;(特别注意，这是最后的方法，先用修复lvm的命令进行修复)&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;e2fsck -f -y &amp;#x2F;dev&amp;#x2F;mapper&amp;#x2F;VolGroup-lv_home
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;shi-xiao-chu-vgjing-gao&quot;&gt;十、消除VG警告&lt;&#x2F;h2&gt;
+&lt;p&gt;WARNING: PV &#x2F;dev&#x2F;sda1 in VG ubuntu-vg is using an old PV header, modify the VG to update.&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;vgck --updatemetadata ubuntu-vg
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+        
+    </entry>
+</feed>

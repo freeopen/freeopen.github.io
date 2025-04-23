@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LVM 管理 | Freeopen</title>
+  <meta name="title" content="LVM 管理">
+<meta name="description" content="7 labo.">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+  <link href="/main.css" rel="stylesheet">
+</head>
+<body>
+  <header>
+  <a href="/" class="title">
+    <h1>Freeopen</h1>
+  </a>
+  <nav aria-label="site">
+      <a href="/">Home</a>
+      <a href="/blog/">Blog</a>
+      <a href="/shorttips/">Tips</a>
+      <a href="/about/">About</a>
+  </nav>
+</header>
+
+
+  <div>
+      
+<aside id="toc-aside" class="right-to-left">
+        <h2>Table of contents</h2>
+    <ol>
+        <li>
+            <a href="#yi-guan-xi">一、关系</a>
+            
+        </li><li>
+            <a href="#er-cha-kan">二、查看</a>
+            
+        </li><li>
+            <a href="#san-xin-jian-suo-you">三、新建所有</a>
+            
+        </li><li>
+            <a href="#si-lv-zeng-jian-rong-liang">四、lv 增减容量</a>
+            <ol>
+                <li>
+                    <a href="#lv-kuo-rong">lv 扩容</a>
+                </li><li>
+                    <a href="#lv-suo-rong">lv 缩容</a>
+                </li>
+            </ol>
+        </li><li>
+            <a href="#wu-cong-vgyi-chu-pv">五、从vg移除pv</a>
+            
+        </li><li>
+            <a href="#liu-yi-chu-lv">六、移除lv</a>
+            
+        </li><li>
+            <a href="#qi-yi-chu-ying-pan">七、移除硬盘</a>
+            
+        </li><li>
+            <a href="#ba-kuai-zhao-juan">八、快照卷</a>
+            
+        </li><li>
+            <a href="#jiu-jian-cha-xiu-fu-sun-pi-de-luo-ji-juan">九、检查修复损坏的逻辑卷</a>
+            
+        </li><li>
+            <a href="#shi-xiao-chu-vgjing-gao">十、消除VG警告</a>
+            
+        </li>
+    </ol>
+</aside>
+
+      <h1>LVM 管理</h1>
+      <time datetime="2023-06-01" class="post-date">
+          2023-06-01
+          
+            (updated on 2023-06-01)
+          
+      </time>
+  <main>
+    <h2 id="yi-guan-xi">一、关系</h2>
+<p><strong>物理卷 physical volumes（PV）</strong></p>
+<p>物理卷处于逻辑卷管理器中的底层，任何的逻辑卷和卷组都必需依靠物理卷来建立；物理卷可以是一个完整的硬盘，也可以是硬盘中的一个分区，并有一个名字 ( 如 hdisk0)。</p>
+<p><strong>逻辑卷 logical volumes （LV）</strong></p>
+<p>逻辑卷建立在卷组之上，卷组中的空间可以建立多个逻辑卷，并且逻辑卷可以随意在卷组的空闲空间中增减，逻辑卷可以属于一个卷组，也可以属于不同的多个卷组。LV 是位于 PV 上的信息的组合，在 LV 上的数据可以连续或者不连续地出现在 PV。</p>
+<p><strong>卷组 logical volume group（VG）</strong></p>
+<p>卷组是建立在物理卷之上，一个卷组中可以包含一个物理卷组或者多个物理卷。所有的物理卷属于一个称作 rootvg 的卷组。</p>
+<p>pv (物理卷) 对应 硬盘的分区 或 整个硬盘;
+vg (卷组) 由一到多个pv组成，相当于等待分区的硬盘抽象层，这样就能跨越多块硬盘;
+lv (逻辑卷）在vg上的分区;</p>
+<p>pe（Physical Extents） lvm中的最小存储单元，默认4M, 创建vg时可以改变pe大小，vgcreate -s 8M …
+le (logical extents) 逻辑卷的最小存储单元</p>
+<h2 id="er-cha-kan">二、查看</h2>
+<p>＊ ：指代 pv vg lv</p>
+<p>*s, *scan, *display , 显示由简到繁</p>
+<p>df -Th 查看挂载、容量等</p>
+<h2 id="san-xin-jian-suo-you">三、新建所有</h2>
+<p><strong>新盘创建lvm分区</strong></p>
+<p>(注， parted 可以做2T以上的分区, fdisk 则仅2T内)</p>
+<pre><code>parted &#x2F;dev&#x2F;sdc
+mklabel gpt
+mkpart  part_name filesye_type(ext4) 0G  500G(whole disk: -0G)
+set 1 lvm on
+quit
+
+partprobe # 重读系统中全部设备的分区表信息, 立即生效
+</code></pre>
+<ol>
+<li>修改分区类型为lvm</li>
+<li>pvcreate /dev/sda1  (or pvcreate /dev/sdb{1,2,3})</li>
+<li>vgcreate vg_name /dev/sda1  /dev/sda2  (or  vgcreate vg1 /dev/sdb{5,6,7,8})</li>
+<li>lvcreate -L 50G -n lv_name vg_name  (-l pe_num)</li>
+<li>mkfs.ext4 /dev/vg_name/lv_name</li>
+<li>mount /dev/vg_name/lv_name /mnt  ( or vim /etc/fstab)</li>
+</ol>
+<p>lvcreate -l 100%VG  [100%FREE]</p>
+<h2 id="si-lv-zeng-jian-rong-liang">四、lv 增减容量</h2>
+<h3 id="lv-kuo-rong">lv 扩容</h3>
+<p>如果vg不够，需要为vg增加pv，否则直接从第3步开始
+可以在线进行。</p>
+<ol>
+<li>为新分区创建物理卷</li>
+<li>加入卷组  vgextend vg_name /dev/sdb5</li>
+<li>lvresize -l +100 /dev/vg_name/lv_name  (推荐用pe，更准确)</li>
+<li>resize2fs /dev/vg_name/lv_name      (调整文件系统大小，缺少这一步，df查看容量未变)</li>
+</ol>
+<h3 id="lv-suo-rong">lv 缩容</h3>
+<p>注意，必须离线，即先卸载lv</p>
+<ol>
+<li>umount  lv的挂载点</li>
+<li>回缩文件系统大小 resize2fs /dev/vg_name/lv_name  5000M （用m更准确，因为PE、LE的单位为M)</li>
+<li>缩小lv大小 lvresize -l -1000 /dev/vg_name/lv_name</li>
+<li>挂载并验证  mount …    and    df -Th</li>
+</ol>
+<h2 id="wu-cong-vgyi-chu-pv">五、从vg移除pv</h2>
+<p>移除pv前，被移除pv不能划分lv</p>
+<pre><code>vgreduce vg_name &#x2F;dev&#x2F;sdb1
+</code></pre>
+<p>但：vg 还剩最后一个 pv时，vgreduce 不能成功，
+如果目的是要移除硬盘，且该硬盘的vg仅有一个pv，
+必须先移除vg, 才能移除pv, 用命令：</p>
+<pre><code>vgremove vg_name
+</code></pre>
+<h2 id="liu-yi-chu-lv">六、移除lv</h2>
+<pre><code>lvremove &#x2F;dev&#x2F;vg1&#x2F;lv1
+</code></pre>
+<h2 id="qi-yi-chu-ying-pan">七、移除硬盘</h2>
+<ol>
+<li>从vg移除pv</li>
+<li>移除pv   pvremove /dev/sdb1</li>
+<li>删除分区</li>
+<li>重启</li>
+</ol>
+<h2 id="ba-kuai-zhao-juan">八、快照卷</h2>
+<p>快照原理</p>
+<p>LVM中snapshot通过“写时复制”(copy on write) 来实现，即当一个snapshot创建的时候，仅拷贝原始卷里数据的元数据(meta-data)，并不会有数据的物理拷贝，因此snapshot的创建几乎是实时的，当原始卷上有写操作时，snapshot跟踪原始卷块的改变，这时原始卷上被改变之前的数据先拷贝到snapshot里，然后再在原始卷上写入数据。</p>
+<p>snapshot的大小并不需要和原始卷一样大，其大小仅仅只需要考虑两个方面：从shapshot创建到释放这段时间内，估计块的改变量有多大;数据更新的频率。一旦 snapshot的空间记录满了原始卷块变换的信息，那么这个snapshot立刻被释放，从而无法使用，从而导致这个snapshot无效。</p>
+<p>用处：可以用于大大减少备份期间服务/数据库关闭的时间，因为快照通常会在几分之一秒内创建。 创建快照后，您可以在服务和数据库正常运行时备份快照。</p>
+<ol>
+<li>lvcreate -l pe_num -s -n lv_snap  /dev/vg1/lv1 [-p rw]  （－p 选项为权限）</li>
+<li>挂载快照</li>
+<li>备份快照, 用dd复制快照内容</li>
+<li>删除快照</li>
+</ol>
+<h2 id="jiu-jian-cha-xiu-fu-sun-pi-de-luo-ji-juan">九、检查修复损坏的逻辑卷</h2>
+<p>(特别注意，这是最后的方法，先用修复lvm的命令进行修复)</p>
+<pre><code>e2fsck -f -y &#x2F;dev&#x2F;mapper&#x2F;VolGroup-lv_home
+</code></pre>
+<h2 id="shi-xiao-chu-vgjing-gao">十、消除VG警告</h2>
+<p>WARNING: PV /dev/sda1 in VG ubuntu-vg is using an old PV header, modify the VG to update.</p>
+<pre><code>vgck --updatemetadata ubuntu-vg
+</code></pre>
+
+  </main>
+  <p>
+        Tags:
+          <a href="/tags/lvm/">#lvm</a>
+          <a href="/tags/linux/">#linux</a>
+        Categories:
+          <a href="/categories/fu-wen-mi-lu/">#符文秘录</a>
+  </p>
+
+  </div><footer class="footer">
+    <hr>
+    <small>
+        &copy; <time id="dynamic-year" datetime="2017">2017</time>. All rights reserved.
+    </small>
+</footer>
+<script>
+    const currentYear = new Date().getFullYear();
+
+    const timeElement = document.getElementById('dynamic-year');
+    timeElement.textContent = `2017 - ${currentYear}`;
+    timeElement.setAttribute('datetime', `2017/${currentYear}`);
+</script>
+</body>
+</html>
