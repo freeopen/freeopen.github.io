@@ -7,9 +7,6 @@
         <loc>/about/</loc>
     </url>
     <url>
-        <loc>/bear/</loc>
-    </url>
-    <url>
         <loc>/blog/</loc>
     </url>
     <url>
@@ -152,30 +149,6 @@
         <loc>/categories/su-cha-shou-ce/</loc>
     </url>
     <url>
-        <loc>/cn/</loc>
-    </url>
-    <url>
-        <loc>/cn/about/</loc>
-    </url>
-    <url>
-        <loc>/cn/bear/</loc>
-    </url>
-    <url>
-        <loc>/cn/blog/</loc>
-    </url>
-    <url>
-        <loc>/cn/categories/</loc>
-    </url>
-    <url>
-        <loc>/cn/shorttips/</loc>
-    </url>
-    <url>
-        <loc>/cn/tags/</loc>
-    </url>
-    <url>
-        <loc>/cn/zola/</loc>
-    </url>
-    <url>
         <loc>/shorttips/</loc>
     </url>
     <url>
@@ -230,6 +203,21 @@
         <loc>/tags/webmention/</loc>
     </url>
     <url>
-        <loc>/zola/</loc>
+        <loc>/zh-CN/</loc>
+    </url>
+    <url>
+        <loc>/zh-CN/about/</loc>
+    </url>
+    <url>
+        <loc>/zh-CN/blog/</loc>
+    </url>
+    <url>
+        <loc>/zh-CN/categories/</loc>
+    </url>
+    <url>
+        <loc>/zh-CN/shorttips/</loc>
+    </url>
+    <url>
+        <loc>/zh-CN/tags/</loc>
     </url>
 </urlset>
